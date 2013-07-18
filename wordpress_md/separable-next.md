@@ -1,0 +1,27 @@
+Title: Separable next
+Date: 2009-05-31 18:48
+Author: asmeurer
+Category: Uncategorized
+Slug: separable-next
+
+So the next thing on my [list][] is seperable differential equations. As
+I predicted in my proposal, I am going to have to do some work to get
+SymPy to recognize all equations that are separable. Currently, it can
+match expressions that are exactly written as \$latex
+a(x)b(y)\\frac{dy}{dx}+c(x)d(y)=0\$, such as \$latex
+x\^2(y+2)\\frac{dy}{dx}-y\^3=0\$ but the matching engine cannot get
+things like \$latex (x\^2y+2x\^2)\\frac{dy}{dx}+-y\^3=0\$, because it
+doesn't know how to factor out the \$latex x\^2\$. There is a function,
+collect, that can factor out expressions if you give them to it
+explicily with
+
+`collect(x**2*y+x**2,x**2)`
+
+but it doesn't know yet how to separate variables in general. So I will
+be working on it this week. Once it can properly separate separable
+expressions, implementing it in dsolve will be cake.
+
+Also, it needs to learn how to do \$latex e\^{x+y}\\rightarrow
+e\^{x}e\^{y}\$ and \$latex 1+x+y+xy \\rightarrow (1+x)(1+y)\$.
+
+  [list]: http://wiki.sympy.org/wiki/User:Asmeurer/GSoC2009_Application#Description_.28by_timeline.29

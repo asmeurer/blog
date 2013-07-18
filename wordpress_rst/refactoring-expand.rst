@@ -1,0 +1,75 @@
+Refactoring Expand
+##################
+:date: 2009-06-21 04:48
+:author: asmeurer
+:category: Uncategorized
+:slug: refactoring-expand
+
+So I have spent the past week refactoring expand so that you can have
+more control over what expansion methods you use. With the present
+method, expand takes in hints which defaults to basic. basic distributed
+multiplication over addition ($latex x(y+z) \\rightarrow xy+xz$),
+expanded multinomial expressions ($latex (x+y)^2 \\rightarrow
+x^2+2xy+y^2$), expanded logarithms ($latex \\log{x^2} \\rightarrow
+2\\log{x}$ and $latex \\log{xy} \\rightarrow \\log{x}+\\log{y}$), and
+expanded powers ($latex (xy)^n \\rightarrow x^ny^n$ and $latex e^{x+y}
+\\rightarrow e^{x}e^{y}$).
+
+If you wanted to do any of these things, you had to use expand\_basic,
+which did all of them. Also, you had no control on how deep the
+expansion went. It went all they way down in recursion, so if you only
+wanted, for example, to distribute multiplication on the top level, it
+was impossible.
+
+So I decided to start and fix `issue 1455`_. I now have a branch ready
+in my github account (see `here`_).
+
+With my patch, you can now choose to expand using each of the above
+individually with the log, mul, multinomial, power\_exp, power\_base. In
+addition to this, you also now have complete control of how deep the
+expression recurses in the expand. Previously, you couldn't, for
+example, expand $latex x(y+e^{x(y+z)})$ to $latex xy+xe^{x(y+z)}$. (It
+would also distribute the exponent, then expand to $latex
+e^{xy}e^{xz}$). Now, you can choose to only distribute multiplication
+over addition, and to only do it on the top level.
+
+| **Automatic expansion of exponents**
+|  I mentioned above that expand would expand $latex e^{xy+xz}$ to
+$latex e^{xy}e^{xz}$. Actually, in the current version of SymPy, this
+would not happen because it automatically combines exponents like $latex
+e^{xy}e^{xz}$ to $latex e^{xy+xz}$.
+
+I have been working for the past few weeks changing this as per `issue
+252`_. I have been mostly successful, except there are two nseries tests
+that I cannot figure out how to fix. If you think you know why nseries
+would fail without automatic combining of exponents, please let me know.
+The expand branch in my GitHub repo also has the exponent patches in it,
+if you want to see what I mean.
+
+Because some things, like the gruntz algorithm, rely on automatic
+combining of exponents, so I had to rework powsimp, which combined
+exponents but also combined bases ($latex x^ay^a$ to $latex (xy)^a$) so
+that it could only combine exponents. That way, I could use it to get
+the old behavior where I needed it. Use
+``powsimp(expr, deep=True, combine='exp')`` in my branch to get the old
+automatic behavior.
+
+| **So what does this have to do with ODEs?**
+|  When I started working on separable equations, I wanted to be able to
+separate things like $latex e^{x+y}$ into $latex e^xe^y$, which is
+separable in $latex x$ and $latex y$. So that is why I needed to
+refactor expand (I don't, for example, want to change $latex x(y+1)$ to
+$latex xy+x$ because the later is not easily recognizable as separate.
+Doing this or course required that SymPy didn't automatically put back
+together $latex e^xe^y$ into $latex e^{x+y}$, so I had to fix that issue
+as well.
+
+I am almost finished implementing separable (there are some match issues
+that I will blog about later whenever I get them straightened out), and
+the only thing that is holding all of this back is those nseries tests.
+If anyone is familiar with how those algorithms work and which parts
+require automatic combining of exponents, that would be great.
+
+.. _issue 1455: http://code.google.com/p/sympy/issues/detail?id=1455
+.. _here: http://github.com/asmeurer/sympy/tree/expand
+.. _issue 252: http://code.google.com/p/sympy/issues/detail?id=252&q=asmeurer
