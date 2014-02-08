@@ -1,0 +1,36 @@
+<html><body><strong>The Structure Theorems</strong>
+
+
+<em>Here's a blog post that I actually started to write last August.  I suggest you read parts <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/" target="_blank">0</a>, <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/" target="_blank">1</a>, <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/" target="_blank">2</a>, and <a href="http://asmeurersympy.wordpress.com/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem/" target="_blank">3</a> first.</em>
+
+
+
+The Transcendental Risch Algorithm is very picky.  Every elementary extension (review <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">part 2</a> for the definition of this) that we use for the integral has to be transcendental over the already existing extensions.  I also spoke a little about the difficulties of this in the first part of <a href="http://asmeurersympy.wordpress.com/2010/08/05/prototype-risch_integrate-function-ready-for-testing/">this blog post</a>.  
+
+
+
+The bad news is that recognizing algebraic functions is not as easy as looking for things like $latex \sqrt{x}$ and $latex (x + 2)^{\frac{3}{2}}$.  The reason is that with transcendental functions we can have hidden algebraic relations.  For example, in each of the following sets, the elements are algebraically dependent over $latex \mathbb{C}$:
+
+
+
+1. $latex \{x, e^x, e^{x + 1}\}$
+
+2. $latex \{x, \log{(x)}, e^\frac{\log{(x)}}{2}\}$
+
+3. $latex \{x, \log{(x)}, \log{(x + 1)}, \log{(2x^2 + 2x)}\}$
+
+
+
+Can you see the algebraic relations?  If you have been reading this blog for long enough, you should be able to.  In the first set, we see that $latex e^{x + 1} - ee^x = 0$, in 2., which is an example that I have given probably about five times now in my blog, $latex {\left(e^\frac{\log{(x)}}{2}\right)}^2 - x = 0$ (i.e., $latex e^\frac{\log{(x)}}{2} = \sqrt{x}$), and in 3. $latex \log{(x)} + \log{(x + 1)} + \log{(2)} - \log{(2x^2 + 2x)} = 0$ (in each case, I have given the relation in terms of the minimal polynomial that equals 0, which is the definition of <a href="http://en.wikipedia.org/wiki/Algebraic_dependence">algebraic dependence</a>). 
+
+
+
+Now, the good news is that there is a complete algorithm for not only determining when elements are algebraic over the already existing field, but also computing the minimal polynomial, which gives the relation needed to rewrite the dependent elements in terms of the others.  
+
+
+
+Notice that in the above sets, if you remove the last element, the remaining terms are algebraically independent.  In other words, you can algebraically rewrite the last term in terms of the remaining.  We have $latex e^{x + 1} = ee^x$, $latex e^\frac{\log{(x)}}{2} = \sqrt{x}$, and $latex \log{(2x^2 + 2x)} = \log{(2)} + \log{(x)} + \log{(x + 1)}$.  
+
+
+
+The above are three ways that the transcendental functions of the exponential and the logarithm can be written in a way that they are algebraically dependent</body></html>
