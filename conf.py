@@ -237,6 +237,8 @@ COMPILERS = {
 DEPLOY_COMMANDS = [
     "git checkout gh-pages",
     "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
+    "git commit -a -m 'Updating blog content'",
+    "git push",
 ]
 
 # Where the output site should be located
