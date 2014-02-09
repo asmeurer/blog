@@ -1,10 +1,10 @@
 {
   "pages": [
     {
-      "text": "Write your post here.", 
       "title": "Test post", 
+      "tags": "", 
       "loc": "/posts/test-post/", 
-      "tags": ""
+      "text": "This is a test post"
     }
   ]
 }
