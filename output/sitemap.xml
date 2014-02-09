@@ -5,39 +5,47 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>http://getnikola.com/2014/index.html</loc>
+  <loc>http://asmeurer.github.io/</loc>
   <lastmod>2014-02-09</lastmod>
  </url>
  <url>
-  <loc>http://getnikola.com/archive.html</loc>
+  <loc>http://asmeurer.github.io/2014/</loc>
+  <lastmod>2014-02-08</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/archive.html</loc>
   <lastmod>2014-02-09</lastmod>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/index.html</loc>
+  <loc>http://asmeurer.github.io/categories/</loc>
+  <lastmod>2014-02-08</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/galleries/</loc>
+  <lastmod>2014-02-08</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/galleries/rss.xml</loc>
   <lastmod>2014-02-09</lastmod>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/index.html</loc>
+  <loc>http://asmeurer.github.io/listings/</loc>
+  <lastmod>2014-02-08</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/posts/test-post.html</loc>
   <lastmod>2014-02-09</lastmod>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/rss.xml</loc>
+  <loc>http://asmeurer.github.io/posts/test-post/</loc>
   <lastmod>2014-02-09</lastmod>
  </url>
  <url>
-  <loc>http://getnikola.com/index.html</loc>
+  <loc>http://asmeurer.github.io/rss.xml</loc>
   <lastmod>2014-02-09</lastmod>
  </url>
  <url>
-  <loc>http://getnikola.com/listings/index.html</loc>
-  <lastmod>2014-02-09</lastmod>
- </url>
- <url>
-  <loc>http://getnikola.com/posts/test-post.html</loc>
-  <lastmod>2014-02-09</lastmod>
- </url>
- <url>
-  <loc>http://getnikola.com/rss.xml</loc>
+  <loc>http://asmeurer.github.io/tipue_search.html</loc>
   <lastmod>2014-02-09</lastmod>
  </url>
 </urlset>
