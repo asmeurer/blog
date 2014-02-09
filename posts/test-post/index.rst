@@ -6,4 +6,4 @@
 .. description: Test
 .. type: text
 
-This is a test post
+This is a test post. Testing.

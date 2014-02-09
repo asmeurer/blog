@@ -2,9 +2,9 @@
   "pages": [
     {
       "title": "Test post", 
-      "tags": "", 
       "loc": "/posts/test-post/", 
-      "text": "This is a test post"
+      "text": "This is a test post. Test\u00ading.", 
+      "tags": ""
     }
   ]
 }
