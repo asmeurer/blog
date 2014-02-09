@@ -239,6 +239,7 @@ DEPLOY_COMMANDS = [
     "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
     "git commit -a -m 'Updating blog content'",
     "git push",
+    "git checkout master",
 ]
 
 # Where the output site should be located
