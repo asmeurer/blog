@@ -3,19 +3,21 @@
 from __future__ import unicode_literals
 import time
 
+import nikola
+
 # Configuration, please edit
 
 # Data about this site
-BLOG_AUTHOR = "Your Name"
-BLOG_TITLE = "Demo Site"
+BLOG_AUTHOR = "Aaron Meurer"
+BLOG_TITLE = "Aaron Meurer's Blog"
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://getnikola.com/"
+SITE_URL = "http://asmeurer.github.io"
 # This is the URL where nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://getnikola.com/"
-BLOG_EMAIL = "joe@demo.site"
-BLOG_DESCRIPTION = "This is a demo site for Nikola."
+BLOG_EMAIL = "asmeurer@gmail.com"
+BLOG_DESCRIPTION = "My blog"
 
 # Nikola is multilingual!
 #
@@ -149,8 +151,8 @@ PAGES = (
 # 'markdown' is MarkDown
 # 'html' assumes the file is html and just copies it
 COMPILERS = {
-    "rest": ('.rst', '.txt'),
     "markdown": ('.md', '.mdown', '.markdown'),
+    "rest": ('.rst', '.txt'),
     "textile": ('.textile',),
     "txt2tags": ('.t2t',),
     "bbcode": ('.bb',),
@@ -268,6 +270,10 @@ COMPILERS = {
 #    ".jpg": ["jpegoptim --strip-all -m75 -v %s"],
 # }
 
+FILTERS = {
+    ".html": [nikola.filters.typogrify],
+    }
+
 # Expert setting! Create a gzipped copy of each generated file. Cheap server-
 # side optimization for very high traffic sites or low memory servers.
 # GZIP_FILES = False
@@ -358,7 +364,27 @@ THEME = "bootstrap3"
 # READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
 
 # A HTML fragment describing the license, for the sidebar.
-LICENSE = ""
+LICENSE = """
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license"
+     href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png"
+style="border-style: none;" alt="CC0" />
+  </a>
+"""
+#   <br />
+#   To the extent possible under law,
+#   <a rel="dct:publisher"
+#      href="asmeurer.github.io">
+#     <span property="dct:title">Aaron Meurer</span></a>
+#   has waived all copyright and related or neighboring rights to
+#   <span property="dct:title">Aaron Meurer's Blog</span>.
+# This work is published from:
+# <span property="vcard:Country" datatype="dct:ISO3166"
+#       content="US" about="asmeurer.github.io">
+#   United States</span>.
+# </p>
+
 # I recommend using the Creative Commons' wizard:
 # http://creativecommons.org/choose/
 # LICENSE = """
@@ -410,7 +436,7 @@ COMMENT_SYSTEM_ID = "asmeurer"
 # it will instead /foo/default.html => /foo)
 # (Note: This was briefly STRIP_INDEX_HTML in v 5.4.3 and 5.4.4)
 # Default = False
-# STRIP_INDEXES = False
+STRIP_INDEXES = True
 
 # Should the sitemap list directories which only include other directories
 # and no files.
@@ -425,7 +451,7 @@ COMMENT_SYSTEM_ID = "asmeurer"
 # This can be disabled on a per-page/post basis by adding
 #    .. pretty_url: False
 # to the metadata
-# PRETTY_URLS = False
+PRETTY_URLS = True
 
 # If True, publish future dated posts right away instead of scheduling them.
 # Defaults to False.
@@ -450,20 +476,20 @@ COMMENT_SYSTEM_ID = "asmeurer"
 # MATHJAX_CONFIG = ""
 
 # If you are using the compile-ipynb plugin, just add this one:
-#MATHJAX_CONFIG = """
-#<script type="text/x-mathjax-config">
-#MathJax.Hub.Config({
-#    tex2jax: {
-#        inlineMath: [ ['$','$'], ["\\\(","\\\)"] ],
-#        displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ]
-#    },
-#    displayAlign: 'left', // Change this to 'center' to center equations.
-#    "HTML-CSS": {
-#        styles: {'.MathJax_Display': {"margin": 0}}
-#    }
-#});
-#</script>
-#"""
+MATHJAX_CONFIG = """
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\\(","\\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+"""
 
 # Do you want to customize the nbconversion of your IPython notebook?
 # IPYNB_CONFIG = {}
@@ -474,7 +500,7 @@ COMMENT_SYSTEM_ID = "asmeurer"
 # What MarkDown extensions to enable?
 # You will also get gist, nikola and podcast because those are
 # done in the code, hope you don't mind ;-)
-# MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite']
+MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite']
 
 # Social buttons. This is sample code for AddThis (which was the default for a
 # long time). Insert anything you want here, or even make it empty.
@@ -547,31 +573,31 @@ COMMENT_SYSTEM_ID = "asmeurer"
 # Also, there is a local search plugin you can use, based on Tipue, but it requires setting several
 # options:
 
-# SEARCH_FORM = """
-# <span class="navbar-form pull-left">
-# <input type="text" id="tipue_search_input">
-# </span>"""
-#
-# BODY_END = """
-# <script type="text/javascript" src="/assets/js/tipuesearch_set.js"></script>
-# <script type="text/javascript" src="/assets/js/tipuesearch.js"></script>
-# <script type="text/javascript">
-# $(document).ready(function() {
-    # $('#tipue_search_input').tipuesearch({
-        # 'mode': 'json',
-        # 'contentLocation': '/assets/js/tipuesearch_content.json',
-        # 'showUrl': false
-    # });
-# });
-# </script>
-# """
+SEARCH_FORM = """
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>"""
 
-# EXTRA_HEAD_DATA = """
-# <link rel="stylesheet" type="text/css" href="/assets/css/tipuesearch.css">
-# <div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
-# """
-# ENABLED_EXTRAS = ['local_search']
-#
+BODY_END = """
+<script type="text/javascript" src="/assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="/assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+"""
+
+EXTRA_HEAD_DATA = """
+<link rel="stylesheet" type="text/css" href="/assets/css/tipuesearch.css">
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+"""
+ENABLED_EXTRAS = ['local_search']
+
 
 
 # Use content distribution networks for jquery and twitter-bootstrap css and js
@@ -619,14 +645,14 @@ COMMENT_SYSTEM_ID = "asmeurer"
 # Specifying the id for either 'site' or 'creator' will be preferred
 # over the cleartext username. Specifying an ID is not necessary.
 # Displaying images is currently not supported.
-# TWITTER_CARD = {
-#     # 'use_twitter_cards': True,  # enable Twitter Cards / Open Graph
-#     # 'site': '@website',  # twitter nick for the website
-#     # 'site:id': 123456,  # Same as site, but the website's Twitter user ID
-#                           # instead.
-#     # 'creator': '@username',  # Username for the content creator / author.
-#     # 'creator:id': 654321,  # Same as creator, but the Twitter user's ID.
-# }
+TWITTER_CARD = {
+    'use_twitter_cards': True,  # enable Twitter Cards / Open Graph
+    'site': '@asmeurer',  # twitter nick for the website
+    'site:id': 123456,  # Same as site, but the website's Twitter user ID
+                         # instead.
+    'creator': '@asmeurer',  # Username for the content creator / author.
+    'creator:id': 654321,  # Same as creator, but the Twitter user's ID.
+}
 
 
 # Post's dates are considered in UTC by default, if you want to use
@@ -637,10 +663,10 @@ COMMENT_SYSTEM_ID = "asmeurer"
 # Also, if you want to use a different time zone in some of your posts,
 # you can use W3C-DTF Format (ex. 2012-03-30T23:00:00+02:00)
 #
-# TIMEZONE = 'UTC'
+TIMEZONE = 'America/Chicago'
 
 # If webassets is installed, bundle JS and CSS to make site loading faster
-# USE_BUNDLES = True
+USE_BUNDLES = True
 
 # Plugins you don't want to use. Be careful :-)
 # DISABLED_PLUGINS = ["render_galleries"]
@@ -659,13 +685,14 @@ COMMENT_SYSTEM_ID = "asmeurer"
 #     'local_search',
 #     'render_mustache',
 # ]
+ENABLED_EXTRAS = ['local_search']
 
 # List of regular expressions, links matching them will always be considered
 # valid by "nikola check -l"
 # LINK_CHECK_WHITELIST = []
 
 # If set to True, enable optional hyphenation in your posts (requires pyphen)
-# HYPHENATE = False
+HYPHENATE = True
 
 # The <hN> tags in HTML generated by certain compilers (reST/Markdown)
 # will be demoted by that much (1 → h1 will become h2 and so on)
