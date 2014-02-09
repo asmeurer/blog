@@ -236,7 +236,7 @@ COMPILERS = {
 # To do manual deployment, set it to []
 DEPLOY_COMMANDS = [
     "git checkout gh-pages",
-    "rsync -rPv --delete output/ -e old_blog -e .git .",
+    "rsync -rPv --delete-after --exclude old_blog --exclude .git output/ .",
 ]
 
 # Where the output site should be located
