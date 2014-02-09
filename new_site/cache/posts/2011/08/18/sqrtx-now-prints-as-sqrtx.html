@@ -1,0 +1,111 @@
+<p><html><body><p>Just a few moments ago, <a href="https://github.com/sympy/sympy/pull/548" target="_blank">a branch</a> was pushed in that fixed one of my biggest grievances in SymPy, if not the biggest.  Previously we had this behavior:</p>
+<p>[code language="py"]</p>
+<p>In [1]: sqrt(x)</p>
+<p>Out[1]: x**(1/2)</p>
+<p>In [2]: solve(x**2 - 2, x)</p>
+<p>Out[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p>
+<p>[/code]</p>
+<p>Now suppose you took the output of those expressions and pasted them into isympy:</p>
+<p>[code language="py"]</p>
+<p>In [3]: x**(1/2)</p>
+<p>Out[3]: x**0.5</p>
+<p>In [4]: [-2<strong>(1/2), 2</strong>(1/2)]</p>
+<p>Out[4]: [-1.41421356237, 1.41421356237]</p>
+<p>[/code]</p>
+<p>That's with <code><strong>future</strong>.division</code>.  Here's what would happen with old division:</p>
+<p>[code language="py"]</p>
+<p>In [2]: x**(1/2)</p>
+<p>Out[2]: 1</p>
+<p>In [3]: [-2<strong>(1/2), 2</strong>(1/2)]</p>
+<p>Out[3]: [-1, 1]</p>
+<p>[/code]</p>
+<p>This is because with old division, <code>1/2</code> evaluates to <code>0</code>.</p>
+<p>The problem is that Python evaluates <code>1/2</code> to <code>0.5</code> (or <code>0</code>) before SymPy has a change to convert it to a Rational.  There were several ways that people got around this.  If you copy an expression with number division in it and want to paste it into a SymPy session, the easiest way to do this was to pass it as a string to <code>sympify()</code>:</p>
+<p>[code language="py"]</p>
+<p>In [1]: sympify("x**(1/2)")</p>
+<p>Out[1]: x**(1/2)</p>
+<p>In [2]: sympify("[-2<strong>(1/2), 2</strong>(1/2)]")</p>
+<p>Out[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p>
+<p>[/code]</p>
+<p>If that was too much typing for you, you could use the <code>S()</code> shortcut to <code>sympify()</code></p>
+<p>[code language="py"]</p>
+<p>In [3]: S("x**(1/2)")</p>
+<p>Out[3]: x**(1/2)</p>
+<p>In [4]: S("[-2<strong>(1/2), 2</strong>(1/2)]")</p>
+<p>Out[4]: [-2<strong>(1/2), 2</strong>(1/2)]</p>
+<p>[/code]</p>
+<p>This solution is fine if you want to paste an expression into a SymPy session, but it's not a very clean one if you want to paste code into a script. For that, you need to modify the code so that it no longer contains Python int/Python int.  The easiest way to do this is to sympify one of the ints.  So you would do something like</p>
+<p>[code language="py"]</p>
+<p>In [5]: x**(S(1)/2)</p>
+<p>Out[5]: x**(1/2)</p>
+<p>In [6]: [-2<strong>(S(1)/2), 2</strong>(S(1)/2)]</p>
+<p>Out[6]: [-2<strong>(1/2), 2</strong>(1/2)]</p>
+<p>[/code]</p>
+<p>This wasn't terribly readable, though.  The <em>best</em> way to fix the problem when you had a power of one half was to use <code>sqrt()</code>, which is a shortcut to <code>Pow(…, Rational(1, 2))</code>.  </p>
+<p>Well, this last item should make you think.  If <code>sqrt(x)</code> is more readable than <code>x<strong>(S(1)/2)</code> or even <code>x</strong>(1/2)</code>, why not print it like that in the first place.  Well, I thought so, so I changed the string printer, and now this is the way that SymPy works.  So 90% of the time, you can just paste the result of <code>str()</code> or <code>print</code>, and it will just work, because there won't be any <code>**(1/2)</code>, which was by far the most common problem of "Python evaluating the expression to something before we can."  In the git master, SymPy now behaves like</p>
+<p>[code language="py"]</p>
+<p>In [1]: sqrt(x)</p>
+<p>Out[1]: sqrt(x)</p>
+<p>In [2]: solve(x**2 - 2, x)</p>
+<p>Out[2]: [-sqrt(2), sqrt(2)]</p>
+<p>[/code]</p>
+<p>You can obviously just copy and paste these results, and you get the exact same thing back.  Not only does this make expressions more copy-and-pastable, but the output is <em>much</em> nicer in terms of readability.  Here are some before and afters that come from actual SymPy doctests that I had to change after fixing the printer:</p>
+<p>[code language="py"]</p>
+<p>Before:</p>
+<p>&gt;&gt;&gt; e = ((2+2<em>sqrt(2))</em>x+(2+sqrt(8))*y)/(2+sqrt(2))</p>
+<p>&gt;&gt;&gt; radsimp(e)</p>
+<p>2<strong>(1/2)*x + 2</strong>(1/2)*y</p>
+<p>After:</p>
+<p>&gt;&gt;&gt; radsimp(e)</p>
+<p>sqrt(2)<em>x + sqrt(2)</em>y</p>
+<p>[/code]</p>
+<p>[code language="py"]</p>
+<p>Before:</p>
+<p>&gt;&gt;&gt; b = besselj(n, z)</p>
+<p>&gt;&gt;&gt; b.rewrite(jn)</p>
+<p>2<strong>(1/2)*z</strong>(1/2)<em>jn(n - 1/2, z)/pi</em>*(1/2)</p>
+<p>After:</p>
+<p>&gt;&gt;&gt; b.rewrite(jn)</p>
+<p>sqrt(2)<em>sqrt(z)</em>jn(n - 1/2, z)/sqrt(pi)</p>
+<p>[/code]</p>
+<p>[code language="py"]</p>
+<p>Before:</p>
+<p>&gt;&gt;&gt; x = sympify('-1/(-3/2+(1/2)<em>sqrt(5))</em>sqrt(3/2-1/2*sqrt(5))')</p>
+<p>&gt;&gt;&gt; x</p>
+<p>(3/2 - 5<strong>(1/2)/2)</strong>(-1/2)</p>
+<p>After</p>
+<p>&gt;&gt;&gt; x</p>
+<p>1/sqrt(3/2 - sqrt(5)/2)</p>
+<p>[/code]</p>
+<p>And not only is <code>sqrt(x)</code> easier to read than <code>x**(1/2)</code> but it's fewer characters.</p>
+<p>In the course of changing this, I went ahead and did some greps of the repository to get rid of all <code><strong>(S(1)/2)</code>, <code></strong>Rational(1, 2)</code> and similar throughout the code base (not just in the output of doctests where the change had to be made), replacing them with just <code>sqrt</code>.  Big thanks to Chris Smith for helping me catch all instances of this.  Now the code should be a little easier to read and maintain.</p>
+<p><strong>Future Work</strong></p>
+<p>This is a big change, and I believe it will fix the copy-paste problem for 90% of expressions. But it does not solve it completely.  It is still possible to get int/int in the string form of an expression.  Only powers of 1/2 and -1/2 are converted to sqrt, so any other rational power will still print as a/b, like</p>
+<p>[code language="py"]</p>
+<p>In [1]: x**Rational(3, 2)</p>
+<p>Out[1]: x**(3/2)</p>
+<p>[/code]</p>
+<p>Also, as you may have noticed in the last example above, a rational number that sits by itself will still be printed as int/int, like</p>
+<p>[code language="py"]</p>
+<p>In [2]: (1 + x)/2</p>
+<p>Out[2]: x/2 + 1/2</p>
+<p>[/code]</p>
+<p>Therefore, I'm leaving the <a href="http://code.google.com/p/sympy/issues/detail?id=2359" target="_blank">issue for this</a> open to discuss potential future fixes to the string printer.  One idea is to create a <code>root</code> function that is a shortcut to <code>root(x, a) == x**(1/a)</code>. This would work for rational powers where the numerator is 1.  For other rational powers, we could then denest these with an integer power.  It's important to do this in the right order, though, as they are not equivalent.  You can see that SymPy auto-simplifies it when it is mathematically correct in all cases, and not when it is not:</p>
+<p>[code language="py"]</p>
+<p>In [3]: sqrt(x**3)</p>
+<p>Out[3]: sqrt(x**3)</p>
+<p>In [4]: sqrt(x)**3</p>
+<p>Out[4]: x**(3/2)</p>
+<p>[/code]</p>
+<p>Thus $latex \left(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $latex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, replace $latex x$ with -1).</p>
+<p>So the idea would be to print <code>Pow(expr, Rational(a, b))</code> as <code>root(expr, b)**a</code>.  </p>
+<p>The merits of this are debatable, but anyway I think we should have this <code>root()</code> function in any case (see <a href="http://code.google.com/p/sympy/issues/detail?id=2643" target="_blank">issue 2643</a>).</p>
+<p>Another idea, which is probably not a good one, is to always print <code>int/int</code> as <code>S(int)/int</code>.  So we would get</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; Rational(1, 2)</p>
+<p>S(1)/2</p>
+<p>&gt;&gt;&gt; x**Rational(4, 5)</p>
+<p>x**(S(4)/5)</p>
+<p>[/code]</p>
+<p>This is probably a bad idea because even though expressions would always be copy-pastable, they would be slightly less readable.  </p>
+<p>By the way, in case you didn't catch it, all of these changes only affect the string printer.  The pretty printer remained unaffected, and would under any additional changes, as it isn't copy-pastable anyway, and already does a superb job of printing roots.</p></body></html></p>

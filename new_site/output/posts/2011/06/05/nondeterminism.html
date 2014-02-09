@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Joe Example">
+    <title>Nondeterminism | Aaron Meurer's SymPy Blog</title>
+    
+            <link href="../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+    <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/2011/06/05/nondeterminism.html">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
+
+    
+
+
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            
+                <li><a href="../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../rss.xml">RSS</a>
+
+        </li></ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            
+            
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Nondeterminism</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2011-06-05T06:08:21+00:00" itemprop="datePublished">2011-06-05 06:08</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../categories/mathjax.html"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>So from Saturday to Wednesday of this week, I was on vacation to the Grand Canyon without my computer.  Therefore, I did not do a whole lot with respect to SymPy this week.  The vacation was very fun, though.  My family and I hiked to the bottom of the Grand Canyon and stayed a day at the bottom in a lodge at Phantom Ranch, then hiked back up.  I would highly recommend it to anyone who does not mind doing a little hiking.  </p>
+<p>Regarding what I did do, other than catching up on the email from when I was gone, I did some more work finishing patches for the release.  We are now <em>very</em> close to having a release.  All the remaining <a href="http://code.google.com/p/sympy/issues/list?q=label:Milestone-Release0.7.0">blocking issues</a> either have patches that need to be reviewed, or decisions that need to be made.</p>
+<p>I also did some work on the Risch Algorithm, though it wasn't very much.  One of my favorite ways to "do work" on the code is to stress test <code>risch_integrate()</code> and if I find a bug or find that it runs too slow, see what needs to be done to fix it.  This week, I discovered that <code>risch_integrate()</code> has a bit of nondeterminism built into it.  Actually, I already knew this, but I recently found an example that demonstrates it very nicely.  The problem is that when it builds the extension to integrate the function, <code>risch_integrate()</code> uses <code>.atoms()</code> to get the parts of the expression (for example, <code>expr.atoms(log)</code> gets all the logarithms in <code>expr</code>).  But <code>.atoms()</code> returns a set (I believe this is for performance reasons, though I'm not certain).  So we get things like</p>
+<p><strong>Hover over the code and click on the left-most, "view source" icon (a paper icon with <tt>&lt; &gt;</tt> over it) to view without breaks.  Opens in a new window.</strong></p>
+<p>[code language="py"]</p>
+<p>In [1]: a = Add(<em>(log(x</em>*i) for i in range(10)))</p>
+<p>In [2]: a</p>
+<p>Out[2]: 
+            ⎛ 2⎞      ⎛ 3⎞      ⎛ 4⎞      ⎛ 5⎞      ⎛ 6⎞      ⎛ 7⎞      ⎛ 8⎞      ⎛ 9⎞
+log(x) + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠</p>
+<p>In [3]: b = risch_integrate(a, x)</p>
+<p>In [4]: b</p>
+<p>Out[4]: 
+                ⎛ 4⎞
+        45⋅x⋅log⎝x ⎠
+-45⋅x + ────────────
+             4    <br>
+[/code]</p>
+<p>This is correct, since we have</p>
+<p>[code language="py"]</p>
+<p>In [5]: expand(b.diff(x) - a)</p>
+<p>Out[5]: 0</p>
+<p>[/code]</p>
+<p>(remember that $latex \log{(x^n)}=n\log{(x)}$).  The integral can be expressed in terms of any of the logarithms in the expression.  It happens to be expressed in terms of $latex \log{(x^4)}$ because that happened to be the first one that came out of <code>a.atoms(log)</code> during iteration.  This is problematic.  First, it's not exactly what is expected.  The ideal solution would be if the answer was written in terms of $latex \log{(x)}$.  </p>
+<p>But it's actually worse than that.  Like I mentioned, this is nondeterministic.  It depends on the order of iteration through a set, which is not guaranteed to be in any particular order.  Indeed, if I run the following in 32-bit Python 2.7 and again in 64-bit Python 2.7), the output is exactly the same except for <code>i</code> = 64 to <code>i</code> = 77.</p>
+<p>[code language="py"]</p>
+<p>for i in range(100):
+    print risch_integrate(Add(<em>(log(x</em>*j) for j in range(i))), x)
+[/code]</p>
+<p>The actual output seems to follow a pattern, though it's had to discern exactly what it is.  The output for 32-bit is <a href="https://gist.github.com/1008685" title="32-bit Python risch_integrate(logarithms)" target="_blank">https://gist.github.com/1008685</a> and the output for 64-bit is <a href="https://gist.github.com/1008684" title="64-bit Python risch_integrate(logarithms)" target="_blank">https://gist.github.com/1008684</a> (sorry, I forgot to print <code>i</code>; just subtract 4 from the line number).  </p>
+<p>So this has gotten me thinking about how to reduce nondeterminism.  Clearly, I need to sort the result of <code>.atoms()</code>, or else <code>risch_integrate()</code> might return a different (though equivalent) result on different platforms. Actually, I've seen <code>list(set)</code> return a different result in the <em>same</em> Python session.  That means that you could potentially get something like <code>risch_integrate(expr, x) == risch_integrate(expr, x) =&gt; False</code>!</p>
+<p>The problem is how to sort the atoms.  We recently added a <code>sort_key()</code> function that can be passed as a key to <code>sorted()</code>, which is completely deterministic and platform independent.  That would solve the determinism problem, but actually, I think this requires more thought.  The order that the differential extension is built in can affect not only the form of the resulting antiderivative (though it will always be equivalent, up to a constant), but also the speed with which it is computed.  To take an example from <a href="http://code.google.com/p/sympy/issues/detail?id=2010#c1">issue 2010</a>, the issue about <code>risch_integrate()</code> (you may also <a href="http://asmeurersympy.wordpress.com/2010/08/05/prototype-risch_integrate-function-ready-for-testing/">recognize</a> this example if you are a regular reader of this blog), the <code>handle_first</code> keyword argument to <code>risch_integrate()</code> affects if it builds the extension tower looking for logarithms first or exponentials first.  Whichever comes last is what is integrated first (the tower is integrated from the top to the bottom).  If the last extension was an exponential, then it uses the exponential algorithm.  If it was a logarithm, then it uses the logarithm algorithm.  These are completely different algorithms, and indeed the results can appear in different forms (and sometimes, one will raise NotImplementedError while the other will work because I have implemented the exponential algorithm more completely than the logarithmic one).  It also affects the speed because the integrand might be of a different "type" in the different extensions.  In the example below, the answers are different because it tries to make the argument of the logarithmic part monic with respect to the exponential or the logarithm, respectively. Also notice the speed difference.  This can be exasperated more for integrands of different forms than this one.</p>
+<p>[code language="py"]</p>
+<p>In [1]: f = (x<em>(x + 1)</em>((x<strong>2<em>exp(2</em>x</strong>2) - log(x + 1)<strong>2)</strong>2 +
+   ...: 2<em>x</em>exp(3<em>x<strong>2)<em>(x - (2</em>x</strong>3 + 2</em>x<strong>2 + x + 1)<em>log(x + 1))))/((x +
+   ...: 1)</em>log(x + 1)</strong>2 - (x<strong>3 + x</strong>2)<em>exp(2</em>x<strong>2))</strong>2</p>
+<p>In [2]: f</p>
+<p>Out[2]: 
+          ⎛                          2                                                   ⎞
+          ⎜⎛                       2⎞                                                   2⎟
+          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
+x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠</p>
+<p>──────────────────────────────────────────────────────────────────────────────────────────
+                                                                2                       <br>
+                         ⎛                                    2⎞                        <br>
+                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟                        <br>
+                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠                          </p>
+<p>In [3]: risch_integrate(f, x, handle_first='log')</p>
+<p>Out[3]: 
+       ⎛              ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞                           <br>
+       ⎜log(1 + x)    ⎝x ⎠⎟                   ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞             <br>
+    log⎜────────── + ℯ    ⎟                log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠             <br>
+       ⎝    x             ⎠                   ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)  <br>
+x + ─────────────────────── - log(1 + x) - ───────────────────────── + ──────────────────────────
+               2                                       2                                        2
+                                                                              2           3  2⋅x 
+                                                                       - x⋅log (1 + x) + x ⋅ℯ    </p>
+<p>In [4]: risch_integrate(f, x, handle_first='exp')</p>
+<p>Out[4]: 
+       ⎛                ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞        ⎛ 2⎞           <br>
+       ⎜                ⎝x ⎠⎟                   ⎜                ⎝x ⎠⎟        ⎝x ⎠           <br>
+    log⎝log(1 + x) + x⋅ℯ    ⎠                log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)<br>
+x + ───────────────────────── - log(1 + x) - ───────────────────────── - ──────────────────────
+                2                                        2                                    2
+                                                                            2           2  2⋅x 
+                                                                         log (1 + x) - x ⋅ℯ    </p>
+<p>In [5]: %timeit risch_integrate(f, x, handle_first='log')</p>
+<p>1 loops, best of 3: 1.49 s per loop</p>
+<p>In [6]: %timeit risch_integrate(f, x, handle_first='exp')</p>
+<p>1 loops, best of 3: 1.21 s per loop</p>
+<p>In [7]: cancel(risch_integrate(f, x, handle_first='log').diff(x) - f)</p>
+<p>Out[7]: 0</p>
+<p>In [8]: cancel(risch_integrate(f, x, handle_first='exp').diff(x) - f)</p>
+<p>Out[8]: 0</p>
+<p>[/code]</p>
+<p>So what I think I really need to do is to do some research on what order of building the tower makes it the most efficient.  Also, <code>handle_first</code> needs to be modified to be more dynamic than just looking at exponentials or logarithms first, but also considering which exponentials or logarithms to look at first, and the others might be rewritten in terms of those (this needed to be done anyway to make it work for three types of extensions: exponentials, logarithms, and tangents).  </p>
+<p>There can also be more heuristics for this.  Currently, there are heuristics for exponentials to prefer rewriting $latex e^{2x}$ as $latex \left({e^{x}}\right)^2$ instead of rewriting $latex e^{x}$ as $latex \sqrt{e^{2x}}$ (this is necessary not only for keeping things in terms of the nicer looking gcds but also because <code>risch_integrate()</code> doesn't know how to handle algebraic extensions like square roots). I didn't realize it at the time, but the corollary heuristic for logarithms should try to rewrite $latex \log{(x^2)}$ in terms of $latex \log{(x)}$ and not the other way around.  We can use the exact same gcd algorithm (called <a href="https://github.com/asmeurer/sympy/blob/integration3/sympy/integrals/risch.py#L44"><code>integer_powers()</code></a> in <code>risch.py</code>, and I now realize that it should actually be called <code>integer_multiples()</code>) as we do for the exponential, only use the powers of the arguments instead of coefficients.  This might require some factorization to do completely correctly, so it certainly requires some thought.  </p>
+<p><strong>Update</strong></p>
+<p>I discovered that there's an easier way to show the nondeterminism of the above than running it on different architectures.  You just have to change the variable of integration:</p>
+<p>[code language="py"]</p>
+<p>In [1]: a = Add(<em>(log(x</em>*i) for i in range(10)))</p>
+<p>In [2]: risch_integrate(a, x)</p>
+<p>Out[2]: 
+                ⎛ 4⎞
+        45⋅x⋅log⎝x ⎠
+-45⋅x + ────────────
+             4      </p>
+<p>In [3]: b = Add(<em>(log(y</em>*i) for i in range(10)))</p>
+<p>In [4]: risch_integrate(b, y)</p>
+<p>Out[4]: -45⋅y + 45⋅y⋅log(y)</p>
+<p>In [5]: c = Add(<em>(log(z</em>*i) for i in range(10)))</p>
+<p>In [6]: risch_integrate(c, z)</p>
+<p>Out[6]: 
+                ⎛ 2⎞
+        45⋅z⋅log⎝z ⎠
+-45⋅z + ────────────
+             2    <br>
+[/code]</p>
+<p>Clearly the code for this needs to be doing some canonicalization. </p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../05/26/update-for-the-beginning-of-the-summer.html" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../13/sympy-0-7-0-rc1-is-out.html" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/2011/06/05/nondeterminism.html",
+        disqus_title="Nondeterminism",
+        disqus_identifier="cache/posts/2011/06/05/nondeterminism.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:joe@example.com">Joe Example</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Joe Example">
+    <title>Python 3: Single codebase vs. 2to3 | Aaron Meurer's SymPy Blog</title>
+    
+            <link href="../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+    <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/2013/08/22/python-3-single-codebase-vs-2to3.html">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
+
+    
+
+
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            
+                <li><a href="../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../rss.xml">RSS</a>
+
+        </li></ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            
+            
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Python 3: Single codebase vs. 2to3</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2013-08-22T00:45:57+00:00" itemprop="datePublished">2013-08-22 00:45</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>In my <a href="http://asmeurersympy.wordpress.com/2013/08/09/using-python-3-as-my-default-python/">previous post</a> about switching to Python 3 as my default Python, I praised the use of a single codebase for supporting both Python 2 and Python 3. I even chastised the Python core developers for creating 2to3, writing, "I think that the core Python folks made a mistake by presenting Python 3 as a new language. It has made people antagonistic against Python 3 (well, that and the print function, which was another stupid mistake, because even if it was a good idea, it alone has kept too many people from switching). 2to3 was a mistake too, because it perpetuated this idea."</p>
+<p>Well, this isn't entirely fair, because I myself used to be one of the biggest advocates of using 2to3 over a single codebase. Take this <a href="https://github.com/ipython/ipython/issues/2440#issuecomment-9058182">GitHub comment</a> from when the IPython guys were considering this issue, where I wrote, "maintaining a common code base is going to be a bit annoying from the developer side.…The main benefit of using 2to3 is that 99% of the time, you can just write your code as you would for Python 2, and when it gets to Python 3, it just works (maybe that percent is a bit smaller if you use strings a lot, but it's still quite high). To write for Python 2 and 3 at the same time, you have to remember a lot of little rules, which no one will remember (and new contributors will not even know about). And given that IPython's test coverage is still poor (unless I am mistaken, in which case, please correct me), little mistakes will slip through, and no one will notice until they try the certain behavior in Python 3."</p>
+<p>So I just want to clarify a few things.</p>
+<p></p><ol>
+    <li><strong>I was wrong.</strong>  When I chastised the Python core developers for making people believe that Python 3 is a different language from Python 2, <em>I too</em> fell into that trap. It took a month of me working on a codebase that had to be directly Python 3 compatible to see the fallacy of this.  And seeing just how small the SymPy <a href="https://github.com/sympy/sympy/blob/master/sympy/core/compatibility.py">compatibility</a> file is sealed the deal. I now believe that I was completely wrong in saying that maintaining a common codebase is annoying. As I wrote in the previous post, it is no different from supporting 2.4-2.7, for instance (actually, by my memory, supporting 2.4-2.7 was much worse than supporting 2.6-3.3, because <em>so</em> many language features were introduced in Python 2.5)</li>
+    <li><strong>If you have to support 2.5 or earlier and Python 3, then 2to3 might actually be better.</strong> The reason is simple: Python 2.6 was the first version of Python to "know" about Python 3. So, for instance, <code>from <strong>future</strong> import print_function</code> was introduced in Python 2.6. This means that to support a single codebase for 2.5-3.x you have to write <code>print('\n')</code> to print an empty line and to print something without a newline at the end, you have to use <code>sys.stdout.write</code>. Also, <code>except Exception as e</code>, using the <code>as</code> keyword, which is the only syntax allowed in Python 3, was introduced in Python 2.6, so if you want to catch an exception you have to use <code>sys.exc_info()[1]</code>. Now that really <em>is</em> annoying. But in Python 2.6, most differences can be fixed with simple definitions, most of which boil down to try, except ImportError, import x as y type workarounds. The worst are the print function, which can be imported from <strong>future</strong>, division, which can also be imported from <strong>future</strong> (or worked around), and unicode literals (if it's a big deal, drop support for Python 3.2). Most other things are just simple renames, like xrange -&gt; range, or making sure that you wrap functions that are iterators in Python 3 in <code>list</code> if you want to access items from them.</li>
+    <li><strong>I was right about test coverage.</strong> Supporting Python 2 and Python 3 in a single codebase if you have bad test coverage is not going to work. You can get around the worst things by making sure that <strong>future</strong> imports are at the top of each file, but you are bound to miss things, because, as I said, you will forget that <code>map(f, s)[0]</code> doesn't work in Python 3 or that the <code>StringIO</code> module has been renamed to <code>io</code>, or that you can't pass around data as strings—they have to be bytes.
+<p>Of course, you also need good test coverage to support Python 3 well using 2to3, but you can get away with more because 2to3 will take care of things like the above for you.  Perhaps instead of 2to3 what really should have been made is a pyflakes-like tool that uses the same knowledge as 2to3 to check for cross-compatibility for Python 2 and Python 3.</p></li>
+    <li><strong>In the end, you have to be actually using Python 3.</strong> I feel like people haven't been, even today, taking Python 3 seriously. They aren't actually using it. There's a feeling that someday in the future they will, but for now, Python 2 is the way to go. 2to3 exacerbates this feeling, because to use it, you have to develop in Python 2. You shouldn't touch the code generated by 2to3. As it is, then, if you develop with 2to3, you only ever use Python 3 to test that things are working in Python 3. You don't prototype your code in Python 3, because then you will write code that doesn't work in Python 2. 
+<p>With the single codebase, your view should change. You should start prototyping in Python 3. You should only use Python 2 to test that things work in Python 2 (and since you've been using Python 2 for so long before switching to Python 3, or at least if you're like me you have, this is not that bad). Just yesterday, I found a <a href="https://github.com/sympy/sympy/pull/2398">bug</a> in SymPy in Python 3 that went unnoticed. It relates to what I said above about using bytes instead of strings for data. I just checked, and 2to3 wouldn't have fixed it (and indeed, the bug is present in SymPy 0.7.3, which used 2to3), because there's no way for 2to3 to have known that the data was bytes and not a string.  The code was obviously untested, but it would have been obvious that it didn't work if anyone was using Python 3 to use SymPy interactively.  As it turns out, some of our users are doing this, and they pointed it out on the mailing list, but it remained unfixed until I found it myself independently. </p></li>  
+</ol>
+
+<p>So old mistakes aside, the lessons to take away from this and the <a href="http://asmeurersympy.wordpress.com/2013/08/09/using-python-3-as-my-default-python/">previous blog post</a> are </p>
+<ol>
+    <li>Use a single codebase instead of 2to3 to support both Python 2 and Python 3.</li>
+    <li>Use Python 3 as your default Python.</li>
+    <li>Keep Python 2 around, though, because not everything supports Python 3 yet.</li>
+    <li>Expect to find some bugs, because, until everyone starts doing this, people aren't going to test their software in Python 3.</li>
+</ol>
+
+<p></p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../09/using-python-3-as-my-default-python.html" rel="prev">← Previous post</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/2013/08/22/python-3-single-codebase-vs-2to3.html",
+        disqus_title="Python 3: Single codebase vs. 2to3",
+        disqus_identifier="cache/posts/2013/08/22/python-3-single-codebase-vs-2to3.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:joe@example.com">Joe Example</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

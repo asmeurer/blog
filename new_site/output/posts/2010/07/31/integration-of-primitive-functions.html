@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Joe Example">
+    <title>Integration of primitive functions | Aaron Meurer's SymPy Blog</title>
+    
+            <link href="../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+    <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/2010/07/31/integration-of-primitive-functions.html">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
+
+    
+
+
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            
+                <li><a href="../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../rss.xml">RSS</a>
+
+        </li></ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            
+            
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Integration of primitive functions</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2010-07-31T06:44:31+00:00" itemprop="datePublished">2010-07-31 06:44</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../categories/mathjax.html"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><strong>Integration of Primitive Functions</strong>
+<p>So this past week, I had another break through in my project.  The <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">first break through</a>, as you may recall, was the completion of the <code>integrate_hyperexponential()</code> function, which allowed for the integration in hyperexponential extensions, including proving the nonexistence of elementary integrals.  Now I have worked my way up to this level on the other major half of the integration algorithm (actually, major third; more on that later): integration of primitive elements.  </p>
+<p>This time, I can refer you to my <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">previous blog post</a> for definitions.  The chief thing here is that there is now a function in my <tt>integration3</tt> branch called <code>integrate_primitive()</code>, and it is used primarily for integrating functions with logarithms.</p>
+<p>So, how about some examples?  The first one comes from <a href="http://">Algorithms for computer algebra By Keith O. Geddes, Stephen R. Czapor, George Labahn</a> (example 12.8).  I like it because it contains both exponentials and logarithms, in a way that they do not depend on each other, so it can be integrated with either <code>integrate_primitive()</code> or <code>integrate_hyperexponential()</code>.  In either case, the polynomial part is $latex \frac{x}{x + 1}$, so recursively calling the other function is not required.  (for those of you who have been following my <tt>integration3</tt> branch, you may notice that this is blatantly taken from the commit history).</p>
+<p><strong>Hover over the code and click on the left-most, "view source" icon (a paper icon with <tt>&lt; &gt;</tt> over it) to view without breaks.  Opens in a new window.</strong></p>
+<p>[code language="py"]</p>
+<p>In [1]: from sympy.integrals.risch import integrate_primitive,</p>
+<p>integrate_hyperexponential</p>
+<p>In [2]: f = (x<em>(x + 1)</em>((x<strong>2<em>exp(2</em>x</strong>2) - log(x + 1)<strong>2)</strong>2 +</p>
+<p>2<em>x</em>exp(3<em>x<strong>2)<em>(x - (2</em>x</strong>3 + 2</em>x*<em>2 + x + 1)</em>log(x + 1))))/((x +</p>
+<p>1)<em>log(x + 1)<strong>2 - (x</strong>3 + x<strong>2)<em>exp(2</em>x</strong>2))</em>*2</p>
+<p>In [3]: f</p>
+<p>Out[3]:
+          ⎛                          2                                                   ⎞
+          ⎜⎛                       2⎞                                                   2⎟
+          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
+x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠</p>
+<p>──────────────────────────────────────────────────────────────────────────────────────────
+                                                                2
+                         ⎛                                    2⎞
+                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟
+                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠</p>
+<p>In [4]: var('t0, t1')</p>
+<p>Out[4]: (t₀, t₁)</p>
+<p>In [5]: a, d = map(lambda i: Poly(i, t1), f.subs(exp(x**2),</p>
+<p>t0).subs(log(x + 1), t1).as_numer_denom())</p>
+<p>In [6]: a</p>
+<p>Out[6]:</p>
+<p>Poly((x + x<strong>2)*t1</strong>4 + (-2<em>t0<strong>2*x</strong>3 - 2</em>t0<strong>2*x</strong>4)<em>t1</em>*2 +</p>
+<p>(-2<em>t0<strong>3*x</strong>2 - 4</em>t0<strong>3*x</strong>3 - 6<em>t0<strong>3*x</strong>4 - 8</em>t0<strong>3*x</strong>5 -</p>
+<p>4<em>t0<strong>3*x</strong>6)</em>t1 + 2<em>t0<strong>3*x</strong>3 + 2</em>t0<strong>3*x</strong>4 + t0<em> </em>4<em>x</em>*5 +</p>
+<p>t0<strong>4*x</strong>6, t1, domain='ZZ[x,t0]')</p>
+<p>In [7]: d</p>
+<p>Out[7]: Poly((1 + 2<em>x + x<strong>2)*t1</strong>4 + (-2</em>t0<strong>2*x</strong>2 - 4*t0<strong>2*x</strong>3 -</p>
+<p>2<em>t0<strong>2*x</strong>4)</em>t1<strong>2 + t0</strong>4<em>x<strong>4 + 2*t0</strong>4</em>x<strong>5 + t0</strong>4<em>x</em>*6, t1,</p>
+<p>domain='ZZ[x,t0]')</p>
+<p>In [8]: D = [Poly(1, x), Poly(2<em>x</em>t0, t0), Poly(1/(x + 1), t1)]</p>
+<p>In [9]: r = integrate_primitive(a, d, D, [x, t0, t1], [lambda x: log(x +</p>
+<p>1), lambda x: exp(x**2)])</p>
+<p>In [10]: r</p>
+<p>Out[10]:</p>
+<p>⎛   ⎛                ⎛ 2⎞⎞      ⎛                ⎛ 2⎞⎞        ⎛ 2⎞                                ⎞</p>
+<p>⎜   ⎜                ⎝x ⎠⎟      ⎜                ⎝x ⎠⎟        ⎝x ⎠                ⌠               ⎟</p>
+<p>⎜log⎝log(1 + x) + x⋅ℯ    ⎠   log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)     ⎮   x           ⎟</p>
+<p>⎜───────────────────────── - ───────────────────────── - ────────────────────── + ⎮ ───── dx, True⎟</p>
+<p>⎜            2                           2                                    2   ⎮ 1 + x         ⎟</p>
+<p>⎜                                                           2           2  2⋅x    ⌡               ⎟</p>
+<p>⎝                                                        log (1 + x) - x ⋅ℯ                       ⎠</p>
+<p>[/code]</p>
+<p>An explanation:  <code>f</code> is the function we are integrating.  Preparsing is not implemented yet, so we have to do it manually in <tt>[5]</tt>.  <tt>[8]</tt> is the list of derivations of the monomials we are working with, <code>[x, t0, t1]</code>, which represent $latex x$, $latex e^{x^2}$, and $latex \log{(x + 1)}$, respectively. Because the outermost monomial is a logarithm (primitive), we call <code>integrate_primitive()</code> on it.  The last argument of the function is the back substitution list, in reverse order because that is the order we have to back substitute in.  We can see the result contains an unevaluated Integral.  This is because the recursive calls to integrate over the smaller extensions have not yet been implemented.  In the final version, <code>integrate()</code> will automatically call <code>ratint()</code> in this case on it to give the complete answer.  The second argument of the result, True, indicates that the integral was elementary and that this is the complete integral.</p>
+<p>Because the extensions did not depend on each other, we could have also integrated in $latex \mathbb{Q}(x, \log{(x + 1)}, e^{x^2})$ instead of $latex \mathbb{Q}(x, e^{x^2}, \log{(x + 1)})$:</p>
+<p>[code language="py"]</p>
+<p>In [11]: a1, d1 = map(lambda i: Poly(i, t0), f.subs(exp(x**2), t0).subs(log(x + 1), t1).as_numer_denom())</p>
+<p>In [12]: D1 = [Poly(1, x), Poly(1/(x + 1), t1), Poly(2<em>x</em>t0, t0)]</p>
+<p>In [13]: r1 = integrate_hyperexponential(a1, d1, D1, [x, t1, t0], [lambda x: exp(x**2), lambda x: log(x + 1)])</p>
+<p>In [14]: r1</p>
+<p>Out[14]:</p>
+<p>⎛   ⎛              ⎛ 2⎞⎞      ⎛                ⎛ 2⎞⎞                                                ⎞</p>
+<p>⎜   ⎜log(1 + x)    ⎝x ⎠⎟      ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞                                  ⎟</p>
+<p>⎜log⎜────────── + ℯ    ⎟   log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠                  ⌠               ⎟</p>
+<p>⎜   ⎝    x             ⎠      ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)       ⎮   x           ⎟</p>
+<p>⎜─────────────────────── - ───────────────────────── + ────────────────────────── + ⎮ ───── dx, True⎟</p>
+<p>⎜           2                          2                                        2   ⎮ 1 + x         ⎟</p>
+<p>⎜                                                             2           3  2⋅x    ⌡               ⎟</p>
+<p>⎝                                                      - x⋅log (1 + x) + x ⋅ℯ                       ⎠</p>
+<p>[/code]</p>
+<p>We can verify by taking the derivative that the results in each case are antiderivatives of the original function, <code>f</code>, even though they appear different.</p>
+<p>[code language="py"]</p>
+<p>In [15]: cancel(r[0].diff(x) - f)</p>
+<p>Out[15]: 0</p>
+<p>In [16]: cancel(r1[0].diff(x) - f)</p>
+<p>Out[16]: 0</p>
+<p>[/code]</p>
+<p>We can see in each case, the remaining unevaluated <code>Integral</code> was in $latex \mathbb{Q}(x)$ only, meaning that the recursive call to <code>integrate_hyperexponential()</code> or <code>integrate_primitive()</code>, respectively, would not have been necessary. Finally, we can see that choosing the correct extension to integrate over can make a difference, time wise:</p>
+<p>[code language="py"]</p>
+<p>In [17]: %timeit integrate_primitive(a, d, D, [x, t0, t1], [lambda x: log(x + 1), lambda x: exp(x**2)])</p>
+<p>1 loops, best of 3: 1.91 s per loop</p>
+<p>In [18]: %timeit integrate_hyperexponential(a1, d1, D1, [x, t1, t0], [lambda x: exp(x**2), lambda x: log(x + 1)])</p>
+<p>1 loops, best of 3: 2.63 s per loop</p>
+<p>[/code]</p>
+<p>Just as with the exponential case, the function can prove the integrals are non-elementary. This is the so-called <a href="http://en.wikipedia.org/wiki/Logarithmic_integral">logarithmic integral</a>:</p>
+<p>[code language="py"]</p>
+<p>In [19]: f1 = 1/log(x)</p>
+<p>In [20]: a, d = map(lambda i: Poly(i, t1), f1.subs(log(x), t1).as_numer_denom())</p>
+<p>In [21]: a</p>
+<p>Out[21]: Poly(1, t1, domain='ZZ')</p>
+<p>In [22]: d</p>
+<p>Out[22]: Poly(t1, t1, domain='ZZ')</p>
+<p>In [23]: integrate_primitive(a, d, [Poly(1, x), Poly(1/x, t1)], [x, t1], [log])</p>
+<p>Out[23]: (0, False)</p>
+<p>[/code]</p>
+<p>The second argument, <code>False</code>, indicates that the integral was non-elementary.  Namely, the function has proven that the function $latex f - D(0) = \frac{1}{\log{(x)}}$ does not have an elementary anti-derivative over $latex \mathbb{Q}(x, \log{(x)})$ (see the <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">previous post</a> for more information).</p>
+<p>Finally, be aware that, just as with <code>integrate_hyperexponential()</code> many integrals will  raise <code>NotImplementedError</code>, because the subroutines necessary to solve them have not yet been finished.</p>
+<p>[code language="py"]</p>
+<p>In [25]: f = log(log(x))**2</p>
+<p>In [26]: f.diff(x)</p>
+<p>Out[26]:</p>
+<p>2⋅log(log(x))</p>
+<p>─────────────
+   x⋅log(x)</p>
+<p>In [27]: a, d = map(lambda i: Poly(i, t1),</p>
+<p>cancel(f.diff(x)).subs(log(x), t0).subs(log(t0), t1).as_numer_denom())</p>
+<p>In [28]: a</p>
+<p>Out[28]: Poly(2*t1, t1, domain='ZZ')</p>
+<p>In [29]: d</p>
+<p>Out[29]: Poly(t0*x, t1, domain='ZZ[x,t0]')</p>
+<p>In [30]: D = [Poly(1, x), Poly(1/x, t0), Poly(1/(x*t0), t1)]</p>
+<p>In [31]: integrate_primitive(a, d, D, [x, t0, t1], [lambda x: log(log(x)), log])</p>
+<hr>
+<p>NotImplementedError: Remaining cases for Poly RDE not yet implemented.</p>
+<p>[/code]</p>
+<p>Now one thing that I want to add from the above examples taken from the commit message is that logarithms are not the only function that are primitive.  The Li function (the logarithmic integral, as above), considered as an elementary extension of $latex \mathbb{Q}(x, \log{(x)})$ is also primitive.  But even among the commonly defined elementary functions, there is one other, acrtangents.  </p>
+<p>[code language="py"]</p>
+<p>In [32]: diff(atan(x)**2, x)</p>
+<p>Out[32]: </p>
+<p>2⋅atan(x)</p>
+<p>─────────
+       2 
+  1 + x  </p>
+<p>In [33]: integrate_primitive(Poly(2*t, t), Poly(1 + x<strong>2, t), [Poly(1, x), Poly(1/(1 + x</strong>2), t)], [x, t], [atan])</p>
+<p>Out[33]: </p>
+<p>⎛    2         ⎞</p>
+<p>⎝atan (x), True⎠</p>
+<p>In [34]: integrate_primitive(Poly(t, t), Poly(x, t), [Poly(1, x), Poly(1/(1 + x**2), t)], [x, t], [atan])</p>
+<p>Out[34]: </p>
+<p>⎛⌠                  ⎞</p>
+<p>⎜⎮ atan(x)          ⎟</p>
+<p>⎜⎮ ─────── dx, False⎟</p>
+<p>⎜⎮    x             ⎟</p>
+<p>⎝⌡                  ⎠</p>
+<p>[/code]</p>
+<p>Due to a bug in the code right now, the final version returns the non-elementary integral in the final result.  Suffice it to say that it has proven that $latex \int {\frac{\arctan{(x)}}{x} dx}$ is non-elementary. As far as I know, this isn't any special function.  Actually, it's just a random function containing arctan that looked non-elementary to me that I plugged in and found out that I was correct.  It's very similar in form to the <a href="http://en.wikipedia.org/wiki/Exponential_integral">exponential integral</a> (Ei) or the <a href="http://en.wikipedia.org/wiki/Sine_integral#Sine_integral">Sine/Cosine Integral</a> (Si/Ci), which is how I guessed that it would be non-elementary.  Maybe it should be called ATi().</p>
+<p><strong>Status Update</strong></p>
+<p>So it has come to my attention that the suggested "pencils down" date is one week from Monday, and the hard "pencils down" date is two weeks from Monday (see the <a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/timeline">Google Summer of Code Timeline</a>).  Now, no matter how fast I work, my work cannot be pushed in until Mateusz's latest polys branch gets pushed in, because my work is based on top of it.  I plan on continuing work on the integration algorithm beyond the summer until I finish the transcendental part of the algorithm, and even after that, I want to look into implementing other integration related things, like definite integration using <a href="http://en.wikipedia.org/wiki/Meijer-G">Meijer G-functions,</a> and the algebraic part of the algorithm.  But for now, these are the things that I need to do for the transcendental part, which is this summer's work:</p>
+<p><em>1. Implement the preparsing algorithms. </em> This part is two-fold.  First, I need to implement algorithms based on the Risch Structure Theorems, which allow me to determine if an extension is algebraic or not (if it is algebraic, we cannot integrate it because only the transcendental part is implemented).  The other part will be the function that actually goes through an expression and tries to build up a differential extension from it so it can be integrated.  This can be a tricky part. For example, if we want to integrate $latex f = e^x + e^{\frac{x}{2}}$, we want to first choose $latex t_1=e^{\frac{x}{2}}$ so that $latex f = t_1^2 + t_1$, because if we choose $latex t_1=e^x$, then $latex t_2=e^{\frac{x}{2}}=\sqrt{t_1}$ will be algebraic over $latex \mathbb{Q}(x, t_1)$.  This is one case where we might try adding an algebraic extensions but where it can be avoided.  The solution will have to be to go through and find the common denominators of the exponentials.  I'm also considering that this might happen in more advanced ways, so it could be necessary for the function to backtrack in the extension tree to see if it can do it in an entirely transcendental way.  Fortunately, the Risch Structure Theorems give us a decision procedure for determining if an extension can be written in terms of the previous extensions (is algebraic over it), but this will still be a very hard function to get right.</p>
+<p><em>2. Finish the remaining cases for <code>integrate_hyperexponential()</code> and <code>integrate_primitive()</code>.</em> As you could see in this post, as well as in the <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">previous one</a>, there are many integrals that cannot yet be integrated because the special cases for them have not been implemented yet.  Most of these actually rely on implementing the structure theorem algorithms from <strong>1</strong>, and implementing them once that is finished will not take long, because they will just be straight copying of the pseudocode from Bronstein's book.  But some of them, particularly ones from the primitive case, are not spelt out so well in Bronstein's book, and will require more thinking (and thus time) on my part.  I should note that the Structure Theorem algorithms are also this way.</p>
+<p><em> 3. Implement the hypertangent case. </em> The ability to integrate in tangent extensions is the other <em>third</em> I mentioned above.  Since tangents require more special casing, I plan on doing this only after I have finished <strong>1</strong> and <strong>2</strong>.  This is actually not much work, because most of the algorithms for solving the particular subproblem for tangents (called the <em>Coupled Risch Differential Equation</em>) are exactly the same as those for solving the subproblem for hyperexponentials (the <em>Risch Differential Equation</em>), which are already (mostly) implemented in the hyperexponential part.  There are only a few extra functions that need to be written for it.  Also, you will still be able to integrate functions that contain tangents, such as $latex e^{\tan{(x)}}$ (recall <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">last time</a> that we showed that <code>integrate_hyperexponential()</code> can prove that this does not have an elementary integral).  It just won't be able to integrate when the top-most extension is a tangent.</p>
+<p>So here is what I plan on doing.  Right now, I am going to focus my work on <strong>1</strong>, since most of <strong>2</strong> can't be done until it is anyway.  But more importantly, I want to have a prototype user-level function for the Risch Algorithm.  The reason I want this is so that people can try it out, without having to do the preparsing like I did above, but rather they can just call <code>risch_integrate(f, x)</code>, and it will return the integral of <code>f</code>, prove that it is non-elementary and reduce it into the elementary and non-elementary parts, or explain why it cannot do it (either because the function is not transcendental or because something is not implemented yet).  My chief desire for doing this is so that people can try out my code and find the bugs in it for me.  I have already found many critical errors in the code (returns a wrong result), and I want to iron these out before anything goes in.  The best way to do this will be to release a working user-level function and hope that people try it out for me.  </p>
+<p>Also, even if <strong>2</strong> and <strong>3</strong> are not finished, if I have <strong>1</strong>, I can integrate it with <code>integrate()</code> (no pun intended) and just have it bail if it raises <code>NotImplementedError</code> I will need to come up with a way to differentiate between this and the case where it returns an unevaluated <code>Integral</code> because it has proven that an elementary antiderivative does not exist.  Any suggestions?</p>
+<p>I plan on continuing work after the summer until I finish <strong>1</strong> through <strong>3</strong>, though I won't pretend that my work won't slow down considerably when I start classes in August.  I also promise to finish the <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">Risch Algorithm posts</a> that I promised.</p>
+<p>And for what it's worth, I plan on working my ass off this next two weeks.</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../24/the-risch-algorithm-part-2-elementary-functions.html" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../08/05/prototype-risch_integrate-function-ready-for-testing.html" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/2010/07/31/integration-of-primitive-functions.html",
+        disqus_title="Integration of primitive functions",
+        disqus_identifier="cache/posts/2010/07/31/integration-of-primitive-functions.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:joe@example.com">Joe Example</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

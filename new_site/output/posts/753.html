@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Joe Example">
+    <title>The Risch Algorithm: Part 4, The Structure Theorems | Aaron Meurer's SymPy Blog</title>
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+    <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/753.html">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+    
+
+
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            
+                <li><a href="../archive.html">Archives</a>
+                </li><li><a href="../categories/index.html">Tags</a>
+                </li><li><a href="../rss.xml">RSS</a>
+
+        </li></ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            
+            
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">The Risch Algorithm: Part 4, The Structure Theorems</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2011-07-08T23:52:17+00:00" itemprop="datePublished">2011-07-08 23:52</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../categories/mathjax.html"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><strong>The Structure Theorems</strong>
+<p><em>Here's a blog post that I actually started to write last August.  I suggest you read parts <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/" target="_blank">0</a>, <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/" target="_blank">1</a>, <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/" target="_blank">2</a>, and <a href="http://asmeurersympy.wordpress.com/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem/" target="_blank">3</a> first.</em></p>
+<p>The Transcendental Risch Algorithm is very picky.  Every elementary extension (review <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">part 2</a> for the definition of this) that we use for the integral has to be transcendental over the already existing extensions.  I also spoke a little about the difficulties of this in the first part of <a href="http://asmeurersympy.wordpress.com/2010/08/05/prototype-risch_integrate-function-ready-for-testing/">this blog post</a>.  </p>
+<p>The bad news is that recognizing algebraic functions is not as easy as looking for things like $latex \sqrt{x}$ and $latex (x + 2)^{\frac{3}{2}}$.  The reason is that with transcendental functions we can have hidden algebraic relations.  For example, in each of the following sets, the elements are algebraically dependent over $latex \mathbb{C}$:</p>
+<ol>
+<li>
+<p>$latex {x, e^x, e^{x + 1}}$</p>
+</li>
+<li>
+<p>$latex {x, \log{(x)}, e^\frac{\log{(x)}}{2}}$</p>
+</li>
+<li>
+<p>$latex {x, \log{(x)}, \log{(x + 1)}, \log{(2x^2 + 2x)}}$</p>
+</li>
+</ol>
+<p>Can you see the algebraic relations?  If you have been reading this blog for long enough, you should be able to.  In the first set, we see that $latex e^{x + 1} - ee^x = 0$, in 2., which is an example that I have given probably about five times now in my blog, $latex {\left(e^\frac{\log{(x)}}{2}\right)}^2 - x = 0$ (i.e., $latex e^\frac{\log{(x)}}{2} = \sqrt{x}$), and in 3. $latex \log{(x)} + \log{(x + 1)} + \log{(2)} - \log{(2x^2 + 2x)} = 0$ (in each case, I have given the relation in terms of the minimal polynomial that equals 0, which is the definition of <a href="http://en.wikipedia.org/wiki/Algebraic_dependence">algebraic dependence</a>). </p>
+<p>Now, the good news is that there is a complete algorithm for not only determining when elements are algebraic over the already existing field, but also computing the minimal polynomial, which gives the relation needed to rewrite the dependent elements in terms of the others.  </p>
+<p>Notice that in the above sets, if you remove the last element, the remaining terms are algebraically independent.  In other words, you can algebraically rewrite the last term in terms of the remaining.  We have $latex e^{x + 1} = ee^x$, $latex e^\frac{\log{(x)}}{2} = \sqrt{x}$, and $latex \log{(2x^2 + 2x)} = \log{(2)} + \log{(x)} + \log{(x + 1)}$.  </p>
+<p>The above are three ways that the transcendental functions of the exponential and the logarithm can be written in a way that they are algebraically dependent</p></div>
+    </div>
+    </div>
+    
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/753.html",
+        disqus_title="The Risch Algorithm: Part 4, The Structure Theorems",
+        disqus_identifier="cache/posts/753.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:joe@example.com">Joe Example</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

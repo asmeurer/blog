@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Joe Example">
+    <title>How to get both 32-bit and 64-bit Python in Snow Leopard | Aaron Meurer's SymPy Blog</title>
+    
+            <link href="../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+    <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/2009/11/13/how-to-get-both-32-bit.html">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
+
+    
+
+
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            
+                <li><a href="../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../rss.xml">RSS</a>
+
+        </li></ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            
+            
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">How to get both 32-bit and 64-bit Python in Snow Leopard</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2009-11-13T01:16:42+00:00" itemprop="datePublished">2009-11-13 01:16</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>We had some discussion on one of the Python issues about whether my Python in Snow Leopard should be 32-bit or 64-bit.  I originally thought that it was tied to what the kernel was, but I turned out to be wrong. </p>
+<p>From what I discovered, the important thing is what the Python was compiled as.  You can tell what your Python has been compiled as by running:</p>
+<p><code></code></p>
+<p>&gt;&gt;&gt; import sys</p>
+<p>&gt;&gt;&gt; from math import log</p>
+<p>&gt;&gt;&gt; log(sys.maxsize, 2)</p>
+<p></p>
+<p>If this is just under 31, then it is 32 bit.  If it returns 63, then it is 64.  An easier way to tell it to run:</p>
+<p><code></code></p>
+<p>&gt;&gt;&gt; 2**40</p>
+<p></p>
+<p>If you get 1099511627776L, then you have 32-bit Python, if you get 1099511627776, you have 64-bit Python (notice that the number is long in 32-bit Python, because it is larger than maxint).  </p>
+<p>This test won't work in Python 3 because all integers are "long" by default, but the first part will still work.  </p>
+<p>So why does this matter, you ask?  Well, aside from the fact that much longer numbers are not long (anything less than 2**63 - 1 = 9223372036854775807), there is the issue of hashing. </p>
+<p>In 64-bit Python:</p>
+<p><code></code></p>
+<p>&gt;&gt;&gt; hash('a')</p>
+<p>12416037344</p>
+<p></p>
+<p>but in 32-bit Python</p>
+<p><code></code></p>
+<p>&gt;&gt;&gt; hash('a')</p>
+<p>-468864544</p>
+<p></p>
+<p>SymPy uses hash values to order arguments, so often it happens that behavior in one architecture will not show up in the other.  These problems are often hard to track and fix, but the worst is when things work fine on the machine you are working on.  This actually happened to me with my GSoC project.  I was renumbering the arbitrary constants in the printing order in an expression, but it turned out that the printing order of an expression can be dependent on .args order, so I had to modify the tests to canonize the numbering first.</p>
+<p>So here comes the crux of the post.  It turns out that on Mac OS X, if you install the binary from python.org (Mac Installer Disk Image), this installs a 32-bit Python (for compatibility reasons) in /Library/Frameworks/Python.framework/Versions/2.6/bin/python2.6</p>
+<p>.  However, if you install Python using 64-bit fink in Snow Leopard, it will compile it from source into 64-bit, and install it into /sw/bin/python2.6.  </p>
+<p>So now I have an easy way to test both architectures without having to ssh into some other machine, which was what I was doing before.  </p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../09/07/google-summer-of-code-2009-wrap-up.html" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../12/29/automatically-remove-trailing-whitespace-in-xcode.html" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/2009/11/13/how-to-get-both-32-bit.html",
+        disqus_title="How to get both 32-bit and 64-bit Python in Snow Leopard",
+        disqus_identifier="cache/posts/2009/11/13/how-to-get-both-32-bit.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:joe@example.com">Joe Example</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

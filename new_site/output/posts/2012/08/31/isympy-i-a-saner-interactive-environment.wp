@@ -1,0 +1,138 @@
+<html><body><p>As <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">promised</a>, here is another post describing a new feature in the upcoming <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.2">SymPy 0.7.2</a>.
+
+
+</p><h2>Automatic Symbol Definition</h2>
+
+
+
+While not as ground breaking as the feature I described in my <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">last post</a>, this feature is still quite useful. As you may know, SymPy is inherently a Python library, meaning that it lives by the rules of Python. If you want to use any name, whether it be a Symbol or a function (like cos), you need to define it (in the case of Symbols), or import it (in the case of functions that come with SymPy). We provide the script <code>isympy</code> with SymPy to assist with this. This script automatically runs IPython (if it's installed), imports all names from sympy (<code>from sympy import *</code>), and defines common symbol names (like <code>x</code>, <code>y</code>, and <code>z</code>).
+
+
+
+But if you want to use a Symbol that is not one of the ones predefined by <code>isympy</code>, you will get something like
+
+
+
+[code language="py"]
+
+In [1]: r*x
+
+---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+ in ()
+----&gt; 1 r*x
+
+
+
+NameError: name 'r' is not defined
+
+[/code]
+
+
+
+The best solution for this has been either to type <code>var('r')</code>, which will create the Symbol <code>r</code> and inject it into the namespace, or to wrap your text in a string and pass it to <code>sympify()</code>, like <code>sympify("r*x")</code>. Neither of these are very friendly in interactive mode.
+
+
+
+In SymPy 0.7.2, <code>isympy</code> has a new command line option, <code>isympy -a</code>, which will enable a mechanism that will automatically define all undefined names as Symbols for you:
+
+
+
+[code language="py"]
+
+In [1]: r*x
+
+Out[1]: r⋅x
+
+[/code]
+
+
+
+There are some caveats to be aware of when using this feature:
+
+<ul>
+	<li>Names must be undefined for <code>isympy -a</code> to work. If you type something like <code>S*x</code>, you'll get:[code language="py"]
+In [3]: S*x
+
+---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-3-6656a97ea7b0&gt; in &lt;module&gt;()
+
+----&gt; 1 S*x
+
+
+
+TypeError: unsupported operand type(s) for *: 'SingletonRegistry' and 'Symbol'
+
+[/code]
+
+
+
+That's because <code>S</code> is already defined (it's the <code>SingletonRegistry</code>, and also a shortcut to <code>sympify()</code>). To use a name that's already defined, either create it manually with <code>var()</code> or delete it using <code>del</code>.</li>
+	<li>This only works on the top level namespace. If you define a function with an undefined name, it will not automatically define that symbol when run.</li>
+	<li>This works by catching NameError, defining the name, and then re-running the expression. If you have a multiline statement, any lines before the undefined name will be run before the NameError will be caught. This usually won't happen, but it's a potential side-effect to be aware of. We plan to rewrite it using either ast or tokenize to avoid this issue.</li>
+	<li>Obviously, this is intended for interactive use only. If you copy code and put it in a script, or in some other place where someone might be expected to run it, but not necessarily from <code>isympy -a</code>, you should include symbol definitions.</li>
+</ul>
+
+
+
+<h2>Automatic int to Integer Conversion</h2>
+
+
+
+A second thing that is annoying with Python and SymPy is that something like <code>1/2</code> will be interpreted completely by Python, without any SymPy. This means that something like <code>1/2 + x</code> will give either <code>0 + x</code> or <code>0.5 + x</code>, depending on whether or not <code>__future__.division</code> has been imported. <code>isympy</code> has always ran <code>from __future__ import division</code>, so that you'll get the latter, but we usually would prefer to get <code>Rational(1, 2)</code>. Previously, the best way to do this was again to either run it through <code>sympify()</code> as a string, or to sympify at least one of the numbers (here the <code>S()</code> shortcut to <code>sympify()</code> is useful, because you can type just <code>S(1)/2</code>).
+
+
+
+With SymPy 0.7.2, you can run <code>isympy -i</code>, and it will automatically wrap all integers literals with <code>Integer()</code>. The result is that <code>1/2</code> produces <code>Rational(1, 2)</code>:
+
+
+
+[code language="py"]
+
+In [1]: 1/2 + x
+
+Out[1]: x + 1/2
+
+[/code]
+
+
+
+Again, there are a couple of caveats:
+
+<ul>
+	<li>If you want to get Python style division, you just need to wrap both arguments in <code>int()</code>:[code language="py"]
+In [2]: int(1)/int(2)
+
+Out[2]: 0.5
+
+[/code]
+
+
+
+Of course, if you just want a floating point number, you can just use <code>N()</code> or <code>.evalf()</code></li>
+	<li>This works by parsing the text and wrapping all integer literals with <code>Integer()</code>. This means that if you have a variable set to a Python int, it will still act like a Python int:[code language="py"]
+In [6]: a = int(1)
+
+
+
+In [7]: b = int(2)
+
+
+
+In [8]: a/b
+
+Out[8]: 0.5
+
+[/code]
+
+
+
+Note that to even do that example, I had to manually make <code>a</code> and <code>b</code> Python ints by wrapping them in <code>int()</code>. If I had just done <code>a = 1</code>, it would have been parsed as <code>a = Integer(1)</code>, and I would have gotten a SymPy Integer. But this can be an issue if you use the result of some function that returns an int (again, note that most functions in SymPy that return integers return Integer, not int).</li>
+	<li>The same as before: this will only work interactively. If you want to reuse your code outside of <code>isympy -i</code>, you should take care of any int/int by rewriting it as S(int)/int.</li>
+</ul>
+
+Since these are both useful features, we've added a way that you can get them both at once: by doing <code>isympy -I</code> (the "I" stands for "Interactive"). If we add similar features in the future, we will also add them to the <code>-I</code> shortcut (for example, we may add an option to allow <code>^</code> to automatically be replaced with <code>**</code>).</body></html>

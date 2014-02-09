@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's SymPy Blog (Standard)</title><link>http://asmeurersympy.wordpress.com/</link><description></description><atom:link type="application/rss+xml" href="http://asmeurersympy.wordpress.com/categories/standard.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 09 Feb 2014 16:18:35 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to install the development version of IPython Qtconsole and Notebook in Ubuntu</title><link>http://asmeurersympy.wordpress.com/posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu.html</link><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Both the awesome &lt;a href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html"&gt;IPython notebook&lt;/a&gt; and &lt;a href="http://ipython.org/ipython-doc/stable/interactive/qtconsole.html"&gt;Qtconsole&lt;/a&gt; are in the Ubuntu repositories, so if you just want to use the stable released versions, you can just do&lt;/p&gt;
+&lt;p&gt;[code language="bash"]&lt;/p&gt;
+&lt;p&gt;sudo apt-get install ipython-notebook ipython-qtconsole&lt;/p&gt;
+&lt;p&gt;[/code]&lt;/p&gt;
+&lt;p&gt;and be on your way.  But the git development version has a lot of cool new features, and you may not want to wait for 0.13 to be released and make its way to the Ubuntu repos.  But you may be thinking that to use those you will have to figure out all the dependencies yourself.  Actually, it's pretty easy:&lt;/p&gt;
+&lt;p&gt;[code language="bash"]&lt;/p&gt;
+&lt;h2&gt;First install git, if you don't already have it&lt;/h2&gt;
+&lt;p&gt;sudo apt-get install git&lt;/p&gt;
+&lt;h2&gt;Then, clone the IPython repo, if you haven't already.&lt;/h2&gt;
+&lt;p&gt;git clone git://github.com/ipython/ipython.git&lt;/p&gt;
+&lt;p&gt;cd ipython&lt;/p&gt;
+&lt;h2&gt;Now just install IPython with apt, then uninstall it.  The dependencies will remain&lt;/h2&gt;
+&lt;p&gt;sudo apt-get install ipython-notebook ipython-qtconsole&lt;/p&gt;
+&lt;p&gt;sudo apt-get remove ipython-notebook ipython -qtconsole ipython&lt;/p&gt;
+&lt;h2&gt;Now install the IPython git version in such a way that will keep up to date when you pull&lt;/h2&gt;
+&lt;p&gt;sudo python setup.py develop&lt;/p&gt;
+&lt;p&gt;[/code]&lt;/p&gt;
+&lt;p&gt;To update, just cd into that ipython directory and type &lt;code&gt;git pull&lt;/code&gt;.  That's it.  Now type &lt;code&gt;ipython notebook&lt;/code&gt; or &lt;code&gt;ipython qtconsole&lt;/code&gt; to get the magic.&lt;/p&gt;
+&lt;p&gt;EDIT: After you do this, &lt;code&gt;apt-get&lt;/code&gt; will start bugging you every time that you use it that a bunch of packages are no longer needed.  These are the ones that you do need for the qtconsole and the notebook, so you should not autoremove them as it says.  Rather, set them as manually installed by copying the list of packages that it tells you about and &lt;code&gt;sudo apt-get install&lt;/code&gt;ing them.&lt;/p&gt;&lt;/div&gt;</description><category>Standard</category><guid>http://asmeurersympy.wordpress.com/posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu.html</guid><pubDate>Thu, 14 Jun 2012 05:49:08 GMT</pubDate></item></channel></rss>
