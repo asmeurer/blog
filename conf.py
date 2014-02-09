@@ -12,7 +12,7 @@ BLOG_AUTHOR = "Aaron Meurer"
 BLOG_TITLE = "Aaron Meurer's Blog"
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://asmeurer.github.io"
+SITE_URL = "http://asmeurer.github.io/"
 # This is the URL where nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://getnikola.com/"
@@ -270,9 +270,10 @@ COMPILERS = {
 #    ".jpg": ["jpegoptim --strip-all -m75 -v %s"],
 # }
 
-FILTERS = {
-    ".html": [nikola.filters.typogrify],
-    }
+# from nikola import filters
+# FILTERS = {
+#     ".html": [filters.typogrify],
+#     }
 
 # Expert setting! Create a gzipped copy of each generated file. Cheap server-
 # side optimization for very high traffic sites or low memory servers.
