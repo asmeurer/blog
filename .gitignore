@@ -3,3 +3,4 @@ _site/
 .DS_Store
 .doit.db.db
 cache/
+output/
