@@ -236,8 +236,7 @@ COMPILERS = {
 # To do manual deployment, set it to []
 DEPLOY_COMMANDS = [
     "git checkout gh-pages",
-    "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude"
-    "cache/ --exclude .doit.db.db output/ .",
+    "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude cache/ --exclude .doit.db.db output/ .",
 ]
 
 # Where the output site should be located
