@@ -1,5 +1,3 @@
-_site/
-*.pyc
-.DS_Store
-.doit.db.db
+output/
 cache/
+.doit.db.db
