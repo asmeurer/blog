@@ -76,3 +76,23 @@ eval "`nikola tabcompletion`"
 ```
 
 to your Bash profile to get tab completion.
+
+## Wordpress import
+
+Importing from Wordpress is pretty easy actually. First you need to go to the
+Wordpress site dashboard and go to "Export" from the "Tools" menu. From here
+you can download an XML file with all your content. Then just do
+
+```
+nikola import_wordpress export_file.xml
+```
+
+Note that the current version of Nikola as of this writing (6.3.0) doesn't do
+this right, so you'll need to use the
+[git master](https://github.com/getnikola/nikola). There are some issues with
+the import, since Wordpress has its own markup that it doesn't know everything
+about, so you may need to go in and fix things. Or report them as bugs to
+Nikola and reimport when they are fixed.
+
+For comments, you first need to create a Disqus account, and enable it in your
+conf.py.
