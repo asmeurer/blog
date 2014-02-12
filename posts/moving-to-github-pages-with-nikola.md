@@ -103,3 +103,6 @@ Disqus section of one of the built pages).
 If there's a mismatch, or if you need to make the urls match your new site for
 some reason, you can use a url map csv. Nikola generates one automatically,
 but you should make sure that it's correct.
+
+The Disqus import can take a while to register (according to Disqus, it can
+take up to 24 hours).
