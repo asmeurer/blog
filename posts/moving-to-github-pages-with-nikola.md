@@ -95,4 +95,11 @@ about, so you may need to go in and fix things. Or report them as bugs to
 Nikola and reimport when they are fixed.
 
 For comments, you first need to create a Disqus account, and enable it in your
-conf.py.
+conf.py. You should then upload the xml file that you exported from Wordpress
+to Disqus. At this point, the comments should just work, because Nikola sets
+the Disqus url for the imported comments to the old Wordpress url (look at the
+Disqus section of one of the built pages).
+
+If there's a mismatch, or if you need to make the urls match your new site for
+some reason, you can use a url map csv. Nikola generates one automatically,
+but you should make sure that it's correct.
