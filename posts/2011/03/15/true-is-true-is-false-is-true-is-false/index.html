@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>True is True is False is True is False | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/03/15/true-is-true-is-false-is-true-is-false/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/03/15/true-is-true-is-false-is-true-is-false/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="True is True is False is True is False">
+            <meta name="og:description" content='Time for  an­oth­er   one  of my WTF Python blog post­s.  Yes­ter­day, I ran­dom­ly typed this in a Python ses­sion (it was late at night): 
+ [code lan­guage="py"] 
+ &gt;&gt;&gt; True is True is False is True '>
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">True is True is False is True is False</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2011-03-15T22:29:15-05:00" itemprop="datePublished">2011-03-15 22:29</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>Time for  <a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">an­oth­er</a>   <a href="http://asmeurersympy.wordpress.com/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/">one</a>  of my WTF Python blog post­s.  Yes­ter­day, I ran­dom­ly typed this in a Python ses­sion (it was late at night):</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; True is True is False is True is False</p> 
+ <p>False</p> 
+ <p>[/­code]</p> 
+ <p>First a lit­tle back­ground, in case you don't know.  The  <code>is</code>  op­er­a­tor in Python does ex­act ob­ject com­par­i­son in mem­o­ry. Un­like  <code>==</code>, which on­ly com­pares it two ob­jects are equal,  <code>is</code>  on­ly re­turns True if both ar­gu­ments have the same mem­o­ry ad­dress.  So you can have some­thing like:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a = 12345</p> 
+ <p>&gt;&gt;&gt; b = 12345</p> 
+ <p>&gt;&gt;&gt; a == b</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; a is b</p> 
+ <p>False</p> 
+ <p>[/­code]</p> 
+ <p>Now, there are a hand­ful of Python built-ins that are al­ways equal one an­oth­er with the  <code>is</code>  op­er­a­tor.   <code>True</code>  and  <code>False</code>  are two such con­stants:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a = True</p> 
+ <p>&gt;&gt;&gt; b = True</p> 
+ <p>&gt;&gt;&gt; a == b</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; a is b</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; c = False</p> 
+ <p>&gt;&gt;&gt; d = False</p> 
+ <p>&gt;&gt;&gt; c == d</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; c is d</p> 
+ <p>True</p> 
+ <p>[/­code]</p> 
+ <p>Now, go­ing back to the above, we see that each  <code>is</code>  re­turns  <code>True</code>  or  <code>False</code>, which is then eval­u­at­ed with the next one.  Or at least that is what you would think is hap­pen­ing.  But go back and look at it again, and see if you can fig­ure out what it should eval­u­ate to.  You could prob­a­bly guess that some­thing was amiss from the fact that I was blog­ging about it.  If you haven't fig­ured it out al­ready, look at the fol­low­ing:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; True is True is False is True is False</p> 
+ <p>False</p> 
+ <p>&gt;&gt;&gt; (((True is True) is False) is True) is False</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; True is (True is (False is (True is False)))</p> 
+ <p>True</p> 
+ <p>[/­code]</p> 
+ <p>So it seems that  <code>is</code>  does not as­so­ciate to the left or to the right.  Let's see if we can fig­ure out what is go­ing on.  First of­f,  <code>True is True</code>, etc. do be­have as you ex­pect them to:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; True is True</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; False is False</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; True is False</p> 
+ <p>False</p> 
+ <p>&gt;&gt;&gt; False is True</p> 
+ <p>False</p> 
+ <p>[/­code]</p> 
+ <p>It is when we start us­ing mul­ti­ple  <code>is</code>s in the same state­ment that we start see­ing prob­lem­s:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; False is False is False</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; (False is False) is False</p> 
+ <p>False</p> 
+ <p>[/­code]</p> 
+ <p>So what's go­ing on here?   <code>False is False</code>  is True, so maybe it is short­-­cir­cuit­ing some­how.   </p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; True is False is False</p> 
+ <p>False</p> 
+ <p>&gt;&gt;&gt; False is False is True</p> 
+ <p>False</p> 
+ <p>[/­code]</p> 
+ <p>No, that is not it.  Those re­duce to  <code>False is False</code>  and  <code>True is True</code>  when as­so­ci­at­ing to the left, re­spec­tive­ly, and  <code>True is True</code>  and  <code>True is True</code>  when as­so­ci­at­ing to the right.   </p> 
+ <p>Fi­nal­ly, at this point, it oc­curs to me what is re­al­ly go­ing on.  Have you fig­ured it out too (or maybe you al­ready knew all along)?  Maybe you can guess it from this state­men­t, which us­es  <code>None</code>, an­oth­er built-in ob­ject that al­ways com­pares equal to it­self with the  <code>is</code>  op­er­a­tor:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; None is None is None</p> 
+ <p>True</p> 
+ <p>[/­code]</p> 
+ <p>So you see what is hap­pen­ing?   <code>is</code>  does­n't as­so­ciate at al­l.  Rather, us­ing mul­ti­ple  <code>is</code>s in one state­ment does mul­ti­ple com­par­isons at once.  Any  <code>a is b is … x</code>  will re­turn  <code>True</code>  if  <code>a</code>,  <code>b</code>, …, and  <code>x</code>  are all equal by the  <code>is</code>  op­er­a­tor (they share the same iden­ti­ty or mem­o­ry ad­dress), and  <code>False</code>  oth­er­wise.  Ac­tu­al­ly, this is­n't sur­pris­ing, since  <code>==</code>  works the same way:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; False == False == False</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; (False == False) == False</p> 
+ <p>False</p> 
+ <p>[/­code]</p> 
+ <p>This syn­tax can ac­tu­al­ly be use­ful to test equal­i­ty of three or more items at once ef­fi­cient­ly (Python will not eval­u­ate the same op­er­and more than on­ce, and it short cir­cuit­s).  But it can be con­fus­ing when com­par­ing with  <code>True</code>  or  <code>False</code>, since  <code>a is b</code>  and  <code>a == b</code>  them­selves eval­u­ate to one of those val­ues.  So re­mem­ber that it is NOT as­so­cia­tive in any way.  Rather, it acts as an n-way com­par­i­son.  </p> 
+ <p>Fi­nal­ly, as  <a href="http://docs.python.org/reference/expressions.html#summary">this ta­ble</a>  of op­er­a­tor prece­dence in Python shows,  <code>is</code>  and  <code>==</code>  have the same prece­dence in Python.  There­fore, it should be pos­si­ble to com­bine the two in these same state­men­t.  In­deed, you can:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a = 12345</p> 
+ <p>&gt;&gt;&gt; b = 12345</p> 
+ <p>&gt;&gt;&gt; c = b</p> 
+ <p>&gt;&gt;&gt; a == b == c</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; a is b is c</p> 
+ <p>False</p> 
+ <p>&gt;&gt;&gt; # Be­cause this is False</p> 
+ <p>...  </p> 
+ <p>&gt;&gt;&gt; a is b</p> 
+ <p>False</p> 
+ <p>&gt;&gt;&gt; # But this is True</p> 
+ <p>...  </p> 
+ <p>&gt;&gt;&gt; b is c</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; # So we get</p> 
+ <p>...  </p> 
+ <p>&gt;&gt;&gt; a == b is c</p> 
+ <p>True</p> 
+ <p>[/­code]</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../01/09/i-am-now-the-sympy-project-leader/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../18/sympy-is-a-google-summer-of-code-2011-mentoring-organization/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2011/03/15/true-is-true-is-false-is-true-is-false/",
+        disqus_title="True is True is False is True is False",
+        disqus_identifier="cache/posts/2011/03/15/true-is-true-is-false-is-true-is-false.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

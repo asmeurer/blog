@@ -1,0 +1,38 @@
+<html><body><p>You can imagine my surprise when I opened my email last Monday and saw this message from Ondrej:
+
+
+</p><blockquote>
+
+Hi Aaron,
+
+
+
+would you like to become the main maintainer/project leader for sympy?
+
+In the last year, it is clearly you, who does most of the work, and
+
+also your blog has quite some visibility now.
+
+It'd be cool to do some release from time to time. Mateusz is
+
+finishing is poly's branch, so probably his code would go into the
+
+release.
+
+</blockquote>
+
+
+
+So I guess now I am the project leader for SymPy.  As to what exactly this means, I am not yet entirely sure, but so far it has meant that I get to do a lot more work than before (yay!).
+
+
+
+Actually, the work is because I have spent the last week working nonstop to get things ready to do a release.  I should have a release candidate for SymPy 0.7.0 ready some time next week.  I'll post more here about what's change, but this is going to be a big release.  The biggest change will be the new polys, which makes things much faster and more powerful.  
+
+
+
+Also, I will try to post things here relating to SymPy as a whole, not just my work.  
+
+
+
+Ondrej, by the way, isn't going anywhere. He plans on doing some work on ways to get SymPy out to more people by writing more/better web and mobile interfaces for it.  A big thanks to Ondrej and the SymPy community for making such an awesome piece of software!</body></html>

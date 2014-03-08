@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Infinitely nested lists in Python | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2012/09/19/infinitely-nested-lists-in-python/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2012/09/19/infinitely-nested-lists-in-python/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Infinitely nested lists in Python">
+            <meta name="og:description" content="Read­ers of this blog know that I some­times like to write about some  strange,  un­ex­pect­ed, and  un­usu­al  things in Python that I stum­ble across.  This post is an­oth­er one of those. 
+ First, ">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Infinitely nested lists in Python</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2012-09-19T04:21:08-05:00" itemprop="datePublished">2012-09-19 04:21</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>Read­ers of this blog know that I some­times like to write about some  <a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">strange</a>,  <a href="http://asmeurersympy.wordpress.com/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/">un­ex­pect­ed</a>, and  <a href="http://asmeurersympy.wordpress.com/2011/03/15/true-is-true-is-false-is-true-is-false/">un­usu­al</a>  things in Python that I stum­ble across.  This post is an­oth­er one of those.</p> 
+ <p>First, look at this</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a = []</p> 
+ <p>&gt;&gt;&gt; a.ap­pend(a)</p> 
+ <p>&gt;&gt;&gt; a</p> 
+ <p>[[...]]</p> 
+ <p>[/­code]</p> 
+ <p>What am I do­ing here?  I'm cre­at­ing a list,  <code>a</code>, and I'm adding it to it­self.  What you end up with is an in­fin­ite­ly nest­ed list.  The first in­ter­est­ing thing about this is that Python is smart enough to not ex­plode when print­ing this list.  The fol­low­ing should con­vince you that  <code>a</code>  does in­deed con­tain it­self.</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a[0] is a</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; a[0] == a</p> 
+ <p>True</p> 
+ <p>[/­code]</p> 
+ <p>Now, if you have pro­grammed in C, or a sim­i­lar lan­guage that us­es point­er­s, this should not come as a sur­prise to you.  Lists in Python, like most things, do not ac­tu­al­ly con­tain the items in­side them.  Rather, they con­tain ref­er­ences (in C ter­mi­nol­o­gy, "point­er­s") to the items in­side them.  From this per­spec­tive, there is no is­sue at all with  <code>a</code>  con­tain­ing a point­er to it­self.</p> 
+ <p>The first thing I won­dered when I saw this was just how clever the print­er was at notic­ing that the list was in­fin­ite­ly nest­ed.  What if we make the cy­cle a lit­tle more com­plex?</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a = []</p> 
+ <p>&gt;&gt;&gt; b = []</p> 
+ <p>&gt;&gt;&gt; a.ap­pend(b)</p> 
+ <p>&gt;&gt;&gt; b.ap­pend(a)</p> 
+ <p>&gt;&gt;&gt; a</p> 
+ <p>[[[...]]]</p> 
+ <p>&gt;&gt;&gt; b</p> 
+ <p>[[[...]]]</p> 
+ <p>&gt;&gt;&gt; a[0] is b</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; b[0] is a</p> 
+ <p>True</p> 
+ <p>[/­code]</p> 
+ <p>So it still work­s.  I had thought that maybe repr just catch­es  <code>Run­timeEr­ror</code>  and falls back to print­ing  <code>...</code>  when the list is nest­ed too deeply, but it turns out that is not true:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a = []</p> 
+ <p>&gt;&gt;&gt; for i in range(10000):</p> 
+ <p>...     a = [a]</p> 
+ <p>...  </p> 
+ <p>&gt;&gt;&gt; a</p> 
+ <p>Trace­back (most re­cent call last):
+  File "&lt;st­d­in&gt;", line 1, in &lt;mod­ule&gt;
+Run­timeEr­ror: max­i­mum re­cur­sion depth ex­ceed­ed while get­ting the repr of a list</p> 
+ <p>[/­code]</p> 
+ <p>And by the way, in case you were won­der­ing, it is pos­si­ble to catch a  <code>Run­timeEr­ror</code>  (us­ing the same  <code>a</code>  as the pre­vi­ous code block)</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; try:</p> 
+ <p>...     print­(a)</p> 
+ <p>... ex­cept Run­timeEr­ror:</p> 
+ <p>...     print­("no way")</p> 
+ <p>...  </p> 
+ <p>no way</p> 
+ <p>[/­code]</p> 
+ <p>(and you al­so may no­tice that this is Python 3. Things be­have the same way in Python 2)</p> 
+ <p>Back to in­fin­ite­ly nest­ed list­s, we saw that print­ing work­s, but there are some things that don't work.</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a[0] == b</p> 
+ <p>True</p> 
+ <p>&gt;&gt;&gt; a[0] == a</p> 
+ <p>Trace­back (most re­cent call last):
+  File "&lt;st­d­in&gt;", line 1, in &lt;mod­ule&gt;
+Run­timeEr­ror: max­i­mum re­cur­sion depth ex­ceed­ed in com­par­i­son</p> 
+ <p>[/­code]</p> 
+ <p><code>a[0] is b</code>  holds (i.e., they are ex­act­ly the same ob­ject in mem­o­ry), so  <code>==</code>  is able to short­-­cir­cuit on them.  But to test  <code>a[0] == a</code>  it has to re­cur­sive­ly com­pare the el­e­ments of  <code>a</code>  and  <code>a[0]</code>.  Since it is in­fin­ite­ly nest­ed, this leads to a re­cur­sion er­ror.  Now an in­ter­est­ing ques­tion: why does this hap­pen?  Is it be­cause  <code>==</code>  on lists us­es a depth first search?  If it were some­how pos­si­ble to com­pare these two ob­ject­s, would they be equal?</p> 
+ <p>One is re­mind­ed of  <a href="http://en.wikipedia.org/wiki/Russel%27s_paradox">Rus­sel's para­dox</a>, and the rea­son why in  <a href="http://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">ax­iomat­ic set the­o­ry</a>, sets are not al­lowed to con­tain them­selves.  </p> 
+ <p>Think­ing of this brought me to my fi­nal ques­tion.  Is it pos­si­ble to make a Python  <code>set</code>  that con­tains it­self?  The an­swer is ob­vi­ous­ly no, be­cause  <code>set</code>  ob­jects can on­ly con­tain hash­able ob­ject­s, and  <code>set</code>  is not hash­able.  But  <code>frozenset</code>,  <code>set</code>'s coun­ter­part, is hash­able.  So can you cre­ate a  <code>frozenset</code>  that con­tains it­self?  The same for  <code>tu­ple</code>.  The method I used for  <code>a</code>  above won't work, be­cause  <code>a</code>  must be mu­ta­ble to ap­pend it to it­self.</p> 
+ <p></p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../08/31/isympy-i-a-saner-interactive-environment/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../12/30/2012-in-review/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2012/09/19/infinitely-nested-lists-in-python/",
+        disqus_title="Infinitely nested lists in Python",
+        disqus_identifier="cache/posts/2012/09/19/infinitely-nested-lists-in-python.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

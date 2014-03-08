@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>First Order Differential Equations with Homogeneous Coefficients | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2009/05/31/first-order-differential-equations-with-homogeneous-coefficients/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2009/05/31/first-order-differential-equations-with-homogeneous-coefficients/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="First Order Differential Equations with Homogeneous Coefficients">
+            <meta name="og:description" content="So here is what I have done.  Ho­mo­ge­neous has  sev­er­al mean­ings, but when I use it in this post, I will mean  ho­mo­ge­neous func­tions.  We on­ly care about func­tions of two vari­ables, so I w">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">First Order Differential Equations with Homogeneous Coefficients</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2009-05-31T00:10:45-05:00" itemprop="datePublished">2009-05-31 00:10</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>So here is what I have done.  Ho­mo­ge­neous has  <a href="http://en.wikipedia.org/wiki/Homogeneous_(mathematics)">sev­er­al mean­ings</a>, but when I use it in this post, I will mean  <a href="http://en.wikipedia.org/wiki/Homogeneous_function">ho­mo­ge­neous func­tions</a>.  We on­ly care about func­tions of two vari­ables, so I will al­so on­ly talk about them.  A func­tion $la­tex F(x,y) $ is called ho­mo­ge­neous of or­der $la­tex n$ if $la­tex F(tx,­ty)=t^n­F(x,y)$ ­for some $la­tex n$.  Al­so, if we "pul­l" an $la­tex x$ out, we get $la­tex F(x,y)=x^n­F(1,\frac{x}{y})=x^nG(\frac{y}{x})$, which is why the def­i­ni­tion is of­ten stat­ed that the func­tion can be writ­ten as a func­tion of $la­tex \frac{y}{x} $.  Of course, we could do the same with $la­tex y$ and get a func­tion of $la­tex \frac{x}{y}$.  Here is an ex­am­ple of a ho­mo­ge­neous ­func­tion: $la­tex x^2+y\sqrt{x^2+y^2}\s­in{\frac{x}{y}}$.  Y­ou can see that $la­tex (x­t)^2+yt\sqrt{(x­t)^2+(yt)^2}\s­in{\frac{x­t}{yt}}=t^2\left­(x^2+y\sqrt{x^2+y^2}\s­in{\frac{x}{y}}\right)$.  </p> 
+ <p>Now, if the co­ef­fi­cients $la­tex P$ and $la­tex Q$ in the ­first or­der dif­fer­en­tial equa­tion $la­tex P(x,y)dx+Q(x,y)dy=0$ are both ho­mo­ge­neous func­tions of the same or­der, then the sub­sti­tu­tion $la­tex x=uy$ or $la­tex y=ux$ will make the equa­tion sep­a­ra­ble.  I will show how to do it for $la­tex y=ux$.  We have $la­tex dy=xdy+udx$ ­by the prod­uct rule.  We al­so have $la­tex P(x,y)=P(x,x­u)$ and $la­tex Q(x,y)=Q(x,x­u)$.  Be­cause these func­tions are ho­mo­ge­neous, we can "pull out" an $la­tex x^n$ from each, giv­ing us $la­tex x^n­P(1,u)dx+x^n­Q(1,u)(x­du+udx)=0$.  Be­cause we made the sub­sti­tu­tion $la­tex u=\frac{y}{x}$, we al­ready have had to as­sume $la­tex x\neq0$.  Thus, we can di­vide the whole thing by $la­tex x^n$.  Do­ing this, and ex­pand­ing the re­main­ing terms, we get $la­tex P(1,u)dx+xQ(1,u)­du+uQ(1,u)dx=0$.  Refac­tor­ing the $la­tex dx$ and $la­tex dy$ terms, we get $la­tex (P(1,u)+uQ(1,u))dx=-xQ(1,u)­du$.  The equa­tion is sep­a­ra­ble!  Sep­a­rat­ing ­vari­ables and in­te­grat­ing, we get $la­tex \in­t{\frac{dx}{x}}=\in­t{\frac{-Q(1,u)­du}{P(1,u)+uQ(1,u)}}+C$.  If we had used $la­tex x=uy$ in­stead, we would have got­ten $la­tex \in­t{\frac{dy}{y}}=\in­t{\frac{-P(u,1)­du}{uP(u,1)+Q(u,1)}}+C$.  This is ex­act­ly how I was able to solve these equa­tions in SymPy.  Each ho­mo­ge­neous equa­tion has two pos­si­ble in­te­gral­s, and of­ten the right hand side of one equa­tion is a much hard­er in­te­gral than the right hand side of the oth­er.  There­fore, I did them both, and ap­plied a lit­tle heuris­tic on which one to re­turn.  It prefers ex­pres­sions that can be solved for y (f(x) in the case of SymPy), ­ex­pres­sion­s that have eval­u­at­ed in­te­gral­s, and if nei­ther of them are solv­able, the short­est one, which tends to be the sim­plest.  </p> 
+ <p>Here is an ex­am­ple from my text book.  $la­tex 2xy­dx+(x^2+y^2)dy=0$.  As­tute read­ers of this blog may have no­ticed that this equa­tion is  <a href="http://asmeurersympy.wordpress.com/2009/05/16/work-started-exact-differential-equations/">ex­act</a>.  It is eas­i­er to solve that way, but we will try us­ing the meth­ods out­lined above.  First, we no­tice that the co­e­fi­cients of $la­tex dx$ and $la­tex dy$ are both ho­mo­ge­neous of or­der 2, so we can make the sub­sti­tu­tion $la­tex x=uy$ or $la­tex u=yx$ and the equa­tion would be­come seper­a­ble.  If I were do­ing this by hand or for a home­work as­sign­men­t, I would make one of those sub­sti­tu­tions and work it through, but we have the ex­act form above, so let's use it just like SymPy would.  $la­tex P(x,y)=2xy $ and $la­tex Q(x,y)=x^2+y^2$.  So we get $la­tex \in­t{\frac{dx}{x}}=\in­t{\frac{-(1+u^2)­du}{2u+u(1+u^2)}}+C$ with $la­tex u=\frac{y}{x}$ and $la­tex \in­t{\frac{dy}{y}}=\in­t{\frac{-2udu}{u(2u)+(1+u^2)}}+C$ with $la­tex u=\frac{x}{y}$ (here and for the re­main­der of this deriva­tion, the ar­bi­trary con­stants in the two equa­tions do not nec­es­sar­i­ly equal each oth­er un­til the last step).  Both in­te­grals can be solved  with a ­sub­sti­tu­tion of the de­nom­i­na­tor, giv­ing, with $la­tex u$ back sub­sti­tut­ed, $la­tex \l­n{x}=\frac{-\l­n{(\frac{y^3}{x^3}+\frac{3y}{x})}}{3}+C$ and $la­tex \l­n{y}=\frac{-\l­n{(\frac{3x^3}{y^3}+1)}}{3}+C$.  If we make $la­tex C=l­n(C_1)$, and pull the con­stants in front of the logs on the right hand sides in as pow­er­s, we can com­bine ev­ery­thing in­to log­a­rithm­s.  After do­ing that, we then take the an­tilog of both sides and get $la­tex x=C_1{(\frac{y^3}{x^3}+\frac{3y}{x})}^{-\frac{1}{3}}$ and $la­tex y=C_1{(\frac{3x^3}{y^3}+1)}^{-\frac{1}{3}}$.  We then raise the whole equa­tion to the $la­tex -3$ pow­er and make $la­tex C_1^{-3}=A$.  We get</p> 
+ <p>$la­tex \frac{1}{x^3}=A(\frac{y^3}{x^3}+3\frac{y}{x})$</p> 
+ <p>$la­tex \frac{1}{x^3}=A\frac{y^3+3x^2y}{x^3}$</p> 
+ <p>$la­tex K=y^3+3x^2y$  </p> 
+ <p>and  </p> 
+ <p>$la­tex \frac{1}{y^3}=A(\frac{3x^2}{y^2}+1)$</p> 
+ <p>$la­tex \frac{1}{y}=A(3x^2y+y^2)$</p> 
+ <p>$la­tex K=y^3+3x^2y$,</p> 
+ <p>where $la­tex K=\frac{1}{A}$</p> 
+ <p>Ver­i­fy as an ex­er­cise that you get the same so­lu­tion by the ex­act dif­fer­en­tial equa­tion meth­ods (or  <a href="http://comics.com/brevity/2006-02-16/">don't... you know, de­pend­ing on which you'd rather do</a>).</p> 
+ <p>Of course, if that was all there was to it, I would have fin­ished in a day.  There was more.  First, I had to write a func­tion that de­ter­mines if an ex­pres­sion is ho­mo­ge­neous and what or­der if it is.  That was about 150 lines of code right there plus tests (150 lines is a lot in Python).    </p> 
+ <p>I al­so want­ed it to rec­og­nize that $la­tex \l­n{x}-\l­n{y}$ is ho­mo­ge­neous be­cause $la­tex \l­n{x}-\l­n{y}=\l­n{\frac{x}{y}}$.  SymPy was in­ca­pable of com­bin­ing log­a­rithms like this, so I had to write a log­com­bine func­tion, which was an­oth­er 100 lines of code plus test­s.  This came in handy, be­cause I was al­so able to use it in the part above where I com­bined the log­a­rithms of my an­swer to elim­i­nate all of them.   </p> 
+ <p>Last­ly, you may have no­ticed that my math looks much nicer in this post.  It turns out that Word­Press sup­ports math us­ing $<!--more-->la­tex  <!--more-->&lt;<!--more-->math<!--more-->&gt;$.  Un­for­tu­nate­ly, I did not dis­cov­er this un­til I had al­ready up­load­ed im­ages of al­most all the math ex­pres­sions in the post, so I had to go back and fix them.   </p> 
+ <p>Al­so, I was hav­ing a prob­lem where the math would­n't ren­der, but it turns out that this was an is­sue with me copy­ing and past­ing "$la­tex" and the ex­pres­sions in­to the Word­Press rich text ed­i­tor.  I changed my ed­i­tor set­tings to plain tex­t.  I'm sor­ry, but web rich text ed­i­tors do not work.  And I've grown ac­cus­tomed to see­ing the source of stuff that I write hav­ing done ev­ery­thing in $la­tex \La­TeX$ for a year and hav­ing edit­ed Wikipedia for a while.  </p> 
+ <p>I wish there were a free blog­ging site like Word­Press or Blog­ger that used Me­di­aWi­ki or $la­tex \La­TeX$ as its ren­der­ing en­gine.  It would look nice, the for­mat­ting would be a stan­dard thing that is­n't con­fus­ing htm­l, and $la­tex \La­TeX$ math would come out much nicer.   </p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../30/just-finished-a-new-bit/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../separable-next/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2009/05/31/first-order-differential-equations-with-homogeneous-coefficients/",
+        disqus_title="First Order Differential Equations with Homogeneous Coefficients",
+        disqus_identifier="cache/posts/2009/05/31/first-order-differential-equations-with-homogeneous-coefficients.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

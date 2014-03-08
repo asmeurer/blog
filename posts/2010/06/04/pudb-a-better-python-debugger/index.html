@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>PuDB, a better Python debugger | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2010/06/04/pudb-a-better-python-debugger/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2010/06/04/pudb-a-better-python-debugger/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="PuDB, a better Python debugger">
+            <meta name="og:description" content="So  Chris­tian Muise  un­wit­ting­ly just re­mind­ed me on IRC that I for­got to men­tion the main method that I used to learn how the heurisch func­tion works in my last blog post.  I usu­al­ly on­ly">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">PuDB, a better Python debugger</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2010-06-04T20:59:17-05:00" itemprop="datePublished">2010-06-04 20:59</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>So  <a href="http://haz-tech.blogspot.com/">Chris­tian Muise</a>  un­wit­ting­ly just re­mind­ed me on IRC that I for­got to men­tion the main method that I used to learn how the heurisch func­tion works in my last blog post.  I usu­al­ly on­ly use a de­bug­ger when I have a re­al­ly hard bug I need to fig­ure out, when the print state­ments aren't enough.  The rea­son for this is that the de­bug­ger that I had been us­ing, win­pdb, is, well, a pain to use.  There are so many lit­tle bugs, at least in Mac OS X, that it is al­most not worth while to use it un­less I need to.  For ex­am­ple, restart­ing a script from the de­bug­ger does­n't work.  If I pass a point that I want­ed to see, I have to com­plete­ly close the win­pdb win­dow and restart it from the com­mand line, which takes about half a minute.  Al­so, win­pdb us­es it's own vari­ant of pdb, which seems to cause more prob­lems than it cre­ates (like bug­ging me about sympy im­port­ing pdb some­where  <em>ev­ery time</em>  I start de­bug­ging.)</p> 
+ <p>But I re­al­ly want­ed to be able to step through the heurisch code to see ex­act­ly how it work­s, be­cause many of the im­ple­men­ta­tion de­tail­s, such as gath­er­ing the com­po­nents of an ex­pres­sion, will be sim­i­lar if not ex­act­ly the same in the full al­go­rith­m.  So I start­ed my quest for a bet­ter de­bug­ger.  For me, the ide­al de­bug­ger is the C de­bug­ger in XCode.  That de­bug­ger has saved me in most of my pro­gram­ming as­sign­ments in C.  But it is on­ly for C based lan­guages (C, Ob­jec­tive-C, prob­a­bly C++, …), not Python.  So I did a Google search, and it turns out that there is a list of Python de­bug­gers  <a href="http://wiki.python.org/moin/PythonDebuggers">here</a>.  So I went through them, and I did­n't have to go far.  The very first one,  <a href="http://pypi.python.org/pypi/pudb">pudb</a>, turns out to be awe­some!</p> 
+ <p>You can watch this  <a href="http://vimeo.com/5255125">screen­cast</a>  to get a bet­ter idea of the fea­tures, or even bet­ter in­stall it and check them out.  The de­bug­ger runs in the con­sole, not in some half-hacked GUI (half-hacked is what any non-­Co­coa GUI looks like in Mac OS X).  The on­ly down side to this is that you have to use the key­board to do ev­ery­thing, but it ends up not be­ing too bad.  And you can press '?' at any time to see the pos­si­ble com­mand­s.   </p> 
+ <p>To in­stall it, just do  <code>easy_in­stall pudb</code>.  To run it, just cre­ate a script of what you want to de­bug, and do  <code>python -m pud­b.run my-scrip­t.py  </code>  and it just work­s! I have a line that says  <code>alias pud­b='python -m pud­b.run'</code>  in my  <code>.pro­file</code>, which makes it even eas­i­er to run.  If you want to set a break point in the code, you can ei­ther nav­i­gate there from with­in pudb by press­ing 'm', or you add a line that says  <code>from pudb im­port set_­trace; set_­trace()</code>  to the code (if you add the line to your code, you don't even need to cre­ate a scrip­t.  Just ex­e­cute the code in IPython and when it hits that line, it will load the de­bug­ger).   </p> 
+ <p>Some cool fea­tures:</p> 
+ <ul>
+<li> 
+ <p>IPython con­­sole.  Just press '!' to go to a con­­sole, where you can ma­nip­u­late var­i­ables from the ex­e­­cut­ed names­­pace, and you can choose an IPython con­­sole.    </p>  
+  </li> 
+ <li> 
+ <p>Very easy to nav­i­­gate.  You just need to know the keys 's', 'n', and 't'.    </p>  
+  </li> 
+ <li> 
+ <p>View the code from else­where than what is be­ing run.  Press­ing 'm' lets you view all im­­port­ed mod­­ules.  You can eas­i­­ly view points on the stack by choos­ing them.    </p>  
+  </li> 
+ <li> 
+ <p>If an ex­­cep­­tion is thrown, it   <em>catch­es it</em>!  This may sound ob­vi­ous for a de­bug­ger, but it is one of things that did­n't work very well in win­pdb.  You can view the trace­back of the ex­­cep­­tion, and choose to restart   <em>with­­out hav­ing to close and re­open the de­bug­ger</em>.  Ac­­tu­al­­ly, it asks you if you want to restart ev­ery time the script fin­ish­es too, which is al­­so a great im­prove­­ment over win­pdb.    </p>  
+  </li> 
+ </ul>
+<p>This is what it looks like.  Click for a big­ger pic­ture:</p> 
+ <p><a href="../../../../../2010/06/pudb.png"><img src="../../../../../2010/06/pudb.png" alt="" title="PuDB" width="450" height="298" class="size-full wp-image-401"></a></p> 
+ <p>Some an­noy­ances (in case An­dreas Kloeck­n­er reads this):</p> 
+ <ul>
+<li> 
+ <p>The de­­fault dis­­­play for var­i­ables is type, which is com­­plete­­ly use­­less. I have to man­u­al­­ly go through and change each to str so I can see what the var­i­able is.  Is there a way to change this de­­fault?</p>  
+  </li> 
+ <li> 
+ <p>It asks me ev­ery time if I want to use IPython.  I al­ways want to use IPython.</p>  
+  </li> 
+ <li> 
+ <p>This is might be a Mac OS X Ter­mi­­nal bug, but when I ex­e­­cute a state­­ment that takes a while to run, it does­n't re­­draw the pudb win­­dow un­til it fin­ish­es.  This means that step­ping through a pro­­gram "flash­es" black from what is above pudb in the win­­dow, and if I run a state­­ment that takes forever, I loose the abil­i­­ty to see where it is un­­less I key­board in­­ter­rup­t. For­­tu­­nate­­ly, it catch­es key­board in­­ter­rup­t­s, so I can still see the trace­back.</p>  
+  </li> 
+ <li> 
+ <p>There is no way to re­­size the var­i­ables win­­dow, or to scroll side­ways in it.  If I want to see what a long var­i­able ex­pres­­sion is, I have to go to the IPython con­­sole and type it there.   </p>  
+  </li> 
+ </ul>
+<p>Some of these might be fix­able and I just don't know it yet.  But even with them, this is still an or­der of mag­ni­tude im­prove­ment over win­pdb.  Now I can ac­tu­al­ly use the de­bug­ger all the time in my cod­ing, in­stead of just when I have a re­al­ly tough bug and no oth­er choice.   </p> 
+ <p>UP­DATE:</p> 
+ <p>The first two were triv­ial to fix in a fork of the repos­i­to­ry (is­n't open source awe­some?).  So if those are both­er­ing you too, check out my branch­es at  <a href="http://github.com/asmeurer/PuDB">http://github.­com/as­meur­er/PuDB</a>.  Maybe if I have some time I will make them glob­al op­tions us­ing en­vi­ron­ment vari­ables or some­thing and  see if An­dreas wants to merge them back in­to the main re­po.   </p> 
+ <p>As for the sec­ond one, I re­al­ized that it might be a good thing, be­cause you can see any­thing that is print­ed.  Stil­l, I would pre­fer see­ing both, if pos­si­ble (and the black flash­es are an­noy­ing).   </p> 
+ <p>UP­DATE 2:</p> 
+ <p>You can re­size the side view by push­ing +/-, though there does­n't seem to be a way to, say, make the vari­ables view big­ger and the break­points view small­er.  </p> 
+ <p>UP­DATE 3:</p> 
+ <p>A while back On­drej mod­i­fied the code to have a dif­fer­ent col­or the­me, and I fol­lowed suit.  See  <a href="https://github.com/certik/PuDB/commit/38fed5024d022c5d6d1961c917026e021a833a9e#comments">this con­ver­sa­tion at GitHub</a>.  So now, in­stead of look­ing like a DOS ter­mi­nal, in PuDB for me looks like this:</p> 
+ <p><a href="../../../../../2010/07/screen-shot-2010-07-28-at-12-51-36-pm.png"><img src="../../../../../2010/07/screen-shot-2010-07-28-at-12-51-36-pm.png" alt="PuDB XCode Midnight Theme Colors" title="PuDB XCode Midnight Theme Colors" width="450" height="360" class="size-full wp-image-682"></a>   This is ex­act­ly the same col­ors as my code in XCode, the ed­i­tor I use, with the Mid­night Theme.  It's pret­ty easy to change the col­ors to what­ev­er you wan­t.  Right now, you have to ed­it the source, but On­drej or I might some­day make it so you can have themes.   </p> 
+ <p>Al­so, hav­ing used this all sum­mer (and it was a life-saver hav­ing it in mul­ti­ple oc­ca­sion­s, and I am sure made my de­vel­op­ment speed at least twice as fast in oth­er­s), I have one ad­di­tion­al gripe.  It is too dif­fi­cult to ar­row up to the vari­able that you want to ac­cess in the vari­ables view.  It would be nice to have a page up­/­page down fea­ture there.   </p> 
+ <p>UP­DATE 4: PuDB has since im­proved a lot, in­clude many fix­es by my­self. It now sup­ports themes, saved set­tings, vari­able name wrap­ping, and more. See  <a href="http://asmeurersympy.wordpress.com/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">this fol­lowup post</a>.  </p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../update-for-this-week/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../11/integration-of-rational-functions/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2010/06/04/pudb-a-better-python-debugger/",
+        disqus_title="PuDB, a better Python debugger",
+        disqus_identifier="cache/posts/2010/06/04/pudb-a-better-python-debugger.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

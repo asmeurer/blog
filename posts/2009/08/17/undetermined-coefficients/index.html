@@ -1,0 +1,394 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Undetermined Coefficients | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2009/08/17/undetermined-coefficients/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2009/08/17/undetermined-coefficients/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Undetermined Coefficients">
+            <meta name="og:description" content="[Sorry for the delay in this post.  I was having some difficulties coming up with some of the rationales below. Also, classes have started, which has made me very busy.]
+If there was one ODE solv­ing ">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Undetermined Coefficients</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2009-08-17T22:33:00-05:00" itemprop="datePublished">2009-08-17 22:33</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><em>[Sorry for the delay in this post.  I was having some difficulties coming up with some of the rationales below. Also, classes have started, which has made me very busy.]</em>
+<p>If there was one ODE solv­ing method that I did not want to im­ple­ment this sum­mer, it was un­de­ter­mined co­ef­fi­cients.  I did­n't re­al­ly like the method too much when we did it my my ODE class (though it was not as un­en­joy­able as se­ries meth­od­s).  The thing that I nev­er re­al­ly un­der­stood very well is to what ex­tent you have to mul­ti­ply terms in the tri­al func­tion by pow­ers of x to make them lin­ear­ly in­de­pen­dent of the so­lu­tion to the gen­er­al equa­tion.  We did our ODEs home­work in Maple, so I would usu­al­ly just keep try­ing high­er pow­ers of x un­til I got a so­lu­tion.  But to im­ple­ment it in SymPy, I had to have a much bet­ter un­der­stand­ing of the ex­act rules for it.</p> 
+ <p>From a user's point of view, the method of un­de­ter­mined co­ef­fi­cients is much bet­ter than the method of vari­a­tion of pa­ram­e­ter­s.  While it is true that vari­a­tion of pa­ram­e­ters is a gen­er­al method and un­de­ter­mined co­ef­fi­cients on­ly works on a spe­cial class of func­tion­s, un­de­ter­mined co­ef­fi­cients re­quires no in­te­gra­tion or ad­vanced sim­pli­fi­ca­tion, so it is fast (very fast, as well shall see be­low).  All that the CAS has to do is fig­ure out what a tri­al func­tion looks like, plug it in­to the ODE, and solve for the co­ef­fi­cients, which is a sys­tem of lin­ear equa­tion­s.   </p> 
+ <p>On the oth­er hand, from the pro­gram­mer's point of view,  <a href="http://asmeurersympy.wordpress.com/2009/08/01/variation-of-parameters-and-more/">vari­a­tion of pa­ram­e­ters</a>  is much bet­ter.  All you have to do is take the Wron­skian of the gen­er­al so­lu­tion set and use it to set up some in­te­gral­s.  But the Wron­skian has to be sim­pli­fied, and if the gen­er­al so­lu­tion con­tains sin's and cos's, this re­quires trigono­met­ric sim­pli­fi­ca­tion not cur­rent­ly avail­able in SymPy (although it looks like the  <a href="http://code.google.com/p/sympy/issues/detail?id=1598">new Polys mod­ule</a>  will be mak­ing a big leap for­ward in this area).  Al­so, in­te­gra­tion is slow, and in SymPy, it of­ten fails (hangs forever).   </p> 
+ <p>Fig­ur­ing out what the tri­al func­tion should be for un­de­ter­mined co­ef­fi­cients is way more dif­fi­cult to pro­gram, but hav­ing finnal­ly fin­ished it, I can say that it is def­i­nite­ly worth hav­ing in the mod­ule.  Prob­lems that it can solve can run or­ders of mag­ni­tude faster than the vari­a­tion of pa­ram­e­ter­s, and of­ten vari­a­tion of pa­ram­e­ters can't do the in­te­gral or re­turns a less sim­pli­fied re­sult.   </p> 
+ <p>So what is this un­de­ter­mined co­ef­fi­cients?  Well, the idea is this:  if you knew what each lin­ear­ly in­de­pen­dent term of the par­tic­u­lar so­lu­tion was, mi­nus the co­ef­fi­cients, then you could just set each co­ef­fi­cient as an un­known, plug it in­to the ODE, and solve for them.  It turns out that re­sult­ing sys­tem of equa­tions is lin­ear, so if you do the first part right, you can al­ways get a so­lu­tion.   </p> 
+ <p>The key thing here is that you know what form the par­tic­u­lar so­lu­tion will take.  How­ev­er, you don't re­al­ly know this ahead of time.  All you have is the lin­ear ode $la­tex a_ny^{(n)}(x) + \dots + a_1y'(x) + a_0y(x) = F(x)$ (as far as I can tel­l, this on­ly works in the case where the co­ef­fi­cients $la­tex a_i$ are con­stant with re­spect to x.  I'd be in­ter­est­ed to learn that it works for oth­er lin­ear ODEs.  At any rate, that is the on­ly one that works in my branch right now.).  The so­lu­tion to the ode is $la­tex y(x) = y_g(x) + y_p(x)$, where $la­tex y_g(x)$ is the so­lu­tion to the ho­mo­ge­neous equa­tion $la­tex f(x) \e­quiv 0$, and $la­tex y_p(x)$ is the par­tic­u­lar so­lu­tion that pro­duces the $la­tex F(x)$ term on the right hand side.  The key here is just that.  If you plug $la­tex y_p(x)$ in­to the left hand side of the ode, you get $la­tex F(x)$.   </p> 
+ <p>It turns out that this method on­ly works if the func­tion $la­tex F(x)$ on­ly has a fi­nite num­ber of lin­ear­ly in­de­pen­dent de­riv­a­tives (I am un­sure, but this might be able to work in oth­er cas­es, but it would in­volve much more ad­vanced math­e­mat­ic­s).  So what kind of func­tions have a fi­nite num­ber of lin­ear­ly in­de­pen­dent so­lu­tion­s?  Ob­vi­ous­ly, poly­no­mi­als do.  So does $la­tex e^x$, $la­tex \cos{x}$, and $la­tex \s­in{x}$.  Al­so, if we mul­ti­ply two or more of these types to­geth­er, then we will get a fi­nite num­ber of lin­ear­ly in­de­pen­dent so­lu­tions af­ter ap­ply­ing the prod­uct rule.  But is that al­l?  Well, if we take the def­i­ni­tion of lin­ear in­de­pen­dence from lin­ear al­ge­bra, we know that a set of n vec­tors $la­tex {\boldsym­bol­{v_1}, \boldsym­bol­{v_2}, \boldsym­bol­{v_3}, \dot­s, \boldsym­bol­{v_n}}$, not all ze­ro, are lin­ear­ly in­de­pen­dent on­ly if $la­tex a_1\boldsym­bol­{v_1} + a_2\boldsym­bol­{v_2} + a_3\boldsym­bol­{v_3} + \dots + a_n\boldsym­bol­{v_n}=0$ holds on­ly when $la­tex a_1 \e­quiv 0, a_2 \e­quiv 0, a_3 \e­quiv 0, \dot­s, a_n \e­quiv 0$, that is, the on­ly so­lu­tion is the triv­ial one (re­mem­ber, this is the  <em>def­i­ni­tion</em>  of lin­ear in­de­pen­dence).  They are lin­ear­ly de­pen­dent if there ex­ist weights $la­tex a_1, a_2, a_3, \dot­s, a_n$, not all 0, such that the equa­tion $la­tex a_1\boldsym­bol­{v_1} + a_2\boldsym­bol­{v_2} + a_3\boldsym­bol­{v_3} + \dots + a_n\boldsym­bol­{v_n}=0$ is sat­is­fied.  Us­ing this def­i­ni­tion, we can see that a func­tion $la­tex f(x)$ will have a fi­nite num­ber of lin­ear­ly in­de­pen­dent de­riv­a­tives if it sat­is­fies $la­tex a_n­f^{(n)}(x) + a_{n - 1}f^{(n - 1)}(x) + \dots + a_1f'(x) + a_0f(x) = 0$ for some $la­tex n$ and with $la­tex a_i\neq 0$ for some $la­tex i$.  But this is just a  <a href="http://asmeurersympy.wordpress.com/2009/08/01/variation-of-parameters-and-more/">ho­mo­ge­neous lin­ear ODE with con­stant co­ef­fi­cients</a>, which we know how to solve.    The so­lu­tions are all of the form $la­tex ax^ne^{b x}\­cos{cx}$ or $la­tex ax^ne^{b x}\s­in{cx}$, where a, b, and c are re­al num­bers and n is a non-neg­a­tive in­te­ger.  We can set the var­i­ous con­stants to 0 to get the type we wan­t.  For ex­am­ple, for a poly­no­mi­al ter­m, b will be 0 and c will be 0 (use the cos ter­m).</p> 
+ <p>So this gives us the ex­act form of func­tions that we need to look for to ap­ply un­de­ter­mined co­ef­fi­cients, based on the as­sump­tion that it on­ly works on func­tions with a fi­nite num­ber of lin­ear­ly in­de­pen­dent de­riv­a­tives.   </p> 
+ <p>Well, im­ple­ment­ing it was quite dif­fi­cult.  For ev­ery ODE, the first step in im­ple­men­ta­tion is match­ing the ODE, so the solver can know what meth­ods it can ap­ply to a giv­en ODE.  To match in this case, I had to write a func­tion that de­ter­mined if the func­tion matched the form giv­en above, which was not too dif­fi­cult, though not as triv­ial as just grab­bing the right hand side in vari­a­tion of pa­ram­e­ter­s.  The next step is to use the match­ing to for­mat the ODE for the solver.  In this case, it means find­ing all of the fi­nite lin­ear­ly in­de­pen­dent de­riv­a­tives of the ODE, so that the solver can just cre­ate a lin­ear com­bi­na­tion of them solve for the co­ef­fi­cients.  This was a lit­tle more dif­fi­cult, and it took some lat­er­al think­ing.   </p> 
+ <p>At this point, there is one more thing that needs to be not­ed. Since the tri­al func­tion­s, that is, the lin­ear­ly in­de­pen­dent de­riv­a­tive terms of the right hand side of the ODE, are of the same form as the so­lu­tions to the ho­mo­ge­neous equa­tion, it is pos­si­ble that one of the tri­al func­tion terms will be a so­lu­tion to the ho­mo­ge­neous equa­tion.  If this hap­pen­s, plug­ging it in­to the ODE will cause it to go to ze­ro, which means that we will not be able to solve for a co­ef­fi­cient for that ter­m.  In­deed, that term will be of the form $la­tex C1*\­tex­tr­m{ter­m}$ in the fi­nal so­lu­tion, so even if we had a co­ef­fi­cient for it, it would be ab­sorbed in­to this term from the so­lu­tion to the ho­mo­ge­neous equa­tion.  For ex­am­ple, vari­a­tion of pa­ram­e­ters will give a co­ef­fi­cient for such terms, even though it is un­nec­es­sary.  This is a clue that Maple us­es vari­a­tion of pa­ram­e­ters for all lin­ear con­stant co­ef­fi­cient ODE solv­ing, be­cause it gives the un­nec­es­sary terms with the co­ef­fi­cients that would be giv­en by vari­a­tion of pa­ram­e­ter­s, in­stead of ab­sorb­ing them in­to the ar­bi­trary con­stants.   </p> 
+ <p>We can safe­ly ig­nore these terms for un­de­ter­mined co­ef­fi­cients, be­cause their co­ef­fi­cients will not even ap­pear in the sys­tem of lin­ear equa­tions of the co­ef­fi­cients any­way.  But, with­out these co­ef­fi­cients, we will run in­to trou­ble.  It turns out that if a term $la­tex x^ne^{ax}\s­in{bx}$ or $la­tex x^ne^{ax}\­cos{bx}$ is re­peat­ed so­lu­tion to the ho­mo­ge­neous equa­tion, and $la­tex x^{n + 1}e^{ax}\s­in{bx}$ or $la­tex x^{n + 1}e^{ax}\­cos{bx}$ is not, so that $la­tex n$ is the high­est $la­tex x$ pow­er that makes it a so­lu­tion to the ho­mo­ge­neous equa­tion, and if the tri­al so­lu­tion has $la­tex x^me^{ax}\s­in{bx}$ or $la­tex x^me^{ax}\­cos{bx}$ terms, but not $la­tex x^{m + 1}e^{ax}\s­in{bx}$ or $la­tex x^{m + 1}e^{ax}\­cos{bx}$ terms, so that $la­tex m$ is the high­est pow­er of $la­tex x$ in the the tri­al func­tion terms, then we need to mul­ti­ply these tri­al func­tion terms by $la­tex x^{n + m}$ to make them lin­ear­ly in­de­pen­dent with the so­lu­tions of the ho­mo­ge­neous equa­tion.   </p> 
+ <p>Most  <a href="http://en.wikipedia.org/wiki/Method_of_undetermined_coefficients">ref­er­ences</a>  sim­ply say that you need to mul­ti­ply the tri­al func­tion terms by "suf­fi­cient pow­ers of x" to make them lin­ear­ly in­de­pen­dent with the ho­mo­ge­neous so­lu­tion.  Well, this is just fine if you are do­ing it by hand or you are cre­at­ing the tri­al func­tion man­u­al­ly in Maple and plug­ging it in and solv­ing for the co­ef­fi­cients.  You can just keep up­ping the pow­ers of x un­til you get a so­lu­tion for the co­ef­fi­cients.  Cre­at­ing those tri­al func­tions in Maple, plug­ging them in­to the ODE, and solv­ing for the co­ef­fi­cients is ex­act­ly what I had to do for my home­work when I took ODEs last spring, and this "up­ping pow­er­s" tri­al and er­ror method is ex­act­ly the method I used.  But when you are do­ing it in SymPy, you need to know ex­act­ly what pow­er to mul­ti­ply it by.  If it is too low, you will not get so­lu­tion to the co­ef­fi­cients.  If it is too high, you can ac­tu­al­ly end up with too many terms in the fi­nal so­lu­tion, giv­ing a wrong an­swer.   </p> 
+ <p>For­tu­nate­ly, my ex­cel­lent  <a href="http://books.google.com.np/books?id=29utVed7QMIC&amp;lpg=PA24&amp;ots=uxLSUKt_3P&amp;dq=testing%20implicit%20solutions%20to%20ode&amp;hl=en&amp;pg=PA61#v=onepage&amp;q=&amp;f=false">ODEs text­book</a>  gives the ex­act cas­es to fol­low, and so I was able to im­ple­ment it cor­rect­ly.  The text­book al­so gives a whole slew of ex­er­cis­es, all for which the so­lu­tions are giv­en.  As usu­al, this helped me to find the bugs in my very com­plex and dif­fi­cult to write rou­tine.  It al­so helped me to find a  <a href="http://code.google.com/p/sympy/issues/detail?id=1601">match bug</a>  that would have pre­vent­ed  <code>dsolve()</code>  from be­ing able to match cer­tain types of ODEs.  The bug turned out to be fun­da­men­tal to the way  <code>match()</code>  is writ­ten, so I had to write my own cus­tom match­ing func­tion for lin­ear ODEs.   </p> 
+ <p>The fi­nal step in solv­ing the un­de­ter­mined co­ef­fi­cients is of course just cre­at­ing a lin­ear com­bi­na­tion of the tri­al func­tion terms, plug­ging it in­to the orig­i­nal ODE, and set­ting the co­ef­fi­cients of each term on each side equal to each oth­er, which gives a lin­ear sys­tem. SymPy can solve these eas­i­ly, and once you have the val­ues of the co­ef­fi­cients, you can use them to build your par­tic­u­lar so­lu­tion, at which point, you are done.   </p> 
+ <p>The re­sults were as­tound­ing.  Vari­a­tion of pa­ram­e­ters would hang on many sim­ple in­ho­mo­ge­neous ODEs be­cause of poor trig sim­pli­fi­ca­tion of the Wron­sikan, but my un­de­ter­mined co­ef­fi­cients method han­dles them per­fect­ly.  Al­so, there is no need to wor­ry about ab­sorb­ing su­per­flu­ous terms in­to the ar­bi­trary con­stants as with vari­a­tion of pa­ram­e­ter­s, be­cause they are re­moved from with­in the un­de­ter­mined co­ef­fi­cients al­go­rith­m.</p> 
+ <p>But the big­gest thing was speed.  Here are some bench­marks on some ran­dom ODEs from the test suit­e. Word­Press code blocks are im­per­vi­ous to whites­pace, as I have men­tioned be­fore, so no pret­ty print­ing here.  Al­so, it trun­cates the hints.  The hints used are  <code>'n­th_­lin­ear_­con­stan­t_­co­ef­f_un­de­ter­mined_­co­ef­fi­cients'</code>  and  <code>'n­th_­lin­ear_­con­stan­t_­co­ef­f_­vari­a­tion_of_­pa­ram­e­ter­s'</code>:</p> 
+ <p><code></code></p> 
+ <blockquote>
+
+In [1]: time dsolve(f(x).diff(x, 2) - 3*f(x).diff(x) - 2*exp(2*x)*sin(x), f(x), hint='nth_linear_constant_coeff_undetermined_coefficients')
+
+CPU times: user 0.07 s, sys: 0.00 s, total: 0.08 s
+
+Wall time: 0.08 s
+
+Out[2]: 
+
+f(x) == C1 + (-3*sin(x)/5 - cos(x)/5)*exp(2*x) + C2*exp(3*x)
+
+
+
+In [3]: time dsolve(f(x).diff(x, 2) - 3*f(x).diff(x) - 2*exp(2*x)*sin(x), f(x), hint='nth_linear_constant_coeff_variation_of_parameters')
+
+CPU times: user 0.92 s, sys: 0.01 s, total: 0.93 s
+
+Wall time: 0.94 s
+
+Out[4]: 
+
+f(x) == C1 + (-3*sin(x)/5 - cos(x)/5)*exp(2*x) + C2*exp(3*x)
+
+
+
+In [5]: time dsolve(f(x).diff(x, 4) - 2*f(x).diff(x, 2) + f(x) - x + sin(x), f(x), hint='nth_linear_constant_coeff_undetermined_coefficients')
+
+CPU times: user 0.06 s, sys: 0.00 s, total: 0.06 s
+
+Wall time: 0.06 s
+
+Out[6]: 
+
+f(x) == x - sin(x)/4 + (C1 + C2*x)*exp(x) + (C3 + C4*x)*exp(-x)
+
+
+
+In [7]: time dsolve(f(x).diff(x, 4) - 2*f(x).diff(x, 2) + f(x) - x + sin(x), f(x), hint='nth_linear_constant_coeff_variation_of_parameters')
+
+CPU times: user 5.43 s, sys: 0.03 s, total: 5.46 s
+
+Wall time: 5.52 s
+
+Out[8]: 
+
+f(x) == x - sin(x)/4 + (C1 + C2*x)*exp(x) + (C3 + C4*x)*exp(-x)
+
+
+
+In [9]: time dsolve(f(x).diff(x, 5) + 2*f(x).diff(x, 3) + f(x).diff(x) - 2*x - sin(x) - cos(x), f(x), 'nth_linear_constant_coeff_undetermined_coefficients')
+
+CPU times: user 0.10 s, sys: 0.00 s, total: 0.10 s
+
+Wall time: 0.11 s
+
+Out[10]: 
+
+f(x) == C1 + (C2 + C3*x - x**2/8)*sin(x) + (C4 + C5*x + x**2/8)*cos(x) + x**2
+
+
+
+In [11]: time dsolve(f(x).diff(x, 5) + 2*f(x).diff(x, 3) + f(x).diff(x) - 2*x - sin(x) - cos(x), f(x), 'nth_linear_constant_coeff_variation_of_parameters')
+
+
+
+</blockquote>
+
+<p></p> 
+ <p>The last one in­volves a par­tic­u­lar­ly dif­fi­cult Wron­skian for SymPy (run it with hin­t='n­th_­lin­ear_­con­stan­t_­co­ef­f_­vari­a­tion_of_­pa­ram­e­ter­s_In­te­gral', sim­pli­fy=­False).</p> 
+ <p>Wall time com­par­isons re­veal amaz­ing speed dif­fer­ences.  We're talk­ing or­ders of mag­ni­tude.</p> 
+ <p><code></code></p> 
+ <blockquote>
+
+In [13]: 0.94/0.08
+
+Out[13]: 11.75
+
+
+
+In [14]: 5.52/0.06
+
+Out[14]: 92.0
+
+
+
+In [15]: oo/0.11
+
+Out[15]: +inf
+
+</blockquote>
+
+<p></p> 
+ <p>Of course, vari­a­tion of pa­ram­e­ters has the most dif­fi­cult time when there are sin and cos terms in­volved, be­cause of the poor trig sim­pli­fi­ca­tion in SymPy.  So let's see what hap­pens with an ODE that just has ex­po­nen­tials and poly­no­mi­al terms in­volved.</p> 
+ <p><code></code></p> 
+ <blockquote>
+
+In [16]: time dsolve(f(x).diff(x, 2) + f(x).diff(x) - x**2 - 2*x, f(x), hint='nth_linear_constant_coeff_undetermined_coefficients')
+
+CPU times: user 0.10 s, sys: 0.00 s, total: 0.10 s
+
+Wall time: 0.10 s
+
+Out[17]: 
+
+f(x) == C1 + x**3/3 + C2*exp(-x)
+
+
+
+In [18]: time dsolve(f(x).diff(x, 2) + f(x).diff(x) - x**2 - 2*x, f(x), hint='nth_linear_constant_coeff_variation_of_parameters')
+
+CPU times: user 0.19 s, sys: 0.00 s, total: 0.19 s
+
+Wall time: 0.20 s
+
+Out[19]: 
+
+f(x) == C1 + x**3/3 + C2*exp(-x)
+
+
+
+In [20]: time dsolve(f(x).diff(x, 3) + 3*f(x).diff(x, 2) + 3*f(x).diff(x) + f(x) - 2*exp(-x) + x**2*exp(-x), f(x), hint='nth_linear_constant_coeff_undetermined_coefficients')
+
+CPU times: user 0.09 s, sys: 0.00 s, total: 0.09 s
+
+Wall time: 0.09 s
+
+Out[21]: 
+
+f(x) == (C1 + C2*x + C3*x**2 + x**3/3 - x**5/60)*exp(-x)
+
+
+
+In [22]: time dsolve(f(x).diff(x, 3) + 3*f(x).diff(x, 2) + 3*f(x).diff(x) + f(x) - 2*exp(-x) + x**2*exp(-x), f(x), hint='nth_linear_constant_coeff_variation_of_parameters')
+
+CPU times: user 0.29 s, sys: 0.00 s, total: 0.29 s
+
+Wall time: 0.29 s
+
+Out[23]: 
+
+f(x) == (C1 + C2*x + C3*x**2 + x**3/3 - x**5/60)*exp(-x)
+
+
+
+</blockquote>
+
+<p></p> 
+ <p>The wall time com­par­isons here are:</p> 
+ <p><code></code></p> 
+ <blockquote>
+
+In [24]: 0.20/0.10
+
+Out[24]: 2.0
+
+
+
+In [25]: 0.29/0.09
+
+Out[25]: 3.22222222222
+
+</blockquote>
+
+<p></p> 
+ <p>So we don't have or­ders of mag­ni­tude any­more, but it is still 2 to 3 times faster.  Of course, most ODEs of this form  <em>will</em>  have sin or cos terms in them, so the or­der of mag­ni­tude im­prove­ment over vari­a­tion of pa­ram­e­ters can prob­a­bly be at­trib­uted to un­de­ter­mined co­ef­fi­cients in gen­er­al.   </p> 
+ <p>Of course, we know that vari­a­tion of pa­ram­e­ters will still be use­ful, be­cause func­tions like $la­tex \l­n{x}$, $la­tex \sec{x}$ and $la­tex \frac{1}{x}$ do not have a fi­nite num­ber of lin­ear­ly in­de­pen­dent deriva­tives, and so you can­not ap­ply the method of un­de­ter­mined co­ef­fi­cients to them.   </p> 
+ <p>There is one last thing I want to men­tion.  You can in­deed mul­ti­ply any poly­no­mi­al, ex­po­nen­tial, sin, or cos func­tions to­geth­er and still get a func­tion that has a fi­nite num­ber of lin­ear­ly in­de­pen­dent so­lu­tion­s, but if you mul­ti­ply two or more of the trig func­tion­s, you have to ap­ply the  <a href="http://en.wikipedia.org/wiki/Trig_identities#Power-reduction_formulas">pow­er re­duc­tion rules</a>  to the re­sult­ing func­tion to get it in terms of sin and cos alone.  Un­for­tu­nate­ly, SymPy does not yet have a  <a href="http://code.google.com/p/sympy/issues/detail?id=1590">func­tion</a>  that can do this, so to solve such a dif­fer­en­tial equa­tion with un­de­ter­mined co­ef­fi­cients (rec­om­mend­ed, see above), you will have to ap­ply them man­u­al­ly your­self.  Al­so, just for the record, it does­n't play well with ex­po­nen­tials in the form of sin's and cos's or the oth­er way around (com­plex co­ef­fi­cients on the ar­gu­ments), so you should back con­vert those first too.   </p> 
+ <p>Well, this con­cludes the first of two blog posts that I promised.  I al­so promised that I would write about my sum­mer of code ex­pe­ri­ences.  Not on­ly is this im­por­tant to me, but it is a  <a href="http://code.google.com/p/sympy/wiki/GSoC2009">re­quire­ment</a>.  I re­al­ly  <em>hope</em>  to get this done soon, but with class­es, who knows.   </p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../los-alamos-sprint/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../09/07/google-summer-of-code-2009-wrap-up/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2009/08/17/undetermined-coefficients/",
+        disqus_title="Undetermined Coefficients",
+        disqus_identifier="cache/posts/2009/08/17/undetermined-coefficients.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

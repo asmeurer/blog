@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Prototype risch_integrate() function ready for testing! | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Prototype risch_integrate() function ready for testing!">
+            <meta name="og:description" content="So to­day I fi­nal­ly fin­ished up the pro­to­type func­tion I talked about  last week.  The func­tion is called  risch_in­te­grate()  and is avail­able at my  in­te­gra­tion3  branch.  Un­like the in">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Prototype risch_integrate() function ready for testing!</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2010-08-05T22:30:00-05:00" itemprop="datePublished">2010-08-05 22:30</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>So to­day I fi­nal­ly fin­ished up the pro­to­type func­tion I talked about  <a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/">last week</a>.  The func­tion is called  <code>risch_in­te­grate()</code>  and is avail­able at my  <a href="http://github.com/asmeurer/sympy/tree/integration3">in­te­gra­tion3</a>  branch.  Un­like the in­ner lev­el func­tions I have show­cased in  <a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/">pre­vi­ous</a>   <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">blog posts</a>, this func­tion does not re­quire you to do sub­sti­tu­tion for dum­my vari­ables and man­u­al­ly cre­ate a list of deriva­tives, etc.  All you have to do is pass it a func­tion and the in­te­gra­tion vari­able, and it will re­turn the re­sult, just like nor­mal  <code>in­te­grate()</code>. I have spent the past few days work­ing on a mon­ster of a func­tion called  <code>build_ex­ten­sion()</code>  that does this prepars­ing work for you.  The rea­son that the func­tion was so hard to write is that the tran­scen­den­tal Risch Al­go­rithm is very pick­y.   <em>Ev­ery</em>  dif­fer­en­tial ex­ten­sion has to be tran­scen­den­tal over the pre­vi­ous ex­ten­sion­s.  This means that if you have a func­tion like $la­tex e^x + e^{\frac{x}{2}}$, you can­not write this as $la­tex t_0 + t_1$ with $la­tex t_0=e^x$ and $la­tex t_1=e^{\frac{x}{2}}$ be­cause $la­tex t_0$ and $la­tex t_1$ will each be al­ge­bra­ic over the oth­er ($la­tex t_0=t_1^2$).  You al­so can­not let $la­tex t_0=e^{x}$ and re­write the whole in­te­gral in terms of $la­tex t_0$ be­cause you will get $la­tex t_0 + \sqrt{t_0}$, which is an al­ge­bra­ic func­tion.  The on­ly way that you can do it is to let $la­tex t_0=e^{\frac{x}{2}}$, and then your func­tion will be $la­tex t_0^2 + t_0$.   </p> 
+ <p>Now, for­tu­nate­ly, there is an al­go­rithm that pro­vides nec­es­sary and suf­fi­cient con­di­tions for de­ter­min­ing if an ex­ten­sion is al­ge­bra­ic over the pre­vi­ous ones.  It's called the Risch Struc­ture The­o­rem­s.  My first or­der of busi­ness this week was to fin­ish im­ple­ment­ing these.  This is ac­tu­al­ly the rea­son that I we had to wait un­til now to get this pro­to­type func­tion.  The Struc­ture The­o­rems are at the very end of Bron­stein's book, and the in­te­gra­tion al­go­rithm is not cor­rect with­out them (name­ly, it is not cor­rect if you add an al­ge­bra­ic ex­ten­sion).  I just re­cent­ly got to them in my read­ing.  Ac­tu­al­ly, I skipped some work on tan­gent in­te­gra­tion so I could get to them first.  I hope to talk a lit­tle about them in a fu­ture "Risch In­te­gra­tion" blog post, though be aware that they re­quire some ex­treme­ly in­tense al­ge­bra­ic ma­chin­ery to prove, so I won't be giv­ing any proof­s.</p> 
+ <p>Even though these al­go­rithms can tell me, for ex­am­ple, that I should­n't have added $la­tex t_0=e^x$ above be­cause it makes $la­tex e^{\frac{x}{2}}=\sqrt{t_0}$, that means that I have to go back and restart my search for an ex­ten­sion so that I can try to get $la­tex t_0=e^{\frac{x}{2}}$ in­stead.  So I wrote a sim­ple func­tion that takes the ar­gu­ments of the ex­po­nen­tials and de­ter­mines the low­est com­mon fac­tor.  This heuris­tic saves a lot of time.   </p> 
+ <p>I al­so no­ticed (ac­tu­al­ly, Chris Smith in­ad­ver­tent­ly point­ed it out to me; su­per thanks to him), that the Struc­ture The­o­rem al­go­rithms on­ly tell you if the terms are the same as mono­mi­al­s.  It would tell you that $la­tex e^x = e^{x + 1}$ be­cause both sat­is­fy $la­tex Dt=t$.  There­fore, I had to al­so mod­i­fy the struc­ture the­o­rem al­go­rithms to pull out any con­stant ter­m.   </p> 
+ <p>It can still be nec­es­sary to restart build­ing the ex­ten­sion even with the above heuris­tic.  For ex­am­ple, if you have $la­tex e^x + e^{x^2} + e^{\frac{x}{2} + x^2}$, and start with $la­tex t_0=e^x$ and $la­tex t_1=e^{x^2}$, then the struc­ture the­o­rems will tell you that $la­tex e^{x/2 + x^2} = \sqrt{t_0}t_1$, which we can­not use be­cause of the rad­i­cal.  The so­lu­tion it us­es is to split it up as $la­tex e^x + e^{x^2} + e^{\frac{x}{2}}e^{x^2}$ (the struc­ture the­o­rems tell you ex­act­ly how to do this so you are split­ting in terms of the oth­er ex­po­nen­tial­s) and then restart the ex­ten­sion build­ing en­tire­ly.  This can be an ex­pen­sive op­er­a­tion, be­cause you have to re­build $la­tex t_0$ and $la­tex t_1$, but this time, the heuris­tic func­tion I wrote from above han­dles the $la­tex e^{\frac{x}{2}}$ cor­rect­ly, mak­ing $la­tex t_0=e^{\frac{x}{2}}$, with the fi­nal an­swer $la­tex t_0^2 + t_1 + t_0t_1$.  I could have prob­a­bly made it smarter by on­ly go­ing back to be­fore the con­flict­ing ex­ten­sion­s, but this was quite a bit more work, and adds more dif­fi­cul­ties such as non-triv­ial re­la­tion­ship­s, so I just took the lazy way and restart­ed com­plete­ly.  It does­n't take  <em>that</em>  much time.   </p> 
+ <p>Of course, some­times, you can­not add a new ex­po­nen­tial, no mat­ter how you add the ex­ten­sion­s.  The clas­sic ex­am­ple is $la­tex e^{\frac{\log{(x)}}{2}}$, which you can see is ac­tu­al­ly equal to $la­tex \sqrt{x}$, an al­ge­bra­ic func­tion.  There­fore, I had to im­ple­ment some tricky log­ic to keep the  <code>build_ex­ten­sion()</code>  func­tion from try­ing again in­fin­ite­ly.  I hope I did it right, so that it nev­er in­fi­nite loop­s, and nev­er fails when it re­al­ly can be done.  On­ly time and test­ing will tel­l.</p> 
+ <p>It is ex­act­ly the same for log­a­rithm­s, ex­cept in that case, when a new log­a­rithm is al­ge­bra­ic in terms of old ones, it can be writ­ten as a lin­ear com­bi­na­tion of them.  This means that there are nev­er any rad­i­cals to wor­ry about, though you do al­so have to wor­ry about con­stants.  For ex­am­ple, $la­tex \log{(x)}$ looks the same as $la­tex \log{(2x)}$ be­cause they both sat­is­fy $la­tex Dt=\frac{1}{x}$.  An ex­am­ple of a log­a­rithm that is al­ge­bra­ic over old ones is $la­tex \log{(x^2 - 1)}$ over $la­tex \log{(x + 1)}$ and $la­tex \log{(x - 1)}$, be­cause $la­tex \log{(x^2 - 1)}=\log{((x + 1)(x - 1))}=\log{(x + 1)} + \log{(x - 1)}$.   </p> 
+ <p>The par­al­lels be­tween ex­po­nen­tials and log­a­rithms are amaz­ing.  For the struc­ture the­o­rem­s, the ex­po­nen­tial case is ex­act­ly the same as the log­a­rith­mic case ex­cept re­plac­ing ad­di­tion with mul­ti­pli­ca­tion and mul­ti­pli­ca­tion with ex­po­nen­ti­a­tion.  For the ex­po­nen­tial case, you need the ar­gu­ments of the al­ready added log­a­rithms to find the al­ge­bra­ic de­pen­dence, and the ar­gu­ments of the al­ready added ex­po­nen­tials to find the con­stant ter­m.  For the log­a­rith­mic case, you need the ar­gu­ments of the al­ready added ex­po­nen­tials to find the al­ge­bra­ic de­pen­dence, and the ar­gu­ments of the al­ready added log­a­rithms to find the con­tent ter­m. Ev­ery­thing else is ex­act­ly the same, ex­cept for the shift in op­er­a­tors.  Of course, I re­al­ize why these things are, math­e­mat­i­cal­ly, but the sym­me­try still amaz­ing to me.  I will hope­ful­ly ex­plain in more de­tail in my fu­ture Struc­ture The­o­rems post.   </p> 
+ <p>So on­to the  <code>risch_in­te­grate()</code>  func­tion.  Here is the text that I have ba­si­cal­ly put in my  <a href="http://github.com/asmeurer/sympy/commit/e3cd5f18f86fd6377836f33f726182c8bd4dc1a0">com­mit mes­sage</a>, the  <a href="http://code.google.com/p/sympy/issues/detail?q=2010">apt­ly num­bered is­sue</a>  that I have cre­at­ed for it, and the  <a href="http://groups.google.com/group/sympy/browse_thread/thread/2464fa764f6f47aa">post to the mail­ing list</a>  (it's not so much that I am lazy as that I was re­al­ly ex­cit­ed to get this out there).</p> 
+ <p></p><blockquote>
+<p>I have ready in my in­te­gra­tion3 branch a pro­to­type risch_in­te­grate() func­tion that is a user-lev­el func­tion for the full Risch Al­go­rithm I have been im­ple­ment­ing this sum­mer.  Pull from h<a href="//github.com/asmeurer/sympy/tree/integration3">ttp://github.­com/as­meur­er/sympy/tree/in­te­gra­tion3</a>.</p> 
+ <p>This is NOT ready to go in.  It is a pro­to­type func­tion that I am mak­ing avail­able so peo­ple can try out the new al­go­rithm and hope­ful­ly help me to find the bugs in it.  Please pass it your fa­vorite non-ele­men­tary in­te­grals and see if it can de­ter­mine that they are not el­e­men­tary.  If you try to pass it a very crazy func­tion at ran­dom, the chances are pret­ty high that it will not be el­e­men­tary.  So a bet­ter way to test it is to come up with a crazy func­tion, then dif­fer­en­ti­ate it. Then pass the de­riv­a­tive and see if it can give you your orig­i­nal func­tion back.  Note that it will prob­a­bly not look ex­act­ly the same as your orig­i­nal func­tion, and may dif­fer by a con­stan­t.  You should ver­i­fy by dif­fer­en­ti­at­ing the re­sult you get and call­ing can­cel() (or sim­pli­fy(), but usu­al­ly can­cel() is enough) on the dif­fer­ence.</p> 
+ <p>So you can re­view the code too, if you like, but just know that things are not sta­ble yet, and this is­n't strict­ly a branch for re­view.   </p> 
+ <p>So far, this func­tion on­ly sup­ports ex­po­nen­tials and log­a­rithm­s.</p> 
+ <p>Sup­port for trigono­met­ric func­tions is planned.  Al­ge­bra­ic func­tions are</p> 
+ <p>not sup­port­ed. If the func­tion re­turns an un­eval­u­at­ed In­te­gral, it means</p> 
+ <p>that it has proven the in­te­gral to be non-ele­men­tary.  Note that sev­er­al</p> 
+ <p>cas­es are still not im­ple­ment­ed, so you may get NotIm­ple­ment­ed­Er­ror</p> 
+ <p>in­stead. Even­tu­al­ly, these will all be elim­i­nat­ed, and the on­ly</p> 
+ <p>NotIm­ple­ment­ed­Er­ror you should see from this func­tion is</p> 
+ <p>NotIm­ple­ment­ed­Er­ror("Al­ge­bra­ic ex­ten­sions are not sup­port­ed.")</p> 
+ <p>This func­tion has not been in­te­grat­ed in any way with the al­ready</p> 
+ <p>ex­ist­ing in­te­grate() yet, and you can use it to com­pare.</p> 
+ <p>Ex­am­ples:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: risch_in­te­grate(­ex­p(x**2), x)</p> 
+ <p>Out­[1]:</p> 
+ <p>⌠</p> 
+ <p>⎮  ⎛ 2⎞</p> 
+ <p>⎮  ⎝x ⎠</p> 
+ <p>⎮ ℯ     dx</p> 
+ <p>⌡</p> 
+ <p>In [2]: risch_in­te­grate(x*<em>100</em>ex­p(x), x).d­if­f(x)</p> 
+ <p>Out­[2]:
+ 100  x
+x   ⋅ℯ</p> 
+ <p>In [3]: %timeit risch_in­te­grate(x*<em>100</em>ex­p(x), x).d­if­f(x)</p> 
+ <p>1 loop­s, best of 3: 270 ms per loop</p> 
+ <p>In [4]: in­te­grate(x*<em>100</em>ex­p(x), x)</p> 
+ <p>... hangs ...</p> 
+ <p>In [5]: risch_in­te­grate(x/log(x), x)</p> 
+ <p>Out­[5]:</p> 
+ <p>⌠</p> 
+ <p>⎮   x</p> 
+ <p>⎮ ────── dx</p> 
+ <p>⎮ log(x)</p> 
+ <p>⌡</p> 
+ <p>In [6]: risch_in­te­grate(log(x)**10, x).d­if­f(x)</p> 
+ <p>Out­[6]:
+   10
+log  (x)</p> 
+ <p>In [7]: in­te­grate(log(x)**10, x).d­if­f(x)</p> 
+ <p>Out­[7]:
+   10
+log  (x)</p> 
+ <p>In [8]: %timeit risch_in­te­grate(log(x)**10, x).d­if­f(x)</p> 
+ <p>10 loop­s, best of 3: 159 ms per loop</p> 
+ <p>In [9]: %timeit in­te­grate(log(x)**10, x).d­if­f(x)</p> 
+ <p>1 loop­s, best of 3: 2.35 s per loop</p> 
+ <p>[/­code]</p> 
+ <p>Be warned that things are still very bug­gy and you should al­ways ver­i­fy</p> 
+ <p>re­sults by dif­fer­en­ti­at­ing.  Usu­al­ly, can­cel(d­if­f(re­sult, x) - re­sult)</p> 
+ <p>should be enough.  This should go to 0.</p> 
+ <p>So please, please, PLEASE, try out this func­tion and re­port any bugs that you find.  It is not nec­es­sary to re­port NotIm­ple­ment­ed­Er­ror bugs, be­cause I al­ready know about those (I put them in there), and as I men­tioned above, they are all planned to dis­ap­pear.  Al­so, I am con­tin­u­al­ly up­dat­ing my branch with fix­es, so you should do a "git pul­l" and try again be­fore you re­port any­thing.</p> 
+ <p>Al­so, I am aware that there are test fail­ures.  This is be­cause I had to hack ex­p._e­val_­sub­s() to on­ly do ex­act sub­sti­tu­tion (no al­ge­bra­ic sub­sti­tu­tion).  It's just a quick hack workaround, and I should even­tu­al­ly get a re­al fix.   </p> 
+ <p>Fi­nal­ly, I'm think­ing there needs to be a way to dif­fer­en­ti­ate be­tween an un­eval­u­at­ed In­te­gral be­cause the in­te­gra­tor failed and an un­eval­u­at­ed In­te­gral be­cause it has proven the in­te­gral to be non-ele­men­tary.  Any ideas?</p> 
+ </blockquote>
+
+<p>Al­so, look­ing at the in­te­gral from the pre­vi­ous blog post, you can get the dif­fer­ent re­sults by us­ing the  <code>han­dle_log</code>  ar­gu­ment to  <code>risch_in­te­grate()</code>:</p> 
+ <p>If  <code>han­dle_­first == 'log'</code>  (the de­fault right now), then it will gath­er all log­a­rithms first, and then ex­po­nen­tials (in­so­much as it can do it in that or­der).  If  <code>han­dle_­first='­ex­p'</code>, it gath­ers ex­po­nen­tials first.  The dif­fer­ence is that the Risch Al­go­rithm in­te­grates re­cur­sive­ly, one ex­ten­sion at a time, start­ing with the out­er-­most one. So if you have an ex­pres­sion with both log­a­rithms and ex­po­nen­tial­s, such that they do not de­pend on each oth­er,  <code>han­dle_­first == 'log'</code>  will in­te­grate the ex­po­nen­tials first, be­cause they will be gath­ered last (be at the top of the tow­er of ex­ten­sion­s), and  <code>han­dle_­first == 'ex­p'</code>  will in­te­grate the log­a­rithms first.  Right now, I have de­fault­ed to 'log' be­cause the ex­po­nen­tial in­te­gra­tion al­go­rithm is slight­ly more com­plete.  If you get  <code>NotIm­ple­ment­ed­Er­ror</code>  with one, it is pos­si­ble (though I don't know for sure yet) that you might get an an­swer with the oth­er.   </p> 
+ <p>Al­so, they can give dif­fer­ent look­ing re­sult­s, and at dif­fer­ent speed­s.  For ex­am­ple:</p> 
+ <p><strong>Hov­er over the code and click on the left­-­most, "view source" icon (a pa­per icon with  <tt>&lt; &gt;</tt>  over it) to view with­out break­s.  Opens in a new win­dow.</strong></p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: f = (x<em>(x + 1)</em>((x<strong>2<em>ex­p(2</em>x</strong>2) - log(x + 1)<strong>2)</strong>2 +
+   ...: 2<em>x</em>ex­p(3<em>x<strong>2)<em>(x - (2</em>x</strong>3 + 2</em>x<strong>2 + x + 1)<em>log(x + 1))))/((x +
+   ...: 1)</em>log(x + 1)</strong>2 - (x<strong>3 + x</strong>2)<em>ex­p(2</em>x<strong>2))</strong>2</p> 
+ <p>In [2]: f</p> 
+ <p>Out­[2]: 
+          ⎛                          2                                                   ⎞
+          ⎜⎛                       2⎞                                                   2⎟
+          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
+x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠</p> 
+ <p>──────────────────────────────────────────────────────────────────────────────────────────
+                                                                2                        <br> 
+                         ⎛                                    2⎞                         <br> 
+                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟                         <br> 
+                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠                           </p> 
+ <p>In [3]: risch_in­te­grate(f, x, han­dle_­first='log')</p> 
+ <p>Out­[3]: 
+       ⎛              ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞                            <br> 
+       ⎜log(1 + x)    ⎝x ⎠⎟                   ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞              <br> 
+    log⎜────────── + ℯ    ⎟                log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠              <br> 
+       ⎝    x             ⎠                   ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)   <br> 
+x + ─────────────────────── - log(1 + x) - ───────────────────────── + ──────────────────────────
+               2                                       2                                        2
+                                                                              2           3  2⋅x 
+                                                                       - x⋅log (1 + x) + x ⋅ℯ     </p> 
+ <p>In [4]: risch_in­te­grate(f, x, han­dle_­first='­ex­p')</p> 
+ <p>Out­[4]: 
+       ⎛                ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞        ⎛ 2⎞            <br> 
+       ⎜                ⎝x ⎠⎟                   ⎜                ⎝x ⎠⎟        ⎝x ⎠            <br> 
+    log⎝log(1 + x) + x⋅ℯ    ⎠                log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)<br> 
+x + ───────────────────────── - log(1 + x) - ───────────────────────── - ──────────────────────
+                2                                        2                                    2
+                                                                            2           2  2⋅x 
+                                                                         log (1 + x) - x ⋅ℯ     </p> 
+ <p>In [5]: %timeit risch_in­te­grate(f, x, han­dle_­first='log')</p> 
+ <p>1 loop­s, best of 3: 1.49 s per loop</p> 
+ <p>In [6]: %timeit risch_in­te­grate(f, x, han­dle_­first='­ex­p')</p> 
+ <p>1 loop­s, best of 3: 1.21 s per loop</p> 
+ <p>In [7]: can­cel(risch_in­te­grate(f, x, han­dle_­first='log').d­if­f(x) - f)</p> 
+ <p>Out­[7]: 0</p> 
+ <p>In [8]: can­cel(risch_in­te­grate(f, x, han­dle_­first='­ex­p').d­if­f(x) - f)</p> 
+ <p>Out­[8]: 0</p> 
+ <p>[/­code]</p> 
+ <p>So go now, and pull my  <a href="//github.com/asmeurer/sympy/tree/integration3">branch</a>, and try this func­tion out.  And re­port any prob­lems that you have back to me, ei­ther through the mail­ing list, IR­C, is­sue 2010, or as a com­ment to this blog post (I don't re­al­ly care how).</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../07/31/integration-of-primitive-functions/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../14/the-risch-algorithm-part-3-liouvilles-theorem/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/",
+        disqus_title="Prototype risch_integrate() function ready for testing!",
+        disqus_identifier="cache/posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

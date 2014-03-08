@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Vim vs. Emacs (Part 2) | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2012/01/03/vim-vs-emacs-part-2/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2012/01/03/vim-vs-emacs-part-2/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Vim vs. Emacs (Part 2)">
+            <meta name="og:description" content="As I not­ed in  part 1, I have de­cid­ed to switch to a com­mand line text ed­i­tor.  I de­cid­ed that, to be fair, I would try both vim and emac­s.  And to force my­self to learn them, I de­cid­ed to">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Vim vs. Emacs (Part 2)</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2012-01-03T07:30:37-06:00" itemprop="datePublished">2012-01-03 07:30</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>As I not­ed in  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">part 1</a>, I have de­cid­ed to switch to a com­mand line text ed­i­tor.  I de­cid­ed that, to be fair, I would try both vim and emac­s.  And to force my­self to learn them, I de­cid­ed to use them cold-­turkey.   </p> 
+ <p>Since I'm go­ing cold-­turkey, I am do­ing this over my break from class­es, so that I can weed out any dif­fi­cul­ties dur­ing a pe­ri­od when I can live with slow text edit­ing if nec­es­sary.  This is a one month break.  I have reached (rough­ly) the half way point.  For the first half, I used noth­ing but vim to ed­it tex­t.  Now, I will use noth­ing but emac­s.</p> 
+ <p>Now that I've stopped us­ing vim (for now any­way), my view of it is­n't much dif­fer­ent from what I wrote in the first part.  A lot of things there were ad­dressed by com­menters (or rather com­menter).  I still feel that it's not an a method of text edit­ing that fits my head.  My en­tire life, I've used text ed­i­tors where typ­ing in­serts tex­t, and var­i­ous con­trol char­ac­ters do things like move around faster.   </p> 
+ <p>En­ter emac­s. It does ex­act­ly this.  Al­so a ton more.</p> 
+ <p>I've on­ly been us­ing emacs for two days, but here are my im­pres­sions so far:</p> 
+ <div class="code"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;&lt;strong&gt;</span>The tutorial is better.<span class="nt">&lt;/strong&gt;</span>  When you start emacs, it tells you how to start the tutorial.  Just type <span class="nt">&lt;code&gt;</span>C-h t<span class="nt">&lt;/code&gt;</span> (if you don't already know, in emacs <span class="nt">&lt;code&gt;</span>C-<span class="nt">&lt;/code&gt;</span> means <span class="nt">&lt;code&gt;</span>CTRL-<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>M-<span class="nt">&lt;/code&gt;</span> means <span class="nt">&lt;code&gt;</span>ALT-<span class="nt">&lt;/code&gt;</span>).  Like I said last time, the very first thing you learn is how to scroll by more than one line at a time.  That turns out to be a very useful thing to do.  Also, the emacs tutorial did a better job of explaining how to use multiple files at once in emacs, which is something that I still don't really know how to do very well in vim.
+</pre></div>
+
+
+<p>I have to give the vim tu­to­ri­al some cred­it for one thing, though.  It has bet­ter in­ter­ac­tive ex­am­ples.  For ex­am­ple, in the vim tu­to­ri­al, you have stuff like  </p> 
+ <p>[code]
+  1. Move the cur­sor to the sec­ond line in the phrase be­low.
+  2. Type  dd  to delete the line.
+  3. Now move to the fourth line.
+  4. Type   2dd   to delete two lines.</p> 
+ <p>---&gt;  1)  Ros­es are red,</p> 
+ <p>---&gt;  2)  Mud is fun,</p> 
+ <p>---&gt;  3)  Vi­o­lets are blue,</p> 
+ <p>---&gt;  4)  I have a car,</p> 
+ <p>---&gt;  5)  Clocks tell time,</p> 
+ <p>---&gt;  6)  Sug­ar is sweet</p> 
+ <p>---&gt;  7)  And so are you.</p> 
+ <p>[/­code]</p> 
+ <p>where­as in the emacs tu­to­ri­al, you just have</p> 
+ <p>[code]</p> 
+ <p>&gt;&gt; Kill a line, move around, kill an­oth­er line.
+   Then do C-y to get back the sec­ond killed line.
+   Then do M-y and it will be re­placed by the first killed line.
+   Do more M-y's and see what you get.  Keep do­ing them un­til
+   the sec­ond kill line comes back, and then a few more.
+   If you like, you can try giv­ing M-y pos­i­tive and neg­a­tive
+   ar­gu­ments.
+[/­code]</p> 
+ <p>which is a lit­tle more vague.  So I have to give vim cred­it for that.   </p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>Everything's a buffer.<span class="nt">&lt;/strong&gt;</span> This line from the emacs tutorial really stuck with me: "ANY text you see in an Emacs window is always part of some buffer."  Emacs has really a awesome editing model, even simple things like <span class="nt">&lt;code&gt;</span>M-f<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>M-b<span class="nt">&lt;/code&gt;</span> to move around words at a time, or <span class="nt">&lt;code&gt;</span>M-DEL<span class="nt">&lt;/code&gt;</span> to delete whole words make things <span class="nt">&lt;strong&gt;</span>way<span class="nt">&lt;/strong&gt;</span> faster.  Vim of course has all of these too, albiet in a different way, but they aren't everywhere.  In emacs, everything is a buffer, which just means that everything supports all the standard emacs commands.  So if you type <span class="nt">&lt;code&gt;</span>M-x<span class="nt">&lt;/code&gt;</span> (roughly the equivalent of vim's <span class="nt">&lt;code&gt;</span>:<span class="nt">&lt;/code&gt;</span>) and start typing a command, you can move around and edit your command with emacs commands.  One of the things that bothered me about vim was that when I was typing something with <span class="nt">&lt;code&gt;</span>:<span class="nt">&lt;/code&gt;</span>, I couldn't use vim's text moving/modifying commands to manipulate the text.  Typing ESC just canceled the command.
+</pre></div>
+
+
+<p>Ex­cep­tion­s: There are at least two ex­cep­tions I've found to this rule.  First, if you do a search with  <code>C-s</code>  or  <code>C-r</code>, no con­trol com­mands work.  If you type a search string, and then type  <code>M-DEL</code>  to try to delete the last word in your search string, you will in­stead delete the word where the cur­sor is!  The so­lu­tion I think is to use some­thing like  <code>M-x re-builder</code>  in­stead.  This was a lit­tle slow in my test­s.</p> 
+ <p>Sec­ond, the emacs man­u­al is pre­sent­ed in the  <code>in­fo</code>  pro­gram, which us­es com­plete­ly dif­fer­ent key com­mands from ev­ery oth­er pro­gram.  This irked me quite a bit, be­cause as soon as I fin­ished the emacs tu­to­ri­al, it point­ed me to the man­u­al, which was in  <code>in­fo</code>.  Then, the first thing in  <code>in­fo</code>  is a tu­to­ri­al on how to use  <code>in­fo</code>!  I opt­ed to skip this.  If I need any in­for­ma­tion on emac­s, I'll just do a Google search any­way, so I found this to be a waste of time.</p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>It's a little slower.<span class="nt">&lt;/strong&gt;</span> I do notice a speed difference between emacs and vim.  vim is much more lightweight, and it shows.  Starting up emacs takes a second or two.  Also, since a lot of the features are more interactive, they suffer from a speed delay.  It's not nearly slow enough to be a serious issue, though, and it's still way faster than the GUI program I was using before (start up time).
+</pre></div>
+
+
+<p>The emacs tu­to­ri­al sug­gests us­ing  <code>C-z</code>  when­ev­er you want to on­ly tem­po­rar­ily close emac­s.  This seems like a good idea, and has worked pret­ty well for me so far (though I still usu­al­ly close the whole thing with  <code>C-x C-c</code>  out of habit).</p> 
+ <p>On a re­lat­ed note, I no­ticed that do­ing type­-a­head while wait­ing for emacs to start up did­n't al­ways work, where­as it al­ways worked in vim (I do this, e.g., when wait­ing for the ed­i­tor to start up when writ­ing com­mit mes­sages).</p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>It's way more user-friendly.<span class="nt">&lt;/strong&gt;</span> Note that this is of course a relative term.  I mean more user-friendly than vim, and pretty user-friendly for a command line program.  Obviously, the most user-friendly text editors are the GUI ones used by the majority of the population (for that very reason).  Actually, both vim and emacs are user-unfriendly in that if you accidentally open them and don't know what they are or how to use them, you have no idea how to close them.  But even <span class="nt">&lt;code&gt;</span>less<span class="nt">&lt;/code&gt;</span> (i.e., <span class="nt">&lt;code&gt;</span>man<span class="nt">&lt;/code&gt;</span>) is technically like this.
+</pre></div>
+
+
+<p>I'm not even re­fer­ring to the dif­fer­ent edit­ing "mod­es" of the two ed­i­tors, though you could eas­i­ly ar­gue that emacs style edit­ing is more user-friend­ly than vim style edit­ing. What I mean here is that emacs in­ter­ac­tion is nice. When you type  <code>:</code>  in vim, start typ­ing a com­mand, and type  <code>TAB</code>, it en­ters the first com­ple­tion, re­gard­less if it's unique.  Press­ing  <code>TAB</code>  mul­ti­ple times give the rest.  In emac­s, if you type  <code>M-x</code>  and start typ­ing a com­mand and type  <code>TAB</code>, it pops up a tem­po­rary win­dow with the list of all com­ple­tion­s.  It even col­ors the next char­ac­ter, so you can eas­i­ly see what to type next to get what you wan­t.  As soon as you en­ter the com­mand, the win­dow dis­ap­pears. (yes, I know about  <code>CTR­L-D</code>  in vim, but to me tab com­ple­tion should  <em>al­ways</em>  work like it does in bash: com­plete char­ac­ters if and on­ly if they are unique in the list of com­ple­tion­s)</p> 
+ <p>By the way, when I said ev­ery­thing's a buffer, I mean ev­ery­thing.  If you wan­t, you can ex­it the  <code>M-x</code>  en­try (type  <code>C-g</code>), type  <code>C-x C-b</code>  to show the list of buffer­s,  <code>C-x o</code>  to switch to it, scroll down to "Com­ple­tion­s", press En­ter, and ac­tu­al­ly get in the com­ple­tion list, as a buf­fer (there's prob­a­bly a less com­pli­cat­ed way to get to it, by the way).  You can then do what­ev­er your heart fan­cies with it (save it to a file, copy it, what­ev­er).</p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>Customization is harder.<span class="nt">&lt;/strong&gt;</span> This was expected, since I already knew that emacs used lisp.  vim uses a language that is really easy to understand.  I was able to modify all the vim plugins I installed very easily.  If you want to change a setting globally in vim, just Google it and add one line to your .vimrc.   In emacs, everything is in Emacs Lisp.  I suppose prior experience with Lisp would probably help here.
+</pre></div>
+
+
+<p>In the vim tu­to­ri­al, near the end, it told how to cre­ate a .vim­rc file, and even gave a very use­ful sam­ple one as a starter.  In emac­s, it took me a while to fig­ure out how to do the equiv­a­lent (it took me a few Google search­es just to fig­ure out that the name of the con­fig­u­ra­tion file in emacs is .emac­s).   </p> 
+ <p>Ac­tu­al­ly, the emacs equiv­a­lent is way bet­ter than in vim, but it is­n't re­al­ly men­tioned any­where. It took me prob­a­bly a dozen Google search­es be­fore I learned about it (grant­ed, I was look­ing for things in the same way I did for vim, lines to add to .emac­s). What you have to do is type  <code>M-x con­fig­ure</code>.  This opens what is ba­si­cal­ly a huge pref­er­ences di­a­log for emac­s.  You can then go through and set just about ev­ery set­table emacs set­ting from there.  The in­ter­face is very nice, as it's in­ter­ac­tive and tells you all about each set­ting.  And you nev­er have to touch Lisp.  I'm still go­ing through it, so I can't com­ment more on it yet.  But I rec­om­mend do­ing  <code>M-x con­fig­ure</code>  as soon as you have fin­ished the tu­to­ri­al and have got­ten used to edit­ing with emac­s, as you are in­vari­ably go­ing to want to change some things (though I should note that emacs gen­er­al­ly has nicer de­faults than vim).</p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>Better text editing methodology?<span class="nt">&lt;/strong&gt;</span> Like I've already mentioned a bunch of times, the emacs editing model seems to fit my head better than the vim model.  In emacs, you type text, and it inserts the text.  If you want to do some advanced modification or move around, you type a control sequence.  In vim, you type characters, and it does modifications or moves around.  If you want to type text, you type <span class="nt">&lt;code&gt;</span>i<span class="nt">&lt;/code&gt;</span> (or one of a few other characters) and type it.  Then, if you want to move around or modify the text, you have to press <span class="nt">&lt;code&gt;</span>ESC<span class="nt">&lt;/code&gt;</span>.  This so-called "modular editing" doesn't seem to work for me.  For one thing, I like to rapidly switch back and forth between these two "modes" (editing and inserting) when I write things.  I type too fast and write something wrong, and have to delete some stuff. The <span class="nt">&lt;code&gt;</span>M-DEL<span class="nt">&lt;/code&gt;</span> emacs command is probably my most used (this also works in Mac OS X text dialogs, so I'm used to it already).  In vim, there is <span class="nt">&lt;code&gt;</span>CTRL-w<span class="nt">&lt;/code&gt;</span> and a few others, but if I want to do something more advanced, like rearranging a sentence, then half of my key presses would be <span class="nt">&lt;code&gt;</span>ESC<span class="nt">&lt;/code&gt;</span> or <span class="nt">&lt;code&gt;</span>i<span class="nt">&lt;/code&gt;</span>, i.e., just moving between the modes.  In emacs, I can always have my pinky by Control and Alt (especially as soon as I remap CAPS-LOCK to Control).
+</pre></div>
+
+
+<p>Al­so, it re­al­ly irks me how in vim, if you are at the end of a line and press  <code>l</code>  (or right-ar­row), in­stead of mov­ing to the be­gin­ning of the next line, it beep­s!  In emac­s, if you are at the end of a the line and type  <code>C-f</code>, it moves to the be­gin­ning of the next line (ac­tu­al­ly, it tech­ni­cal­ly moves just be­yond the line, in case you want to ap­pend, which is an­oth­er an­noy­ing thing about vim: you have to use  <code>A</code>, not  <code>i</code>,  to add text to the end of a line).  </p> 
+ <p>Well, that's it for now.  I will hold off on the ques­tions un­til af­ter I go through all the cus­tomiza­tion­s, as it seems that, un­like vim, emacs has many things al­ready built-in (but we al­ready knew that, did­n't we :).  So I have just one ques­tion for read­er­s: does any­one know of a re­al­ly good emacs cheat­sheet?  The  <a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">one I used for vim</a>  was re­al­ly awe­some, but I haven't found any­thing equal for emac­s.  I find my­self search­ing the tu­to­ri­al when­ev­er I for­get some­thing, which is not very ef­fi­cien­t, so I would ap­pre­ci­ate some­thing bet­ter. Oth­er­wise, I'll just find some­thing de­cent and print it out, as it would be bet­ter than noth­ing.</p> 
+ <p>And if any­one cares, you can see what I've got for my .emacs file so far at  <a href="https://github.com/asmeurer/dotfiles/blob/master/.emacs">http­s://github.­com/as­meur­er/­dot­files/blob/­mas­ter/.emacs</a>.</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../01/2011-in-review/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../13/vim-vs-emacs-part-3/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2012/01/03/vim-vs-emacs-part-2/",
+        disqus_title="Vim vs. Emacs (Part 2)",
+        disqus_identifier="cache/posts/2012/01/03/vim-vs-emacs-part-2.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

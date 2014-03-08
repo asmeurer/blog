@@ -1,0 +1,952 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My blog">
+    <meta name="author" content="Aaron Meurer">
+    <title>Aaron Meurer's Blog (old posts, page 6) | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/index-6.html">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+    
+    
+    
+<link rel="stylesheet" type="text/css" href="assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="archive.html">Archives</a>
+                </li><li><a href="categories/index.html">Tags</a>
+                </li><li><a href="rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/12/20/vim-vs-emacs-part-1/" class="u-url">Vim vs. Emacs (Part 1)</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-12-20T08:17:43-06:00">2011-12-20 08:17</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>So about a month or so ago, I de­cid­ed that I need­ed to start learn­ing a com­mand line text ed­i­tor.  XCode, the ed­i­tor I had been us­ing for Python files, did­n't work very well with the new ver­sion (in par­tic­u­lar, the  <a href="http://asmeurersympy.wordpress.com/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/">es­sen­tial plug­in</a>  that I'd been us­ing to clear trail­ing white­space on save does­n't yet work in XCode 4).  I'd been us­ing Tex­tWran­gler for oth­er things, and start­ed to switch to it for Python edit­ing too.  As far as free GUI text ed­i­tors on the Mac go, Tex­tWran­gler is the best.   </p> 
+ <p>But I'd seen some of the nice fea­tures that vim has, like au­to­mat­i­cal­ly keep­ing all lines un­der 80 char­ac­ter­s, on a friend's com­put­er, and I de­cid­ed that I should try it.</p> 
+ <p>Now, I had had a lit­tle pri­or ex­pe­ri­ence with both vim and emac­s, but all that I re­mem­bered was for vim that  <code>i</code>  in­serts and  <code>ZZ</code>  quits (for when I ac­ci­den­tal­ly open it) and for emac­s, that  <code>M-X doc­tor</code>  starts the psy­chi­a­trist.  </p> 
+ <p>So I've de­cid­ed to try them out, do­ing it cold tur­key.  To make sure that I choose the bet­ter one, I've de­cid­ed to try both.  So, start­ing about a week ago, I've been us­ing noth­ing but vim for all my text edit­ing.  Start­ing in Jan­uary, I will try us­ing emac­s, and af­ter two week­s, I will see what I like bet­ter.</p> 
+ <p>My opin­ions so far on vim:</p> 
+ <div class="code"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>The tutorials suck.  The best tutorial is <span class="nt">&lt;code&gt;</span>vimtutor<span class="nt">&lt;/code&gt;</span> (type that in the command line), which I think comes with vim.  It's not bad, but it leaves out a few things that I would consider to be essential to a tutorial, for example, how to scroll (answer: use CTRL-D and CTRL-U).  I started the emacs tutorial a while back, and while I never finished it, from what I remember, it was much better (and I also remember that the first thing it talked about was how to scroll by more than one line at a time). It also left out the <span class="nt">&lt;code&gt;</span>.<span class="nt">&lt;/code&gt;</span> command, which I think is rather useful.  I did print out <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html"</span><span class="nt">&gt;</span>this cheatsheet<span class="nt">&lt;/a&gt;</span> and have it sitting next to me on my desk.  That has helped a lot.  I hope I can find something similar for emacs when I get to it.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>vim is too line oriented.  vi started out as an extension to ed, the line editor, so this is not surprising.  But I still can't understand why pressing <span class="nt">&lt;code&gt;</span>l<span class="nt">&lt;/code&gt;</span> at the end of a line can't bring me to the beginning of the next line.  Maybe I'm just still doing it wrong (supposedly, you should rarely use <span class="nt">&lt;code&gt;</span>h<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>l<span class="nt">&lt;/code&gt;</span> over more efficient moving commands).  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>Somewhat related to the last point, vim really likes to ring the terminal bell a lot. To quote <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://en.wikipedia.org/wiki/Editor_war"</span><span class="nt">&gt;</span>Wikipedia<span class="nt">&lt;/a&gt;</span>, "vi has two modes – 'beep repeatedly' and 'break everything'"<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>I managed to customize it to the point of usability (there are still several things I need to go in and figure out how to fix).  See https://github.com/asmeurer/dotfiles for my .vimrc and .vim/ files.  I found a decent Python syntax file, but it's actually not that great.  I modified it to color single quoted strings different from double quoted strings (a feature I missed from Xcode). I still need to make a better color scheme (preferably the same as Xcode's midnight), but this is enough work that I've put it off.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>Pressing ESC all the time is really annoying.  Sometimes, I just arrow over, even though I know you're not "supposed to", just because my fingers don't want to reach over and press ESC.  I'm also really used to using control sequences to move around while typing, which of course doesn't work in vim.  In fact, so far, I'm suspecting that I'll like emacs better.  But I've vowed to give both a fair chance.  But so far, my impression is that vim is a great for text <span class="nt">&lt;em&gt;</span>editing<span class="nt">&lt;/em&gt;</span>, but not so hot for text <span class="nt">&lt;em&gt;</span>writing<span class="nt">&lt;/em&gt;</span> (unless you always write text perfectly, so that you never need to leave insert mode until you are done typing).  Just the simple act of deleting a mistyped word (yes, word, that happens a lot when you are decently fast touch typist) takes several keystrokes, when it should in my opinion only take one (two if you count the meta-key).<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>The customizability is really nice.  So far, everything that I've thought of to change has been changeable.  Also, language is easy enough to understand that I was able to modify the Python syntax file without any difficulty.  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>I like how it syntax highlights virtually everything I throw at it. <span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+<p>If there are any vim ex­perts out there read­ing this, I have some ques­tion­s:</p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;</span>Is there an easy way to get a list of and jump to a function/class definition in a Python file?  In Xcode and TextWrangler, there was a nice popup at the top of the window that I could access these from.  In vim, so far the best I've found is searching for it, which isn't very efficient.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>I got TAB to indent 4 spaces in Python, but for some reason, when I create a new line after a <span class="nt">&lt;code&gt;</span>:<span class="nt">&lt;/code&gt;</span>, it puts 8 extra spaces. I wouldn't be surprised if this is the result of some mismatch/error in <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/asmeurer/dotfiles"</span><span class="nt">&gt;</span>my .vimrc or .vim/ files<span class="nt">&lt;/a&gt;</span>, but I don't know how to fix it<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>Any useful tricks to share?  Especially for editing Python files.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>How long did it take you to become reasonably efficient with vim?<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+<p><strong>ED­IT: I thought of some more ques­tion­s:</strong> 
+     </p><li>Is there a way to make vim con­sid­er camel­Case to be word bound­aries?</li> 
+ <p>Fi­nal­ly, if any­one else is think­ing of start­ing vim, I have some use­ful things I've al­ready found in my .vim­r­c. So you might take a look at that, and add the ones that you like to your .vim­r­c.  Fi­nal­ly, if you are on Mac OS X, you should use  <a href="http://www.iterm2.com/#/section/home">iTer­m2</a>.  Ac­tu­al­ly, you should use this re­gard­less of what text ed­i­tor you use.  It's a very good Ter­mi­nal.app re­place­ment that has vir­tu­al­ly all the fea­tures (with a cou­ple of ex­cep­tion­s) as Ter­mi­nal.ap­p, and a ton of ex­tra ones.  The one I want to men­tion here is mouse re­port­ing sup­port, so you can use your mouse to do things in vim.  This is very use­ful, as some­times, e.g., when se­lect­ing tex­t, us­ing the mouse is just more ef­fi­cien­t.  Al­so, if you get frus­trat­ed try­ing to re­mem­ber the com­mands that will move around you faster than  <code>h</code>,  <code>j</code>,  <code>k</code>, and  <code>l</code>, you can just click on where you want to go.</p> 
+ <p>:wq</p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/12/20/vim-vs-emacs-part-1/#disqus_thread" data-disqus-identifier="cache/posts/2011/12/20/vim-vs-emacs-part-1.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/08/18/sqrtx-now-prints-as-sqrtx/" class="u-url">sqrt(x) now prints as "sqrt(x)"</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-08-18T03:11:32-05:00">2011-08-18 03:11</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>Just a few mo­ments ago,  <a href="https://github.com/sympy/sympy/pull/548" target="_blank">a branch</a>  was pushed in that fixed one of my big­gest griev­ances in SymPy, if not the big­gest.  Pre­vi­ous­ly we had this be­hav­ior:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: sqrt(x)</p> 
+ <p>Out­[1]: x**(1/2)</p> 
+ <p>In [2]: solve(x**2 - 2, x)</p> 
+ <p>Out­[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>[/­code]</p> 
+ <p>Now sup­pose you took the out­put of those ex­pres­sions and past­ed them in­to isympy:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [3]: x**(1/2)</p> 
+ <p>Out­[3]: x**0.5</p> 
+ <p>In [4]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>Out­[4]: [-1.41421356237, 1.41421356237]</p> 
+ <p>[/­code]</p> 
+ <p>That's with  <code><strong>fu­ture</strong>.di­vi­sion</code>.  Here's what would hap­pen with old di­vi­sion:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [2]: x**(1/2)</p> 
+ <p>Out­[2]: 1</p> 
+ <p>In [3]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>Out­[3]: [-1, 1]</p> 
+ <p>[/­code]</p> 
+ <p>This is be­cause with old di­vi­sion,  <code>1/2</code>  eval­u­ates to  <code>0</code>.</p> 
+ <p>The prob­lem is that Python eval­u­ates  <code>1/2</code>  to  <code>0.5</code>  (or  <code>0</code>) be­fore SymPy has a change to con­vert it to a Ra­tio­nal.  There were sev­er­al ways that peo­ple got around this.  If you copy an ex­pres­sion with num­ber di­vi­sion in it and want to paste it in­to a SymPy ses­sion, the eas­i­est way to do this was to pass it as a string to  <code>sympi­fy()</code>:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: sympi­fy("x**(1/2)")</p> 
+ <p>Out­[1]: x**(1/2)</p> 
+ <p>In [2]: sympi­fy("[-2<strong>(1/2), 2</strong>(1/2)]")</p> 
+ <p>Out­[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>[/­code]</p> 
+ <p>If that was too much typ­ing for you, you could use the  <code>S()</code>  short­cut to  <code>sympi­fy()</code></p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [3]: S("x**(1/2)")</p> 
+ <p>Out­[3]: x**(1/2)</p> 
+ <p>In [4]: S("[-2<strong>(1/2), 2</strong>(1/2)]")</p> 
+ <p>Out­[4]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>[/­code]</p> 
+ <p>This so­lu­tion is fine if you want to paste an ex­pres­sion in­to a SymPy ses­sion, but it's not a very clean one if you want to paste code in­to a scrip­t. For that, you need to mod­i­fy the code so that it no longer con­tains Python in­t/Python in­t.  The eas­i­est way to do this is to sympi­fy one of the ints.  So you would do some­thing like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [5]: x**(S(1)/2)</p> 
+ <p>Out­[5]: x**(1/2)</p> 
+ <p>In [6]: [-2<strong>(S(1)/2), 2</strong>(S(1)/2)]</p> 
+ <p>Out­[6]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>[/­code]</p> 
+ <p>This was­n't ter­ri­bly read­able, though.  The  <em>best</em>  way to fix the prob­lem when you had a pow­er of one half was to use  <code>sqrt()</code>, which is a short­cut to  <code>Pow(…, Ra­tio­nal(1, 2))</code>.   </p> 
+ <p>Well, this last item should make you think.  If  <code>sqrt(x)</code>  is more read­able than  <code>x<strong>(S(1)/2)</strong></code>  or even  <code>x(1/2)</code>, why not print it like that in the first place.  Well, I thought so, so I changed the string print­er, and now this is the way that SymPy work­s.  So 90% of the time, you can just paste the re­sult of  <code>str()</code>  or  <code>print</code>, and it will just work, be­cause there won't be any  <code>**(1/2)</code>, which was by far the most com­mon prob­lem of "Python eval­u­at­ing the ex­pres­sion to some­thing be­fore we can."  In the git mas­ter, SymPy now be­haves like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: sqrt(x)</p> 
+ <p>Out­[1]: sqrt(x)</p> 
+ <p>In [2]: solve(x**2 - 2, x)</p> 
+ <p>Out­[2]: [-sqrt(2), sqrt(2)]</p> 
+ <p>[/­code]</p> 
+ <p>You can ob­vi­ous­ly just copy and paste these re­sult­s, and you get the ex­act same thing back.  Not on­ly does this make ex­pres­sions more copy­-and-­pastable, but the out­put is  <em>much</em>  nicer in terms of read­abil­i­ty.  Here are some be­fore and af­ters that come from ac­tu­al SymPy doctests that I had to change af­ter fix­ing the print­er:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>Be­fore:</p> 
+ <p>&gt;&gt;&gt; e = ((2+2<em>sqrt(2))</em>x+(2+sqrt(8))*y)/(2+sqrt(2))</p> 
+ <p>&gt;&gt;&gt; rad­sim­p(e)</p> 
+ <p>2<strong>(1/2)*x + 2</strong>(1/2)*y</p> 
+ <p>Af­ter:</p> 
+ <p>&gt;&gt;&gt; rad­sim­p(e)</p> 
+ <p>sqrt(2)<em>x + sqrt(2)</em>y</p> 
+ <p>[/­code]</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>Be­fore:</p> 
+ <p>&gt;&gt;&gt; b = besselj(n, z)</p> 
+ <p>&gt;&gt;&gt; b.rewrite(jn)</p> 
+ <p>2<strong>(1/2)*z</strong>(1/2)<em>jn(n - 1/2, z)/pi</em>*(1/2)</p> 
+ <p>Af­ter:</p> 
+ <p>&gt;&gt;&gt; b.rewrite(jn)</p> 
+ <p>sqrt(2)<em>sqrt(z)</em>jn(n - 1/2, z)/sqrt(pi)</p> 
+ <p>[/­code]</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>Be­fore:</p> 
+ <p>&gt;&gt;&gt; x = sympi­fy('-1/(-3/2+(1/2)<em>sqrt(5))</em>sqrt(3/2-1/2*sqrt(5))')</p> 
+ <p>&gt;&gt;&gt; x</p> 
+ <p>(3/2 - 5<strong>(1/2)/2)</strong>(-1/2)</p> 
+ <p>Af­ter</p> 
+ <p>&gt;&gt;&gt; x</p> 
+ <p>1/sqrt(3/2 - sqrt(5)/2)</p> 
+ <p>[/­code]</p> 
+ <p>And not on­ly is  <code>sqrt(x)</code>  eas­i­er to read than  <code>x**(1/2)</code>  but it's few­er char­ac­ter­s.</p> 
+ <p>In the course of chang­ing this, I went ahead and did some greps of the repos­i­to­ry to get rid of all  <code><strong>(S(1)/2)</strong></code>,  <code>Ra­tio­nal(1, 2)</code>  and sim­i­lar through­out the code base (not just in the out­put of doctests where the change had to be made), re­plac­ing them with just  <code>sqrt</code>.  Big thanks to Chris Smith for help­ing me catch all in­stances of this.  Now the code should be a lit­tle eas­i­er to read and main­tain.</p> 
+ <p><strong>Fu­ture Work</strong></p> 
+ <p>This is a big change, and I be­lieve it will fix the copy­-­paste prob­lem for 90% of ex­pres­sion­s. But it does not solve it com­plete­ly.  It is still pos­si­ble to get in­t/int in the string form of an ex­pres­sion.  On­ly pow­ers of 1/2 and -1/2 are con­vert­ed to sqrt, so any oth­er ra­tio­nal pow­er will still print as a/b, like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: x**Ra­tional(3, 2)</p> 
+ <p>Out­[1]: x**(3/2)</p> 
+ <p>[/­code]</p> 
+ <p>Al­so, as you may have no­ticed in the last ex­am­ple above, a ra­tio­nal num­ber that sits by it­self will still be print­ed as in­t/in­t, like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [2]: (1 + x)/2</p> 
+ <p>Out­[2]: x/2 + 1/2</p> 
+ <p>[/­code]</p> 
+ <p>There­fore, I'm leav­ing the  <a href="http://code.google.com/p/sympy/issues/detail?id=2359" target="_blank">is­sue for this</a>  open to dis­cuss po­ten­tial fu­ture fix­es to the string print­er.  One idea is to cre­ate a  <code>root</code>  func­tion that is a short­cut to  <code>root(x, a) == x**(1/a)</code>. This would work for ra­tio­nal pow­ers where the nu­mer­a­tor is 1.  For oth­er ra­tio­nal pow­er­s, we could then den­est these with an in­te­ger pow­er.  It's im­por­tant to do this in the right or­der, though, as they are not equiv­a­len­t.  You can see that SymPy au­to-sim­pli­fies it when it is math­e­mat­i­cal­ly cor­rect in all cas­es, and not when it is not:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [3]: sqrt(x**3)</p> 
+ <p>Out­[3]: sqrt(x**3)</p> 
+ <p>In [4]: sqrt(x)**3</p> 
+ <p>Out­[4]: x**(3/2)</p> 
+ <p>[/­code]</p> 
+ <p>Thus $la­tex \left­(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $la­tex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, re­place $la­tex x$ with -1).</p> 
+ <p>So the idea would be to print  <code>Pow(­ex­pr, Ra­tio­nal(a, b))</code>  as  <code>root(­ex­pr, b)**a</code>.   </p> 
+ <p>The mer­its of this are de­bat­able, but any­way I think we should have this  <code>root()</code>  func­tion in any case (see  <a href="http://code.google.com/p/sympy/issues/detail?id=2643" target="_blank">is­sue 2643</a>).</p> 
+ <p>An­oth­er idea, which is prob­a­bly not a good one, is to al­ways print  <code>in­t/int</code>  as  <code>S(in­t)/int</code>.  So we would get</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; Ra­tio­nal(1, 2)</p> 
+ <p>S(1)/2</p> 
+ <p>&gt;&gt;&gt; x**Ra­tional(4, 5)</p> 
+ <p>x**(S(4)/5)</p> 
+ <p>[/­code]</p> 
+ <p>This is prob­a­bly a bad idea be­cause even though ex­pres­sions would al­ways be copy­-­pastable, they would be slight­ly less read­able.   </p> 
+ <p>By the way, in case you did­n't catch it, all of these changes on­ly af­fect the string print­er.  The pret­ty print­er re­mained un­af­fect­ed, and would un­der any ad­di­tion­al changes, as it is­n't copy­-­pastable any­way, and al­ready does a su­perb job of print­ing root­s.</p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/08/18/sqrtx-now-prints-as-sqrtx/#disqus_thread" data-disqus-identifier="cache/posts/2011/08/18/sqrtx-now-prints-as-sqrtx.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/" class="u-url">Hacking PuDB: Now an even better Python debugger</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-08-08T03:16:10-05:00">2011-08-08 03:16</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>Read­ers of this blog may re­mem­ber last year when I  <a href="http://asmeurersympy.wordpress.com/2010/06/04/pudb-a-better-python-debugger/" target="_blank">wrote</a>  about this awe­some vis­ual con­sole Python de­bug­ger called  <a href="http://pypi.python.org/pypi/pudb" target="_blank">PuDB</a>.  I sug­gest you read that post if you haven't.</p> 
+ <p>At the end of that post, I not­ed that Ondřej and I had hacked it to make the col­ors more liv­able.  Well, a cou­ple of weeks ago, GitHub us­er  <a href="https://github.com/jtriley" target="_blank">jtri­ley</a>  sent me an email ask­ing me to back port my changes.</p> 
+ <p>A lot has changed since I wrote my blog post last year.  PuDB now has an of­fi­cial  <a href="http://lists.tiker.net/listinfo/pudb" target="_blank">mail­ing list</a>  and an of­fi­cial  <a href="https://github.com/inducer/pudb" target="_blank">GitHub re­po</a>.</p> 
+ <p>So I delet­ed my  <a href="https://github.com/asmeurer/pudb" target="_blank">GitHub clone</a>  and re­forked from the of­fi­cial ver­sion.   </p> 
+ <p>A lot has al­so changed in the of­fi­cial code.  An­dreas had added con­fig sup­port, in­clud­ing a built-in prefs di­a­log that lets you set a few set­tings:  the abil­i­ty to turn on or off line num­bers and the abil­i­ty to change themes.</p> 
+ <p>So I took the new code and added my theme as an of­fi­cial theme.  This was pret­ty straight for­ward to do.</p> 
+ <p>But then, I got a lit­tle car­ried away.   </p> 
+ <p>I no­ticed that it was dif­fi­cult to choose a theme with the built-in prefs win­dow be­cause you had to close and re­open the win­dow each time you made a change.  So I added code to make it au­to-up­date your changes as you made them.</p> 
+ <p>Then I went back and looked at my orig­i­nal blog post and looked at the things that I did­n't like.  There were two things.  First, the de­fault stringi­fi­er for vari­ables is  <code>type</code>, which is com­plete­ly use­less.  This is be­cause  <code>type</code>  is very fast and sta­ble to com­pute.  I had pre­vi­ous­ly hacked this to be  <code>str</code>, but now that there was an of­fi­cial con­fig file with a prefs di­alog, I fig­ured it should go there.  </p> 
+ <p>So I added sup­port to change this set­ting.  But this was­n't enough for me.  I al­so added the abil­i­ty to de­fine your own cus­tom stringi­fi­er.  You just cre­ate a Python file that de­fines a func­tion called  <code>pud­b_stringi­fier(ob­j)</code>, which con­verts  <code>obj</code>  in­to the de­sired string rep­re­sen­ta­tion.  I in­clud­ed an  <a href="https://github.com/inducer/pudb/blob/master/example-stringifier.py" target="_blank">ex­am­ple file</a>  that gives a fan­cy ex­am­ple that us­es sig­nals to com­pute the string val­ue, but times out af­ter one sec­ond and falls back to the type.  This al­le­vi­ates one of the prob­lems of us­ing  <code>str</code>, which is that it can be slow for ob­jects with large string ex­pres­sion­s, es­pe­cial­ly SymPy ob­ject­s, where some­times the print­er can be slow.</p> 
+ <p>The sec­ond thing I did­n't like was that al­though you can change the width of the right-­hand side bar, you could not change the rel­a­tive heights of the vari­ables, stack, and break­points box­es.  I nev­er use break­points, and rarely use the stack, so I would pre­fer to have those small­er and the vari­ables larg­er.  So I im­ple­ment­ed it so that the  <code>[</code>  and  <code>]</code>  keys make the se­lect­ed view small­er or larg­er.  This in­for­ma­tion is all saved in the con­fig file, so it's re­mem­bered when you close and re­open PuD­B.</p> 
+ <p>There was one oth­er thing that I did­n't like, which a change since my last blog post that re­versed the or­der of the stack vari­ables from what it was.  It used to be most re­cent at the bot­tom, but it was changed to most re­cent at the top.  This per­haps makes more sense, but the but­tons to move around the stack,  <code>u</code>  and  <code>d</code>, were still the same:  <code>u</code>  moves down the stack (i.e., less re­cen­t), and  <code>d</code>  moves up.  These keys were al­ready well es­tab­lished—in­deed, these are the same keys used in Python's built-in de­bug­ger pdb—­so I added a set­ting to change the stack or­der.  This was an easy change to make at this point, as I was al­ready well aquat­int­ed with the set­tings code, and on­ly two lines of code need­ed to be changed when the set­ting changed.  Like all oth­er set­tings, this us­es the cool mag­ic that changes the set­ting in re­al time, so you can see the ef­fect with­out clos­ing the set­tings win­dow.</p> 
+ <p>Then some­one on the mail­ing list re­quest­ed a fea­ture that I re­al­ized I al­so want­ed, the abil­i­ty to wrap vari­ables.  Pre­vi­ous­ly, any vari­able that was longer than the vari­able view would just be cut of­f.  You could make it wider, but that on­ly helped a lit­tle bit.  Oth­er­wise, if you want­ed to see the whole vari­able, you had to open IPython by press­ing  <code>!</code>  and view it there.</p> 
+ <p>So, I im­ple­ment­ed this.  This was def­i­nite­ly the hard­est thing to im­ple­men­t.  I found out that it's iron­i­cal­ly very dif­fi­cult to de­bug PuDB it­self.  You can't run PuDB in­side of PuDB if PuDB crash­es, as both in­stances will just crash.  Al­so, PuDB eats any print state­ments.  The so­lu­tion, sug­gest­ed by PuDB au­thor An­dreas Klöck­n­er, was to get the ttys file of an­oth­er ter­mi­nal (e.g.,  <code>/de­v/t­tys012</code>) and write the out­put to that.</p> 
+ <p>I al­so made it so that non-wrapped vari­ables show  <code>...</code>  at the end, at An­dreas's sug­ges­tion.  I want­ed to use the uni­code  <code>…</code>, but this was not work­ing at al­l.  I dis­cov­ered how much uni­code re­al­ly is a mess in Python 2.  The prob­lem has some­thing to do with … be­ing a three byte char­ac­ter, and I think it al­so has to do with the col­or codes that ur­wid us­es.  I'll try it again once PuDB is port­ed to Python 3, but for now,  we are go­ing to have to do with the three ascii dot­s.</p> 
+ <p>The wrap­ping code is wait­ing for merge, but the rest are al­ready in.  Here is a screen shot demon­strat­ing some of the things I did:</p> 
+ <p><a href="2011/08/screen-shot-2011-08-07-at-8-28-11-pm.png"><img src="http://asmeurersympy.files.wordpress.com/2011/08/screen-shot-2011-08-07-at-8-28-11-pm.png?w=300" alt="" title="Improved PuDB" width="300" height="245" class="size-medium wp-image-1021"></a></p> 
+ <p>Things that I im­ple­ment­ed to no­tice here:</p> 
+ <ul>
+<li> 
+ <p>The mid­night theme.</p>  
+  </li> 
+ <li> 
+ <p>The stack and break­­points views have been shrunk­­en.</p>  
+  </li> 
+ <li> 
+ <p>The var­i­ables are wrapped.</p>  
+  </li> 
+ <li> 
+ <p>Wrap­ping for the var­i­able   <code>fourhun­­dred</code>   has been turned off (y­ou can turn wrap­ping on or off on a per-­­var­i­able ba­­sis by se­lec­t­ing the var­i­able and press­ing   <code>w</code>).   No­tice that there is an el­lip­­sis at the end to note it has been cut of­f.</p>  
+  </li> 
+ <li> 
+ <p>Nest­ed var­i­ables now have   <code>|</code>   be­­fore them, to dis­­t­in­guish them from wrapped var­i­ables, which are al­­so in­­­den­t­ed.  This change may or may not be ac­­cep­t­ed by An­­dreas.</p>  
+  </li> 
+ </ul>
+<p>Here's a screen shot show­ing the prefs win­dow.  I did not im­ple­ment this, but I did im­ple­ment all but the first two pref­er­ences in the win­dow. I've made my win­dow tall so you can see all the op­tion­s.  You re­al­ly have to get the code and try it to see the au­to-up­date awe­some­ness.  You can open the prefs win­dow by press­ing  <code>Ctr­l-p</code>  (this was not at all ob­vi­ous to me the first time I used it, so I al­so sub­mit­ted a patch that makes it open the first time you use PuD­B).</p> 
+ <p><a href="2011/08/screen-shot-2011-08-07-at-8-41-30-pm.png"><img src="http://asmeurersympy.files.wordpress.com/2011/08/screen-shot-2011-08-07-at-8-41-30-pm.png?w=243" alt="" title="PuDB Prefs Window" width="243" height="300" class="size-medium wp-image-1023"></a></p> 
+ <p>So if you're not al­ready us­ing this awe­some Python de­bug­ger, you should.  You can  <code>pip in­stall pudb</code>, or  <a href="https://github.com/inducer/pudb" target="_blank">fork it</a>  at GitHub.</p> 
+ <p>Run­ning it in your code is very easy.  Just add</p> 
+ <p>[code lang="py"]</p> 
+ <p>im­port pud­b;pud­b.set_­trace()</p> 
+ <p>[/­code]</p> 
+ <p>in your code wher­ev­er you want to set a break point, or you can do  <code>python -m pud­b.run scrip­t.py</code>.</p> 
+ <p>This awe­some tool has in­creased my pro­duc­tiv­i­ty ten­fold since I dis­cov­ered it, and has helped me track down bugs that would have oth­er­wise ex­treme­ly dif­fi­cult if not im­pos­si­ble to find.  And now, it's just bet­ter.</p> 
+ <p>PuDB us­es the  <a href="http://excess.org/urwid/" target="_blank">ur­wid li­brary</a>  to do all its con­sole GUI mag­ic.  This li­brary makes it pret­ty easy to do a lot of stuff. For ex­am­ple, it au­to­mat­i­cal­ly does rel­a­tive siz­ing of wid­get­s, so, for ex­am­ple, when you re­size the vari­ables, stack, or break­points views, you are ac­tu­al­ly in­creas­ing the rel­a­tive size of each, not the size in char­ac­ter­s.  This makes it por­ta­ble against any ter­mi­nal size.  The li­brary al­so made cod­ing the prefs win­dow autoup­date mag­ic very easy.</p> 
+ <p>Al­so, I just want to note that git and GitHub make col­lab­o­ra­tion like this very easy.  I just forked his pro­jec­t, made some im­prove­ments, and sub­mit­ted them as pull re­quest­s.  Then it was easy to dis­cuss the changes.  If the code had not been on GitHub and es­pe­cial­ly if it had not been in git, I prob­a­bly would have nev­er both­ered to sub­mit my con­tri­bu­tions up­stream.  I high­ly rec­om­mend that ev­ery open source project use git and GitHub.</p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/#disqus_thread" data-disqus-identifier="cache/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/07/30/sympy-0-7-1-released/" class="u-url">SymPy 0.7.1 Released</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-07-30T05:19:14-05:00">2011-07-30 05:19</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><em>Cross posted on the <a href="http://sympy.blogspot.com/2011/07/sympy-071-released.html">official SymPy Blog</a></em>
+<p>SymPy 0.7.1 has been re­leased on Ju­ly 29, 2011. It is avail­able at</p> 
+ <p><a href="http://sympy.org">http://sympy.org</a></p> 
+ <p></p> 
+ <p>The source dis­tri­bu­tion can be down­load­ed from:</p> 
+ <p><a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.1.tar.gz">http://­code.­google.­com/p/sympy/­down­load­s/de­tail?­name=sympy-0.7.1.­tar.gz</a></p> 
+ <p></p> 
+ <p>You can get the Win­dows in­stall­er here:</p> 
+ <p><a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.1.win32.exe">http://­code.­google.­com/p/sympy/­down­load­s/de­tail?­name=sympy-0.7.1.win32.exe</a></p> 
+ <p></p> 
+ <p>And the html doc­u­men­ta­tion here:</p> 
+ <p><a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.1-docs-html.zip">http://­code.­google.­com/p/sympy/­down­load­s/de­tail?­name=sympy-0.7.1-­doc­s-htm­l.zip</a></p> 
+ <p></p> 
+ <p><span style="font-weight:bold;">About SymPy</span></p> 
+ <p></p> 
+ <p>SymPy is a Python li­brary for sym­bol­ic math­e­mat­ic­s. It aims to be­come a ful­l-fea­tured com­put­er al­ge­bra sys­tem (CAS) while keep­ing the code as sim­ple as pos­si­ble in or­der to be com­pre­hen­si­ble and eas­i­ly ex­ten­si­ble. SymPy is writ­ten en­tire­ly in Python.</p> 
+ <p><span style="font-weight:bold;">Re­lease notes</span></p> 
+ <p></p> 
+ <p><span style="font-weight:bold;">Ma­jor changes</span></p> 
+ <ul>
+<li> 
+ <p>Python 2.4 is no longer sup­­port­ed.  SymPy will not work at all in
+  Python 2.4.  If you still need to use SymPy un­der Python 2.4 for some
+  rea­­son, you will need to use SymPy 0.7.0 or ear­li­er.</p>  
+  </li> 
+ <li> 
+ <p>The Py­­glet plot­t­ing li­brary is now an (op­­tion­al) ex­ter­­nal de­pen­­den­­cy. 
+  Pre­vi­ous­­ly, we shipped a ver­­sion of Py­­glet with SymPy, but this was
+  old and bug­­gy.  The plan is to even­­tu­al­­ly make the plot­t­ing in SymPy
+  much more mod­­u­lar, so that it sup­­ports many back­­end­s, but this has not
+  been done yet.  For now, still on­­ly Py­­glet is di­rec­t­­ly sup­­port­ed. 
+  Note that Py­­glet is on­­ly an op­­tion­al de­pen­­den­­cy and is on­­ly need­ed for
+  plot­t­ing. The rest of SymPy can still be used with­­out any de­pen­­den­­cies
+  (ex­­cept for Python).</p>  
+  </li> 
+ <li> 
+ <p>isympy now works with the new IPython 0.11.</p>  
+  </li> 
+ <li> 
+ <p>mp­­math has been up­­­dat­ed to 0.17.  See the cor­re­spond­ing mp­­math re­lease
+  notes at http://m­p­­math­­.­­google­­code.­­com/svn/trunk­­/CHANGES.</p>  
+  </li> 
+ <li> 
+ <p>Added a Subs ob­­ject for rep­re­sen­t­ing un­e­val­u­at­ed sub­­sti­­tu­­tion­s.  This
+  fi­­nal­­ly lets us rep­re­sent de­riv­a­­tives eval­u­at­ed at a point, i.e.,
+    <code>dif­f(f(x), x).­­sub­­s(x, 0)</code>   re­­turns   <code>Sub­­s(Deriva­­tive(f(_x), _x), (_x,), (0,))</code>.
+  This al­­so means that SymPy can now cor­rec­t­­ly com­­pute the chain rule
+  when this func­­tion­al­i­­ty is re­quired, such as with   <code>f(g(x)).d­if­f(x)</code>.</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">Hy­per­ge­o­met­ric func­­tion­s/Mei­­jer G-­­Func­­tions</span></p> 
+ <ul>
+<li> 
+ <p>Added class­es hy­per­() and mei­­jerg() to rep­re­sent Hy­per­ge­o­met­ric and Mei­­jer G-­­func­­tion­s, re­spec­­tive­­ly. They sup­­port nu­mer­i­­cal eval­u­a­­tion (us­ing mp­­math) and sym­bol­ic dif­fer­­en­ti­a­­tion (not with re­spect to the pa­ram­e­ter­s).</p>  
+  </li> 
+ <li> 
+ <p>Added an al­­go­rithm for rewrit­ing hy­per­ge­o­met­ric and mei­­jer g-­­func­­tions in terms of more fa­mil­iar, named spe­­cial func­­tion­s. It is ac­ces­si­ble via the func­­tion hy­per­ex­­pand(), or al­­so via ex­­pand_­­func(). This al­­go­rithm recog­nis­es many el­e­­men­­tary func­­tion­s, and al­­so com­­plete and in­­­com­­plete gam­­ma func­­tion­s, bessel func­­tion­s, and er­ror func­­tion­s. It can eas­i­­ly be ex­­tend­ed to han­­dle more class­es of spe­­cial func­­tion­s.</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">Sets</span></p> 
+ <ul>
+<li> 
+ <p>Added Finite­Set class to mim­ic python set be­hav­ior while al­­so in­­ter­ac­t­ing with ex­ist­ing In­­ter­­vals and Unions</p>  
+  </li> 
+ <li> 
+ <p>Finite­Sets and In­­ter­­vals in­­ter­act so that, for ex­am­­ple   <code>In­­ter­­val(0, 10) - Finite­Set(0, 5)</code>   pro­­duces   <code>(0, 5) U (5, 10]</code></p>  
+  </li> 
+ <li> 
+ <p>Finite­Sets al­­so han­­dle non-nu­mer­i­­cal ob­­jects so the fol­low­ing is pos­si­ble   <code>{1, 2, 'one', 't­­wo', {a, b}}</code></p>  
+  </li> 
+ <li> 
+ <p>Added Prod­uc­t­Set to han­­dle Carte­sian prod­ucts of sets</p>  
+  </li> 
+ <li> 
+ <p>Cre­ate us­ing the   <code>*</code>   op­er­a­­tor, i.e.   <code>twodice = Finite­Set(1, 2, 3, 4, 5, 6) * Finite­Set(1, 2, 3, 4, 5, 6) or square = In­­ter­­val(0, 1) * In­­ter­­val(0, 1)</code></p>  
+  </li> 
+ <li> 
+ <p>pow op­er­a­­tor al­­so works as ex­pec­t­ed:   <code>R3 = In­­ter­­val(-oo, oo)**3 ; (3, -5, 0) in R3 == True</code></p>  
+  </li> 
+ <li> 
+ <p>Sub­­­trac­­tion, union, mea­­sure­­ment all work tak­ing com­­plex in­­ter­sec­­tions in­­­to ac­­coun­t.   </p>  
+  </li> 
+ <li> 
+ <p>Added as_re­la­­tion­al method to set­s, pro­­duc­ing bool­ean state­­ments us­ing And, Or, Eq, Lt, Gt, etc...</p>  
+  </li> 
+ <li> 
+ <p>Changed re­­duce_poly_inequal­i­ties to re­­turn unions of sets rather than lists of sets</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">It­er­ables</span></p> 
+ <ul>
+<li> 
+ <p>Added gen­er­at­ing rou­tines for in­­te­ger par­ti­­tions and bi­­na­ry par­ti­­tion­s. The rou­­tine for in­­te­ger par­ti­­tions takes 3 ar­gu­­ments, the num­ber it­­self, the max­i­­mum pos­si­ble el­e­­ment al­lowed in the par­ti­­tions gen­er­at­ed and the max­i­­mum pos­si­ble num­ber of el­e­­ments that will be in the par­ti­­tion. Bi­­na­ry par­ti­­tions are char­ac­ter­ized by con­­tain­ing on­­ly pow­ers of two.</p>  
+  </li> 
+ <li> 
+ <p>Added gen­er­at­ing rou­­tine for mul­ti­-set par­ti­­tion­s. Giv­en a mul­ti­set, the al­­go­rithm im­­ple­­men­t­ed will gen­er­ate all pos­si­ble par­ti­­tions of that mul­ti­-set.</p>  
+  </li> 
+ <li> 
+ <p>Added gen­er­at­ing rou­tines for bell per­­mu­­ta­­tion­s, de­range­­ments, and in­­vo­lu­­tion­s. A bell per­­mu­­ta­­tion is one in which the cy­­cles that com­­pose it con­­sist of in­­te­gers in a de­creas­ing or­der. A de­range­­ment is a per­­mu­­ta­­tion such that the ith el­e­­ment is not at the ith po­si­­tion. An in­­vo­lu­­tion is a per­­mu­­ta­­tion that when mul­ti­­plied by it­­self gives the iden­ti­­ty per­­mu­­ta­­tion.</p>  
+  </li> 
+ <li> 
+ <p>Added gen­er­at­ing rou­­tine for un­re­stric­t­ed neck­­laces. An un­re­stric­t­ed neck­­lace is an a-ary string of n char­ac­ter­s, each of a pos­si­ble type­­s. These have been char­ac­ter­ized by the pa­ram­e­ters n and k in the rou­­tine.</p>  
+  </li> 
+ <li> 
+ <p>Added gen­er­at­ing rou­­tine for ori­en­t­ed forest­s. This is an im­­ple­­men­­ta­­tion of al­­go­rithm S in TAOCP Vol 4A.</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">xyz Spin bases</span></p> 
+ <ul>
+<li> 
+ <p>The rep­re­sen­t, re­write and In­­n­er­Prod­uct log­ic has been im­proved to work be­tween any two spin bases. This was done by uti­l­iz­ing the Wign­er-D ma­trix, im­­ple­­men­t­ed in the Wign­erD class, in defin­ing the changes be­tween the var­i­ous bases. Rep­re­sen­t­ing a state, i.e.   <code>rep­re­sen­t(JzKet(1,0), ba­­sis=Jx)</code>, can be used to give the vec­­tor rep­re­sen­­ta­­tion of any get in any of the x/y/z bases for nu­mer­i­­cal val­ues of j and m in the spin eigen­s­tate. Sim­i­lar­­ly, rewrit­ing states in­­­to dif­fer­­ent bases, i.e.   <code>JzKet(1,0).rewrite('Jx')</code>, will write the states as a lin­ear com­bi­­na­­tion of el­e­­ments of the giv­en ba­­sis. Be­­cause this re­lies on the rep­re­sent func­­tion, this on­­ly works for nu­mer­i­­cal j and m val­ues. The in­­n­er prod­uct of two eigen­s­tates in dif­fer­­ent bases can be eval­u­at­ed, i.e.   <code>In­­n­er­Pro­­duc­t(JzKet(1,0),JxKet(1,1))</code>. When two dif­fer­­ent bases are used, one state is rewrit­ten in­­­to the oth­­er ba­­sis, so this re­quires nu­mer­i­­cal val­ues of j and m, but in­­n­er­prod­ucts of states in the same ba­­sis can still be done sym­bol­i­­cal­­ly.</p>  
+  </li> 
+ <li> 
+ <p>The   <code>Ro­­ta­­tion.D</code>   and   <code>Ro­­ta­­tion.d</code>   meth­od­s, rep­re­sen­t­ing the Wign­er-D func­­tion and the Wign­er smal­l­-d func­­tion, re­­turn an in­­s­tance of the Wign­erD class, which can be eval­u­at­ed with the   <code>doit()</code>   method to give the cor­re­spond­ing ma­trix el­e­­ment of the Wign­er-D ma­trix.</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">Oth­­er changes</span></p> 
+ <ul>
+<li> 
+ <p>We now use Math­­­Jax in our doc­s. Math­­­Jax ren­ders La­­TeX math en­tier­­ly in
+  the brows­er us­ing Javascrip­t.  This means that the math is much more
+  read­­able than the pre­vi­ous png math, which us­es im­ages.  Math­­­Jax is
+  on­­ly sup­­port­ed on mod­­ern browser­s, so La­­TeX math in the docs may not
+  work on old­er browser­s.</p>  
+  </li> 
+ <li> 
+ <p>nroot­s() now lets you set the pre­­ci­­sion of com­pu­­ta­­tions</p>  
+  </li> 
+ <li> 
+ <p>Added sup­­port for gmpy and mp­­math­­'s types to sympi­­fy()</p>  
+  </li> 
+ <li> 
+ <p>Fix some bugs with lam­b­d­i­­fy()</p>  
+  </li> 
+ <li> 
+ <p>Fix a bug with as_in­de­pen­­dent and non-­­com­­mu­­ta­­tive sym­bol­s.</p>  
+  </li> 
+ <li> 
+ <p>Fix a bug with col­lect (is­­sue 2516)</p>  
+  </li> 
+ <li> 
+ <p>Many fix­es re­lat­ing to port­ing SymPy to Python 3.  Thanks to our GSoC
+  stu­­dent Vladimir Per­ić, this task is al­­most com­­plet­ed.</p>  
+  </li> 
+ <li> 
+ <p>Some peo­­ple were retroac­­tive­­ly added to the AU­THORS file.</p>  
+  </li> 
+ <li> 
+ <p>Added a solver for a spe­­cial case of the Ric­­cati equa­­tion in the ODE
+  mod­­ule.</p>  
+  </li> 
+ <li> 
+ <p>It­er­at­ed de­riv­a­­tives are pret­­ty print­­ed in a con­­cise way.</p>  
+  </li> 
+ <li> 
+ <p>Fix a bug with in­­te­­grat­ing func­­tions with mul­ti­­ple DiracDeltas.</p>  
+  </li> 
+ <li> 
+ <p>Add sup­­port for Ma­trix.nor­m() that works for Ma­tri­ces (not just vec­­tors).</p>  
+  </li> 
+ <li> 
+ <p>Im­prove­­ments to the Groe­b­n­er bases al­­go­rith­m.</p>  
+  </li> 
+ <li> 
+ <p>Plot.saveim­age now sup­­ports a Strin­­gIO out­­­file</p>  
+  </li> 
+ <li> 
+ <p>Ex­pr.as_ordered_terms now sup­­ports non lex or­der­ings.</p>  
+  </li> 
+ <li> 
+ <p>diff now canon­i­­cal­izes the or­der of dif­fer­­en­ti­a­­tion sym­bol­s.  This is
+  so it can sim­­pli­­fy ex­pres­­sions like   <code>f(x, y).d­if­f(x, y) - f(x,
+  y).d­if­f(y, x)</code>.  If you want to cre­ate a De­riv­a­­tive ob­­ject with­­out
+  sort­ing the args, you should cre­ate it ex­­plic­it­­ly with   <code>De­riv­a­­tive</code>,
+  so that you will get   <code>Deriva­­tive(f(x, y), x, y) != Deriva­­tive(f(x, y), y, x)</code>.
+  Note that in­­ter­­nal­­ly, de­riv­a­­tives that can be com­put­ed are al­ways
+  com­put­ed in the or­der that they are giv­en in.</p>  
+  </li> 
+ <li> 
+ <p>Added func­­tions   <code>is_se­quence()</code>   and   <code>it­er­able()</code>   for de­ter­min­ing if
+  some­thing is an or­dered it­er­able or nor­­mal it­er­able, re­spec­­tive­­ly.</p>  
+  </li> 
+ <li> 
+ <p>En­abled an op­­tion in Sphinx that adds a   <code>source</code>   link next to each func­­tion, which links to a copy of the source code for that func­­tion.</p>  
+  </li> 
+ </ul>
+<p>In ad­di­tion to the more no­tice­able changes list­ed above, there have been nu­mer­ous oth­er small­er ad­di­tion­s, im­prove­ments and bug fix­es in the ~300 com­mits in this re­lease. See the git log for a full list of all changes.  The com­mand  <code>git log sympy-0.7.0..sympy-0.7.1</code>  will show all com­mits made be­tween this re­lease and the last. You can al­so see the is­sues closed since the last re­lease  <a href="http://code.google.com/p/sympy/issues/list?can=1&amp;amp;q=closed-after%3A2010%2F6%2F13+closed-before%3A2011%2F7%2F30&amp;amp;sort=-closed&amp;amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary+Stars+Closed&amp;amp;cells=tiles">here</a>.</p> 
+ <p><span style="font-weight:bold;">Au­thors</span></p> 
+ <p>The fol­low­ing peo­ple con­trib­uted at least one patch to this re­lease (names are giv­en in al­pha­bet­i­cal or­der by last name).  A to­tal of 26 peo­ple con­trib­uted to this re­lease.  Peo­ple with a * by their names con­trib­uted a patch for the first time for this re­lease.  Five peo­ple con­trib­uted for the first time for this re­lease.   </p> 
+ <p>Thanks to ev­ery­one who con­trib­uted to this re­lease!</p> 
+ <ul>
+<li> 
+ <p>Tom Bach­­mann</p>  
+  </li> 
+ <li> 
+ <p>Ondřej Čertík</p>  
+  </li> 
+ <li> 
+ <p>Re­­na­­to Coutin­ho</p>  
+  </li> 
+ <li> 
+ <p>Bill Fly­­nn</p>  
+  </li> 
+ <li> 
+ <p>Bradley Froehle*</p>  
+  </li> 
+ <li> 
+ <p>Gilbert Gede</p>  
+  </li> 
+ <li> 
+ <p>Bri­an Granger</p>  
+  </li> 
+ <li> 
+ <p>Em­­ma Hogan*</p>  
+  </li> 
+ <li> 
+ <p>Yuri Karadzhov</p>  
+  </li> 
+ <li> 
+ <p>Ste­­fan Kras­­tanov*</p>  
+  </li> 
+ <li> 
+ <p>Ro­­nan Lamy</p>  
+  </li> 
+ <li> 
+ <p>To­­mo La­­zovich</p>  
+  </li> 
+ <li> 
+ <p>Sam Magu­ra*</p>  
+  </li> 
+ <li> 
+ <p>Sap­­tarshi Man­­dal</p>  
+  </li> 
+ <li> 
+ <p>Aaron Meur­er</p>  
+  </li> 
+ <li> 
+ <p>Sher­jil Ozair</p>  
+  </li> 
+ <li> 
+ <p>Ma­­teusz Pa­proc­­ki</p>  
+  </li> 
+ <li> 
+ <p>Vladimir Per­ić</p>  
+  </li> 
+ <li> 
+ <p>Mario Per­ni­­ci</p>  
+  </li> 
+ <li> 
+ <p>Nico­las Pourcelot</p>  
+  </li> 
+ <li> 
+ <p>Min Ra­­gan-Kel­­ley*</p>  
+  </li> 
+ <li> 
+ <p>Matthew Rock­­lin</p>  
+  </li> 
+ <li> 
+ <p>Chris Smith</p>  
+  </li> 
+ <li> 
+ <p>Vinzent Stein­berg</p>  
+  </li> 
+ <li> 
+ <p>Sean Vig</p>  
+  </li> 
+ <li> 
+ <p>Thomas Wiec­­ki</p>  
+  </li> 
+ </ul>
+<p></p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/07/30/sympy-0-7-1-released/#disqus_thread" data-disqus-identifier="cache/posts/2011/07/30/sympy-0-7-1-released.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/07/25/merging-integration3-with-sympy-0-7-0-nightmare/" class="u-url">Merging integration3 with sympy-0.7.0 nightmare</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-07-25T09:25:13-05:00">2011-07-25 09:25</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>For a long time, there have been sev­er­al prob­lems in my  <code>in­te­gra­tion3</code>  branch that were fixed in  <code>mas­ter</code>.  I de­cid­ed that as an in­cen­tive to fin­ish the re­lease, I would hold off on merg­ing  <code>mas­ter</code>  in­to my branch un­til the 0.7.0 re­lease was fin­ished.  Well, here's a lit­tle time­line:</p> 
+ <p></p><ul>
+    <li><strong>June 28, 2011:</strong>  SymPy 0.7.0 fi­nal is re­leased.</li> 
+     <li><strong>June 29, 2011:</strong>  I type  <code>git merge sympy-0.7.0</code>  in my  <code>in­te­gra­tion3</code>  branch.</li> 
+     <li><strong>Ju­ly 24, 2011 (to­day; tech­ni­cal­ly Ju­ly 25 be­cause it's 2 AM):</strong>  I fin­ish merg­ing  <code>sympy-0.7.0</code>  in­to  <code>in­te­gra­tion3</code>.</li> 
+ </ul>
+<p>That's right, it took me over three week­s---al­most a mon­th---­to merge  <code>sympy-0.7.0</code>  in­to  <code>in­te­gra­tion3</code>  (grant­ed, I worked on oth­er things at the same time, such as the  <a href="https://github.com/asmeurer/sympy/commit/52657848516ce7f4f7119b921d6b8d64131b58d3" target="_blank">SciPy 2011 con­fer­ence</a>, but to me, any merge that takes longer than a day to com­plete is a prob­lem).  This is be­cause git de­cid­ed that I need­ed to fix as a merge con­flict just about ev­ery sin­gle change in the re­lease branch since the base of  <code>in­te­gra­tion3</code>.  The to­tal was over 100 files.  You can see the fi­nal merge com­mit  <a href="https://github.com/asmeurer/sympy/commit/52657848516ce7f4f7119b921d6b8d64131b58d3" target="_blank">here</a>.</p> 
+ <p>So I start­ed  <code>git merge­tool</code>, with­out which this whole or­deal would have been 10 times worse.  The merge­tool, which on my com­put­er is open­dif­f, i.e., File Merge, gave the cor­rect change by de­fault in most cas­es, so I ac­tu­al­ly did not have to man­u­al­ly fix the ma­jor­i­ty of the con­flict­s.  But I did have to go through and do a lot of them.  I had to man­u­al­ly check each dif­fer­ence in the polys, as I had made sev­er­al changes there in the course of work­ing on  <code>in­te­gra­tion3</code>.  In sev­er­al oc­ci­saion­s, I had to re­search a change us­ing  <code>git log -S</code>  and fan­cy meth­od­s.  And I no­ticed at least two re­gres­sions in the polys, which I fixed.</p> 
+ <p>merge­tool was use­less against  <code>risch.py</code>  and  <code>test_risch.py</code>, be­cause in my branch I had re­named these to  <code>heurisch.py</code>  and  <code>test_heurisch.py</code>.  For­tu­nate­ly, these were not re­al­ly mod­i­fied much by me, so I could ba­si­cal­ly just re­place them with the  <code>sympy-0.7.0</code>  ver­sion­s.</p> 
+ <p>Once I fin­ished merg­ing I had to deal with test fail­ures.  This was part­ly ex­pect­ed, as my branch has al­ways had test fail­ures due to my hack dis­abling al­ge­bra­ic sub­sti­tu­tion in  <code>exp</code>, which is re­quired for  <code>risch_in­te­grate()</code>  to work, but there were al­so sev­er­al un­re­lat­ed ones.   </p> 
+ <p>Some of these were caused by wrong merge con­flict res­o­lu­tions by me.  So I went through  <code>git diff sympy-0.7.0</code>  change by change and made sure that noth­ing was dif­fer­ent that I did­n't want to be.  I would rec­om­mend do­ing this for any big merge.</p> 
+ <p>Then, I had to fix a few bugs that caused test fail­ures.  Sev­er­al se­man­tics were changed in the re­lease.  I think the ones that I had to change were the re­nam­ing of  <code>has_any_sym­bols</code>  to just  <code>has</code>, the re­nam­ing of  <code>Poly.as_ba­sic()</code>  to  <code>Poly.as_­ex­pr()</code>, and the swap­ping of the mean­ings of  <code>quo</code>  and  <code>exquo</code>  in the polys.  There were al­so some doctest fail­ures due to the change to lex­i­co­graph­ic or­der­ing in the print­er.</p> 
+ <p>Af­ter all that, there were two re­gres­sions that caused test fail­ures.  The first was the fol­low­ing:</p> 
+ <p>Be­fore:</p> 
+ <p>[code lang="py"]</p> 
+ <p>In [1]: In­te­gral((­ex­p(x<em>log(x))</em>log(x)), x).­sub­s(­ex­p(x<em>log(x)), x</em>*x)</p> 
+ <p>Out­[1]:  </p> 
+ <p>⌠              </p> 
+ <p>⎮  x           </p> 
+ <p>⎮ x ⋅log(x) dx</p> 
+ <p>⌡              </p> 
+ <p>[/­code]</p> 
+ <p>Af­ter:</p> 
+ <p>[code lang="py"]</p> 
+ <p>In [1]: In­te­gral((­ex­p(x<em>log(x))</em>log(x)), x).­sub­s(­ex­p(x<em>log(x)), x</em>*x)</p> 
+ <p>Out­[1]:  </p> 
+ <p>⌠                     </p> 
+ <p>⎮  x⋅log(x)           </p> 
+ <p>⎮ ℯ        ⋅log(x) dx</p> 
+ <p>⌡                     </p> 
+ <p>[/­code]</p> 
+ <p>This sub­sti­tu­tion is nec­es­sary be­cause the Risch al­go­rithm re­quires ex­pres­sions like $la­tex x^x$ to be rewrit­ten as $la­tex e^{x\log(x)}$ be­fore it can in­te­grate them, but I try to con­vert them back af­ter in­te­grat­ing so that the us­er gets the same thing in the re­sult that he en­tered.  I cre­at­ed  <a href="http://code.google.com/p/sympy/issues/detail?id=2571" target="_blank">is­sue 2571</a>  for this.</p> 
+ <p>The sec­ond was that I had sev­er­al places in my doc­strings with things like</p> 
+ <blockquote>
+
+Given a derivation D on k[t] and f, g in k(t) with f weakly normalized with respect to t, either raise NonElementaryIntegralException, in which case the equation Dy + f*y == g has no solution in k(t), or the quadruplet (a, b, c, h) such that a, h in k[t], b, c in k, and for any solution y in k(t) of Dy + f*y == g, q = y*h in k satisfies a*Dq + b*q == c.
+
+</blockquote>
+
+<p>The prob­lem here is the "raise NonEle­men­tary­In­te­gralEx­cep­tion," part.  The code qual­i­ty check­er things that this is an old style ex­cep­tion (like  <code>raise Ex­cep­tion, mes­sage</code>), due to a poor­ly formed reg­u­lar ex­pres­sion.  I fixed this in a  <a href="https://github.com/sympy/sympy/pull/511" target="_blank">pull re­quest</a>.</p> 
+ <p>The good news is that now a lot of stuff works that did­n't be­fore be­cause of fix­es that were re­quired that on­ly ex­ist­ed in  <code>mas­ter</code>.  For ex­am­ple, the fol­low­ing did not work be­fore, but now does due to im­prove­ments to  <code>Root­Sum</code>:</p> 
+ <p>[code lang="py"]</p> 
+ <p>In [1]: risch_in­te­grate(1/(­ex­p(5*x) + ex­p(x) + 1), x)</p> 
+ <p>Out­[1]: 
+           ⎛    2                                                          <br> 
+x + Root­Sum⎝21⋅z  + 6⋅z + 1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>4/4 - 3381*_i</strong>3/4  </p> 
+ <div class="code"><pre>                                   <span class="err">⎞</span>          <span class="err">⎛</span>     <span class="mi">3</span>        <span class="mi">2</span>
+</pre></div>
+
+
+<ul>
+<li>625<em>_i</em><em>2/2 - 125</em>_i/2 + ex­p(x) - 5))⎠ + Root­Sum⎝161⋅z  + 115⋅z  + 19⋅z +  </li> 
+ </ul>
+<p>1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>4/4 - 3381*_i</strong>3/4 - 625<em>_i</em><em>2/2 - 125</em>_i/2 +</p> 
+ <div class="code"><pre>         <span class="err">⎞</span>
+</pre></div>
+
+
+<p>ex­p(x) - 5))⎠</p> 
+ <p>In [2]: can­cel(risch_in­te­grate(1/(­ex­p(5*x) + ex­p(x) + 1), x).d­if­f(x))</p> 
+ <p>Out­[2]: 
+      1     <br> 
+─────────────
+ 5⋅x    x   <br> 
+ℯ    + ℯ  + 1</p> 
+ <p>[/­code]</p> 
+ <p>The gen­er­al def­i­ni­tion of the log­a­rith­mic part of an in­te­gral is a sum over the roots of a poly­no­mi­al, which must be ex­pressed as a  <code>Root­Sum</code>  in the gen­er­al case.  Pre­vi­ous­ly,  <code>Root­Sum.d­iff</code>  did not work, but thanks to Ma­teusz, an al­go­rithm for com­put­ing ex­act­ly the Root­Sum where the Lamb­da ex­pres­sion is a ra­tio­nal func­tion was im­ple­ment­ed (see  <a href="http://mattpap.github.com/scipy-2011-tutorial/html/mathematics.html#summing-roots-of-polynomials" target="_blank">this bit</a>  from our SciPy tu­to­ri­al for an idea on how this work­s), so now the Risch Al­go­rithm can work with Root­Sum ob­jects just as well with as an or­di­nary sum of log­a­rithm­s.</p> 
+ <p>Al­so, there was a bug in the square free al­go­rithm in my branch that was fixed in  <code>mas­ter</code>  that was caus­ing wrong re­sults (I don't re­mem­ber the ex­pres­sion that pro­duced them right now), and al­so there was a fix by me in  <code>mas­ter</code>  to make  <code>is_ra­tional_­func­tion()</code>  faster, as it was sig­nif­i­cant­ly slow­ing down the cal­cu­la­tion of some in­te­grals (for ex­am­ple,  <code>risch_in­te­grate(Ad­d(<em>(ex­p(i</em>x) for i in range(1000))))</code>, which is still slow to cal­cu­late, but now it's be­cause of oth­er things).</p> 
+ <p><strong>About big branch­es</strong></p> 
+ <p>So this merge, along with the poly12 fi­as­co (which by the way, I think part of the rea­son git made me do all these merge con­flict res­o­lu­tions was be­cause  <code>polys12</code>  was re­based from the  <code>polys11</code>  I had merged in­to in­te­gra­tion3), has shown me very clear­ly that it is very bad to go off with your own branch and do a lot of work and wait a long time be­fore merg­ing it back in­to the main re­po.</p> 
+ <p>This is what was done with  <code>polys12</code>.  Ma­teusz had a lot of new poly­no­mi­als code that he de­vel­oped in one big branch, and when it fi­nal­ly came to merg­ing it back in, it was a mess.  This was for sev­er­al rea­son­s, which I do not want to dis­cuss too much here, but it be­came clear to ev­ery­one I think that do­ing this was bad, and that it would have been bet­ter to have sub­mit­ted many changes as pull re­quests as they were made than keep­ing them all to­geth­er in one big branch for a long time.</p> 
+ <p>This mod­el al­so af­fect­ed my work, as I had to work off of lat­est the polys branch, not  <code>mas­ter</code>, as my work re­lied heav­i­ly on the lat­est and great­est in the polys.   </p> 
+ <p>Well, with this merge of the main re­po in­to my branch, I see that my branch is start­ing to be­come the same way.  I orig­i­nal­ly thought that I should fin­ish the Risch al­go­rithm be­fore sub­mit­ting it to be merged in­to  <code>mas­ter</code>.  I know know that this is the wrong ap­proach.  De­vel­op­ment in  <code>mas­ter</code>  is too fast to keep code away from it for too long.  The di­ver­gence makes it more and more dif­fi­cult to merge back with ev­ery time.  Fur­ther­more, there are re­gres­sions that were nev­er no­ticed to be re­gres­sions be­cause the code that would have shown them ex­ist­ed on­ly in my branch.  Now I have to fix the­se, where­as if the code were in  <code>mas­ter</code>, the re­gres­sion would have nev­er hap­pened in the first place, be­cause the au­thor would have seen it im­me­di­ate­ly from the test fail­ures.</p> 
+ <p>I al­so thought that I should wait to merge be­cause there were so many bugs in my code.  But I see now that this is al­so wrong.  Merg­ing with  <code>mas­ter</code>  will help me find these bugs, as peo­ple will ac­tu­al­ly use my code.  Sure, I've asked peo­ple to try out  <code>risch_in­te­grate()</code>, and some peo­ple have (and I thank you), but hav­ing it in the de­fault  <code>in­te­grate()</code>  in  <code>mas­ter</code>  will re­sult in find­ing more bugs in the code than I ev­er would alone, which is ba­si­cal­ly the way it is right now with the code liv­ing on­ly in my own branch.</p> 
+ <p>I would pre­pare my code for merg­ing with  <code>mas­ter</code>  to­day, if it weren't for this  <code>ex­p.­subs</code>  hack, which caus­es test fail­ures and is tech­ni­cal­ly a re­gres­sion, but is re­quired for the prepars­ing code to the Risch al­go­rithm to work.  This is why I  <a href="http://groups.google.com/group/sympy/browse_thread/thread/4a19d0f39f51fda6#" target="_blank">wrote to the list</a>  two weeks ago ask­ing for ad­vice on how to struc­ture the sub­sti­tu­tion code so that we can nice­ly have var­i­ous kinds of sub­sti­tu­tions (e.g., ex­act like I need and al­ge­bra­ic like cur­rent­ly ex­ists in  <code>exp</code>) liv­ing to­geth­er with­out clut­ter­ing up the code.</p> 
+ <p>There­fore, I am go­ing to fo­cus my en­er­gies on fix­ing this subs prob­lem so I can get my code merged with  <code>mas­ter</code>.  Then, when this is done, I will con­tin­ue my work on im­ple­ment­ing the re­main­ing cas­es of the Risch al­go­rith­m.   </p> 
+ <p>So let this tale be a warn­ing to peo­ple work­ing on a lot of code in a big branch.  This es­pe­cial­ly ap­plies to our GSoC stu­dents, as it's ex­treme­ly easy to let your code ac­cu­mu­late when you're a GSoC stu­dent (tech­ni­cal­ly this branch of mine is a GSoC branch).  I see that some of our stu­dents are do­ing a bet­ter job of this than oth­er­s.  To those who have your code all in one big branch that has­n't been merged, I rec­om­mend you ready your branch for merge now.  And in the fu­ture, try to break your code up in­to small but still mean­ing­ful chunks and sub­mit those as pull re­quest­s.  With git, it's easy to base the code you are cur­rent­ly work­ing on on code that has­n't been merged yet, while still keep­ing things in small chunks for the pull re­quest­s.   </p> 
+ <p>On the oth­er hand, git will on­ly take you so far if you keep ev­ery­thing in a big branch, be­cause there are go­ing to be changes in  <code>mas­ter</code>  that will af­fect your work, no mat­ter how iso­lat­ed you think it is, and these are the sorts of things that it is im­pos­si­ble for git to fix for you.  But if your code is in  <code>mas­ter</code>, it will be sup­port­ed by ev­ery­one, and any ma­jor change that af­fects it will have to fix it. For ex­am­ple, if some­one changes a print­er and the doctests change, then he will have to change your doctest too if it's in  <code>mas­ter</code>, but if it's in your branch, then you will have to fix it when you next merge/re­base with­/a­gainst  <code>mas­ter</code>.</p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/07/25/merging-integration3-with-sympy-0-7-0-nightmare/#disqus_thread" data-disqus-identifier="cache/posts/2011/07/25/merging-integration3-with-sympy-0-7-0-nightmare.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/07/17/the-scipy-2011-conference/" class="u-url">The SciPy 2011 Conference</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-07-17T16:32:31-05:00">2011-07-17 16:32</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>So this past week, I at­tend­ed the SciPy 2011 con­fer­ence in Austin, TX, which was my first con­fer­ence ev­er.  Here are some high­lights of the con­fer­ence for me:</p> 
+ <p></p><ul>
+    <li>I met a  <em>ton</em>  of cool peo­ple.  This in­clud­ed meet­ing sev­er­al peo­ple who I had pre­vi­ous­ly known from mail­ing lists in per­son for the first time.  I met the SymPy de­vel­op­ers Ma­teusz Pa­proc­ki and Andy Ter­rel, and I al­so had al­ready known or heard about peo­ple like Fer­nan­do Perez, Gael Varo­quaux, and Robert Kern.  There are a lot of peo­ple out there who are ex­cit­ed to be us­ing Python for their re­search, which is a re­al re­fresh­er from my uni­ver­si­ty, where ev­ery­one is us­ing Mat­lab and Maple.</li> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;</span>Mateusz and I gave a tutorial on SymPy.  This was one of the four introductory track tutorials.  This was a great experience to teach SymPy to people.  You can see the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://mattpap.github.com/scipy-2011-tutorial/html/index.html"</span><span class="nt">&gt;</span>Sphinx document<span class="nt">&lt;/a&gt;</span> that we used, and there should eventually be a video posted at the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://conference.scipy.org/scipy2011/tutorials.php#mateusz"</span><span class="nt">&gt;</span>SciPy 2011 website<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>In addition to our tutorial, I attended some of the other tutorials.  I particularly enjoyed the NumPy tutorial. Having never used NumPy before, I now feel comfortable with the basics.  I also attended Gael Varoquaux's tutorial on scikits.learn and Corran Webster's tutorial on Matplotlib, Traits, and Chaco. My only regret is that the advanced track and introductory track tutorials were held at the same time, so I could not attend half of them.  I plan to watch the ones I missed online.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>The general conference was excellent.  Some of the talks that I particularly enjoyed were:
+</pre></div>
+
+
+<p></p><ul><li>The key­notes.  I found Er­ic Jone's key­note par­tic­u­lar­ly rel­e­vant as the lead­er of SymPy, as he talked about some of the good things to do and bad things to not do when lead­ing a sci­en­tif­ic projec­t.  I al­so en­joyed Per­ry Green­field­'s talk about how the as­tron­o­my com­mu­ni­ty moved from some old pro­pri­etary sys­tem to Python.</li> 
+     <li>Ma­teusz gave a talk on his  <a href="http://lab.femhub.org/">FEMhub on­line lab</a>, which a was very im­pres­sive sys­tem for us­ing Python en­tire­ly in the web brows­er.</li> 
+     <li>By far the best talk of the en­tire con­fer­ence was Fer­nan­do Perez's talk on the new IPython 0.11, which will be com­ing out in about a week or so.  His de­mo of the new fea­tures such as the QT con­sole and html note­book were very im­pres­sive.  If you want to watch just one video from the con­fer­ence, I would rec­om­mend that one.</li> 
+     <li>Mark Dew­ing gave a talk about a sys­tem he wrote us­ing SymPy to do au­to­mat­ed deriva­tion of equa­tion­s.  The sys­tem is im­pres­sive, and con­tains some fea­tures that would be nice to back­port to SymPy.  He told me that he wants to do this, so fol­low the mail­ing list.  You can see what he has so far on his  <a href="https://github.com/markdewing/sympy/tree/derivation_modeling">deriva­tion_­mod­el­ing</a>  branch at GitHub.</li> 
+     <li>The light­ning talk­s.  These are very short talks at the end of the con­fer­ence that are on­ly five min­utes long.  In ad­di­tion to many in­ter­est­ing talk­s, both Ma­teusz and I gave a light­ning talk. Ma­teusz gave a talk on  <a href="http://live.sympy.org/">SymPy Live</a>, which he re­cent­ly im­proved to do things like give La­TeX out­put, and I gave a talk on my work with the Risch al­go­rith­m.  I would al­so high­ly rec­om­mend watch this talk once they post the videos.</li> 
+     <li>Again, re­gret­tably, I could not at­tend half of the talks be­cause they were held at the same time.  For­tu­nate­ly, they filmed all of them, so I hope to watch them all on­line when they are post­ed (and I rec­om­mend that you do too).</li></ul>
+    
+<div class="code"><pre><span class="nt">&lt;li&gt;</span>The sprints were a great time for getting together and hacking together.  I worked with Min Ragan-Kelley to make isympy work with the new IPython.  Having fixed this, I now want to release 0.7.1 very soon, so I used some of the time during the sprints getting ready for that.  We already have <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.1"</span><span class="nt">&gt;</span>preliminary release notes<span class="nt">&lt;/a&gt;</span>, and my hope is to create a release candidate on Monday (tomorrow).  I also finished up my <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/pull/491"</span><span class="nt">&gt;</span>MathJax branch<span class="nt">&lt;/a&gt;</span> and finished reviewing and pushed in Tom's first GSoC pull request, which has a lot of really cool stuff relating to converting hypergeometric functions and Meijer G-functions into standard elementary functions.  This will all be in the release.
+</pre></div>
+
+
+<p>Al­so at the sprints, Ma­teusz worked on an ex­ten­sion for our Sphinx docs that puts a SymPy Live con­sole right in the doc­s.  You can then click on "e­val­u­ate" next to any of the code ex­am­ples, and it will run it in SymPy live.  And of course, you can then ed­it it and play around with it.  He al­ready had a work­ing ver­sion of this by the end of the sprints (with a few bugs stil­l), but I don't think he has pushed it to GitHub yet.  I think this is go­ing to be a land­mark change for our doc­u­men­ta­tion.  SymPy Live runs on the App En­gine, so this ap­proach can be ap­plied to any li­brary that can run in pure Python 2.5, and I think a lot of such projects are go­ing to be jeal­ous this and want to start us­ing it, be­cause it's very im­pres­sive and use­ful.</p> 
+ <p>We al­so had a cou­ple of peo­ple from the con­fer­ence come to our ta­ble and work on SymPy.  These were peo­ple who were new to SymPy, and I think at­tend­ed our tu­to­ri­al.  One of them, Em­ma Hogan, worked a lit­tle bit on im­prov­ing our doc­u­men­ta­tion, and has sub­mit­ted a  <a href="https://github.com/sympy/sympy/pull/490">pull re­quest</a>.</p> 
+
+
+ <div class="code"><pre><span class="nt">&lt;li&gt;</span>Austin, TX is a nice city with lots of fun places to go, but it is also very humid, which is something I could barely stand (I am used to the same heat, but in Albuquerque it is dry heat).  One interesting thing that some of us went and saw was the bats.  The bridge over this lake in Austin has over a million bats living under it, and at night they all fly out to feed.  <span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+</ul>
+
+<p>There's all kinds of fun and in­ter­est­ing stuff that hap­pened that I did not men­tion here.  If you are in­ter­est­ed in sci­ence and Python, I would high­ly rec­om­mend at­tend­ing a fu­ture SciPy con­fer­ence.   </p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/07/17/the-scipy-2011-conference/#disqus_thread" data-disqus-identifier="cache/posts/2011/07/17/the-scipy-2011-conference.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/06/29/sympy-0-7-0-released/" class="u-url">SymPy 0.7.0 released</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-06-29T08:00:38-05:00">2011-06-29 08:00</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><em>Cross posted on the <a href="http://sympy.blogspot.com/2011/06/sympy-070-released.html" target="_blank">official SymPy blog</a></em>
+<p>SymPy 0.7.0 has been re­leased on June 28, 2011.   <span class="Apple-style-span" style="font-family:'Trebuchet MS', Verdana, Arial, sans-serif;font-size:13px;color:rgb(51,51,51);line-height:18px;">It is avail­able at<br><a href="http://sympy.org/" style="color:rgb(34,85,136);"><br>http://sympy.org</a><br><br>The source dis­­tri­bu­­tion can be down­load­­ed from:<br><a href="http://sympy.googlecode.com/files/sympy-0.6.6.tar.gz" style="color:rgb(34,85,136);">http://sympy.­­google­­code.­­com/­­files/sympy-0.6.7.­­tar.gz</a><br><br>You can get the Win­­dows in­­stal­l­er here:<br><a href="http://sympy.googlecode.com/files/sympy-0.6.6.win32.exe" style="color:rgb(34,85,136);">http://sympy.­­google­­code.­­com/­­files/sympy-0.6.7.win32.exe</a><br><br>And the html doc­u­­men­­ta­­tion here:<br><a href="http://sympy.googlecode.com/files/sympy-0.6.6-docs-html.zip" style="color:rgb(34,85,136);">http://sympy.­­google­­code.­­com/­­files/sympy-0.6.7-­­doc­s-ht­m­l.zip</a></span></p><div><br></div><div><span class="Apple-style-span" style="font-family:'Trebuchet MS', Verdana, Arial, sans-serif;font-size:13px;color:rgb(51,51,51);line-height:18px;"><span style="font-weight:bold;font-size:16px;">About SymPy</span><br><br>SymPy is a Python li­brary for sym­bol­ic math­e­mat­ic­s. It aims to be­come a ful­l-fea­tured com­put­er al­ge­bra sys­tem (CAS) while keep­ing the code as sim­ple as pos­si­ble in or­der to be com­pre­hen­si­ble and eas­i­ly ex­ten­si­ble. SymPy is writ­ten en­tire­ly in Python.<br><span style="font-size:16px;"><span class="Apple-style-span" style="font-size:13px;"><span style="font-size:16px;"><span style="font-weight:bold;"><br></span></span></span></span></span></div><div><span class="Apple-style-span" style="font-family:'Trebuchet MS', Verdana, Arial, sans-serif;font-size:13px;color:rgb(51,51,51);line-height:18px;"><span style="font-size:16px;"><span class="Apple-style-span" style="font-size:13px;"><span style="font-size:16px;"><span style="font-weight:bold;">Changes since last sta­ble re­lease</span></span><br></span></span></span></div><div><span class="Apple-style-span" style="font-family:helvetica, arial, freesans, clean, sans-serif;font-size:6px;"><span class="Apple-style-span" style="font-size:22px;"><b><span class="Apple-style-span" style="font-family:'Trebuchet MS', Verdana, Arial, sans-serif;font-weight:normal;font-size:13px;color:rgb(51,51,51);line-height:18px;"><br></span></b></span></span></div><div><span class="Apple-style-span" style="font-family:helvetica, arial, freesans, clean, sans-serif;font-size:6px;"><span class="Apple-style-span" style="font-size:22px;"><b><span class="Apple-style-span" style="font-family:'Trebuchet MS', Verdana, Arial, sans-serif;font-weight:normal;font-size:13px;color:rgb(51,51,51);line-height:18px;">(from    <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.0">http­s://github.­­­com/sympy/sympy/wik­i/Re­lease-Notes-­­­for-0.7.0</a>)</span></b></span></span></div><div><span class="Apple-style-span" style="font-family:'Trebuchet MS', Verdana, Arial, sans-serif;color:rgb(51,51,51);line-height:18px;"><b><span class="Apple-style-span" style="color:rgb(0,0,0);font-family:helvetica, arial, freesans, clean, sans-serif;font-weight:normal;line-height:23px;font-size:14px;"><h3 style="line-height:normal;border-top-width:4px;border-top-style:solid;border-top-color:rgb(204,204,204);font-size:22px;display:inline!important;margin:22px 0 0;padding:7px 0 0;"><br></h3></span></b></span></div><div><span class="Apple-style-span" style="font-family:'Trebuchet MS', Verdana, Arial, sans-serif;color:rgb(51,51,51);line-height:18px;"><b><span class="Apple-style-span" style="color:rgb(0,0,0);font-family:helvetica, arial, freesans, clean, sans-serif;font-weight:normal;line-height:23px;font-size:14px;"><h3 style="line-height:normal;border-top-width:4px;border-top-style:solid;border-top-color:rgb(204,204,204);font-size:22px;display:inline!important;margin:22px 0 0;padding:7px 0 0;">Back­­wards com­­pat­i­­bil­i­­ty breaks</h3></span></b></span></div><div><span class="Apple-style-span" style="font-family:'Trebuchet MS', Verdana, Arial, sans-serif;color:#333333;"><span class="Apple-style-span" style="line-height:18px;"><b><span class="Apple-style-span" style="color:rgb(0,0,0);font-family:helvetica, arial, freesans, clean, sans-serif;font-weight:normal;line-height:23px;font-size:14px;"><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">This will be the last re­lease of SymPy to sup­­­­port Python 2.4. Drop­ping sup­­­­port for Python 2.4 will let us move for­ward with things like sup­­­­port­ing Python 3, and will let us use things that were in­­­­tro­­­­duced in Python 2.5, like with­­­­-s­­­­tate­­­­ment con­­­­text man­ager­s.</li><li style="line-height:1.4em;margin:0;padding:0;">no longer sup­­­­port cre­at­ing ma­tri­ces with­­­­out brack­­­­ets (see: is­­­­sue 930)</li><li style="line-height:1.4em;margin:0;padding:0;">Re­­­­named     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sum()</code>     to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sum­­­­ma­­­­tion()</code>     (see: 3e763a8, is­­­­sues 1376, 1727). This was changed so that it no longer over­rides the built-in     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sum()</code>. The un­e­­­val­u­at­ed sum­­­­ma­­­­tion is still called     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Sum()</code>.</li><li style="line-height:1.4em;margin:0;padding:0;">Re­­­­named     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">ab­s()</code>     to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Ab­s()</code>     (see: 64a12a4, is­­­­sue 1727). This was al­­­­so changed so that it no longer over­rides the built-in     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">ab­s()</code>. Note that be­­­­cause of     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;"><strong>abs</strong></code>     mag­ic, you can still do     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">ab­s(­ex­pr)</code>     with the built-in     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">ab­s()</code>, and it will re­­­­turn     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Ab­s(­ex­pr)</code>.</li><li style="line-height:1.4em;margin:0;padding:0;">Re­­­­named     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">max_()</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">min_()</code>     to now     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Max()</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Min()</code>     (see: 99a271e, is­­­­sue 2153)</li><li style="line-height:1.4em;margin:0;padding:0;">Changed be­hav­iour of     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sym­bol­s()</code>.     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sym­bol­s('xyz')</code>     gives now a sin­­­­gle sym­bol (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">'xyz'</code>), not three (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">'x'</code>,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">'y'</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">'z'</code>) (see: f6452a8). Use<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sym­bol­s('x,y,z')</code>     or     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sym­bol­s('x y z')</code>     to get three sym­bol­s. The 'each_char' op­­­­tion will still work but is be­ing de­p­re­­­­cat­ed.</li><li style="line-height:1.4em;margin:0;padding:0;">Split class     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Ba­sic</code>     in­­­­­­­to new class­es     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Ex­pr</code>,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Bool­ean</code>     (see: a0ab479, 635d89c). Class­es that are de­signed to be part of stan­­­­dard sym­bol­ic ex­pres­­­­sions (like     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">x<strong>2<em>sin(x)</em></strong></code>) should sub­­­­­­­class from     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Ex­pr</code>. More gen­er­ic ob­­­­jects that do not work in sym­bol­ic ex­pres­­­­sions but still want the ba­sic SymPy struc­­­­ture like     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">.args</code>     and ba­sic meth­ods like     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">.sub­­­­s()</code>     should on­­­­ly sub­­­­­­­class from     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Ba­sic</code>.</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">as_ba­sic()</code>     method was re­­­­named to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">as_­ex­pr()</code>     to re­flect changes in the core (see: e61819d, 80d­fe91)</li><li style="line-height:1.4em;margin:0;padding:0;">Meth­ods     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">as_­­­­co­e­f­f_terms</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">as_­­­­co­e­f­f_­­­­fac­­­­tors</code>     were re­­­­named to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">as_­­­­co­e­f­f_­­­­mul</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">as_­­­­co­e­f­f_add</code>, re­spec­­­­tive­­­­ly.</li><li style="line-height:1.4em;margin:0;padding:0;">Re­­­­moved the     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">trim()</code>     func­­­­tion. The func­­­­tion is re­­­­dun­­­­dant with the new polys (see be­low). Use the     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">can­cel()</code>     func­­­­tion in­­­­stead.</li></ul><h3 style="line-height:normal;border-top-width:4px;border-top-style:solid;border-top-color:rgb(204,204,204);font-size:22px;margin:22px 0 0;padding:7px 0 0;">Ma­jor Changes</h3><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Polys</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">New in­­­­ter­­­­nal rep­re­sen­­­­ta­­­­tions of dense and sparse poly­no­mi­als (see: 6aecd­b7, 31c9aa4)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed al­­­­go­rithms for re­al and com­­­­plex root iso­la­­­­tion and coun­t­ing (see: 3a­­­­cac67, 4b75­­­­dae, fa1206e, 103b928, 45c9b22, 8870c8b, b348b30)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­proved Gröb­n­er bases al­­­­go­rithm (see: ff65e9f, 891e4de, 310a585)</li><li style="line-height:1.4em;margin:0;padding:0;">Field iso­­­­mor­phism al­­­­go­rithm (see: b097b01, 08482bf)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed ef­­­­fi­­­­cient or­thog­o­­­­nal poly­no­mi­als (see: b8f­b­d59)</li><li style="line-height:1.4em;margin:0;padding:0;">Added con­­­­fig­u­ra­­­­tion frame­­­­work for polys (see: 33d8cd­b, 7e­b81c9)</li><li style="line-height:1.4em;margin:0;padding:0;">Func­­­­tion for com­put­ing min­i­­­­mal poly­no­mi­als (see: 88bf187, f800f95)</li><li style="line-height:1.4em;margin:0;padding:0;">Func­­­­tion for gen­er­at­ing Vi­ete's for­­­­mu­las (see: 1027408)</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">root­s()</code>     sup­­­­ports more class­es of poly­no­mi­als (e.g. cy­­­­clo­­­­tomic) (see: d8c8768, 75c8d2d)</li><li style="line-height:1.4em;margin:0;padding:0;">Added a func­­­­tion for rec­og­niz­ing cy­­­­clo­­­­tom­ic poly­no­mi­als (see: b9c2a9a)</li><li style="line-height:1.4em;margin:0;padding:0;">Added a func­­­­tion for com­put­ing Horner form of poly­no­mi­als (see: 8d235c7)</li><li style="line-height:1.4em;margin:0;padding:0;">Added a func­­­­tion for com­put­ing sym­met­ric re­­­­duc­­­­tions of poly­no­mi­als (see: 6d560f3)</li><li style="line-height:1.4em;margin:0;padding:0;">Added gen­er­a­­­­tors of Swin­n­er­­­­ton-Dy­er, cy­­­­clo­­­­tomic, sym­met­ric, ran­­­­dom and in­­­­ter­po­lat­ing poly­no­mi­als (see: dad03d­d, 6c­cf20c, dc728d6, 2f17684, 3004d­b8)</li><li style="line-height:1.4em;margin:0;padding:0;">Added a func­­­­tion com­put­ing iso­la­­­­tion in­­­­ter­­­­vals of al­ge­bra­ic num­bers (see: 37a58f1)</li><li style="line-height:1.4em;margin:0;padding:0;">Poly­no­mi­al di­vi­­­­sion (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">di­v()</code>,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">rem()</code>,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">quo()</code>) now de­­­­faults to a field (see: a72d188)</li><li style="line-height:1.4em;margin:0;padding:0;">Added wrap­pers for nu­mer­i­­­­cal root find­­­­ing al­­­­go­rithms (see: 0d98945, f638fcf)</li><li style="line-height:1.4em;margin:0;padding:0;">Added sym­bol­ic ca­­­­pa­­­­bil­i­ties to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">fac­­­­tor()</code>,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sqf()</code>     and re­lat­ed func­­­­tions (see: d521c7f, 548120b, f6f74e6, b1c49cd, 3527b64)</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">to­geth­­­­er()</code>     was sig­nif­i­­­­can­t­­­­ly im­proved (see: dc327fe)</li><li style="line-height:1.4em;margin:0;padding:0;">Added sup­­­­port for it­er­able con­­­­tain­ers to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">gcd()</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">lcm()</code>     (see: e920870)</li><li style="line-height:1.4em;margin:0;padding:0;">Added a func­­­­tion for con­struc­t­ing do­­­­mains from co­e­f­­­­fi­­­­cient con­­­­tain­ers (see: a8f20e6)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed great­est fac­­­­to­ri­al fac­­­­tor­iza­­­­­­­tion (see: d4d­b­b­b5)</li><li style="line-height:1.4em;margin:0;padding:0;">Added par­­­­tial frac­­­­tion de­­­­com­po­si­­­­tion al­­­­go­rithm based on un­de­ter­mined co­e­f­­­­fi­­­­cient ap­proach (see: 9769d49, 496f08f)</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">RootOf</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Root­­­­Sum</code>     were sig­nif­i­­­­can­t­­­­ly im­proved (see: f3e432, 4c88be6, 41502d7)</li><li style="line-height:1.4em;margin:0;padding:0;">Added sup­­­­port for gmpy (GNU Mul­ti­­­­ple Pre­­­­ci­­­­sion Arith­met­ic Li­brary) (see: 38e1683)</li><li style="line-height:1.4em;margin:0;padding:0;">Al­low to com­pile     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.polys</code>     with Cython (see: af­b3886)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­proved con­­­­fig­u­ra­­­­tion of var­i­ables in     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Poly</code>     (see: 22c4061)</li><li style="line-height:1.4em;margin:0;padding:0;">Added doc­u­­­­men­­­­ta­­­­tion based on West­­­­er's ex­am­­­­ples (see: 1c23792)</li><li style="line-height:1.4em;margin:0;padding:0;">Ir­re­­­­ducibil­i­­­­ty test­ing over fi­nite fields (see: 17e8f1f)</li><li style="line-height:1.4em;margin:0;padding:0;">Al­low sym­met­ric and non-sym­met­ric rep­re­sen­­­­ta­­­­tions over fi­nite fields (see: 60f­bf­f4)</li><li style="line-height:1.4em;margin:0;padding:0;">More con­­­­sis­­­­tent fac­­­­tor­iza­­­­­­­tion forms from     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">fac­­­­tor()</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sqf()</code>     (see: 5d­f77f5)</li><li style="line-height:1.4em;margin:0;padding:0;">Added sup­­­­port for au­­­­to­­­­mat­ic recog­ni­­­­tion al­ge­bra­ic ex­ten­­­­sions (see: 7de602c)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed Collins' mod­­­­u­lar al­­­­go­rithm for com­put­ing re­­­­sul­­­­tants (see: 950969b)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed Berlekam­p's al­­­­go­rithm for fac­­­­tor­iza­­­­­­­tion over fi­nite fields (see: 70353e9)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed Trager's al­­­­go­rithm for fac­­­­tor­iza­­­­­­­tion over al­ge­bra­ic num­ber fields (see: bd0be06)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­proved Wang's al­­­­go­rithm for ef­­­­fi­­­­cient fac­­­­tor­iza­­­­­­­tion of mul­ti­­­­var­i­ate poly­no­mi­als (see: 425e225)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Quan­­­tum</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Sym­bol­ic, ab­s­­­tract dirac no­­­­ta­­­­tion in     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum</code>. This in­­­­­­­cludes op­er­a­­­­tors, states (bras and ket­s), com­­­­mu­­­­ta­­­­tors, an­ti­­­­com­­­­mu­­­­ta­­­­tors, dag­ger, in­­­­n­er prod­uc­t­s, out­­­­er prod­uc­t­s, ten­­­­sor prod­ucts and Hilbert spa­ces</li><li style="line-height:1.4em;margin:0;padding:0;">Sym­bol­ic quan­­­­tum com­put­ing frame­­­­work that is based on the gen­er­al ca­­­­pa­­­­bil­i­ties in     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum</code>. This in­­­­­­­cludes qubits (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum.qubit</code>), gates (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum.­­­­gate</code>), Grover's al­­­­go­rithm (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum.­­­­grover</code>), the quan­­­­tum Fouri­er tran­s­­­­form (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum.qft</code>), Shor's al­­­­go­rithm (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum.shor</code>) and cir­cuit plot­t­ing (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum.­­­­cir­cuit­­­­plot</code>)</li><li style="line-height:1.4em;margin:0;padding:0;">Sec­ond quan­ti­za­­­­­­­tion frame­­­­work that in­­­­­­­clues cre­a­­­tion/ani­hi­la­­­­tion op­er­a­­­­tors for both Fer­­­mi­ons and Bosons and Wick­­­­'s the­o­rem for Fer­­­mi­ons (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.sec­ondquant</code>).</li><li style="line-height:1.4em;margin:0;padding:0;">Sym­bol­ic quan­­­­tum an­gu­lar mo­­­­men­­­­tum (spin) al­ge­bra (<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.­­­­physic­s.quan­­­­tum.spin</code>)</li><li style="line-height:1.4em;margin:0;padding:0;">Hy­­­­dro­­­­gen wave func­­­­tions (Schroedinger) and en­er­­­­gies (both Schroedinger and Dirac)</li><li style="line-height:1.4em;margin:0;padding:0;">Wave func­­­­tions and en­er­­­­gies for 1D har­­­­mon­ic os­­­­­­­cil­la­­­­tor</li><li style="line-height:1.4em;margin:0;padding:0;">Wave func­­­­tions and en­er­­­­gies for 3D spher­i­­­­cal­­­­ly sym­met­ric har­­­­mon­ic os­­­­­­­cil­la­­­­tor</li><li style="line-height:1.4em;margin:0;padding:0;">Wign­er and Cle­b­sch Gor­­­­dan co­e­f­­­­fi­­­­cients</li></ul><h3 style="line-height:normal;border-top-width:4px;border-top-style:solid;border-top-color:rgb(204,204,204);font-size:22px;margin:22px 0 0;padding:7px 0 0;">Ev­ery­thing else</h3><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­ment symar­ray, pro­vid­ing numpy nd-ar­rays of sym­bol­s.</li><li style="line-height:1.4em;margin:0;padding:0;">up­­­­­­­date mp­­­­math to 0.16</li><li style="line-height:1.4em;margin:0;padding:0;">Add a ten­­­­sor mod­­­­ule (see:     <a href="http://code.google.com/p/sympy/wiki/CodeGenerationReport" style="line-height:1.4em;color:rgb(65,131,196);text-decoration:none;outline-style:none;outline-width:initial;outline-color:initial;margin:0;padding:0;">http://­­­­code.­­­­google.­­­­com/p/sympy/wik­i/­­­­Code­­­­Gen­er­a­­­­tion­Re­­­­port</a>)</li><li style="line-height:1.4em;margin:0;padding:0;">A lot of stuff was be­ing im­­­­port­ed with     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">from sympy im­­­­port     </code>     that should­n't have been (like     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sys</code>). This has been fixed.</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">As­­­sump­­­tion­s:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Re­fine</li><li style="line-height:1.4em;margin:0;padding:0;">Added pred­i­­­­cates (see: 7c0b857, 53f0e1a, d1d­d6a3..)</li><li style="line-height:1.4em;margin:0;padding:0;">Added query han­dlers for al­ge­bra­ic num­bers (see: f3bee7a)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­ment a SAT solver (see:     <a href="http://code.google.com/p/sympy/wiki/SuperchargingAssumptionsReport" style="line-height:1.4em;color:rgb(65,131,196);text-decoration:none;outline-style:none;outline-width:initial;outline-color:initial;margin:0;padding:0;">http://­­­­code.­­­­google.­­­­com/p/sympy/wik­i/­­­­Su­per­chargin­­­­gAs­­­­sump­­­­tion­s­Re­­­­port</a>, 2d96329, acf­be75, etc.)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Con­crete</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Fi­­­­nal­ized im­­­­ple­­­­men­­­­ta­­­­tion of Gosper's al­­­­go­rithm (see: 0f187e5, 5888024)</li><li style="line-height:1.4em;margin:0;padding:0;">Re­­­­moved re­­­­dun­­­­dant     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Sum2</code>     and re­lat­ed class­es (see: ef1f6a7)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Core:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Split     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Atom</code>     in­­­­­­­to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Atom</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Atom­­­­ic­Ex­pr</code>     (see: 965aa91)</li><li style="line-height:1.4em;margin:0;padding:0;">Var­i­ous     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympi­­­­fy()</code>     im­prove­­­­ments</li><li style="line-height:1.4em;margin:0;padding:0;">Added func­­­­tion­al­i­­­­ty for ac­­­­tion verbs (many func­­­­tions can be called both as glob­al func­­­­tions and as meth­ods e.g.     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">a.sim­­­­pli­­­­fy() == sim­­­­pli­­­­fy(a)</code>)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­prove han­dling of ra­­­­tio­­­­nal strings (see: 053a045, is­­­­sue 1778)</li><li style="line-height:1.4em;margin:0;padding:0;">Ma­jor changes to fac­­­­tor­ing of in­­­­te­gers (see: 273f450, is­­­­sue 2003)</li><li style="line-height:1.4em;margin:0;padding:0;">Op­ti­mized     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">.has()</code>     (see: c83c9b0, is­­­­sue 1980; d86d08f)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­prove­­­­ments to pow­er (see: c8661e­f, is­­­­sue 1963)</li><li style="line-height:1.4em;margin:0;padding:0;">Added range and lex­i­­­­co­­­­graph­ic syn­­­­tax to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sym­bol­s()</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">var()</code>     (see: f6452a8, 9ae­b220, 957745a)</li><li style="line-height:1.4em;margin:0;padding:0;">Added     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">mod­­­­u­lus</code>     ar­gu­­­­ment to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">ex­­­­pand()</code>     (see: 1ea5be8)</li><li style="line-height:1.4em;margin:0;padding:0;">Al­low to con­vert     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">In­­­­ter­­­­val</code>     to re­la­­­­tion­al form (see: 4c269fe)</li><li style="line-height:1.4em;margin:0;padding:0;">SymPy won't ma­nip­u­late mi­nus sign of ex­pres­­­­sions any more (see: 6a26941, 9c6bf0f, e9f4a0a)</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Re­al</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">.is_Re­al</code>     were re­­­­named to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Float</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">.is_Float</code>.     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Re­al</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">.is_Re­al</code>     still re­­­­main as de­p­re­­­­cat­ed short­­­­­­­cuts to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Float</code>     and<code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">is_Float</code>     for back­­­­wards com­­­­pat­i­­­­bil­i­­­­ty. (see: abe1c49)</li><li style="line-height:1.4em;margin:0;padding:0;">Meth­ods co­­­­eff and as_­­­­co­e­f­­­­fi­­­­cient are now non-­­­­com­­­­mu­­­­ta­­­­tive aware. (see a4ea170)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Ge­om­e­try:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Var­i­ous im­prove­­­­ments to El­lipse</li><li style="line-height:1.4em;margin:0;padding:0;">Up­­­­­­­dat­ed doc­u­­­­men­­­­ta­­­­tion to numpy stan­­­­dard</li><li style="line-height:1.4em;margin:0;padding:0;">Poly­­­­gon and Line im­prove­­­­ments</li><li style="line-height:1.4em;margin:0;padding:0;">Al­low all ge­om­e­try ob­­­­jects to ac­­­­cept a tu­­­­ple as     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Point</code>     args</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">In­­­te­­­gral­s:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Var­i­ous im­prove­­­­ments (see eg. is­­­­sues 1772, 1999, 1992, 1987.. etc)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">isympy</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Fixed the     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">-p</code>     switch (see: e8cb04a)</li><li style="line-height:1.4em;margin:0;padding:0;">Caching can be dis­­­­abled us­ing     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">-C</code>     switch (see: 0d8d748)</li><li style="line-height:1.4em;margin:0;padding:0;">Ground types can be set us­ing     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">-t</code>     switch (see: 75734f8)</li><li style="line-height:1.4em;margin:0;padding:0;">Print­­­­ing or­der­ing can be set us­ing     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">-o</code>     switch (see: fc­c6b13, 4ec9d­c5)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Log­ic</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">im­­­­plies ob­­­­ject ad­heres to neg­a­­­­tive nor­­­­mal form</li><li style="line-height:1.4em;margin:0;padding:0;">Cre­ate new bool­ean class,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">log­ic.­­­­boolal­g.­­­­Bool­ean</code></li><li style="line-height:1.4em;margin:0;padding:0;">Added XOR op­er­a­­­­tor (^) sup­­­­port</li><li style="line-height:1.4em;margin:0;padding:0;">Added If-then-else (ITE) sup­­­­port</li><li style="line-height:1.4em;margin:0;padding:0;">Added the dpll al­­­­go­rithm</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Func­­­tion­s:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Added Piece­­­­wise, B-s­­­­plines</li><li style="line-height:1.4em;margin:0;padding:0;">Spher­i­­­­cal Bessel func­­­­tion of the sec­ond kind im­­­­ple­­­­men­t­ed</li><li style="line-height:1.4em;margin:0;padding:0;">Add se­ries ex­­­­pan­­­­sions of mul­ti­­­­var­i­ate func­­­­tions (see: d4d351d)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Ma­tri­ces:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Add el­e­­­­men­t­­­­wise prod­uct (Hadamard pro­­­­duc­t)</li><li style="line-height:1.4em;margin:0;padding:0;">Ex­­­­tend­ed QR fac­­­­tor­iza­­­­­­­tion for gen­er­al full ranked mxn ma­tri­ces</li><li style="line-height:1.4em;margin:0;padding:0;">Re­­­­move de­p­re­­­­cat­ed func­­­­tions     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">ze­ro()</code>,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">ze­ron­m()</code>,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">one()</code>     (see: 5da0884)</li><li style="line-height:1.4em;margin:0;padding:0;">Added cholesky and LDL fac­­­­tor­iza­­­­­­­tion­s, and re­spec­­­­tive solves.</li><li style="line-height:1.4em;margin:0;padding:0;">Added func­­­­tions for ef­­­­fi­­­­cient tri­an­gu­lar and di­ag­o­­­­nal solves.</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">SMa­trix</code>     was re­­­­named to     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">Sparse­­­­Ma­trix</code>     (see: acd1685)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Physics</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">See the Quan­­­­tum sec­­­­tion</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Print­­­ing:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed pret­­­­ty print­­­­ing of bi­no­mi­als (see: 58c1­­­­dad)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed pret­­­­ty print­­­­ing of Sum() (see: 84f2c22, 95b4321)</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">sympy.print­­­­ing</code>     now sup­­­­ports or­der­ing of terms and fac­­­­tors (see: 859b­b33)</li><li style="line-height:1.4em;margin:0;padding:0;">Lex­i­­­­co­­­­graph­ic or­der is now the de­­­­fault. Now fi­­­­nal­­­­ly things will print as     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">x2 + x + 1</code>     in­­­­stead of     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">1 + x + x<strong>2</strong></code>, how­ev­er se­ries still print us­ing re­­­­versed or­der­ing, e.g.     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">x - x3/6 + O(x<em><em>5)</em></em></code>. You can get the old or­der (and oth­­­­er or­der­ings) by set­t­ing the     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">-o</code>     op­­­­tion to isympy (see: 08b4932, a30c5a3)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Se­ries:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­ment a func­­­­tion to cal­cu­late residues,     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">residue()</code></li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­ment nseries and lseries to han­­­­dle     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">x0 != 0</code>, se­ries should be more ro­­­­bust now (see: 2c99999, is­­­­sues 2122-2124)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­prove­­­­ments to Gruntz al­­­­go­rithm</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Sim­­­pli­­­fy:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Added     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">use()</code>     (see: 147c142)</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">rat­sim­p()</code>     now us­es     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">can­cel()</code>     and     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">re­­­­duced()</code>     (see: 108f­b41)</li><li style="line-height:1.4em;margin:0;padding:0;">Im­­­­ple­­­­men­t­ed EPath (see: 696139d, bf90689)</li><li style="line-height:1.4em;margin:0;padding:0;">a new key­­­­word     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">ra­­­­tio­­­­nal</code>     was added to nsim­­­­pli­­­­fy which will re­­­­place Floats with Ra­­­­tio­­­­nal ap­prox­­­­i­­­­ma­­­­tion­s. (see: 053a045)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Solver­s:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">ODE im­prove­­­­ments (see: d12a2aa, 3542041; 73f­b9ac)</li><li style="line-height:1.4em;margin:0;padding:0;">Added sup­­­­port for solv­ing in­­­­e­qual­i­ties (see: 328e­aba, 8455147, f8f­­­­caa7)</li></ul><h4 style="line-height:26px;font-size:16px;margin:0;padding:26px 0 0;">Util­i­ties:</h4><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Im­prove cartes, for gen­er­at­ing the Carte­sian prod­uct (see: b1b10ed)</li><li style="line-height:1.4em;margin:0;padding:0;">Added a func­­­­tion com­put­ing topo­log­i­­­­cal sort of graphs (see: b2ce27b)</li><li style="line-height:1.4em;margin:0;padding:0;">Al­low to set­up a cus­­­­tom­ized print­­­­er in     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">lam­b­d­i­­­­fy()</code>     (see: c1ad905)</li><li style="line-height:1.4em;margin:0;padding:0;"><code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">flat­ten()</code>     was sig­nif­i­­­­can­t­­­­ly im­proved (see: 31ed8d7)</li><li style="line-height:1.4em;margin:0;padding:0;">Ma­jor im­prove­­­­ments to the For­­­­tran code gen­er­a­­­­tor (see:     <a href="http://code.google.com/p/sympy/wiki/CodeGenerationReport" style="line-height:1.4em;color:rgb(65,131,196);text-decoration:none;outline-style:none;outline-width:initial;outline-color:initial;margin:0;padding:0;">http://­­­­code.­­­­google.­­­­com/p/sympy/wik­i/­­­­Code­­­­Gen­er­a­­­­tion­Re­­­­port</a>, 3383aa3, 7ab2­­­­da2, etc.)</li></ul><p style="line-height:1.4em;margin:16px 0 0;padding:0;">In ad­di­­­­tion to the more no­tice­able changes list­ed above, there have been nu­mer­ous oth­­­­er smal­l­­er ad­di­­­­tion­s, im­prove­­­­ments and bug fix­es in the ~2000 com­mits in this re­lease. See the git log for a full list of all changes. The com­­­­mand     <code style="font:normal normal normal 12px/normal 'Bitstream Vera Sans Mono', Courier, monospace;line-height:1.4em;background-color:rgb(248,248,248);font-size:13px;border-top-left-radius:3px 3px;border-top-right-radius:3px 3px;border-bottom-right-radius:3px 3px;border-bottom-left-radius:3px 3px;border-color:rgb(222,222,222);border-style:solid;border-width:1px;margin:0;padding:0;">git log sympy-0.6.7..sympy-0.7.0</code>     will show all com­mits made be­tween this re­lease and the last. You can al­­­­so see the is­­­­sues closed since the last re­lease     <a href="http://code.google.com/p/sympy/issues/list?can=1&amp;q=closed-after%3A2010%2F3%2F17+closed-before%3A2011%2F6%2F13&amp;sort=-closed&amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary+Stars+Closed&amp;cells=tiles" style="line-height:1.4em;color:rgb(65,131,196);text-decoration:none;outline-style:none;outline-width:initial;outline-color:initial;margin:0;padding:0;">here</a>.</p><h3 style="line-height:normal;border-top-width:4px;border-top-style:solid;border-top-color:rgb(204,204,204);font-size:22px;margin:22px 0 0;padding:7px 0 0;">Au­thors</h3><p style="line-height:1.4em;margin:16px 0 0;padding:0;">The fol­low­ing peo­­­­ple con­trib­ut­ed at least one patch to this re­lease (names are giv­en in al­pha­­­­bet­i­­­­cal or­der by last name). A to­­­­tal of 64 peo­­­­ple con­trib­ut­ed to this re­lease. Peo­­­­ple with a * by their names con­trib­ut­ed a patch for the first time for this re­lease. Thir­­­­ty-­­­­sev­en peo­­­­ple con­trib­ut­ed for the first time for this re­lease. Over half of the peo­­­­ple who con­trib­ut­ed to this re­lease con­trib­ut­ed for the first time!</p><p style="line-height:1.4em;margin:16px 0 0;padding:0;">Thanks to ev­ery­one who con­trib­ut­ed to this re­lease!</p><ul style="line-height:1.4em;margin:0 0 0 1.5em;padding:20px 0 0;"><li style="line-height:1.4em;margin:0;padding:0;">Tom Bach­­­­mann</li><li style="line-height:1.4em;margin:0;padding:0;">Tomas Bam­bas</li><li style="line-height:1.4em;margin:0;padding:0;">Matthew Brett<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Ondřej Čertík</li><li style="line-height:1.4em;margin:0;padding:0;">Re­­­­na­­­­to Coutin­ho</li><li style="line-height:1.4em;margin:0;padding:0;">Ad­di­­­­son Cug­i­ni</li><li style="line-height:1.4em;margin:0;padding:0;">Matt Cur­ry<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Raf­­­­faele De Feo</li><li style="line-height:1.4em;margin:0;padding:0;">Mark Dew­ing</li><li style="line-height:1.4em;margin:0;padding:0;">Thomas Dixon<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Harold Erbin</li><li style="line-height:1.4em;margin:0;padding:0;">Pavel Fe­­­­do­­­­tov</li><li style="line-height:1.4em;margin:0;padding:0;">Gilbert Gede<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Olek­san­­­­dr Gi­t­u­liar</li><li style="line-height:1.4em;margin:0;padding:0;">Bri­an Granger</li><li style="line-height:1.4em;margin:0;padding:0;">Alex­ey U. Gud­chenko<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Øyvind Jensen</li><li style="line-height:1.4em;margin:0;padding:0;">Fredrik Jo­han­s­­­­son</li><li style="line-height:1.4em;margin:0;padding:0;">Fe­lix Kaiser</li><li style="line-height:1.4em;margin:0;padding:0;">Yuri Karadzhov</li><li style="line-height:1.4em;margin:0;padding:0;">Gary Kerr<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Kibeom Kim</li><li style="line-height:1.4em;margin:0;padding:0;">Nicholas J.S. Ki­­­­nar<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Ana­­­­tolii Ko­­­­val</li><li style="line-height:1.4em;margin:0;padding:0;">Se­bas­­­­tian Krämer</li><li style="line-height:1.4em;margin:0;padding:0;">Ryan Krauss</li><li style="line-height:1.4em;margin:0;padding:0;">Gre­­­­go­ry Ksion­­­­da<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Pri­it Laes</li><li style="line-height:1.4em;margin:0;padding:0;">Vladimir La­­­­gunov</li><li style="line-height:1.4em;margin:0;padding:0;">Ro­­­­nan Lamy</li><li style="line-height:1.4em;margin:0;padding:0;">To­­­­mo La­­­­zovich</li><li style="line-height:1.4em;margin:0;padding:0;">Sap­­­­tarshi Man­­­­dal<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">David Marek</li><li style="line-height:1.4em;margin:0;padding:0;">Jack Mc­­­­Caf­fery</li><li style="line-height:1.4em;margin:0;padding:0;">Ben­­­­jamin Mc­­­­Don­ald<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Aaron Meur­er</li><li style="line-height:1.4em;margin:0;padding:0;">Chris­­­­tian Muise</li><li style="line-height:1.4em;margin:0;padding:0;">Ós­­­­car Ná­­­­jera<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Jezreel Ng</li><li style="line-height:1.4em;margin:0;padding:0;">Sher­jil Ozair<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Ma­­­­teusz Pa­proc­­­­ki</li><li style="line-height:1.4em;margin:0;padding:0;">James Pear­­­­son</li><li style="line-height:1.4em;margin:0;padding:0;">Fer­­­­­­­nan­­­­do Perez</li><li style="line-height:1.4em;margin:0;padding:0;">Vladimir Per­ić</li><li style="line-height:1.4em;margin:0;padding:0;">Mario Per­ni­­­­ci<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Nico­las Pourcelot</li><li style="line-height:1.4em;margin:0;padding:0;">ray­­­­man</li><li style="line-height:1.4em;margin:0;padding:0;">Matthew Rock­­­­lin<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Chris­­­­tian Schu­bert</li><li style="line-height:1.4em;margin:0;padding:0;">An­­­­dre de For­ti­er Smit</li><li style="line-height:1.4em;margin:0;padding:0;">Chris Smith</li><li style="line-height:1.4em;margin:0;padding:0;">Cristóvão Sousa<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Ak­shay Srini­­­­vasan</li><li style="line-height:1.4em;margin:0;padding:0;">Vinzent Stein­berg</li><li style="line-height:1.4em;margin:0;padding:0;">Pra­­­­ful­lku­­­­mar P. Tale</li><li style="line-height:1.4em;margin:0;padding:0;">Andy R. Ter­rel</li><li style="line-height:1.4em;margin:0;padding:0;">Kazuo Thow<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Toon Ver­s­­­trae­len</li><li style="line-height:1.4em;margin:0;padding:0;">Sean Vig</li><li style="line-height:1.4em;margin:0;padding:0;">Lu­­­­ca Weihs<em></em></li><li style="line-height:1.4em;margin:0;padding:0;">Thomas Wiec­­­­ki</li><li style="line-height:1.4em;margin:0;padding:0;">Shai 'Deshe' Wybors­­­­ki</li><li style="line-height:1.4em;margin:0;padding:0;">Jeremias Yehdegho*</li></ul></span></b></span></span></div></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/06/29/sympy-0-7-0-released/#disqus_thread" data-disqus-identifier="cache/posts/2011/06/29/sympy-0-7-0-released.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/06/24/import_module-the-hopefully-last-fix-for-0-7-0/" class="u-url">import_module (the (hopefully) last fix for 0.7.0)</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-06-24T06:59:22-05:00">2011-06-24 06:59</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>So ev­ery­thing seemed to be ready to go for the 0.7.0 re­lease, when some­one  <a href="https://groups.google.com/d/topic/sympy/9FOPjxC0D6s/discussion" target="_blank">point­ed out</a>  a test fail­ure in Python 2.5.   </p> 
+ <p>It turned out that there is a bug in numpy (see the  <a href="http://projects.scipy.org/numpy/ticket/1872" target="_blank">numpy is­sue page</a>  for more in­for­ma­tion), that was caus­ing the quan­tum mod­ule to fail en­tire­ly when im­port­ed in Python 2.5 with numpy in­stalled.</p> 
+ <p>Be­cause there was no easy way around the bug, the so­lu­tion was to dis­able numpy com­plete­ly in Python 2.5 in the quan­tum mod­ule.  But this en­tailed writ­ing the fol­low­ing code id­iom</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>im­port sys</p> 
+ <p>im­port warn­ings</p> 
+ <p>numpy_­sup­port­ed = True</p> 
+ <p>if sys.ver­sion_in­fo &lt; (2, 6):
+    warn­ings.warn("­Can­not use numpy in Python 2.4/2.5.")
+    numpy_­sup­port­ed = False
+else:
+    try:
+        im­port numpy as np
+    ex­cept Im­portEr­ror:
+        numpy_­sup­port­ed = False
+[/­code]</p> 
+ <p>in all the half dozen files that im­port numpy in the quan­tum mod­ule.   </p> 
+ <p>So clear­ly, SymPy need­ed a more cen­tral­ized way to han­dle im­port­ing op­tion­al ex­ter­nal mod­ules.  Hence, I wrote the  <code>im­port_­mod­ule()</code>  func­tion.  The func­tion at­tempts to im­port a mod­ule giv­en it's name. It re­turns the mod­ule if it can be im­port­ed and None if it can­not.  It sup­ports check­ing the ver­sion of Python or the ver­sion of the li­brary and not im­port­ing it if ei­ther are too old.  It al­so sup­ports emit­ting warn­ings when the mod­ule is not avail­able or the ver­sion is too old.  Thus, the above id­iom re­duces to</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
+ <p>np = im­port_­mod­ule('numpy', min_python_ver­sion=(2, 6))</p> 
+ <p>[/­code]</p> 
+ <p>And that's it. The func­tion will au­to­mat­i­cal­ly warn if numpy can­not be im­port­ed be­cause the Python ver­sion is too old.</p> 
+ <p>Any kind of  <code>numpy_­sup­port­ed</code>  vari­able in the code can be re­placed by test­ing the  <code>np</code>  vari­able it­self, like</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>if np:
+    # Do some numpy stuff
+else:
+    # np is None
+    # Do what­ev­er you do when it is not avail­able
+[/­code]</p> 
+ <p>This method has an ad­di­tion­al ad­van­tage, which is that the warn­ings can be cus­tom­ized by set­ting vari­able hook­s.  So, for ex­am­ple, the test run­ner can dis­able all warn­ings by do­ing</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>im­port sympy.ex­ter­nal</p> 
+ <p>sympy.ex­ter­nal.im­port­tool­s.WARN_OLD_VER­SION = False</p> 
+ <p>sympy.ex­ter­nal.im­port­tool­s.WARN_NOT_IN­STALLED = False</p> 
+ <p>[/­code]</p> 
+ <p>I ac­tu­al­ly did make the test run­ner do this, and al­so set both to True when the  <code>SYMPY_DE­BUG</code>  en­vi­ron­ment vari­able is set to True (by de­fault,  <code>WARN_NOT_IN­STALLED</code>  is False and  <code>WARN_OLD_VER­SION</code>  is True).</p> 
+ <p>There are some caveat­s.  First, note that the func­tion does it's mag­ic us­ing the built-in  <code><strong>im­port</strong>()</code>  func­tion.  To im­port a sub­mod­ule (like  <code>sympy.quan­tum</code>), you need to pass some stuff to the  <code>from­list</code>  ar­gu­ment of  <code><strong>im­port</strong>()</code>.  It's al­so a good idea to pass names to this if you plan to repli­cate  <code>from mod­ule im­port stuff</code>  (in­stead of just  <code>im­port mod­ule</code>), be­cause some mod­ules use lazy im­port­ing and oth­er mag­ic that pre­vent you from ac­cess­ing names di­rect­ly from  <code>mod­ule.stuff</code>  with­out im­port­ing  <code>stuff</code>  first.</p> 
+ <p>To do this, just pass the ar­gu­ments to  <code><strong>im­port</strong>()</code>  to  <code>im­port_­mod­ule()</code>  us­ing the  <code><strong>im­port</strong>kwargs</code>  key­word ar­gu­men­t, like</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
+ <h2>Do this instead of "from matplotlib import pyplot" or "import matplotlib.pyplot as pyplot"</h2>
+<p>mat­plotlib = im­port_­mod­ule('­mat­plotlib',  <strong>im­port</strong>kwargs={'from­list':['py­plot']})</p> 
+ <p>py­plot = mat­plotlib.py­plot</p> 
+ <p>[/­code]</p> 
+ <p>Sec­ond, for mod­ule ver­sion check­ing it looks at  <code>mod­ule.<strong>ver­sion</strong></code>.  Some mod­ules use a dif­fer­ent method (for ex­am­ple, gmpy).  You can use the oth­er method by pass­ing the prop­er ar­gu­ments to  <code>im­port_­mod­ule()</code>.  For ex­am­ple, ver­sions of gmpy low­er than 1.03 have a bug that pre­vent its use in SymPy (ba­si­cal­ly,  <code>in­t(large mpz)</code>  did not au­to­mat­i­cal­ly con­vert the num­ber to a  <code>long</code>).  So to im­port gmpy, but on­ly if it's ver­sion 1.03 or new­er, you would use</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
+ <p>gmpy = im­port_­mod­ule('gmpy', min_­mod­ule_ver­sion='1.03',
+    mod­ule_ver­sion_at­tr='ver­sion', mod­ule_ver­sion_at­tr_­cal­l_args=())
+[/­code]</p> 
+ <p>This tells it to check the ver­sion of gmpy us­ing  <code>gmpy.ver­sion()</code>, and to im­port it on­ly if it's at least 1.03 (note that this works by the fact that Python lex­i­co­graph­i­cal­ly com­pares strings and tu­ples, so  <code>'1.02' &lt; '1.03'</code>  re­turns True).</p> 
+ <p>The sympy.ex­ter­nal mod­ule is com­plete­ly in­de­pen­dent of the rest of SymPy (it does not call  <code>sympy/<strong>init</strong>.py</code>), so you can use it even out­side of sympy with­out the per­for­mance penal­ty that im­port­ing all of sympy might bring.   </p> 
+ <p>So, hope­ful­ly this is the last is­sue to fix for the 0.7.0 re­lease.  You can still test it at  <a href="https://github.com/sympy/sympy/tree/0.7.0" target="_blank">http­s://github.­com/sympy/sympy/tree/0.7.0</a>.  If peo­ple wan­t, I will cre­ate an­oth­er re­lease can­di­date.  Oth­er­wise, I will re­lease 0.7.0 fi­nal on Mon­day (bar­ring any fur­ther prob­lem­s).</p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/06/24/import_module-the-hopefully-last-fix-for-0-7-0/#disqus_thread" data-disqus-identifier="cache/posts/2011/06/24/import_module-the-hopefully-last-fix-for-0-7-0.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/06/17/fixing-bugs-in-the-release-candidate/" class="u-url">Fixing bugs in the release candidate</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-06-17T04:00:55-05:00">2011-06-17 04:00</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>This week, I most­ly worked on fix­ing bugs that peo­ple found in the  <a href="http://asmeurersympy.wordpress.com/2011/06/13/sympy-0-7-0-rc1-is-out/">re­lease can­di­date</a>  I re­leased last week.  I dis­cov­ered right af­ter re­leas­ing it that it did not work in Python 2.4 or 2.5 be­cause of a syn­tax er­ror.  So I fixed those and cre­at­ed SymPy 0.7.0.r­c2 (<a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.tar.gz" target="_blank">source</a>;  <a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.win32.exe" target="_blank">win­dows in­stall­er</a>).   </p> 
+ <p>Things were go­ing pret­ty smooth­ly with that, un­til Re­na­to Coutin­ho dis­cov­ered that there were test fail­ures in Python 2.4 on Win­dows, and that the tests failed if ran twice in the same ses­sion (i.e., by us­ing  <code>test()</code>  in isympy).  I was able to fix the fail­ures re­sult­ing from two ses­sion­s, which were al­most all caused by a test mod­i­fy­ing some glob­al val­ue or be­ing writ­ten in a way that did not al­low it to pass when run twice.  But I do not have a Win­dows ma­chine, so I could­n't re­pro­duce the Win­dows fail­ures.</p> 
+ <p>For­tu­nate­ly, yes­ter­day, Re­na­to, Chris Smith, and I were able to de­bug the prob­lems over IR­C.  The main prob­lem was that sympy/­core/e­valf.py had code</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>INF = 1e1000</p> 
+ <p>MI­NUS_INF = -1e1000</p> 
+ <p>[/­code]</p> 
+ <p>These were in­tend­ed to give  <code>float('in­f')</code>  and  <code>float('-in­f')</code>, re­spec­tive­ly (float­ing point in­fin­i­ty and neg­a­tive in­fin­i­ty). And they did do this… on all plat­forms ex­cept for Python 2.4 on Win­dows.  From what I can tell from what Chris told me, on that plat­form it in­stead gives 1.0.  Strange­ly,  <code>float('in­f')</code>  did not give float­ing point in­fin­i­ty ei­ther.  We dis­cov­ered that  <code>float(mp­math­_in­f)</code>  did give float­ing point in­fin­i­ty, where  <code>mp­math­_inf</code>  is mp­math­'s in­fin­i­ty.  This of course al­so works in all oth­er plat­form­s, so chang­ing it made the code work ev­ery­where.</p> 
+ <p>Af­ter that, there was on­ly one test fail­ure left in Win­dows (o­rig­i­nal­ly there were dozens of er­rors, but all but one were caused by the above prob­lem).  It turns out that the  <code>sub­pro­cess</code>  mod­ule from the code­gen mod­ule was caus­ing the test run­ner to fail en­tire­ly.  Our so­lu­tion was to skip this test com­plete­ly in Python 2.4 on Win­dows.</p> 
+ <p>So now we had all tests pass­ing on all plat­forms with all ground type­s, even if run twice from with­in the same ses­sion.</p> 
+ <p>But it turned out there was still one more er­ror lurk­ing, found by Re­na­to.  A bunch of mp­math tests failed in Python 2.4 when gmpy was in­stalled.  I had nev­er got­ten gmpy to com­pile, so I have on­ly had it in­stalled on my ma­chine for those Python ex­e­cuta­bles in­stalled by fink (2.5-2.7, 64-bit).   </p> 
+ <p>It turns out that mp­math us­es gmpy if it is in­stalled.  There were a few places in the code where it was do­ing things like line 1947 of mp­math­/libm­p/gam­maze­ta.py, shown be­low:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>re­turn mpf_­pos(s­mal­l­_­fac­to­ri­al_­cache[n-1], prec, rnd)</p> 
+ <p>[/­code]</p> 
+ <p>The prob­lem was that  <code>n</code>  was an  <code>mpz</code>, or gmpy in­te­ger.  But Python 2.4 and ealier do not sup­port non-int types as the in­dex to list­s.  It was­n't un­til Python 2.5's  <a href="http://docs.python.org/reference/datamodel.html?highlight=__index__#object.__index__" target="_blank"><code><strong>in­dex</strong></code></a>  method that non-in­t/­long types were able to be used as slice in­dices.   </p> 
+ <p>This id­iom was be­ing used in sev­er­al places through­out the code, so rather than try to patch them al­l, we de­cid­ed to just dis­able the gmpy back­end in mp­math for Python 2.4.  This is­sue had nev­er come up be­fore to my knowl­edge, so it seems that he was the first per­son to run the mp­math tests in Python 2.4 with gmpy in­stalled.   </p> 
+ <p>So now tests should be pass­ing ev­ery­where in the  <a href="posts/2011/06/17/fixing-bugs-in-the-release-candidate/github.com/sympy/sympy/tree/0.7.0" target="_blank">0.7.0 branch</a>.  Please con­tin­ue to test it, though.  If it will make it eas­i­er to test, I will cre­ate a 0.7.0.r­c3 with all the lat­est fix­es.  Oth­er­wise, bar­ring any fur­ther ma­jor fix­es, I will re­lease 0.7.0 fi­nal in about a week.</p> 
+ <p>And a big thanks for Re­na­to Coutin­ho and Chris Smith for help­ing me de­bug and fix these bugs.    </p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/06/17/fixing-bugs-in-the-release-candidate/#disqus_thread" data-disqus-identifier="cache/posts/2011/06/17/fixing-bugs-in-the-release-candidate.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2011/06/13/sympy-0-7-0-rc1-is-out/" class="u-url">SymPy 0.7.0.rc1 is out!</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2011-06-13T01:15:03-05:00">2011-06-13 01:15</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>My blog post is a lit­tle late this week be­cause I want­ed to be able to an­nounce this.  I have re­leased the first re­lease can­di­date for SymPy 0.7.0 (see  <a href="https://asmeurersympy.wordpress.com/2011/05/26/update-for-the-beginning-of-the-summer/" target="_blank">this pre­vi­ous blog post</a>  for a lit­tle bit of what's new since the last re­lease).  You can down­load source (Lin­ux/­Mac OS X ver­sion)  <a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc1.tar.gz" target="_blank">here</a>  and the Win­dows in­stall­er  <a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc1.win32.exe" target="_blank">here</a>.  Please down­load it at test it.</p> 
+ <p>Un­for­tu­nate­ly, I dis­cov­ered soon af­ter re­leas­ing it that the code does not work in Python 2.4 or 2.5.  I will soon re­lease SymPy 0.7.0.r­c2 to fix this. Please test it in Python 2.6 and 2.7 un­til then, or test the  <a href="https://github.com/sympy/sympy/tree/0.7.0" target="_blank">0.7.0 branch</a>  of the of­fi­cial SymPy repos­i­to­ry.</p> 
+ <p>If ev­ery­thing goes smooth­ly, then the full re­lease should be out in a week or so.  Watch this blog or the  <a href="http://sympy.blogspot.com/" target="_blank">of­fi­cial SymPy blog</a>  for the an­nounce­men­t.</p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2011/06/13/sympy-0-7-0-rc1-is-out/#disqus_thread" data-disqus-identifier="cache/posts/2011/06/13/sympy-0-7-0-rc1-is-out.html">Comments</a>
+
+
+        </p></article>
+    
+        <div>
+        <ul class="pager">
+            <li class="previous">
+                <a href="index-7.html" rel="prev">← Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-5.html" rel="next">Older posts →</a>
+            </li>
+        </ul>
+        </div>
+
+    
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+	
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="assets/js/mathjax.js"></script>
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

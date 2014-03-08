@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Major API Change for the Risch Algorithm Functions | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Major API Change for the Risch Algorithm Functions">
+            <meta name="og:description" content="I have been able to get to work again on the Risch Al­go­rithm now that I have a month win­ter break from class­es.  So the first thing I did was com­mit a bunch of bug fix­es that had been sit­ting t">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Major API Change for the Risch Algorithm Functions</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2010-12-27T07:34:30-06:00" itemprop="datePublished">2010-12-27 07:34</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>I have been able to get to work again on the Risch Al­go­rithm now that I have a month win­ter break from class­es.  So the first thing I did was com­mit a bunch of bug fix­es that had been sit­ting there since the end of the sum­mer.  Then, I set out to make a ma­jor in­ter­nal API change to the en­tire Risch Al­go­rith­m.</p> 
+ <p>Let me give some back­ground.  When I first start­ed pro­gram­ming the Risch Al­go­rithm at the be­gin­ning of the sum­mer, I did­n't have a very good idea of how dif­fer­en­tial ex­ten­sions worked yet (re­mem­ber that I pro­grammed the al­go­rithm as I learned it from Bron­stein's book).  Let me use the func­tion  <code>deriva­tion()</code>  to demon­strate how the API has changed.   <code>deriva­tion()</code>  takes the Poly  <code>p</code>  in  <code>t</code>  and com­putes the de­riv­a­tive (<code>t</code>  is some tran­scen­den­tal ex­ten­sion, like $la­tex e^x$).  Al­so, the in­te­gra­tion vari­able is  <code>x</code>.  The first in­ter­nal API that I used was</p> 
+ <p><code>deriva­tion(p, D, x, t)</code></p> 
+ <p>where  <code>D</code>  is a Poly of the de­riv­a­tive of  <code>t</code>, and  <code>x</code>  and  <code>t</code>  are Sym­bols (see  <a href="https://github.com/asmeurer/sympy/commit/0f6a3d90f724118fadc5fdaf290a0cb3e3963efd">this com­mit</a>).   The prob­lem here is that  <code>p</code>  might not be in just one sym­bol,  <code>t</code>, but in many. This would hap­pen when­ev­er the func­tion had more than one tran­scen­den­tal func­tion, or ex­ten­sion, in it.  So, for ex­am­ple, $la­tex e^x\log{x}$ would have this prob­lem. Sur­pris­ing­ly, ac­cord­ing to the git log, it took me un­til Ju­ly 4 to fig­ure this out (that above linked com­mit, which is the first oc­cur­rence of this func­tion and when I start­ed the full al­go­rith­m, dates from June 7, so it took me al­most a mon­th!), af­ter which I had al­ready writ­ten a good por­tion of the Risch Al­go­rith­m.  I changed the API to</p> 
+ <p><code>deriva­tion(p, D, x, T)</code></p> 
+ <p>where  <code>T</code>  is a list of the ex­ten­sion vari­ables and  <code>D</code>  is a list of the deriva­tions of the re­spec­tive el­e­ments of  <code>T</code>  with re­spect to the low­er el­e­ments and x (see  <a href="https://github.com/asmeurer/sympy/commit/20b7a5f8ca8dec579065f85583f11cc0955b96f0">this com­mit</a>).  Now, the deriva­tion of  <code>x</code>  is al­ways  <code>Poly(1, x)</code>, so I did­n't think it was nec­es­sary to in­clude it.  But it turns out that it is eas­i­er to just al­ways in­clude this in  <code>D</code>  rather than try to spe­cial case it in the code.  Al­so, the low­est ex­ten­sion vari­able,  <code>x</code>, is­n't used very of­ten in the code, so it al­so does­n't make much sense to keep it sep­a­rate from the rest of the vari­ables in  <code>T</code>.  Now this did­n't take me as long to fig­ure out (Ju­ly 11).  There­fore, I changed the API to just</p> 
+ <p><code>deriva­tion(p, D, T)</code></p> 
+ <p>where the first el­e­ment of  <code>T</code>  is al­ways  <code>x</code>  and the first el­e­ment of  <code>D</code>  is al­ways  <code>Poly(1, x)</code>  (see  <a href="https://github.com/asmeurer/sympy/commit/bca2b19844ae71aa1ef8e27a9f77eabb70b4aa5f">this com­mit</a>).</p> 
+ <p>Now this API worked quite well for the re­main­der of the sum­mer.  How­ev­er, at the very end, I dis­cov­ered that a func­tion re­quired to han­dle some spe­cial cas­es in cer­tain parts of the al­go­rithm need­ed four more lists (the el­e­ments of the ex­ten­sion that are log­a­rithm­s, the el­e­ments of the ex­ten­sion that are ex­po­nen­tial­s, the ar­gu­ments of those log­a­rithm­s, and the ar­gu­ments of those ex­po­nen­tial­s).  I had pre­vi­ous­ly thought that these lists would on­ly be need­ed when cre­at­ing the ex­ten­sion at the be­gin­ning of in­te­gra­tion, but it turned out that this was not the case and that they could be need­ed in sev­er­al rather deep places in the al­go­rith­m.  The on­ly way to get them there would be to pass them through to ev­ery sin­gle func­tion in the al­go­rith­m.     </p> 
+ <p>So I was faced with a dilem­ma.  I did­n't want to pass six ar­gu­ments through each func­tion just be­cause a few might need them al­l.  I knew that the an­swer was to cre­ate an ob­ject to store all the da­ta for a dif­fer­en­tial ex­ten­sion and to just pass this ob­ject around.  Un­for­tu­nate­ly, this hap­pened at the very end of the sum­mer, so I had­n't been able to do that un­til now.   </p> 
+ <p>This brings us to now.  Over the past cou­ple of week­s, I cre­at­ed an ob­ject called  <code>Dif­fer­en­tialEx­ten­sion</code>, and re­placed the API in the Risch Al­go­rithm to use it.  See  <a href="https://github.com/asmeurer/sympy/commit/d9d9548625513188aaa663621bfe4e097aebf741">this com­mit</a>  and  <a href="https://github.com/asmeurer/sympy/commit/1935b6d6e1fdf8eae4deb5a4f56ea53c5d6989fa">this com­mit</a>  and some of the ones in be­tween to see what I did. More or less, the ob­ject is like a C struc­t---it does lit­tle more than hold a lot of in­for­ma­tion as at­tributes.  How­ev­er, at the sug­ges­tion of Ro­nan Lamy on the  <a href="http://groups.google.com/group/sympy/browse_thread/thread/a051b5ba1fb5cb4d">mail­ing list</a>, I have moved all the rel­e­vant code for build­ing the ex­ten­sion from the  <code>build_ex­ten­sion()</code>  func­tion in­to  <code>Dif­fer­en­tialEx­ten­sion.<strong>init</strong>()</code>.  I have al­so cre­at­ed some "mag­ic" to han­dle the re­cur­sive na­ture of the al­go­rith­m.  A Dif­fer­en­tialEx­ten­sion ob­ject has an at­tribute  <code>lev­el</code>, which rep­re­sents the lev­el of the ex­ten­sion that the al­go­rithm is work­ing in.  So you can store all the deriva­tions of the ex­ten­sion in  <code>Dif­fer­en­tialEx­ten­sion.D</code>, but on­ly have  <code>Dif­fer­en­tialEx­ten­sion.d</code>  point to the "cur­ren­t" out­er­most deriva­tion.  This re­places things like</p> 
+ <p><code>D = D[:-1]</code></p> 
+ <p>T = T[:-1]</p> 
+ <p>   </p> 
+ <p>from the old API to just</p> 
+ <p><code>DE.decre­men­t_level()</code></p> 
+ <p></p> 
+ <p>(and then lat­er on,  <code>DE.in­cre­men­t_level()</code>).  The en­tire API is now just</p> 
+ <p><code>deriva­tion(p, DE)</code></p> 
+ <p>where  <code>DE</code>  is a  <code>Dif­fer­en­tialEx­ten­sion</code>  ob­jec­t.  Chang­ing the API of the en­tire code base at this point was a bit of work, but I have fi­nal­ly fin­ished it, and I must say, this is much clean­er.  True, you now have to use  <code>DE.t</code>  ev­ery­where in­stead of  <code>t</code>  (with  <code>t = T[-1]</code>  at the top of the func­tion), which is three char­ac­ters more space for ev­ery use, but I think in the end it is clean­er.  For ex­am­ple, the func­tion that used to be</p> 
+ <p><code>is_log_deriv_k_t_rad­i­cal(­fa, fd, L_K, E_K, L_args, E_args, D, T)</code></p> 
+ <p>is now just</p> 
+ <p><code>is_log_deriv_k_t_rad­i­cal(­fa, fd, DE)</code>.</p> 
+ <p>Al­so, be­cause it is an ob­jec­t, I can do cool things like over­ride  <code>Dif­fer­en­tialEx­ten­sion.<strong>str</strong>()</code>  to print out a tu­ple of the most im­por­tant at­tributes of the ob­jec­t, mak­ing de­bug­ging much eas­i­er (now there is just one print state­ment in­stead of five).   </p> 
+ <p>An­oth­er thing I had to do was to al­low the cre­ation of these ob­jects man­u­al­ly, be­cause what is now  <code>Dif­fer­en­tialEx­ten­sion.<strong>init</strong>()</code>  can­not yet han­dle, for ex­am­ple, tan­gent ex­ten­sion­s, but some of the tests in­volve those.  So I cre­at­ed an  <code>ex­ten­sion</code>  flag to  <code><strong>init</strong>()</code>  to which you could pass a dic­tio­nary, and it would cre­ate a skele­ton ex­ten­sion from that (see  <a href="https://github.com/asmeurer/sympy/commit/7121b06eab3f1e0f8464c287438fb7175f07762b">this com­mit</a>).  I made it smart enough to cre­ate some at­tributes au­to­mat­i­cal­ly, so I on­ly have to pass the list  <code>D</code>  in most test­s---it cre­ates at­tributes like  <code>T</code>  from that au­to­mat­i­cal­ly.  Thus, this in some ways made the tests a lit­tle sim­pler, be­cause I did­n't have to wor­ry about  <code>T</code>  any more.   </p> 
+ <p>We'll see how things go, but this fourth API change should hope­ful­ly be the last.  This should al­so make it much eas­i­er when­ev­er I add trigono­met­ric func­tion sup­port, where I will have to add even more at­tributes to the ob­jec­t.  I won't have to change the code in any ex­ist­ing func­tion (un­less it specif­i­cal­ly needs to be able to know about trig ex­ten­sion­s), be­cause, to them, the in­for­ma­tion in  <code>DE</code>  will not change.</p> 
+ <p>So the good news be­hind all of this, as I men­tioned at the be­gin­ning of this post, is that I can now write some al­go­rithm that re­quires those  <code>L_K</code>,  <code>E_K</code>,  <code>L_args</code>,  <code>E_args</code>  vari­ables from ar­bi­trary places with­in the al­go­rith­m.  This should al­low me to com­plete­ly fin­ish the ex­po­nen­tial case.  So look for­ward soon to a  <code>risch_in­te­grate()</code>  that can han­dle com­plete­ly any tran­scen­den­tal func­tion of ex­po­nen­tials (ei­ther pro­duce an in­te­gral or prove that no el­e­men­tary in­te­gral ex­ist­s).   </p> 
+ <p>And just to be clear, this does­n't change any­thing with  <code>risch_in­te­grate()</code>---this is on­ly an in­ter­nal change. And at the mo­men­t, it does­n't add any fea­tures, though that should soon change. So keep on test­ing it for me!  If you see any er­rors along the lines of "Vari­able t not de­fined," it prob­a­bly means that I missed that one when I was switch­ing the API due to poor test cov­er­age in that area of the code.  I would love to know about any er­rors you find, or, in­deed, any test­ing you do with  <code>risch_in­te­grate</code>.  Re­mem­ber that you can ob­tain my branch at  <a href="https://github.com/asmeurer/sympy/tree/integration3">my GitHub ac­count (branch in­te­gra­tion3)</a>.</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../08/14/the-risch-algorithm-part-3-liouvilles-theorem/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../../2011/01/02/2010-in-review/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions/",
+        disqus_title="Major API Change for the Risch Algorithm Functions",
+        disqus_identifier="cache/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

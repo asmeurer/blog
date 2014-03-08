@@ -1,0 +1,294 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>How to make attributes un-inheritable in Python using descriptors | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="How to make attributes un-inheritable in Python using descriptors">
+            <meta name="og:description" content="For http­s://github.­com/sympy/sympy/pul­l/1969, and pre­vi­ous work at http­s://github.­com/sympy/sympy/pul­l/1901, we added the abil­i­ty for the SymPy doctester to run or not run doctests con­di­ti">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">How to make attributes un-inheritable in Python using descriptors</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2013-04-06T02:49:13-05:00" itemprop="datePublished">2013-04-06 02:49</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>For http­s://github.­com/sympy/sympy/pul­l/1969, and pre­vi­ous work at http­s://github.­com/sympy/sympy/pul­l/1901, we added the abil­i­ty for the SymPy doctester to run or not run doctests con­di­tion­al­ly de­pend­ing on whether or not re­quired ex­ter­nal de­pen­den­cies are in­stalled. This means that for ex­am­ple we can doctest all the plot­ting ex­am­ples with­out them fail­ing when mat­plotlib is not in­stalled.  </p> 
+ <p>For func­tion­s, this is as easy as dec­o­rat­ing the func­tion with  <code>@doctest_de­pends</code>, which adds the at­tribute  <code>_doctest_de­pend­s_on</code>  to the func­tion with a list of what de­pen­den­cies the doctest de­pends on. The doctest will then not run the doctest un­less those de­pen­den­cies are in­stalled.</p> 
+ <p>For class­es, this is not so easy. Ide­al­ly, one could just de­fine  <code>_doctest_de­pend­s_on</code>  as an at­tribute of the class. How­ev­er, the is­sue is that with class­es, we have in­her­i­tance. But if class  <code>A</code>  has a doc­string with a doctest that de­pends on some mod­ules, it does­n't mean that a sub­class  <code>B</code>  of  <code>A</code>  will have a doctest that does.   </p> 
+ <p>Re­al­ly, what we need to do is to dec­o­rate the doc­string it­self, not the class. Un­for­tu­nate­ly, Python does not al­low adding at­tributes to strings</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a = ""</p> 
+ <p>&gt;&gt;&gt; a.x = 1</p> 
+ <p>Trace­back (most re­cent call last):
+  File "&lt;st­d­in&gt;", line 1, in &lt;mod­ule&gt;
+At­tribu­teEr­ror: 'str' ob­ject has no at­tribute 'x'</p> 
+ <p>[/­code]</p> 
+ <p>So what we have to do is to cre­ate a at­tribute that does­n't in­her­it.   </p> 
+ <p>I had for some time want­ed to give  <a href="http://docs.python.org/2/howto/descriptor.html">de­scrip­tors</a>  in Python a try, since they are a cool fea­ture, but al­so the sec­ond most com­pli­cat­ed fea­ture in Python (the first is meta­class­es). If you don't know what a de­scrip­tor is, I rec­om­mend read­ing  <a href="http://python-history.blogspot.com/2010/06/inside-story-on-new-style-classes.html?m=1">this blog post</a>  by Gui­do van Rossum, the cre­ator of Python. It's the best ex­pla­na­tion of the fea­ture there is.   </p> 
+ <p>Ba­si­cal­ly, Python lets at­tributes de­fine what hap­pens when they are ac­cessed (like  <code>a.x</code>).  You may al­ready know that ob­jects can de­fine how their at­tributes are ac­cessed via  <code><strong>getat­tr</strong></code>. This is dif­fer­en­t. With de­scrip­tors, the  <em>at­tributes them­selves</em>  de­fine what hap­pen­s.  This may sound less use­ful, but in fac­t, it's a very core fea­ture of the lan­guage.  </p> 
+ <p>If you've ev­er won­dered how  <code>prop­er­ty</code>,  <code>class­method</code>, or  <code>stat­icmethod</code>  work in Python, the an­swer is de­scrip­tors. Ba­si­cal­ly, if you have some­thing like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>class A(ob­jec­t):
+    def f(­self):
+        re­turn 1
+    f = prop­er­ty(f)
+[/­code]</p> 
+ <p>Then  <code>A().f</code>  mag­i­cal­ly calls what would nor­mal­ly be  <code>A().f()</code>. The way it works is that  <code>prop­er­ty</code>  de­fines the  <code><strong>get</strong></code>  method, which re­turns  <code>f(ob­j)</code>, where  <code>obj</code>  is the call­ing ob­jec­t, here  <code>A()</code>  (re­mem­ber in Python that the first ar­gu­ment of a method, usu­al­ly called  <code>self</code>  is the ob­ject that calls the method­).   </p> 
+ <p>De­scrip­tors can al­low method to de­fine ar­bi­trary be­hav­ior when called, set, or delet­ed.  To make an at­tribute in­ac­ces­si­ble to sub­class­es, then, you just need to de­fine a de­scrip­tor that pre­vents the at­tribute from be­ing ac­cessed if the class of the call­ing ob­ject is not the orig­i­nal class.  Here is some code:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>class no­sub­class­es(ob­jec­t):
+    def  <strong>init</strong>(self, f, cls):
+        self­.f = f
+        self­.­cls = cls
+    def  <strong>get</strong>(self, ob­j, type­=None):
+        if type == self­.­cls:
+            if hasat­tr(­self.f, '<strong>get</strong>'):
+                re­turn self­.f.<strong>get</strong>(ob­j, type­)
+            re­turn self­.f
+        raise At­tribu­teEr­ror
+[/­code]</p> 
+ <p>it works like this</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [2]: class My­Class(ob­jec­t):
+   ...:     x = 1
+   ...:</p> 
+ <p>In [3]: My­Class.x = no­sub­class­es(My­Class.x, My­Class)</p> 
+ <p>In [4]: class My­Sub­class(My­Class):
+   ...:     pass
+   ...:</p> 
+ <p>In [5]: My­Class.x</p> 
+ <p>Out­[5]: 1</p> 
+ <p>In [6]: My­Class().x</p> 
+ <p>Out­[6]: 1</p> 
+ <p>In [80]: My­Sub­class.x</p> 
+ <hr>
+<p>At­tribu­teEr­ror                            Trace­back (most re­cent call last)</p> 
+ <p>&lt;ipython-in­put-80-2b2f456d­d101&gt; in &lt;mod­ule&gt;()</p> 
+ <p>----&gt; 1 My­Sub­class.x</p> 
+ <p>&lt;ipython-in­put-51-7fe1b5063367&gt; in  <strong>get</strong>(self, ob­j, type­)
+      8                 re­turn self­.f.<strong>get</strong>(ob­j, type­)
+      9             re­turn self­.f
+---&gt; 10         raise At­tribu­teEr­ror</p> 
+ <p>At­tribu­teEr­ror:</p> 
+ <p>In [81]: My­Sub­class().x</p> 
+ <hr>
+<p>At­tribu­teEr­ror                            Trace­back (most re­cent call last)</p> 
+ <p>&lt;ipython-in­put-81-93764ee­b9948&gt; in &lt;mod­ule&gt;()</p> 
+ <p>----&gt; 1 My­Sub­class().x</p> 
+ <p>&lt;ipython-in­put-51-7fe1b5063367&gt; in  <strong>get</strong>(self, ob­j, type­)
+      8                 re­turn self­.f.<strong>get</strong>(ob­j, type­)
+      9             re­turn self­.f
+---&gt; 10         raise At­tribu­teEr­ror</p> 
+ <p>At­tribu­teEr­ror:</p> 
+ <p>[/­code]</p> 
+ <p>Note that by us­ing the third ar­gu­ment to  <code><strong>get</strong></code>, this works re­gard­less if the at­tribute is ac­cessed from the class or the ob­jec­t. I have to call  <code><strong>get</strong></code>  on  <code>self­.f</code>  again if it has it to en­sure that the right thing hap­pens if the at­tribute has oth­er de­scrip­tor log­ic de­fined (and note that reg­u­lar meth­ods have de­scrip­tor log­ic de­fined---that's how they con­vert the first ar­gu­ment  <code>self</code>  to im­plic­it­ly be the call­ing ob­jec­t).</p> 
+ <p>One could eas­i­ly make class dec­o­ra­tor that au­to­mat­i­cal­ly adds the at­tribute to the class in a non-in­her­i­ta­ble way:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>def no­sub­class_x(args):
+    def _wrap­per(­cls):
+        cls.x = no­sub­class­es(args, cls)
+        re­turn cls
+    re­turn _wrap­per
+[/­code]</p> 
+ <p>This au­to­mat­i­cal­ly adds the prop­er­ty  <code>x</code>  to the dec­o­rat­ed class with the val­ue giv­en in the dec­o­ra­tor, and it won't be ac­ces­si­ble to sub­class­es:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [87]: @no­sub­class_x(1)
+   ....: class My­Class(ob­jec­t):
+   ....:     pass
+   ....:</p> 
+ <p>In [88]: My­Class().x</p> 
+ <p>Out­[88]: 1</p> 
+ <p>In [89]: My­Sub­class().x</p> 
+ <hr>
+<p>At­tribu­teEr­ror                            Trace­back (most re­cent call last)</p> 
+ <p>&lt;ipython-in­put-89-93764ee­b9948&gt; in &lt;mod­ule&gt;()</p> 
+ <p>----&gt; 1 My­Sub­class().x</p> 
+ <p>&lt;ipython-in­put-51-7fe1b5063367&gt; in  <strong>get</strong>(self, ob­j, type­)
+      8                 re­turn self­.f.<strong>get</strong>(ob­j, type­)
+      9             re­turn self­.f
+---&gt; 10         raise At­tribu­teEr­ror</p> 
+ <p>At­tribu­teEr­ror:</p> 
+ <p>[/­code]</p> 
+ <p>For SymPy, we can't use class dec­o­ra­tors be­cause we still sup­port Python 2.5, and they were in­tro­duced in Python 2.6. The best work around is to just call  <code>Class.at­tribute = no­sub­class­es(­Class.at­tribute, Class)</code>  af­ter the class def­i­ni­tion. Un­for­tu­nate­ly, you can't ac­cess a class in­side its def­i­ni­tion like you can with func­tion­s, so this has to go at the end.  </p> 
+ <p><strong>Name Man­gling</strong></p> 
+ <p>Af­ter com­ing up with all this, I re­mem­bered that Python al­ready has a pret­ty stan­dard way to de­fine at­tributes in such a way that sub­class­es won't have ac­cess to them. All you have to do is use two un­der­scores be­fore the name, like  <code><strong>x</strong></code>, and it will be  <a href="http://docs.python.org/2/reference/expressions.html#atom-identifiers">name man­gled</a>. This means that the name will be re­named to  <code>_class­namex</code>  out­side the class def­i­ni­tion. The name will not be in­her­it­ed by sub­class­es.  There are some sub­tleties with this, par­tic­u­lar­ly for strange class names (names that are too long, or names that be­gin with an un­der­score). I  <a href="http://stackoverflow.com/q/15845931/161801">asked about this on Stack­Over­flow</a>. The best an­swer is that there was a func­tion in the stan­dard li­brary, but it was re­moved in Python 3. My tests re­veal that the be­hav­ior is dif­fer­ent in CPYthon than in PyPy, so get­ting it right for ev­ery pos­si­ble class is non­triv­ial. The de­scrip­tor thing should work ev­ery­where, though.  On the oth­er hand,  <code>getat­tr(ob­j, '_' + ob­j.<strong>class</strong>.<strong>name</strong>  + at­tribute­name)</code>  will work 99% of the time, and is much eas­i­er both to write and to un­der­stand than the de­scrip­tor.  </p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../03/03/when-does-xlogy-ylogx/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../07/02/scipy-2013/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/",
+        disqus_title="How to make attributes un-inheritable in Python using descriptors",
+        disqus_identifier="cache/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

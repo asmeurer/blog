@@ -1,0 +1,470 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>SymPy 0.7.1 Released | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/07/30/sympy-0-7-1-released/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/07/30/sympy-0-7-1-released/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="SymPy 0.7.1 Released">
+            <meta name="og:description" content="Cross posted on the official SymPy Blog
+SymPy 0.7.1 has been re­leased on Ju­ly 29, 2011. It is avail­able at 
+ http://sympy.org 
+  
+ The source dis­tri­bu­tion can be down­load­ed from: 
+ http://­cod">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">SymPy 0.7.1 Released</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2011-07-30T05:19:14-05:00" itemprop="datePublished">2011-07-30 05:19</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><em>Cross posted on the <a href="http://sympy.blogspot.com/2011/07/sympy-071-released.html">official SymPy Blog</a></em>
+<p>SymPy 0.7.1 has been re­leased on Ju­ly 29, 2011. It is avail­able at</p> 
+ <p><a href="http://sympy.org">http://sympy.org</a></p> 
+ <p></p> 
+ <p>The source dis­tri­bu­tion can be down­load­ed from:</p> 
+ <p><a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.1.tar.gz">http://­code.­google.­com/p/sympy/­down­load­s/de­tail?­name=sympy-0.7.1.­tar.gz</a></p> 
+ <p></p> 
+ <p>You can get the Win­dows in­stall­er here:</p> 
+ <p><a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.1.win32.exe">http://­code.­google.­com/p/sympy/­down­load­s/de­tail?­name=sympy-0.7.1.win32.exe</a></p> 
+ <p></p> 
+ <p>And the html doc­u­men­ta­tion here:</p> 
+ <p><a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.1-docs-html.zip">http://­code.­google.­com/p/sympy/­down­load­s/de­tail?­name=sympy-0.7.1-­doc­s-htm­l.zip</a></p> 
+ <p></p> 
+ <p><span style="font-weight:bold;">About SymPy</span></p> 
+ <p></p> 
+ <p>SymPy is a Python li­brary for sym­bol­ic math­e­mat­ic­s. It aims to be­come a ful­l-fea­tured com­put­er al­ge­bra sys­tem (CAS) while keep­ing the code as sim­ple as pos­si­ble in or­der to be com­pre­hen­si­ble and eas­i­ly ex­ten­si­ble. SymPy is writ­ten en­tire­ly in Python.</p> 
+ <p><span style="font-weight:bold;">Re­lease notes</span></p> 
+ <p></p> 
+ <p><span style="font-weight:bold;">Ma­jor changes</span></p> 
+ <ul>
+<li> 
+ <p>Python 2.4 is no longer sup­­port­ed.  SymPy will not work at all in
+  Python 2.4.  If you still need to use SymPy un­der Python 2.4 for some
+  rea­­son, you will need to use SymPy 0.7.0 or ear­li­er.</p>  
+  </li> 
+ <li> 
+ <p>The Py­­glet plot­t­ing li­brary is now an (op­­tion­al) ex­ter­­nal de­pen­­den­­cy. 
+  Pre­vi­ous­­ly, we shipped a ver­­sion of Py­­glet with SymPy, but this was
+  old and bug­­gy.  The plan is to even­­tu­al­­ly make the plot­t­ing in SymPy
+  much more mod­­u­lar, so that it sup­­ports many back­­end­s, but this has not
+  been done yet.  For now, still on­­ly Py­­glet is di­rec­t­­ly sup­­port­ed. 
+  Note that Py­­glet is on­­ly an op­­tion­al de­pen­­den­­cy and is on­­ly need­ed for
+  plot­t­ing. The rest of SymPy can still be used with­­out any de­pen­­den­­cies
+  (ex­­cept for Python).</p>  
+  </li> 
+ <li> 
+ <p>isympy now works with the new IPython 0.11.</p>  
+  </li> 
+ <li> 
+ <p>mp­­math has been up­­­dat­ed to 0.17.  See the cor­re­spond­ing mp­­math re­lease
+  notes at http://m­p­­math­­.­­google­­code.­­com/svn/trunk­­/CHANGES.</p>  
+  </li> 
+ <li> 
+ <p>Added a Subs ob­­ject for rep­re­sen­t­ing un­e­val­u­at­ed sub­­sti­­tu­­tion­s.  This
+  fi­­nal­­ly lets us rep­re­sent de­riv­a­­tives eval­u­at­ed at a point, i.e.,
+    <code>dif­f(f(x), x).­­sub­­s(x, 0)</code>   re­­turns   <code>Sub­­s(Deriva­­tive(f(_x), _x), (_x,), (0,))</code>.
+  This al­­so means that SymPy can now cor­rec­t­­ly com­­pute the chain rule
+  when this func­­tion­al­i­­ty is re­quired, such as with   <code>f(g(x)).d­if­f(x)</code>.</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">Hy­per­ge­o­met­ric func­­tion­s/Mei­­jer G-­­Func­­tions</span></p> 
+ <ul>
+<li> 
+ <p>Added class­es hy­per­() and mei­­jerg() to rep­re­sent Hy­per­ge­o­met­ric and Mei­­jer G-­­func­­tion­s, re­spec­­tive­­ly. They sup­­port nu­mer­i­­cal eval­u­a­­tion (us­ing mp­­math) and sym­bol­ic dif­fer­­en­ti­a­­tion (not with re­spect to the pa­ram­e­ter­s).</p>  
+  </li> 
+ <li> 
+ <p>Added an al­­go­rithm for rewrit­ing hy­per­ge­o­met­ric and mei­­jer g-­­func­­tions in terms of more fa­mil­iar, named spe­­cial func­­tion­s. It is ac­ces­si­ble via the func­­tion hy­per­ex­­pand(), or al­­so via ex­­pand_­­func(). This al­­go­rithm recog­nis­es many el­e­­men­­tary func­­tion­s, and al­­so com­­plete and in­­­com­­plete gam­­ma func­­tion­s, bessel func­­tion­s, and er­ror func­­tion­s. It can eas­i­­ly be ex­­tend­ed to han­­dle more class­es of spe­­cial func­­tion­s.</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">Sets</span></p> 
+ <ul>
+<li> 
+ <p>Added Finite­Set class to mim­ic python set be­hav­ior while al­­so in­­ter­ac­t­ing with ex­ist­ing In­­ter­­vals and Unions</p>  
+  </li> 
+ <li> 
+ <p>Finite­Sets and In­­ter­­vals in­­ter­act so that, for ex­am­­ple   <code>In­­ter­­val(0, 10) - Finite­Set(0, 5)</code>   pro­­duces   <code>(0, 5) U (5, 10]</code></p>  
+  </li> 
+ <li> 
+ <p>Finite­Sets al­­so han­­dle non-nu­mer­i­­cal ob­­jects so the fol­low­ing is pos­si­ble   <code>{1, 2, 'one', 't­­wo', {a, b}}</code></p>  
+  </li> 
+ <li> 
+ <p>Added Prod­uc­t­Set to han­­dle Carte­sian prod­ucts of sets</p>  
+  </li> 
+ <li> 
+ <p>Cre­ate us­ing the   <code>*</code>   op­er­a­­tor, i.e.   <code>twodice = Finite­Set(1, 2, 3, 4, 5, 6) * Finite­Set(1, 2, 3, 4, 5, 6) or square = In­­ter­­val(0, 1) * In­­ter­­val(0, 1)</code></p>  
+  </li> 
+ <li> 
+ <p>pow op­er­a­­tor al­­so works as ex­pec­t­ed:   <code>R3 = In­­ter­­val(-oo, oo)**3 ; (3, -5, 0) in R3 == True</code></p>  
+  </li> 
+ <li> 
+ <p>Sub­­­trac­­tion, union, mea­­sure­­ment all work tak­ing com­­plex in­­ter­sec­­tions in­­­to ac­­coun­t.   </p>  
+  </li> 
+ <li> 
+ <p>Added as_re­la­­tion­al method to set­s, pro­­duc­ing bool­ean state­­ments us­ing And, Or, Eq, Lt, Gt, etc...</p>  
+  </li> 
+ <li> 
+ <p>Changed re­­duce_poly_inequal­i­ties to re­­turn unions of sets rather than lists of sets</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">It­er­ables</span></p> 
+ <ul>
+<li> 
+ <p>Added gen­er­at­ing rou­tines for in­­te­ger par­ti­­tions and bi­­na­ry par­ti­­tion­s. The rou­­tine for in­­te­ger par­ti­­tions takes 3 ar­gu­­ments, the num­ber it­­self, the max­i­­mum pos­si­ble el­e­­ment al­lowed in the par­ti­­tions gen­er­at­ed and the max­i­­mum pos­si­ble num­ber of el­e­­ments that will be in the par­ti­­tion. Bi­­na­ry par­ti­­tions are char­ac­ter­ized by con­­tain­ing on­­ly pow­ers of two.</p>  
+  </li> 
+ <li> 
+ <p>Added gen­er­at­ing rou­­tine for mul­ti­-set par­ti­­tion­s. Giv­en a mul­ti­set, the al­­go­rithm im­­ple­­men­t­ed will gen­er­ate all pos­si­ble par­ti­­tions of that mul­ti­-set.</p>  
+  </li> 
+ <li> 
+ <p>Added gen­er­at­ing rou­tines for bell per­­mu­­ta­­tion­s, de­range­­ments, and in­­vo­lu­­tion­s. A bell per­­mu­­ta­­tion is one in which the cy­­cles that com­­pose it con­­sist of in­­te­gers in a de­creas­ing or­der. A de­range­­ment is a per­­mu­­ta­­tion such that the ith el­e­­ment is not at the ith po­si­­tion. An in­­vo­lu­­tion is a per­­mu­­ta­­tion that when mul­ti­­plied by it­­self gives the iden­ti­­ty per­­mu­­ta­­tion.</p>  
+  </li> 
+ <li> 
+ <p>Added gen­er­at­ing rou­­tine for un­re­stric­t­ed neck­­laces. An un­re­stric­t­ed neck­­lace is an a-ary string of n char­ac­ter­s, each of a pos­si­ble type­­s. These have been char­ac­ter­ized by the pa­ram­e­ters n and k in the rou­­tine.</p>  
+  </li> 
+ <li> 
+ <p>Added gen­er­at­ing rou­­tine for ori­en­t­ed forest­s. This is an im­­ple­­men­­ta­­tion of al­­go­rithm S in TAOCP Vol 4A.</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">xyz Spin bases</span></p> 
+ <ul>
+<li> 
+ <p>The rep­re­sen­t, re­write and In­­n­er­Prod­uct log­ic has been im­proved to work be­tween any two spin bases. This was done by uti­l­iz­ing the Wign­er-D ma­trix, im­­ple­­men­t­ed in the Wign­erD class, in defin­ing the changes be­tween the var­i­ous bases. Rep­re­sen­t­ing a state, i.e.   <code>rep­re­sen­t(JzKet(1,0), ba­­sis=Jx)</code>, can be used to give the vec­­tor rep­re­sen­­ta­­tion of any get in any of the x/y/z bases for nu­mer­i­­cal val­ues of j and m in the spin eigen­s­tate. Sim­i­lar­­ly, rewrit­ing states in­­­to dif­fer­­ent bases, i.e.   <code>JzKet(1,0).rewrite('Jx')</code>, will write the states as a lin­ear com­bi­­na­­tion of el­e­­ments of the giv­en ba­­sis. Be­­cause this re­lies on the rep­re­sent func­­tion, this on­­ly works for nu­mer­i­­cal j and m val­ues. The in­­n­er prod­uct of two eigen­s­tates in dif­fer­­ent bases can be eval­u­at­ed, i.e.   <code>In­­n­er­Pro­­duc­t(JzKet(1,0),JxKet(1,1))</code>. When two dif­fer­­ent bases are used, one state is rewrit­ten in­­­to the oth­­er ba­­sis, so this re­quires nu­mer­i­­cal val­ues of j and m, but in­­n­er­prod­ucts of states in the same ba­­sis can still be done sym­bol­i­­cal­­ly.</p>  
+  </li> 
+ <li> 
+ <p>The   <code>Ro­­ta­­tion.D</code>   and   <code>Ro­­ta­­tion.d</code>   meth­od­s, rep­re­sen­t­ing the Wign­er-D func­­tion and the Wign­er smal­l­-d func­­tion, re­­turn an in­­s­tance of the Wign­erD class, which can be eval­u­at­ed with the   <code>doit()</code>   method to give the cor­re­spond­ing ma­trix el­e­­ment of the Wign­er-D ma­trix.</p>  
+  </li> 
+ </ul>
+<p><span style="font-weight:bold;">Oth­­er changes</span></p> 
+ <ul>
+<li> 
+ <p>We now use Math­­­Jax in our doc­s. Math­­­Jax ren­ders La­­TeX math en­tier­­ly in
+  the brows­er us­ing Javascrip­t.  This means that the math is much more
+  read­­able than the pre­vi­ous png math, which us­es im­ages.  Math­­­Jax is
+  on­­ly sup­­port­ed on mod­­ern browser­s, so La­­TeX math in the docs may not
+  work on old­er browser­s.</p>  
+  </li> 
+ <li> 
+ <p>nroot­s() now lets you set the pre­­ci­­sion of com­pu­­ta­­tions</p>  
+  </li> 
+ <li> 
+ <p>Added sup­­port for gmpy and mp­­math­­'s types to sympi­­fy()</p>  
+  </li> 
+ <li> 
+ <p>Fix some bugs with lam­b­d­i­­fy()</p>  
+  </li> 
+ <li> 
+ <p>Fix a bug with as_in­de­pen­­dent and non-­­com­­mu­­ta­­tive sym­bol­s.</p>  
+  </li> 
+ <li> 
+ <p>Fix a bug with col­lect (is­­sue 2516)</p>  
+  </li> 
+ <li> 
+ <p>Many fix­es re­lat­ing to port­ing SymPy to Python 3.  Thanks to our GSoC
+  stu­­dent Vladimir Per­ić, this task is al­­most com­­plet­ed.</p>  
+  </li> 
+ <li> 
+ <p>Some peo­­ple were retroac­­tive­­ly added to the AU­THORS file.</p>  
+  </li> 
+ <li> 
+ <p>Added a solver for a spe­­cial case of the Ric­­cati equa­­tion in the ODE
+  mod­­ule.</p>  
+  </li> 
+ <li> 
+ <p>It­er­at­ed de­riv­a­­tives are pret­­ty print­­ed in a con­­cise way.</p>  
+  </li> 
+ <li> 
+ <p>Fix a bug with in­­te­­grat­ing func­­tions with mul­ti­­ple DiracDeltas.</p>  
+  </li> 
+ <li> 
+ <p>Add sup­­port for Ma­trix.nor­m() that works for Ma­tri­ces (not just vec­­tors).</p>  
+  </li> 
+ <li> 
+ <p>Im­prove­­ments to the Groe­b­n­er bases al­­go­rith­m.</p>  
+  </li> 
+ <li> 
+ <p>Plot.saveim­age now sup­­ports a Strin­­gIO out­­­file</p>  
+  </li> 
+ <li> 
+ <p>Ex­pr.as_ordered_terms now sup­­ports non lex or­der­ings.</p>  
+  </li> 
+ <li> 
+ <p>diff now canon­i­­cal­izes the or­der of dif­fer­­en­ti­a­­tion sym­bol­s.  This is
+  so it can sim­­pli­­fy ex­pres­­sions like   <code>f(x, y).d­if­f(x, y) - f(x,
+  y).d­if­f(y, x)</code>.  If you want to cre­ate a De­riv­a­­tive ob­­ject with­­out
+  sort­ing the args, you should cre­ate it ex­­plic­it­­ly with   <code>De­riv­a­­tive</code>,
+  so that you will get   <code>Deriva­­tive(f(x, y), x, y) != Deriva­­tive(f(x, y), y, x)</code>.
+  Note that in­­ter­­nal­­ly, de­riv­a­­tives that can be com­put­ed are al­ways
+  com­put­ed in the or­der that they are giv­en in.</p>  
+  </li> 
+ <li> 
+ <p>Added func­­tions   <code>is_se­quence()</code>   and   <code>it­er­able()</code>   for de­ter­min­ing if
+  some­thing is an or­dered it­er­able or nor­­mal it­er­able, re­spec­­tive­­ly.</p>  
+  </li> 
+ <li> 
+ <p>En­abled an op­­tion in Sphinx that adds a   <code>source</code>   link next to each func­­tion, which links to a copy of the source code for that func­­tion.</p>  
+  </li> 
+ </ul>
+<p>In ad­di­tion to the more no­tice­able changes list­ed above, there have been nu­mer­ous oth­er small­er ad­di­tion­s, im­prove­ments and bug fix­es in the ~300 com­mits in this re­lease. See the git log for a full list of all changes.  The com­mand  <code>git log sympy-0.7.0..sympy-0.7.1</code>  will show all com­mits made be­tween this re­lease and the last. You can al­so see the is­sues closed since the last re­lease  <a href="http://code.google.com/p/sympy/issues/list?can=1&amp;amp;q=closed-after%3A2010%2F6%2F13+closed-before%3A2011%2F7%2F30&amp;amp;sort=-closed&amp;amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary+Stars+Closed&amp;amp;cells=tiles">here</a>.</p> 
+ <p><span style="font-weight:bold;">Au­thors</span></p> 
+ <p>The fol­low­ing peo­ple con­trib­uted at least one patch to this re­lease (names are giv­en in al­pha­bet­i­cal or­der by last name).  A to­tal of 26 peo­ple con­trib­uted to this re­lease.  Peo­ple with a * by their names con­trib­uted a patch for the first time for this re­lease.  Five peo­ple con­trib­uted for the first time for this re­lease.   </p> 
+ <p>Thanks to ev­ery­one who con­trib­uted to this re­lease!</p> 
+ <ul>
+<li> 
+ <p>Tom Bach­­mann</p>  
+  </li> 
+ <li> 
+ <p>Ondřej Čertík</p>  
+  </li> 
+ <li> 
+ <p>Re­­na­­to Coutin­ho</p>  
+  </li> 
+ <li> 
+ <p>Bill Fly­­nn</p>  
+  </li> 
+ <li> 
+ <p>Bradley Froehle*</p>  
+  </li> 
+ <li> 
+ <p>Gilbert Gede</p>  
+  </li> 
+ <li> 
+ <p>Bri­an Granger</p>  
+  </li> 
+ <li> 
+ <p>Em­­ma Hogan*</p>  
+  </li> 
+ <li> 
+ <p>Yuri Karadzhov</p>  
+  </li> 
+ <li> 
+ <p>Ste­­fan Kras­­tanov*</p>  
+  </li> 
+ <li> 
+ <p>Ro­­nan Lamy</p>  
+  </li> 
+ <li> 
+ <p>To­­mo La­­zovich</p>  
+  </li> 
+ <li> 
+ <p>Sam Magu­ra*</p>  
+  </li> 
+ <li> 
+ <p>Sap­­tarshi Man­­dal</p>  
+  </li> 
+ <li> 
+ <p>Aaron Meur­er</p>  
+  </li> 
+ <li> 
+ <p>Sher­jil Ozair</p>  
+  </li> 
+ <li> 
+ <p>Ma­­teusz Pa­proc­­ki</p>  
+  </li> 
+ <li> 
+ <p>Vladimir Per­ić</p>  
+  </li> 
+ <li> 
+ <p>Mario Per­ni­­ci</p>  
+  </li> 
+ <li> 
+ <p>Nico­las Pourcelot</p>  
+  </li> 
+ <li> 
+ <p>Min Ra­­gan-Kel­­ley*</p>  
+  </li> 
+ <li> 
+ <p>Matthew Rock­­lin</p>  
+  </li> 
+ <li> 
+ <p>Chris Smith</p>  
+  </li> 
+ <li> 
+ <p>Vinzent Stein­berg</p>  
+  </li> 
+ <li> 
+ <p>Sean Vig</p>  
+  </li> 
+ <li> 
+ <p>Thomas Wiec­­ki</p>  
+  </li> 
+ </ul>
+<p></p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../25/merging-integration3-with-sympy-0-7-0-nightmare/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../08/08/hacking-pudb-now-an-even-better-python-debugger/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2011/07/30/sympy-0-7-1-released/",
+        disqus_title="SymPy 0.7.1 Released",
+        disqus_identifier="cache/posts/2011/07/30/sympy-0-7-1-released.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

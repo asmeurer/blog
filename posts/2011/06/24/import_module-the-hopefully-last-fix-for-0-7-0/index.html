@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>import_module (the (hopefully) last fix for 0.7.0) | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/06/24/import_module-the-hopefully-last-fix-for-0-7-0/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/06/24/import_module-the-hopefully-last-fix-for-0-7-0/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="import_module (the (hopefully) last fix for 0.7.0)">
+            <meta name="og:description" content="So ev­ery­thing seemed to be ready to go for the 0.7.0 re­lease, when some­one  point­ed out  a test fail­ure in Python 2.5.    
+ It turned out that there is a bug in numpy (see the  numpy is­sue page">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">import_module (the (hopefully) last fix for 0.7.0)</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2011-06-24T06:59:22-05:00" itemprop="datePublished">2011-06-24 06:59</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>So ev­ery­thing seemed to be ready to go for the 0.7.0 re­lease, when some­one  <a href="https://groups.google.com/d/topic/sympy/9FOPjxC0D6s/discussion" target="_blank">point­ed out</a>  a test fail­ure in Python 2.5.   </p> 
+ <p>It turned out that there is a bug in numpy (see the  <a href="http://projects.scipy.org/numpy/ticket/1872" target="_blank">numpy is­sue page</a>  for more in­for­ma­tion), that was caus­ing the quan­tum mod­ule to fail en­tire­ly when im­port­ed in Python 2.5 with numpy in­stalled.</p> 
+ <p>Be­cause there was no easy way around the bug, the so­lu­tion was to dis­able numpy com­plete­ly in Python 2.5 in the quan­tum mod­ule.  But this en­tailed writ­ing the fol­low­ing code id­iom</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>im­port sys</p> 
+ <p>im­port warn­ings</p> 
+ <p>numpy_­sup­port­ed = True</p> 
+ <p>if sys.ver­sion_in­fo &lt; (2, 6):
+    warn­ings.warn("­Can­not use numpy in Python 2.4/2.5.")
+    numpy_­sup­port­ed = False
+else:
+    try:
+        im­port numpy as np
+    ex­cept Im­portEr­ror:
+        numpy_­sup­port­ed = False
+[/­code]</p> 
+ <p>in all the half dozen files that im­port numpy in the quan­tum mod­ule.   </p> 
+ <p>So clear­ly, SymPy need­ed a more cen­tral­ized way to han­dle im­port­ing op­tion­al ex­ter­nal mod­ules.  Hence, I wrote the  <code>im­port_­mod­ule()</code>  func­tion.  The func­tion at­tempts to im­port a mod­ule giv­en it's name. It re­turns the mod­ule if it can be im­port­ed and None if it can­not.  It sup­ports check­ing the ver­sion of Python or the ver­sion of the li­brary and not im­port­ing it if ei­ther are too old.  It al­so sup­ports emit­ting warn­ings when the mod­ule is not avail­able or the ver­sion is too old.  Thus, the above id­iom re­duces to</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
+ <p>np = im­port_­mod­ule('numpy', min_python_ver­sion=(2, 6))</p> 
+ <p>[/­code]</p> 
+ <p>And that's it. The func­tion will au­to­mat­i­cal­ly warn if numpy can­not be im­port­ed be­cause the Python ver­sion is too old.</p> 
+ <p>Any kind of  <code>numpy_­sup­port­ed</code>  vari­able in the code can be re­placed by test­ing the  <code>np</code>  vari­able it­self, like</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>if np:
+    # Do some numpy stuff
+else:
+    # np is None
+    # Do what­ev­er you do when it is not avail­able
+[/­code]</p> 
+ <p>This method has an ad­di­tion­al ad­van­tage, which is that the warn­ings can be cus­tom­ized by set­ting vari­able hook­s.  So, for ex­am­ple, the test run­ner can dis­able all warn­ings by do­ing</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>im­port sympy.ex­ter­nal</p> 
+ <p>sympy.ex­ter­nal.im­port­tool­s.WARN_OLD_VER­SION = False</p> 
+ <p>sympy.ex­ter­nal.im­port­tool­s.WARN_NOT_IN­STALLED = False</p> 
+ <p>[/­code]</p> 
+ <p>I ac­tu­al­ly did make the test run­ner do this, and al­so set both to True when the  <code>SYMPY_DE­BUG</code>  en­vi­ron­ment vari­able is set to True (by de­fault,  <code>WARN_NOT_IN­STALLED</code>  is False and  <code>WARN_OLD_VER­SION</code>  is True).</p> 
+ <p>There are some caveat­s.  First, note that the func­tion does it's mag­ic us­ing the built-in  <code><strong>im­port</strong>()</code>  func­tion.  To im­port a sub­mod­ule (like  <code>sympy.quan­tum</code>), you need to pass some stuff to the  <code>from­list</code>  ar­gu­ment of  <code><strong>im­port</strong>()</code>.  It's al­so a good idea to pass names to this if you plan to repli­cate  <code>from mod­ule im­port stuff</code>  (in­stead of just  <code>im­port mod­ule</code>), be­cause some mod­ules use lazy im­port­ing and oth­er mag­ic that pre­vent you from ac­cess­ing names di­rect­ly from  <code>mod­ule.stuff</code>  with­out im­port­ing  <code>stuff</code>  first.</p> 
+ <p>To do this, just pass the ar­gu­ments to  <code><strong>im­port</strong>()</code>  to  <code>im­port_­mod­ule()</code>  us­ing the  <code><strong>im­port</strong>kwargs</code>  key­word ar­gu­men­t, like</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
+ <h2>Do this instead of "from matplotlib import pyplot" or "import matplotlib.pyplot as pyplot"</h2>
+<p>mat­plotlib = im­port_­mod­ule('­mat­plotlib',  <strong>im­port</strong>kwargs={'from­list':['py­plot']})</p> 
+ <p>py­plot = mat­plotlib.py­plot</p> 
+ <p>[/­code]</p> 
+ <p>Sec­ond, for mod­ule ver­sion check­ing it looks at  <code>mod­ule.<strong>ver­sion</strong></code>.  Some mod­ules use a dif­fer­ent method (for ex­am­ple, gmpy).  You can use the oth­er method by pass­ing the prop­er ar­gu­ments to  <code>im­port_­mod­ule()</code>.  For ex­am­ple, ver­sions of gmpy low­er than 1.03 have a bug that pre­vent its use in SymPy (ba­si­cal­ly,  <code>in­t(large mpz)</code>  did not au­to­mat­i­cal­ly con­vert the num­ber to a  <code>long</code>).  So to im­port gmpy, but on­ly if it's ver­sion 1.03 or new­er, you would use</p> 
+ <p>[code lan­guage="python"]</p> 
+ <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
+ <p>gmpy = im­port_­mod­ule('gmpy', min_­mod­ule_ver­sion='1.03',
+    mod­ule_ver­sion_at­tr='ver­sion', mod­ule_ver­sion_at­tr_­cal­l_args=())
+[/­code]</p> 
+ <p>This tells it to check the ver­sion of gmpy us­ing  <code>gmpy.ver­sion()</code>, and to im­port it on­ly if it's at least 1.03 (note that this works by the fact that Python lex­i­co­graph­i­cal­ly com­pares strings and tu­ples, so  <code>'1.02' &lt; '1.03'</code>  re­turns True).</p> 
+ <p>The sympy.ex­ter­nal mod­ule is com­plete­ly in­de­pen­dent of the rest of SymPy (it does not call  <code>sympy/<strong>init</strong>.py</code>), so you can use it even out­side of sympy with­out the per­for­mance penal­ty that im­port­ing all of sympy might bring.   </p> 
+ <p>So, hope­ful­ly this is the last is­sue to fix for the 0.7.0 re­lease.  You can still test it at  <a href="https://github.com/sympy/sympy/tree/0.7.0" target="_blank">http­s://github.­com/sympy/sympy/tree/0.7.0</a>.  If peo­ple wan­t, I will cre­ate an­oth­er re­lease can­di­date.  Oth­er­wise, I will re­lease 0.7.0 fi­nal on Mon­day (bar­ring any fur­ther prob­lem­s).</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../17/fixing-bugs-in-the-release-candidate/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../29/sympy-0-7-0-released/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2011/06/24/import_module-the-hopefully-last-fix-for-0-7-0/",
+        disqus_title="import_module (the (hopefully) last fix for 0.7.0)",
+        disqus_identifier="cache/posts/2011/06/24/import_module-the-hopefully-last-fix-for-0-7-0.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>sqrt(x) now prints as "sqrt(x)" | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/08/18/sqrtx-now-prints-as-sqrtx/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/08/18/sqrtx-now-prints-as-sqrtx/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content='sqrt(x) now prints as "sqrt(x)"'>
+            <meta name="og:description" content='Just a few mo­ments ago,  a branch  was pushed in that fixed one of my big­gest griev­ances in SymPy, if not the big­gest.  Pre­vi­ous­ly we had this be­hav­ior: 
+ [code lan­guage="py"] 
+ In [1]: sqrt'>
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">sqrt(x) now prints as "sqrt(x)"</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2011-08-18T03:11:32-05:00" itemprop="datePublished">2011-08-18 03:11</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>Just a few mo­ments ago,  <a href="https://github.com/sympy/sympy/pull/548" target="_blank">a branch</a>  was pushed in that fixed one of my big­gest griev­ances in SymPy, if not the big­gest.  Pre­vi­ous­ly we had this be­hav­ior:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: sqrt(x)</p> 
+ <p>Out­[1]: x**(1/2)</p> 
+ <p>In [2]: solve(x**2 - 2, x)</p> 
+ <p>Out­[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>[/­code]</p> 
+ <p>Now sup­pose you took the out­put of those ex­pres­sions and past­ed them in­to isympy:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [3]: x**(1/2)</p> 
+ <p>Out­[3]: x**0.5</p> 
+ <p>In [4]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>Out­[4]: [-1.41421356237, 1.41421356237]</p> 
+ <p>[/­code]</p> 
+ <p>That's with  <code><strong>fu­ture</strong>.di­vi­sion</code>.  Here's what would hap­pen with old di­vi­sion:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [2]: x**(1/2)</p> 
+ <p>Out­[2]: 1</p> 
+ <p>In [3]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>Out­[3]: [-1, 1]</p> 
+ <p>[/­code]</p> 
+ <p>This is be­cause with old di­vi­sion,  <code>1/2</code>  eval­u­ates to  <code>0</code>.</p> 
+ <p>The prob­lem is that Python eval­u­ates  <code>1/2</code>  to  <code>0.5</code>  (or  <code>0</code>) be­fore SymPy has a change to con­vert it to a Ra­tio­nal.  There were sev­er­al ways that peo­ple got around this.  If you copy an ex­pres­sion with num­ber di­vi­sion in it and want to paste it in­to a SymPy ses­sion, the eas­i­est way to do this was to pass it as a string to  <code>sympi­fy()</code>:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: sympi­fy("x**(1/2)")</p> 
+ <p>Out­[1]: x**(1/2)</p> 
+ <p>In [2]: sympi­fy("[-2<strong>(1/2), 2</strong>(1/2)]")</p> 
+ <p>Out­[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>[/­code]</p> 
+ <p>If that was too much typ­ing for you, you could use the  <code>S()</code>  short­cut to  <code>sympi­fy()</code></p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [3]: S("x**(1/2)")</p> 
+ <p>Out­[3]: x**(1/2)</p> 
+ <p>In [4]: S("[-2<strong>(1/2), 2</strong>(1/2)]")</p> 
+ <p>Out­[4]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>[/­code]</p> 
+ <p>This so­lu­tion is fine if you want to paste an ex­pres­sion in­to a SymPy ses­sion, but it's not a very clean one if you want to paste code in­to a scrip­t. For that, you need to mod­i­fy the code so that it no longer con­tains Python in­t/Python in­t.  The eas­i­est way to do this is to sympi­fy one of the ints.  So you would do some­thing like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [5]: x**(S(1)/2)</p> 
+ <p>Out­[5]: x**(1/2)</p> 
+ <p>In [6]: [-2<strong>(S(1)/2), 2</strong>(S(1)/2)]</p> 
+ <p>Out­[6]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
+ <p>[/­code]</p> 
+ <p>This was­n't ter­ri­bly read­able, though.  The  <em>best</em>  way to fix the prob­lem when you had a pow­er of one half was to use  <code>sqrt()</code>, which is a short­cut to  <code>Pow(…, Ra­tio­nal(1, 2))</code>.   </p> 
+ <p>Well, this last item should make you think.  If  <code>sqrt(x)</code>  is more read­able than  <code>x<strong>(S(1)/2)</strong></code>  or even  <code>x(1/2)</code>, why not print it like that in the first place.  Well, I thought so, so I changed the string print­er, and now this is the way that SymPy work­s.  So 90% of the time, you can just paste the re­sult of  <code>str()</code>  or  <code>print</code>, and it will just work, be­cause there won't be any  <code>**(1/2)</code>, which was by far the most com­mon prob­lem of "Python eval­u­at­ing the ex­pres­sion to some­thing be­fore we can."  In the git mas­ter, SymPy now be­haves like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: sqrt(x)</p> 
+ <p>Out­[1]: sqrt(x)</p> 
+ <p>In [2]: solve(x**2 - 2, x)</p> 
+ <p>Out­[2]: [-sqrt(2), sqrt(2)]</p> 
+ <p>[/­code]</p> 
+ <p>You can ob­vi­ous­ly just copy and paste these re­sult­s, and you get the ex­act same thing back.  Not on­ly does this make ex­pres­sions more copy­-and-­pastable, but the out­put is  <em>much</em>  nicer in terms of read­abil­i­ty.  Here are some be­fore and af­ters that come from ac­tu­al SymPy doctests that I had to change af­ter fix­ing the print­er:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>Be­fore:</p> 
+ <p>&gt;&gt;&gt; e = ((2+2<em>sqrt(2))</em>x+(2+sqrt(8))*y)/(2+sqrt(2))</p> 
+ <p>&gt;&gt;&gt; rad­sim­p(e)</p> 
+ <p>2<strong>(1/2)*x + 2</strong>(1/2)*y</p> 
+ <p>Af­ter:</p> 
+ <p>&gt;&gt;&gt; rad­sim­p(e)</p> 
+ <p>sqrt(2)<em>x + sqrt(2)</em>y</p> 
+ <p>[/­code]</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>Be­fore:</p> 
+ <p>&gt;&gt;&gt; b = besselj(n, z)</p> 
+ <p>&gt;&gt;&gt; b.rewrite(jn)</p> 
+ <p>2<strong>(1/2)*z</strong>(1/2)<em>jn(n - 1/2, z)/pi</em>*(1/2)</p> 
+ <p>Af­ter:</p> 
+ <p>&gt;&gt;&gt; b.rewrite(jn)</p> 
+ <p>sqrt(2)<em>sqrt(z)</em>jn(n - 1/2, z)/sqrt(pi)</p> 
+ <p>[/­code]</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>Be­fore:</p> 
+ <p>&gt;&gt;&gt; x = sympi­fy('-1/(-3/2+(1/2)<em>sqrt(5))</em>sqrt(3/2-1/2*sqrt(5))')</p> 
+ <p>&gt;&gt;&gt; x</p> 
+ <p>(3/2 - 5<strong>(1/2)/2)</strong>(-1/2)</p> 
+ <p>Af­ter</p> 
+ <p>&gt;&gt;&gt; x</p> 
+ <p>1/sqrt(3/2 - sqrt(5)/2)</p> 
+ <p>[/­code]</p> 
+ <p>And not on­ly is  <code>sqrt(x)</code>  eas­i­er to read than  <code>x**(1/2)</code>  but it's few­er char­ac­ter­s.</p> 
+ <p>In the course of chang­ing this, I went ahead and did some greps of the repos­i­to­ry to get rid of all  <code><strong>(S(1)/2)</strong></code>,  <code>Ra­tio­nal(1, 2)</code>  and sim­i­lar through­out the code base (not just in the out­put of doctests where the change had to be made), re­plac­ing them with just  <code>sqrt</code>.  Big thanks to Chris Smith for help­ing me catch all in­stances of this.  Now the code should be a lit­tle eas­i­er to read and main­tain.</p> 
+ <p><strong>Fu­ture Work</strong></p> 
+ <p>This is a big change, and I be­lieve it will fix the copy­-­paste prob­lem for 90% of ex­pres­sion­s. But it does not solve it com­plete­ly.  It is still pos­si­ble to get in­t/int in the string form of an ex­pres­sion.  On­ly pow­ers of 1/2 and -1/2 are con­vert­ed to sqrt, so any oth­er ra­tio­nal pow­er will still print as a/b, like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: x**Ra­tional(3, 2)</p> 
+ <p>Out­[1]: x**(3/2)</p> 
+ <p>[/­code]</p> 
+ <p>Al­so, as you may have no­ticed in the last ex­am­ple above, a ra­tio­nal num­ber that sits by it­self will still be print­ed as in­t/in­t, like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [2]: (1 + x)/2</p> 
+ <p>Out­[2]: x/2 + 1/2</p> 
+ <p>[/­code]</p> 
+ <p>There­fore, I'm leav­ing the  <a href="http://code.google.com/p/sympy/issues/detail?id=2359" target="_blank">is­sue for this</a>  open to dis­cuss po­ten­tial fu­ture fix­es to the string print­er.  One idea is to cre­ate a  <code>root</code>  func­tion that is a short­cut to  <code>root(x, a) == x**(1/a)</code>. This would work for ra­tio­nal pow­ers where the nu­mer­a­tor is 1.  For oth­er ra­tio­nal pow­er­s, we could then den­est these with an in­te­ger pow­er.  It's im­por­tant to do this in the right or­der, though, as they are not equiv­a­len­t.  You can see that SymPy au­to-sim­pli­fies it when it is math­e­mat­i­cal­ly cor­rect in all cas­es, and not when it is not:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [3]: sqrt(x**3)</p> 
+ <p>Out­[3]: sqrt(x**3)</p> 
+ <p>In [4]: sqrt(x)**3</p> 
+ <p>Out­[4]: x**(3/2)</p> 
+ <p>[/­code]</p> 
+ <p>Thus $la­tex \left­(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $la­tex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, re­place $la­tex x$ with -1).</p> 
+ <p>So the idea would be to print  <code>Pow(­ex­pr, Ra­tio­nal(a, b))</code>  as  <code>root(­ex­pr, b)**a</code>.   </p> 
+ <p>The mer­its of this are de­bat­able, but any­way I think we should have this  <code>root()</code>  func­tion in any case (see  <a href="http://code.google.com/p/sympy/issues/detail?id=2643" target="_blank">is­sue 2643</a>).</p> 
+ <p>An­oth­er idea, which is prob­a­bly not a good one, is to al­ways print  <code>in­t/int</code>  as  <code>S(in­t)/int</code>.  So we would get</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; Ra­tio­nal(1, 2)</p> 
+ <p>S(1)/2</p> 
+ <p>&gt;&gt;&gt; x**Ra­tional(4, 5)</p> 
+ <p>x**(S(4)/5)</p> 
+ <p>[/­code]</p> 
+ <p>This is prob­a­bly a bad idea be­cause even though ex­pres­sions would al­ways be copy­-­pastable, they would be slight­ly less read­able.   </p> 
+ <p>By the way, in case you did­n't catch it, all of these changes on­ly af­fect the string print­er.  The pret­ty print­er re­mained un­af­fect­ed, and would un­der any ad­di­tion­al changes, as it is­n't copy­-­pastable any­way, and al­ready does a su­perb job of print­ing root­s.</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../08/hacking-pudb-now-an-even-better-python-debugger/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../12/20/vim-vs-emacs-part-1/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2011/08/18/sqrtx-now-prints-as-sqrtx/",
+        disqus_title="sqrt(x) now prints as \"sqrt(x)\"",
+        disqus_identifier="cache/posts/2011/08/18/sqrtx-now-prints-as-sqrtx.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

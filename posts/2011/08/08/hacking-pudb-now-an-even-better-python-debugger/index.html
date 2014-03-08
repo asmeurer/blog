@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Hacking PuDB: Now an even better Python debugger | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Hacking PuDB: Now an even better Python debugger">
+            <meta name="og:description" content="Read­ers of this blog may re­mem­ber last year when I  wrote  about this awe­some vis­ual con­sole Python de­bug­ger called  PuDB.  I sug­gest you read that post if you haven't. 
+ At the end of that p">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Hacking PuDB: Now an even better Python debugger</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2011-08-08T03:16:10-05:00" itemprop="datePublished">2011-08-08 03:16</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>Read­ers of this blog may re­mem­ber last year when I  <a href="http://asmeurersympy.wordpress.com/2010/06/04/pudb-a-better-python-debugger/" target="_blank">wrote</a>  about this awe­some vis­ual con­sole Python de­bug­ger called  <a href="http://pypi.python.org/pypi/pudb" target="_blank">PuDB</a>.  I sug­gest you read that post if you haven't.</p> 
+ <p>At the end of that post, I not­ed that Ondřej and I had hacked it to make the col­ors more liv­able.  Well, a cou­ple of weeks ago, GitHub us­er  <a href="https://github.com/jtriley" target="_blank">jtri­ley</a>  sent me an email ask­ing me to back port my changes.</p> 
+ <p>A lot has changed since I wrote my blog post last year.  PuDB now has an of­fi­cial  <a href="http://lists.tiker.net/listinfo/pudb" target="_blank">mail­ing list</a>  and an of­fi­cial  <a href="https://github.com/inducer/pudb" target="_blank">GitHub re­po</a>.</p> 
+ <p>So I delet­ed my  <a href="https://github.com/asmeurer/pudb" target="_blank">GitHub clone</a>  and re­forked from the of­fi­cial ver­sion.   </p> 
+ <p>A lot has al­so changed in the of­fi­cial code.  An­dreas had added con­fig sup­port, in­clud­ing a built-in prefs di­a­log that lets you set a few set­tings:  the abil­i­ty to turn on or off line num­bers and the abil­i­ty to change themes.</p> 
+ <p>So I took the new code and added my theme as an of­fi­cial theme.  This was pret­ty straight for­ward to do.</p> 
+ <p>But then, I got a lit­tle car­ried away.   </p> 
+ <p>I no­ticed that it was dif­fi­cult to choose a theme with the built-in prefs win­dow be­cause you had to close and re­open the win­dow each time you made a change.  So I added code to make it au­to-up­date your changes as you made them.</p> 
+ <p>Then I went back and looked at my orig­i­nal blog post and looked at the things that I did­n't like.  There were two things.  First, the de­fault stringi­fi­er for vari­ables is  <code>type</code>, which is com­plete­ly use­less.  This is be­cause  <code>type</code>  is very fast and sta­ble to com­pute.  I had pre­vi­ous­ly hacked this to be  <code>str</code>, but now that there was an of­fi­cial con­fig file with a prefs di­alog, I fig­ured it should go there.  </p> 
+ <p>So I added sup­port to change this set­ting.  But this was­n't enough for me.  I al­so added the abil­i­ty to de­fine your own cus­tom stringi­fi­er.  You just cre­ate a Python file that de­fines a func­tion called  <code>pud­b_stringi­fier(ob­j)</code>, which con­verts  <code>obj</code>  in­to the de­sired string rep­re­sen­ta­tion.  I in­clud­ed an  <a href="https://github.com/inducer/pudb/blob/master/example-stringifier.py" target="_blank">ex­am­ple file</a>  that gives a fan­cy ex­am­ple that us­es sig­nals to com­pute the string val­ue, but times out af­ter one sec­ond and falls back to the type.  This al­le­vi­ates one of the prob­lems of us­ing  <code>str</code>, which is that it can be slow for ob­jects with large string ex­pres­sion­s, es­pe­cial­ly SymPy ob­ject­s, where some­times the print­er can be slow.</p> 
+ <p>The sec­ond thing I did­n't like was that al­though you can change the width of the right-­hand side bar, you could not change the rel­a­tive heights of the vari­ables, stack, and break­points box­es.  I nev­er use break­points, and rarely use the stack, so I would pre­fer to have those small­er and the vari­ables larg­er.  So I im­ple­ment­ed it so that the  <code>[</code>  and  <code>]</code>  keys make the se­lect­ed view small­er or larg­er.  This in­for­ma­tion is all saved in the con­fig file, so it's re­mem­bered when you close and re­open PuD­B.</p> 
+ <p>There was one oth­er thing that I did­n't like, which a change since my last blog post that re­versed the or­der of the stack vari­ables from what it was.  It used to be most re­cent at the bot­tom, but it was changed to most re­cent at the top.  This per­haps makes more sense, but the but­tons to move around the stack,  <code>u</code>  and  <code>d</code>, were still the same:  <code>u</code>  moves down the stack (i.e., less re­cen­t), and  <code>d</code>  moves up.  These keys were al­ready well es­tab­lished—in­deed, these are the same keys used in Python's built-in de­bug­ger pdb—­so I added a set­ting to change the stack or­der.  This was an easy change to make at this point, as I was al­ready well aquat­int­ed with the set­tings code, and on­ly two lines of code need­ed to be changed when the set­ting changed.  Like all oth­er set­tings, this us­es the cool mag­ic that changes the set­ting in re­al time, so you can see the ef­fect with­out clos­ing the set­tings win­dow.</p> 
+ <p>Then some­one on the mail­ing list re­quest­ed a fea­ture that I re­al­ized I al­so want­ed, the abil­i­ty to wrap vari­ables.  Pre­vi­ous­ly, any vari­able that was longer than the vari­able view would just be cut of­f.  You could make it wider, but that on­ly helped a lit­tle bit.  Oth­er­wise, if you want­ed to see the whole vari­able, you had to open IPython by press­ing  <code>!</code>  and view it there.</p> 
+ <p>So, I im­ple­ment­ed this.  This was def­i­nite­ly the hard­est thing to im­ple­men­t.  I found out that it's iron­i­cal­ly very dif­fi­cult to de­bug PuDB it­self.  You can't run PuDB in­side of PuDB if PuDB crash­es, as both in­stances will just crash.  Al­so, PuDB eats any print state­ments.  The so­lu­tion, sug­gest­ed by PuDB au­thor An­dreas Klöck­n­er, was to get the ttys file of an­oth­er ter­mi­nal (e.g.,  <code>/de­v/t­tys012</code>) and write the out­put to that.</p> 
+ <p>I al­so made it so that non-wrapped vari­ables show  <code>...</code>  at the end, at An­dreas's sug­ges­tion.  I want­ed to use the uni­code  <code>…</code>, but this was not work­ing at al­l.  I dis­cov­ered how much uni­code re­al­ly is a mess in Python 2.  The prob­lem has some­thing to do with … be­ing a three byte char­ac­ter, and I think it al­so has to do with the col­or codes that ur­wid us­es.  I'll try it again once PuDB is port­ed to Python 3, but for now,  we are go­ing to have to do with the three ascii dot­s.</p> 
+ <p>The wrap­ping code is wait­ing for merge, but the rest are al­ready in.  Here is a screen shot demon­strat­ing some of the things I did:</p> 
+ <p><a href="../../../../../2011/08/screen-shot-2011-08-07-at-8-28-11-pm.png"><img src="http://asmeurersympy.files.wordpress.com/2011/08/screen-shot-2011-08-07-at-8-28-11-pm.png?w=300" alt="" title="Improved PuDB" width="300" height="245" class="size-medium wp-image-1021"></a></p> 
+ <p>Things that I im­ple­ment­ed to no­tice here:</p> 
+ <ul>
+<li> 
+ <p>The mid­night theme.</p>  
+  </li> 
+ <li> 
+ <p>The stack and break­­points views have been shrunk­­en.</p>  
+  </li> 
+ <li> 
+ <p>The var­i­ables are wrapped.</p>  
+  </li> 
+ <li> 
+ <p>Wrap­ping for the var­i­able   <code>fourhun­­dred</code>   has been turned off (y­ou can turn wrap­ping on or off on a per-­­var­i­able ba­­sis by se­lec­t­ing the var­i­able and press­ing   <code>w</code>).   No­tice that there is an el­lip­­sis at the end to note it has been cut of­f.</p>  
+  </li> 
+ <li> 
+ <p>Nest­ed var­i­ables now have   <code>|</code>   be­­fore them, to dis­­t­in­guish them from wrapped var­i­ables, which are al­­so in­­­den­t­ed.  This change may or may not be ac­­cep­t­ed by An­­dreas.</p>  
+  </li> 
+ </ul>
+<p>Here's a screen shot show­ing the prefs win­dow.  I did not im­ple­ment this, but I did im­ple­ment all but the first two pref­er­ences in the win­dow. I've made my win­dow tall so you can see all the op­tion­s.  You re­al­ly have to get the code and try it to see the au­to-up­date awe­some­ness.  You can open the prefs win­dow by press­ing  <code>Ctr­l-p</code>  (this was not at all ob­vi­ous to me the first time I used it, so I al­so sub­mit­ted a patch that makes it open the first time you use PuD­B).</p> 
+ <p><a href="../../../../../2011/08/screen-shot-2011-08-07-at-8-41-30-pm.png"><img src="http://asmeurersympy.files.wordpress.com/2011/08/screen-shot-2011-08-07-at-8-41-30-pm.png?w=243" alt="" title="PuDB Prefs Window" width="243" height="300" class="size-medium wp-image-1023"></a></p> 
+ <p>So if you're not al­ready us­ing this awe­some Python de­bug­ger, you should.  You can  <code>pip in­stall pudb</code>, or  <a href="https://github.com/inducer/pudb" target="_blank">fork it</a>  at GitHub.</p> 
+ <p>Run­ning it in your code is very easy.  Just add</p> 
+ <p>[code lang="py"]</p> 
+ <p>im­port pud­b;pud­b.set_­trace()</p> 
+ <p>[/­code]</p> 
+ <p>in your code wher­ev­er you want to set a break point, or you can do  <code>python -m pud­b.run scrip­t.py</code>.</p> 
+ <p>This awe­some tool has in­creased my pro­duc­tiv­i­ty ten­fold since I dis­cov­ered it, and has helped me track down bugs that would have oth­er­wise ex­treme­ly dif­fi­cult if not im­pos­si­ble to find.  And now, it's just bet­ter.</p> 
+ <p>PuDB us­es the  <a href="http://excess.org/urwid/" target="_blank">ur­wid li­brary</a>  to do all its con­sole GUI mag­ic.  This li­brary makes it pret­ty easy to do a lot of stuff. For ex­am­ple, it au­to­mat­i­cal­ly does rel­a­tive siz­ing of wid­get­s, so, for ex­am­ple, when you re­size the vari­ables, stack, or break­points views, you are ac­tu­al­ly in­creas­ing the rel­a­tive size of each, not the size in char­ac­ter­s.  This makes it por­ta­ble against any ter­mi­nal size.  The li­brary al­so made cod­ing the prefs win­dow autoup­date mag­ic very easy.</p> 
+ <p>Al­so, I just want to note that git and GitHub make col­lab­o­ra­tion like this very easy.  I just forked his pro­jec­t, made some im­prove­ments, and sub­mit­ted them as pull re­quest­s.  Then it was easy to dis­cuss the changes.  If the code had not been on GitHub and es­pe­cial­ly if it had not been in git, I prob­a­bly would have nev­er both­ered to sub­mit my con­tri­bu­tions up­stream.  I high­ly rec­om­mend that ev­ery open source project use git and GitHub.</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../07/30/sympy-0-7-1-released/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../18/sqrtx-now-prints-as-sqrtx/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/",
+        disqus_title="Hacking PuDB: Now an even better Python debugger",
+        disqus_identifier="cache/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

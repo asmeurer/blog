@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Variation of Parameters and More | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2009/08/01/variation-of-parameters-and-more/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2009/08/01/variation-of-parameters-and-more/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Variation of Parameters and More">
+            <meta name="og:description" content="Well, the last time I post­ed a project up­date, I had re­signed my­self to writ­ing a con­stant sim­pli­fy­ing func­tion and putting the Con­stant class on the shelf.  Well, just as I sus­pect­ed, it">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Variation of Parameters and More</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2009-08-01T17:39:48-05:00" itemprop="datePublished">2009-08-01 17:39</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>Well, the last time I post­ed a project up­date, I had re­signed my­self to writ­ing a con­stant sim­pli­fy­ing func­tion and putting the Con­stant class on the shelf.  Well, just as I sus­pect­ed, it was hell writ­ing it, but I even­tu­al­ly got it work­ing.  Al­ready, what I have in dsolve() ben­e­fits from it.  I had many so­lu­tions with things like $la­tex \frac{x}{C_1}$ or $la­tex -C_1x$ in them, and they are now au­to­mat­i­cal­ly re­duced to just $la­tex C_1x$.  Of course, the dis­ad­van­tage to this, as I men­tioned in the oth­er post, is that it will on­ly sim­pli­fy once.  Al­so, I wrote the func­tion very specif­i­cal­ly for ex­pres­sions re­turned by dsolve.  It on­ly work­s, for ex­am­ple, with con­stants named se­quen­tial­ly like C1, C2, C3 and so on.  Even with mak­ing it spe­cial­ized, it was still hell to write.  I was al­so able to get it to renum­ber the con­stants, so some­thing like  <code>C2<em>sin(x) + C1</em>cos(x)</code>  would get trans­fered to  <code>C1<em>sin(x) + C2</em>cos(x)</code>.  It us­es  <code>Ba­sic._­com­pare_pret­ty()</code>  (thanks to Andy for that tip), so it will al­ways num­ber the con­stants in the or­der they are print­ed.   </p> 
+ <p>Once I got that work­ing, it was just lit­tle work to fin­ish up what I had al­ready start­ed with solv­ing gen­er­al lin­ear ho­mo­ge­neous odes ($la­tex a_ny^{(n)} + a_{n-1}y^{(n-1)} + \dots + a_2y'' + a_1y' + a_0y = 0$ with $la­tex a_i$ con­stant for all $la­tex i$).  Solv­ing these equa­tions is easy.  You just set up a poly­no­mi­al of the form $la­tex a_n­m^n + a_{n-1}m^{n-1} + \c­dots + a_2m^2 + a_1m + a_0 = 0$ and find the roots of it.  Then you plug the roots in­to an ex­po­nen­tial times $la­tex x^i$ for i from 1 to the mul­ti­plic­i­ty of the root  (as in $la­tex Cx^ie^{­root \c­dot x}$).  You usu­al­ly ex­pand the re­al and com­plex parts of the root us­ing Eu­ler's For­mu­la, and, once you sim­pli­fy the con­stants, you get some­thing like $la­tex x^ie^{re­al­part \c­dot x}(C_1\s­in{(im­part \c­dot x)} + C_2\­cos{(im­part \c­dot x)})$ for each i from 1 to the mul­ti­plic­i­ty of the root.  Any­way, with the new con­stantsim­p() rou­tine, I was able to set this whole thing up as one step, be­cause if the imag­i­nary part is 0, then the two con­stants will be sim­pli­fied in­to each oth­er.  Al­so, SymPy has some good poly­no­mi­al solv­ing, so I did­n't have any prob­lems there.  I even made good use of the col­lec­t() func­tion to fac­tor out com­mon terms, so you get some­thing like $la­tex (C_1 + C_2x)e^{x}$ in­stead of $la­tex C_1e^{x} + C_2x­e^{x}$, which for larg­er or­der so­lu­tion­s, can make the so­lu­tion much eas­i­er to read (com­pare for ex­am­ple, $la­tex ((C_1 + C_2x)\s­in{x} + (C_3 + C_4x)\­cos{x})e^{x}$ with the ex­pand­ed for­m, $la­tex C_1e^{x}\s­in{x} + C_2x­e^{x}\s­in{x} + C_3\­cos{x}e^{x} + C_4x\­cos{x}{e^x}$ as the so­lu­tion to $la­tex {\frac {d^{4}}{d{x}^{4}}}f \left( x \right) -4\,{\frac {d^{3}}{d{x}^{3}}}f \left( x \right) +8\,{\frac {d^{2}}{d{x}^{2}}}f \left( x \right) -8\,{\frac {d}{dx}}f \left( x \right) +4\,f \left( x \right) =0$).   </p> 
+ <p>I en­tered all 30 ex­am­ples from the rel­e­vant chap­ter of my text (Or­di­nary Dif­fer­en­tial Equa­tions by Mor­ris Tenen­baum and Har­ry Pol­lard), and the whole thing runs in un­der 2 sec­onds on my ma­chine.  So it is fast, though that is most­ly due to fast poly­no­mi­al solv­ing in SymPy.   </p> 
+ <p>So once I got that work­ing well, I start­ed im­ple­ment­ing vari­a­tion of pa­ram­e­ter­s, which is a gen­er­al method for solv­ing all equa­tions of form $la­tex a_ny^{(n)} + a_{n-1}y^{(n-1)} + \dots + a_2y'' + a_1y' + a_0y = F(x)$.  The method will set up an in­te­gral to rep­re­sent the par­tic­u­lar so­lu­tion to any equa­tion of this for­m, as­sum­ing that you have all $la­tex n$ lin­ear­ly in­de­pen­dent so­lu­tions to the ho­mo­ge­neous equa­tion $la­tex a_ny^{(n)} + a_{n-1}y^{(n-1)} + \dots + a_2y'' + a_1y' + a_0y = 0$.  The co­ef­fi­cients $la­tex a_i$ do not even have to be con­stant for this method to work, al­though they do have to be in my im­plan­ta­tion be­cause oth­er­wise it will not be able to find gen­er­al so­lu­tion to the ho­mo­ge­neous equa­tion.   </p> 
+ <p>So, aside from do­ing my GSoC project this sum­mer, I am al­so learn­ing Lin­ear Al­ge­bra, be­cause I could not fit it in to my sched­ule next se­mes­ter and I need to know it for my Knot The­o­ry class.  It turns out that it was very use­ful in learn­ing the method of vari­a­tion of pa­ram­e­ter­s.  I will ex­plain how the method works be­low, but first I have a lit­tle rant.   </p> 
+ <p>Why is the Wikipedia ar­ti­cle on  <a href="http://en.wikipedia.org/wiki/Variation_of_parameters">vari­a­tion of pa­ram­e­ters</a>  the on­ly web­site any­where that cov­ers vari­a­tion of pa­ram­e­ters in the gen­er­al case?  Ev­ery oth­er site that I could find on­ly cov­ers 2nd or­der equa­tion­s, which I un­der­stand is what is taught in most cour­ses be­cause ap­ply­ing it to any­thing high­er can be te­dious and de­riv­ing the nth or­der case re­quires knowl­edge of Cramer's Rule, which many stu­dents may not know.  But you would think that there would at least be sites that dis­cuss what I am about to dis­cuss be­low, name­ly, ap­ply­ing it to the gen­er­al case of an nth or­der in­ho­mo­ge­neous lin­ear ode.  Even the  <a href="http://mathworld.wolfram.com/VariationofParameters.html">Wolphram Math­World ar­ti­cle</a>  on­ly ex­plains the deriva­tion for a sec­ond or­der lin­ear ODE, men­tion­ing at the bot­tom that it can be ap­plied to nth or­der lin­ear ODEs.  I did find a web­site called  <a href="http://planetmath.org/encyclopedia/VariationOfParameters.html">Plan­et Math</a>  that cov­ers the gen­er­al case, but it was­n't on the top of the Google re­sults list and took some dig­ging to find.  It al­so has prob­lems of its own, like be­ing on a very slow serv­er and some of the La­TeX on the page not ren­der­ing among them.  </p> 
+ <p>This par­tial­ly an­noys me be­cause the Wikipedia ar­ti­cle is not very well writ­ten.  You have to read through it sev­er­al times to un­der­stand the deriva­tion (I will try to be bet­ter be­low).  The Plan­et Math site is a lit­tle bet­ter, but like I said, it took some dig­ging to find, and I ac­tu­al­ly found it af­ter I had writ­ten up half of this post al­ready.   </p> 
+ <p>But it is al­so part of a larg­er at­ti­tude that I am find­ing more and more of where any­thing that is not like­ly to be di­rect­ly ap­plied is not worth know­ing and thus not worth teach­ing.  Sure, it is not like­ly that any per­son do­ing hand cal­cu­la­tions will ev­er at­tempt vari­a­tion of pa­ram­e­ters on an ode of or­der high­er than 2 or 3, but that is what com­put­er al­ge­bra sys­tems like SymPy are for.  Un­for­tu­nate­ly, it seems that they are al­so in a large part for al­low­ing you to not know how or why some­thing math­e­mat­i­cal­ly is true.  What dif­fer­ence does it make if vari­a­tion of pa­ram­e­ters can be ap­plied to a 5th or­der ODE if I have to use Maple to do ac­tu­al­ly do it any­way.  As long as the mak­ers of Maple know how to ap­ply vari­a­tion of pa­ram­e­ters to a nth or­der ODE, I can get along just fine.  At least with SymPy, the source is freely avail­able, so any­one who does de­sire to know how things are work­ing can eas­i­ly see.  Any­way, I am done rant­ing now, so if you were skip­ping that part, this would be the point to start read­ing again.</p> 
+ <p>So you have your lin­ear in­ho­mo­ge­neous ODE: $la­tex a_ny^{(n)} + a_{n-1}y^{(n-1)} + \dots + a_2y'' + a_1y' + a_0y = F(x)$.  $la­tex a_n$ can­not be ze­ro (other­wise it would be a n-1 or­der ODE), so we can and should di­vide through by it.  Lets pre­tend that we al­ready did that, and just use the same let­ter­s.  Al­so, I will re­write $la­tex a_n$ as $la­tex a_n(x)$ to em­pha­size that the co­ef­fi­cients do not have to be con­stants for this to work.  So you have your lin­ear in­ho­mo­ge­neous ODE: $la­tex y^{(n)} + a_{n-1}(x)y^{(n-1)} + \dots + a_2(x)y'' + a_1(x)y' + a_0(x)y = F(x)$.  So, as I men­tioned above, we need n lin­ear­ly in­de­pen­dent so­lu­tions to the ho­mo­ge­neous equa­tion $la­tex y^{(n)} + a_{n-1}(x)y^{(n-1)} + \dots + a_2(x)y'' + a_1(x)y' + a_0(x)y = 0$ to use this method.  Let us call those so­lu­tions $la­tex y_1(x), y_2(x), \dot­s, y_n(x)$.  Now let us write our par­tic­u­lar so­lu­tion as $la­tex y_p(x) = c_1(x)y_1(x) + c_2(x)y_2(x) + \dots + c_n(x)y_n(x)$.  Now, if we sub­sti­tute our par­tic­u­lar so­lu­tion in to the left hand side of our ODE, we should get $la­tex F(x)$ back.  So we have $la­tex (y_p)^{(n)} + a_{n-1}(x)(y_p)^{(n-1)} + \dots + a_2(x)y_p'' + a_1(x)y_p' + a_0(x)y_p =$ $la­tex F(x)$.  Now, let me re­write $la­tex y_p$ as a sum­ma­tion to help keep things from get­ting too messy.  I am al­so go­ing to write $la­tex c_i$ in­stead of $la­tex c_i(x)$ on terms for ad­di­tion­al san­i­ty.  Ev­ery vari­able is a func­tion of x.  $la­tex y_p(x) = \sum_{i=1}^{n} c_i y_i$.  The par­tic­u­lar so­lu­tion should sat­is­fy the con­di­tion of the ODE, so</p> 
+ <p>$la­tex y_p^{(n)} + a_{n-1}y_p^{(n-1)} + \dots + a_2y_p'' + a_1y_p' + a_0y_p = F(x)$.</p> 
+ <p>$la­tex (\­sum_{i=1}^{n} c_i y_i)^{(n)} + a_{n-1}(\­sum_{i=1}^{n} c_i y_i)^{(n-1)} + \dots + a_2(\­sum_{i=1}^{n} c_i y_i)^{(2)} + $</p> 
+ <p>$la­tex a_1(\­sum_{i=1}^{n} c_i y_i)^{(1)} + a_0\­sum_{i=1}^{n} c_i y_i = F(x)$.</p> 
+ <p>Now, if we ap­ply the prod­uct rule to this, things will get ug­ly re­al­ly fast, be­cause we have to ap­ply the prod­uct rule on each term as many times as the or­der of that term (the first term would have to be ap­plied n times, the sec­ond, n-1 times, and so on).  But there is a trick that we can use.  In the ho­mo­ge­neous case, there is no par­tic­u­lar so­lu­tion, so in that case the $la­tex c_i$ terms must all van­ish iden­ti­cal­ly be­cause the so­lu­tions are lin­ear­ly in­de­pen­dent of one an­oth­er.  Thus, if we plug the par­tic­u­lar so­lu­tion in­to the ho­mo­ge­neous case, we get</p> 
+ <p>$la­tex (\­sum_{i=1}^{n} c_i y_i)^{(n)} + a_{n-1}(\­sum_{i=1}^{n} c_i y_i)^{(n-1)} + \dots + a_2(\­sum_{i=1}^{n} c_i y_i)^{(2)} + $</p> 
+ <p>$la­tex a_1(\­sum_{i=1}^{n} c_i y_i)^{(1)} + a_0\­sum_{i=1}^{n} c_i y_i = 0$.</p> 
+ <p>We al­ready know that if we plug the $la­tex y_i$ terms in in­di­vid­u­al­ly of the $la­tex c_i$ terms, that the ex­pres­sion will van­ish iden­ti­cal­ly be­cause the $la­tex y_i$ terms are so­lu­tions to the ho­mo­ge­neous equa­tion.  The prod­uct rule on each term will be eval­u­at­ed ac­cord­ing to the  <a href="http://en.wikipedia.org/wiki/Leibniz_rule_(generalized_product_rule)">Leib­niz Rule</a>, which is that $la­tex (c_i \c­dot f_i)^{(n)}=\­sum_{k=0}^n {n \choose k} c_i^{(k)} y_i(x)^{(n-k)}$.  Now the $la­tex c_i y_i^{(n)}$ terms will van­ish be­cause we can fac­tor out a $la­tex c_i$ and they will be ex­act­ly the ho­mo­ge­neous so­lu­tion.  Be­cause the ex­pres­sion is iden­ti­cal­ly equal to ze­ro, the re­main­ing terms must van­ish as well.  If we as­sume that each $la­tex \sum_{i=1}^n c_i' y_i^{(j)}=0$ for each j from 0 to n-2, then this will take care of this; the terms with high­er de­riv­a­tives on $la­tex c_i$ will al­so be 0, if this is true, then we do not need them for our deriva­tion.  In oth­er word­s,  </p> 
+ <p>$la­tex  c_1' y_1  + c_2' y_2 + \c­dots + c_n' y_n = 0 $</p> 
+ <p>$la­tex c_n' y_1' + c_n' y_2' + \c­dots + c_n' y_n' = 0 $</p> 
+ <p>$la­tex \v­dots $</p> 
+ <p>$la­tex c_n' y_1^{(n-2)} + c_n' y_2^{(n-2)} + \c­dots + c_n' y_n^{(n-2)} = 0$.</p> 
+ <p>So, turn­ing back to our orig­i­nal ODE with the par­tic­u­lar so­lu­tion sub­sti­tut­ed in, we have</p> 
+ <p>$la­tex (\­sum_{i=1}^{n} c_i y_i)^{(n)} + a_{n-1}(\­sum_{i=1}^{n} c_i y_i)^{(n-1)} + \dots + a_2(\­sum_{i=1}^{n} c_i y_i)^{(2)} + $</p> 
+ <p>$la­tex a_1(\­sum_{i=1}^{n} c_i y_i)^{(1)} + a_0\­sum_{i=1}^{n} c_i y_i = F(x)$.</p> 
+ <p>But we know that most of the terms of this will van­ish, from our as­sump­tion above.  If we re­move those terms, what re­mains is $la­tex \sum_{i=1}^{n} c_i' y_i^{(n-1)} = F(x)$.  So this is where it is nice that I learned  <a href="http://en.wikipedia.org/wiki/Cramer%27s_rule">Cramer's Rule</a>  lit­er­al­ly days be­fore learn­ing how to do Vari­a­tion of Pa­ram­e­ters in the gen­er­al case.  We have a sys­tem of n equa­tions (the n-1 from above, plus the one we just de­rived), of n un­knowns (the $la­tex c_i$ terms).  The de­ter­mi­nant that we use here is used of­ten enough to war­rant a name: the  <a href="http://en.wikipedia.org/wiki/Wronskian">Wron­skian</a>.  We have that $la­tex c_i' = \frac{W_i(x)}{W(x)}$, or $la­tex c_i = \int \frac{W_i(x)}{W(x)}$, where $la­tex W_i(x)$ is the Wron­skian of the fun­da­men­tal sys­tem with the ith col­umn re­placed with $la­tex \be­gin{b­ma­trix} 0 \ 0 \ \v­dots \ 0 \ F(x) \end{b­ma­trix}$.  So we fi­nal­ly have $la­tex y_p = \sum_{i=1}^n \int \frac{W_i(x)}{W(x)} y_i$.   </p> 
+ <p>Well, that's the the­o­ry, but as al­ways here, that is on­ly half of the sto­ry.  A Wron­skian func­tion is al­ready im­ple­ment­ed in SymPy, and find­ing $la­tex W_i(x)$ sim­ply amounts to $la­tex F(x)$ times the Wron­skian of the sys­tem with­out the ith equa­tion, all times $la­tex (-1)^i$.  So im­ple­ment­ing it was easy enough.  But it soon be­came clear that there would be some prob­lems with this method.  Some­times, the SymPy would re­turn a re­al­ly sim­ple Wron­skian, some­thing like $la­tex -4e^{2x}$, but oth­er times, it would re­turn some­thing crazy.  For ex­am­ple, con­sid­er the ex­pres­sion that I re­port­ed in  <a href="http://code.google.com/p/sympy/issues/detail?id=1562">SymPy is­sue 1562</a>.  The ex­pres­sion is (thanks to SymPy's  <code>la­tex()</code>  com­mand, no thanks to Word­Press's stupid au­to line breaks that have forced me to up­load my own im­age.  If it was­n't such a pain, I would do it for ev­ery equa­tion, be­cause it looks much nicer.):</p> 
+ <p><img src="../../../../../2009/08/crazy-trig-wronskian-sympy.png" alt="Crazy Trig Wronskian (SymPy)" title="Crazy Trig Wronskian (SymPy)" width="450" height="78" class="alignnone size-full wp-image-240">.</p> 
+ <p>This is the Wron­skian, as cal­cu­lat­ed by SymPy's  <code>wron­skian()</code>  func­tion, of  </p> 
+ <p>$la­tex \be­gin{b­ma­trix}x \s­in{x}, &amp; \s­in{x}, &amp; 1, &amp; x \cos{x}, &amp; \cos{x}\end{b­ma­trix}$, which is the set of lin­ear­ly in­de­pen­dent so­lu­tions to the ODE $la­tex {\frac {d^{5}}{d{x}^{5}}}f \left( x \right) +2\,{\frac {d^{3}}{d{x}^{3}}}f \left( x \right) +{\frac {d}{dx}}f \left( x \right) -1$.  Well, the prob­lem here is that, as ver­i­fied by Maple, that com­plex Wron­skian above is iden­ti­cal­ly equal to $la­tex -4$.  SymPy's  <code>sim­pli­fy()</code>  and  <code>trigsim­p()</code>  func­tions are not ad­vanced enough to han­dle it.  It turns out that in this case, the prob­lem is that SymPy's  <code>can­cel()</code>  and  <code>fac­tor()</code>  rou­tines do not work un­less the ex­pres­sion has on­ly sym­bols in it, and that ex­pres­sion re­quires you to can­cel and fac­tor to find the $la­tex \cos^2{x} + \s­in^2{x}$ (see the is­sue page for more in­for­ma­tion on this).  Un­for­tu­nate­ly, SymPy's  <code>in­te­grate()</code>  can­not han­dle that un­sim­pli­fied ex­pres­sion in the de­nom­i­na­tor of some­thing, as you could imag­ine, and it seems like al­most ev­ery time that sin's and cos's are part of the so­lu­tion to the ho­mo­ge­neous equa­tion, the Wron­skian be­comes too dif­fi­cult for SymPy to sim­pli­fy.  So, while I was hop­ing to slip along with on­ly vari­a­tion of pa­ram­e­ter­s, which tech­ni­cal­ly solves ev­ery lin­ear in­ho­mo­ge­neous ODE, it looks like I am go­ing to have to im­ple­ment the method of un­de­ter­mined co­ef­fi­cients.  Vari­a­tion of pa­ram­e­ters will still be use­ful, as un­de­ter­mined co­ef­fi­cients on­ly works if the ex­pres­sion on the right hand side of the equa­tion, $la­tex F(x)$ has a fi­nite set of lin­ear­ly in­de­pen­dent de­riv­a­tives (such as sin, cos, ex­p, poly­no­mi­al terms, and com­bi­na­tions of them (I'll talk more about this when­ev­er I im­ple­ment it).   </p> 
+ <p>The good news here is that I dis­cov­ered that I was wrong.  I had pre­vi­ous­ly be­lieved that among the sec­ond or­der spe­cial cas­es were cas­es that could on­ly be han­dled by vari­a­tion of pa­ram­e­ters or un­de­ter­mined co­ef­fi­cients, but it turns out I was wrong.  All that was im­ple­ment­ed were the ho­mo­ge­neous cas­es for sec­ond or­der lin­ear with con­stant co­ef­fi­cients.  In ad­di­tion to this, there was one very spe­cial case ODE that On­drej had im­ple­ment­ed for an ex­am­ple (ex­am­ples/ad­vanced/rel­a­tiv­i­ty.py).  The ODE is</p> 
+ <p>$la­tex -2({\frac{d}{dx}}f(x)){e^{-f(x)}}+x({\frac{d}{dx}}f(x))^{2}{e^{-f(x)}}-x({\frac{d^{2}}{d{x}^{2}}}f(x)){e^{-f(x)}}$, which is the sec­ond de­riv­a­tive of $la­tex xe^{-f(x)}$ with re­spect to x.  Ac­cord­ing to the ex­am­ple file, it is know as Ein­stein's equa­tion­s.  Maple has a nice  <code>odead­vi­sor()</code>  func­tion sim­i­lar to the  <code>clas­si­fy_ode()</code>  func­tion I am writ­ing for SymPy that tells you all of the dif­fer­ent ways that an ODE can be solved. So, I plugged that ODE in­to it and got a few pos­si­ble meth­ods out that I could po­ten­tial­ly im­ple­ment in SymPy to main­tain com­pat­i­bil­i­ty with the ex­am­ple equa­tion.  The chief one is that the low­est or­der of f in the ODE is 1 (as­sum­ing you di­vide out the $la­tex e^{-f(x)}$ ter­m, which is per­fect­ly rea­son­able as that term will nev­er be 0. You can then make the sub­sti­tu­tion $la­tex u = f'(x)$, and you will re­duce the or­der of the ODE to first or­der, which in this case would be a Bernoul­li equa­tion, the first thing that I ev­er im­ple­ment­ed in SymPy.   </p> 
+ <p>But I did­n't do that.  Re­duc­tion of or­der meth­ods would be great to have for  <code>dsolve()</code>, but that is a project for an­oth­er sum­mer.  Aside from that method, Maple's  <code>odead­vi­sor()</code>  al­so told me that it was a Li­ou­ville ODE.  I had nev­er heard of that method, and nei­ther it seems has Wikipedia or "Un­cle Google" (as On­drej calls it).  For­tu­nate­ly, Maple's Doc­u­men­ta­tion has a nice page for each type of ODE re­turned by  <code>odead­vi­sor()</code>, so I was able to learn the method. The method re­lies on Lie Sym­me­tries and ex­act sec­ond or­der equa­tion­s, nei­ther of which I am ac­tu­al­ly fa­mil­iar with, so I will not at­tempt to prove any­thing here.  Suf­fice it to say that if an ODE has the form  </p> 
+ <p>$la­tex {\frac{d^{2}}{d{x}^{2}}}y(x)+g(y(x))({\frac{d}{dx}}y(x))^{2}+f(x){\frac{d}{dx}}y(x)=0$, then the so­lu­tion to the ODE is</p> 
+ <p>$la­tex \in­t^{y(x)}{e^{\int g(a){­da}}}{­da}+C1\in­t{e^{-\int f(x){dx}}}{dx}+C2=0$</p> 
+ <p>You could prob­a­bly ver­i­fy this by sub­sti­tut­ing the so­lu­tion in­to the orig­i­nal ODE.  See the  <a href="http://www.maplesoft.com/support/help/view.aspx?path=odeadvisor/Liouville">Maple Doc­u­men­ta­tion page on Li­ou­ville ODEs</a>, as well as the  <a href="http://eric.ed.gov:80/ERICWebPortal/custom/portlets/recordDetails/detailmini.jsp?_nfpb=true&amp;_&amp;ERICExtSearch_SearchValue_0=ED089982&amp;ERICExtSearch_SearchType_0=no&amp;accno=ED089982">pa­per they ref­er­ence</a>  (Gold­stein and Braun, "Ad­vanced Meth­ods for the So­lu­tion of Dif­fer­en­tial Equa­tion­s", see pg. 98).   </p> 
+ <p>The so­lu­tion is very straight for­ward--as much so as first or­der lin­ear or Bernoul­li equa­tion­s, so it was a cinch to im­ple­ment it.  It looks like quite a few dif­fer­en­tial equa­tions gen­er­at­ed by do­ing $la­tex F''(y(x), x)$ for some func­tion or x and y $la­tex F(y(x), x)$ gen­er­ates equa­tions of that type, so it could be ac­tu­al­ly use­ful for solv­ing oth­er things.   </p> 
+ <p>Be­fore I sign of­f, I just want to men­tion one oth­er thing that I im­ple­ment­ed.  I want­ed my lin­ear ho­mo­ge­neous con­stant co­ef­fi­cient ODE solver to be able to han­dle ODEs for which SymPy can't solve the char­ac­ter­is­tic equa­tion, for what­ev­er rea­son.  SymPy has  <code>RootOf()</code>  ob­jects sim­i­lar to Maple that let you rep­re­sent the roots of a poly­no­mi­al with­out ac­tu­al­ly solv­ing it, or even be­ing able to solve it, but a you can on­ly use RootOf's if you know that none of the roots are re­peat­ed.  Oth­er­wise, you would have to know which terms re­quire an ad­di­tion­al $la­tex x^i$ to pre­serve lin­ear in­de­pen­dence.  Well, it turns out that there is a way to tell if a poly­no­mi­al has re­peat­ed roots with­out solv­ing for them.  There is a num­ber as­so­ci­at­ed with ev­ery poly­no­mi­al of one vari­able called the  <a href="http://en.wikipedia.org/wiki/Discriminant">dis­crim­i­nant</a>.  For ex­am­ple, the dis­crim­i­nant of the com­mon qua­drat­ic poly­no­mi­al $la­tex ax^2 + bx + c$ is the term un­der the square root of the fa­mous so­lu­tion $la­tex b^2 - 4ac$.  It is clear that a qua­drat­ic has re­peat­ed roots if and on­ly if the dis­crim­i­nant is 0.  Well, the same is true for the dis­crim­i­nant of any poly­no­mi­al.  I am not high­ly fa­mil­iar with this (ask me again af­ter I have tak­en my ab­stract al­ge­bra class next semester), but ap­par­ent­ly there is some­thing called the re­sul­tan­t, which is the prod­uct of the dif­fer­ences of roots be­tween two poly­no­mi­als and which can al­so be cal­cu­lat­ed with­out ex­plic­it­ly find­ing the roots of the poly­no­mi­al­s.  Clear­ly, this will be 0 if and on­ly if the two poly­no­mi­als share a root.  So the dis­crim­i­nant is built from the fact that a poly­no­mi­al has a re­peat­ed root iff it shares a root with its re­sul­tan­t.  So it is ba­si­cal­ly the re­sul­tant of a poly­no­mi­al and its de­r­a­ti­vave, times an ex­tra fac­tor.  It is 0 if and on­ly if the poly­no­mi­al has a re­peat­ed root.   </p> 
+ <p>For­tu­nate­ly, SymPy's ex­ce­lent Polys mod­ule al­ready had re­sul­tants im­ple­ment­ed (quite ef­fi­cient­ly too, I might ad­d), so it was easy to im­ple­ment the dis­crim­i­nan­t.  I added it as  <a href="http://code.google.com/p/sympy/issues/detail?id=1555&amp;q=discriminant">is­sue 1555</a>.  If you are a SymPy de­vel­op­er and you have some­how man­aged to make your­self read this far (b­less your heart), please re­view that patch.   </p> 
+ <p>Well, this has turned out to be one hel­la long blog post.  But what can I say.  You don't have to read this thing (ex­cept for pos­si­bly my men­tor.  Sor­ry Andy).  And I haven't been quite up­dat­ing week­ly like I am sup­posed to be, so this com­pen­sates.  If you hap­pened up­on this blog post be­cause, like me, you were look­ing for a gen­er­al treat­ment of vari­a­tion of pa­ram­e­ter­s, I hope you found my lit­tle write up help­ful.  And if you did, and you now un­der­stand it, could you go ahead and im­prove the Wikipedia ar­ti­cle.  I'm not up to it?   </p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../07/20/modifying-a-list-while-looping-through-it-in-python/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../10/homogeneous-coefficients-corner-case/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2009/08/01/variation-of-parameters-and-more/",
+        disqus_title="Variation of Parameters and More",
+        disqus_identifier="cache/posts/2009/08/01/variation-of-parameters-and-more.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

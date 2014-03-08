@@ -183,7 +183,473 @@ but you should make sure that it's cor­rec­t.</p>
 
 
         </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2013/08/22/python-3-single-codebase-vs-2to3/" class="u-url">Python 3: Single codebase vs. 2to3</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-08-22T00:45:57-05:00">2013-08-22 00:45</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>In my  <a href="http://asmeurersympy.wordpress.com/2013/08/09/using-python-3-as-my-default-python/">pre­vi­ous post</a>  about switch­ing to Python 3 as my de­fault Python, I praised the use of a sin­gle code­base for sup­port­ing both Python 2 and Python 3. I even chas­tised the Python core de­vel­op­ers for cre­at­ing 2to3, writ­ing, "I think that the core Python folks made a mis­take by pre­sent­ing Python 3 as a new lan­guage. It has made peo­ple an­tag­o­nis­tic against Python 3 (well, that and the print func­tion, which was an­oth­er stupid mis­take, be­cause even if it was a good idea, it alone has kept too many peo­ple from switch­ing). 2to3 was a mis­take too, be­cause it per­pet­u­at­ed this idea."</p> 
+ <p>Well, this is­n't en­tire­ly fair, be­cause I my­self used to be one of the big­gest ad­vo­cates of us­ing 2to3 over a sin­gle code­base. Take this  <a href="https://github.com/ipython/ipython/issues/2440#issuecomment-9058182">GitHub com­ment</a>  from when the IPython guys were con­sid­er­ing this is­sue, where I wrote, "main­tain­ing a com­mon code base is go­ing to be a bit an­noy­ing from the de­vel­op­er side.…The main ben­e­fit of us­ing 2to3 is that 99% of the time, you can just write your code as you would for Python 2, and when it gets to Python 3, it just works (maybe that per­cent is a bit small­er if you use strings a lot, but it's still quite high­). To write for Python 2 and 3 at the same time, you have to re­mem­ber a lot of lit­tle rules, which no one will re­mem­ber (and new con­trib­u­tors will not even know about). And giv­en that IPython's test cov­er­age is still poor (un­less I am mis­tak­en, in which case, please cor­rect me), lit­tle mis­takes will slip through, and no one will no­tice un­til they try the cer­tain be­hav­ior in Python 3."</p> 
+ <p>So I just want to clar­i­fy a few things.</p> 
+ <p></p><ol>
+    <li><strong>I was wrong.</strong>   When I chas­tised the Python core de­vel­op­ers for mak­ing peo­ple be­lieve that Python 3 is a dif­fer­ent lan­guage from Python 2,  <em>I too</em>  fell in­to that trap. It took a month of me work­ing on a code­base that had to be di­rect­ly Python 3 com­pat­i­ble to see the fal­la­cy of this.  And see­ing just how small the SymPy  <a href="https://github.com/sympy/sympy/blob/master/sympy/core/compatibility.py">com­pat­i­bil­i­ty</a>  file is sealed the deal. I now be­lieve that I was com­plete­ly wrong in say­ing that main­tain­ing a com­mon code­base is an­noy­ing. As I wrote in the pre­vi­ous post, it is no dif­fer­ent from sup­port­ing 2.4-2.7, for in­stance (ac­tu­al­ly, by my mem­o­ry, sup­port­ing 2.4-2.7 was much worse than sup­port­ing 2.6-3.3, be­cause  <em>so</em>  many lan­guage fea­tures were in­tro­duced in Python 2.5)</li> 
+     <li><strong>If you have to sup­port 2.5 or ear­li­er and Python 3, then 2to3 might ac­tu­al­ly be bet­ter.</strong>  The rea­son is sim­ple: Python 2.6 was the first ver­sion of Python to "know" about Python 3. So, for in­stance,  <code>from  <strong>fu­ture</strong>  im­port print­_­func­tion</code>  was in­tro­duced in Python 2.6. This means that to sup­port a sin­gle code­base for 2.5-3.x you have to write  <code>print­('\n')</code>  to print an emp­ty line and to print some­thing with­out a new­line at the end, you have to use  <code>sys.std­out.write</code>. Al­so,  <code>ex­cept Ex­cep­tion as e</code>, us­ing the  <code>as</code>  key­word, which is the on­ly syn­tax al­lowed in Python 3, was in­tro­duced in Python 2.6, so if you want to catch an ex­cep­tion you have to use  <code>sys.ex­c_in­fo()[1]</code>. Now that re­al­ly  <em>is</em>  an­noy­ing. But in Python 2.6, most dif­fer­ences can be fixed with sim­ple def­i­ni­tion­s, most of which boil down to try, ex­cept Im­portEr­ror, im­port x as y type work­arounds. The worst are the print func­tion, which can be im­port­ed from  <strong>fu­ture</strong>, di­vi­sion, which can al­so be im­port­ed from  <strong>fu­ture</strong>  (or worked around), and uni­code lit­er­als (if it's a big deal, drop sup­port for Python 3.2). Most oth­er things are just sim­ple re­names, like xrange -&gt; range, or mak­ing sure that you wrap func­tions that are it­er­a­tors in Python 3 in  <code>list</code>  if you want to ac­cess items from them.</li> 
+     <li><strong>I was right about test cov­er­age.</strong>  Sup­port­ing Python 2 and Python 3 in a sin­gle code­base if you have bad test cov­er­age is not go­ing to work. You can get around the worst things by mak­ing sure that  <strong>fu­ture</strong>  im­ports are at the top of each file, but you are bound to miss things, be­cause, as I said, you will for­get that  <code>map(f, s)[0]</code>  does­n't work in Python 3 or that the  <code>Strin­gIO</code>  mod­ule has been re­named to  <code>io</code>, or that you can't pass around da­ta as strings—they have to be bytes.
+ <p>Of course, you al­­so need good test cov­­er­age to sup­­port Python 3 well us­ing 2to3, but you can get away with more be­­cause 2to3 will take care of things like the above for you.  Per­haps in­­stead of 2to3 what re­al­­ly should have been made is a pyflakes-­­like tool that us­es the same knowl­­edge as 2to3 to check for cross-­­com­­pat­i­­bil­i­­ty for Python 2 and Python 3.</p></li> 
+     <li><strong>In the end, you have to be ac­tu­al­ly us­ing Python 3.</strong>  I feel like peo­ple haven't been, even to­day, tak­ing Python 3 se­ri­ous­ly. They aren't ac­tu­al­ly us­ing it. There's a feel­ing that some­day in the fu­ture they will, but for now, Python 2 is the way to go. 2to3 ex­ac­er­bates this feel­ing, be­cause to use it, you have to de­vel­op in Python 2. You should­n't touch the code gen­er­at­ed by 2to3. As it is, then, if you de­vel­op with 2to3, you on­ly ev­er use Python 3 to test that things are work­ing in Python 3. You don't pro­to­type your code in Python 3, be­cause then you will write code that does­n't work in Python 2. 
+ <p>With the sin­­gle code­base, your view should change. You should start pro­­to­­typ­ing in Python 3. You should on­­ly use Python 2 to test that things work in Python 2 (and since you've been us­ing Python 2 for so long be­­fore switch­ing to Python 3, or at least if you're like me you have, this is not that bad). Just yes­ter­­day, I found a   <a href="https://github.com/sympy/sympy/pull/2398">bug</a>   in SymPy in Python 3 that went un­no­ticed. It re­lates to what I said above about us­ing bytes in­­stead of strings for da­­ta. I just checked, and 2to3 would­n't have fixed it (and in­­deed, the bug is present in SymPy 0.7.3, which used 2to3), be­­cause there's no way for 2to3 to have known that the da­­ta was bytes and not a string.  The code was ob­vi­ous­­ly untest­ed, but it would have been ob­vi­ous that it did­n't work if any­one was us­ing Python 3 to use SymPy in­­ter­ac­­tive­­ly.  As it turns out, some of our users are do­ing this, and they point­ed it out on the mail­ing list, but it re­­mained un­­fixed un­til I found it my­­self in­­de­pen­­den­t­­ly.   </p></li>   
+ </ol>
+
+<p>So old mis­takes aside, the lessons to take away from this and the  <a href="http://asmeurersympy.wordpress.com/2013/08/09/using-python-3-as-my-default-python/">pre­vi­ous blog post</a>  are  </p> 
+ <ol>
+    <li>Use a sin­gle code­base in­stead of 2to3 to sup­port both Python 2 and Python 3.</li> 
+     <li>Use Python 3 as your de­fault Python.</li> 
+     <li>Keep Python 2 around, though, be­cause not ev­ery­thing sup­ports Python 3 yet.</li> 
+     <li>Ex­pect to find some bugs, be­cause, un­til ev­ery­one starts do­ing this, peo­ple aren't go­ing to test their soft­ware in Python 3.</li> 
+ </ol>
+
+<p></p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2013/08/22/python-3-single-codebase-vs-2to3/#disqus_thread" data-disqus-identifier="cache/posts/2013/08/22/python-3-single-codebase-vs-2to3.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2013/08/09/using-python-3-as-my-default-python/" class="u-url">Using Python 3 as my default Python</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-08-09T21:59:55-05:00">2013-08-09 21:59</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>So I just fin­ished my in­tern­ship with  <a href="http://continuum.io">Con­tin­u­um</a>. For the in­tern­ship, I pri­mar­i­ly worked on  <a href="http://continuum.io/downloads">Ana­con­da</a>, their free Python dis­tri­bu­tion, and  <a href="https://github.com/continuumIO/conda">con­da</a>, its free (B­SD open source) pack­age man­ag­er. I might write a blog post about con­da lat­er, but suf­fice it to say that I'm con­vinced that it is do­ing pack­age man­age­ment the right way. One of the ma­jor de­vel­op­ments this sum­mer that I helped out with was the abil­i­ty for  <a href="http://docs.continuum.io/conda/build.html">any­body to build a con­da pack­age</a>, and a site called  <a href="https://binstar.org">Bin­star</a>  where peo­ple can up­load them (the be­ta code is "bin­star in be­ta" with no quotes).  </p><p>An­oth­er thing that hap­pened over the sum­mer is that Al­mar Klein made con­da Python 3 com­pat­i­ble, so that it can be used with the  <a href="http://www.pyzo.org">Py­zo</a>  pro­jec­t, which is Python 3 on­ly.    The way this was done was by us­ing a sin­gle code base for Python 2 and Python 3. Thus, this be­came the first time I have done any heavy de­vel­op­ment on Python source that had to be Python 3 com­pat­i­ble from a sin­gle code­base (as op­posed to us­ing the 2to3 tool).  </p><p>An­oth­er de­vel­op­ment this sum­mer was that SymPy was re­leased (<a href="https://github.com/sympy/sympy/releases/tag/sympy-0.7.3">0.7.3</a>). This marked the last re­lease to sup­port Python 2.5. Around the same time, we dis­cussed our Python 3 sit­u­a­tion, and how an­noy­ing it is to run use2­to3 all the time. The re­sult was  <a href="https://github.com/sympy/sympy/pull/2318">this pull re­quest</a>, which made SymPy use a sin­gle code base for Python 2 and Python 3. Now, that pull re­quest is hard to mull through, but the im­por­tant part to look at is the  <a href="https://github.com/sympy/sympy/pull/2318/files#diff-124">com­pat­i­bil­i­ty</a>  file. Ev­ery­thing in that file has to be im­port­ed and used, be­cause it rep­re­sents things that are dif­fer­ent be­tween Python 2 and Python 3. Ondřej has writ­ten more about this on  <a href="http://ondrejcertik.blogspot.com/2013/08/how-to-support-both-python-2-and-3.html">his blog</a>.  </p><p>In al­l, I think that sup­port­ing Python 2.6-3.3 (not in­clud­ing 3.0 or 3.1) is not that bad. The com­pat­i­bil­i­ty file has a few things, but think­ing back, it was just that bad or worse sup­port­ing Python 2.4-2.7 (heck, back then, we could­n't even use the  <code>all</code>  func­tion with­out im­port­ing it). The sit­u­a­tion is much bet­ter to­day now that we use Travis too, since any mis­take is caught be­fore the pull re­quest is merged. The worst of course is the  <code>print</code>  func­tion, but since that can be im­port­ed from  <code><strong>fu­ture</strong></code>, I will be warned about it pret­ty fast, since  <code>print</code>  as a state­ment is a Syn­tax­Er­ror in that case. It al­so does­n't take that long to get in­to the habit of typ­ing  <code>()</code>  af­ter  <code>print</code>.  </p> 
+ <p>Of course, there are a lot of nice Python 3 on­ly fea­tures that we can­not use, but this was the case for sup­port­ing Python 2.4-2.7 too (e.g., the with state­ment and the ternary state­ment were both in­tro­duced in Python 2.5).   So this is re­al­ly noth­ing new. There is al­ways a stick to drop the old­est Python ver­sion we sup­port, and a lag on what fea­tures we can use. Now that we have dropped Python 2.5 sup­port in SymPy, we can fi­nal­ly start us­ing new-style string for­mat­ting, ab­stract base class­es, rel­a­tive im­port­s, and key­word ar­gu­ments af­ter  <code>*args</code>.</p> 
+ <p>So as a re­sult of this, I've come to the con­clu­sion that Python 3 is  <em>not</em>  an­oth­er lan­guage. It's just an­oth­er ver­sion of the same lan­guage. Sup­port­ing Python 2.6-3.3 is no dif­fer­ent from sup­port­ing Python 2.4-2.7. You have to have some com­pat­i­bil­i­ty im­port­s, you can't use new lan­guage fea­tures, and you have to have good test cov­er­age. I think that the core Python folks made a mis­take by pre­sent­ing Python 3 as a new lan­guage. It has made peo­ple an­tag­o­nis­tic against Python 3 (well, that and the  <code>print</code>  func­tion, which was an­oth­er stupid mis­take, be­cause even if it was a good idea, it alone has kept too many peo­ple from switch­ing). 2to3 was a mis­take too, be­cause it per­pet­u­at­ed this idea.  </p> 
+ <p>In the past, I have al­ways de­vel­oped against the lat­est ver­sion of Python: 2.6 was the best when I learned Python, and then 2.7. Even though I have had to sup­port back to 2.4, I on­ly used 2.4 ex­plic­it­ly when test­ing.  </p> 
+ <p>Well, giv­en what I said above, the on­ly log­i­cal thing to do is to use Python 3.3 as my main de­vel­op­ment Python. If you use Ana­con­da, there are ba­si­cal­ly two ways you can do this. The first is to just cre­ate a Python 3 en­vi­ron­ment (<code>con­da cre­ate -n python3 python=3</code>), and put that first in your  <code>PATH</code>  (y­ou al­so will need to add  <code>source ac­ti­vate python3</code>  to your bash pro­file if you go this route, so that  <code>con­da in­stall</code>  will in­stall in­to that en­vi­ron­ment by de­fault­). For me, though, I plan to use a Python 3 ver­sion of Ana­con­da, which has Python 3 as the de­fault. The main dif­fer­ence here is that  <code>con­da</code>  it­self is writ­ten in Python 3. Aside from pu­ri­ty, and the fact that I plan to fix any oc­ca­sion­al con­da bugs that I come across, the oth­er dif­fer­ence here is that con­da it­self will de­fault to Python 3 in this case (i.e., when cre­at­ing a new en­vi­ron­ment with Python like  <code>con­da cre­ate -n en­vname python</code>, the Python will be Python 3, not Python 2, and al­so it will build against Python 3 by de­fault with  <code>con­da build</code>). Con­tin­u­um does not yet make Python 3 ver­sions of Ana­con­da, but there are Python 3 ver­sions of  <a href="http://repo.continuum.io/miniconda/index.html">Mini­con­da</a>  (Mini­con­da3), which is a stripped down ver­sion of Ana­con­da with just Python, the con­da pack­age man­ager, and its de­pen­den­cies. You can eas­i­ly in­stall Ana­con­da in­to it though with  <code>con­da in­stall ana­con­da</code>. I per­son­al­ly pre­fer to in­stall on­ly what I need to keep the disk us­age low (on an SS­D, disk space is sparse), so this is per­fect for me any­way.</p> 
+ <p>My rec­om­men­da­tion is to put a Python 2 in­stal­la­tion sec­ond in your PATH, so that you can eas­i­ly call  <code>python2</code>  if you want to use Python 2. The eas­i­est way to do this is to cre­ate a con­da en­vi­ron­ment for it (<code>con­da cre­ate -n python2 python=2</code>) and add  <code>~/ana­con­da/en­vs/python2</code>  to your PATH.  </p> 
+ <p>So far, I have run in­to a few is­sues:</p> 
+ <ul>
+    <li>Some pack­ages aren't build for Python 3 yet in Ana­con­da, or they don't sup­port it at al­l.  The big­gest block­er in Ana­con­da is Py­Side (at least on Mac OS X), though it should be com­ing soon.  </li> 
+     <li>Some pack­ages on­ly in­stall en­try points with a "3" suf­fix, which is an­noy­ing. The big­gest of­fend­er here is IPython. I brought up this is­sue on their  <a href="http://mail.scipy.org/pipermail/ipython-dev/2013-August/012074.html">mail­ing list</a>,  <del>so hope­ful­ly they will see the light and fix this be­fore the next re­lease</del>, but it has­n't been im­ple­ment­ed yet. I al­so plan to make sure that the Ana­con­da pack­age for IPython in­stalls an  <code>ipython</code>  en­try point in­to Python 3 en­vi­ron­ments. Even so, one has to re­mem­ber this when in­stalling old ver­sions of IPython in en­vi­ron­ments.  </li> 
+     <li>There are some bugs in con­da in Python 3. Ac­tu­al­ly, I sus­pect that there are bugs in a lot of pack­ages in Python 3, be­cause peo­ple don't de­vel­op against it, un­less they have ex­cel­lent test cov­er­age. Even SymPy missed a few print state­ments.  </li> 
+     <li>You can't  <code>set­up.py de­vel­op</code>  against any­thing that us­es 2to3 (like IPython).  </li> 
+     <li>It's a lit­tle an­noy­ing work­ing against old ver­sions of SymPy (e.g., when dig­ging through the git his­to­ry to track some­thing down), be­cause I have to ex­plic­it­ly use Python 2. Con­da makes this eas­i­er be­cause I can just cre­ate a Python 2 en­vi­ron­ment and do  <code>source ac­ti­vate python2</code>  when I am us­ing Python 2. Or, for a one-of­f, I can just use  <code>python2</code>, and keep a Python 2 en­vi­ron­ment sec­ond in my PATH. But this is­sue is not re­al­ly new. For ex­am­ple, re­al­ly old ver­sions of SymPy on­ly work with Python 2.5, be­cause they used  <code>as</code>  as a vari­able name.</li> 
+     <li>Ev­ery­one else is­n't us­ing Python 3 yet, so if I write a script that on­ly needs to sup­port "the lat­est ver­sion of Python," it prob­a­bly needs to sup­port Python 2.7, or else I should ex­plic­it­ly put  <code>/us­r/bin/env python3</code>  in the she­bang line. But for SymPy, I have to be aware of how to sup­port 2.6-3.3, so I have to know all the fea­tures that are on­ly in some ver­sions any­way. On the oth­er side of things, if I run some ran­dom Python script with a she­bang line, it prob­a­bly is go­ing to ex­pect Python 2 and not Python 3, so I ei­ther have to ex­plic­it­ly add  <code>python2</code>  to the com­mand or ac­ti­vate a Python 2 en­vi­ron­ment</li> 
+     <li>Some pack­ages just don't sup­port Python 3 yet. Fab­ric (and its main de­pen­den­cy, Paramiko) is the one ex­am­ple I have come across so far in my own work. So I have to fall back to Python 2 if I want to use them. The best thing to do here is to pitch in and help these li­braries port them­selves.</li> 
+     <li>Peo­ple al­ways give code ex­am­ples with  <code>print</code>  as a state­ment in­stead of a func­tion, so I ei­ther have to fix it man­u­al­ly be­fore past­ing it or use Python 2. I had tried at one point to make a  <code>%print</code>  mag­ic for IPython that would let print work like a state­ment in Python 3, but I nev­er fin­ished it. I guess I should re­vis­it it.</li> 
+ </ul>
+
+<p>I'll up­date this list as I come across more is­sues.  </p> 
+ <p>In al­l, so far, it's noth­ing too bad. Con­da makes switch­ing back to Python 2 easy enough, and deal­ing with these is­sues are hard­ly the worst thing I have to deal with when de­vel­op­ing with Python. And if any­thing, see­ing Python 2-3 bugs and is­sues makes me more aware of the dif­fer­ences be­tween the two ver­sions of the lan­guage, which is a good things since I have to de­vel­op against code that has to sup­port both.  </p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2013/08/09/using-python-3-as-my-default-python/#disqus_thread" data-disqus-identifier="cache/posts/2013/08/09/using-python-3-as-my-default-python.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2013/07/07/automating-the-sympy-release-process/" class="u-url">Automating the SymPy release process</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-07-07T03:13:57-05:00">2013-07-07 03:13</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>So I have just pub­lished  <a href="https://github.com/sympy/sympy/releases/sympy-0.7.3.rc1">SymPy 0.7.3.r­c1</a>. I'll write a blog post about the re­lease it­self when we re­lease 0.7.3 fi­nal, but for now, I want­ed to write about how we man­aged to au­to­mate our re­lease process.</p> 
+ <p>Our sto­ry be­gins back in Oc­to­ber of 2012, when I wrote a long wind­ed  <a href="https://groups.google.com/d/msg/sympy/UfNhyFv-oMg/PkwIz32K-lsJ">rant</a>  to the mail­ing list about how long it was tak­ing to get the 0.7.2 re­lease out (it took over a month from the time the re­lease branch was cre­at­ed).  </p> 
+ <p>The rant is fun, and I rec­om­mend read­ing it. Here are some quotes</p> 
+ <p>The in­tro:</p> 
+ <p></p><blockquote>
+<p>Now here's a time­line: 0.7.1 was re­leased Ju­ly 29, 2011, more than a year and two months ago.  0.7.0 was re­leased just over a month be­fore that, on June 28.  0.6.7 was re­leased March 18, 2010, again over a year be­fore 0.7.0.  In al­most two year's time, we've had three re­leas­es, and are strug­gling to get out a fourth.  And it's not like there were no changes; quite the op­po­site in fac­t.  If you look at SymPy 0.6.6 com­pared to the cur­rent mas­ter, it's un­be­liev­able the amount of changes that have gone for­ward in that time.  We've had  </p> 
+ <p>since then the new polys, at least four com­plete­ly new sub­mod­ules (com­bi­na­toric­s, set­s, dif­fer­en­tial ge­om­e­try, and stat­s), mas­sive im­prove­ments to in­te­gra­tion and spe­cial func­tion­s, a ton of new stuff in the physics mod­ule, lit­er­al­ly thou­sands of bug fix­es, and the list goes on.  Each of these changes on it's own was enough to war­rant a re­lease.  </p> 
+ <p>So in case I did­n't make my point, le me state it ex­plic­it­ly: we need to re­lease more of­ten.  We need to re­lease  <em>way</em>  more of­ten.  </p> 
+ </blockquote>
+
+<p>My views on some of the fun­da­men­tal (non-tech­ni­cal) is­sues:</p> 
+ <blockquote>
+
+I think that one other thing that has held back many releases is the feeling of "wait, we should put this in the release". The use of a release branch has helped keep master moving along independently, but there still seems to be the feeling with many branches of, "this is a nice feature, it ought to go in the release."  My hope is that by making the release process smoother, we can release more often, and this feeling will go away, because it won't be a big deal if something waits until the next release.  As far as deprecations go, the real issue with them is time, not release numbers.  So if we deprecate a feature today vs. one month from today, it's not a big deal (as opposed to today vs. a year from today), regardless of how many versions are in between. 
+
+
+
+I read about what GitHub does for their Windows product regarding releasing often on their blog: https://github.com/blog/1271-how-we-ship-github-for-windows (they actually have this philosophy for all their products).  One thing that they said is, "And by shipping updates so often, there is less anxiety about getting a particular feature ready for a particular release. If your pull request isn’t ready to be merged in time for today’s release, relax. There will be another one soon, so make that code shine!"  I think that is exactly the point here.  Another thing that they noted is that automation is the key to doing this, which is what I am aiming for with the above point. 
+
+</blockquote>
+
+<p>My vi­sion:</p> 
+ <blockquote>
+
+Once we start releasing very often (and believe me, this is way down the road, but I'm trying to be forward looking here), we can do away with release candidates.  A release candidate lives in the wild for a week before the full release.  But if we are capable of releasing literally every week, then having release candidates is pointless.  If a bug slips into a release, we just fix it and it will be in the next release. 
+
+</blockquote>
+
+<p>...</p> 
+ <blockquote>
+
+We should release *at least* once a month.  I think that if the process is automated enough, that this will be very possible (as opposed to the current situation, where the release branch lasts longer than a month).  In times of high activity, we can release more often than that (e.g., after a big pull request is merged, we can release). 
+
+</blockquote>
+
+<p>That was Oc­to­ber. To­day is Ju­ly. Ba­si­cal­ly, our re­lease process was way too long. Half of it was test­ing stuff, half of it was te­dious re­leas­ing stuff (like mak­ing tar­balls and so on), and half of it was up­dat­ing web­sites.  </p> 
+ <p>We have moved all our test­ing to Travis CI. So now ev­ery pull re­quest is test­ed, and we can be pret­ty much as­sured that mas­ter is al­ways pass­ing the test­s.  There is still some work to do here (cur­rent­ly Travis CI does­n't test with ex­ter­nal de­pen­den­cies), but it's most­ly a solved prob­lem.</p> 
+ <p>For up­dat­ing web­sites, we con­ced­ed that we are not go­ing to up­date any­thing that we don't own. That means no at­tempt­ing to make De­bian or Sage pack­ages, or up­dat­ing Wikipedia or Fresh­meat. Some­one else will do that (and does any­one even use Fresh­meat any more?).  </p> 
+ <p>That leaves the re­leas­ing it­self. It's still a pain, be­cause we have to make a source tar­ball, Win­dows in­staller, html doc­s, and pdf doc­s, and do them all for both Python 2 and Python 3.  </p> 
+ <p>So On­drej sug­gest­ed mov­ing to fab­ric/­va­grant. At the SciPy 2013 sprints, he start­ed work­ing on a fab­file that au­to­mates the whole process. Ba­si­cal­ly va­grant is a pre­de­fined Lin­ux vir­tu­al ma­chine that makes it easy to make ev­ery­thing com­plete­ly re­pro­ducible. Fab­ric is a tool that makes it easy to write com­mands (in Python) that are run on that ma­chine.  </p> 
+ <p>Build­ing the ba­sic stuff was easy, but I want to au­to­mate  <em>ev­ery­thing</em>. So far, not ev­ery­thing is done yet, but we're get­ting close. For ex­am­ple, in ad­di­tion to build­ing the tar­ball­s, the fab­ric script checks the con­tents of the tar­ball against  <code>git ls-­files</code>  to make sure that noth­ing is in­clud­ed that should­n't be or left out ac­ci­den­tal­ly (and, in­deed, we caught some miss­ing files that weren't in­clud­ed in the tar­ball, in­clud­ing the READ­ME).  </p> 
+ <p>You can run all this your­self. Check­out the 0.7.3 branch from SymPy, then cd in­to the re­lease di­rec­to­ry, and read the README. Ba­si­cal­ly, you just in­stall Fab­ric and Va­grant if you don't have them al­ready, then run</p> 
+ <p>[code]</p> 
+ <p>va­grant up</p> 
+ <p>fab va­grant pre­pare</p> 
+ <p>fab va­grant re­lease</p> 
+ <p>[/­code]</p> 
+ <p>Note that this down­loads a 280 MB vir­tu­al ma­chine, so it will take some time to run for the first time. When you do this, the re­leas­es are in the  <code>re­lease</code>  di­rec­to­ry.  </p> 
+ <p>Fi­nal­ly, I up­load­ed 0.7.3.r­c1 to GitHub us­ing the new re­leas­es fea­ture. This is what the re­lease looks like on GitHub, from the us­er point of view</p> 
+ <p><a href="2013/07/screenshot-2013-07-06-22-05-31.png"><img src="2013/07/screenshot-2013-07-06-22-05-31.png" alt="SymPy 0.7.3.rc1" width="450" height="260" class="alignnone size-full wp-image-1352"></a></p> 
+ <p>This is what it looks like to me</p> 
+ <p><a href="2013/07/screenshot-2013-07-06-22-08-19.png"><img src="2013/07/screenshot-2013-07-06-22-08-19.png" alt="SymPy 0.7.3.rc1 Edit" width="450" height="470" class="alignnone size-full wp-image-1353"></a></p> 
+ <p>GitHub has (ob­vi­ous­ly) the best in­ter­face I've ev­er seen for this. Of course, even bet­ter would be if there were an API, so that I could au­to­mate this too.  But since Google's  <a href="http://google-opensource.blogspot.com/2013/05/a-change-to-google-code-download-service.html">an­nounce­ment</a>  that they are dis­con­tin­u­ing down­load­s, we can no longer up­load to Google Code. Our plan was to just use PyP­I, but I am glad that we can have at least one oth­er lo­ca­tion, es­pe­cial­ly since PyPI is so bug­gy and un­re­li­able (I can't even log in, I get a 502).</p> 
+ <p>So please down­load this re­lease can­di­date and test it. We es­pe­ical­ly need peo­ple to test the Win­dows in­staller, since we haven't au­to­mat­ed that part yet (ac­tu­al­ly, we are con­sid­er­ing not mak­ing them any more, es­pecail­ly giv­en the ex­is­tence of peo­ple like Christoph Gohlke who  <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#sympy">make them</a>  for SymPy any­way, but we'll see). The on­ly thing that re­mains to be done is to fin­ish writ­ing the  <a href="https://github.com/sympy/sympy/wiki/release-notes-for-0.7.3">re­lease notes</a>. If you made any con­tri­bu­tions to SymPy since the last re­lease, please add them there. Or if you want to help out, you can go through our pull re­quests and make sure that noth­ing is miss­ing.</p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2013/07/07/automating-the-sympy-release-process/#disqus_thread" data-disqus-identifier="cache/posts/2013/07/07/automating-the-sympy-release-process.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2013/07/02/scipy-2013/" class="u-url">SciPy 2013</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-07-02T01:42:08-05:00">2013-07-02 01:42</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>This past week was the 2013 SciPy con­fer­ence. It was an ex­cit­ing time, and a lot of in­ter­est­ing things hap­pened.  </p><p>First, a back­ground. This sum­mer, I have been do­ing an in­tern­ship with  <a href="http://continuum.io/">Con­tin­u­um An­a­lyt­ics</a>. There I have been work­ing main­ly on Ana­con­da and con­da. Ana­con­da is Con­tin­u­um's free (to ev­ery­one) Python dis­tri­bu­tion, which makes it re­al­ly easy to get boot­strapped with all the sci­en­tif­ic soft­ware (in­clud­ing SymPy). Con­da is Ana­con­da's pack­age man­ager, which, I think, solves many if not all of the main is­sues with the Python pack­ag­ing tools like pip, easy_in­stal­l, PyP­I, and vir­tualen­v.  </p><p>I may write more about that lat­er, but for now, I want to write about my ex­pe­ri­ences at the con­fer­ence. The main point there is that I have al­ready been in Austin for about a mon­th, so get­ting to the con­fer­ence this year was pret­ty easy.</p><p>On the first day of the con­fer­ence, on Mon­day morn­ing, On­drej Cer­tik and I had our tu­to­ri­al for SymPy. For the past cou­ple of month­s, I have been rewrit­ing the of­fi­cial SymPy tu­to­ri­al from scratch. The of­fi­cial tu­to­ri­al for SymPy was very old, and had many is­sues. It on­ly went over fea­tures that were good at the time of its writ­ing, so while noth­ing in the tu­to­ri­al was wrong, it did­n't re­al­ly rep­re­sent the lat­est and great­est of the li­brary. Al­so, it was writ­ten just like a list of ex­am­ples, which is not much more than the API doc­s. In my new tu­to­ri­al, I aimed to give a nar­ra­tive style doc­u­men­ta­tion, which starts from the very be­gin­ning of what sym­bol­ics are and works its way up to the ba­sic func­tion­al­i­ty of things like solv­ing and sim­pli­fy­ing ex­pres­sion­s. My goal was al­so to lead by ex­am­ple, and in par­tic­u­lar, to avoid teach­ing things that I think ei­ther are an­tipat­tern­s, or lead to an­tipat­tern­s. In Python, there is one-- and prefer­ably on­ly one --way to do it. In SymPy, by the na­ture of the li­brary, there are about sev­en dif­fer­ent ways to cre­ate a Sym­bol, for ex­am­ple (see http­s://github.­com/sympy/sympy/wik­i/Id­iom­s-and-An­tipat­tern­s, the sec­tion, "Cre­at­ing Sym­bol­s"). But there is one  <em>best</em>  way to do it: by us­ing sym­bol­s(). So all through­out the tu­to­ri­al, I just use sym­bol­s(), even if I am cre­at­ing a sin­gle Sym­bol. I avoid messy things like var.  </p><p>The fi­nal tu­to­ri­al is at http://­doc­s.sympy.org/­tu­to­ri­al/­tu­to­ri­al/. This was the ba­sis for the tu­to­ri­al that On­drej and I gave at SciPy. The site for our tu­to­ri­al is at http://cer­tik.github.io/s­cipy-2013-­tu­to­ri­al/htm­l/in­dex.htm­l. There are links to videos, slides, and ex­er­cise note­books there.  </p><p>I think our tu­to­ri­al was a great suc­cess. Peo­ple liked (I think) the in­tro­duc­tion from noth­ing to SymPy. For our ex­er­cis­es, we used the  <a href="https://pypi.python.org/pypi/ipython_doctester">IPython Doctester</a>. I think that peo­ple re­al­ly liked this way of do­ing ex­er­cis­es, but there were some is­sues get­ting it to work on ev­ery­one's ma­chine.  </p><p>In ad­di­tion to my stuff, On­drej pre­sent­ed some note­books of ex­am­ples of work that he has used in his work at LAN­L. I think this worked well. There were sev­er­al physi­cists in the au­di­ence, who un­der­stood most of the con­tent, but even for those who weren't (in­clud­ing me!), it re­al­ly showed that SymPy is a use­ful tool. In a be­gin­ner tu­to­ri­al, it is easy to get lost in the easy de­tail­s, and for­get that in the end, you can ac­tu­al­ly use SymPy to com­pute some pow­er­ful things.  SymPy has in the past year or two re­al­ly passed the bar­ri­er of toy to tool.  </p><p>Af­ter our tu­to­ri­al, I at­tend­ed the IPython tu­to­ri­al, and the two-­part Scik­it-Learn tu­to­ri­al. The most awe­some part of this was just get­ting to meet peo­ple. Fer­nan­do Perez, Thomas Kluyver, and Bri­an Granger of IPython were at the con­fer­ence. Brain is al­so a SymPy de­vel­op­er, who has spear­head­ed the quan­tum mod­ule. From SymPy, in ad­di­tion to On­drej (who cre­at­ed SymPy), I met Matthew Rock­lin, one of the top con­trib­u­tors, Ja­son Moore, one of the de­vel­op­ers of Py­Dy, which us­es SymPy's me­chan­ics mod­ule, and David Li, who works on SymPy Gam­ma and SymPy Live (more on these peo­ple lat­er).  </p><p>Af­ter the tu­to­ri­al­s, Wednes­day and Thurs­day were the talk­s. There were a lot of good ones. Here are the ones that I re­mem­ber the most</p><ul><li>Fer­nan­do's key­note. If you've ev­er seen one of Fer­nan­do's talk­s, you know that he is a great speak­er.  </li><li>Matthew's talk. His talk was about his work on us­ing SymPy's ma­trix ex­pres­sions to com­pile ex­pres­sions for BLAS/LA­PACK. This talk ex­cit­ed many peo­ple in the au­di­ence. I think this is great, be­cause it shows peo­ple some of the re­al pow­er of things you can on­ly do with sym­bol­ic­s.</li><li>Ja­son Moore's talk about Py­Dy and the me­chan­ics mod­ule. He ran out of time, but there is a nice ex­am­ple of us­ing SymPy to gen­er­ate a con­troller for an in­vert­ed triple pen­du­lum, which seems im­pos­si­ble, but then he shows a video of an ac­tu­al thing that can do it.</li><li>William Schroed­er's key­note. The mes­sage was that the aca­dem­ic mod­el is bro­ken, and does­n't lead to re­pro­ducible re­search. While they are fix­ing things, the mes­sage is that we are the new pub­lish­er­s. There was al­so men­tion at the end that we should stop us­ing non­com­mer­cial li­cens­es, and stop us­ing vi­ral li­cens­es like the GPL and LGPL. I was a lit­tle sur­prised to hear such a con­tro­ver­sial state­men­t, but it's ac­tu­al­ly very true, and I agree with him that if peo­ple don't stop us­ing the GPL, then we will nev­er achieve open­ness in sci­ence.  </li><li>David Li's talk. David Li is a high school stu­dent (s­tart­ing his se­nior year in the fal­l), who start­ed with SymPy two years ago with Google Code-In. He has con­tin­ued work­ing on  <a href="http://live.sympy.org/">SymPy Live</a>, and  <a href="http://gamma.sympy.org/">SymPy Gam­ma</a>  since. He is the rea­son that we have  <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">SymPy Live in our docs</a>. His talk was al­so well re­ceived.  ­David is a good speak­er, and SymPy Gam­ma and SymPy Live are pret­ty cool (for those of you who don't know, SymPy Live is an on­line shell where you can run a Python ses­sion with SymPy in the browser, and SymPy Gam­ma is the SymPy ver­sion of Wol­fra­mAl­pha).</li><li>Bri­an Granger's talk. His talk is en­ti­tled "<strong><a href="http://conference.scipy.org/scipy2013/presentation_detail.php?id=195">Why you should write bug­gy soft­ware with as few fea­tures as pos­si­ble</a>".  </strong>I think he had some good mes­sages in there. You have to re­duce the scope of your pro­jec­t, or it will get out of hand. As for bugs, get­ting bug re­ports is a good thing, be­cause it shows that peo­ple are us­ing the soft­ware, and what parts of it they are us­ing.  </li><li>The light­ning talk­s. Es­pe­cial­ly Matthew Rock­lin's light­ning talk. His talk was about split­ting things up in­to very small pack­ages, so that you don't have to get a huge pack­age just for one func­tion. He went a lit­tle far with it, and I think his ideas aren't re­al­ly us­able in the cur­rent Python pack­ag­ing ecosys­tem, but, tak­en in mod­er­a­tion, I agree with him. At any rate, it was very en­ter­tain­ing (I don't have any video links here be­cause they aren't post­ed yet, but I en­cour­age you to watch the light­ning talks once they are post­ed).  </li><li>I heard the mat­plotlib talk was good, but I haven't seen it be­cause it was at the same time as Matthew's talk. I plan to watch it when the videos come out. If you saw it, I en­cour­age you to watch Matthew's talk, es­pe­cial­ly if you've ev­er used BLAS/LA­PACK.</li></ul><p>Top­ping off the week were the sprints on Fri­day and Sat­ur­day. My goal was to get out a re­lease of SymPy. We did­n't quite get that far, but we got close. We are on­ly block­ing on a few small things to get out a re­lease can­di­date, so ex­pect one be­fore the end of the week. We did in­tro­duce a lot of peo­ple to SymPy at the sprints, though, and got some first time con­tri­bu­tion­s. Def­i­nite­ly I think we made a lot more peo­ple aware of SymPy at this con­fer­ence than we ev­er have be­fore.  </p><p>An­oth­er in­ter­est­ing thing at the sprints: be­fore the con­fer­ence, I was telling David Li that we should switch to Dill for SymPy Live (the way SymPy Live works on the App En­gine, it has to pick­le the ses­sion be­tween run­s, be­cause there is a 60 time lim­it on each ex­e­cu­tion). Dill is a li­brary that ex­tends Python's pick­le so that it can pick­le just about any­thing. At the end of David's talk, the guy who wrote Dil­l, Mike McK­ern­s raised his hand and asked him about it! At the sprints, David and he worked to­geth­er to get it work­ing in SymPy Live (and co­in­ci­den­tal­ly, he al­so us­es SymPy in an­oth­er pack­age, mys­tic). There were some fix­es need­ed for Dil­l. He al­so moved Dill out of a larg­er project (in the spir­it of Matthew's light­ning talk), and over to  <a href="https://github.com/uqfoundation/dill">GitHub</a>. Now all they need is a lo­go (Paul Ivanov sug­gest­ed a vari­a­tion on "we can pick­le that!").  </p><p>In al­l, it was a fun con­fer­ence. The best part, as al­ways, was meet­ing peo­ple in per­son, and talk­ing to them. To con­clude, I want to men­tion two oth­er in­ter­est­ing things that hap­pened.</p><p>The first is that Matthew and I talked se­ri­ous­ly about how to go about fix­ing the as­sump­tions in SymPy. I will write to the list about this soon, but the ba­sic idea is to just get in there and hack things to­geth­er, so that we can get some­thing that work­s. The work there is start­ed at http­s://github.­com/sympy/sympy/pul­l/2210, where I am see­ing if we can merge the old and new as­sump­tion­s, so that some­thing as­sumed in one can be asked in the old one.</p>The sec­ond thing is that On­drej got a new hat:  <a href="2013/07/2013-06-26-08-02-40-hdr.jpg"><img src="2013/07/2013-06-26-08-02-40-hdr.jpg" alt="Ondrej's Hat" width="450" height="602" class="alignnone size-full wp-image-1344"></a></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2013/07/02/scipy-2013/#disqus_thread" data-disqus-identifier="cache/posts/2013/07/02/scipy-2013.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/" class="u-url">How to make attributes un-inheritable in Python using descriptors</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-04-06T02:49:13-05:00">2013-04-06 02:49</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>For http­s://github.­com/sympy/sympy/pul­l/1969, and pre­vi­ous work at http­s://github.­com/sympy/sympy/pul­l/1901, we added the abil­i­ty for the SymPy doctester to run or not run doctests con­di­tion­al­ly de­pend­ing on whether or not re­quired ex­ter­nal de­pen­den­cies are in­stalled. This means that for ex­am­ple we can doctest all the plot­ting ex­am­ples with­out them fail­ing when mat­plotlib is not in­stalled.  </p> 
+ <p>For func­tion­s, this is as easy as dec­o­rat­ing the func­tion with  <code>@doctest_de­pends</code>, which adds the at­tribute  <code>_doctest_de­pend­s_on</code>  to the func­tion with a list of what de­pen­den­cies the doctest de­pends on. The doctest will then not run the doctest un­less those de­pen­den­cies are in­stalled.</p> 
+ <p>For class­es, this is not so easy. Ide­al­ly, one could just de­fine  <code>_doctest_de­pend­s_on</code>  as an at­tribute of the class. How­ev­er, the is­sue is that with class­es, we have in­her­i­tance. But if class  <code>A</code>  has a doc­string with a doctest that de­pends on some mod­ules, it does­n't mean that a sub­class  <code>B</code>  of  <code>A</code>  will have a doctest that does.   </p> 
+ <p>Re­al­ly, what we need to do is to dec­o­rate the doc­string it­self, not the class. Un­for­tu­nate­ly, Python does not al­low adding at­tributes to strings</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>&gt;&gt;&gt; a = ""</p> 
+ <p>&gt;&gt;&gt; a.x = 1</p> 
+ <p>Trace­back (most re­cent call last):
+  File "&lt;st­d­in&gt;", line 1, in &lt;mod­ule&gt;
+At­tribu­teEr­ror: 'str' ob­ject has no at­tribute 'x'</p> 
+ <p>[/­code]</p> 
+ <p>So what we have to do is to cre­ate a at­tribute that does­n't in­her­it.   </p> 
+ <p>I had for some time want­ed to give  <a href="http://docs.python.org/2/howto/descriptor.html">de­scrip­tors</a>  in Python a try, since they are a cool fea­ture, but al­so the sec­ond most com­pli­cat­ed fea­ture in Python (the first is meta­class­es). If you don't know what a de­scrip­tor is, I rec­om­mend read­ing  <a href="http://python-history.blogspot.com/2010/06/inside-story-on-new-style-classes.html?m=1">this blog post</a>  by Gui­do van Rossum, the cre­ator of Python. It's the best ex­pla­na­tion of the fea­ture there is.   </p> 
+ <p>Ba­si­cal­ly, Python lets at­tributes de­fine what hap­pens when they are ac­cessed (like  <code>a.x</code>).  You may al­ready know that ob­jects can de­fine how their at­tributes are ac­cessed via  <code><strong>getat­tr</strong></code>. This is dif­fer­en­t. With de­scrip­tors, the  <em>at­tributes them­selves</em>  de­fine what hap­pen­s.  This may sound less use­ful, but in fac­t, it's a very core fea­ture of the lan­guage.  </p> 
+ <p>If you've ev­er won­dered how  <code>prop­er­ty</code>,  <code>class­method</code>, or  <code>stat­icmethod</code>  work in Python, the an­swer is de­scrip­tors. Ba­si­cal­ly, if you have some­thing like</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>class A(ob­jec­t):
+    def f(­self):
+        re­turn 1
+    f = prop­er­ty(f)
+[/­code]</p> 
+ <p>Then  <code>A().f</code>  mag­i­cal­ly calls what would nor­mal­ly be  <code>A().f()</code>. The way it works is that  <code>prop­er­ty</code>  de­fines the  <code><strong>get</strong></code>  method, which re­turns  <code>f(ob­j)</code>, where  <code>obj</code>  is the call­ing ob­jec­t, here  <code>A()</code>  (re­mem­ber in Python that the first ar­gu­ment of a method, usu­al­ly called  <code>self</code>  is the ob­ject that calls the method­).   </p> 
+ <p>De­scrip­tors can al­low method to de­fine ar­bi­trary be­hav­ior when called, set, or delet­ed.  To make an at­tribute in­ac­ces­si­ble to sub­class­es, then, you just need to de­fine a de­scrip­tor that pre­vents the at­tribute from be­ing ac­cessed if the class of the call­ing ob­ject is not the orig­i­nal class.  Here is some code:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>class no­sub­class­es(ob­jec­t):
+    def  <strong>init</strong>(self, f, cls):
+        self­.f = f
+        self­.­cls = cls
+    def  <strong>get</strong>(self, ob­j, type­=None):
+        if type == self­.­cls:
+            if hasat­tr(­self.f, '<strong>get</strong>'):
+                re­turn self­.f.<strong>get</strong>(ob­j, type­)
+            re­turn self­.f
+        raise At­tribu­teEr­ror
+[/­code]</p> 
+ <p>it works like this</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [2]: class My­Class(ob­jec­t):
+   ...:     x = 1
+   ...:</p> 
+ <p>In [3]: My­Class.x = no­sub­class­es(My­Class.x, My­Class)</p> 
+ <p>In [4]: class My­Sub­class(My­Class):
+   ...:     pass
+   ...:</p> 
+ <p>In [5]: My­Class.x</p> 
+ <p>Out­[5]: 1</p> 
+ <p>In [6]: My­Class().x</p> 
+ <p>Out­[6]: 1</p> 
+ <p>In [80]: My­Sub­class.x</p> 
+ <hr>
+<p>At­tribu­teEr­ror                            Trace­back (most re­cent call last)</p> 
+ <p>&lt;ipython-in­put-80-2b2f456d­d101&gt; in &lt;mod­ule&gt;()</p> 
+ <p>----&gt; 1 My­Sub­class.x</p> 
+ <p>&lt;ipython-in­put-51-7fe1b5063367&gt; in  <strong>get</strong>(self, ob­j, type­)
+      8                 re­turn self­.f.<strong>get</strong>(ob­j, type­)
+      9             re­turn self­.f
+---&gt; 10         raise At­tribu­teEr­ror</p> 
+ <p>At­tribu­teEr­ror:</p> 
+ <p>In [81]: My­Sub­class().x</p> 
+ <hr>
+<p>At­tribu­teEr­ror                            Trace­back (most re­cent call last)</p> 
+ <p>&lt;ipython-in­put-81-93764ee­b9948&gt; in &lt;mod­ule&gt;()</p> 
+ <p>----&gt; 1 My­Sub­class().x</p> 
+ <p>&lt;ipython-in­put-51-7fe1b5063367&gt; in  <strong>get</strong>(self, ob­j, type­)
+      8                 re­turn self­.f.<strong>get</strong>(ob­j, type­)
+      9             re­turn self­.f
+---&gt; 10         raise At­tribu­teEr­ror</p> 
+ <p>At­tribu­teEr­ror:</p> 
+ <p>[/­code]</p> 
+ <p>Note that by us­ing the third ar­gu­ment to  <code><strong>get</strong></code>, this works re­gard­less if the at­tribute is ac­cessed from the class or the ob­jec­t. I have to call  <code><strong>get</strong></code>  on  <code>self­.f</code>  again if it has it to en­sure that the right thing hap­pens if the at­tribute has oth­er de­scrip­tor log­ic de­fined (and note that reg­u­lar meth­ods have de­scrip­tor log­ic de­fined---that's how they con­vert the first ar­gu­ment  <code>self</code>  to im­plic­it­ly be the call­ing ob­jec­t).</p> 
+ <p>One could eas­i­ly make class dec­o­ra­tor that au­to­mat­i­cal­ly adds the at­tribute to the class in a non-in­her­i­ta­ble way:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>def no­sub­class_x(args):
+    def _wrap­per(­cls):
+        cls.x = no­sub­class­es(args, cls)
+        re­turn cls
+    re­turn _wrap­per
+[/­code]</p> 
+ <p>This au­to­mat­i­cal­ly adds the prop­er­ty  <code>x</code>  to the dec­o­rat­ed class with the val­ue giv­en in the dec­o­ra­tor, and it won't be ac­ces­si­ble to sub­class­es:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [87]: @no­sub­class_x(1)
+   ....: class My­Class(ob­jec­t):
+   ....:     pass
+   ....:</p> 
+ <p>In [88]: My­Class().x</p> 
+ <p>Out­[88]: 1</p> 
+ <p>In [89]: My­Sub­class().x</p> 
+ <hr>
+<p>At­tribu­teEr­ror                            Trace­back (most re­cent call last)</p> 
+ <p>&lt;ipython-in­put-89-93764ee­b9948&gt; in &lt;mod­ule&gt;()</p> 
+ <p>----&gt; 1 My­Sub­class().x</p> 
+ <p>&lt;ipython-in­put-51-7fe1b5063367&gt; in  <strong>get</strong>(self, ob­j, type­)
+      8                 re­turn self­.f.<strong>get</strong>(ob­j, type­)
+      9             re­turn self­.f
+---&gt; 10         raise At­tribu­teEr­ror</p> 
+ <p>At­tribu­teEr­ror:</p> 
+ <p>[/­code]</p> 
+ <p>For SymPy, we can't use class dec­o­ra­tors be­cause we still sup­port Python 2.5, and they were in­tro­duced in Python 2.6. The best work around is to just call  <code>Class.at­tribute = no­sub­class­es(­Class.at­tribute, Class)</code>  af­ter the class def­i­ni­tion. Un­for­tu­nate­ly, you can't ac­cess a class in­side its def­i­ni­tion like you can with func­tion­s, so this has to go at the end.  </p> 
+ <p><strong>Name Man­gling</strong></p> 
+ <p>Af­ter com­ing up with all this, I re­mem­bered that Python al­ready has a pret­ty stan­dard way to de­fine at­tributes in such a way that sub­class­es won't have ac­cess to them. All you have to do is use two un­der­scores be­fore the name, like  <code><strong>x</strong></code>, and it will be  <a href="http://docs.python.org/2/reference/expressions.html#atom-identifiers">name man­gled</a>. This means that the name will be re­named to  <code>_class­namex</code>  out­side the class def­i­ni­tion. The name will not be in­her­it­ed by sub­class­es.  There are some sub­tleties with this, par­tic­u­lar­ly for strange class names (names that are too long, or names that be­gin with an un­der­score). I  <a href="http://stackoverflow.com/q/15845931/161801">asked about this on Stack­Over­flow</a>. The best an­swer is that there was a func­tion in the stan­dard li­brary, but it was re­moved in Python 3. My tests re­veal that the be­hav­ior is dif­fer­ent in CPYthon than in PyPy, so get­ting it right for ev­ery pos­si­ble class is non­triv­ial. The de­scrip­tor thing should work ev­ery­where, though.  On the oth­er hand,  <code>getat­tr(ob­j, '_' + ob­j.<strong>class</strong>.<strong>name</strong>  + at­tribute­name)</code>  will work 99% of the time, and is much eas­i­er both to write and to un­der­stand than the de­scrip­tor.  </p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/#disqus_thread" data-disqus-identifier="cache/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2013/03/03/when-does-xlogy-ylogx/" class="u-url">When does x^log(y) = y^log(x)?</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-03-03T06:49:35-06:00">2013-03-03 06:49</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><em>In this blog post, when I write $latex \log(x)$, I mean the natural logarithm, or log base $latex e$, i.e., $latex \ln(x)$.</em>
+<p>A dis­cus­sion on a  <a href="https://github.com/sympy/sympy/pull/1845">pull re­quest</a>  got me think­ing about this ques­tion: what are the so­lu­tions to the com­plex equa­tion $la­tex x^{\log{(y)}} = y^{\log(x)}$?  At the out­set, they look like dif­fer­ent ex­pres­sion­s.  But clear­ly there some so­lu­tion­s. For ex­am­ple, if $la­tex x = y$, then ob­vi­ous­ly the two ex­pres­sions will be the same.  We prob­a­bly should ex­clude $la­tex x = y = 0$, though note that even if $la­tex 0^{\log(0)}$ is well-de­fined (prob­a­bly if it is it is ei­ther 0 or com­plex $la­tex \in­fty$), it will be the same well-de­fined val­ue. But for the re­main­der of this blog post, I'll as­sume that $la­tex x$ and $la­tex y$ are nonze­ro.</p> 
+ <p>Now, ob­serve that if we ap­ply $la­tex \log$ to both sides of the equa­tion, we get $la­tex \log{\left­(x^{\log(y)}\right )} = \log {\left (y^{\log(x)}\right )}$.  Now, sup­pos­ing that we can ap­ply the fa­mous log­a­rithm ex­po­nent rule, we would get $la­tex \log(x)\log(y) = \log(y)\log(x)$, which means that if ad­di­tion­al­ly $la­tex \log$ is one-­to-one, we would have that the orig­i­nal ex­pres­sions must be equal.</p> 
+ <p>The sec­ond ques­tion, that of  <a href="http://en.wikipedia.org/wiki/Injective_function">in­jec­tiv­i­ty</a>, is eas­i­er to an­swer than the first, so I'll ad­dress it first.  Note that the com­plex ex­po­nen­tial is not one-­to-one, be­cause for ex­am­ple $la­tex e^0 = e^{2\pi i} = 1$.  But we still de­fine the com­plex log­a­rithm as the "in­verse" of the com­plex ex­po­nen­tial.  What this re­al­ly means is that the com­plex log­a­rithm is strict­ly speak­ing not a func­tion, be­cause it is not well-de­fined. Re­call that the def­i­ni­tion of one-­to-one means that $la­tex f(x) = f(y)$ im­plies $la­tex x = y$, and that the def­i­ni­tion of well-de­fined is that $la­tex x = y$ im­plies $la­tex f(x) = f(y)$.  It is clear to see here that $la­tex f$ be­ing one-­to-one is the same as $la­tex f^{-1}$ be­ing well-de­fined and visa-ver­sa ($la­tex f^{-1}$ here is the same loose def­i­ni­tion of an in­verse as say­ing that the com­plex log­a­rithm is the in­verse of the com­plex ex­po­nen­tial).</p> 
+ <p>So note that the com­plex log­a­rithm is not well-de­fined ex­act­ly be­cause the com­plex ex­po­nen­tial is not one-­to-one.  We of course fix this prob­lem by mak­ing it well-de­fined, i.e., it nor­mal­ly is mul­ti­val­ued, but we pick a sin­gle val­ue con­sis­tent­ly (i.e., we pick a  <a href="http://en.wikipedia.org/wiki/Branch_point#Complex_logarithm">branch</a>), so that it is well-de­fined.  For the re­main­der of this blog post, I will as­sume the stan­dard choice of branch cut for the com­plex log­a­rith­m, i.e., the branch cut is along the neg­a­tive ax­is, and we choose the branch where, for $la­tex x &gt; 0$, $la­tex \log(x)$ is re­al and $la­tex \log(-x) = \log(x) + i\pi$.</p> 
+ <p>My point here is that we au­to­mat­i­cal­ly know that the com­plex log­a­rithm is one-­to-one be­cause we know that the com­plex ex­po­nen­tial is well-de­fined.</p> 
+ <p>So our ques­tion boils down to, when does the iden­ti­ty $la­tex \log{\left (z^a\right)} = a \log(z)$ hold?  In SymPy, this iden­ti­ty is on­ly ap­plied by  <code>ex­pand_log()</code>  or  <code>log­com­bine()</code>  when $la­tex a$ is re­al and $la­tex z$ is pos­i­tive, so let us as­sume that we know that it holds un­der those con­di­tion­s. Note that it al­so holds for some oth­er val­ues too.  For ex­am­ple, by our def­i­ni­tion $la­tex \log{\left (e^{i\pi}\right)} = \log(-1) = \log(1) + i\pi = i\pi = i\pi\log(e)$.  For our ex­am­ple, this means that $la­tex x = e$, $la­tex y = -1$ is a non-triv­ial so­lu­tion (non-triv­ial mean­ing $la­tex x \neq y$).   Ac­tu­al­ly, the way that the com­plex log­a­rithm be­ing the "in­verse" of the com­plex ex­po­nen­tial works is that $la­tex e^{\log(x)} = x$ for all $la­tex x$ (on the oth­er hand $la­tex \log{\left­(e^x\right)} \neq x$ in gen­er­al), so that if $la­tex x = e$, then $la­tex x^{\log(y)} = e^{\log(y)} = y$ and $la­tex y^{\log(x)} = y^{\log(e)} = y^1 = y$.  In oth­er word­s, $la­tex x = e$ is al­ways a so­lu­tion, for any $la­tex y\, (\neq 0)$ (and sim­i­lar­ly $la­tex y = e$ for all $la­tex x$).  In terms of our ques­tion of when $la­tex \log{\left­(z^a\right)} = a\log(z)$, this just says that this al­ways true for $la­tex a = \log(e) = 1$, re­gard­less of $la­tex z$, which is ob­vi­ous.  We can al­so no­tice that this iden­ti­ty al­ways holds for $la­tex a = 0$, re­gard­less of $la­tex z$. In terms of our orig­i­nal equa­tion, this means that $la­tex x = e^0 = 1$ is a so­lu­tion for all $la­tex y$ (and as be­fore, $la­tex y = 1$ for all $la­tex x$).</p> 
+ <p>Note that $la­tex z &gt; 0$ and $la­tex a$ re­al cor­re­sponds to $la­tex x, y &gt; 0$ and $la­tex \log(x), \log(y)$ re­al, re­spec­tive­ly, (which are the same con­di­tion).  So we have so far that the fol­low­ing are so­lu­tions to $la­tex x^{\log(y)} = y^{\log(x)}$:</p> 
+ <ul>
+    <li><span style="line-height:13px;">$la­­tex x, y &gt; 0$</span></li> 
+     <li>$la­tex x = y$</li> 
+     <li>$la­tex x = e$, $la­tex y$ ar­bi­trary</li> 
+     <li>$la­tex y = e$, $la­tex x$ ar­bi­trary</li> 
+     <li>$la­tex x = 1$, $la­tex y$ ar­bi­trary</li> 
+     <li>$la­tex y = 1$, $la­tex x$ ar­bi­trary</li> 
+ </ul>
+
+<p>Now let's look at some cas­es where $la­tex \log{\left (z^a\right)} \neq a\log(z)$.  If $la­tex z &lt; 0$ and $la­tex a$ is a nonze­ro even in­te­ger, then $la­tex z^a &gt; 0$ so $la­tex \log{\left (z^a \right)}) = \log{\left (\left (-z\right )^a \right )} = a\log(-z)$, where­as $la­tex a\log(z) = a(\log(-z) + i\pi)$, which are dif­fer­ent by our as­sump­tion that $la­tex a \neq 0$.  If $la­tex a$ is an odd in­te­ger not equal to 1, then $la­tex z^a &lt; 0$, so $la­tex \log{\left (z^a \right)} = \log{\left (-z^a \right )} + i\pi$ = $la­tex \log{\left (\left­(- z\right)^{a} \right )} + i\pi$  <em>Word­press is re­fus­ing to ren­der this. It should be</em>  log((-z)^a) + iπ = $la­tex a\log(-z) + i\pi$, where­as $la­tex a\log(z) = a(\log(-z) + i\pi)$ again, which is not the same be­cause $la­tex a \neq 1$. This means that if we let $la­tex x &lt; 0$ and $la­tex y = e^a$, where $la­tex a \neq 0, 1$, we get a non-­so­lu­tion (and the same if we swap $la­tex x$ and $la­tex y$).   </p> 
+ <p>This is as far as I got tonight. Word­press is ar­bi­trar­i­ly not ren­der­ing that La­TeX for no good rea­son.  That and the very ug­ly La­TeX im­ages is piss­ing me off (why word­press.­com has­n't switched to Math­JaX yet is be­yond me).  The next time I get some free time, I am go­ing to se­ri­ous­ly con­sid­er switch­ing my blog to some­thing host­ed on GitHub, prob­a­bly us­ing the IPython note­book.  I wel­come any hints peo­ple can give me on that, es­pe­cial­ly con­cern­ing mi­grat­ing pages from this blog.</p> 
+ <p>Here is some work on find­ing the rest of the so­lu­tion­s: the gen­er­al def­i­ni­tion of $la­tex \log(x)$ is $la­tex \log(|x|) + i\arg(x)$, where $la­tex \arg(x)$ is cho­sen in $la­tex (-\pi, \pi]$.  There­fore, if $la­tex \log{\left­(z^a\right )} = a\log(z)$, we must have $la­tex \arg(z^a) = a\arg(z)$.  I be­lieve a de­scrip­tion of all such com­plex $la­tex z$ and $la­tex a$ will give all so­lu­tions $la­tex x = z$, $la­tex y = e^a$ (and $la­tex y = z$, $la­tex x = e^a$) to $la­tex x^{\log(y)} = y^{\log(x)}$.  I need to ver­i­fy that, though, and I al­so need to think about how to de­scribe such $la­tex z$ and $la­tex a$. I will (hope­ful­ly) con­tin­ue this post lat­er, ei­ther by edit­ing this one or writ­ing a new one (de­pend­ing on how much more I come up with­).   </p> 
+ <p>Any com­ments to this post are wel­come.  I know you can't pre­view com­ments, but if you want to use math, just write it as  <code>$la­tex math$</code>  (like  <code>$la­tex \log(x)$</code>  for $la­tex \log(x)$). If you mess some­thing up, I'll ed­it your com­ment and fix it.</p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2013/03/03/when-does-xlogy-ylogx/#disqus_thread" data-disqus-identifier="cache/posts/2013/03/03/when-does-xlogy-ylogx.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2013/01/28/tip-for-debugging-sympy-with-pudb/" class="u-url">Tip for debugging SymPy with PuDB</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-01-28T00:43:49-06:00">2013-01-28 00:43</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>Usu­al­ly, when I de­bug SymPy code with  <a href="http://asmeurersympy.wordpress.com/2010/06/04/pudb-a-better-python-debugger/">PuDB</a>, I cre­ate a script that calls the code, then I put a  </p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>im­port pud­b; pud­b.set_­trace()</p> 
+ <p>[/­code]</p> 
+ <p>in the SymPy li­brary code where I want to start de­bug­ging. But this is an­noy­ing, first be­cause I have to cre­ate the scrip­t, and sec­ond, be­cause I have to mod­i­fy the li­brary code, and there's al­ways the risk of ac­ci­den­tal­ly com­mit­ing that.  Al­so, if I want to start de­bug­ging some­where else, I have to ed­it the files and change it.</p> 
+ <p>Well, I just fig­ured out a bet­ter way.   <del datetime="2013-01-30T02:32:19+00:00">First, if you haven't al­ready, add an alias like this in your bash con­fig file (<code>~/.pro­file</code>  or  <code>~/.bashrc</code>):<code>alias pud­b='python -m pud­b.run</code>.</del>   <i>As of  <a href="https://github.com/inducer/pudb/pull/54">this pull re­quest</a>, this is no longer nec­es­sary.  A  <code>pudb</code>  script is in­stalled au­to­mat­i­cal­ly with PuD­B.</i></p> 
+ <p>This will let you run  <code>pudb scrip­t.py</code>  to de­bug  <code>scrip­t.py</code>.   <del datetime="2013-02-05T04:22:39+00:00">Nex­t, start PuD­B. It does­n't mat­ter with what. You can just run  <code>touch test.py</code>, and then  <code>pudb test.py</code>.</del>    <i>It oc­cured to me that you can just set the break­point when start­ing isympy with PuD­B.</i></p> 
+ <p>Now, press  <code>m</code>, and nav­i­gate to where in the li­brary code you want to start de­bug­ging.  It al­so helps to use  <code>/</code>  to search the cur­rent file and  <code>L</code>  to jump to a spe­cif­ic line.  When you get to the line where you want to start de­bug­ging, press  <code>b</code>  to set a break­point. You can do this in mul­ti­ple places if you wan­t.</p> 
+ <p>Now, you just have to start  <code>isympy</code>  from with­in PuD­B.  Just run  <code>pudb bin/isympy</code>, and im­me­di­ate­ly press  <code>c</code>  to jump to the in­ter­ac­tive promp­t.  Now, run what­ev­er code you want to de­bug.  When it gets to the break­point, PuDB will open, and you can start de­bug­ging.  If you type  <code>c</code>  to con­tin­ue, it will go back to isympy. But the next time you run some­thing that hits the break­point, it will open PuDB again.  </p> 
+ <p>This trick works be­cause break­points are saved to file (at  <code>~/.­con­fig/pud­b/saved-break­points</code>). In fac­t, if you wan­t, you can just mod­i­fy that file in the first step.  You can ed­it your saved break­points in the bot­tom right pane of PuD­B.  </p> 
+ <p>When you are done and you type  <code>Ctr­l-D</code>  PuDB will pop-up again, ask­ing if you want to quit.  That's be­cause it was run­ning the whole time, un­der­neath isympy.  Just press  <code>q</code>.  Note that you should avoid press­ing  <code>q</code>  while de­bug­ging, or else PuDB will quit, and you will be left with just nor­mal isympy (it won't break at your break­points any more).  Ac­tu­al­ly, if you do this, but do­ing  <code>Ctr­l-D</code>  still opens the PuDB promp­t, you can just press "Restart", and it should start work­ing again.  Note that "Restart" will not ac­tu­al­ly re­set isympy:  all your saved vari­ables will still be the same, and any changes to the li­brary code will not be reload­ed.  To do that, you have to com­plete­ly ex­it and start over again.</p> 
+ <p>Of course, there is noth­ing SymPy spe­cif­ic about this trick. As long as you have a script that acts as an en­try point to an in­ter­ac­tive con­sole for your ap­pli­ca­tion, you can use it.  If you just use IPython, you can use some­thing like  <code>pudb /bin/ipython</code>  (re­place  <code>/bin/ipython</code>  with the out­put of  <code>which ipython</code>).   </p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2013/01/28/tip-for-debugging-sympy-with-pudb/#disqus_thread" data-disqus-identifier="cache/posts/2013/01/28/tip-for-debugging-sympy-with-pudb.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2013/01/01/emacs-one-year-later/" class="u-url">Emacs: One year later</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-01-01T09:51:21-06:00">2013-01-01 09:51</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>As read­ers of this blog may re­mem­ber, back in 2011, I de­cid­ed to move to a com­mand-­line based ed­i­tor. For rough­ly two weeks in De­cem­ber, 2011, I ex­clu­sive­ly used Vim, and for the same amount of time in Jan­uary, 2012, I used ex­clu­sive­ly Emac­s. I had used a lit­tle of each ed­i­tor in the past, but this was my first time us­ing them to do true edit­ing work. My ex­pe­ri­ences are chron­i­cled in my blog posts (parts  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/" title="1">1</a>,  <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/" title="2">2</a>,  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/" title="3">3</a>, and  <a href="http://asmeurersympy.wordpress.com/2012/07/09/emacs-7-months-later/" title="7 months later follow up">7 months lat­er fol­low up</a>).   </p> 
+ <p>To sum­ma­rize, I de­cid­ed to use Emac­s, as I found it to be much more in­tu­itive, and much more user-friend­ly.  To­day, Jan­u­ary 1, marks the one-year point of my us­ing Emacs as my sole text ed­i­tor, with some ex­cep­tions (no­tably, I'm cur­rent­ly writ­ing this blog post in the browser).  So I'd like to make some ob­ser­va­tion­s:</p> 
+ <div class="code"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>Either one of these editors (Vim or Emacs) is going to really suck unless you are willing to make a serious investment in customizing them and installing nice addons. For the second point, Emacs has an advantage, because the philosophy of Vim is to be barebones whereas the philosophy of Emacs is to be featureful, so that in particular many things that were once addons of Emacs are now included in the standard installation.  For customization, on the one hand, Emacs is easier, because it has a nice interface (<span class="nt">&lt;code&gt;</span>M-x customize<span class="nt">&lt;/code&gt;</span>), but on the other hand, Vim's scripting language is much easier to hack on than Emacs lisp (I still can't code in Lisp to save my life; it's a very challenging programming language).<span class="nt">&lt;br&gt;&lt;br&gt;</span>But my point here is that neither has really great defaults. For example, in Emacs, <span class="nt">&lt;code&gt;</span>M-space<span class="nt">&lt;/code&gt;</span> is bound to <span class="nt">&lt;code&gt;</span>just-one-space<span class="nt">&lt;/code&gt;</span>, which is great for programming.  What it does is remove all spaces around the cursor, except for one.  But to be really useful, it also should include newlines.  It doesn't do this by default.  Rather, you have to call it with a negative argument.  So to be really useful, you have to add
+</pre></div>
+
+
+<p>[source­code]</p> 
+ <p>(de­fun just-one-s­pace-with­-new­line ()
+  "Call just-one-s­pace with a neg­a­tive ar­gu­men­t"
+  (in­ter­ac­tive)
+  (just-one-s­pace -1))</p> 
+ <p>(glob­al-set-key (kbd "M-SPC") 'just-one-s­pace-with­-new­line)</p> 
+ <p>~~~~~~~~~~~~</p> 
+ <p>to your  <code>.emacs</code>  file.</p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;</span>Emacs has great features, but I always have to look them up.  Or rather, I have to look up the keyboard shortcuts for them.  I only have the keyboard shortcuts memorized for the things I do every day.  I even ended up forgetting really important ones, like <span class="nt">&lt;code&gt;</span>M-w<span class="nt">&lt;/code&gt;</span> (Emacs version of copy).  And if a feature involves several keystrokes to access, forget about it (for example, rectangular selection, or any features of special modes).  If I use a new mode, e.g., for some file type that I rarely edit (like HTML), I might as well not have any of the features, other than the syntax highlighting, because I either don't know what they are, or even if I know that they should exist (like automatic tag completion for html), I have no idea how to access them. <span class="nt">&lt;br&gt;&lt;br&gt;</span>
+</pre></div>
+
+
+<p>There's re­al­ly some­thing to be said about GUI ed­i­tors, which give these things to users in a way that they don't have to mem­o­rize any­thing.  Per­haps I should try to use the menu more.  Or maybe au­thors of ad­dons should aim to make fea­tures re­quire as lit­tle cog­ni­tive us­er in­ter­ac­tion as pos­si­ble (such as the ex­cel­lent  <a href="http://cx4a.org/software/auto-complete/manual.html"><code>au­to-­com­plete-­mode</code></a>  I men­tioned in  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/">part 3</a>).</p> 
+ <p><br><br>  I men­tion this be­cause it is one of the things I com­plained about with Vim, that the key­bind­ings were too hard to mem­o­rize.  Of course, the dif­fer­ence with Vim is that one has to mem­o­rize key­bind­ings to do even the most ba­sic of edit­ing tasks, where­as with Emacs one can al­ways fall back to more nat­u­ral things like  <code>Shift-Ar­row Key</code>  to se­lect text or  <code>Delete</code>  to delete the char­ac­ter un­der the cur­sor (and yes, I know you can re­bind this stuff in Vim; I re­fer you to the pre­vi­ous bul­let point).  </p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;</span>I mentioned at the end of part 3 that Vim might still be useful to learn, as vi is available literally anywhere that you have POSIX.  I honestly don't think I would be able to use vi or vim if I had to, customization or no, unless I had my keyboard cheat sheet and a decent amount of time.  If I'm stuck on a barebones system and I can't do anything about it, I'll use nano/pico before I use vi.  It's not that I hate vi. I just can't do anything with it. It is the same to me now as it was before I used it in-depth.  I have forgotten all the keyboard shortcuts, except for <span class="nt">&lt;code&gt;</span>ESC<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>i<span class="nt">&lt;/code&gt;</span>.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>I don't use <span class="nt">&lt;code&gt;</span>emacsclient<span class="nt">&lt;/code&gt;</span> any more.  Ever since I got my new retina MacBook Pro, I don't need it any more, because with the solid state drive starting Emacs from scratch is instantaneous.  I'm glad to get rid of it, because it had some seriously annoying glitches.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>Add <span class="nt">&lt;code&gt;</span>alias e=emacs<span class="nt">&lt;/code&gt;</span> to your Bash config file (<span class="nt">&lt;code&gt;</span>.profile<span class="nt">&lt;/code&gt;</span> or <span class="nt">&lt;code&gt;</span>.bashrc<span class="nt">&lt;/code&gt;</span>). It makes life much easier. "emacs" is not an easy word to type, at least on QWERTY keyboards.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>I still feel like I am not nearly as efficient in Emacs as I could be. On the one hand, I know there are built-in features (like rectangular selection) that I do not take advantage of enough.  I have been a bit lazy with customization: there are a handful of things that I do often that require several keystrokes, but I still haven't created custom keyboard shortcuts for (off the top of my head: copying and pasting to/from the Mac OS X clipboard and rigidly indenting/dedenting a block of text (<span class="nt">&lt;code&gt;</span>C-u 4 C-x TAB<span class="nt">&lt;/code&gt;</span>, actually <span class="nt">&lt;code&gt;</span>C-c u 4 C-x TAB<span class="nt">&lt;/code&gt;</span>, since I did the sensible thing and rebound <span class="nt">&lt;code&gt;</span>C-u<span class="nt">&lt;/code&gt;</span> to clear to the previous newline, and bound <span class="nt">&lt;code&gt;</span>universal-argument<span class="nt">&lt;/code&gt;</span> to <span class="nt">&lt;code&gt;</span>C-c u<span class="nt">&lt;/code&gt;</span>) come to mind). <span class="nt">&lt;br&gt;&lt;br&gt;</span>I feel as if I were to watch someone who has used Emacs for a long time that I would learn a lot of tricks.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>I really should learn Emacs lisp. There are a lot of little customizations that I would like to make, but they are really niche, and can only be done programmatically.  But who has the time to learn a completely new programming language (plus a whole library, as just knowing Lisp is useless if you don't know the proper Emacs funtions and variables and coding styles)?<span class="nt">&lt;/li&gt;</span>
+
+
+
+<span class="nt">&lt;li&gt;</span>I've still not found a good visual browser for jumping to function definitions in a file (mostly Python function definitions, but also other kinds of headers for other kinds of files).  The best I've found is <span class="nt">&lt;code&gt;</span>imenu<span class="nt">&lt;/code&gt;</span>. If you know of anything, please let me know.  One thing I really liked about Vim was the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.vim.org/scripts/script.php?script_id=273"</span><span class="nt">&gt;</span>tag list<span class="nt">&lt;/a&gt;</span> extension, which did this perfectly (thanks to commenter <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/#comment-424"</span><span class="nt">&gt;</span>Scott<span class="nt">&lt;/a&gt;</span> for pointing it out to me).  I've been told that Cedet has something like this, but every time I try to install it, I run into some issues that just seem like way too much work (I don't remember what they are, it won't compile or something, or maybe it just wants to do just way too much and I can't figure out how to disable everything except for the parts I want).  <span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>If you ever code in C, add the following to your Makefile
+</pre></div>
+
+
+<p>[code]</p> 
+ <p>check­-syn­tax:
+    $(C­C) -o nul $(FLAGS) -S $(CHK_­SOURCES)
+[/­code]</p> 
+ <p>(and if you don't use a Make­file, start us­ing one now).  This is as­sum­ing you have  <code>CC</code>  and  <code>FLAGS</code>  de­fined at the top (gen­er­al­ly to some­thing like  <code>cc</code>  and  <code>-Wall</code>, re­spec­tive­ly). Al­so, add the fol­low­ing to your  <code>.emacs</code></p> 
+ <p>[code]</p> 
+ <p>;; ===== Turn on fly­make-­mode ====</p> 
+ <p>(ad­d-hook 'c-­mod­e-­com­mon-hook 'turn-on-fly­make)</p> 
+ <p>(de­fun turn-on-fly­make ()
+  "Force fly­make-­mode on. For use in hook­s."
+  (in­ter­ac­tive)
+  (fly­make-­mode 1))</p> 
+ <p>(ad­d-hook 'c-­mod­e-­com­mon-hook 'fly­make-key­board­-short­cut­s)</p> 
+ <p>(de­fun fly­make-key­board­-short­cuts ()
+  "Add key­board short­cuts for fly­make go­to nex­t/prev er­ror."
+  (in­ter­ac­tive)
+  (lo­cal-set-key "\M-n" 'fly­make-­go­to-nex­t-er­ror)
+  (lo­cal-set-key "\M-p" 'fly­make-­go­to-pre­v-er­ror))
+[/­code]</p> 
+ <p>The last part adds the use­ful key­board short­cuts  <code>M-n</code>  and  <code>M-p</code>  to move be­tween er­rors.  Now, er­rors in your C code will show up au­to­mat­i­cal­ly as you type.  If you use the com­mand line ver­sion of emacs like I do, and not the GUI ver­sion, you'll al­so need to in­stall the  <a href="http://www.emacswiki.org/emacs/flymake-cursor.el">fly­make-cur­sor</a>  mod­ule, which makes the er­rors show up in the mode line, since oth­er­wise it tries to use mouse pop­up­s.  You can change the col­ors us­ing  <code>M-x cus­tomize-­face</code>  (search for "fly­make").  </p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;</span>I never got flymake to work with LaTeX.  Does anyone know how to do it? It seems it is hardcoded to use MikTeX, the Windows version of LaTeX. I found some stuff, but none of it worked.  <span class="nt">&lt;br&gt;&lt;br&gt;</span>
+</pre></div>
+
+
+<p>Ac­tu­al­ly, what I re­al­ly would like is not syn­tax check­ing (I rarely make syn­tax mis­takes in La­TeX any more), but rather some­thing that au­to­mat­i­cal­ly builds the PDF con­stant­ly as I type.  That way, I can just look over at the PDF as I am writ­ing (I use an ex­ter­nal mon­i­tor for this. I high­ly rec­om­mend it if you use La­TeX, es­pe­cial­ly one of those mon­i­tors that swivels to por­trait mod­e).   </p> 
+ <div class="code"><pre><span class="nt">&lt;li&gt;</span>If you use Mac OS X, you can use the very excellent <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://pqrs.org/macosx/keyremap4macbook/"</span><span class="nt">&gt;</span>KeyRemap4MacBook<span class="nt">&lt;/a&gt;</span> program to make regular Mac OS X programs act more like Emacs.  Mac OS X already has many Emacs shortcuts built in (like <span class="nt">&lt;code&gt;</span>C-a<span class="nt">&lt;/code&gt;</span>, <span class="nt">&lt;code&gt;</span>C-e<span class="nt">&lt;/code&gt;</span>, etc.), but that only works in Cocoa apps, and it doesn't include any meta key shortcuts.  This lets you use additional shortcuts literally everywhere (don't worry, it automatically doesn't use them in the Terminal), including an emulator for <span class="nt">&lt;code&gt;</span>C-space<span class="nt">&lt;/code&gt;</span> and some <span class="nt">&lt;code&gt;</span>C-x<span class="nt">&lt;/code&gt;</span> commands (like <span class="nt">&lt;code&gt;</span>C-x C-s<span class="nt">&lt;/code&gt;</span> to <span class="nt">&lt;code&gt;</span>Command-s<span class="nt">&lt;/code&gt;</span>).  It doesn't work on context sensitive shortcuts, unfortunately, unless the operating system already supports it with another keyboard shortcut (e.g., it can map <span class="nt">&lt;code&gt;</span>M-f<span class="nt">&lt;/code&gt;</span> to <span class="nt">&lt;code&gt;</span>Option-right arrow<span class="nt">&lt;/code&gt;</span>).  For example, it can't enable moving between paragraphs with <span class="nt">&lt;code&gt;</span>C-S-{<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>C-S-}<span class="nt">&lt;/code&gt;</span>.  If anyone knows how to do that, let me know. <span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>For about a month this summer, I had to use a Linux laptop, because my Mac broke and my new Mac took a month to arrive (the downside to ordering a new computer immediately after it is announced by Apple).  At this point, my saving of all my customizations to <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://pqrs.org/macosx/keyremap4macbook/"</span><span class="nt">&gt;</span>GitHub<span class="nt">&lt;/a&gt;</span> really helped a lot.  I created a new branch for the Linux computer (because several things in my customizations were Mac specific), and just symlinked the files I wanted.  A hint I can give to people using Linux is to use Konsole.  The Gnome terminal sucks.  One thing I never figured out is how to make Konsole (or any other Terminal for that matter) to send Control-Shift shortcuts to Emacs (see http://superuser.com/q/439961/39697).   I don't use Linux any more at the moment, but if anyone knows what was going on there, add an answer to that question. <span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>In <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/"</span><span class="nt">&gt;</span>part 3<span class="nt">&lt;/a&gt;</span> mentioned that <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.dr-qubit.org/predictive/predictive-user-manual/html/index.php"</span><span class="nt">&gt;</span>predictive mode<span class="nt">&lt;/a&gt;</span> was cool, but not very useful.  What it does is basically add tab completion for every word in the English language.  Actually, I've found using auto-complete-mode even when editing text (or LaTeX) to be very useful.  Unlike predictive mode, it only guesses words that you've already typed  (it turns out that you tend to type the same words over and over, and doubly so if those words are LaTeX math commands).  Also, predictive mode has a set order of words, which supposedly helps to use it with muscle memory, whereas auto-complete-mode tries to learn what words you are more likely to use based on some basic statistical machine-learning.  Also, auto-complete-mode has a much better visual UI and smarter defaults than predictive mode. The result is that it's actually quite useful and makes typing plain text, as well as LaTeX (actually, pretty much anything, as long as you tend to use the same words repeatedly) much faster.  I recommend enabling auto-complete-mode almost everywhere using hooks, like
+</pre></div>
+
+
+<p>[code]</p> 
+ <p>(ad­d-hook 'la­tex-­mod­e-hook 'au­to-­com­plete-­mod­e)</p> 
+ <p>(ad­d-hook 'La­TeX-­mod­e-hook 'au­to-­com­plete-­mod­e)</p> 
+ <p>(ad­d-hook 'prog-­mod­e-hook 'au­to-­com­plete-­mod­e)</p> 
+ <p>;; etc.</p> 
+ <p>[/­code]</p> 
+
+
+ <div class="code"><pre><span class="nt">&lt;li&gt;</span>At the end of the day, I'm pretty happy with Emacs.  I've managed to fix most of the things that make it annoying, and it is orders of magnitude more powerful than any GUI editor or IDE I've ever seen, especially at just basic text editing, which is the most important thing (I can always use another program for other things, like debugging or whatever).  The editor uses the basic shortcuts that I am used to, and is quite efficient to write in.  Extensions like auto-complete-mode make using it much faster, though I could use some more extensions to make it even better (namely, a better isearch and a better imenu). Regarding Vim vs. Emacs, I'd like to quote something I said back in my <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1"</span><span class="nt">&gt;</span>first blog post<span class="nt">&lt;/a&gt;</span> about Vim over a year ago:
+</pre></div>
+
+
+<blockquote>Vim is great for text <em>editing</em>, but not so hot for text <em>writing</em> (unless you always write text perfectly, so that you never need to leave insert mode until you are done typing). Just the simple act of deleting a mistyped word (yes, word, that happens a lot when you are decently fast touch typist) takes several keystrokes, when it should in my opinion only take one (two if you count the meta-key).</blockquote>
+
+<p>Need­less to say, I find Emacs to be great for both text edit­ing and text writ­ing.  </p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2013/01/01/emacs-one-year-later/#disqus_thread" data-disqus-identifier="cache/posts/2013/01/01/emacs-one-year-later.html">Comments</a>
+
+
+        </p></article>
+        <article class="postbox h-entry post-text">
+        <h1 class="p-name"><a href="posts/2012/12/30/2012-in-review/" class="u-url">2012 in review</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2012-12-30T23:07:19-06:00">2012-12-30 23:07</time>
+        </small></h1>
+        <hr>
+        <div class="e-content">
+        <div><p></p><p>The Word­Press.­com stats helper mon­keys pre­pared a 2012 an­nu­al re­port for this blog.</p> 
+     <a href="http://asmeurersympy.wordpress.com/2012/annual-report/"><img src="http://www.wordpress.com/wp-content/mu-plugins/annual-reports/img/2012-emailteaser.png" width="100%" alt=""></a>
+    <p>Here's an ex­cerp­t:</p> 
+ <div class="code"><pre><span class="nt">&lt;blockquote&gt;</span>4,329 films were submitted to the 2012 Cannes Film Festival. This blog had <span class="nt">&lt;strong&gt;</span>20,000<span class="nt">&lt;/strong&gt;</span> views in 2012. If each view were a film, this blog would power 5 Film Festivals<span class="nt">&lt;/blockquote&gt;</span>
+<span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://asmeurersympy.wordpress.com/2012/annual-report/"</span><span class="nt">&gt;</span>Click here to see the complete report.<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+</pre></div>
+
+
+<p></p></div>
+        </div>
+            
+        
+    <p>
+        <a href="posts/2012/12/30/2012-in-review/#disqus_thread" data-disqus-identifier="cache/posts/2012/12/30/2012-in-review.html">Comments</a>
+
+
+        </p></article>
     
+        <div>
+        <ul class="pager">
+            <li class="next">
+                <a href="index-7.html" rel="next">Older posts →</a>
+            </li>
+        </ul>
+        </div>
 
     
         
@@ -191,6 +657,12 @@ but you should make sure that it's cor­rec­t.</p>
 
 
 	
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="assets/js/mathjax.js"></script>
 
 
         </div>

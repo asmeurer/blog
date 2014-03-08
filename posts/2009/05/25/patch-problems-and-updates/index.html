@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Patch Problems and Updates | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2009/05/25/patch-problems-and-updates/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2009/05/25/patch-problems-and-updates/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Patch Problems and Updates">
+            <meta name="og:description" content="So the GSoC pro­gram of­fi­cial­ly start­ed Sat­ur­day.  I have al­most fin­ished ev­ery­thing on the time­line for the first week al­ready, ex­cept for ini­tial con­di­tion­s, which I am putting off ">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Patch Problems and Updates</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2009-05-25T04:29:23-05:00" itemprop="datePublished">2009-05-25 04:29</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>So the GSoC pro­gram of­fi­cial­ly start­ed Sat­ur­day.  I have al­most fin­ished ev­ery­thing on the time­line for the first week al­ready, ex­cept for ini­tial con­di­tion­s, which I am putting off un­til On­drej re­codes solve so that it re­turns a RootOf in­stance when it can­not solve the equa­tion.  See this  <a href="http://groups.google.com/group/sympy/browse_thread/thread/40cafb75db3cb522/eff6ff30dcd450f9?lnk=gst&amp;q=RootOf#eff6ff30dcd450f9">post</a>.</p> 
+ <p>In or­der to solve ho­mo­ge­neous equa­tion­s, I had to de­ter­mine if an equa­tion is ho­mo­ge­neous.  I will post what all this mean­s, when I fin­ish ev­ery­thing up.  Right now, I just need to write a few more tests and make sure that they work.  So I wrote the func­tion, which is very com­pli­cat­ed, be­cause it has to take any ex­pres­sion and break it up re­cur­sive­ly.  One thing that I want­ed for it to do is to re­al­ize that log(x)-log(y) == log(x/y) (no La­TeX to­day, I am too tired).  This is ba­si­cal­ly be­cause just log(x) or log(y) will make it non-ho­mo­ge­neous, but log(x/y) will make is ho­mo­ge­neous (a­gain, more on what this all means lat­er).  It turns out SymPy could not re­al­ly do this sim­pli­fi­ca­tion, so I had to go in and write a log­com­bine func­tion that did that.  The func­tion works quite well (at least from my test­s), but it is al­so a beefy piece or re­cur­sive work.</p> 
+ <p>So here is the part where I am now.  I want­ed to sub­mit the log­com­bine func­tion as a reg­u­lar patch, be­cause strict­ly speak­ing it is not re­lat­ed to my GSoC projec­t.  So I used 'git for­mat-­patch' and git 'send-e­mail' as usu­al.  But then, yes­ter­day, I be­gan to won­der why no one had re­viewed or even re­spond­ed to my patch­es.  I checked that patch list, and found to my dis­may that none of the emails made it through.  I sus­pect that git is the prob­lem, so I send the patch­es man­u­al­ly with my email clien­t.</p> 
+ <p>Which led to an­oth­er prob­lem: the re­view­ers are claim­ing that my files are ­cor­rup­t.  These are ma­jor prob­lem­s.  I can­not re­li­ably send patch emails through git, and when I send them man­u­al­ly, the files are messed up.</p> 
+ <p>Can any­one read­ing this blog (does any­one ac­tu­al­ly read this blog?) give me some ad­vice here?  I think the cor­rup­tion of the patch files  <em>may</em>  have some­thing to do with the fact that I am us­ing Mac OS X, which I know likes to put nasty things like re­source forks in files which screws them up when they are sent to non-­Mac­s.</p> 
+ <p>Of course, this does not ex­plain why git will not send email­s.  It has sent them  <a href="http://groups.google.com/group/sympy-patches/browse_thread/thread/db7cc7d85d36c5d9/92d5df372a3222f3?lnk=gst&amp;q=asmeurer#92d5df372a3222f3">be­fore</a>, though I think I have had this prob­lem since the  <a href="http://groups.google.com/group/sympy-patches/browse_thread/thread/e11b2244ced4709e/178af7c1eeb53652?lnk=gst&amp;q=asmeurer#178af7c1eeb53652">be­gin­ning</a>.</p> 
+ <p>And an­oth­er ques­tion to you git ge­nius­es out there: how do I change branch­es with­out ­com­mit­ting changes?  Some­times, I am in the mid­dle of two things, and I fin­ish one and I want to push it to its own branch, but I can­not do this with­out ­com­mit­ting the changes on the oth­er thing, which I am not ready to do be­cause I am not done with it yet.</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../16/work-started-exact-differential-equations/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../one-problem-solved/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2009/05/25/patch-problems-and-updates/",
+        disqus_title="Patch Problems and Updates",
+        disqus_identifier="cache/posts/2009/05/25/patch-problems-and-updates.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

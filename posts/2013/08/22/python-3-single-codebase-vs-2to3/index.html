@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Python 3: Single codebase vs. 2to3 | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2013/08/22/python-3-single-codebase-vs-2to3/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2013/08/22/python-3-single-codebase-vs-2to3/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Python 3: Single codebase vs. 2to3">
+            <meta name="og:description" content="In my  pre­vi­ous post  about switch­ing to Python 3 as my de­fault Python, I praised the use of a sin­gle code­base for sup­port­ing both Python 2 and Python 3. I even chas­tised the Python core de­v">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Python 3: Single codebase vs. 2to3</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2013-08-22T00:45:57-05:00" itemprop="datePublished">2013-08-22 00:45</time>
+        
+
+        
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>In my  <a href="http://asmeurersympy.wordpress.com/2013/08/09/using-python-3-as-my-default-python/">pre­vi­ous post</a>  about switch­ing to Python 3 as my de­fault Python, I praised the use of a sin­gle code­base for sup­port­ing both Python 2 and Python 3. I even chas­tised the Python core de­vel­op­ers for cre­at­ing 2to3, writ­ing, "I think that the core Python folks made a mis­take by pre­sent­ing Python 3 as a new lan­guage. It has made peo­ple an­tag­o­nis­tic against Python 3 (well, that and the print func­tion, which was an­oth­er stupid mis­take, be­cause even if it was a good idea, it alone has kept too many peo­ple from switch­ing). 2to3 was a mis­take too, be­cause it per­pet­u­at­ed this idea."</p> 
+ <p>Well, this is­n't en­tire­ly fair, be­cause I my­self used to be one of the big­gest ad­vo­cates of us­ing 2to3 over a sin­gle code­base. Take this  <a href="https://github.com/ipython/ipython/issues/2440#issuecomment-9058182">GitHub com­ment</a>  from when the IPython guys were con­sid­er­ing this is­sue, where I wrote, "main­tain­ing a com­mon code base is go­ing to be a bit an­noy­ing from the de­vel­op­er side.…The main ben­e­fit of us­ing 2to3 is that 99% of the time, you can just write your code as you would for Python 2, and when it gets to Python 3, it just works (maybe that per­cent is a bit small­er if you use strings a lot, but it's still quite high­). To write for Python 2 and 3 at the same time, you have to re­mem­ber a lot of lit­tle rules, which no one will re­mem­ber (and new con­trib­u­tors will not even know about). And giv­en that IPython's test cov­er­age is still poor (un­less I am mis­tak­en, in which case, please cor­rect me), lit­tle mis­takes will slip through, and no one will no­tice un­til they try the cer­tain be­hav­ior in Python 3."</p> 
+ <p>So I just want to clar­i­fy a few things.</p> 
+ <p></p><ol>
+    <li><strong>I was wrong.</strong>   When I chas­tised the Python core de­vel­op­ers for mak­ing peo­ple be­lieve that Python 3 is a dif­fer­ent lan­guage from Python 2,  <em>I too</em>  fell in­to that trap. It took a month of me work­ing on a code­base that had to be di­rect­ly Python 3 com­pat­i­ble to see the fal­la­cy of this.  And see­ing just how small the SymPy  <a href="https://github.com/sympy/sympy/blob/master/sympy/core/compatibility.py">com­pat­i­bil­i­ty</a>  file is sealed the deal. I now be­lieve that I was com­plete­ly wrong in say­ing that main­tain­ing a com­mon code­base is an­noy­ing. As I wrote in the pre­vi­ous post, it is no dif­fer­ent from sup­port­ing 2.4-2.7, for in­stance (ac­tu­al­ly, by my mem­o­ry, sup­port­ing 2.4-2.7 was much worse than sup­port­ing 2.6-3.3, be­cause  <em>so</em>  many lan­guage fea­tures were in­tro­duced in Python 2.5)</li> 
+     <li><strong>If you have to sup­port 2.5 or ear­li­er and Python 3, then 2to3 might ac­tu­al­ly be bet­ter.</strong>  The rea­son is sim­ple: Python 2.6 was the first ver­sion of Python to "know" about Python 3. So, for in­stance,  <code>from  <strong>fu­ture</strong>  im­port print­_­func­tion</code>  was in­tro­duced in Python 2.6. This means that to sup­port a sin­gle code­base for 2.5-3.x you have to write  <code>print­('\n')</code>  to print an emp­ty line and to print some­thing with­out a new­line at the end, you have to use  <code>sys.std­out.write</code>. Al­so,  <code>ex­cept Ex­cep­tion as e</code>, us­ing the  <code>as</code>  key­word, which is the on­ly syn­tax al­lowed in Python 3, was in­tro­duced in Python 2.6, so if you want to catch an ex­cep­tion you have to use  <code>sys.ex­c_in­fo()[1]</code>. Now that re­al­ly  <em>is</em>  an­noy­ing. But in Python 2.6, most dif­fer­ences can be fixed with sim­ple def­i­ni­tion­s, most of which boil down to try, ex­cept Im­portEr­ror, im­port x as y type work­arounds. The worst are the print func­tion, which can be im­port­ed from  <strong>fu­ture</strong>, di­vi­sion, which can al­so be im­port­ed from  <strong>fu­ture</strong>  (or worked around), and uni­code lit­er­als (if it's a big deal, drop sup­port for Python 3.2). Most oth­er things are just sim­ple re­names, like xrange -&gt; range, or mak­ing sure that you wrap func­tions that are it­er­a­tors in Python 3 in  <code>list</code>  if you want to ac­cess items from them.</li> 
+     <li><strong>I was right about test cov­er­age.</strong>  Sup­port­ing Python 2 and Python 3 in a sin­gle code­base if you have bad test cov­er­age is not go­ing to work. You can get around the worst things by mak­ing sure that  <strong>fu­ture</strong>  im­ports are at the top of each file, but you are bound to miss things, be­cause, as I said, you will for­get that  <code>map(f, s)[0]</code>  does­n't work in Python 3 or that the  <code>Strin­gIO</code>  mod­ule has been re­named to  <code>io</code>, or that you can't pass around da­ta as strings—they have to be bytes.
+ <p>Of course, you al­­so need good test cov­­er­age to sup­­port Python 3 well us­ing 2to3, but you can get away with more be­­cause 2to3 will take care of things like the above for you.  Per­haps in­­stead of 2to3 what re­al­­ly should have been made is a pyflakes-­­like tool that us­es the same knowl­­edge as 2to3 to check for cross-­­com­­pat­i­­bil­i­­ty for Python 2 and Python 3.</p></li> 
+     <li><strong>In the end, you have to be ac­tu­al­ly us­ing Python 3.</strong>  I feel like peo­ple haven't been, even to­day, tak­ing Python 3 se­ri­ous­ly. They aren't ac­tu­al­ly us­ing it. There's a feel­ing that some­day in the fu­ture they will, but for now, Python 2 is the way to go. 2to3 ex­ac­er­bates this feel­ing, be­cause to use it, you have to de­vel­op in Python 2. You should­n't touch the code gen­er­at­ed by 2to3. As it is, then, if you de­vel­op with 2to3, you on­ly ev­er use Python 3 to test that things are work­ing in Python 3. You don't pro­to­type your code in Python 3, be­cause then you will write code that does­n't work in Python 2. 
+ <p>With the sin­­gle code­base, your view should change. You should start pro­­to­­typ­ing in Python 3. You should on­­ly use Python 2 to test that things work in Python 2 (and since you've been us­ing Python 2 for so long be­­fore switch­ing to Python 3, or at least if you're like me you have, this is not that bad). Just yes­ter­­day, I found a   <a href="https://github.com/sympy/sympy/pull/2398">bug</a>   in SymPy in Python 3 that went un­no­ticed. It re­lates to what I said above about us­ing bytes in­­stead of strings for da­­ta. I just checked, and 2to3 would­n't have fixed it (and in­­deed, the bug is present in SymPy 0.7.3, which used 2to3), be­­cause there's no way for 2to3 to have known that the da­­ta was bytes and not a string.  The code was ob­vi­ous­­ly untest­ed, but it would have been ob­vi­ous that it did­n't work if any­one was us­ing Python 3 to use SymPy in­­ter­ac­­tive­­ly.  As it turns out, some of our users are do­ing this, and they point­ed it out on the mail­ing list, but it re­­mained un­­fixed un­til I found it my­­self in­­de­pen­­den­t­­ly.   </p></li>   
+ </ol>
+
+<p>So old mis­takes aside, the lessons to take away from this and the  <a href="http://asmeurersympy.wordpress.com/2013/08/09/using-python-3-as-my-default-python/">pre­vi­ous blog post</a>  are  </p> 
+ <ol>
+    <li>Use a sin­gle code­base in­stead of 2to3 to sup­port both Python 2 and Python 3.</li> 
+     <li>Use Python 3 as your de­fault Python.</li> 
+     <li>Keep Python 2 around, though, be­cause not ev­ery­thing sup­ports Python 3 yet.</li> 
+     <li>Ex­pect to find some bugs, be­cause, un­til ev­ery­one starts do­ing this, peo­ple aren't go­ing to test their soft­ware in Python 3.</li> 
+ </ol>
+
+<p></p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../09/using-python-3-as-my-default-python/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../../moving-to-github-pages-with-nikola/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2013/08/22/python-3-single-codebase-vs-2to3/",
+        disqus_title="Python 3: Single codebase vs. 2to3",
+        disqus_identifier="cache/posts/2013/08/22/python-3-single-codebase-vs-2to3.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

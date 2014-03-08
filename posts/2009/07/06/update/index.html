@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Update | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2009/07/06/update/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2009/07/06/update/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Update">
+            <meta name="og:description" content="It's been a while since I've post­ed here, so I fig­ured an up­date was in or­der.  Here is a list of stuff that I have done since my last post. 
+ 
+ 
+ I re­­cov­­ered my da­­ta from my Ter­mi­­nal his">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Update</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2009-07-06T18:12:26-05:00" itemprop="datePublished">2009-07-06 18:12</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>It's been a while since I've post­ed here, so I fig­ured an up­date was in or­der.  Here is a list of stuff that I have done since my last post.</p> 
+ <ul>
+<li> 
+ <p>I re­­cov­­ered my da­­ta from my Ter­mi­­nal his­­to­ry.  This was­n't too dif­­fi­cult as I pre­­dic­t­ed.  I just had to do some mi­nor for­­mat­t­ing on the   <code>git com­mit --in­ter­ac­­tive</code>   da­­ta to make it a valid git patch file.  For what­ev­er rea­­son, a hand­­ful of the changes would­n't ap­­ply be­­cause git could­n't find where changed lines were, even though they were iden­ti­­cal to what was in the patch.    <code>git ap­­ply</code>   does­n't seem to have a merge op­­tion, but even­­tu­al­­ly I found the   <code>--re­­ject</code>   op­­tion, which puts failed patch­es in .rej files, in­­stead of just fail­ing the whole ap­­ply.</p>  
+  </li> 
+ <li> 
+ <p>I got sep­a­ra­ble equa­­tions im­­ple­­men­t­ed in dsolve.  I ac­­tu­al­­ly did this on the road be­­fore I lost my data, but I failed to men­­tion it be­­fore, so here it is.  The hard­est part with that was cre­at­ing a de­­cent   <code>sep­a­rat­e­­vars()</code>   func­­tion that could sep­a­rate just about any fun­ci­­ton. As I men­­tioned in an   <a href="http://asmeurersympy.wordpress.com/2009/06/21/refactoring-expand/">ear­li­er post</a>, this in­­­volved chang­ing the way that SymPy han­­dles au­­to­­mat­ic com­bin­ing of ex­po­­nents in the core, as well as refac­­tor­ing ex­­pand. I al­­so had to make the func­­tion com­­plete­­ly in­­de­pen­­dent of   <code>match</code>, be­­cause   <code>match</code>   is too bug­­gy to work cor­rec­t­­ly for sep­a­ra­ble equa­­tion­s.    </p>  
+  </li> 
+ <li> 
+ <p>Speak­ing of refac­­tor­ing   <code>ex­­pand</code>   and com­bin­ing ex­po­­nents, that work made it in!  It is the first ma­jor thing that I have done that has ac­­tu­al­­ly made it in­­­to the main SymPy re­po.  It got in just be­­fore the re­lease of SymPy 0.6.5-­be­­ta2, so it should be in the fi­­nal re­lease of SymPy 0.6.5.  Most like­­ly, none of my ODE stuff will make it in un­til 0.7.    </p>  
+  </li> 
+ <li> 
+ <p>I start­ed to work on   <a href="http://en.wikipedia.org/wiki/Variation_of_parameters">Var­i­a­­tion of Pa­ram­e­ters</a>, but be­­fore I could ac­­tu­al­­ly get to the var­i­a­­tion of pa­ram­e­ters part, I need­ed to be able to solve a ho­­mo­ge­­neous equa­­tion $la­­tex a_ny^{(n)}+a_{n-1}y^{(n-1)}+\­­dot­s+a_1y'+a_0y=0$ ($la­­tex a_i$ con­s­tant for all $la­­tex i$).  If you know how that work­s, it in­­­volves find­­ing the roots of the poly­no­mi­al giv­en by $la­­tex a_n­r^n+a_{n-1}r^{n-1}+\­­dot­s+a_1r+a_0=0$.  De­pend­ing on whether these roots are re­al, imag­i­­nary, or com­­plex, you have dif­fer­­ent so­lu­­tions with ex­po­­nen­­tials or sin's and cos's.  I had no trou­ble get­t­ing the ex­po­­nen­­tials and the sin's and cos's to work cor­rec­t­­ly (SymPy al­ready has a root find­­er that I put to work), but I did have a prob­lem get­t­ing the ar­bi­­trary con­s­tants to work cor­rec­­ty.  It turns out that the code for that would be much sim­­pler if I had an ar­bi­­trary con­s­tant type that au­­to­­mat­i­­cal­­ly "ab­­sorbed" oth­­er con­s­tants.  Since I had planned on do­ing that any­way, I de­­cid­ed to put the rest of var­i­a­­tion of pa­ram­e­ters on hold and be­­gin work on that.</p>  
+  </li> 
+ <li> 
+ <p>We had a Doc­u­­men­­ta­­tion day on June 30, and I de­­cid­ed to write up a doc­u­­ment that would help peo­­ple new to SymPy and Python with some of the gotchas and pit­­fal­l­s.  For ex­am­­ple, un­­like most oth­­er in­­de­pen­­dent CAS's like Maple, you can't just type   <code>1/2</code>   in SymPy to get $la­­tex \frac{1}{2}$.  That is be­­cause Python eval­u­ates it nu­mer­i­­cal­­ly.  You have to do   <code>S(1)/2</code>   or   <code>Ra­­tio­­nal(1,2)</code>   to get the Ra­­tio­­nal class.  It's all things like that.  It's tak­en me a while to get it to­geth­­er, not be­­cause it took me long to write it, but be­­cause it has to be in the Sphinx doc­u­­men­­ta­­tion for­­mat, which I have had to learn.  I am just fin­ish­ing it up now.</p>  
+  </li> 
+ <li> 
+ <p>I met with On­­drej on Sat­ur­­day.  He went down from Los Alam­os to Carl­s­bad with a friend to see the cav­ern­s, and they stopped here in Al­bu­­querque on the way back up.  He came just in time to see the fire­­work­s, and af­ter that got some din­n­er.  We weren't able to do any cod­ing, but hope­­ful­­ly we will be able to meet up again lat­er this sum­mer to do some of that.</p>  
+  </li> 
+ </ul></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../06/22/how-to-permanently-lose-data-with-git-and-then-retrieve-it-again/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../13/meeting-ondrej-in-los-alamos/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2009/07/06/update/",
+        disqus_title="Update",
+        disqus_identifier="cache/posts/2009/07/06/update.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>

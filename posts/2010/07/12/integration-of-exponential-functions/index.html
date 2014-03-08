@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aaron Meurer">
+    <title>Integration of exponential functions | Aaron Meurer's Blog</title>
+    
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'left', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script>
+
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2010/07/12/integration-of-exponential-functions/">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+    
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2010/07/12/integration-of-exponential-functions/">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+        <meta name="og:title" content="Integration of exponential functions">
+            <meta name="og:description" content="So for the first time this sum­mer, I missed my blog­ging dead­line.  I have been on va­ca­tion for the past few week­s, and have spent a good bit of the last week in the car, driv­ing home. But that'">
+
+
+
+
+    
+<link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
+</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li><a href="../../../../../archive.html">Archives</a>
+                </li><li><a href="../../../../../categories/index.html">Tags</a>
+                </li><li><a href="../../../../../rss.xml">RSS</a>
+
+            </li></ul>
+                
+<span class="navbar-form pull-left">
+<input type="text" id="tipue_search_input">
+</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="index.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Integration of exponential functions</h1>
+
+    <hr>
+    <small>
+        Posted: <time class="published dt-published" datetime="2010-07-12T06:22:06-05:00" itemprop="datePublished">2010-07-12 06:22</time>
+        
+
+        
+          |  
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
+    </span>
+
+
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><p></p><p>So for the first time this sum­mer, I missed my blog­ging dead­line.  I have been on va­ca­tion for the past few week­s, and have spent a good bit of the last week in the car, driv­ing home. But that's not my ex­cuse.  I was on va­ca­tion the week be­fore, when I wrote up my  <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">lengthy blog post on the Risch Al­go­rithm</a>.  My ex­cuse is that I want­ed to fin­ish up my  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>  func­tion be­fore I post­ed, so I could write about it.  Well, I fin­ished it on Thurs­day (to­day is Sun­day, the post was due Fri­day), but I ran in­to un­ex­pect­ed bugs (imag­ine that) that has post­poned it ac­tu­al­ly work­ing un­til now. I al­so end­ed up do­ing API changes 3 dif­fer­ent times (they are ba­si­cal­ly in­cre­men­tal­ly all one change, from sup­port­ing on­ly one ex­ten­sion to prop­er­ly sup­port­ing mul­ti­ple ex­ten­sion­s.  Look for long com­mits in my re­cent com­mit his­to­ry in my branch if you are in­ter­est­ed).   </p> 
+ <p>So here is the func­tion.  It in­te­grates ex­po­nen­tial func­tion­s.  You still have to man­u­al­ly cre­ate the dif­fer­en­tial ex­ten­sion, as be­fore.  Here are some ex­am­ples.  You can try them in my  <a href="http://github.com/asmeurer/sympy/tree/integration2">in­te­gra­tion2</a>  branch (I have re­based over Ma­teusz's lat­est polys9up­date.  The lat­est branch is al­ways in­te­gra­tion<code>n</code>, where  <code>n</code>  is the largest in­te­ger avail­able).   </p> 
+ <p><strong>Hov­er over the code and click on the left­-­most, "view source" icon (a pa­per icon with  <tt>&lt; &gt;</tt>  over it) to view with­out break­s.  Opens in a new win­dow.</strong></p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: from sympy.in­te­gral­s.risch im­port *</p> 
+ <p>In [2]: var('t1, t')</p> 
+ <p>Out­[2]: (t₁, t)</p> 
+ <p>In [3]: r = ex­p(2<em>tan(x))</em>tan(x) + tan(x) + ex­p(­tan(x))</p> 
+ <p>In [4]: r</p> 
+ <p>Out­[4]: 
+ 2⋅­tan(x)                    tan(x)
+ℯ        ⋅tan(x) + tan(x) + ℯ       </p> 
+ <p>In [5]: rd = r.d­if­f(x)</p> 
+ <p>In [6]: rd</p> 
+ <p>Out­[6]: 
+    ⎛         2   ⎞  2⋅­tan(x)             2      ⎛       2   ⎞  2⋅­tan(x)   ⎛       2   ⎞  tan(x)
+1 + ⎝2 + 2⋅­tan (x)⎠⋅ℯ        ⋅tan(x) + tan (x) + ⎝1 + tan (x)⎠⋅ℯ         + ⎝1 + tan (x)⎠⋅ℯ       </p> 
+ <p>In [7]: a, d = map(lamb­da i: Poly(i, t), rd.­sub­s(­tan(x), t1).­sub­s(­ex­p(t1), t).as_nu­mer_­de­nom()) # Man­u­al­ly cre­ate the ex­ten­sion</p> 
+ <p>In [8]: a</p> 
+ <p>Out­[8]: Poly((1 + 2<em>t1 + t1<strong>2 + 2*t1</strong>3)</em>t<strong>2 + (1 + t1</strong>2)<em>t + 1 + t1</em>*2, t, do­main='Z­Z[t1]')</p> 
+ <p>In [9]: d</p> 
+ <p>Out­[9]: Poly(1, t, do­main='Z­Z')</p> 
+ <p>In [10]: in­te­grate_hy­per­ex­po­nen­tial(a, d, [Poly(1, x), Poly(1 + t1<strong>2, t1), Poly((1 + t1</strong>2)*t, t)], [x, t1, t], [lamb­da x: ex­p(­tan(x)), tan])</p> 
+ <p>Out­[10]:  </p> 
+ <p>⎛                   ⌠                                 ⎞</p> 
+ <p>⎜ 2⋅­tan(x)          ⎮ ⎛       2   ⎞       tan(x)      ⎟</p> 
+ <p>⎜ℯ        ⋅tan(x) + ⎮ ⎝1 + tan (x)⎠ dx + ℯ      , True⎟</p> 
+ <p>⎝                   ⌡                                 ⎠</p> 
+ <p>[/­code]</p> 
+ <p>We have to man­u­al­ly build up the dif­fer­en­tial ex­ten­sion (<code>[7]</code>).  The first el­e­ment is $la­tex x$, which is al­ready there.  Nex­t, we add $la­tex t_1 = \tan{x}$, and fi­nal­ly $la­tex t = e^{\­tan{x}} = e^{t_1}$.  The third ar­gu­ment of  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>  is what gives these vari­ables their iden­ti­ties: their de­riv­a­tives.  The fourth ar­gu­ment is the list of the ex­ten­sion sym­bol­s, and the last ar­gu­ment is a list of the func­tions for which the sym­bols stand for, in re­verse or­der (be­cause we have to back sub­sti­tute in the so­lu­tion in re­verse or­der).   </p> 
+ <p>The un­eval­u­at­ed In­te­gral in the so­lu­tion is due to the re­cur­sive na­ture of the Risch al­go­rith­m.  Even­tu­al­ly, an out­er func­tion in the al­go­rithm will re­cur­sive­ly in­te­grate un­til it reach­es the ground field, $la­tex \math­b­b{Q}$.  It will al­so do the prop­er prepars­ing au­to­mat­i­cal­ly as well.  The sec­ond el­e­ment of the so­lu­tion,  <code>True</code>, in­di­cates that the in­te­gral is el­e­men­tary, and thus the giv­en so­lu­tion is the com­plete in­te­gral of the orig­i­nal in­te­grand, which we can see ($la­tex \int (1 + \tan^2{x})dx=\­tan{x}$).   </p> 
+ <p>An­oth­er ex­am­ple:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: from sympy.in­te­gral­s.risch im­port *</p> 
+ <p>In [2]: var('t')</p> 
+ <p>Out­[2]: (t,)</p> 
+ <p>In [3]: rd = ex­p(-x**2)</p> 
+ <p>In [4]: rd</p> 
+ <p>Out­[4]: 
+   2
+ -x 
+ℯ    </p> 
+ <p>In [5]: a, d = map(lamb­da i: Poly(i, t), rd.­sub­s(­ex­p(x**2), t).as_nu­mer_­de­nom())</p> 
+ <p>In [6]: a</p> 
+ <p>Out­[6]: Poly(1, t, do­main='Z­Z')</p> 
+ <p>In [7]: d</p> 
+ <p>Out­[7]: Poly(t, t, do­main='Z­Z')</p> 
+ <p>In [8]: in­te­grate_hy­per­ex­po­nen­tial(a, d, [Poly(1, x), Poly(2<em>x</em>t, t)], [x, t], [lamb­da x: ex­p(x**2)])</p> 
+ <p>Out­[8]: (0, False)</p> 
+ <p>[/­code]</p> 
+ <p>Here the sec­ond ar­gu­ment of the so­lu­tion is  <code>False</code>, which in­di­cates that the al­go­rithm has proven that the in­te­gral of $la­tex e^{-x^2}$ is not el­e­men­tary!   The first ar­gu­ment 0 in­di­cates that ac­tu­al­ly it is the in­te­gral of $la­tex e^{-x^2} - \frac{d}{dx}(0)$ that is not el­e­men­tary, i.e., the Risch al­go­rithm will re­duce an in­te­grand in­to an in­te­grat­ed func­tion part and non-ele­men­tary part.  For ex­am­ple:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: from sympy.in­te­gral­s.risch im­port *</p> 
+ <p>In [2]: var('t1, t')</p> 
+ <p>Out­[2]: (t₁, t)</p> 
+ <p>In [3]: rd = ex­p(x)/­tan(x) + ex­p(x)/(1 + ex­p(x))</p> 
+ <p>In [4]: rd</p> 
+ <p>Out­[4]: 
+   x        x<br> 
+  ℯ        ℯ  <br> 
+────── + ──────
+     x   tan(x)
+1 + ℯ           </p> 
+ <p>In [5]: a, d = map(lamb­da i: Poly(i, t), rd.­sub­s(­ex­p(x), t).­sub­s(­tan(x), t1).as_nu­mer_­de­nom())</p> 
+ <p>In [6]: a</p> 
+ <p>Out­[6]: Poly(t*<em>2 + (1 + t1)</em>t, t, do­main='Z­Z[t1]')</p> 
+ <p>In [7]: d</p> 
+ <p>Out­[7]: Poly(t1*t + t1, t, do­main='Z­Z[t1]')</p> 
+ <p>In [8]: in­te­grate_hy­per­ex­po­nen­tial(a, d, [Poly(1, x), Poly(1 + t1**2, t1), Poly(t, t)], [x, t1, t], [ex­p, tan])</p> 
+ <p>Out­[8]:  </p> 
+ <p>⎛   ⎛     x⎞       ⎞</p> 
+ <p>⎝log⎝1 + ℯ ⎠, False⎠</p> 
+ <p>[/­code]</p> 
+ <p>This in­di­cates that the in­te­gral of $la­tex (\frac{e^x}{\­tan{x}} + \frac{e^x}{1 + e^x}) - \frac{d}{dx}(\log{(1 + e^x)}) = \frac{e^x}{\­tan{x}}$ is not el­e­men­tary.  That is one ad­van­tage that the new al­go­rithm will have over the present one.  Cur­rent­ly, the present al­go­rithm just re­turns an un­eval­u­at­ed In­te­gral for the above  <code>rd</code>, but the new one will be able to re­turn $la­tex \log{(1 + e^x)} + \in­t{\frac{e^x}{\­tan{x}}dx}$.  It will be able to do this even if rd were rewrit­ten as $la­tex \frac{e^x \tan{x} + e^x + e^{2x}}{e^x \tan{x} + \tan{x}}$ (no­tice that this is ex­act­ly what  <code>.as_nu­mer_­de­nom()</code>  is do­ing any­way in  <code>[5]</code>, as you can see in  <code>[6]</code>  and  <code>[7]</code>).  Fur­ther­more, it will have ac­tu­al­ly  <em>proven</em>  that the re­main­ing $la­tex \in­t{\frac{e^x}{\­tan{x}}dx}$ is non-ele­men­tary.  I plan on hav­ing some kind of mark­er in the pret­ty print­ed un­eval­u­at­ed  <code>In­te­gral</code>  to in­di­cate this.  Sug­ges­tions on what this should be are wel­come.   </p> 
+ <p>Fi­nal­ly, the full al­go­rithm ap­pears to be faster (prob­a­bly asymp­tot­i­cal­ly faster) than the cur­rent im­ple­men­ta­tion:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: from sympy.in­te­gral­s.risch im­port *</p> 
+ <p>In [2]: var('t1, t')</p> 
+ <p>Out­[2]: (t₁, t)</p> 
+ <p>In [3]: rd = ex­p(x)<em>x</em>*4</p> 
+ <p>In [4]: a, d = map(lamb­da i: Poly(i, t), rd.­sub­s(­ex­p(x), t).as_nu­mer_­de­nom())</p> 
+ <p>In [5]: in­te­grate_hy­per­ex­po­nen­tial(a, d, [Poly(1, x), Poly(t, t)], [x, t], [lamb­da x: ex­p(x)])</p> 
+ <p>Out­[5]:  </p> 
+ <p>⎛    x    4  x         x      3  x       2  x      ⎞</p> 
+ <p>⎝24⋅ℯ  + x ⋅ℯ  - 24⋅x⋅ℯ  - 4⋅x ⋅ℯ  + 12⋅x ⋅ℯ , True⎠</p> 
+ <p>In [6]: %timeit in­te­grate_hy­per­ex­po­nen­tial(a, d, [Poly(1, x), Poly(t, t)], [x, t], [ex­p])</p> 
+ <p>10 loop­s, best of 3: 28 ms per loop</p> 
+ <p>In [7]: in­te­grate(rd, x)</p> 
+ <p>Out­[7]: 
+    x    4  x         x      3  x       2  x
+24⋅ℯ  + x ⋅ℯ  - 24⋅x⋅ℯ  - 4⋅x ⋅ℯ  + 12⋅x ⋅ℯ  </p> 
+ <p>In [8]: %timeit in­te­grate(rd, x)</p> 
+ <p>1 loop­s, best of 3: 218 ms per loop</p> 
+ <p>[/­code]</p> 
+ <p>Of course, keep in mind that I am tim­ing what will be an in­ter­nal func­tion against a full func­tion.  But if you in­crease the ex­po­nent on x, you find that there is no way the ad­di­tion of prepars­ing time (which should­n't be af­fect­ed by such a change) will cause it to be­come as slow as the cur­rent  <code>in­te­grate()</code>.  Like I said, I am pret­ty sure that it is as­ymp­tot­ic.  For ex­am­ple:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: from sympy.in­te­gral­s.risch im­port *</p> 
+ <p>In [2]: var('t1, t')</p> 
+ <p>Out­[2]: (t₁, t)</p> 
+ <p>In [3]: rd = ex­p(x)<em>x</em>*10</p> 
+ <p>In [4]: a, d = map(lamb­da i: Poly(i, t), rd.­sub­s(­ex­p(x), t).as_nu­mer_­de­nom())</p> 
+ <p>In [5]: in­te­grate_hy­per­ex­po­nen­tial(a, d, [Poly(1, x), Poly(t, t)], [x, t], [lamb­da x: ex­p(x)])</p> 
+ <p>Out­[5]:  </p> 
+ <p>⎛         x    10  x              x           3  x          5  x        7  x       9  x       8  x         6  x           4  x            2  x      ⎞</p> 
+ <p>⎝3628800⋅ℯ  + x  ⋅ℯ  - 3628800⋅x⋅ℯ  - 604800⋅x ⋅ℯ  - 30240⋅x ⋅ℯ  - 720⋅x ⋅ℯ  - 10⋅x ⋅ℯ  + 90⋅x ⋅ℯ  + 5040⋅x ⋅ℯ  + 151200⋅x ⋅ℯ  + 1814400⋅x ⋅ℯ , True⎠</p> 
+ <p>In [6]: %timeit in­te­grate_hy­per­ex­po­nen­tial(a, d, [Poly(1, x), Poly(t, t)], [x, t], [ex­p])</p> 
+ <p>10 loop­s, best of 3: 42 ms per loop</p> 
+ <p>In [7]: in­te­grate(rd, x)</p> 
+ <p>Out­[7]: 
+         x    10  x              x           3  x          5  x        7  x       9  x       8  x         6  x           4  x            2  x
+3628800⋅ℯ  + x  ⋅ℯ  - 3628800⋅x⋅ℯ  - 604800⋅x ⋅ℯ  - 30240⋅x ⋅ℯ  - 720⋅x ⋅ℯ  - 10⋅x ⋅ℯ  + 90⋅x ⋅ℯ  + 5040⋅x ⋅ℯ  + 151200⋅x ⋅ℯ  + 1814400⋅x ⋅ℯ  </p> 
+ <p>In [8]: %timeit in­te­grate(rd, x)</p> 
+ <p>1 loop­s, best of 3: 2.78 s per loop</p> 
+ <p>[/­code]</p> 
+ <p>There is one thing I should men­tion.  I haven't im­ple­ment­ed all the cas­es in  <code>rischDE()</code>, which is the sub­prob­lem for ex­po­nen­tial func­tions (more on this in a fu­ture "The Risch Al­go­rith­m" post).  So some in­te­grals will fail with a  <code>NotIm­ple­ment­ed­Er­ror</code>, in­di­cat­ing that there is a func­tion that I still need to im­ple­ment to solve the in­te­gral:</p> 
+ <p>[code lan­guage="py"]</p> 
+ <p>In [1]: from sympy.in­te­gral­s.risch im­port *</p> 
+ <p>In [2]: var('t1, t')</p> 
+ <p>Out­[2]: (t₁, t)</p> 
+ <p>In [3]: rd = (ex­p(x) - x<em>ex­p(2</em>x)*­tan(x))/­tan(x)</p> 
+ <p>In [4]: a, d = map(lamb­da i: Poly(i, t), rd.­sub­s(­ex­p(x), t).­sub­s(­tan(x), t1).as_nu­mer_­de­nom())</p> 
+ <p>In [5]: a</p> 
+ <p>Out­[5]: Poly(-t1<em>x</em>t**2 + t, t, do­main='Z­Z[x,t1]')</p> 
+ <p>In [6]: d</p> 
+ <p>Out­[6]: Poly(t1, t, do­main='Z­Z[t1]')</p> 
+ <p>In [7]: in­te­grate_hy­per­ex­po­nen­tial(a, d, [Poly(1, x), Poly(1 + t1**2, t1), Poly(t, t)], [x, t1, t], [ex­p, tan])</p> 
+ <hr>
+<p>...</p> 
+ <p>NotIm­ple­ment­ed­Er­ror: The abil­i­ty to solve the para­met­ric log­a­rith­mic de­riv­a­tive prob­lem is re­quired to solve this RDE</p> 
+ <p>[/­code]</p> 
+ <p>So feel free to give this a try and let me know what you think.  You will have to do the prepars­ing as I have done above, which means that you al­so have to be care­ful that any ex­ten­sion that you make is not the de­riv­a­tive or log­a­rith­mic de­riv­a­tive of an el­e­ment of the field you have al­ready built up.  You al­so can­not use al­ge­bra­ic func­tion­s, as I men­tioned be­fore, in­clud­ing things like $la­tex e^\frac{\log{x}}{2}$ (func­tions like these are called the log­a­rith­mic de­riv­a­tives of k(t)-rad­i­cal­s, which I will al­so dis­cuss in a fu­ture "The Risch Al­go­rith­m" post).  If you just use sim­ple ex­ten­sions like  <code>t1 = tan(x);t=­ex­p(x)</code>  like I have above, you won't need to wor­ry about this.  Each de­riv­a­tive Poly should be in the vari­able that it is the de­riv­a­tive of (e.g., start with  <code>Poly(1, x)</code>, then add  <code>Poly(1 + t1<strong>2, t1)</strong></code>,  <code>Poly(t2*(1 + t12), t2)</code>, etc.).  Ev­ery­thing else should be a Poly in  <code>t</code>, the last el­e­ment of the ex­ten­sion.  And in cause you did­n't get it, the last ex­ten­sion must be an ex­po­nen­tial func­tion.   </p> 
+ <p>Al­so, I did­n't have to do it in any of the above ex­am­ples, but the first and sec­ond ar­gu­ments to  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>   <em>must</em>  be can­celed (<code>a, d = a.­can­cel(d, in­clude=True)</code>  will do this for you), or you will get a wrong re­sult!  I spent a good day of de­bug­ging un­til I fig­ured this out.  The ex­is­tence of oth­er bugs did­n't help.</p></div>
+    </div>
+    </div>
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../../06/30/the-risch-algorithm-part-1/" rel="prev">← Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../17/a-hard-week/" rel="next">Next post →</a>
+            </li>
+        </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="http://asmeurer.github.io/posts/2010/07/12/integration-of-exponential-functions/",
+        disqus_title="Integration of exponential functions",
+        disqus_identifier="cache/posts/2010/07/12/integration-of-exponential-functions.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
+        });
+        </script>
+        <script src="../../../../../assets/js/mathjax.js"></script>
+
+    </article>
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
+  </a>
+
+        </p></footer>
+    </div>
+</div>
+
+
+            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
+<script type="text/javascript" src="../../../../../assets/js/tipuesearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        'mode': 'json',
+        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'showUrl': false
+    });
+});
+</script>
+
+
+</body></html>
