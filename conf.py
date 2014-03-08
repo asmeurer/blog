@@ -239,6 +239,7 @@ ONE_FILE_POSTS = False
 DEPLOY_COMMANDS = [
     "git checkout gh-pages",
     "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
+    "git add -A *",
     "git commit -a -m 'Updating blog content'",
     "git push",
     "git checkout master",
