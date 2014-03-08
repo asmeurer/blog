@@ -6,27 +6,27 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://asmeurer.github.io/</loc>
-  <lastmod>2014-02-09</lastmod>
+  <lastmod>2014-03-08</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/2014/</loc>
-  <lastmod>2014-02-09</lastmod>
+  <lastmod>2014-03-08</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/archive.html</loc>
-  <lastmod>2014-02-09</lastmod>
+  <lastmod>2014-03-08</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/categories/</loc>
-  <lastmod>2014-02-09</lastmod>
+  <lastmod>2014-03-08</lastmod>
  </url>
  <url>
-  <loc>http://asmeurer.github.io/posts/test-post/</loc>
-  <lastmod>2014-02-09</lastmod>
+  <loc>http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/</loc>
+  <lastmod>2014-03-08</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/rss.xml</loc>
-  <lastmod>2014-02-09</lastmod>
+  <lastmod>2014-03-08</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/tipue_search.html</loc>
