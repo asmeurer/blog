@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="description" content="My blog on my work on SymPy and other fun stuff.">
+    <meta name="viewport" content="width=device-width">
+    <title>Aaron Meurer's SymPy Blog (old posts, page 5) | Aaron Meurer's SymPy Blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://asmeurersympy.wordpress.com/index-5.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+
+</head>
+<body>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li>
+<a href="archive.html">Archives</a>
+                </li>
+<li>
+<a href="categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="rss.xml">RSS</a>
+
+            </li>
+</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+            </ul>
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+<div class="postindex">
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2011/06/05/nondeterminism.html" class="u-url">Nondeterminism</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2011/06/05/nondeterminism.html" rel="bookmark"><time class="published dt-published" datetime="2011-06-05T06:08:21+00:00" itemprop="datePublished" title="Publication date">2011-06-05 06:08</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2011/06/05/nondeterminism.html#disqus_thread" data-disqus-identifier="cache/posts/2011/06/05/nondeterminism.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So from Saturday to Wednesday of this week, I was on vacation to the Grand Canyon without my computer.  Therefore, I did not do a whole lot with respect to SymPy this week.  The vacation was very fun, though.  My family and I hiked to the bottom of the Grand Canyon and stayed a day at the bottom in a lodge at Phantom Ranch, then hiked back up.  I would highly recommend it to anyone who does not mind doing a little hiking.  </p>
+<p>Regarding what I did do, other than catching up on the email from when I was gone, I did some more work finishing patches for the release.  We are now <em>very</em> close to having a release.  All the remaining <a href="http://code.google.com/p/sympy/issues/list?q=label:Milestone-Release0.7.0">blocking issues</a> either have patches that need to be reviewed, or decisions that need to be made.</p>
+<p>I also did some work on the Risch Algorithm, though it wasn't very much.  One of my favorite ways to "do work" on the code is to stress test <code>risch_integrate()</code> and if I find a bug or find that it runs too slow, see what needs to be done to fix it.  This week, I discovered that <code>risch_integrate()</code> has a bit of nondeterminism built into it.  Actually, I already knew this, but I recently found an example that demonstrates it very nicely.  The problem is that when it builds the extension to integrate the function, <code>risch_integrate()</code> uses <code>.atoms()</code> to get the parts of the expression (for example, <code>expr.atoms(log)</code> gets all the logarithms in <code>expr</code>).  But <code>.atoms()</code> returns a set (I believe this is for performance reasons, though I'm not certain).  So we get things like</p>
+<p><strong>Hover over the code and click on the left-most, "view source" icon (a paper icon with <tt>&lt; &gt;</tt> over it) to view without breaks.  Opens in a new window.</strong></p>
+<p>[code language="py"]</p>
+<p>In [1]: a = Add(<em>(log(x</em>*i) for i in range(10)))</p>
+<p>In [2]: a</p>
+<p>Out[2]: 
+            ⎛ 2⎞      ⎛ 3⎞      ⎛ 4⎞      ⎛ 5⎞      ⎛ 6⎞      ⎛ 7⎞      ⎛ 8⎞      ⎛ 9⎞
+log(x) + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠</p>
+<p>In [3]: b = risch_integrate(a, x)</p>
+<p>In [4]: b</p>
+<p>Out[4]: 
+                ⎛ 4⎞
+        45⋅x⋅log⎝x ⎠
+-45⋅x + ────────────
+             4    <br>
+[/code]</p>
+<p>This is correct, since we have</p>
+<p>[code language="py"]</p>
+<p>In [5]: expand(b.diff(x) - a)</p>
+<p>Out[5]: 0</p>
+<p>[/code]</p>
+<p>(remember that $latex \log{(x^n)}=n\log{(x)}$).  The integral can be expressed in terms of any of the logarithms in the expression.  It happens to be expressed in terms of $latex \log{(x^4)}$ because that happened to be the first one that came out of <code>a.atoms(log)</code> during iteration.  This is problematic.  First, it's not exactly what is expected.  The ideal solution would be if the answer was written in terms of $latex \log{(x)}$.  </p>
+<p>But it's actually worse than that.  Like I mentioned, this is nondeterministic.  It depends on the order of iteration through a set, which is not guaranteed to be in any particular order.  Indeed, if I run the following in 32-bit Python 2.7 and again in 64-bit Python 2.7), the output is exactly the same except for <code>i</code> = 64 to <code>i</code> = 77.</p>
+<p>[code language="py"]</p>
+<p>for i in range(100):
+    print risch_integrate(Add(<em>(log(x</em>*j) for j in range(i))), x)
+[/code]</p>
+<p>The actual output seems to follow a pattern, though it's had to discern exactly what it is.  The output for 32-bit is <a href="https://gist.github.com/1008685" title="32-bit Python risch_integrate(logarithms)" target="_blank">https://gist.github.com/1008685</a> and the output for 64-bit is <a href="https://gist.github.com/1008684" title="64-bit Python risch_integrate(logarithms)" target="_blank">https://gist.github.com/1008684</a> (sorry, I forgot to print <code>i</code>; just subtract 4 from the line number).  </p>
+<p>So this has gotten me thinking about how to reduce nondeterminism.  Clearly, I need to sort the result of <code>.atoms()</code>, or else <code>risch_integrate()</code> might return a different (though equivalent) result on different platforms. Actually, I've seen <code>list(set)</code> return a different result in the <em>same</em> Python session.  That means that you could potentially get something like <code>risch_integrate(expr, x) == risch_integrate(expr, x) =&gt; False</code>!</p>
+<p>The problem is how to sort the atoms.  We recently added a <code>sort_key()</code> function that can be passed as a key to <code>sorted()</code>, which is completely deterministic and platform independent.  That would solve the determinism problem, but actually, I think this requires more thought.  The order that the differential extension is built in can affect not only the form of the resulting antiderivative (though it will always be equivalent, up to a constant), but also the speed with which it is computed.  To take an example from <a href="http://code.google.com/p/sympy/issues/detail?id=2010#c1">issue 2010</a>, the issue about <code>risch_integrate()</code> (you may also <a href="http://asmeurersympy.wordpress.com/2010/08/05/prototype-risch_integrate-function-ready-for-testing/">recognize</a> this example if you are a regular reader of this blog), the <code>handle_first</code> keyword argument to <code>risch_integrate()</code> affects if it builds the extension tower looking for logarithms first or exponentials first.  Whichever comes last is what is integrated first (the tower is integrated from the top to the bottom).  If the last extension was an exponential, then it uses the exponential algorithm.  If it was a logarithm, then it uses the logarithm algorithm.  These are completely different algorithms, and indeed the results can appear in different forms (and sometimes, one will raise NotImplementedError while the other will work because I have implemented the exponential algorithm more completely than the logarithmic one).  It also affects the speed because the integrand might be of a different "type" in the different extensions.  In the example below, the answers are different because it tries to make the argument of the logarithmic part monic with respect to the exponential or the logarithm, respectively. Also notice the speed difference.  This can be exasperated more for integrands of different forms than this one.</p>
+<p>[code language="py"]</p>
+<p>In [1]: f = (x<em>(x + 1)</em>((x<strong>2<em>exp(2</em>x</strong>2) - log(x + 1)<strong>2)</strong>2 +
+   ...: 2<em>x</em>exp(3<em>x<strong>2)<em>(x - (2</em>x</strong>3 + 2</em>x<strong>2 + x + 1)<em>log(x + 1))))/((x +
+   ...: 1)</em>log(x + 1)</strong>2 - (x<strong>3 + x</strong>2)<em>exp(2</em>x<strong>2))</strong>2</p>
+<p>In [2]: f</p>
+<p>Out[2]: 
+          ⎛                          2                                                   ⎞
+          ⎜⎛                       2⎞                                                   2⎟
+          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
+x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠</p>
+<p>──────────────────────────────────────────────────────────────────────────────────────────
+                                                                2                       <br>
+                         ⎛                                    2⎞                        <br>
+                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟                        <br>
+                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠                          </p>
+<p>In [3]: risch_integrate(f, x, handle_first='log')</p>
+<p>Out[3]: 
+       ⎛              ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞                           <br>
+       ⎜log(1 + x)    ⎝x ⎠⎟                   ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞             <br>
+    log⎜────────── + ℯ    ⎟                log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠             <br>
+       ⎝    x             ⎠                   ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)  <br>
+x + ─────────────────────── - log(1 + x) - ───────────────────────── + ──────────────────────────
+               2                                       2                                        2
+                                                                              2           3  2⋅x 
+                                                                       - x⋅log (1 + x) + x ⋅ℯ    </p>
+<p>In [4]: risch_integrate(f, x, handle_first='exp')</p>
+<p>Out[4]: 
+       ⎛                ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞        ⎛ 2⎞           <br>
+       ⎜                ⎝x ⎠⎟                   ⎜                ⎝x ⎠⎟        ⎝x ⎠           <br>
+    log⎝log(1 + x) + x⋅ℯ    ⎠                log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)<br>
+x + ───────────────────────── - log(1 + x) - ───────────────────────── - ──────────────────────
+                2                                        2                                    2
+                                                                            2           2  2⋅x 
+                                                                         log (1 + x) - x ⋅ℯ    </p>
+<p>In [5]: %timeit risch_integrate(f, x, handle_first='log')</p>
+<p>1 loops, best of 3: 1.49 s per loop</p>
+<p>In [6]: %timeit risch_integrate(f, x, handle_first='exp')</p>
+<p>1 loops, best of 3: 1.21 s per loop</p>
+<p>In [7]: cancel(risch_integrate(f, x, handle_first='log').diff(x) - f)</p>
+<p>Out[7]: 0</p>
+<p>In [8]: cancel(risch_integrate(f, x, handle_first='exp').diff(x) - f)</p>
+<p>Out[8]: 0</p>
+<p>[/code]</p>
+<p>So what I think I really need to do is to do some research on what order of building the tower makes it the most efficient.  Also, <code>handle_first</code> needs to be modified to be more dynamic than just looking at exponentials or logarithms first, but also considering which exponentials or logarithms to look at first, and the others might be rewritten in terms of those (this needed to be done anyway to make it work for three types of extensions: exponentials, logarithms, and tangents).  </p>
+<p>There can also be more heuristics for this.  Currently, there are heuristics for exponentials to prefer rewriting $latex e^{2x}$ as $latex \left({e^{x}}\right)^2$ instead of rewriting $latex e^{x}$ as $latex \sqrt{e^{2x}}$ (this is necessary not only for keeping things in terms of the nicer looking gcds but also because <code>risch_integrate()</code> doesn't know how to handle algebraic extensions like square roots). I didn't realize it at the time, but the corollary heuristic for logarithms should try to rewrite $latex \log{(x^2)}$ in terms of $latex \log{(x)}$ and not the other way around.  We can use the exact same gcd algorithm (called <a href="https://github.com/asmeurer/sympy/blob/integration3/sympy/integrals/risch.py#L44"><code>integer_powers()</code></a> in <code>risch.py</code>, and I now realize that it should actually be called <code>integer_multiples()</code>) as we do for the exponential, only use the powers of the arguments instead of coefficients.  This might require some factorization to do completely correctly, so it certainly requires some thought.  </p>
+<p><strong>Update</strong></p>
+<p>I discovered that there's an easier way to show the nondeterminism of the above than running it on different architectures.  You just have to change the variable of integration:</p>
+<p>[code language="py"]</p>
+<p>In [1]: a = Add(<em>(log(x</em>*i) for i in range(10)))</p>
+<p>In [2]: risch_integrate(a, x)</p>
+<p>Out[2]: 
+                ⎛ 4⎞
+        45⋅x⋅log⎝x ⎠
+-45⋅x + ────────────
+             4      </p>
+<p>In [3]: b = Add(<em>(log(y</em>*i) for i in range(10)))</p>
+<p>In [4]: risch_integrate(b, y)</p>
+<p>Out[4]: -45⋅y + 45⋅y⋅log(y)</p>
+<p>In [5]: c = Add(<em>(log(z</em>*i) for i in range(10)))</p>
+<p>In [6]: risch_integrate(c, z)</p>
+<p>Out[6]: 
+                ⎛ 2⎞
+        45⋅z⋅log⎝z ⎠
+-45⋅z + ────────────
+             2    <br>
+[/code]</p>
+<p>Clearly the code for this needs to be doing some canonicalization. </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2011/05/26/update-for-the-beginning-of-the-summer.html" class="u-url">Update for the Beginning of the Summer</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2011/05/26/update-for-the-beginning-of-the-summer.html" rel="bookmark"><time class="published dt-published" datetime="2011-05-26T05:41:50+00:00" itemprop="datePublished" title="Publication date">2011-05-26 05:41</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2011/05/26/update-for-the-beginning-of-the-summer.html#disqus_thread" data-disqus-identifier="cache/posts/2011/05/26/update-for-the-beginning-of-the-summer.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So the Google Summer of Code coding period officially started on Monday, and in solidarity with the students, I will be blogging once a week about various things.  Some of the posts will just be about what I have done that week.  Others will be continuations of my Risch Algorithm series of blog posts (see parts <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/" target="_blank">0</a>, <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/" target="_blank">1</a>, <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/" target="_blank">2</a>, and <a href="http://asmeurersympy.wordpress.com/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem/" target="_blank">3</a>).  </p>
+<p>This week, I will do the former.  I have spend the past several weeks preparing for the release.  The main thing right now is to clear out <a href="http://code.google.com/p/sympy/issues/list?can=2&amp;q=Milestone%3DRelease0.7.0+&amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary+Stars&amp;cells=tiles" target="_blank">the issues that are blocking the release</a>.  I merged in a branch that included all of my polys related fixes from my integration3 branch. Along with similar branch from earlier that had some non-polys related fixes (like some fixes to the integrals), all of my fixes from integration3 not directly related to my implementation of the Risch Algorithm should no be in master. </p>
+<p>Once those issues are fixed, I should be ready to make a release candidate for the release.  The last release was over a year ago (March 2010), and we've racked up <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.0" target="_blank">quite a few changes</a> since then.  A few big ones are:</p>
+<p></p>
+<ul>
+    <li> <strong>The new polys</strong>.  This is (in my opinion) the biggest change.  Because of the new polys, everything is faster, and simplification is far more powerful than it was before.  This is for a few reasons.  The biggest reason is that the new polys allow polynomials in any kind of expression, not just Symbols.  This means that you can do things like factor the expression $latex \cos^2{x} + 2\cos{x} + 1$.  As you can imagine, many simplifications of complex expressions are nothing more than polynomial simplifications, where the polynomial is in some function.  
+<p>In addition to this, the new polys have a much faster implementation, and if you have gmpy installed, it will use that and be even faster.  There are also several faster algorithms, like a faster algorithm for multivariate factorization, that have been implemented. These all lead to blazing fast simplification and polynomial minipulation in SymPy.</p>
+</li>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>The Quantum Module<span class="nt">&lt;/strong&gt;</span>.  Unfortunatly, I can't say much about this, since I don't know anything about quantum physics.  Furthermore, at the time of the writing of this blog post, that part of the release notes hasn't been written yet.  Suffice it say that thanks to two GSoC projects from last summer (see <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://code.google.com/p/sympy/wiki/SymbolicQMReport"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;</span>this<span class="nt">&lt;/a&gt;</span> and <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://code.google.com/p/sympy/wiki/Quantum_Computation_Report"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;</span>this<span class="nt">&lt;/a&gt;</span> page), we now have a quantum physics module.  A lot of the stuff in that module, from my understanding, is unique to SymPy, which is very exciting.  (By the way, if you're interested in this, Brian Granger can tell you more about it).<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;&lt;strong&gt;</span>Various backwards incompatible changes<span class="nt">&lt;/strong&gt;</span>.  We've taken advantage of the fact that this will be a point release (0.7.0) to clean up some old cruft.
+</pre></div>
+
+
+<p></p>
+<ul>
+    <li>We've renamed the functions <code>abs()</code> and <code>sum()</code> to <code>Abs()</code> and <code>summation()</code>, respectively, because they conflicted with built-in names (although thanks to <code><strong>abs</strong></code> magic, <code>abs(expr)</code> will still work with the built-in <code>abs()</code> function).  </li>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>This will be the last release to support Python 2.4.  This will be a big benefit to not have to support Python 2.4 anymore after this release.  There were <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://docs.python.org/whatsnew/2.5.html"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;</span>a ton of features<span class="nt">&lt;/a&gt;</span> added in Python 2.5 that we have had to either manually re-implement (like any() and all()), or have had to do without (like the with statement).    Also, this will make porting to Python 3 much easier (this is one of our GSoC projects).  <span class="nt">&lt;/li&gt;</span>
+
+
+
+<span class="nt">&lt;li&gt;</span>We split the class Basic, which is the base class of all SymPy types, into Basic and a subclass Expr.  Mathematical objects like <span class="nt">&lt;code&gt;</span>cos(x)<span class="nt">&lt;/code&gt;</span> or <span class="nt">&lt;code&gt;</span>x*y*z**2<span class="nt">&lt;/code&gt;</span> are instances of Expr.  Objects that do not make sense in mathematical expressions, but still want to have some of the standard SymPy methods like .args and .subs() are Basic.  For example, a Set object is Basic, but not Expr.<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+
+
+
+<span class="nt">&lt;li&gt;&lt;strong&gt;</span>Lots of little bug fixes and new features<span class="nt">&lt;/strong&gt;</span>.  See the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.0"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;</span>release notes<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+</ul>
+
+<p>Once we have the release out, I plan to go back to work on the Risch Algorithm.  I am very close to finishing the exponential case, which means that once I do, any transcendental elementary function built up of only exponential extensions could be integrated or proven not to have an elementary integral by my algorithm.  I also want to start getting the code ready to merge with the main code base, so that it can go in the next release (0.7.1).  </p>
+<p>Finally, I want to announce that I have been selected for a <a href="http://conference.scipy.org/scipy2011/student.php" target="_blank">student sponsorship</a> to the SciPy 2011 conference in Austin, TX in the week of July 11. Mateusz and I will be presenting a tutorial on SymPy.  This will be the first time I have ever attended a conference, and I am very excited.  </p>
+</ul>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2011/04/27/advice-for-future-prospective-gsoc-students.html" class="u-url">Advice for Future Prospective GSoC Students</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2011/04/27/advice-for-future-prospective-gsoc-students.html" rel="bookmark"><time class="published dt-published" datetime="2011-04-27T21:15:54+00:00" itemprop="datePublished" title="Publication date">2011-04-27 21:15</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2011/04/27/advice-for-future-prospective-gsoc-students.html#disqus_thread" data-disqus-identifier="cache/posts/2011/04/27/advice-for-future-prospective-gsoc-students.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So now that Google has <a href="http://asmeurersympy.wordpress.com/2011/04/27/accepted-gsoc-students-announced/">announced the results</a> of Google Summer of Code, I want to write down some general things that I noticed when reviewing applications while they are still fresh in my mind.  </p>
+<p>Note that none of these things apply to any specific student who applied to SymPy.  Many of these things are things that I noticed that people did right.  </p>
+<p>Most of this should apply to any organization, though some of them might be SymPy specific, since that is the lens that I am viewing this through.  These aren't really in any particular order.  </p>
+<p></p>
+<ol>
+    <li>
+<strong>Fulfill all the requirements.</strong> This is kind of a no brainer, and as it turns out, almost all students who applied to SymPy did indeed do this.  For SymPy, this means that you should submit a patch by the deadline. Other organizations might have other requirements.  If you don't fulfill the requirements, it doesn't matter how good your application is; you won't be eligible and hence won't be accepted.</li>
+    <li>
+<strong>Discuss your proposal on the mailing list.</strong> A proposal submitted out of the blue has a poor chance of being accepted.  First, we like to see that you will be involved in the community, and if you don't discuss the proposal at all, it shows badly.  Second, it is very likely that we will not like something about your proposal, or will have questions (see the next point).  If you don't discuss it at all, you are making a shot in the dark.  Even if the proposal is good, it could be rejected simply because it's not something that we feel that we want. And you don't want to accidentally submit a proposal to do something that has already been implemented.  
+<p>It's important to discuss it on the public mailing list, not just with a specific mentor.  Even if that mentor is the expert on your project subject and would likely be the person to mentor you if you are accepted, you need to remember that all the mentors review the proposals and decide who to accept.   Also, this year for SymPy, we are trying to put an emphasis on students doing things publicly with the whole community, instead of just with their mentors.</p>
+</li>
+    <li>
+<strong>Ask the mentors for advice on your proposal, and then follow it.</strong> Again, most students who applied to SymPy were good on this one too.  We request that all students put their proposals on the GitHub wiki, so that the mentors can take a look at them and give advice.  If you feel uncomfortable putting your application in a public place, send it to some mentors privately.  
+<p>But the most important thing here is to actually follow any advice that the mentors give you.  If they tell you that you should expand your timeline section, you should expand your timeline section.  If they tell you you should discuss the implementation more, you should do that (see the next point).  If you don't follow the advice, it looks to the mentor like you didn't listen to him, which doesn't make you appear like a good candidate for acceptance.  Also, the things that they tell you to improve will tend to be the things that they will look at when reviewing your proposal.  </p>
+</li>
+    <li>
+<strong>Don't just discuss the theory.</strong> I suspect that this may be more of a problem with SymPy than for other organizations, because SymPy is very math based, so many of the proposals to SymPy involve complex mathematics. One of the biggest issues I saw in proposals was that students discussed the theory of what they wanted to implement too much and not enough of the actual implementation. It's easy to do this, but discussing the implementation is actually more important than the theory of what you want to do.  
+<p>An easy way to do this is to give a "fake" example session showing how your code might work after it is completed.  For example, if you were writing a proposal for a PDE solver, you might include something like</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; u = Function('u')</p>
+<p>&gt;&gt;&gt; # Solve the Heat Equation in one dimension</p>
+<p>&gt;&gt;&gt; pdesolve(u(x, t).diff(t) - c*<em>2</em>u(x, t).diff(x, x), u(x), {u(x, 0):f(x), u(0, t):0, u(0, pi):0}, method='separation of variables') </p>
+<p>2/pi<em>Sum(Integral(f(x)</em>sin(n<em>x), x)</em>sin(n<em>x)</em>exp(-n<strong>2*c</strong>2*t), (n, 1, oo))</p>
+<p>&gt;&gt;&gt; # Use Fourier Transforms to get d'Alembert's Solution to the Wave Equation</p>
+<p>&gt;&gt;&gt; …</p>
+<p>[/code]</p>
+<p>in your proposal.  Just saying "I plan to implement solvers for PDEs using separation of variables and Fourier Transforms" tells us only what we already know, which is that you can solve PDEs using separation of variables and Fourier Transforms.  What we don't know is how it will look.  The above example shows how the PDE, initial/boundary conditions, and method are entered by the user, and how the output looks.  </p>
+<p>A more advanced thing that you can do is to give actual prototype code. This is not required, but it can show that you are dedicated enough to get a start, and can demonstrate how things will work for more complicated projects.</p>
+</li>
+    <li>
+<strong>But theory is important too.</strong> This might also be a problem more in SymPy, but maybe not.  The mathematical backgrounds of SymPy developers ranges quite a bit.  For example, I know a lot about the complicated Risch Algorithm for symbolic integration that the majority of people (even among SymPy developers) know hardly anything about, but I know basically nothing about quantum mechanics.  So that more mentors can have a chance to even have a clue about what you are talking about when they are reviewing your proposal, you should try to explain things to a general audience, at least in the introduction of your proposal.  It can also help to explain why your project would be useful, so that even if someone doesn't know what it is, they can see why it would be nice to have.  This doesn't mean that you should sacrifice details by dumbing everything down.  There's a pretty good chance that someone will understand what you are talking about in your specifics, but you should also explain things from the other end.
+<p>If you are implementing a specific algorithm, maybe you could give a brief overview of the algorithm.  This will not only explain things to the mentors who might not know how it works, but also it shows that you know how it works too.</p>
+</li>
+    <li>
+<strong>Be involved in the community.</strong> We understand that students have classes during the application period, but the more you involve yourself in the community beyond the patch requirement (or whatever requirement some other org might have), the better your chances of being accepted. Every org has to take risks accepting students, because there is always the chance that they will fail.  This is not good for anyone: the student doesn't get paid the full stipend and the organization looses not only the project that would have been implemented, but also the slot that they could have given to someone who wouldn't have failed.  Involving yourself in the community early is the best way to show the community that you are a low risk for failure.</li>
+    <li>
+<strong>The proposal is the most important thing.</strong> But don't assume that just because you are involved in the community that you will be accepted.  The most important thing is the proposal.  If you don't have a good proposal, we will not even consider the rest of your activity.  So you should focus most of your energy on writing a high quality proposal.  The quality of the patch and your involvement in the community are secondary considerations after the quality of the proposal.  These might be used to narrow down the list of good proposals to fit the number of slots Google gives us and the number of mentors we have available, but the first phase is always to narrow down the list based on the quality of the proposals.</li>
+    <li>
+<strong>Use a consistant nickname, preferably one based on your real name.</strong>  This is something that I think most people do not realize.  If your real name is John Smith, and your IRC nick, GitHub handle, Google Code handle, and GSoC link_id are all jsmith, it makes it very easy for me to associate in my mind: "OK, that person who just submitted that patch is the same person I talked to on IRC last week, and I remember reading his proposal on google-melange.com."  But if your real name is John Smith, your IRC nick is freebird, your GitHub handle is mr.nice, your Google Code handle is smithy, and your link_id on google-melange.com is johnhsmith, I can have a very hard time associating your work in one place with your work in another (my apologies if those are anybodys' real nicknames; I just made them up to make the point here).  Maybe you actually have been very active in the IRC channel, but it is hard for me to realize that based on your nick vs. your real name.  This year for SymPy, we had 25 applications by 25 students.  None of these students were members of the SymPy community a few months ago.  It's very hard for the other mentors and I to keep track of which nicknames associate with which people, and in the end, we may mistakenly believe that you haven't done as much as you really have.  Your best bet is to use one nickname everywhere, and to make it based on your real name, so that we can easily tell who it is even based on the nickname.  If your name is common enough that no one permutation is guaranteed to be available everywhere, at least try to be consistent with your nickname, or just use different permutations of your real name based on what site you are on.</li>
+</ol>
+<p>That's all I can think of for now.  I kind of wish I had thought of two more, so I could make it "Ten pieces of advice," but whatever.  If any SymPy mentors or mentors from other projects feel that something is missing, I would love to hear about it in the comments.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2011/04/27/accepted-gsoc-students-announced.html" class="u-url">Accepted GSoC Students Announced</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2011/04/27/accepted-gsoc-students-announced.html" rel="bookmark"><time class="published dt-published" datetime="2011-04-27T19:45:06+00:00" itemprop="datePublished" title="Publication date">2011-04-27 19:45</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2011/04/27/accepted-gsoc-students-announced.html#disqus_thread" data-disqus-identifier="cache/posts/2011/04/27/accepted-gsoc-students-announced.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<em>(Cross posted on the <a href="http://sympy.blogspot.com/2011/04/accepted-gsoc-students-announced.html">Official SymPy Blog</a>)</em>
+So Google has announced the results of <a href="http://www.google-melange.com/gsoc/homepage/google/gsoc2011">Google Summer of Code</a>. I am proud to announce that we got nine slots from Google.  The following projects have been accepted: 
+<p><em>(Project, Student, Mentor, Link to proposal on the wiki) </em></p>
+<p>- Definite Integration using Meijer G-functions, Tom Bachmann, Aaron Meurer, <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application-Tom-Bachmann%3A-Definite-Integration">Proposal</a></p>
+<ul>
+<li>
+<p>PyDy, Gilbert Gede, Luke Peterson, <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application-Gilbert-Gede%3A-PyDy">Proposal</a></p>
+</li>
+<li>
+<p>Position and Momentum Bases for Quantum Mechanics, Tomo Lazovich, Brian Granger, <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application-Tomo-Lazovich%3A-Position-and-Momentum-Bases-for-QM">Proposal</a></p>
+</li>
+<li>
+<p>Combinatorics package for Sympy, Saptarshi Mandal, Christian Muise, <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application-Saptarshi-Mandal">Proposal</a></p>
+</li>
+<li>
+<p>Symbolic Linear Algebra, Sherjil Ozair, Vinzent Steinberg, <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application-Sherjil-Ozair:-Symbolic-Linear-Algebra">Proposal</a></p>
+</li>
+<li>
+<p>Porting to Python 3, Vladimir Perić, Ronan Lamy, <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application%3A-Vladimir-Peri%C4%87%3A-Porting-to-Python-3">Proposal</a></p>
+</li>
+<li>
+<p>SymPy Stats: Random Variables, Matthew Rocklin, Andy Terrel, <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application-Matthew-Rocklin%3A-Random-Variables">Proposal</a></p>
+</li>
+<li>
+<p>Symbolic Clebsch-Gordon coefficients/Wigner symbols and Implementing Addition of Spin Angular Momenta, Sean Vig, Ondřej Čertík, <a href="https://github.com/sympy/sympy/wiki/GSoC%202011%20Application%20Sean%20Vig">Proposal</a></p>
+</li>
+<li>
+<p>Implementing F5, Jeremias Yehdegho, Mateusz Paprocki, <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application-Jeremias-Yehdegho%3A-Implementing-F5">Proposal</a></p>
+</li>
+</ul>
+<p>Join me in congratulating these students on their acceptance.   </p>
+<p>In case you don't know for some reason, Google Summer of Code is a program where Google pays students to write code for open source projects.  SymPy was accepted as a mentoring organization this year.  The goal of the summer is to help the students learn new skills, in particular in our case: </p>
+<ul>
+<li>
+<p>contributing to open source </p>
+</li>
+<li>
+<p>working with the community </p>
+</li>
+<li>
+<p>learn git, pull requests, reviews </p>
+</li>
+<li>
+<p>teach them how to review other's people patches </p>
+</li>
+<li>
+<p>do useful work for SymPy </p>
+</li>
+<li>
+<p>have fun, and encourage the students to stay around </p>
+</li>
+</ul>
+<p>Also see my <a href="http://asmeurersympy.wordpress.com/2011/03/18/sympy-is-a-google-summer-of-code-2011-mentoring-organization/">previous blog post</a> about it.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2011/03/18/sympy-is-a-google-summer-of-code-2011-mentoring-organization.html" class="u-url">SymPy is a Google Summer of Code 2011 Mentoring Organization</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2011/03/18/sympy-is-a-google-summer-of-code-2011-mentoring-organization.html" rel="bookmark"><time class="published dt-published" datetime="2011-03-18T22:50:04+00:00" itemprop="datePublished" title="Publication date">2011-03-18 22:50</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2011/03/18/sympy-is-a-google-summer-of-code-2011-mentoring-organization.html#disqus_thread" data-disqus-identifier="cache/posts/2011/03/18/sympy-is-a-google-summer-of-code-2011-mentoring-organization.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>I am proud to announce that SymPy has been accepted as a mentoring organization for Google Summer of Code 2011.  This is great news for the project.  Although we have participated in the past under the umbrella of the Python Software Foundation and Portland State University mentoring organizations, this is the first time that we have been accepted as a mentoring organization.  Out of 417 organizations that applied to Google, 175 were accepted, 50 of which were new.</p>
+<p>In case you don't know, Google Summer of Code is a program run by Google every year where they pay college students all around the world to write code for open source projects. Each student has a mentor assigned to him/her, who helps the student get started with interacting with open source (most students who are accepted have never participated in open source before).  </p>
+<p>So now that were are accepted, students are open to applications.  The actual application period opens on March 28, and closes on April 8 (see <a href="http://www.google-melange.com/document/show/gsoc_program/google/gsoc2011/timeline">the program timeline</a>).</p>
+<p>To students:</p>
+<p>If you are interested in applying, please write the to mailing list and introduce yourself.  The program is open to anyone worldwide who is 18 years of age or older who is enrolled in a higher education institution (this includes undergraduate and graduate).  If you are interested in applying, here is what you should do (if you have not already):</p>
+<ul>
+<li>
+<p>As I said above, write to the list and introduce yourself.  You might also join our IRC channel, which is #sympy on freenode.</p>
+</li>
+<li>
+<p>Start thinking about what you want to apply to do.  See our <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Ideas">ideas page</a>.  However, we are open to ideas that are not on that page. Anything that fits in a computer algebra system would fit in SymPy.  If you have an idea not on that page, please discuss it on our mailing list, so we can see if it has not already be implemented, and if it is fitting for SymPy and for a project.  I recommend you apply to do something that you are interested in personally.</p>
+</li>
+<li>
+<p>We require for any student to be accepted that he/she submit at least one patch to SymPy, which gets reviewed and pushed in.  See <a href="http://code.google.com/p/sympy/issues/list?can=2&amp;q=label%3AEasyToFix">issues labeled EasyToFix in our issue tracker</a> for some easy to fix issues that are a good place to start.  Don't worry if you do not know how to send in a patch or use git.  We will help you (that is the whole point of the program).  Just ask on the mailing list, on the issue page, or on IRC.</p>
+</li>
+<li>
+<p>You should start thinking about your application.  See our <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application-Template">application template</a> (it will also be at our page on the Google site).  If you like, you can start a page on our wiki to write your proposal.  If you do this, we will help you edit it (though understand that we will not help you write it).  Remember that we want you to get accepted just as much as you do, so you can help improve SymPy!</p>
+</li>
+</ul>
+<p>To SymPy developers:</p>
+<ul>
+<li>
+<p>We need people who are willing to mentor students.  If you are willing to mentor, please add your name to the bottom of the <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-ideas">ideas page</a>. </p>
+</li>
+<li>
+<p>Please edit the ideas page to improve formatting and add new ideas.</p>
+</li>
+</ul>
+<p>Good luck to all students who plan on applying!</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2011/03/15/true-is-true-is-false-is-true-is-false.html" class="u-url">True is True is False is True is False</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2011/03/15/true-is-true-is-false-is-true-is-false.html" rel="bookmark"><time class="published dt-published" datetime="2011-03-15T22:29:15+00:00" itemprop="datePublished" title="Publication date">2011-03-15 22:29</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2011/03/15/true-is-true-is-false-is-true-is-false.html#disqus_thread" data-disqus-identifier="cache/posts/2011/03/15/true-is-true-is-false-is-true-is-false.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>Time for <a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">another</a> <a href="http://asmeurersympy.wordpress.com/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/">one</a> of my WTF Python blog posts.  Yesterday, I randomly typed this in a Python session (it was late at night):</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; True is True is False is True is False</p>
+<p>False</p>
+<p>[/code]</p>
+<p>First a little background, in case you don't know.  The <code>is</code> operator in Python does exact object comparison in memory. Unlike <code>==</code>, which only compares it two objects are equal, <code>is</code> only returns True if both arguments have the same memory address.  So you can have something like:</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; a = 12345</p>
+<p>&gt;&gt;&gt; b = 12345</p>
+<p>&gt;&gt;&gt; a == b</p>
+<p>True</p>
+<p>&gt;&gt;&gt; a is b</p>
+<p>False</p>
+<p>[/code]</p>
+<p>Now, there are a handful of Python built-ins that are always equal one another with the <code>is</code> operator.  <code>True</code> and <code>False</code> are two such constants:</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; a = True</p>
+<p>&gt;&gt;&gt; b = True</p>
+<p>&gt;&gt;&gt; a == b</p>
+<p>True</p>
+<p>&gt;&gt;&gt; a is b</p>
+<p>True</p>
+<p>&gt;&gt;&gt; c = False</p>
+<p>&gt;&gt;&gt; d = False</p>
+<p>&gt;&gt;&gt; c == d</p>
+<p>True</p>
+<p>&gt;&gt;&gt; c is d</p>
+<p>True</p>
+<p>[/code]</p>
+<p>Now, going back to the above, we see that each <code>is</code> returns <code>True</code> or <code>False</code>, which is then evaluated with the next one.  Or at least that is what you would think is happening.  But go back and look at it again, and see if you can figure out what it should evaluate to.  You could probably guess that something was amiss from the fact that I was blogging about it.  If you haven't figured it out already, look at the following:</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; True is True is False is True is False</p>
+<p>False</p>
+<p>&gt;&gt;&gt; (((True is True) is False) is True) is False</p>
+<p>True</p>
+<p>&gt;&gt;&gt; True is (True is (False is (True is False)))</p>
+<p>True</p>
+<p>[/code]</p>
+<p>So it seems that <code>is</code> does not associate to the left or to the right.  Let's see if we can figure out what is going on.  First off, <code>True is True</code>, etc. do behave as you expect them to:</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; True is True</p>
+<p>True</p>
+<p>&gt;&gt;&gt; False is False</p>
+<p>True</p>
+<p>&gt;&gt;&gt; True is False</p>
+<p>False</p>
+<p>&gt;&gt;&gt; False is True</p>
+<p>False</p>
+<p>[/code]</p>
+<p>It is when we start using multiple <code>is</code>s in the same statement that we start seeing problems:</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; False is False is False</p>
+<p>True</p>
+<p>&gt;&gt;&gt; (False is False) is False</p>
+<p>False</p>
+<p>[/code]</p>
+<p>So what's going on here?  <code>False is False</code> is True, so maybe it is short-circuiting somehow.  </p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; True is False is False</p>
+<p>False</p>
+<p>&gt;&gt;&gt; False is False is True</p>
+<p>False</p>
+<p>[/code]</p>
+<p>No, that is not it.  Those reduce to <code>False is False</code> and <code>True is True</code> when associating to the left, respectively, and <code>True is True</code> and <code>True is True</code> when associating to the right.  </p>
+<p>Finally, at this point, it occurs to me what is really going on.  Have you figured it out too (or maybe you already knew all along)?  Maybe you can guess it from this statement, which uses <code>None</code>, another built-in object that always compares equal to itself with the <code>is</code> operator:</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; None is None is None</p>
+<p>True</p>
+<p>[/code]</p>
+<p>So you see what is happening?  <code>is</code> doesn't associate at all.  Rather, using multiple <code>is</code>s in one statement does multiple comparisons at once.  Any <code>a is b is … x</code> will return <code>True</code> if <code>a</code>, <code>b</code>, …, and <code>x</code> are all equal by the <code>is</code> operator (they share the same identity or memory address), and <code>False</code> otherwise.  Actually, this isn't surprising, since <code>==</code> works the same way:</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; False == False == False</p>
+<p>True</p>
+<p>&gt;&gt;&gt; (False == False) == False</p>
+<p>False</p>
+<p>[/code]</p>
+<p>This syntax can actually be useful to test equality of three or more items at once efficiently (Python will not evaluate the same operand more than once, and it short circuits).  But it can be confusing when comparing with <code>True</code> or <code>False</code>, since <code>a is b</code> and <code>a == b</code> themselves evaluate to one of those values.  So remember that it is NOT associative in any way.  Rather, it acts as an n-way comparison. </p>
+<p>Finally, as <a href="http://docs.python.org/reference/expressions.html#summary">this table</a> of operator precedence in Python shows, <code>is</code> and <code>==</code> have the same precedence in Python.  Therefore, it should be possible to combine the two in these same statement.  Indeed, you can:</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; a = 12345</p>
+<p>&gt;&gt;&gt; b = 12345</p>
+<p>&gt;&gt;&gt; c = b</p>
+<p>&gt;&gt;&gt; a == b == c</p>
+<p>True</p>
+<p>&gt;&gt;&gt; a is b is c</p>
+<p>False</p>
+<p>&gt;&gt;&gt; # Because this is False</p>
+<p>... </p>
+<p>&gt;&gt;&gt; a is b</p>
+<p>False</p>
+<p>&gt;&gt;&gt; # But this is True</p>
+<p>... </p>
+<p>&gt;&gt;&gt; b is c</p>
+<p>True</p>
+<p>&gt;&gt;&gt; # So we get</p>
+<p>... </p>
+<p>&gt;&gt;&gt; a == b is c</p>
+<p>True</p>
+<p>[/code]</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2011/01/09/i-am-now-the-sympy-project-leader.html" class="u-url">I am now the SymPy project leader</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2011/01/09/i-am-now-the-sympy-project-leader.html" rel="bookmark"><time class="published dt-published" datetime="2011-01-09T00:29:53+00:00" itemprop="datePublished" title="Publication date">2011-01-09 00:29</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2011/01/09/i-am-now-the-sympy-project-leader.html#disqus_thread" data-disqus-identifier="cache/posts/2011/01/09/i-am-now-the-sympy-project-leader.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>You can imagine my surprise when I opened my email last Monday and saw this message from Ondrej:</p>
+<p></p>
+<blockquote>
+<p>Hi Aaron,</p>
+<p>would you like to become the main maintainer/project leader for sympy?</p>
+<p>In the last year, it is clearly you, who does most of the work, and</p>
+<p>also your blog has quite some visibility now.</p>
+<p>It'd be cool to do some release from time to time. Mateusz is</p>
+<p>finishing is poly's branch, so probably his code would go into the</p>
+<p>release.</p>
+</blockquote>
+
+<p>So I guess now I am the project leader for SymPy.  As to what exactly this means, I am not yet entirely sure, but so far it has meant that I get to do a lot more work than before (yay!).</p>
+<p>Actually, the work is because I have spent the last week working nonstop to get things ready to do a release.  I should have a release candidate for SymPy 0.7.0 ready some time next week.  I'll post more here about what's change, but this is going to be a big release.  The biggest change will be the new polys, which makes things much faster and more powerful.  </p>
+<p>Also, I will try to post things here relating to SymPy as a whole, not just my work.  </p>
+<p>Ondrej, by the way, isn't going anywhere. He plans on doing some work on ways to get SymPy out to more people by writing more/better web and mobile interfaces for it.  A big thanks to Ondrej and the SymPy community for making such an awesome piece of software!</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2011/01/02/2010-in-review.html" class="u-url">2010 in review</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2011/01/02/2010-in-review.html" rel="bookmark"><time class="published dt-published" datetime="2011-01-02T23:07:04+00:00" itemprop="datePublished" title="Publication date">2011-01-02 23:07</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2011/01/02/2010-in-review.html#disqus_thread" data-disqus-identifier="cache/posts/2011/01/02/2010-in-review.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<i>Here's some silly thing that WordPress sent me:</i>
+<div class="codehilite"><pre>                    <span class="nt">&lt;p&gt;</span>The stats helper monkeys at WordPress.com mulled over how this blog did in 2010, and here's a high level summary of its overall blog health:<span class="nt">&lt;/p&gt;</span>
+
+                    <span class="nt">&lt;p</span> <span class="na">align=</span><span class="s">"center"</span><span class="nt">&gt;&lt;img</span> <span class="na">style=</span><span class="s">"border:1px solid #ddd;background:#f5f5f5;padding:20px;"</span> <span class="na">src=</span><span class="s">"http://s0.wp.com/i/annual-recap/meter-healthy4.gif"</span> <span class="na">width=</span><span class="s">"250"</span> <span class="na">height=</span><span class="s">"183"</span> <span class="na">alt=</span><span class="s">"Healthy blog!"</span><span class="nt">&gt;&lt;/p&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">align=</span><span class="s">"center"</span><span class="nt">&gt;</span>The <span class="nt">&lt;em&gt;</span>Blog-Health-o-Meter™<span class="nt">&lt;/em&gt;</span> reads This blog is on fire!.<span class="nt">&lt;/p&gt;</span>
+
+            <span class="nt">&lt;h2&gt;</span>Crunchy numbers<span class="nt">&lt;/h2&gt;</span>
+
+
+
+
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/2009/07/code-block-2.png"</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">"http://asmeurersympy.files.wordpress.com/2009/07/code-block-2.png?w=288"</span> <span class="na">alt=</span><span class="s">"Featured image"</span> <span class="na">style=</span><span class="s">"max-height:230px;float:right;border:1px solid #ddd;background:#fff;margin:0 0 1em 1em;padding:6px;"</span><span class="nt">&gt;&lt;/a&gt;</span>
+
+
+    <span class="nt">&lt;p&gt;</span>A Boeing 747-400 passenger jet can hold 416 passengers.  This blog was viewed about <span class="nt">&lt;strong&gt;</span>6,800<span class="nt">&lt;/strong&gt;</span> times in 2010.  That's about 16 full 747s.<span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;p&gt;&lt;/p&gt;&lt;p&gt;</span>In 2010, there were <span class="nt">&lt;strong&gt;</span>16<span class="nt">&lt;/strong&gt;</span> new posts, growing the total archive of this blog to 41 posts. There were <span class="nt">&lt;strong&gt;</span>7<span class="nt">&lt;/strong&gt;</span> pictures uploaded, taking up a total of 1mb. <span class="nt">&lt;/p&gt;</span>
+
+            <span class="nt">&lt;p&gt;</span>The busiest day of the year was July 4th with <span class="nt">&lt;strong&gt;</span>103<span class="nt">&lt;/strong&gt;</span> views. The most popular post that day was <span class="nt">&lt;a</span> <span class="na">style=</span><span class="s">"color:#08c;"</span> <span class="na">href=</span><span class="s">"http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/"</span><span class="nt">&gt;</span>The Risch Algorithm: Part 1<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;br&gt;</span>
+
+            <span class="nt">&lt;h2&gt;</span>Where did they come from?<span class="nt">&lt;/h2&gt;</span>
+
+                        <span class="nt">&lt;p&gt;</span>The top referring sites in 2010 were <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://code.google.com"</span><span class="nt">&gt;</span>code.google.com<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>, <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://planet.sympy.org"</span><span class="nt">&gt;</span>planet.sympy.org<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>, <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://www.facebook.com"</span><span class="nt">&gt;</span>facebook.com<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>, <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://www.stackoverflow.com"</span><span class="nt">&gt;</span>stackoverflow.com<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>, and <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://socghop.appspot.com"</span><span class="nt">&gt;</span>socghop.appspot.com<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>.<span class="nt">&lt;/p&gt;</span>
+                            <span class="nt">&lt;p&gt;</span>Some visitors came searching, mostly for <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://www.google.com/search?q=risch%20algorithm"</span><span class="nt">&gt;</span>risch algorithm<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>, <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://www.google.com/search?q=pudb"</span><span class="nt">&gt;</span>pudb<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>, <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://www.google.com/search?q=integrate%20exponential"</span><span class="nt">&gt;</span>integrate exponential<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>, <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://www.google.com/search?q=equations%20with%20homogeneous%20coefficients"</span><span class="nt">&gt;</span>equations with homogeneous coefficients<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>, and <span class="nt">&lt;strong&gt;&lt;a</span> <span class="na">href=</span><span class="s">"http://www.google.com/search?q=xcode%20trailing%20whitespace"</span><span class="nt">&gt;</span>xcode trailing whitespace<span class="nt">&lt;/a&gt;&lt;/strong&gt;</span>.<span class="nt">&lt;/p&gt;</span>
+</pre></div>
+
+
+<p><em>I have linked the search terms to their respective Google searches, so you can see how far up my blog posts are in the results list.</em></p>
+<div style="clear:both;"><br></div>
+
+<div class="codehilite"><pre>        <span class="o">&lt;</span><span class="s-Atom">h2</span><span class="o">&gt;</span><span class="nv">Attractions</span> <span class="s-Atom">in</span> <span class="m">2010</span><span class="s-Atom">&lt;/h2</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="s-Atom">p</span><span class="o">&gt;</span><span class="nv">These</span> <span class="s-Atom">are</span> <span class="s-Atom">the</span> <span class="s-Atom">posts</span> <span class="s-Atom">and</span> <span class="s-Atom">pages</span> <span class="s-Atom">that</span> <span class="s-Atom">got</span> <span class="s-Atom">the</span> <span class="s-Atom">most</span> <span class="s-Atom">views</span> <span class="s-Atom">in</span> <span class="m">2010</span><span class="p">.</span><span class="s-Atom">&lt;/p</span><span class="o">&gt;</span>
+
+
+                            <span class="o">&lt;div</span> <span class="s-Atom">style=</span><span class="s2">"clear:left;float:left;font-size:24pt;line-height:1em;margin:-5px 10px 20px 0;"</span><span class="o">&gt;</span><span class="m">1</span><span class="s-Atom">&lt;/</span><span class="o">div&gt;</span>
+                <span class="o">&lt;</span><span class="s-Atom">a</span> <span class="s-Atom">style=</span><span class="s2">"margin-right:10px;"</span> <span class="s-Atom">href=</span><span class="s2">"http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/"</span><span class="o">&gt;</span><span class="nv">The</span> <span class="nv">Risch</span> <span class="nv">Algorithm</span><span class="s-Atom">:</span> <span class="nv">Part</span> <span class="m">1</span><span class="s-Atom">&lt;/a</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="s-Atom">span</span> <span class="s-Atom">style=</span><span class="s2">"color:#999;font-size:8pt;"</span><span class="o">&gt;</span><span class="nv">June</span> <span class="m">2010</span><span class="s-Atom">&lt;/span&gt;&lt;br</span><span class="o">&gt;</span><span class="m">3</span> <span class="s-Atom">comments</span>
+
+                            <span class="o">&lt;div</span> <span class="s-Atom">style=</span><span class="s2">"clear:left;float:left;font-size:24pt;line-height:1em;margin:-5px 10px 20px 0;"</span><span class="o">&gt;</span><span class="m">2</span><span class="s-Atom">&lt;/</span><span class="o">div&gt;</span>
+                <span class="o">&lt;</span><span class="s-Atom">a</span> <span class="s-Atom">style=</span><span class="s2">"margin-right:10px;"</span> <span class="s-Atom">href=</span><span class="s2">"http://asmeurersympy.wordpress.com/2009/11/13/how-to-get-both-32-bit/"</span><span class="o">&gt;</span><span class="nv">How</span> <span class="s-Atom">to</span> <span class="s-Atom">get</span> <span class="s-Atom">both</span> <span class="m">32</span><span class="o">-</span><span class="s-Atom">bit</span> <span class="s-Atom">and</span> <span class="m">64</span><span class="o">-</span><span class="s-Atom">bit</span> <span class="nv">Python</span> <span class="s-Atom">in</span> <span class="nv">Snow</span> <span class="nv">Leopard</span><span class="s-Atom">&lt;/a</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="s-Atom">span</span> <span class="s-Atom">style=</span><span class="s2">"color:#999;font-size:8pt;"</span><span class="o">&gt;</span><span class="nv">November</span> <span class="m">2009</span><span class="s-Atom">&lt;/span&gt;&lt;br</span><span class="o">&gt;</span><span class="m">5</span> <span class="s-Atom">comments</span> <span class="s-Atom">and</span> <span class="m">1</span> <span class="nv">Like</span> <span class="s-Atom">on</span> <span class="nv">WordPress</span><span class="p">.</span><span class="s-Atom">com</span><span class="p">,</span>
+
+                            <span class="o">&lt;div</span> <span class="s-Atom">style=</span><span class="s2">"clear:left;float:left;font-size:24pt;line-height:1em;margin:-5px 10px 20px 0;"</span><span class="o">&gt;</span><span class="m">3</span><span class="s-Atom">&lt;/</span><span class="o">div&gt;</span>
+                <span class="o">&lt;</span><span class="s-Atom">a</span> <span class="s-Atom">style=</span><span class="s2">"margin-right:10px;"</span> <span class="s-Atom">href=</span><span class="s2">"http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/"</span><span class="o">&gt;</span><span class="nv">Modifying</span> <span class="s-Atom">a</span> <span class="s-Atom">list</span> <span class="s-Atom">while</span> <span class="s-Atom">looping</span> <span class="s-Atom">through</span> <span class="s-Atom">it</span> <span class="s-Atom">in</span> <span class="nv">Python</span><span class="s-Atom">&lt;/a</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="s-Atom">span</span> <span class="s-Atom">style=</span><span class="s2">"color:#999;font-size:8pt;"</span><span class="o">&gt;</span><span class="nv">July</span> <span class="m">2009</span><span class="s-Atom">&lt;/span&gt;&lt;br</span><span class="o">&gt;</span><span class="m">13</span> <span class="s-Atom">comments</span>
+
+                            <span class="o">&lt;div</span> <span class="s-Atom">style=</span><span class="s2">"clear:left;float:left;font-size:24pt;line-height:1em;margin:-5px 10px 20px 0;"</span><span class="o">&gt;</span><span class="m">4</span><span class="s-Atom">&lt;/</span><span class="o">div&gt;</span>
+                <span class="o">&lt;</span><span class="s-Atom">a</span> <span class="s-Atom">style=</span><span class="s2">"margin-right:10px;"</span> <span class="s-Atom">href=</span><span class="s2">"http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/"</span><span class="o">&gt;</span><span class="nv">Integration</span> <span class="s-Atom">of</span> <span class="s-Atom">exponential</span> <span class="s-Atom">functions&lt;/a</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="s-Atom">span</span> <span class="s-Atom">style=</span><span class="s2">"color:#999;font-size:8pt;"</span><span class="o">&gt;</span><span class="nv">July</span> <span class="m">2010</span><span class="s-Atom">&lt;/span&gt;&lt;br</span><span class="o">&gt;</span><span class="m">3</span> <span class="s-Atom">comments</span>
+
+                            <span class="o">&lt;div</span> <span class="s-Atom">style=</span><span class="s2">"clear:left;float:left;font-size:24pt;line-height:1em;margin:-5px 10px 20px 0;"</span><span class="o">&gt;</span><span class="m">5</span><span class="s-Atom">&lt;/</span><span class="o">div&gt;</span>
+                <span class="o">&lt;</span><span class="s-Atom">a</span> <span class="s-Atom">style=</span><span class="s2">"margin-right:10px;"</span> <span class="s-Atom">href=</span><span class="s2">"http://asmeurersympy.wordpress.com/2009/05/31/first-order-differential-equations-with-homogeneous-coefficients/"</span><span class="o">&gt;</span><span class="nv">First</span> <span class="nv">Order</span> <span class="nv">Differential</span> <span class="nv">Equations</span> <span class="s-Atom">with</span> <span class="nv">Homogeneous</span> <span class="nv">Coefficients</span><span class="s-Atom">&lt;/a</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="s-Atom">span</span> <span class="s-Atom">style=</span><span class="s2">"color:#999;font-size:8pt;"</span><span class="o">&gt;</span><span class="nv">May</span> <span class="m">2009</span><span class="s-Atom">&lt;/span&gt;&lt;br</span><span class="o">&gt;</span><span class="m">2</span> <span class="s-Atom">comments</span>
+</pre></div>
+
+
+<p><em>I wonder where things are coming from from Facebook.  I do not have an account there, so I can't search it to find out.</em></p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html" class="u-url">Major API Change for the Risch Algorithm Functions</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html" rel="bookmark"><time class="published dt-published" datetime="2010-12-27T07:34:30+00:00" itemprop="datePublished" title="Publication date">2010-12-27 07:34</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html#disqus_thread" data-disqus-identifier="cache/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>I have been able to get to work again on the Risch Algorithm now that I have a month winter break from classes.  So the first thing I did was commit a bunch of bug fixes that had been sitting there since the end of the summer.  Then, I set out to make a major internal API change to the entire Risch Algorithm.</p>
+<p>Let me give some background.  When I first started programming the Risch Algorithm at the beginning of the summer, I didn't have a very good idea of how differential extensions worked yet (remember that I programmed the algorithm as I learned it from Bronstein's book).  Let me use the function <code>derivation()</code> to demonstrate how the API has changed.  <code>derivation()</code> takes the Poly <code>p</code> in <code>t</code> and computes the derivative (<code>t</code> is some transcendental extension, like $latex e^x$).  Also, the integration variable is <code>x</code>.  The first internal API that I used was</p>
+<p><code>derivation(p, D, x, t)</code></p>
+<p>where <code>D</code> is a Poly of the derivative of <code>t</code>, and <code>x</code> and <code>t</code> are Symbols (see <a href="https://github.com/asmeurer/sympy/commit/0f6a3d90f724118fadc5fdaf290a0cb3e3963efd">this commit</a>).   The problem here is that <code>p</code> might not be in just one symbol, <code>t</code>, but in many. This would happen whenever the function had more than one transcendental function, or extension, in it.  So, for example, $latex e^x\log{x}$ would have this problem. Surprisingly, according to the git log, it took me until July 4 to figure this out (that above linked commit, which is the first occurrence of this function and when I started the full algorithm, dates from June 7, so it took me almost a month!), after which I had already written a good portion of the Risch Algorithm.  I changed the API to</p>
+<p><code>derivation(p, D, x, T)</code></p>
+<p>where <code>T</code> is a list of the extension variables and <code>D</code> is a list of the derivations of the respective elements of <code>T</code> with respect to the lower elements and x (see <a href="https://github.com/asmeurer/sympy/commit/20b7a5f8ca8dec579065f85583f11cc0955b96f0">this commit</a>).  Now, the derivation of <code>x</code> is always <code>Poly(1, x)</code>, so I didn't think it was necessary to include it.  But it turns out that it is easier to just always include this in <code>D</code> rather than try to special case it in the code.  Also, the lowest extension variable, <code>x</code>, isn't used very often in the code, so it also doesn't make much sense to keep it separate from the rest of the variables in <code>T</code>.  Now this didn't take me as long to figure out (July 11).  Therefore, I changed the API to just</p>
+<p><code>derivation(p, D, T)</code></p>
+<p>where the first element of <code>T</code> is always <code>x</code> and the first element of <code>D</code> is always <code>Poly(1, x)</code> (see <a href="https://github.com/asmeurer/sympy/commit/bca2b19844ae71aa1ef8e27a9f77eabb70b4aa5f">this commit</a>).</p>
+<p>Now this API worked quite well for the remainder of the summer.  However, at the very end, I discovered that a function required to handle some special cases in certain parts of the algorithm needed four more lists (the elements of the extension that are logarithms, the elements of the extension that are exponentials, the arguments of those logarithms, and the arguments of those exponentials).  I had previously thought that these lists would only be needed when creating the extension at the beginning of integration, but it turned out that this was not the case and that they could be needed in several rather deep places in the algorithm.  The only way to get them there would be to pass them through to every single function in the algorithm.    </p>
+<p>So I was faced with a dilemma.  I didn't want to pass six arguments through each function just because a few might need them all.  I knew that the answer was to create an object to store all the data for a differential extension and to just pass this object around.  Unfortunately, this happened at the very end of the summer, so I hadn't been able to do that until now.  </p>
+<p>This brings us to now.  Over the past couple of weeks, I created an object called <code>DifferentialExtension</code>, and replaced the API in the Risch Algorithm to use it.  See <a href="https://github.com/asmeurer/sympy/commit/d9d9548625513188aaa663621bfe4e097aebf741">this commit</a> and <a href="https://github.com/asmeurer/sympy/commit/1935b6d6e1fdf8eae4deb5a4f56ea53c5d6989fa">this commit</a> and some of the ones in between to see what I did. More or less, the object is like a C struct---it does little more than hold a lot of information as attributes.  However, at the suggestion of Ronan Lamy on the <a href="http://groups.google.com/group/sympy/browse_thread/thread/a051b5ba1fb5cb4d">mailing list</a>, I have moved all the relevant code for building the extension from the <code>build_extension()</code> function into <code>DifferentialExtension.<strong>init</strong>()</code>.  I have also created some "magic" to handle the recursive nature of the algorithm.  A DifferentialExtension object has an attribute <code>level</code>, which represents the level of the extension that the algorithm is working in.  So you can store all the derivations of the extension in <code>DifferentialExtension.D</code>, but only have <code>DifferentialExtension.d</code> point to the "current" outermost derivation.  This replaces things like</p>
+<p><code>D = D[:-1]</code></p>
+<p>T = T[:-1]</p>
+<p> </p>
+<p>from the old API to just</p>
+<p><code>DE.decrement_level()</code></p>
+<p></p>
+<p>(and then later on, <code>DE.increment_level()</code>).  The entire API is now just</p>
+<p><code>derivation(p, DE)</code></p>
+<p>where <code>DE</code> is a <code>DifferentialExtension</code> object.  Changing the API of the entire code base at this point was a bit of work, but I have finally finished it, and I must say, this is much cleaner.  True, you now have to use <code>DE.t</code> everywhere instead of <code>t</code> (with <code>t = T[-1]</code> at the top of the function), which is three characters more space for every use, but I think in the end it is cleaner.  For example, the function that used to be</p>
+<p><code>is_log_deriv_k_t_radical(fa, fd, L_K, E_K, L_args, E_args, D, T)</code></p>
+<p>is now just</p>
+<p><code>is_log_deriv_k_t_radical(fa, fd, DE)</code>.</p>
+<p>Also, because it is an object, I can do cool things like override <code>DifferentialExtension.<strong>str</strong>()</code> to print out a tuple of the most important attributes of the object, making debugging much easier (now there is just one print statement instead of five).  </p>
+<p>Another thing I had to do was to allow the creation of these objects manually, because what is now <code>DifferentialExtension.<strong>init</strong>()</code> cannot yet handle, for example, tangent extensions, but some of the tests involve those.  So I created an <code>extension</code> flag to <code><strong>init</strong>()</code> to which you could pass a dictionary, and it would create a skeleton extension from that (see <a href="https://github.com/asmeurer/sympy/commit/7121b06eab3f1e0f8464c287438fb7175f07762b">this commit</a>).  I made it smart enough to create some attributes automatically, so I only have to pass the list <code>D</code> in most tests---it creates attributes like <code>T</code> from that automatically.  Thus, this in some ways made the tests a little simpler, because I didn't have to worry about <code>T</code> any more.  </p>
+<p>We'll see how things go, but this fourth API change should hopefully be the last.  This should also make it much easier whenever I add trigonometric function support, where I will have to add even more attributes to the object.  I won't have to change the code in any existing function (unless it specifically needs to be able to know about trig extensions), because, to them, the information in <code>DE</code> will not change.</p>
+<p>So the good news behind all of this, as I mentioned at the beginning of this post, is that I can now write some algorithm that requires those <code>L_K</code>, <code>E_K</code>, <code>L_args</code>, <code>E_args</code> variables from arbitrary places within the algorithm.  This should allow me to completely finish the exponential case.  So look forward soon to a <code>risch_integrate()</code> that can handle completely any transcendental function of exponentials (either produce an integral or prove that no elementary integral exists).  </p>
+<p>And just to be clear, this doesn't change anything with <code>risch_integrate()</code>---this is only an internal change. And at the moment, it doesn't add any features, though that should soon change. So keep on testing it for me!  If you see any errors along the lines of "Variable t not defined," it probably means that I missed that one when I was switching the API due to poor test coverage in that area of the code.  I would love to know about any errors you find, or, indeed, any testing you do with <code>risch_integrate</code>.  Remember that you can obtain my branch at <a href="https://github.com/asmeurer/sympy/tree/integration3">my GitHub account (branch integration3)</a>.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html" class="u-url">The Risch Algorithm: Part 3, Liouville's Theorem</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html" rel="bookmark"><time class="published dt-published" datetime="2010-08-14T02:55:23+00:00" itemprop="datePublished" title="Publication date">2010-08-14 02:55</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html#disqus_thread" data-disqus-identifier="cache/posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So this is the last official week of the Summer of Code program, and my work is mostly consisting of removing <code>NotImplementedError</code>s (i.e., implementing stuff), and fixing bugs. None of this is particularly interesting, so instead of talking about that, I figured I would produce another one of my Risch Algorithm blog posts.  It is recommended that you read parts <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">1</a> and <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">2</a> first, as well as my post on <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/">rational function integration</a>, which could be considered part 0.</p>
+<p><strong>Liouville's Theorem</strong></p>
+<p>Anyone who's taken calculus intuitively knows that integration is hard, while differentiation is easy.  For differentiation, we can produce the derivative of any elementary function, and we can do so easily, using a simple algorithm consisting of the sum and product rules, the chain rule, and the rules for the derivative of all the various elementary functions.  But for integration, we have to try to work backwards.  </p>
+<p>There are two things that make integration difficult.  First is the existence of functions that simply do not have any elementary antiderivative.  $latex e^{-x^2}$ is perhaps the most famous example of such a function, since it arises from the normal distribution in statistics.  But there are many others.  $latex \sin{(x^2)}$, $latex \frac{1}{\log{(x)}}$, and $latex x^x$ are some other examples of famous non-integrable functions.  </p>
+<p>The second problem is that no one single simple rule for working backwards will always be applicable.  We know that u-substitution and integration by parts are the reverse of the chain rule and the product rule, respectively.  But those methods will only work if those rules were the ones that were applied originally, and then only if you chose the right $latex u$ and $latex dv$.  </p>
+<p>But there is a much simpler example that gets right down to the point with Liouville's theorem.  The power rule, which is that $latex \frac{d}{dx}x^n=nx^{n-1}$ is easily reversed for integration.  Given the power rule for differentiation, it's easy to see that the reverse rule should be $latex \int{x^ndx}=\frac{x^{n+1}}{n+1}$.  This works fine, except that were are dividing something, $latex n+1$.  In mathematics, whenever we do that, we have to ensure that whatever we divide by is not 0. In this case, it means that we must assert $latex n\neq -1$.  This excludes $latex \int{\frac{1}{x}dx}$.  We know from calculus that this integral requires us to introduce a special function, the natural logarithm.  </p>
+<p>But we see that $latex n=-1$ is the only exception to the power rule, so that the integral of any (<a href="http://en.wikipedia.org/wiki/Laurent_polynomial">Laurent</a>) polynomial is again a (Laurent) polynomial, plus a logarithm.  Recall from part 0 (<a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/">Rational Function Integration</a>) that the same thing is true for any rational function: the integral is again a rational function, plus a logarithm (we can combine multiple logarithms into one using the logarithmic identities, so assume for simplicity that there is just one).  The argument is very similar, too.  Assume that we have split the denominator rational function into linear factors in the <a href="http://en.wikipedia.org/wiki/Algebraic_splitting_field">algebraic splitting field</a> (such as the complex numbers).  Then perform a partial fractions decomposition on the rational function.  Each term in the decomposition will be either a polynomial, or of the form $latex \frac{a}{(x - b)^n}$. The integration of these terms is the same as with the power rule, making the substitution $latex u = x - b$. When $latex n\geq 2$, the integral will be $latex \frac{-1}{n - 1}\frac{a}{(x - b)^{n - 1}}$; when $latex n = 1$, the integral will be $latex a\log{(x - b)}$.  Now computationally, we don't want to work with the algebraic splitting field, but it turns out that we don't need to actually compute it to find the integral.  But theory is what we are dealing with here, so don't worry about that.  </p>
+<p>Now the key observation about differentiation, as I have pointed out in the earlier parts of this blog post series,  is that the derivative of an elementary function can be expressed in terms of itself, in particular, as a polynomial in itself.  To put it another way, functions like $latex e^x$, $latex \tan{(x)}$, and $latex \log{(x)}$ all satisfy linear differential equations with rational coefficients (e.g., for these, $latex y'=y$, $latex y'=1 + y^2$, and $latex y'=\frac{1}{x}$).  </p>
+<p>Now, the theory gets more complicated, but it turns out that, using a careful analysis of this fact, we can prove a similar result to the one about rational functions to any elementary function. In a nutshell, Liouville's Theorem says this:  if an elementary function has an elementary integral, then that integral is a composed only of functions from the original integrand, plus a finite number of logarithms of functions from the integrand, which can be considered one logarithm, as mentioned above ("functions from" more specifically means a rational function in the terms from our elementary extension).  Here is the formal statement of the theorem.</p>
+<p><strong>Theorem (Liouville's Theorem - Strong version)</strong></p>
+<p><em>Let $latex K$ be a differential field, $latex C=\mathrm{Const}(K)$, and $latex f\in K$. If there exist an elementary extension $latex E$ of $latex K$ and $latex g \in E$ such that $latex Dg =f$, then there are $latex v \in K$, $latex c_1, \dots, c_n\in \bar{C}$, and $latex u_1, \dots,u_n\in K(c_1,\dots,c_n)^*$ such that </em></p>
+<h2>
+
+$latex f = Dv + \sum_{i=1}^n c_i\frac{Du_i}{u_i}$.
+
+</h2>
+
+<p></p>
+<p>Looking closely at the formal statement of the theorem, we can see that it says the same thing as my "in a nutshell" statement.  $latex K$ is the differential extension, say of $latex \mathbb{Q}(x)$, that contains all of our elementary functions (see <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">part 2</a>).  $latex E$ is an extension of $latex K$.  The whole statement of the theorem is that $latex E$ need not be extended from $latex K$ by anything more than some logarithms.   $latex f$ is our original function and $latex g=\int f$.  Recall from <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">part 1</a> that $latex Dg = \frac{Du}{u}$ is just another way of saying that $latex g = \log{(u)}$.  The rest of the formal statement is some specifics dealing with the constant field, which assure us that we do not need to introduce any new constants in the integration. This fact is actually important to the decidability of the Risch Algorithm, because many problems about constants are either unknown or undecidable (such as the transcendence degree of $latex \mathbb{Q}(e, \pi)$).  But this ensures us that as long as we start with a constant field that is computable, our constant field for our antiderivative will also be computable, and will in fact be the same field, except for some possible algebraic extensions (the $latex c_i$).  </p>
+<p>At this point, I want to point out that even though my work this summer has been only on the purely transcendental case of the Risch Algorithm, Liouville's Theorem is true for all elementary functions, which includes algebraic functions.  However, if you review the proof of the theorem, the proof of the algebraic part is completely different from the proof of the transcendental part, which is the first clue that the algebraic part of the algorithm is completely different from the transcendental part (and also a clue that it is harder).</p>
+<p>Liouville's Theorem is what allows us to prove that a given function does not have an elementary antiderivative, by giving us the form that any antiderivative must have.  We first perform the same Hermite Reduction from the <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/">rational integration case</a>. Then, a generalization of the same Lazard-Rioboo-Trager Algorithm due to Rothstein allows us to find the logarithmic part of any integral (the $latex \sum_{i=1}^n c_i\frac{Du_i}{u_i}$ from Liouville's Theorem).  </p>
+<p>Now a difference here is that sometimes, the part of the integrand that corresponds to the $latex \frac{a}{x - b}$ for general functions doesn't always have an elementary integral (these are called <em>simple</em> functions.  I think I will talk about them in more detail in a future post in this series).   An example of this is $latex \frac{1}{\log{(x)}}$.  Suffice it to say that any elementary integral of $latex \frac{1}{\log{(x)}}$ must be part of some log-extension of $latex \mathbb{Q}(x, \log{(x)})$, and that we can prove that no such logarithmic extension exists in the course of trying to compute it with the Lazard-Rioboo-Rothstein-Trager Algorithm.</p>
+<p>In the rational function case, after we found the rational part and the logarithmic part, we were practically done, because the only remaining part was a polynomial.  Well, for the general transcendental function case, we are left with an analogue, which are called <em>reduced</em> functions, and we are far from done.  This is the hardest part of the integration algorithm.  This will also be the topic of a future post in this series.  Suffice it to say that this is where most of the proofs of non-integrability come from, including the other integrals than $latex \frac{1}{\log{(x)}}$ that I gave above.  </p>
+<p><strong>Conclusion</strong></p>
+<p>That's it for now.  Originally, I was also going to include a bit on the structure theorems too, but I think I am going to save that for part 4 instead.  I may or may not have another post ready before the official end of coding date for Google Summer of Code, which is Monday (three days from now).  I want to make a post with some nice graphs comparing the timings of the new <code>risch_integrate()</code> and the old <code>heurisch()</code> (what is currently behind SymPy's <code>integrate()</code>).  But as I have said before, I plan on continuing coding the integration algorithm beyond the program until I finish it, and even beyond that (there are lots of cool ways that the algorithm can be extended to work with special functions, there's definite integration with Meijer-G functions, and there's of course the algebraic part of the algorithm, which is a much larger challenge).  And along with it, I plan to continue keeping you updated with blog posts, including at least all the Risch Algorithm series posts that I have promised (I have counted at least three topics that I have explicitly promised but haven't done yet).  And of course, there will be the mandatory GSoC wrap-up blog post, detailing my work for the summer.  </p>
+<p>Please continue to test my prototype <a href="http://asmeurersympy.wordpress.com/2010/08/05/prototype-risch_integrate-function-ready-for-testing/"><code>risch_integrate()</code></a> function in my <a href="http://github.com/asmeurer/sympy/tree/integration3">integration3</a> branch, and tell me what you think (or if you find a bug).</p>
+</div>
+    </div>
+    </article>
+</div>
+
+        <nav class="postindexpager">
+        <ul class="pager">
+            <li class="previous">
+                <a href="index-6.html" rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-4.html" rel="next">Older posts</a>
+            </li>
+        </ul>
+        </nav>
+
+
+        
+       <script>var disqus_shortname="nikolademo";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
+        <script src="assets/js/mathjax.js"></script>
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="assets/js/all-nocdn.js"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

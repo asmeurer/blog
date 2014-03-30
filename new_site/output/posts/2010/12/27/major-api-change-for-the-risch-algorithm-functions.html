@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Major API Change for the Risch Algorithm Functions | Aaron Meurer's SymPy Blog</title>
+
+    
+            <link href="../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Major API Change for the Risch Algorithm Functions">
+        <meta name="og:url" content="http://asmeurersympy.wordpress.com/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html">
+            <meta name="og:description" content="I have been able to get to work again on the Risch Algorithm now that I have a month winter break from classes.  So the first thing I did was commit a bunch of bug fixes that had been sitting there si">
+        <meta name="og:site_name" content="Aaron Meurer's SymPy Blog">
+        <meta name="og:type" content="article">
+
+    
+
+    
+
+
+
+</head>
+<body>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li>
+<a href="../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../rss.xml">RSS</a>
+
+            </li>
+</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="major-api-change-for-the-risch-algorithm-functions.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="#" class="u-url">Major API Change for the Risch Algorithm Functions</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="#" rel="bookmark"><time class="published dt-published" datetime="2010-12-27T07:34:30+00:00" itemprop="datePublished" title="Publication date">2010-12-27 07:34</time></a></p>
+                <p class="commentline">
+        
+    <a href="major-api-change-for-the-risch-algorithm-functions.html#disqus_thread" data-disqus-identifier="cache/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html">Comments</a>
+
+
+        </p>
+</div>
+        
+
+    </header>
+
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>I have been able to get to work again on the Risch Algorithm now that I have a month winter break from classes.  So the first thing I did was commit a bunch of bug fixes that had been sitting there since the end of the summer.  Then, I set out to make a major internal API change to the entire Risch Algorithm.</p>
+<p>Let me give some background.  When I first started programming the Risch Algorithm at the beginning of the summer, I didn't have a very good idea of how differential extensions worked yet (remember that I programmed the algorithm as I learned it from Bronstein's book).  Let me use the function <code>derivation()</code> to demonstrate how the API has changed.  <code>derivation()</code> takes the Poly <code>p</code> in <code>t</code> and computes the derivative (<code>t</code> is some transcendental extension, like $latex e^x$).  Also, the integration variable is <code>x</code>.  The first internal API that I used was</p>
+<p><code>derivation(p, D, x, t)</code></p>
+<p>where <code>D</code> is a Poly of the derivative of <code>t</code>, and <code>x</code> and <code>t</code> are Symbols (see <a href="https://github.com/asmeurer/sympy/commit/0f6a3d90f724118fadc5fdaf290a0cb3e3963efd">this commit</a>).   The problem here is that <code>p</code> might not be in just one symbol, <code>t</code>, but in many. This would happen whenever the function had more than one transcendental function, or extension, in it.  So, for example, $latex e^x\log{x}$ would have this problem. Surprisingly, according to the git log, it took me until July 4 to figure this out (that above linked commit, which is the first occurrence of this function and when I started the full algorithm, dates from June 7, so it took me almost a month!), after which I had already written a good portion of the Risch Algorithm.  I changed the API to</p>
+<p><code>derivation(p, D, x, T)</code></p>
+<p>where <code>T</code> is a list of the extension variables and <code>D</code> is a list of the derivations of the respective elements of <code>T</code> with respect to the lower elements and x (see <a href="https://github.com/asmeurer/sympy/commit/20b7a5f8ca8dec579065f85583f11cc0955b96f0">this commit</a>).  Now, the derivation of <code>x</code> is always <code>Poly(1, x)</code>, so I didn't think it was necessary to include it.  But it turns out that it is easier to just always include this in <code>D</code> rather than try to special case it in the code.  Also, the lowest extension variable, <code>x</code>, isn't used very often in the code, so it also doesn't make much sense to keep it separate from the rest of the variables in <code>T</code>.  Now this didn't take me as long to figure out (July 11).  Therefore, I changed the API to just</p>
+<p><code>derivation(p, D, T)</code></p>
+<p>where the first element of <code>T</code> is always <code>x</code> and the first element of <code>D</code> is always <code>Poly(1, x)</code> (see <a href="https://github.com/asmeurer/sympy/commit/bca2b19844ae71aa1ef8e27a9f77eabb70b4aa5f">this commit</a>).</p>
+<p>Now this API worked quite well for the remainder of the summer.  However, at the very end, I discovered that a function required to handle some special cases in certain parts of the algorithm needed four more lists (the elements of the extension that are logarithms, the elements of the extension that are exponentials, the arguments of those logarithms, and the arguments of those exponentials).  I had previously thought that these lists would only be needed when creating the extension at the beginning of integration, but it turned out that this was not the case and that they could be needed in several rather deep places in the algorithm.  The only way to get them there would be to pass them through to every single function in the algorithm.    </p>
+<p>So I was faced with a dilemma.  I didn't want to pass six arguments through each function just because a few might need them all.  I knew that the answer was to create an object to store all the data for a differential extension and to just pass this object around.  Unfortunately, this happened at the very end of the summer, so I hadn't been able to do that until now.  </p>
+<p>This brings us to now.  Over the past couple of weeks, I created an object called <code>DifferentialExtension</code>, and replaced the API in the Risch Algorithm to use it.  See <a href="https://github.com/asmeurer/sympy/commit/d9d9548625513188aaa663621bfe4e097aebf741">this commit</a> and <a href="https://github.com/asmeurer/sympy/commit/1935b6d6e1fdf8eae4deb5a4f56ea53c5d6989fa">this commit</a> and some of the ones in between to see what I did. More or less, the object is like a C struct---it does little more than hold a lot of information as attributes.  However, at the suggestion of Ronan Lamy on the <a href="http://groups.google.com/group/sympy/browse_thread/thread/a051b5ba1fb5cb4d">mailing list</a>, I have moved all the relevant code for building the extension from the <code>build_extension()</code> function into <code>DifferentialExtension.<strong>init</strong>()</code>.  I have also created some "magic" to handle the recursive nature of the algorithm.  A DifferentialExtension object has an attribute <code>level</code>, which represents the level of the extension that the algorithm is working in.  So you can store all the derivations of the extension in <code>DifferentialExtension.D</code>, but only have <code>DifferentialExtension.d</code> point to the "current" outermost derivation.  This replaces things like</p>
+<p><code>D = D[:-1]</code></p>
+<p>T = T[:-1]</p>
+<p> </p>
+<p>from the old API to just</p>
+<p><code>DE.decrement_level()</code></p>
+<p></p>
+<p>(and then later on, <code>DE.increment_level()</code>).  The entire API is now just</p>
+<p><code>derivation(p, DE)</code></p>
+<p>where <code>DE</code> is a <code>DifferentialExtension</code> object.  Changing the API of the entire code base at this point was a bit of work, but I have finally finished it, and I must say, this is much cleaner.  True, you now have to use <code>DE.t</code> everywhere instead of <code>t</code> (with <code>t = T[-1]</code> at the top of the function), which is three characters more space for every use, but I think in the end it is cleaner.  For example, the function that used to be</p>
+<p><code>is_log_deriv_k_t_radical(fa, fd, L_K, E_K, L_args, E_args, D, T)</code></p>
+<p>is now just</p>
+<p><code>is_log_deriv_k_t_radical(fa, fd, DE)</code>.</p>
+<p>Also, because it is an object, I can do cool things like override <code>DifferentialExtension.<strong>str</strong>()</code> to print out a tuple of the most important attributes of the object, making debugging much easier (now there is just one print statement instead of five).  </p>
+<p>Another thing I had to do was to allow the creation of these objects manually, because what is now <code>DifferentialExtension.<strong>init</strong>()</code> cannot yet handle, for example, tangent extensions, but some of the tests involve those.  So I created an <code>extension</code> flag to <code><strong>init</strong>()</code> to which you could pass a dictionary, and it would create a skeleton extension from that (see <a href="https://github.com/asmeurer/sympy/commit/7121b06eab3f1e0f8464c287438fb7175f07762b">this commit</a>).  I made it smart enough to create some attributes automatically, so I only have to pass the list <code>D</code> in most tests---it creates attributes like <code>T</code> from that automatically.  Thus, this in some ways made the tests a little simpler, because I didn't have to worry about <code>T</code> any more.  </p>
+<p>We'll see how things go, but this fourth API change should hopefully be the last.  This should also make it much easier whenever I add trigonometric function support, where I will have to add even more attributes to the object.  I won't have to change the code in any existing function (unless it specifically needs to be able to know about trig extensions), because, to them, the information in <code>DE</code> will not change.</p>
+<p>So the good news behind all of this, as I mentioned at the beginning of this post, is that I can now write some algorithm that requires those <code>L_K</code>, <code>E_K</code>, <code>L_args</code>, <code>E_args</code> variables from arbitrary places within the algorithm.  This should allow me to completely finish the exponential case.  So look forward soon to a <code>risch_integrate()</code> that can handle completely any transcendental function of exponentials (either produce an integral or prove that no elementary integral exists).  </p>
+<p>And just to be clear, this doesn't change anything with <code>risch_integrate()</code>---this is only an internal change. And at the moment, it doesn't add any features, though that should soon change. So keep on testing it for me!  If you see any errors along the lines of "Variable t not defined," it probably means that I missed that one when I was switching the API due to poor test coverage in that area of the code.  I would love to know about any errors you find, or, indeed, any testing you do with <code>risch_integrate</code>.  Remember that you can obtain my branch at <a href="https://github.com/asmeurer/sympy/tree/integration3">my GitHub account (branch integration3)</a>.</p>
+</div>
+    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+        <ul itemprop="keywords" class="tags">
+           <li><a class="tag p-category" href="../../../../categories/mathjax.html" rel="tag">mathjax</a></li>
+        </ul>
+
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../08/14/the-risch-algorithm-part-3-liouvilles-theorem.html" rel="prev" title="The Risch Algorithm: Part 3, Liouville's Theorem">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../2011/01/02/2010-in-review.html" rel="next" title="2010 in review">Next post</a>
+            </li>
+        </ul>
+
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html",
+        disqus_title="Major API Change for the Risch Algorithm Functions",
+        disqus_identifier="cache/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section>
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
+        <script src="../../../../assets/js/mathjax.js"></script>
+
+</article>
+
+        
+       <script>var disqus_shortname="nikolademo";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../../../assets/js/all-nocdn.js"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

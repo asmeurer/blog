@@ -1,0 +1,238 @@
+<html><body><p>Time for <a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">another</a> <a href="http://asmeurersympy.wordpress.com/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/">one</a> of my WTF Python blog posts.  Yesterday, I randomly typed this in a Python session (it was late at night):
+
+
+[code language="py"]
+
+&gt;&gt;&gt; True is True is False is True is False
+
+False
+
+[/code]
+
+
+
+First a little background, in case you don't know.  The <code>is</code> operator in Python does exact object comparison in memory. Unlike <code>==</code>, which only compares it two objects are equal, <code>is</code> only returns True if both arguments have the same memory address.  So you can have something like:
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; a = 12345
+
+&gt;&gt;&gt; b = 12345
+
+&gt;&gt;&gt; a == b
+
+True
+
+&gt;&gt;&gt; a is b
+
+False
+
+[/code]
+
+
+
+Now, there are a handful of Python built-ins that are always equal one another with the <code>is</code> operator.  <code>True</code> and <code>False</code> are two such constants:
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; a = True
+
+&gt;&gt;&gt; b = True
+
+&gt;&gt;&gt; a == b
+
+True
+
+&gt;&gt;&gt; a is b
+
+True
+
+&gt;&gt;&gt; c = False
+
+&gt;&gt;&gt; d = False
+
+&gt;&gt;&gt; c == d
+
+True
+
+&gt;&gt;&gt; c is d
+
+True
+
+[/code]
+
+
+
+Now, going back to the above, we see that each <code>is</code> returns <code>True</code> or <code>False</code>, which is then evaluated with the next one.  Or at least that is what you would think is happening.  But go back and look at it again, and see if you can figure out what it should evaluate to.  You could probably guess that something was amiss from the fact that I was blogging about it.  If you haven't figured it out already, look at the following:
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; True is True is False is True is False
+
+False
+
+&gt;&gt;&gt; (((True is True) is False) is True) is False
+
+True
+
+&gt;&gt;&gt; True is (True is (False is (True is False)))
+
+True
+
+[/code]
+
+
+
+So it seems that <code>is</code> does not associate to the left or to the right.  Let's see if we can figure out what is going on.  First off, <code>True is True</code>, etc. do behave as you expect them to:
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; True is True
+
+True
+
+&gt;&gt;&gt; False is False
+
+True
+
+&gt;&gt;&gt; True is False
+
+False
+
+&gt;&gt;&gt; False is True
+
+False
+
+[/code]
+
+
+
+It is when we start using multiple <code>is</code>s in the same statement that we start seeing problems:
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; False is False is False
+
+True
+
+&gt;&gt;&gt; (False is False) is False
+
+False
+
+[/code]
+
+
+
+So what's going on here?  <code>False is False</code> is True, so maybe it is short-circuiting somehow.  
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; True is False is False
+
+False
+
+&gt;&gt;&gt; False is False is True
+
+False
+
+[/code]
+
+
+
+No, that is not it.  Those reduce to <code>False is False</code> and <code>True is True</code> when associating to the left, respectively, and <code>True is True</code> and <code>True is True</code> when associating to the right.  
+
+
+
+Finally, at this point, it occurs to me what is really going on.  Have you figured it out too (or maybe you already knew all along)?  Maybe you can guess it from this statement, which uses <code>None</code>, another built-in object that always compares equal to itself with the <code>is</code> operator:
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; None is None is None
+
+True
+
+[/code]
+
+
+
+So you see what is happening?  <code>is</code> doesn't associate at all.  Rather, using multiple <code>is</code>s in one statement does multiple comparisons at once.  Any <code>a is b is … x</code> will return <code>True</code> if <code>a</code>, <code>b</code>, …, and <code>x</code> are all equal by the <code>is</code> operator (they share the same identity or memory address), and <code>False</code> otherwise.  Actually, this isn't surprising, since <code>==</code> works the same way:
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; False == False == False
+
+True
+
+&gt;&gt;&gt; (False == False) == False
+
+False
+
+[/code]
+
+
+
+This syntax can actually be useful to test equality of three or more items at once efficiently (Python will not evaluate the same operand more than once, and it short circuits).  But it can be confusing when comparing with <code>True</code> or <code>False</code>, since <code>a is b</code> and <code>a == b</code> themselves evaluate to one of those values.  So remember that it is NOT associative in any way.  Rather, it acts as an n-way comparison. 
+
+
+
+Finally, as <a href="http://docs.python.org/reference/expressions.html#summary">this table</a> of operator precedence in Python shows, <code>is</code> and <code>==</code> have the same precedence in Python.  Therefore, it should be possible to combine the two in these same statement.  Indeed, you can:
+
+
+
+[code language="py"]
+
+&gt;&gt;&gt; a = 12345
+
+&gt;&gt;&gt; b = 12345
+
+&gt;&gt;&gt; c = b
+
+&gt;&gt;&gt; a == b == c
+
+True
+
+&gt;&gt;&gt; a is b is c
+
+False
+
+&gt;&gt;&gt; # Because this is False
+
+... 
+
+&gt;&gt;&gt; a is b
+
+False
+
+&gt;&gt;&gt; # But this is True
+
+... 
+
+&gt;&gt;&gt; b is c
+
+True
+
+&gt;&gt;&gt; # So we get
+
+... 
+
+&gt;&gt;&gt; a == b is c
+
+True
+
+[/code]</p></body></html>

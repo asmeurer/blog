@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Vim vs. Emacs (Part 1) | Aaron Meurer's SymPy Blog</title>
+
+    
+            <link href="../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/2011/12/20/vim-vs-emacs-part-1.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Vim vs. Emacs (Part 1)">
+        <meta name="og:url" content="http://asmeurersympy.wordpress.com/posts/2011/12/20/vim-vs-emacs-part-1.html">
+            <meta name="og:description" content="So about a month or so ago, I decided that I needed to start learning a command line text editor.  XCode, the editor I had been using for Python files, didn't work very well with the new version (in p">
+        <meta name="og:site_name" content="Aaron Meurer's SymPy Blog">
+        <meta name="og:type" content="article">
+
+    
+
+    
+
+
+
+</head>
+<body>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li>
+<a href="../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../rss.xml">RSS</a>
+
+            </li>
+</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="vim-vs-emacs-part-1.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="#" class="u-url">Vim vs. Emacs (Part 1)</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="#" rel="bookmark"><time class="published dt-published" datetime="2011-12-20T08:17:43+00:00" itemprop="datePublished" title="Publication date">2011-12-20 08:17</time></a></p>
+                <p class="commentline">
+        
+    <a href="vim-vs-emacs-part-1.html#disqus_thread" data-disqus-identifier="cache/posts/2011/12/20/vim-vs-emacs-part-1.html">Comments</a>
+
+
+        </p>
+</div>
+        
+
+    </header>
+
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>So about a month or so ago, I decided that I needed to start learning a command line text editor.  XCode, the editor I had been using for Python files, didn't work very well with the new version (in particular, the <a href="http://asmeurersympy.wordpress.com/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/">essential plugin</a> that I'd been using to clear trailing whitespace on save doesn't yet work in XCode 4).  I'd been using TextWrangler for other things, and started to switch to it for Python editing too.  As far as free GUI text editors on the Mac go, TextWrangler is the best.  </p>
+<p>But I'd seen some of the nice features that vim has, like automatically keeping all lines under 80 characters, on a friend's computer, and I decided that I should try it.</p>
+<p>Now, I had had a little prior experience with both vim and emacs, but all that I remembered was for vim that <code>i</code> inserts and <code>ZZ</code> quits (for when I accidentally open it) and for emacs, that <code>M-X doctor</code> starts the psychiatrist. </p>
+<p>So I've decided to try them out, doing it cold turkey.  To make sure that I choose the better one, I've decided to try both.  So, starting about a week ago, I've been using nothing but vim for all my text editing.  Starting in January, I will try using emacs, and after two weeks, I will see what I like better.</p>
+<p>My opinions so far on vim:</p>
+<div class="codehilite"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>The tutorials suck.  The best tutorial is <span class="nt">&lt;code&gt;</span>vimtutor<span class="nt">&lt;/code&gt;</span> (type that in the command line), which I think comes with vim.  It's not bad, but it leaves out a few things that I would consider to be essential to a tutorial, for example, how to scroll (answer: use CTRL-D and CTRL-U).  I started the emacs tutorial a while back, and while I never finished it, from what I remember, it was much better (and I also remember that the first thing it talked about was how to scroll by more than one line at a time). It also left out the <span class="nt">&lt;code&gt;</span>.<span class="nt">&lt;/code&gt;</span> command, which I think is rather useful.  I did print out <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html"</span><span class="nt">&gt;</span>this cheatsheet<span class="nt">&lt;/a&gt;</span> and have it sitting next to me on my desk.  That has helped a lot.  I hope I can find something similar for emacs when I get to it.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>vim is too line oriented.  vi started out as an extension to ed, the line editor, so this is not surprising.  But I still can't understand why pressing <span class="nt">&lt;code&gt;</span>l<span class="nt">&lt;/code&gt;</span> at the end of a line can't bring me to the beginning of the next line.  Maybe I'm just still doing it wrong (supposedly, you should rarely use <span class="nt">&lt;code&gt;</span>h<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>l<span class="nt">&lt;/code&gt;</span> over more efficient moving commands).  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>Somewhat related to the last point, vim really likes to ring the terminal bell a lot. To quote <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://en.wikipedia.org/wiki/Editor_war"</span><span class="nt">&gt;</span>Wikipedia<span class="nt">&lt;/a&gt;</span>, "vi has two modes – 'beep repeatedly' and 'break everything'"<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>I managed to customize it to the point of usability (there are still several things I need to go in and figure out how to fix).  See https://github.com/asmeurer/dotfiles for my .vimrc and .vim/ files.  I found a decent Python syntax file, but it's actually not that great.  I modified it to color single quoted strings different from double quoted strings (a feature I missed from Xcode). I still need to make a better color scheme (preferably the same as Xcode's midnight), but this is enough work that I've put it off.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>Pressing ESC all the time is really annoying.  Sometimes, I just arrow over, even though I know you're not "supposed to", just because my fingers don't want to reach over and press ESC.  I'm also really used to using control sequences to move around while typing, which of course doesn't work in vim.  In fact, so far, I'm suspecting that I'll like emacs better.  But I've vowed to give both a fair chance.  But so far, my impression is that vim is a great for text <span class="nt">&lt;em&gt;</span>editing<span class="nt">&lt;/em&gt;</span>, but not so hot for text <span class="nt">&lt;em&gt;</span>writing<span class="nt">&lt;/em&gt;</span> (unless you always write text perfectly, so that you never need to leave insert mode until you are done typing).  Just the simple act of deleting a mistyped word (yes, word, that happens a lot when you are decently fast touch typist) takes several keystrokes, when it should in my opinion only take one (two if you count the meta-key).<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>The customizability is really nice.  So far, everything that I've thought of to change has been changeable.  Also, language is easy enough to understand that I was able to modify the Python syntax file without any difficulty.  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>I like how it syntax highlights virtually everything I throw at it. <span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+<p>If there are any vim experts out there reading this, I have some questions:</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>Is there an easy way to get a list of and jump to a function/class definition in a Python file?  In Xcode and TextWrangler, there was a nice popup at the top of the window that I could access these from.  In vim, so far the best I've found is searching for it, which isn't very efficient.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>I got TAB to indent 4 spaces in Python, but for some reason, when I create a new line after a <span class="nt">&lt;code&gt;</span>:<span class="nt">&lt;/code&gt;</span>, it puts 8 extra spaces. I wouldn't be surprised if this is the result of some mismatch/error in <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/asmeurer/dotfiles"</span><span class="nt">&gt;</span>my .vimrc or .vim/ files<span class="nt">&lt;/a&gt;</span>, but I don't know how to fix it<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>Any useful tricks to share?  Especially for editing Python files.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>How long did it take you to become reasonably efficient with vim?<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+<p><strong>EDIT: I thought of some more questions:</strong>
+    </p>
+<li>Is there a way to make vim consider camelCase to be word boundaries?</li>
+<p>Finally, if anyone else is thinking of starting vim, I have some useful things I've already found in my .vimrc. So you might take a look at that, and add the ones that you like to your .vimrc.  Finally, if you are on Mac OS X, you should use <a href="http://www.iterm2.com/#/section/home">iTerm2</a>.  Actually, you should use this regardless of what text editor you use.  It's a very good Terminal.app replacement that has virtually all the features (with a couple of exceptions) as Terminal.app, and a ton of extra ones.  The one I want to mention here is mouse reporting support, so you can use your mouse to do things in vim.  This is very useful, as sometimes, e.g., when selecting text, using the mouse is just more efficient.  Also, if you get frustrated trying to remember the commands that will move around you faster than <code>h</code>, <code>j</code>, <code>k</code>, and <code>l</code>, you can just click on where you want to go.</p>
+<p>:wq</p>
+</div>
+    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../08/18/sqrtx-now-prints-as-sqrtx.html" rel="prev" title="sqrt(x) now prints as " sqrt>Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../../2012/01/01/2011-in-review.html" rel="next" title="2011 in review">Next post</a>
+            </li>
+        </ul>
+
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/2011/12/20/vim-vs-emacs-part-1.html",
+        disqus_title="Vim vs. Emacs (Part 1)",
+        disqus_identifier="cache/posts/2011/12/20/vim-vs-emacs-part-1.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section>
+    
+
+</article>
+
+        
+       <script>var disqus_shortname="nikolademo";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../../../assets/js/all-nocdn.js"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

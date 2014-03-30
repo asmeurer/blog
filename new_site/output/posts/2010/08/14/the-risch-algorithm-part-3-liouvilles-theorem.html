@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>The Risch Algorithm: Part 3, Liouville's Theorem | Aaron Meurer's SymPy Blog</title>
+
+    
+            <link href="../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="The Risch Algorithm: Part 3, Liouville's Theorem">
+        <meta name="og:url" content="http://asmeurersympy.wordpress.com/posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html">
+            <meta name="og:description" content="So this is the last official week of the Summer of Code program, and my work is mostly consisting of removing NotImplementedErrors (i.e., implementing stuff), and fixing bugs. None of this is particul">
+        <meta name="og:site_name" content="Aaron Meurer's SymPy Blog">
+        <meta name="og:type" content="article">
+
+    
+
+    
+
+
+
+</head>
+<body>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li>
+<a href="../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../rss.xml">RSS</a>
+
+            </li>
+</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="the-risch-algorithm-part-3-liouvilles-theorem.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="#" class="u-url">The Risch Algorithm: Part 3, Liouville's Theorem</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="#" rel="bookmark"><time class="published dt-published" datetime="2010-08-14T02:55:23+00:00" itemprop="datePublished" title="Publication date">2010-08-14 02:55</time></a></p>
+                <p class="commentline">
+        
+    <a href="the-risch-algorithm-part-3-liouvilles-theorem.html#disqus_thread" data-disqus-identifier="cache/posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html">Comments</a>
+
+
+        </p>
+</div>
+        
+
+    </header>
+
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>So this is the last official week of the Summer of Code program, and my work is mostly consisting of removing <code>NotImplementedError</code>s (i.e., implementing stuff), and fixing bugs. None of this is particularly interesting, so instead of talking about that, I figured I would produce another one of my Risch Algorithm blog posts.  It is recommended that you read parts <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">1</a> and <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">2</a> first, as well as my post on <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/">rational function integration</a>, which could be considered part 0.</p>
+<p><strong>Liouville's Theorem</strong></p>
+<p>Anyone who's taken calculus intuitively knows that integration is hard, while differentiation is easy.  For differentiation, we can produce the derivative of any elementary function, and we can do so easily, using a simple algorithm consisting of the sum and product rules, the chain rule, and the rules for the derivative of all the various elementary functions.  But for integration, we have to try to work backwards.  </p>
+<p>There are two things that make integration difficult.  First is the existence of functions that simply do not have any elementary antiderivative.  $latex e^{-x^2}$ is perhaps the most famous example of such a function, since it arises from the normal distribution in statistics.  But there are many others.  $latex \sin{(x^2)}$, $latex \frac{1}{\log{(x)}}$, and $latex x^x$ are some other examples of famous non-integrable functions.  </p>
+<p>The second problem is that no one single simple rule for working backwards will always be applicable.  We know that u-substitution and integration by parts are the reverse of the chain rule and the product rule, respectively.  But those methods will only work if those rules were the ones that were applied originally, and then only if you chose the right $latex u$ and $latex dv$.  </p>
+<p>But there is a much simpler example that gets right down to the point with Liouville's theorem.  The power rule, which is that $latex \frac{d}{dx}x^n=nx^{n-1}$ is easily reversed for integration.  Given the power rule for differentiation, it's easy to see that the reverse rule should be $latex \int{x^ndx}=\frac{x^{n+1}}{n+1}$.  This works fine, except that were are dividing something, $latex n+1$.  In mathematics, whenever we do that, we have to ensure that whatever we divide by is not 0. In this case, it means that we must assert $latex n\neq -1$.  This excludes $latex \int{\frac{1}{x}dx}$.  We know from calculus that this integral requires us to introduce a special function, the natural logarithm.  </p>
+<p>But we see that $latex n=-1$ is the only exception to the power rule, so that the integral of any (<a href="http://en.wikipedia.org/wiki/Laurent_polynomial">Laurent</a>) polynomial is again a (Laurent) polynomial, plus a logarithm.  Recall from part 0 (<a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/">Rational Function Integration</a>) that the same thing is true for any rational function: the integral is again a rational function, plus a logarithm (we can combine multiple logarithms into one using the logarithmic identities, so assume for simplicity that there is just one).  The argument is very similar, too.  Assume that we have split the denominator rational function into linear factors in the <a href="http://en.wikipedia.org/wiki/Algebraic_splitting_field">algebraic splitting field</a> (such as the complex numbers).  Then perform a partial fractions decomposition on the rational function.  Each term in the decomposition will be either a polynomial, or of the form $latex \frac{a}{(x - b)^n}$. The integration of these terms is the same as with the power rule, making the substitution $latex u = x - b$. When $latex n\geq 2$, the integral will be $latex \frac{-1}{n - 1}\frac{a}{(x - b)^{n - 1}}$; when $latex n = 1$, the integral will be $latex a\log{(x - b)}$.  Now computationally, we don't want to work with the algebraic splitting field, but it turns out that we don't need to actually compute it to find the integral.  But theory is what we are dealing with here, so don't worry about that.  </p>
+<p>Now the key observation about differentiation, as I have pointed out in the earlier parts of this blog post series,  is that the derivative of an elementary function can be expressed in terms of itself, in particular, as a polynomial in itself.  To put it another way, functions like $latex e^x$, $latex \tan{(x)}$, and $latex \log{(x)}$ all satisfy linear differential equations with rational coefficients (e.g., for these, $latex y'=y$, $latex y'=1 + y^2$, and $latex y'=\frac{1}{x}$).  </p>
+<p>Now, the theory gets more complicated, but it turns out that, using a careful analysis of this fact, we can prove a similar result to the one about rational functions to any elementary function. In a nutshell, Liouville's Theorem says this:  if an elementary function has an elementary integral, then that integral is a composed only of functions from the original integrand, plus a finite number of logarithms of functions from the integrand, which can be considered one logarithm, as mentioned above ("functions from" more specifically means a rational function in the terms from our elementary extension).  Here is the formal statement of the theorem.</p>
+<p><strong>Theorem (Liouville's Theorem - Strong version)</strong></p>
+<p><em>Let $latex K$ be a differential field, $latex C=\mathrm{Const}(K)$, and $latex f\in K$. If there exist an elementary extension $latex E$ of $latex K$ and $latex g \in E$ such that $latex Dg =f$, then there are $latex v \in K$, $latex c_1, \dots, c_n\in \bar{C}$, and $latex u_1, \dots,u_n\in K(c_1,\dots,c_n)^*$ such that </em></p>
+<h2>
+
+$latex f = Dv + \sum_{i=1}^n c_i\frac{Du_i}{u_i}$.
+
+</h2>
+
+<p></p>
+<p>Looking closely at the formal statement of the theorem, we can see that it says the same thing as my "in a nutshell" statement.  $latex K$ is the differential extension, say of $latex \mathbb{Q}(x)$, that contains all of our elementary functions (see <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">part 2</a>).  $latex E$ is an extension of $latex K$.  The whole statement of the theorem is that $latex E$ need not be extended from $latex K$ by anything more than some logarithms.   $latex f$ is our original function and $latex g=\int f$.  Recall from <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">part 1</a> that $latex Dg = \frac{Du}{u}$ is just another way of saying that $latex g = \log{(u)}$.  The rest of the formal statement is some specifics dealing with the constant field, which assure us that we do not need to introduce any new constants in the integration. This fact is actually important to the decidability of the Risch Algorithm, because many problems about constants are either unknown or undecidable (such as the transcendence degree of $latex \mathbb{Q}(e, \pi)$).  But this ensures us that as long as we start with a constant field that is computable, our constant field for our antiderivative will also be computable, and will in fact be the same field, except for some possible algebraic extensions (the $latex c_i$).  </p>
+<p>At this point, I want to point out that even though my work this summer has been only on the purely transcendental case of the Risch Algorithm, Liouville's Theorem is true for all elementary functions, which includes algebraic functions.  However, if you review the proof of the theorem, the proof of the algebraic part is completely different from the proof of the transcendental part, which is the first clue that the algebraic part of the algorithm is completely different from the transcendental part (and also a clue that it is harder).</p>
+<p>Liouville's Theorem is what allows us to prove that a given function does not have an elementary antiderivative, by giving us the form that any antiderivative must have.  We first perform the same Hermite Reduction from the <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/">rational integration case</a>. Then, a generalization of the same Lazard-Rioboo-Trager Algorithm due to Rothstein allows us to find the logarithmic part of any integral (the $latex \sum_{i=1}^n c_i\frac{Du_i}{u_i}$ from Liouville's Theorem).  </p>
+<p>Now a difference here is that sometimes, the part of the integrand that corresponds to the $latex \frac{a}{x - b}$ for general functions doesn't always have an elementary integral (these are called <em>simple</em> functions.  I think I will talk about them in more detail in a future post in this series).   An example of this is $latex \frac{1}{\log{(x)}}$.  Suffice it to say that any elementary integral of $latex \frac{1}{\log{(x)}}$ must be part of some log-extension of $latex \mathbb{Q}(x, \log{(x)})$, and that we can prove that no such logarithmic extension exists in the course of trying to compute it with the Lazard-Rioboo-Rothstein-Trager Algorithm.</p>
+<p>In the rational function case, after we found the rational part and the logarithmic part, we were practically done, because the only remaining part was a polynomial.  Well, for the general transcendental function case, we are left with an analogue, which are called <em>reduced</em> functions, and we are far from done.  This is the hardest part of the integration algorithm.  This will also be the topic of a future post in this series.  Suffice it to say that this is where most of the proofs of non-integrability come from, including the other integrals than $latex \frac{1}{\log{(x)}}$ that I gave above.  </p>
+<p><strong>Conclusion</strong></p>
+<p>That's it for now.  Originally, I was also going to include a bit on the structure theorems too, but I think I am going to save that for part 4 instead.  I may or may not have another post ready before the official end of coding date for Google Summer of Code, which is Monday (three days from now).  I want to make a post with some nice graphs comparing the timings of the new <code>risch_integrate()</code> and the old <code>heurisch()</code> (what is currently behind SymPy's <code>integrate()</code>).  But as I have said before, I plan on continuing coding the integration algorithm beyond the program until I finish it, and even beyond that (there are lots of cool ways that the algorithm can be extended to work with special functions, there's definite integration with Meijer-G functions, and there's of course the algebraic part of the algorithm, which is a much larger challenge).  And along with it, I plan to continue keeping you updated with blog posts, including at least all the Risch Algorithm series posts that I have promised (I have counted at least three topics that I have explicitly promised but haven't done yet).  And of course, there will be the mandatory GSoC wrap-up blog post, detailing my work for the summer.  </p>
+<p>Please continue to test my prototype <a href="http://asmeurersympy.wordpress.com/2010/08/05/prototype-risch_integrate-function-ready-for-testing/"><code>risch_integrate()</code></a> function in my <a href="http://github.com/asmeurer/sympy/tree/integration3">integration3</a> branch, and tell me what you think (or if you find a bug).</p>
+</div>
+    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+        <ul itemprop="keywords" class="tags">
+           <li><a class="tag p-category" href="../../../../categories/mathjax.html" rel="tag">mathjax</a></li>
+        </ul>
+
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../05/prototype-risch_integrate-function-ready-for-testing.html" rel="prev" title="Prototype risch_integrate() function ready for testing!">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../12/27/major-api-change-for-the-risch-algorithm-functions.html" rel="next" title="Major API Change for the Risch Algorithm Functions">Next post</a>
+            </li>
+        </ul>
+
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html",
+        disqus_title="The Risch Algorithm: Part 3, Liouville's Theorem",
+        disqus_identifier="cache/posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section>
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
+        <script src="../../../../assets/js/mathjax.js"></script>
+
+</article>
+
+        
+       <script>var disqus_shortname="nikolademo";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../../../assets/js/all-nocdn.js"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

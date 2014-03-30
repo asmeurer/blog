@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="description" content="My blog on my work on SymPy and other fun stuff.">
+    <meta name="viewport" content="width=device-width">
+    <title>Aaron Meurer's SymPy Blog (old posts, page 7) | Aaron Meurer's SymPy Blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://asmeurersympy.wordpress.com/index-7.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+
+</head>
+<body>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li>
+<a href="archive.html">Archives</a>
+                </li>
+<li>
+<a href="categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="rss.xml">RSS</a>
+
+            </li>
+</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+            </ul>
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+<div class="postindex">
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/08/31/isympy-i-a-saner-interactive-environment.html" class="u-url">isympy -I:  A saner interactive environment</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/08/31/isympy-i-a-saner-interactive-environment.html" rel="bookmark"><time class="published dt-published" datetime="2012-08-31T03:30:08+00:00" itemprop="datePublished" title="Publication date">2012-08-31 03:30</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2012/08/31/isympy-i-a-saner-interactive-environment.html#disqus_thread" data-disqus-identifier="cache/posts/2012/08/31/isympy-i-a-saner-interactive-environment.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>As <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">promised</a>, here is another post describing a new feature in the upcoming <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.2">SymPy 0.7.2</a>.</p>
+<p></p>
+<h3>Automatic Symbol Definition</h3>
+<p>While not as ground breaking as the feature I described in my <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">last post</a>, this feature is still quite useful. As you may know, SymPy is inherently a Python library, meaning that it lives by the rules of Python. If you want to use any name, whether it be a Symbol or a function (like cos), you need to define it (in the case of Symbols), or import it (in the case of functions that come with SymPy). We provide the script <code>isympy</code> with SymPy to assist with this. This script automatically runs IPython (if it's installed), imports all names from sympy (<code>from sympy import *</code>), and defines common symbol names (like <code>x</code>, <code>y</code>, and <code>z</code>).</p>
+<p>But if you want to use a Symbol that is not one of the ones predefined by <code>isympy</code>, you will get something like</p>
+<p>[code language="py"]</p>
+<p>In [1]: r*x</p>
+<hr>
+<p>NameError                                 Traceback (most recent call last)
+ in ()
+----&gt; 1 r*x</p>
+<p>NameError: name 'r' is not defined</p>
+<p>[/code]</p>
+<p>The best solution for this has been either to type <code>var('r')</code>, which will create the Symbol <code>r</code> and inject it into the namespace, or to wrap your text in a string and pass it to <code>sympify()</code>, like <code>sympify("r*x")</code>. Neither of these are very friendly in interactive mode.</p>
+<p>In SymPy 0.7.2, <code>isympy</code> has a new command line option, <code>isympy -a</code>, which will enable a mechanism that will automatically define all undefined names as Symbols for you:</p>
+<p>[code language="py"]</p>
+<p>In [1]: r*x</p>
+<p>Out[1]: r⋅x</p>
+<p>[/code]</p>
+<p>There are some caveats to be aware of when using this feature:</p>
+<ul>
+    <li>Names must be undefined for <code>isympy -a</code> to work. If you type something like <code>S*x</code>, you'll get:[code language="py"]
+In [3]: S*x
+
+---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-3-6656a97ea7b0&gt; in &lt;module&gt;()
+
+----&gt; 1 S*x
+
+
+
+TypeError: unsupported operand type(s) for *: 'SingletonRegistry' and 'Symbol'
+
+[/code]
+
+
+
+That's because <code>S</code> is already defined (it's the <code>SingletonRegistry</code>, and also a shortcut to <code>sympify()</code>). To use a name that's already defined, either create it manually with <code>var()</code> or delete it using <code>del</code>.</li>
+    <li>This only works on the top level namespace. If you define a function with an undefined name, it will not automatically define that symbol when run.</li>
+    <li>This works by catching NameError, defining the name, and then re-running the expression. If you have a multiline statement, any lines before the undefined name will be run before the NameError will be caught. This usually won't happen, but it's a potential side-effect to be aware of. We plan to rewrite it using either ast or tokenize to avoid this issue.</li>
+    <li>Obviously, this is intended for interactive use only. If you copy code and put it in a script, or in some other place where someone might be expected to run it, but not necessarily from <code>isympy -a</code>, you should include symbol definitions.</li>
+</ul>
+
+<h3>Automatic int to Integer Conversion</h3>
+
+<p>A second thing that is annoying with Python and SymPy is that something like <code>1/2</code> will be interpreted completely by Python, without any SymPy. This means that something like <code>1/2 + x</code> will give either <code>0 + x</code> or <code>0.5 + x</code>, depending on whether or not <code><strong>future</strong>.division</code> has been imported. <code>isympy</code> has always ran <code>from <strong>future</strong> import division</code>, so that you'll get the latter, but we usually would prefer to get <code>Rational(1, 2)</code>. Previously, the best way to do this was again to either run it through <code>sympify()</code> as a string, or to sympify at least one of the numbers (here the <code>S()</code> shortcut to <code>sympify()</code> is useful, because you can type just <code>S(1)/2</code>).</p>
+<p>With SymPy 0.7.2, you can run <code>isympy -i</code>, and it will automatically wrap all integers literals with <code>Integer()</code>. The result is that <code>1/2</code> produces <code>Rational(1, 2)</code>:</p>
+<p>[code language="py"]</p>
+<p>In [1]: 1/2 + x</p>
+<p>Out[1]: x + 1/2</p>
+<p>[/code]</p>
+<p>Again, there are a couple of caveats:</p>
+<ul>
+    <li>If you want to get Python style division, you just need to wrap both arguments in <code>int()</code>:[code language="py"]
+In [2]: int(1)/int(2)
+
+Out[2]: 0.5
+
+[/code]
+
+
+
+Of course, if you just want a floating point number, you can just use <code>N()</code> or <code>.evalf()</code>
+</li>
+    <li>This works by parsing the text and wrapping all integer literals with <code>Integer()</code>. This means that if you have a variable set to a Python int, it will still act like a Python int:[code language="py"]
+In [6]: a = int(1)
+
+
+
+In [7]: b = int(2)
+
+
+
+In [8]: a/b
+
+Out[8]: 0.5
+
+[/code]
+
+
+
+Note that to even do that example, I had to manually make <code>a</code> and <code>b</code> Python ints by wrapping them in <code>int()</code>. If I had just done <code>a = 1</code>, it would have been parsed as <code>a = Integer(1)</code>, and I would have gotten a SymPy Integer. But this can be an issue if you use the result of some function that returns an int (again, note that most functions in SymPy that return integers return Integer, not int).</li>
+    <li>The same as before: this will only work interactively. If you want to reuse your code outside of <code>isympy -i</code>, you should take care of any int/int by rewriting it as S(int)/int.</li>
+</ul>
+
+<p>Since these are both useful features, we've added a way that you can get them both at once: by doing <code>isympy -I</code> (the "I" stands for "Interactive"). If we add similar features in the future, we will also add them to the <code>-I</code> shortcut (for example, we may add an option to allow <code>^</code> to automatically be replaced with <code>**</code>).</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/08/21/sympy-live-sphinx-extension.html" class="u-url">SymPy Live Sphinx Extension</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/08/21/sympy-live-sphinx-extension.html" rel="bookmark"><time class="published dt-published" datetime="2012-08-21T05:09:13+00:00" itemprop="datePublished" title="Publication date">2012-08-21 05:09</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2012/08/21/sympy-live-sphinx-extension.html#disqus_thread" data-disqus-identifier="cache/posts/2012/08/21/sympy-live-sphinx-extension.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>I didn't blog about SymPy all summer, so I thought I would write a post about my favorite feature of the upcoming SymPy 0.7.2 release.  In fact, this feature has got me more excited than any other feature from any version of SymPy.  Yeah, it's that good.</p>
+<p>The feature is the SymPy Live Sphinx extension.  To start, if you don't know about it, check out <a href="http://live.sympy.org/" target="_blank">SymPy Live</a>.  This is a console that runs on the <a href="https://developers.google.com/appengine/">App Engine</a>.  We've actually had this for quite some time, but this winter, it got a huge upgrade thanks to the contribution of some <a href="http://www.google-melange.com/gci/homepage/google/gci2011">GCI</a> students.  Basically, SymPy Live lets you try out SymPy in your browser completely for free, because it runs all the code on the App Engine.  Actually, the console is a full Python console, so you can actually run any valid Python command on it.  This past winter, GCI students upgraded the look of the site, added a mobile version (visit live.sympy.org on your phone), and added other neat features like search history and autocompletion.</p>
+<p>Now, <a href="http://sphinx.pocoo.org/">Sphinx</a> is the documentation system that we use to generate <a href="http://docs.sympy.org/">SymPy's html documentation</a>. Last year, when I was at the <a href="http://asmeurersympy.wordpress.com/2011/07/17/the-scipy-2011-conference/">SciPy Conference</a>, Mateusz had an idea at the sprints to create an extension linking SymPy Live and Sphinx, so that the examples in Sphinx could be easily run in SymPy Live.  He didn't finish the extension, but I'm happy to report that thanks to David Li, who was also one of the aforementioned GCI students, the extension is now complete, and is running live on our <a href="http://docs.sympy.org/dev/">development docs</a>.  When SymPy 0.7.2 is released (soon I promise), it will be part of the oficial documentation.</p>
+<p>The best way to see how awesome this is is to visit the website and check it out.  You will need a modern browser (the latest version of Firefox, Safari, or Chrome will work, IE might work too).  Go to a page in the development docs with documentation examples, for example, <a href="http://docs.sympy.org/dev/tutorial.html#algebra">http://docs.sympy.org/dev/tutorial.html#algebra</a>, and click on one of the examples (or click on one of the green "Run code block in SymPy Live" buttons). You should see a console pop up from the bottom-right of the screen, and run your code.  For example:</p>
+<p><a href="2012/08/sympy-live-sphinx.png"><img class="size-full wp-image-1149" title="SymPy-Live-Sphinx" src="2012/08/sympy-live-sphinx.png" alt="" width="450" height="317"></a> Example of the SymPy Live Sphinx extension at <a href="http://docs.sympy.org/dev/tutorial.html#algebra">http://docs.sympy.org/dev/tutorial.html#algebra</a>. Click for larger image.</p>
+<p>You can access or hide the console at any time by clicking on the green box at the bottom-right of the page.  If you click on "Settings", you will see that you can change all the same settings as the regular SymPy Live console, such as the printer type, and the keys for execution and autocompletion.  Additionally, there is a new setting, "Evaluation Mode", which changes how the Sphinx examples are evaluated.  The default is "Evaluate".  In this mode, if you click on an example, it is executed immediately.  The other option is "Copy".  In this mode, if you click an example, it is copied to the console, but not executed right away. This way, you can edit the code to try something different.  Remember, this is a full fledged Python console running SymPy, so you can try literally anything</p>
+<p>So play with this and <a href="http://groups.google.com/group/sympy">let us know</a> what you think.  We would love to hear ways that we can improve the experience even further.  In particular, I think we should think about ways to make the "Copy" mode more user-friendly.  Suggestions welcome!  Also, please <a href="http://code.google.com/p/sympy/issues">report any bugs</a>.</p>
+<p>And one word of warning:  even though these are the development docs, SymPy Live is still running SymPy 0.7.1.  So some examples may not work until 0.7.2 is released, at which point we will update SymPy Live.</p>
+<p>I believe that this extension represents the future of interactive documentation. I hope you enjoy.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/07/09/emacs-7-months-later.html" class="u-url">Emacs: 7 months later</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/07/09/emacs-7-months-later.html" rel="bookmark"><time class="published dt-published" datetime="2012-07-09T05:24:05+00:00" itemprop="datePublished" title="Publication date">2012-07-09 05:24</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2012/07/09/emacs-7-months-later.html#disqus_thread" data-disqus-identifier="cache/posts/2012/07/09/emacs-7-months-later.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>In my <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/">final post</a> about my switching to Emacs, a <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/#comment-544">commenter</a>, Scott, asked me, "It has been a while since you started using Emacs. I’m just curious. How is your experience so far now that you have more experience and a more complete configuration?"  My reply was getting quite long, so I figured it would be best suited as a new post.</p>
+<p>The short answer is, mostly the same since I wrote that <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3">Vim vs. Emacs (part 3)</a>. Once you use something a lot, you notice all kinds of things that could use improvements. Some of them are just minor annoyances. For example, many interactive commands in Emacs (but not all!) require you to type out "yes" instead of just "y" as a confirmation. Others are more serious, like the need for a real replacement of SuperTab from vim.</p>
+<p>I actually didn't have much free time to work on configuring Emacs during the school year, and once the summer started, my computer died, and I've been working of an old laptop running Linux until I can get a new one. Fortunately, I had the foresight to put all my Emacs configuration <a href="https://github.com/asmeurer/dotfiles">online on GitHub</a>, so it was easy to get my configuration again. I've noticed that in Linux, the Alt key (i.e., Meta) is used for other things, so it doesn't work so well in Emacs (e.g., pressing Alt without any other keys sometimes activates a menu that removes the keyboard focus, and also C-M shortcuts don't seem to work at all).</p>
+<p>I've memorized very few keyboard shortcuts, even ones that might be useful to me (e.g., I don't remember the shortcut to jump to a matching parenthesis). Usually, if I am using some mode or something and I want to know how to do something, I just Google it, and generally find the answer within a few seconds.</p>
+<p>There are several major configuration issues that I've yet to address, either due to lack of time or because I couldn't find a suitable solution. A SuperTab replacement is one.  This is actually a big one, because scrolling through a file just to see what's there is getting older and older, as is searching just to jump to a function definition.  If anyone knows of a good way to do this, please let me know.  I mainly need it for Python files, but having it other modes as well would be nice.  Basically, I just want something that shows me all the class and function definitions in the file, in order, that I can easily select one and jump to it.</p>
+<p>Related to searching, searching in Emacs sucks. I'm using isearch+, which is an improvement, but it still bugs me that search does not wrap around by default. Also, for some reason, pressing delete doesn't delete the last character you typed, but the last character that it matched. That may sound minor, but I use it a lot, so it's really gotten on my nerves.</p>
+<p>Regular expression searching in Emacs is useless.  I can never get it to work (usually because of differences between () and ()).  What I really want is an interactive, user friendly, regular expression search/search and replace tool.  There's regexp-builder, but that's useless because once you build the regular expression, you have to manually copy it and paste it into the real regular expression search function to actually use it.  And it doesn't work with search and replace.</p>
+<p>This last semester I had a semester long project in C.  For that, flymake-mode was a godsend.  It requires a bit of manual configuration (you have to add something to your Makefile, and you have to add some stuff to .emacs as always to enable it by default), but once you do that, it just works.  If you don't know what this is, basically, it highlights the compiler errors in your source in real time, as you type it.  So instead of doing something stupid twenty times, and then compiling and finding them all, you do something stupid once, see the error, and don't do make the mistake any more.  It's also nice to close your editor and know that your code will compile.</p>
+<p>The Python mode I am mixed about.  On the one hand, it's really awesome how smart it is about indentation.  On the other hand, the syntax highlighting is just shy of what I want (granted, it's pretty good, but I want better than that).  For example, I want to be able to color docstrings, single quoted strings, and double quoted strings differently.  It would also be awesome to get some coloring in docstrings itself.  I'm thinking markdown mode for any text that's in a docstring, except for doctests, which are colored in Python mode (or some variant).</p>
+<p>Some things I've not really cared much about yet because I haven't used that type of file yet.  For example, I'm currently writing this post in Emacs, and just now noticing the deficiencies in html-mode (e.g., I want an easy way to select text and turn it into a link, just like in the WordPress editor).</p>
+<p>Finally, I've been trying to write my own theme.  That process has been slow and slightly painful.  Emacs is currently in the process of moving to themes, though, so this is to be expected.  When Emacs 24 is actually released I think it will be fair to judge how well this feature works.</p>
+<p>That's my wishlist (or most of it anyway).  But there are positive things too. auto-complete-mode, which I mentioned at the top of my previous blog post, is absolutely awesome.  I think this extension alone has made me more productive.</p>
+<p>Some things I take for granted, like automatic spell checking of strings and comments in Python (not enabled by default, but not hard to configure either).  Thanks to someone on an Emacs mailing list, I have the perfect automatic clearing of trailing whitespace, that automatically leaves your whitespace before the cursor in the buffer, but still writes the clear to the file (see my .emacs file from my dotfiles repo linked to above for details).</p>
+<p>I've been hoping to learn Emacs lisp, so that I could remedy many of these problems on my own, but so far I haven't really had the free time.  Lisp is a very confusing language, so it's not easy to jump into (compared to the language vim uses, which I found easy enough to hack on without knowing at all).</p>
+<p>Ultimately, I'm quite pleased with how user friendly Emacs is, and with how easy it is to find out how to do almost anything I want just by Googling it. Configuration is an uphill battle.  Emacs has a ton of great packages, many of which are included, but almost none are enabled by default.  Just today I discovered Ido mode, thanks to <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/#comment-543"> David Li</a>.  I feel that in the long term, as I learn Emacs Lisp, I can make it do whatever I want.  It provides a good baseline editing experience, and a good framework for configuring it to do whatever you want, and also enough people use it that 99% of the things you want are already done by somebody.</p>
+<!-- LocalWords:  SuperTab isearch flymake Makefile WordPress repo -->
+
+<p></p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu.html" class="u-url">How to install the development version of IPython Qtconsole and Notebook in Ubuntu</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu.html" rel="bookmark"><time class="published dt-published" datetime="2012-06-14T05:49:08+00:00" itemprop="datePublished" title="Publication date">2012-06-14 05:49</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu.html#disqus_thread" data-disqus-identifier="cache/posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>Both the awesome <a href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">IPython notebook</a> and <a href="http://ipython.org/ipython-doc/stable/interactive/qtconsole.html">Qtconsole</a> are in the Ubuntu repositories, so if you just want to use the stable released versions, you can just do</p>
+<p>[code language="bash"]</p>
+<p>sudo apt-get install ipython-notebook ipython-qtconsole</p>
+<p>[/code]</p>
+<p>and be on your way.  But the git development version has a lot of cool new features, and you may not want to wait for 0.13 to be released and make its way to the Ubuntu repos.  But you may be thinking that to use those you will have to figure out all the dependencies yourself.  Actually, it's pretty easy:</p>
+<p>[code language="bash"]</p>
+<h2>First install git, if you don't already have it</h2>
+<p>sudo apt-get install git</p>
+<h2>Then, clone the IPython repo, if you haven't already.</h2>
+<p>git clone git://github.com/ipython/ipython.git</p>
+<p>cd ipython</p>
+<h2>Now just install IPython with apt, then uninstall it.  The dependencies will remain</h2>
+<p>sudo apt-get install ipython-notebook ipython-qtconsole</p>
+<p>sudo apt-get remove ipython-notebook ipython -qtconsole ipython</p>
+<h2>Now install the IPython git version in such a way that will keep up to date when you pull</h2>
+<p>sudo python setup.py develop</p>
+<p>[/code]</p>
+<p>To update, just cd into that ipython directory and type <code>git pull</code>.  That's it.  Now type <code>ipython notebook</code> or <code>ipython qtconsole</code> to get the magic.</p>
+<p>EDIT: After you do this, <code>apt-get</code> will start bugging you every time that you use it that a bunch of packages are no longer needed.  These are the ones that you do need for the qtconsole and the notebook, so you should not autoremove them as it says.  Rather, set them as manually installed by copying the list of packages that it tells you about and <code>sudo apt-get install</code>ing them.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/01/13/vim-vs-emacs-part-3.html" class="u-url">Vim vs. Emacs (Part 3)</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/01/13/vim-vs-emacs-part-3.html" rel="bookmark"><time class="published dt-published" datetime="2012-01-13T23:01:39+00:00" itemprop="datePublished" title="Publication date">2012-01-13 23:01</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2012/01/13/vim-vs-emacs-part-3.html#disqus_thread" data-disqus-identifier="cache/posts/2012/01/13/vim-vs-emacs-part-3.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>See parts <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">1</a> and <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/">2</a>.</p>
+<p>Some more comments after using emacs for a while:</p>
+<div class="codehilite"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>I finally found the perfect tab completion solution. It took way too much searching for how awesome it is.  It's called <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://cx4a.org/software/auto-complete/manual.html"</span><span class="nt">&gt;</span>auto-complete-mode<span class="nt">&lt;/a&gt;</span>.  The best way to get an idea of what this is is to watch <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.youtube.com/watch?v=rGVVnDxwJYE"</span><span class="nt">&gt;</span>this screencast<span class="nt">&lt;/a&gt;</span>.  Basically, it shows you a completion list automatically.  It uses the <span class="nt">&lt;em&gt;</span>TAB<span class="nt">&lt;/em&gt;</span> key to do completion (to me, this is a no brainer, but for some reason, no other completion extension that I found did this, requiring you to do all kinds of nonsense in your .emacs file).  It's got cool features like simple fuzzy matching and intelligent matching (so the first completion is what you tend to use, instead of just the first one that matches).  To quote the author, "a goal of auto-complete-mode is to provide a system that does what users want without any command." I couldn't agree with that goal more. If you install it, I recommend adding <span class="nt">&lt;code&gt;</span>(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)<span class="nt">&lt;/code&gt;</span> to your .emacs, so that you can use M-TAB to force the completion menu to come up.  This generally happens automatically, but I think this is the only way to get fuzzy matching, for example. Actually, you can also just use <span class="nt">&lt;code&gt;</span>(ac-set-trigger-key "TAB")<span class="nt">&lt;/code&gt;</span>, which intelligently sets TAB to complete or indent, based on which one you more likely want.  This seems to work pretty well to me.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>Speaking of indenting, emacs has a pretty nice indentation feature for Python.  You just press <span class="nt">&lt;code&gt;</span>TAB<span class="nt">&lt;/code&gt;</span> repeatedly, and it cycles through all the syntactically legal indentations.  I find this to be more useful than the usual <span class="nt">&lt;code&gt;</span>TAB<span class="nt">&lt;/code&gt;</span> indents behavior of most editors. Note that by default, it won't automatically indent, even with trivial indentations (i.e., keeping the previous indentation).  This is easy to fix, though.  Just add <span class="nt">&lt;code&gt;</span>(define-key global-map (kbd "RET") 'newline-and-indent)<span class="nt">&lt;/code&gt;</span> to your .emacs file.  This will make <span class="nt">&lt;code&gt;</span>RET<span class="nt">&lt;/code&gt;</span> do the same thing as <span class="nt">&lt;code&gt;</span>C-j<span class="nt">&lt;/code&gt;</span>, i.e., basically the equivalent of <span class="nt">&lt;code&gt;</span>RET TAB<span class="nt">&lt;/code&gt;</span>.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>emacs comes with an extension that lets you work with version control systems, called VC.  I don't use it.  I don't like stuff messing with my git stuff behind my back (sounds like a good way to lose data to me), and I'm good enough with git commands straight that I don't need the help.
+</pre></div>
+
+
+<p>But unlike all the other hundreds of emacs features that I don't use, this one was seriously slowing down my workflow.  It adds three or four seconds to the startup time of emacs when loading from within a git repository.  So I did some Googling and added this to my .emacs file:</p>
+<p>[code]</p>
+<p>;; Disable all the version control stuff         </p>
+<p>;; Makes emacs load much faster inside git repos </p>
+<p>(setq vc-handled-backends nil)</p>
+<p>[/code]</p>
+<p>(<em>unrelated: Why doesn't WordPress support lisp as a language for syntax highlighting?</em>)</p>
+<p>This disables the version control stuff, making emacs load fast again (virtually as fast as vim, actually).</p>
+
+
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>Speaking of making emacs go faster, make sure you compile all your extensions into byte code.  For whatever reason, emacs doesn't do this automatically, even though compiled files run much faster, and it doesn't take very long.  The easiest way is to use <span class="nt">&lt;code&gt;</span>M-x byte-compile-file<span class="nt">&lt;/code&gt;</span> from within emacs.  Just make sure that if you modify the .el file that you recompile the byte code, or it will continue to use the old version.<span class="nt">&lt;/li&gt;</span>
+
+
+
+<span class="nt">&lt;li&gt;</span>I finally figured out how to enable mouse support.  For whatever reason, Googling got me nowhere with this, so I ended up asking on the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://lists.gnu.org/mailman/listinfo/help-gnu-emacs"</span><span class="nt">&gt;</span>help-gnu-emacs<span class="nt">&lt;/a&gt;</span> list, which was very helpful.  The solution is to put
+</pre></div>
+
+
+<p>[code]</p>
+<p>;; ===== Enable mouse support ====</p>
+<p>(require 'xt-mouse)                   </p>
+<p>(xterm-mouse-mode)</p>
+<p>[/code]</p>
+<p>in your .emacs file.  And then it just works.  It needs some tweaking (e.g., it doesn't play so well with momentum scrolling), but at least it works. I thought I was going to hang myself without mouse support. Because frankly, as good as the movement commands are, moving with the mouse is so much easier sometimes (the same is true for vim too, btw).</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>I compiled the git version of emacs (it's not very hard btw).  I did this to see if the mouse suport "bug" was fixed there, but I've gone ahead and kept using it, as it's nicer.  But I didn't figure out how to configure it to not load in an X window. So for now, I've aliased <span class="nt">&lt;code&gt;</span>emacs<span class="nt">&lt;/code&gt;</span> to <span class="nt">&lt;code&gt;</span>emacs -nw<span class="nt">&lt;/code&gt;</span>. I'm sure I just need to add some flag to <span class="nt">&lt;code&gt;</span>configure<span class="nt">&lt;/code&gt;</span>, but I haven't gotten around to looking it up yet.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>I found out how to allow editing in the Isearch mode (again, thanks to the help-gnu-emacs list).  You need to install the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/asmeurer/dotfiles/blob/master/.emacs.d/lisp/isearch%2B.el"</span><span class="nt">&gt;</span>isearch+<span class="nt">&lt;/a&gt;</span> extension, add the following to your .emacs,
+</pre></div>
+
+
+<p>[code]</p>
+<p>;; ===== isearch+ =====         </p>
+<p>(require 'isearch+)</p>
+<p>[/code]</p>
+<p>and most importantly, you need to edit the file and uncomment all the commmands you want to allow.  If you follow my link above, it goes to my personal dotfiles repo, where I've already done that.</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>On a related note, this is the first of several emacs extensions I've installed that I've edited the extension file itself for.  The rest, I just had to add some code to .emacs.  In most cases, there was already a variable or suggested code snippet to add to .emacs to get what I wanted.
+</pre></div>
+
+
+<p>On the other hand, with vim, I had to edit virtually every extension I installed to make it do what I want.  I'm not sure what this means, though.  It could be a statement about one of many things: how the emacs community provides nicer defaults, how the vim language is easier to use, and hence more inviting for me to edit the files, or how I haven't gotten around to messing with certain things yet.</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>If you do a lot of work with LaTeX, check out <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.gnu.org/software/auctex/"</span><span class="nt">&gt;</span>AUCTeX<span class="nt">&lt;/a&gt;</span>. I haven't used it enough yet to say much about it, but from what I've played around with, it's pretty awesome.  And if you use a windowed version of emacs, it's got a really awesome preview mode.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>If you're bored, check out the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.dr-qubit.org/predictive/predictive-user-manual/html/index.php"</span><span class="nt">&gt;</span>predictive<span class="nt">&lt;/a&gt;</span> extension.  It's actually not as helpful as you'd think (unlike the very similar auto-complete-mode module mentioned above).  But it's kind of cool to turn on and play around with when you're typing something.  Maybe you'll learn new words or something.<span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>I could go on and on.  I haven't mentioned the most basic customizations (like how to setup four-space tabs).  If you are starting to use emacs, I recommend going through <span class="nt">&lt;code&gt;</span>M-x customize<span class="nt">&lt;/code&gt;</span>, and reading my <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/asmeurer/dotfiles/blob/master/.emacs"</span><span class="nt">&gt;&lt;code&gt;</span>.emacs<span class="nt">&lt;/code&gt;&lt;/a&gt;</span> file.  And my best advice: if you want emacs to do something, first do <span class="nt">&lt;code&gt;</span>M-x customize<span class="nt">&lt;/code&gt;</span> and search for what you want (EDIT: apparently searching customize requires emacs 24, i.e., the development version).  If you don't find what you want there (and you will surprisingly often), search Google.  There are so many emacs users, that the chances of someone else wanting what you want are very likely. I've found the results from the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.emacswiki.org/"</span><span class="nt">&gt;</span>emacs wiki<span class="nt">&lt;/a&gt;</span> to be particularly helpful. And one more thing: if you find an extension you like, double check first to see if it's not already included in emacs. Emacs seems to like including good extensions in future releases, so an older extension has a good chance of already being included.<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+<p>Some emacs questions:</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>I tried <span class="nt">&lt;code&gt;</span>(define-abbrev global-abbrev-table "Ondrej" "Ondřej")<span class="nt">&lt;/code&gt;</span>, so that when I type Ondrej it give me Ondřej.  But it doesn't work.  Is this a bug or what? If I do <span class="nt">&lt;code&gt;</span>(define-abbrev global-abbrev-table "foo" "bar")<span class="nt">&lt;/code&gt;</span> and type "foo", it turns into "bar", but the above leaves Ondrej alone. <span class="nt">&lt;em&gt;</span>EDIT: I guess this was an emacs bug.  It doesn't seem to be there any more (perhaps it was fixed with the git version or something).<span class="nt">&lt;/em&gt;&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>Is there a way to reload .emacs without closing emacs? I'm doing that a lot these days. <span class="nt">&lt;em&gt;</span>EDIT: I found it. Do <span class="nt">&lt;code&gt;</span>M-x load-file RET ~/.emacs<span class="nt">&lt;/code&gt;&lt;/em&gt;&lt;/li&gt;</span>
+
+<span class="nt">&lt;li&gt;</span>Is there a good emacs equivalent of the vim <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.vim.org/scripts/script.php?script_id=273"</span><span class="nt">&gt;</span>tag list plugin<span class="nt">&lt;/a&gt;</span>  (thanks for commenter Scott for pointing me to that in the first place)?  I just want something that lists all the class and function definitions in a Python file in order, so I can easily jump to the one I want, or just get an overview of the file.  <span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+<p>This Tuesday will mark the point where I will have spend as long using emacs as I did using vim. But already, I feel more competent with emacs.  I won't repeat what I said in my last post, but I just want to say that the ability to edit and write at the same time makes me way more productive.  The fact that it uses keyboard shortcuts that I'm already used to probably helps a lot too.  Even so, I've not used any kind of cheat sheet for emacs (since I never really found any that were any good), and yet I feel like I've memorized more key commands now than I ever did with vim, for which I did use a <a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">cheat sheet</a>.  </p>
+<p>So I really don't see myself going back to vim at this point.</p>
+<p>I'm actually surprised.  Virtually everyone I know who uses a command line editor uses vim.  It's definitely the more popular of the two.  But having tried both, I can only speculate as to why.  Vim has a much higher learning curve than emacs.  Everybody grows up learning how to write text in editors like Microsoft Word, TextEdit, Notepad, etc., that all work fundamentally like emacs: if you type text, it enters the text.  If you want to do advanced editing with the keyboard, you hold down some meta keys and type chorded keyboard shortcuts.  The vim modal editing methodology is so different from this, that it surprises me that so many people go to the trouble of learning it (I mean, to the point that they are more efficient with it).  I can see the benefit over GUI editors, which have nothing on either vim or emacs with regards to customization, or just the plain editing power that is really necessary for coding. My guesses why people use vim:</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>They are shown vim first, so just use it.
+</pre></div>
+
+
+
+
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>They are turned off by the massiveness of emacs (it seems contradictory to me, since the whole point of using a command line editor is to get more power, but I could see it).
+</pre></div>
+
+
+
+
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>They are turned off by emacs lisp.
+</pre></div>
+
+
+
+
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>Some combination of those.<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+
+<p>Maybe the vim users out there could comment why they use vim.  Am I missing something?  Or are your heads just wired differently from mine? And if you use emacs (or anything else), I'd love to hear from you too?</p>
+<p>At any rate, I recommend that anyone who wants to give command line editors a chance do what I did: learn both vim and emacs.  My blog posts should be enough to give you some good advice.  I went cold-turkey, and I recommend that you do too, but only do it if you won't have any important editing to do for a few weeks, as your editing rate will slow down a lot as you are learning for both editors.  And even though I think I am going to stick with emacs, learning vim was still valuable.  Unlike emacs, vi is part of the POSIX standard, so it's included in pretty much every UNIX distribution.  I'll be glad when I find myself on a minimal command line and know how to use a decent text editor.  And anyway, you can't really know which one will be your way until you try them both.  I really thought I would end up using vim, as it was so popular among all the people I know who use command line editors. But I guess there is only <a href="http://www.dina.dk/~abraham/religion/">One True Editor</a>.</p>
+<p><strong>EDIT:</strong> I found out how to make emacs really fast.  The key is to run one process of emacs in daemon mode, and have the rest connect to that.  Then you only have to wait for the startup once (per computer session).  To do it, just set your <code>EDITOR</code> to <code>'emacsclient -a "" -nw'</code> (and you might also want to alias <code>emacs</code> to that as well).  What this does is connect to the emacs daemon.  The <code>-a ""</code> starts one if it isn't already started (you can also do this yourself with <code>emacs --daemon</code>.  If you only want to use the daemon version if you've specifically started it, replace <code>""</code> with <code>emacs</code>.  This will connect to the daemon if it's running, and otherwise just start a new emacs process.  </p>
+<p>The <code>-nw</code> keeps it from running in window mode.  Remove this if you use the GUI version of emacs.  This is necessary to make it work correctly with multiple tabs.  This is so fast that you should never really even need to use <code>C-z</code> to quickly exit emacs.  <code>C-x C-c</code> is just fine, because reopening will be instantaneous.  I like this because I was starting to accumulate background emacs processes that I forgot about.</p>
+<p>This probably requires a fairly new version of emacs, possibly even the development version.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/01/03/vim-vs-emacs-part-2.html" class="u-url">Vim vs. Emacs (Part 2)</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/01/03/vim-vs-emacs-part-2.html" rel="bookmark"><time class="published dt-published" datetime="2012-01-03T07:30:37+00:00" itemprop="datePublished" title="Publication date">2012-01-03 07:30</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2012/01/03/vim-vs-emacs-part-2.html#disqus_thread" data-disqus-identifier="cache/posts/2012/01/03/vim-vs-emacs-part-2.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>As I noted in <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">part 1</a>, I have decided to switch to a command line text editor.  I decided that, to be fair, I would try both vim and emacs.  And to force myself to learn them, I decided to use them cold-turkey.  </p>
+<p>Since I'm going cold-turkey, I am doing this over my break from classes, so that I can weed out any difficulties during a period when I can live with slow text editing if necessary.  This is a one month break.  I have reached (roughly) the half way point.  For the first half, I used nothing but vim to edit text.  Now, I will use nothing but emacs.</p>
+<p>Now that I've stopped using vim (for now anyway), my view of it isn't much different from what I wrote in the first part.  A lot of things there were addressed by commenters (or rather commenter).  I still feel that it's not an a method of text editing that fits my head.  My entire life, I've used text editors where typing inserts text, and various control characters do things like move around faster.  </p>
+<p>Enter emacs. It does exactly this.  Also a ton more.</p>
+<p>I've only been using emacs for two days, but here are my impressions so far:</p>
+<div class="codehilite"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;&lt;strong&gt;</span>The tutorial is better.<span class="nt">&lt;/strong&gt;</span>  When you start emacs, it tells you how to start the tutorial.  Just type <span class="nt">&lt;code&gt;</span>C-h t<span class="nt">&lt;/code&gt;</span> (if you don't already know, in emacs <span class="nt">&lt;code&gt;</span>C-<span class="nt">&lt;/code&gt;</span> means <span class="nt">&lt;code&gt;</span>CTRL-<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>M-<span class="nt">&lt;/code&gt;</span> means <span class="nt">&lt;code&gt;</span>ALT-<span class="nt">&lt;/code&gt;</span>).  Like I said last time, the very first thing you learn is how to scroll by more than one line at a time.  That turns out to be a very useful thing to do.  Also, the emacs tutorial did a better job of explaining how to use multiple files at once in emacs, which is something that I still don't really know how to do very well in vim.
+</pre></div>
+
+
+<p>I have to give the vim tutorial some credit for one thing, though.  It has better interactive examples.  For example, in the vim tutorial, you have stuff like </p>
+<p>[code]
+  1. Move the cursor to the second line in the phrase below.
+  2. Type  dd  to delete the line.
+  3. Now move to the fourth line.
+  4. Type   2dd   to delete two lines.</p>
+<p>---&gt;  1)  Roses are red,</p>
+<p>---&gt;  2)  Mud is fun,</p>
+<p>---&gt;  3)  Violets are blue,</p>
+<p>---&gt;  4)  I have a car,</p>
+<p>---&gt;  5)  Clocks tell time,</p>
+<p>---&gt;  6)  Sugar is sweet</p>
+<p>---&gt;  7)  And so are you.</p>
+<p>[/code]</p>
+<p>whereas in the emacs tutorial, you just have</p>
+<p>[code]</p>
+<p>&gt;&gt; Kill a line, move around, kill another line.
+   Then do C-y to get back the second killed line.
+   Then do M-y and it will be replaced by the first killed line.
+   Do more M-y's and see what you get.  Keep doing them until
+   the second kill line comes back, and then a few more.
+   If you like, you can try giving M-y positive and negative
+   arguments.
+[/code]</p>
+<p>which is a little more vague.  So I have to give vim credit for that.  </p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>Everything's a buffer.<span class="nt">&lt;/strong&gt;</span> This line from the emacs tutorial really stuck with me: "ANY text you see in an Emacs window is always part of some buffer."  Emacs has really a awesome editing model, even simple things like <span class="nt">&lt;code&gt;</span>M-f<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>M-b<span class="nt">&lt;/code&gt;</span> to move around words at a time, or <span class="nt">&lt;code&gt;</span>M-DEL<span class="nt">&lt;/code&gt;</span> to delete whole words make things <span class="nt">&lt;strong&gt;</span>way<span class="nt">&lt;/strong&gt;</span> faster.  Vim of course has all of these too, albiet in a different way, but they aren't everywhere.  In emacs, everything is a buffer, which just means that everything supports all the standard emacs commands.  So if you type <span class="nt">&lt;code&gt;</span>M-x<span class="nt">&lt;/code&gt;</span> (roughly the equivalent of vim's <span class="nt">&lt;code&gt;</span>:<span class="nt">&lt;/code&gt;</span>) and start typing a command, you can move around and edit your command with emacs commands.  One of the things that bothered me about vim was that when I was typing something with <span class="nt">&lt;code&gt;</span>:<span class="nt">&lt;/code&gt;</span>, I couldn't use vim's text moving/modifying commands to manipulate the text.  Typing ESC just canceled the command.
+</pre></div>
+
+
+<p>Exceptions: There are at least two exceptions I've found to this rule.  First, if you do a search with <code>C-s</code> or <code>C-r</code>, no control commands work.  If you type a search string, and then type <code>M-DEL</code> to try to delete the last word in your search string, you will instead delete the word where the cursor is!  The solution I think is to use something like <code>M-x re-builder</code> instead.  This was a little slow in my tests.</p>
+<p>Second, the emacs manual is presented in the <code>info</code> program, which uses completely different key commands from every other program.  This irked me quite a bit, because as soon as I finished the emacs tutorial, it pointed me to the manual, which was in <code>info</code>.  Then, the first thing in <code>info</code> is a tutorial on how to use <code>info</code>!  I opted to skip this.  If I need any information on emacs, I'll just do a Google search anyway, so I found this to be a waste of time.</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>It's a little slower.<span class="nt">&lt;/strong&gt;</span> I do notice a speed difference between emacs and vim.  vim is much more lightweight, and it shows.  Starting up emacs takes a second or two.  Also, since a lot of the features are more interactive, they suffer from a speed delay.  It's not nearly slow enough to be a serious issue, though, and it's still way faster than the GUI program I was using before (start up time).
+</pre></div>
+
+
+<p>The emacs tutorial suggests using <code>C-z</code> whenever you want to only temporarily close emacs.  This seems like a good idea, and has worked pretty well for me so far (though I still usually close the whole thing with <code>C-x C-c</code> out of habit).</p>
+<p>On a related note, I noticed that doing type-ahead while waiting for emacs to start up didn't always work, whereas it always worked in vim (I do this, e.g., when waiting for the editor to start up when writing commit messages).</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>It's way more user-friendly.<span class="nt">&lt;/strong&gt;</span> Note that this is of course a relative term.  I mean more user-friendly than vim, and pretty user-friendly for a command line program.  Obviously, the most user-friendly text editors are the GUI ones used by the majority of the population (for that very reason).  Actually, both vim and emacs are user-unfriendly in that if you accidentally open them and don't know what they are or how to use them, you have no idea how to close them.  But even <span class="nt">&lt;code&gt;</span>less<span class="nt">&lt;/code&gt;</span> (i.e., <span class="nt">&lt;code&gt;</span>man<span class="nt">&lt;/code&gt;</span>) is technically like this.
+</pre></div>
+
+
+<p>I'm not even referring to the different editing "modes" of the two editors, though you could easily argue that emacs style editing is more user-friendly than vim style editing. What I mean here is that emacs interaction is nice. When you type <code>:</code> in vim, start typing a command, and type <code>TAB</code>, it enters the first completion, regardless if it's unique.  Pressing <code>TAB</code> multiple times give the rest.  In emacs, if you type <code>M-x</code> and start typing a command and type <code>TAB</code>, it pops up a temporary window with the list of all completions.  It even colors the next character, so you can easily see what to type next to get what you want.  As soon as you enter the command, the window disappears. (yes, I know about <code>CTRL-D</code> in vim, but to me tab completion should <em>always</em> work like it does in bash: complete characters if and only if they are unique in the list of completions)</p>
+<p>By the way, when I said everything's a buffer, I mean everything.  If you want, you can exit the <code>M-x</code> entry (type <code>C-g</code>), type <code>C-x C-b</code> to show the list of buffers, <code>C-x o</code> to switch to it, scroll down to "Completions", press Enter, and actually get in the completion list, as a buffer (there's probably a less complicated way to get to it, by the way).  You can then do whatever your heart fancies with it (save it to a file, copy it, whatever).</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>Customization is harder.<span class="nt">&lt;/strong&gt;</span> This was expected, since I already knew that emacs used lisp.  vim uses a language that is really easy to understand.  I was able to modify all the vim plugins I installed very easily.  If you want to change a setting globally in vim, just Google it and add one line to your .vimrc.   In emacs, everything is in Emacs Lisp.  I suppose prior experience with Lisp would probably help here.
+</pre></div>
+
+
+<p>In the vim tutorial, near the end, it told how to create a .vimrc file, and even gave a very useful sample one as a starter.  In emacs, it took me a while to figure out how to do the equivalent (it took me a few Google searches just to figure out that the name of the configuration file in emacs is .emacs).  </p>
+<p>Actually, the emacs equivalent is way better than in vim, but it isn't really mentioned anywhere. It took me probably a dozen Google searches before I learned about it (granted, I was looking for things in the same way I did for vim, lines to add to .emacs). What you have to do is type <code>M-x configure</code>.  This opens what is basically a huge preferences dialog for emacs.  You can then go through and set just about every settable emacs setting from there.  The interface is very nice, as it's interactive and tells you all about each setting.  And you never have to touch Lisp.  I'm still going through it, so I can't comment more on it yet.  But I recommend doing <code>M-x configure</code> as soon as you have finished the tutorial and have gotten used to editing with emacs, as you are invariably going to want to change some things (though I should note that emacs generally has nicer defaults than vim).</p>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;&lt;strong&gt;</span>Better text editing methodology?<span class="nt">&lt;/strong&gt;</span> Like I've already mentioned a bunch of times, the emacs editing model seems to fit my head better than the vim model.  In emacs, you type text, and it inserts the text.  If you want to do some advanced modification or move around, you type a control sequence.  In vim, you type characters, and it does modifications or moves around.  If you want to type text, you type <span class="nt">&lt;code&gt;</span>i<span class="nt">&lt;/code&gt;</span> (or one of a few other characters) and type it.  Then, if you want to move around or modify the text, you have to press <span class="nt">&lt;code&gt;</span>ESC<span class="nt">&lt;/code&gt;</span>.  This so-called "modular editing" doesn't seem to work for me.  For one thing, I like to rapidly switch back and forth between these two "modes" (editing and inserting) when I write things.  I type too fast and write something wrong, and have to delete some stuff. The <span class="nt">&lt;code&gt;</span>M-DEL<span class="nt">&lt;/code&gt;</span> emacs command is probably my most used (this also works in Mac OS X text dialogs, so I'm used to it already).  In vim, there is <span class="nt">&lt;code&gt;</span>CTRL-w<span class="nt">&lt;/code&gt;</span> and a few others, but if I want to do something more advanced, like rearranging a sentence, then half of my key presses would be <span class="nt">&lt;code&gt;</span>ESC<span class="nt">&lt;/code&gt;</span> or <span class="nt">&lt;code&gt;</span>i<span class="nt">&lt;/code&gt;</span>, i.e., just moving between the modes.  In emacs, I can always have my pinky by Control and Alt (especially as soon as I remap CAPS-LOCK to Control).
+</pre></div>
+
+
+<p>Also, it really irks me how in vim, if you are at the end of a line and press <code>l</code> (or right-arrow), instead of moving to the beginning of the next line, it beeps!  In emacs, if you are at the end of a the line and type <code>C-f</code>, it moves to the beginning of the next line (actually, it technically moves just beyond the line, in case you want to append, which is another annoying thing about vim: you have to use <code>A</code>, not <code>i</code>,  to add text to the end of a line). </p>
+<p>Well, that's it for now.  I will hold off on the questions until after I go through all the customizations, as it seems that, unlike vim, emacs has many things already built-in (but we already knew that, didn't we :).  So I have just one question for readers: does anyone know of a really good emacs cheatsheet?  The <a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">one I used for vim</a> was really awesome, but I haven't found anything equal for emacs.  I find myself searching the tutorial whenever I forget something, which is not very efficient, so I would appreciate something better. Otherwise, I'll just find something decent and print it out, as it would be better than nothing.</p>
+<p>And if anyone cares, you can see what I've got for my .emacs file so far at <a href="https://github.com/asmeurer/dotfiles/blob/master/.emacs">https://github.com/asmeurer/dotfiles/blob/master/.emacs</a>.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/01/01/2011-in-review.html" class="u-url">2011 in review</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/01/01/2011-in-review.html" rel="bookmark"><time class="published dt-published" datetime="2012-01-01T00:00:49+00:00" itemprop="datePublished" title="Publication date">2012-01-01 00:00</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2012/01/01/2011-in-review.html#disqus_thread" data-disqus-identifier="cache/posts/2012/01/01/2011-in-review.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>The WordPress.com stats helper monkeys prepared a 2011 annual report for this blog.</p>
+    <div style="background:url('wp-content/mu-plugins/annual-reports/img/emailteaser.jpg') no-repeat center center;height:300px;"></div>
+    <p>Here's an excerpt:</p>
+<div class="codehilite"><pre><span class="nt">&lt;blockquote&gt;</span>The concert hall at the Syndey Opera House holds 2,700 people.  This blog was viewed about <span class="nt">&lt;strong&gt;</span>11,000<span class="nt">&lt;/strong&gt;</span> times in 2011.  If it were a concert at Sydney Opera House, it would take about 4 sold-out performances for that many people to see it.<span class="nt">&lt;/blockquote&gt;</span>
+<span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/2011/annual-report/"</span><span class="nt">&gt;</span>Click here to see the complete report.<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+</pre></div>
+
+
+<p></p>
+</div>
+    </div>
+    </article>
+</div>
+
+        <nav class="postindexpager">
+        <ul class="pager">
+            <li class="previous">
+                <a href="index.html" rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-6.html" rel="next">Older posts</a>
+            </li>
+        </ul>
+        </nav>
+
+
+        
+       <script>var disqus_shortname="nikolademo";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="assets/js/all-nocdn.js"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>

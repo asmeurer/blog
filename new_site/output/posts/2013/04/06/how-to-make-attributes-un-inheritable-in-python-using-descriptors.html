@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>How to make attributes un-inheritable in Python using descriptors | Aaron Meurer's SymPy Blog</title>
+
+    
+            <link href="../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurersympy.wordpress.com/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="How to make attributes un-inheritable in Python using descriptors">
+        <meta name="og:url" content="http://asmeurersympy.wordpress.com/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors.html">
+            <meta name="og:description" content="For https://github.com/sympy/sympy/pull/1969, and previous work at https://github.com/sympy/sympy/pull/1901, we added the ability for the SymPy doctester to run or not run doctests conditionally depen">
+        <meta name="og:site_name" content="Aaron Meurer's SymPy Blog">
+        <meta name="og:type" content="article">
+
+    
+
+    
+
+
+
+</head>
+<body>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://asmeurersympy.wordpress.com/">Aaron Meurer's SymPy Blog</a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li>
+<a href="../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../rss.xml">RSS</a>
+
+            </li>
+</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="how-to-make-attributes-un-inheritable-in-python-using-descriptors.wp" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="#" class="u-url">How to make attributes un-inheritable in Python using descriptors</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="#" rel="bookmark"><time class="published dt-published" datetime="2013-04-06T02:49:13+00:00" itemprop="datePublished" title="Publication date">2013-04-06 02:49</time></a></p>
+                <p class="commentline">
+        
+    <a href="how-to-make-attributes-un-inheritable-in-python-using-descriptors.html#disqus_thread" data-disqus-identifier="cache/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors.html">Comments</a>
+
+
+        </p>
+</div>
+        
+
+    </header>
+
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>For https://github.com/sympy/sympy/pull/1969, and previous work at https://github.com/sympy/sympy/pull/1901, we added the ability for the SymPy doctester to run or not run doctests conditionally depending on whether or not required external dependencies are installed. This means that for example we can doctest all the plotting examples without them failing when matplotlib is not installed. </p>
+<p>For functions, this is as easy as decorating the function with <code>@doctest_depends</code>, which adds the attribute <code>_doctest_depends_on</code> to the function with a list of what dependencies the doctest depends on. The doctest will then not run the doctest unless those dependencies are installed.</p>
+<p>For classes, this is not so easy. Ideally, one could just define <code>_doctest_depends_on</code> as an attribute of the class. However, the issue is that with classes, we have inheritance. But if class <code>A</code> has a docstring with a doctest that depends on some modules, it doesn't mean that a subclass <code>B</code> of <code>A</code> will have a doctest that does.  </p>
+<p>Really, what we need to do is to decorate the docstring itself, not the class. Unfortunately, Python does not allow adding attributes to strings</p>
+<p>[code language="py"]</p>
+<p>&gt;&gt;&gt; a = ""</p>
+<p>&gt;&gt;&gt; a.x = 1</p>
+<p>Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AttributeError: 'str' object has no attribute 'x'</p>
+<p>[/code]</p>
+<p>So what we have to do is to create a attribute that doesn't inherit.  </p>
+<p>I had for some time wanted to give <a href="http://docs.python.org/2/howto/descriptor.html">descriptors</a> in Python a try, since they are a cool feature, but also the second most complicated feature in Python (the first is metaclasses). If you don't know what a descriptor is, I recommend reading <a href="http://python-history.blogspot.com/2010/06/inside-story-on-new-style-classes.html?m=1">this blog post</a> by Guido van Rossum, the creator of Python. It's the best explanation of the feature there is.  </p>
+<p>Basically, Python lets attributes define what happens when they are accessed (like <code>a.x</code>).  You may already know that objects can define how their attributes are accessed via <code><strong>getattr</strong></code>. This is different. With descriptors, the <em>attributes themselves</em> define what happens.  This may sound less useful, but in fact, it's a very core feature of the language. </p>
+<p>If you've ever wondered how <code>property</code>, <code>classmethod</code>, or <code>staticmethod</code> work in Python, the answer is descriptors. Basically, if you have something like</p>
+<p>[code language="py"]</p>
+<p>class A(object):
+    def f(self):
+        return 1
+    f = property(f)
+[/code]</p>
+<p>Then <code>A().f</code> magically calls what would normally be <code>A().f()</code>. The way it works is that <code>property</code> defines the <code><strong>get</strong></code> method, which returns <code>f(obj)</code>, where <code>obj</code> is the calling object, here <code>A()</code> (remember in Python that the first argument of a method, usually called <code>self</code> is the object that calls the method).  </p>
+<p>Descriptors can allow method to define arbitrary behavior when called, set, or deleted.  To make an attribute inaccessible to subclasses, then, you just need to define a descriptor that prevents the attribute from being accessed if the class of the calling object is not the original class.  Here is some code:</p>
+<p>[code language="py"]</p>
+<p>class nosubclasses(object):
+    def <strong>init</strong>(self, f, cls):
+        self.f = f
+        self.cls = cls
+    def <strong>get</strong>(self, obj, type=None):
+        if type == self.cls:
+            if hasattr(self.f, '<strong>get</strong>'):
+                return self.f.<strong>get</strong>(obj, type)
+            return self.f
+        raise AttributeError
+[/code]</p>
+<p>it works like this</p>
+<p>[code language="py"]</p>
+<p>In [2]: class MyClass(object):
+   ...:     x = 1
+   ...:</p>
+<p>In [3]: MyClass.x = nosubclasses(MyClass.x, MyClass)</p>
+<p>In [4]: class MySubclass(MyClass):
+   ...:     pass
+   ...:</p>
+<p>In [5]: MyClass.x</p>
+<p>Out[5]: 1</p>
+<p>In [6]: MyClass().x</p>
+<p>Out[6]: 1</p>
+<p>In [80]: MySubclass.x</p>
+<hr>
+<p>AttributeError                            Traceback (most recent call last)</p>
+<p>&lt;ipython-input-80-2b2f456dd101&gt; in &lt;module&gt;()</p>
+<p>----&gt; 1 MySubclass.x</p>
+<p>&lt;ipython-input-51-7fe1b5063367&gt; in <strong>get</strong>(self, obj, type)
+      8                 return self.f.<strong>get</strong>(obj, type)
+      9             return self.f
+---&gt; 10         raise AttributeError</p>
+<p>AttributeError:</p>
+<p>In [81]: MySubclass().x</p>
+<hr>
+<p>AttributeError                            Traceback (most recent call last)</p>
+<p>&lt;ipython-input-81-93764eeb9948&gt; in &lt;module&gt;()</p>
+<p>----&gt; 1 MySubclass().x</p>
+<p>&lt;ipython-input-51-7fe1b5063367&gt; in <strong>get</strong>(self, obj, type)
+      8                 return self.f.<strong>get</strong>(obj, type)
+      9             return self.f
+---&gt; 10         raise AttributeError</p>
+<p>AttributeError:</p>
+<p>[/code]</p>
+<p>Note that by using the third argument to <code><strong>get</strong></code>, this works regardless if the attribute is accessed from the class or the object. I have to call <code><strong>get</strong></code> on <code>self.f</code> again if it has it to ensure that the right thing happens if the attribute has other descriptor logic defined (and note that regular methods have descriptor logic defined---that's how they convert the first argument <code>self</code> to implicitly be the calling object).</p>
+<p>One could easily make class decorator that automatically adds the attribute to the class in a non-inheritable way:</p>
+<p>[code language="py"]</p>
+<p>def nosubclass_x(args):
+    def _wrapper(cls):
+        cls.x = nosubclasses(args, cls)
+        return cls
+    return _wrapper
+[/code]</p>
+<p>This automatically adds the property <code>x</code> to the decorated class with the value given in the decorator, and it won't be accessible to subclasses:</p>
+<p>[code language="py"]</p>
+<p>In [87]: @nosubclass_x(1)
+   ....: class MyClass(object):
+   ....:     pass
+   ....:</p>
+<p>In [88]: MyClass().x</p>
+<p>Out[88]: 1</p>
+<p>In [89]: MySubclass().x</p>
+<hr>
+<p>AttributeError                            Traceback (most recent call last)</p>
+<p>&lt;ipython-input-89-93764eeb9948&gt; in &lt;module&gt;()</p>
+<p>----&gt; 1 MySubclass().x</p>
+<p>&lt;ipython-input-51-7fe1b5063367&gt; in <strong>get</strong>(self, obj, type)
+      8                 return self.f.<strong>get</strong>(obj, type)
+      9             return self.f
+---&gt; 10         raise AttributeError</p>
+<p>AttributeError:</p>
+<p>[/code]</p>
+<p>For SymPy, we can't use class decorators because we still support Python 2.5, and they were introduced in Python 2.6. The best work around is to just call <code>Class.attribute = nosubclasses(Class.attribute, Class)</code> after the class definition. Unfortunately, you can't access a class inside its definition like you can with functions, so this has to go at the end. </p>
+<p><strong>Name Mangling</strong></p>
+<p>After coming up with all this, I remembered that Python already has a pretty standard way to define attributes in such a way that subclasses won't have access to them. All you have to do is use two underscores before the name, like <code><strong>x</strong></code>, and it will be <a href="http://docs.python.org/2/reference/expressions.html#atom-identifiers">name mangled</a>. This means that the name will be renamed to <code>_classnamex</code> outside the class definition. The name will not be inherited by subclasses.  There are some subtleties with this, particularly for strange class names (names that are too long, or names that begin with an underscore). I <a href="http://stackoverflow.com/q/15845931/161801">asked about this on StackOverflow</a>. The best answer is that there was a function in the standard library, but it was removed in Python 3. My tests reveal that the behavior is different in CPYthon than in PyPy, so getting it right for every possible class is nontrivial. The descriptor thing should work everywhere, though.  On the other hand, <code>getattr(obj, '_' + obj.<strong>class</strong>.<strong>name</strong> + attributename)</code> will work 99% of the time, and is much easier both to write and to understand than the descriptor. </p>
+</div>
+    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../../03/03/when-does-xlogy-ylogx.html" rel="prev" title="When does x^log(y) = y^log(x)?">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../07/02/scipy-2013.html" rel="next" title="SciPy 2013">Next post</a>
+            </li>
+        </ul>
+
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+            disqus_url="http://asmeurersympy.wordpress.com/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors.html",
+        disqus_title="How to make attributes un-inheritable in Python using descriptors",
+        disqus_identifier="cache/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section>
+    
+
+</article>
+
+        
+       <script>var disqus_shortname="nikolademo";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2014         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../../../assets/js/all-nocdn.js"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    
+
+</body>
+</html>
