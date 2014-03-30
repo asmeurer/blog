@@ -77,11 +77,11 @@ Out[10]:
 
 
 
-We have to manually build up the differential extension (<code>[7]</code>).  The first element is $latex x$, which is already there.  Next, we add $latex t_1 = \tan{x}$, and finally $latex t = e^{\tan{x}} = e^{t_1}$.  The third argument of <code>integrate_hyperexponential()</code> is what gives these variables their identities: their derivatives.  The fourth argument is the list of the extension symbols, and the last argument is a list of the functions for which the symbols stand for, in reverse order (because we have to back substitute in the solution in reverse order).  
+We have to manually build up the differential extension (<code>[7]</code>).  The first element is $x$, which is already there.  Next, we add $t_1 = \tan{x}$, and finally $t = e^{\tan{x}} = e^{t_1}$.  The third argument of <code>integrate_hyperexponential()</code> is what gives these variables their identities: their derivatives.  The fourth argument is the list of the extension symbols, and the last argument is a list of the functions for which the symbols stand for, in reverse order (because we have to back substitute in the solution in reverse order).  
 
 
 
-The unevaluated Integral in the solution is due to the recursive nature of the Risch algorithm.  Eventually, an outer function in the algorithm will recursively integrate until it reaches the ground field, $latex \mathbb{Q}$.  It will also do the proper preparsing automatically as well.  The second element of the solution, <code>True</code>, indicates that the integral is elementary, and thus the given solution is the complete integral of the original integrand, which we can see ($latex \int (1 + \tan^2{x})dx=\tan{x}$).  
+The unevaluated Integral in the solution is due to the recursive nature of the Risch algorithm.  Eventually, an outer function in the algorithm will recursively integrate until it reaches the ground field, $\mathbb{Q}$.  It will also do the proper preparsing automatically as well.  The second element of the solution, <code>True</code>, indicates that the integral is elementary, and thus the given solution is the complete integral of the original integrand, which we can see ($\int (1 + \tan^2{x})dx=\tan{x}$).  
 
 
 
@@ -144,7 +144,7 @@ Out[8]: (0, False)
 
 
 
-Here the second argument of the solution is <code>False</code>, which indicates that the algorithm has proven that the integral of $latex e^{-x^2}$ is not elementary!   The first argument 0 indicates that actually it is the integral of $latex e^{-x^2} - \frac{d}{dx}(0)$ that is not elementary, i.e., the Risch algorithm will reduce an integrand into an integrated function part and non-elementary part.  For example:
+Here the second argument of the solution is <code>False</code>, which indicates that the algorithm has proven that the integral of $e^{-x^2}$ is not elementary!   The first argument 0 indicates that actually it is the integral of $e^{-x^2} - \frac{d}{dx}(0)$ that is not elementary, i.e., the Risch algorithm will reduce an integrand into an integrated function part and non-elementary part.  For example:
 
 
 
@@ -205,7 +205,7 @@ Out[8]:
 
 
 
-This indicates that the integral of $latex (\frac{e^x}{\tan{x}} + \frac{e^x}{1 + e^x}) - \frac{d}{dx}(\log{(1 + e^x)}) = \frac{e^x}{\tan{x}}$ is not elementary.  That is one advantage that the new algorithm will have over the present one.  Currently, the present algorithm just returns an unevaluated Integral for the above <code>rd</code>, but the new one will be able to return $latex \log{(1 + e^x)} + \int{\frac{e^x}{\tan{x}}dx}$.  It will be able to do this even if rd were rewritten as $latex \frac{e^x \tan{x} + e^x + e^{2x}}{e^x \tan{x} + \tan{x}}$ (notice that this is exactly what <code>.as_numer_denom()</code> is doing anyway in <code>[5]</code>, as you can see in <code>[6]</code> and <code>[7]</code>).  Furthermore, it will have actually <em>proven</em> that the remaining $latex \int{\frac{e^x}{\tan{x}}dx}$ is non-elementary.  I plan on having some kind of marker in the pretty printed unevaluated <code>Integral</code> to indicate this.  Suggestions on what this should be are welcome.  
+This indicates that the integral of $(\frac{e^x}{\tan{x}} + \frac{e^x}{1 + e^x}) - \frac{d}{dx}(\log{(1 + e^x)}) = \frac{e^x}{\tan{x}}$ is not elementary.  That is one advantage that the new algorithm will have over the present one.  Currently, the present algorithm just returns an unevaluated Integral for the above <code>rd</code>, but the new one will be able to return $\log{(1 + e^x)} + \int{\frac{e^x}{\tan{x}}dx}$.  It will be able to do this even if rd were rewritten as $\frac{e^x \tan{x} + e^x + e^{2x}}{e^x \tan{x} + \tan{x}}$ (notice that this is exactly what <code>.as_numer_denom()</code> is doing anyway in <code>[5]</code>, as you can see in <code>[6]</code> and <code>[7]</code>).  Furthermore, it will have actually <em>proven</em> that the remaining $\int{\frac{e^x}{\tan{x}}dx}$ is non-elementary.  I plan on having some kind of marker in the pretty printed unevaluated <code>Integral</code> to indicate this.  Suggestions on what this should be are welcome.  
 
 
 
@@ -371,7 +371,7 @@ NotImplementedError: The ability to solve the parametric logarithmic derivative 
 
 
 
-So feel free to give this a try and let me know what you think.  You will have to do the preparsing as I have done above, which means that you also have to be careful that any extension that you make is not the derivative or logarithmic derivative of an element of the field you have already built up.  You also cannot use algebraic functions, as I mentioned before, including things like $latex e^\frac{\log{x}}{2}$ (functions like these are called the logarithmic derivatives of k(t)-radicals, which I will also discuss in a future "The Risch Algorithm" post).  If you just use simple extensions like <code>t1 = tan(x);t=exp(x)</code> like I have above, you won't need to worry about this.  Each derivative Poly should be in the variable that it is the derivative of (e.g., start with <code>Poly(1, x)</code>, then add <code>Poly(1 + t1**2, t1)</code>, <code>Poly(t2*(1 + t1**2), t2)</code>, etc.).  Everything else should be a Poly in <code>t</code>, the last element of the extension.  And in cause you didn't get it, the last extension must be an exponential function.  
+So feel free to give this a try and let me know what you think.  You will have to do the preparsing as I have done above, which means that you also have to be careful that any extension that you make is not the derivative or logarithmic derivative of an element of the field you have already built up.  You also cannot use algebraic functions, as I mentioned before, including things like $e^\frac{\log{x}}{2}$ (functions like these are called the logarithmic derivatives of k(t)-radicals, which I will also discuss in a future "The Risch Algorithm" post).  If you just use simple extensions like <code>t1 = tan(x);t=exp(x)</code> like I have above, you won't need to worry about this.  Each derivative Poly should be in the variable that it is the derivative of (e.g., start with <code>Poly(1, x)</code>, then add <code>Poly(1 + t1**2, t1)</code>, <code>Poly(t2*(1 + t1**2), t2)</code>, etc.).  Everything else should be a Poly in <code>t</code>, the last element of the extension.  And in cause you didn't get it, the last extension must be an exponential function.  
 
 
 

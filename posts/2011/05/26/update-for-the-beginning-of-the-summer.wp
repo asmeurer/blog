@@ -10,7 +10,7 @@ Once those issues are fixed, I should be ready to make a release candidate for t
 
 
 </p><ul>
-	<li> <strong>The new polys</strong>.  This is (in my opinion) the biggest change.  Because of the new polys, everything is faster, and simplification is far more powerful than it was before.  This is for a few reasons.  The biggest reason is that the new polys allow polynomials in any kind of expression, not just Symbols.  This means that you can do things like factor the expression $latex \cos^2{x} + 2\cos{x} + 1$.  As you can imagine, many simplifications of complex expressions are nothing more than polynomial simplifications, where the polynomial is in some function.  
+	<li> <strong>The new polys</strong>.  This is (in my opinion) the biggest change.  Because of the new polys, everything is faster, and simplification is far more powerful than it was before.  This is for a few reasons.  The biggest reason is that the new polys allow polynomials in any kind of expression, not just Symbols.  This means that you can do things like factor the expression $\cos^2{x} + 2\cos{x} + 1$.  As you can imagine, many simplifications of complex expressions are nothing more than polynomial simplifications, where the polynomial is in some function.  
 
 
 In addition to this, the new polys have a much faster implementation, and if you have gmpy installed, it will use that and be even faster.  There are also several faster algorithms, like a faster algorithm for multivariate factorization, that have been implemented. These all lead to blazing fast simplification and polynomial minipulation in SymPy.</li>

@@ -1,4 +1,4 @@
 <html><body><p>Again an interesting post (and it looks nicer :)).  Maybe I'll try them later in your branch to see if it works this time, and if so, if I get similar results.
 
 
-What did you use to create the plots?  Did you automate it somehow, or did you have to enter the numbers manually?  I would like to create a timing plot comparing <code>risch_integrate()</code> to <code>integrate()</code>, but would like to get a lot of points (say, compare $latex \int x^ne^x dx$ for $latex n$ from 0 to 50, which is phenomenally faster in the new implementation), but I don't want to manually grab 100 <code>%timeit</code> numbers.  </p></body></html>
+What did you use to create the plots?  Did you automate it somehow, or did you have to enter the numbers manually?  I would like to create a timing plot comparing <code>risch_integrate()</code> to <code>integrate()</code>, but would like to get a lot of points (say, compare $\int x^ne^x dx$ for $n$ from 0 to 50, which is phenomenally faster in the new implementation), but I don't want to manually grab 100 <code>%timeit</code> numbers.  </p></body></html>

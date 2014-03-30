@@ -77,7 +77,7 @@ Out[1]:
 
 
 
-This substitution is necessary because the Risch algorithm requires expressions like $latex x^x$ to be rewritten as $latex e^{x\log(x)}$ before it can integrate them, but I try to convert them back after integrating so that the user gets the same thing in the result that he entered.  I created <a href="http://code.google.com/p/sympy/issues/detail?id=2571" target="_blank">issue 2571</a> for this.
+This substitution is necessary because the Risch algorithm requires expressions like $x^x$ to be rewritten as $e^{x\log(x)}$ before it can integrate them, but I try to convert them back after integrating so that the user gets the same thing in the result that he entered.  I created <a href="http://code.google.com/p/sympy/issues/detail?id=2571" target="_blank">issue 2571</a> for this.
 
 
 

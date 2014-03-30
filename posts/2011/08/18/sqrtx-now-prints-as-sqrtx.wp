@@ -275,7 +275,7 @@ Out[4]: x**(3/2)
 
 
 
-Thus $latex \left(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $latex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, replace $latex x$ with -1).
+Thus $\left(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $\sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, replace $x$ with -1).
 
 
 
