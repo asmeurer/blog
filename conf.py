@@ -492,7 +492,7 @@ MATHJAX_CONFIG = """
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\\(","\\\)"] ],
+       inlineMath: [ ['$','$'], ["\\\(","\\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
