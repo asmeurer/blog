@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Variation of Parameters and More | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2009/08/01/variation-of-parameters-and-more/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,35 +32,42 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2009/08/01/variation-of-parameters-and-more/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2009/08/01/variation-of-parameters-and-more/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="Variation of Parameters and More">
-            <meta name="og:description" content="Well, the last time I post­ed a project up­date, I had re­signed my­self to writ­ing a con­stant sim­pli­fy­ing func­tion and putting the Con­stant class on the shelf.  Well, just as I sus­pect­ed, it">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Variation of Parameters and More">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2009/08/01/variation-of-parameters-and-more/">
+            <meta name="og:description" content="Well, the last time I post­ed a project up­date, I had re­signed my­self to writ­ing a con­stant sim­pli­fy­ing func­tion and putting the Con­stant class on the shelf.  Well, just as I sus­pect­ed, it">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -57,15 +76,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -80,8 +106,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -91,28 +119,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">Variation of Parameters and More</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Variation of Parameters and More</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2009-08-01T17:39:48-05:00" itemprop="datePublished">2009-08-01 17:39</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2009-08-01T17:39:48-05:00" itemprop="datePublished" title="Publication date">2009-08-01 17:39</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2009/08/01/variation-of-parameters-and-more.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
-          |  
-        More posts about 
-    <span itemprop="keywords">
-        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
-    </span>
+    </header>
 
-
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>Well, the last time I post­ed a project up­date, I had re­signed my­self to writ­ing a con­stant sim­pli­fy­ing func­tion and putting the Con­stant class on the shelf.  Well, just as I sus­pect­ed, it was hell writ­ing it, but I even­tu­al­ly got it work­ing.  Al­ready, what I have in dsolve() ben­e­fits from it.  I had many so­lu­tions with things like $la­tex \frac{x}{C_1}$ or $la­tex -C_1x$ in them, and they are now au­to­mat­i­cal­ly re­duced to just $la­tex C_1x$.  Of course, the dis­ad­van­tage to this, as I men­tioned in the oth­er post, is that it will on­ly sim­pli­fy once.  Al­so, I wrote the func­tion very specif­i­cal­ly for ex­pres­sions re­turned by dsolve.  It on­ly work­s, for ex­am­ple, with con­stants named se­quen­tial­ly like C1, C2, C3 and so on.  Even with mak­ing it spe­cial­ized, it was still hell to write.  I was al­so able to get it to renum­ber the con­stants, so some­thing like  <code>C2<em>sin(x) + C1</em>cos(x)</code>  would get trans­fered to  <code>C1<em>sin(x) + C2</em>cos(x)</code>.  It us­es  <code>Ba­sic._­com­pare_pret­ty()</code>  (thanks to Andy for that tip), so it will al­ways num­ber the con­stants in the or­der they are print­ed.   </p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>Well, the last time I post­ed a project up­date, I had re­signed my­self to writ­ing a con­stant sim­pli­fy­ing func­tion and putting the Con­stant class on the shelf.  Well, just as I sus­pect­ed, it was hell writ­ing it, but I even­tu­al­ly got it work­ing.  Al­ready, what I have in dsolve() ben­e­fits from it.  I had many so­lu­tions with things like $la­tex \frac{x}{C_1}$ or $la­tex -C_1x$ in them, and they are now au­to­mat­i­cal­ly re­duced to just $la­tex C_1x$.  Of course, the dis­ad­van­tage to this, as I men­tioned in the oth­er post, is that it will on­ly sim­pli­fy once.  Al­so, I wrote the func­tion very specif­i­cal­ly for ex­pres­sions re­turned by dsolve.  It on­ly work­s, for ex­am­ple, with con­stants named se­quen­tial­ly like C1, C2, C3 and so on.  Even with mak­ing it spe­cial­ized, it was still hell to write.  I was al­so able to get it to renum­ber the con­stants, so some­thing like  <code>C2<em>sin(x) + C1</em>cos(x)</code>  would get trans­fered to  <code>C1<em>sin(x) + C2</em>cos(x)</code>.  It us­es  <code>Ba­sic._­com­pare_pret­ty()</code>  (thanks to Andy for that tip), so it will al­ways num­ber the con­stants in the or­der they are print­ed.   </p> 
  <p>Once I got that work­ing, it was just lit­tle work to fin­ish up what I had al­ready start­ed with solv­ing gen­er­al lin­ear ho­mo­ge­neous odes ($la­tex a_ny^{(n)} + a_{n-1}y^{(n-1)} + \dots + a_2y'' + a_1y' + a_0y = 0$ with $la­tex a_i$ con­stant for all $la­tex i$).  Solv­ing these equa­tions is easy.  You just set up a poly­no­mi­al of the form $la­tex a_n­m^n + a_{n-1}m^{n-1} + \c­dots + a_2m^2 + a_1m + a_0 = 0$ and find the roots of it.  Then you plug the roots in­to an ex­po­nen­tial times $la­tex x^i$ for i from 1 to the mul­ti­plic­i­ty of the root  (as in $la­tex Cx^ie^{­root \c­dot x}$).  You usu­al­ly ex­pand the re­al and com­plex parts of the root us­ing Eu­ler's For­mu­la, and, once you sim­pli­fy the con­stants, you get some­thing like $la­tex x^ie^{re­al­part \c­dot x}(C_1\s­in{(im­part \c­dot x)} + C_2\­cos{(im­part \c­dot x)})$ for each i from 1 to the mul­ti­plic­i­ty of the root.  Any­way, with the new con­stantsim­p() rou­tine, I was able to set this whole thing up as one step, be­cause if the imag­i­nary part is 0, then the two con­stants will be sim­pli­fied in­to each oth­er.  Al­so, SymPy has some good poly­no­mi­al solv­ing, so I did­n't have any prob­lems there.  I even made good use of the col­lec­t() func­tion to fac­tor out com­mon terms, so you get some­thing like $la­tex (C_1 + C_2x)e^{x}$ in­stead of $la­tex C_1e^{x} + C_2x­e^{x}$, which for larg­er or­der so­lu­tion­s, can make the so­lu­tion much eas­i­er to read (com­pare for ex­am­ple, $la­tex ((C_1 + C_2x)\s­in{x} + (C_3 + C_4x)\­cos{x})e^{x}$ with the ex­pand­ed for­m, $la­tex C_1e^{x}\s­in{x} + C_2x­e^{x}\s­in{x} + C_3\­cos{x}e^{x} + C_4x\­cos{x}{e^x}$ as the so­lu­tion to $la­tex {\frac {d^{4}}{d{x}^{4}}}f \left( x \right) -4\,{\frac {d^{3}}{d{x}^{3}}}f \left( x \right) +8\,{\frac {d^{2}}{d{x}^{2}}}f \left( x \right) -8\,{\frac {d}{dx}}f \left( x \right) +4\,f \left( x \right) =0$).   </p> 
  <p>I en­tered all 30 ex­am­ples from the rel­e­vant chap­ter of my text (Or­di­nary Dif­fer­en­tial Equa­tions by Mor­ris Tenen­baum and Har­ry Pol­lard), and the whole thing runs in un­der 2 sec­onds on my ma­chine.  So it is fast, though that is most­ly due to fast poly­no­mi­al solv­ing in SymPy.   </p> 
  <p>So once I got that work­ing well, I start­ed im­ple­ment­ing vari­a­tion of pa­ram­e­ter­s, which is a gen­er­al method for solv­ing all equa­tions of form $la­tex a_ny^{(n)} + a_{n-1}y^{(n-1)} + \dots + a_2y'' + a_1y' + a_0y = F(x)$.  The method will set up an in­te­gral to rep­re­sent the par­tic­u­lar so­lu­tion to any equa­tion of this for­m, as­sum­ing that you have all $la­tex n$ lin­ear­ly in­de­pen­dent so­lu­tions to the ho­mo­ge­neous equa­tion $la­tex a_ny^{(n)} + a_{n-1}y^{(n-1)} + \dots + a_2y'' + a_1y' + a_0y = 0$.  The co­ef­fi­cients $la­tex a_i$ do not even have to be con­stant for this method to work, al­though they do have to be in my im­plan­ta­tion be­cause oth­er­wise it will not be able to find gen­er­al so­lu­tion to the ho­mo­ge­neous equa­tion.   </p> 
@@ -149,19 +179,30 @@ MathJax.Hub.Config({
  <p>The so­lu­tion is very straight for­ward--as much so as first or­der lin­ear or Bernoul­li equa­tion­s, so it was a cinch to im­ple­ment it.  It looks like quite a few dif­fer­en­tial equa­tions gen­er­at­ed by do­ing $la­tex F''(y(x), x)$ for some func­tion or x and y $la­tex F(y(x), x)$ gen­er­ates equa­tions of that type, so it could be ac­tu­al­ly use­ful for solv­ing oth­er things.   </p> 
  <p>Be­fore I sign of­f, I just want to men­tion one oth­er thing that I im­ple­ment­ed.  I want­ed my lin­ear ho­mo­ge­neous con­stant co­ef­fi­cient ODE solver to be able to han­dle ODEs for which SymPy can't solve the char­ac­ter­is­tic equa­tion, for what­ev­er rea­son.  SymPy has  <code>RootOf()</code>  ob­jects sim­i­lar to Maple that let you rep­re­sent the roots of a poly­no­mi­al with­out ac­tu­al­ly solv­ing it, or even be­ing able to solve it, but a you can on­ly use RootOf's if you know that none of the roots are re­peat­ed.  Oth­er­wise, you would have to know which terms re­quire an ad­di­tion­al $la­tex x^i$ to pre­serve lin­ear in­de­pen­dence.  Well, it turns out that there is a way to tell if a poly­no­mi­al has re­peat­ed roots with­out solv­ing for them.  There is a num­ber as­so­ci­at­ed with ev­ery poly­no­mi­al of one vari­able called the  <a href="http://en.wikipedia.org/wiki/Discriminant">dis­crim­i­nant</a>.  For ex­am­ple, the dis­crim­i­nant of the com­mon qua­drat­ic poly­no­mi­al $la­tex ax^2 + bx + c$ is the term un­der the square root of the fa­mous so­lu­tion $la­tex b^2 - 4ac$.  It is clear that a qua­drat­ic has re­peat­ed roots if and on­ly if the dis­crim­i­nant is 0.  Well, the same is true for the dis­crim­i­nant of any poly­no­mi­al.  I am not high­ly fa­mil­iar with this (ask me again af­ter I have tak­en my ab­stract al­ge­bra class next semester), but ap­par­ent­ly there is some­thing called the re­sul­tan­t, which is the prod­uct of the dif­fer­ences of roots be­tween two poly­no­mi­als and which can al­so be cal­cu­lat­ed with­out ex­plic­it­ly find­ing the roots of the poly­no­mi­al­s.  Clear­ly, this will be 0 if and on­ly if the two poly­no­mi­als share a root.  So the dis­crim­i­nant is built from the fact that a poly­no­mi­al has a re­peat­ed root iff it shares a root with its re­sul­tan­t.  So it is ba­si­cal­ly the re­sul­tant of a poly­no­mi­al and its de­r­a­ti­vave, times an ex­tra fac­tor.  It is 0 if and on­ly if the poly­no­mi­al has a re­peat­ed root.   </p> 
  <p>For­tu­nate­ly, SymPy's ex­ce­lent Polys mod­ule al­ready had re­sul­tants im­ple­ment­ed (quite ef­fi­cient­ly too, I might ad­d), so it was easy to im­ple­ment the dis­crim­i­nan­t.  I added it as  <a href="http://code.google.com/p/sympy/issues/detail?id=1555&amp;q=discriminant">is­sue 1555</a>.  If you are a SymPy de­vel­op­er and you have some­how man­aged to make your­self read this far (b­less your heart), please re­view that patch.   </p> 
- <p>Well, this has turned out to be one hel­la long blog post.  But what can I say.  You don't have to read this thing (ex­cept for pos­si­bly my men­tor.  Sor­ry Andy).  And I haven't been quite up­dat­ing week­ly like I am sup­posed to be, so this com­pen­sates.  If you hap­pened up­on this blog post be­cause, like me, you were look­ing for a gen­er­al treat­ment of vari­a­tion of pa­ram­e­ter­s, I hope you found my lit­tle write up help­ful.  And if you did, and you now un­der­stand it, could you go ahead and im­prove the Wikipedia ar­ti­cle.  I'm not up to it?   </p></div>
+ <p>Well, this has turned out to be one hel­la long blog post.  But what can I say.  You don't have to read this thing (ex­cept for pos­si­bly my men­tor.  Sor­ry Andy).  And I haven't been quite up­dat­ing week­ly like I am sup­posed to be, so this com­pen­sates.  If you hap­pened up­on this blog post be­cause, like me, you were look­ing for a gen­er­al treat­ment of vari­a­tion of pa­ram­e­ter­s, I hope you found my lit­tle write up help­ful.  And if you did, and you now un­der­stand it, could you go ahead and im­prove the Wikipedia ar­ti­cle.  I'm not up to it?   </p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+        <ul itemprop="keywords" class="tags">
+           <li><a class="tag p-category" href="../../../../../categories/mathjax/" rel="tag">mathjax</a></li>
+        </ul>
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../../07/20/modifying-a-list-while-looping-through-it-in-python/" rel="prev">← Previous post</a>
+                <a href="../../../07/20/modifying-a-list-while-looping-through-it-in-python/" rel="prev" title="Modifying a list while looping through it in Python">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../10/homogeneous-coefficients-corner-case/" rel="next">Next post →</a>
+                <a href="../../10/homogeneous-coefficients-corner-case/" rel="next" title="Homogeneous coefficients corner case">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -179,19 +220,23 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
         <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
-        });
-        </script>
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
         <script src="../../../../../assets/js/mathjax.js"></script>
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -208,24 +253,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -241,4 +293,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>The SciPy 2011 Conference | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/07/17/the-scipy-2011-conference/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,37 +32,44 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/07/17/the-scipy-2011-conference/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/07/17/the-scipy-2011-conference/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="The SciPy 2011 Conference">
-            <meta name="og:description" content="So this past week, I at­tend­ed the SciPy 2011 con­fer­ence in Austin, TX, which was my first con­fer­ence ev­er.  Here are some high­lights of the con­fer­ence for me: 
- 
-    I met a  ton  of cool pe">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="The SciPy 2011 Conference">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/07/17/the-scipy-2011-conference/">
+            <meta name="og:description" content="So this past week, I at­tend­ed the SciPy 2011 con­fer­ence in Austin, TX, which was my first con­fer­ence ev­er.  Here are some high­lights of the con­fer­ence for me: 
+ 
+    I met a  ton  of cool pe">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -59,15 +78,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -82,8 +108,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -93,23 +121,32 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">The SciPy 2011 Conference</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">The SciPy 2011 Conference</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2011-07-17T16:32:31-05:00" itemprop="datePublished">2011-07-17 16:32</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2011-07-17T16:32:31-05:00" itemprop="datePublished" title="Publication date">2011-07-17 16:32</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2011/07/17/the-scipy-2011-conference.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>So this past week, I at­tend­ed the SciPy 2011 con­fer­ence in Austin, TX, which was my first con­fer­ence ev­er.  Here are some high­lights of the con­fer­ence for me:</p> 
- <p></p><ul>
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>So this past week, I at­tend­ed the SciPy 2011 con­fer­ence in Austin, TX, which was my first con­fer­ence ev­er.  Here are some high­lights of the con­fer­ence for me:</p> 
+ <p></p>
+<ul>
     <li>I met a  <em>ton</em>  of cool peo­ple.  This in­clud­ed meet­ing sev­er­al peo­ple who I had pre­vi­ous­ly known from mail­ing lists in per­son for the first time.  I met the SymPy de­vel­op­ers Ma­teusz Pa­proc­ki and Andy Ter­rel, and I al­so had al­ready known or heard about peo­ple like Fer­nan­do Perez, Gael Varo­quaux, and Robert Kern.  There are a lot of peo­ple out there who are ex­cit­ed to be us­ing Python for their re­search, which is a re­al re­fresh­er from my uni­ver­si­ty, where ev­ery­one is us­ing Mat­lab and Maple.</li> 
  <div class="code"><pre><span class="nt">&lt;li&gt;</span>Mateusz and I gave a tutorial on SymPy.  This was one of the four introductory track tutorials.  This was a great experience to teach SymPy to people.  You can see the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://mattpap.github.com/scipy-2011-tutorial/html/index.html"</span><span class="nt">&gt;</span>Sphinx document<span class="nt">&lt;/a&gt;</span> that we used, and there should eventually be a video posted at the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://conference.scipy.org/scipy2011/tutorials.php#mateusz"</span><span class="nt">&gt;</span>SciPy 2011 website<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/li&gt;</span>
 
@@ -119,12 +156,15 @@ MathJax.Hub.Config({
 </pre></div>
 
 
-<p></p><ul><li>The key­notes.  I found Er­ic Jone's key­note par­tic­u­lar­ly rel­e­vant as the lead­er of SymPy, as he talked about some of the good things to do and bad things to not do when lead­ing a sci­en­tif­ic projec­t.  I al­so en­joyed Per­ry Green­field­'s talk about how the as­tron­o­my com­mu­ni­ty moved from some old pro­pri­etary sys­tem to Python.</li> 
+<p></p>
+<ul>
+<li>The key­notes.  I found Er­ic Jone's key­note par­tic­u­lar­ly rel­e­vant as the lead­er of SymPy, as he talked about some of the good things to do and bad things to not do when lead­ing a sci­en­tif­ic projec­t.  I al­so en­joyed Per­ry Green­field­'s talk about how the as­tron­o­my com­mu­ni­ty moved from some old pro­pri­etary sys­tem to Python.</li> 
      <li>Ma­teusz gave a talk on his  <a href="http://lab.femhub.org/">FEMhub on­line lab</a>, which a was very im­pres­sive sys­tem for us­ing Python en­tire­ly in the web brows­er.</li> 
      <li>By far the best talk of the en­tire con­fer­ence was Fer­nan­do Perez's talk on the new IPython 0.11, which will be com­ing out in about a week or so.  His de­mo of the new fea­tures such as the QT con­sole and html note­book were very im­pres­sive.  If you want to watch just one video from the con­fer­ence, I would rec­om­mend that one.</li> 
      <li>Mark Dew­ing gave a talk about a sys­tem he wrote us­ing SymPy to do au­to­mat­ed deriva­tion of equa­tion­s.  The sys­tem is im­pres­sive, and con­tains some fea­tures that would be nice to back­port to SymPy.  He told me that he wants to do this, so fol­low the mail­ing list.  You can see what he has so far on his  <a href="https://github.com/markdewing/sympy/tree/derivation_modeling">deriva­tion_­mod­el­ing</a>  branch at GitHub.</li> 
      <li>The light­ning talk­s.  These are very short talks at the end of the con­fer­ence that are on­ly five min­utes long.  In ad­di­tion to many in­ter­est­ing talk­s, both Ma­teusz and I gave a light­ning talk. Ma­teusz gave a talk on  <a href="http://live.sympy.org/">SymPy Live</a>, which he re­cent­ly im­proved to do things like give La­TeX out­put, and I gave a talk on my work with the Risch al­go­rith­m.  I would al­so high­ly rec­om­mend watch this talk once they post the videos.</li> 
-     <li>Again, re­gret­tably, I could not at­tend half of the talks be­cause they were held at the same time.  For­tu­nate­ly, they filmed all of them, so I hope to watch them all on­line when they are post­ed (and I rec­om­mend that you do too).</li></ul>
+     <li>Again, re­gret­tably, I could not at­tend half of the talks be­cause they were held at the same time.  For­tu­nate­ly, they filmed all of them, so I hope to watch them all on­line when they are post­ed (and I rec­om­mend that you do too).</li>
+</ul>
     
 <div class="code"><pre><span class="nt">&lt;li&gt;</span>The sprints were a great time for getting together and hacking together.  I worked with Min Ragan-Kelley to make isympy work with the new IPython.  Having fixed this, I now want to release 0.7.1 very soon, so I used some of the time during the sprints getting ready for that.  We already have <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.1"</span><span class="nt">&gt;</span>preliminary release notes<span class="nt">&lt;/a&gt;</span>, and my hope is to create a release candidate on Monday (tomorrow).  I also finished up my <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/pull/491"</span><span class="nt">&gt;</span>MathJax branch<span class="nt">&lt;/a&gt;</span> and finished reviewing and pushed in Tom's first GSoC pull request, which has a lot of really cool stuff relating to converting hypergeometric functions and Meijer G-functions into standard elementary functions.  This will all be in the release.
 </pre></div>
@@ -140,19 +180,27 @@ MathJax.Hub.Config({
 
 </ul>
 
-<p>There's all kinds of fun and in­ter­est­ing stuff that hap­pened that I did not men­tion here.  If you are in­ter­est­ed in sci­ence and Python, I would high­ly rec­om­mend at­tend­ing a fu­ture SciPy con­fer­ence.   </p></div>
+<p>There's all kinds of fun and in­ter­est­ing stuff that hap­pened that I did not men­tion here.  If you are in­ter­est­ed in sci­ence and Python, I would high­ly rec­om­mend at­tend­ing a fu­ture SciPy con­fer­ence.   </p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../../06/29/sympy-0-7-0-released/" rel="prev">← Previous post</a>
+                <a href="../../../06/29/sympy-0-7-0-released/" rel="prev" title="SymPy 0.7.0 released">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../25/merging-integration3-with-sympy-0-7-0-nightmare/" rel="next">Next post →</a>
+                <a href="../../25/merging-integration3-with-sympy-0-7-0-nightmare/" rel="next" title="Merging integration3 with sympy-0.7.0 nightmare">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -170,13 +218,20 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -193,24 +248,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -226,4 +288,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

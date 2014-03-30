@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>isympy -I: A saner interactive environment | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2012/08/31/isympy-i-a-saner-interactive-environment/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,37 +32,44 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2012/08/31/isympy-i-a-saner-interactive-environment/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2012/08/31/isympy-i-a-saner-interactive-environment/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="isympy -I:  A saner interactive environment">
-            <meta name="og:description" content="As  promised, here is an­oth­er post de­scrib­ing a new fea­ture in the up­com­ing  SymPy 0.7.2. 
- Automatic Symbol Definition
-While not as ground break­ing as the fea­ture I de­scribed in my  last po">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="isympy -I:  A saner interactive environment">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2012/08/31/isympy-i-a-saner-interactive-environment/">
+            <meta name="og:description" content="As  promised, here is an­oth­er post de­scrib­ing a new fea­ture in the up­com­ing  SymPy 0.7.2. 
+ Automatic Symbol Definition
+While not as ground break­ing as the fea­ture I de­scribed in my  last po">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -59,15 +78,22 @@ While not as ground break­ing as the fea­ture I de­scribed in my  last po">
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -82,8 +108,10 @@ While not as ground break­ing as the fea­ture I de­scribed in my  last po">
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -93,23 +121,32 @@ While not as ground break­ing as the fea­ture I de­scribed in my  last po">
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">isympy -I:  A saner interactive environment</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">isympy -I:  A saner interactive environment</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2012-08-31T03:30:08-05:00" itemprop="datePublished">2012-08-31 03:30</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2012-08-31T03:30:08-05:00" itemprop="datePublished" title="Publication date">2012-08-31 03:30</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2012/08/31/isympy-i-a-saner-interactive-environment.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>As  <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">promised</a>, here is an­oth­er post de­scrib­ing a new fea­ture in the up­com­ing  <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.2">SymPy 0.7.2</a>.</p> 
- <p></p><h3>Automatic Symbol Definition</h3>
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>As  <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">promised</a>, here is an­oth­er post de­scrib­ing a new fea­ture in the up­com­ing  <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.2">SymPy 0.7.2</a>.</p> 
+ <p></p>
+<h3>Automatic Symbol Definition</h3>
 <p>While not as ground break­ing as the fea­ture I de­scribed in my  <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">last post</a>, this fea­ture is still quite use­ful. As you may know, SymPy is in­her­ent­ly a Python li­brary, mean­ing that it lives by the rules of Python. If you want to use any name, whether it be a Sym­bol or a func­tion (like cos), you need to de­fine it (in the case of Sym­bol­s), or im­port it (in the case of func­tions that come with SymPy). We pro­vide the script  <code>isympy</code>  with SymPy to as­sist with this. This script au­to­mat­i­cal­ly runs IPython (if it's in­stalled), im­ports all names from sympy (<code>from sympy im­port *</code>), and de­fines com­mon sym­bol names (like  <code>x</code>,  <code>y</code>, and  <code>z</code>).</p> 
  <p>But if you want to use a Sym­bol that is not one of the ones pre­de­fined by  <code>isympy</code>, you will get some­thing like</p> 
  <p>[code lan­guage="py"]</p> 
@@ -172,7 +209,8 @@ Out[2]: 0.5
 
 
 
-Of course, if you just want a float­ing point num­ber, you can just use  <code>N()</code>  or  <code>.e­valf()</code></li> 
+Of course, if you just want a float­ing point num­ber, you can just use  <code>N()</code>  or  <code>.e­valf()</code>
+</li> 
      <li>This works by pars­ing the text and wrap­ping all in­te­ger lit­er­als with  <code>In­te­ger()</code>. This means that if you have a vari­able set to a Python in­t, it will still act like a Python in­t:[­code lan­guage="py"]
 In [6]: a = in­t(1)
 
@@ -194,19 +232,27 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
      <li>The same as be­fore: this will on­ly work in­ter­ac­tive­ly. If you want to re­use your code out­side of  <code>isympy -i</code>, you should take care of any in­t/int by rewrit­ing it as S(in­t)/in­t.</li> 
  </ul>
 
-<p>Since these are both use­ful fea­tures, we've added a way that you can get them both at on­ce: by do­ing  <code>isympy -I</code>  (the "I" stands for "In­ter­ac­tive"). If we add sim­i­lar fea­tures in the fu­ture, we will al­so add them to the  <code>-I</code>  short­cut (for ex­am­ple, we may add an op­tion to al­low  <code>^</code>  to au­to­mat­i­cal­ly be re­placed with  <code>**</code>).</p></div>
+<p>Since these are both use­ful fea­tures, we've added a way that you can get them both at on­ce: by do­ing  <code>isympy -I</code>  (the "I" stands for "In­ter­ac­tive"). If we add sim­i­lar fea­tures in the fu­ture, we will al­so add them to the  <code>-I</code>  short­cut (for ex­am­ple, we may add an op­tion to al­low  <code>^</code>  to au­to­mat­i­cal­ly be re­placed with  <code>**</code>).</p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../21/sympy-live-sphinx-extension/" rel="prev">← Previous post</a>
+                <a href="../../21/sympy-live-sphinx-extension/" rel="prev" title="SymPy Live Sphinx Extension">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../../09/19/infinitely-nested-lists-in-python/" rel="next">Next post →</a>
+                <a href="../../../09/19/infinitely-nested-lists-in-python/" rel="next" title="Infinitely nested lists in Python">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -224,13 +270,20 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -247,24 +300,31 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -280,4 +340,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

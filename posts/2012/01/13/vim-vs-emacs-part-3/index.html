@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Vim vs. Emacs (Part 3) | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2012/01/13/vim-vs-emacs-part-3/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,37 +32,44 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2012/01/13/vim-vs-emacs-part-3/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2012/01/13/vim-vs-emacs-part-3/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="Vim vs. Emacs (Part 3)">
-            <meta name="og:description" content="See parts  1  and  2. 
- Some more com­ments af­ter us­ing emacs for a while: 
- &lt;/p&gt;&lt;li&gt;I finally found the perfect tab completion solution. It took way too much searching for how awesome it is.  It's ">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Vim vs. Emacs (Part 3)">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2012/01/13/vim-vs-emacs-part-3/">
+            <meta name="og:description" content="See parts  1  and  2. 
+ Some more com­ments af­ter us­ing emacs for a while: 
+ &lt;/p&gt;&lt;li&gt;I finally found the perfect tab completion solution. It took way too much searching for how awesome it is.  It's ">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -59,15 +78,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -82,8 +108,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -93,22 +121,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">Vim vs. Emacs (Part 3)</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Vim vs. Emacs (Part 3)</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2012-01-13T23:01:39-06:00" itemprop="datePublished">2012-01-13 23:01</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2012-01-13T23:01:39-06:00" itemprop="datePublished" title="Publication date">2012-01-13 23:01</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2012/01/13/vim-vs-emacs-part-3.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>See parts  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">1</a>  and  <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/">2</a>.</p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>See parts  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">1</a>  and  <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/">2</a>.</p> 
  <p>Some more com­ments af­ter us­ing emacs for a while:</p> 
  <div class="code"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>I finally found the perfect tab completion solution. It took way too much searching for how awesome it is.  It's called <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://cx4a.org/software/auto-complete/manual.html"</span><span class="nt">&gt;</span>auto-complete-mode<span class="nt">&lt;/a&gt;</span>.  The best way to get an idea of what this is is to watch <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.youtube.com/watch?v=rGVVnDxwJYE"</span><span class="nt">&gt;</span>this screencast<span class="nt">&lt;/a&gt;</span>.  Basically, it shows you a completion list automatically.  It uses the <span class="nt">&lt;em&gt;</span>TAB<span class="nt">&lt;/em&gt;</span> key to do completion (to me, this is a no brainer, but for some reason, no other completion extension that I found did this, requiring you to do all kinds of nonsense in your .emacs file).  It's got cool features like simple fuzzy matching and intelligent matching (so the first completion is what you tend to use, instead of just the first one that matches).  To quote the author, "a goal of auto-complete-mode is to provide a system that does what users want without any command." I couldn't agree with that goal more. If you install it, I recommend adding <span class="nt">&lt;code&gt;</span>(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)<span class="nt">&lt;/code&gt;</span> to your .emacs, so that you can use M-TAB to force the completion menu to come up.  This generally happens automatically, but I think this is the only way to get fuzzy matching, for example. Actually, you can also just use <span class="nt">&lt;code&gt;</span>(ac-set-trigger-key "TAB")<span class="nt">&lt;/code&gt;</span>, which intelligently sets TAB to complete or indent, based on which one you more likely want.  This seems to work pretty well to me.<span class="nt">&lt;/li&gt;</span>
 
@@ -204,19 +240,27 @@ MathJax.Hub.Config({
  <p>At any rate, I rec­om­mend that any­one who wants to give com­mand line ed­i­tors a chance do what I did: learn both vim and emac­s.  My blog posts should be enough to give you some good ad­vice.  I went cold-­turkey, and I rec­om­mend that you do too, but on­ly do it if you won't have any im­por­tant edit­ing to do for a few week­s, as your edit­ing rate will slow down a lot as you are learn­ing for both ed­i­tors.  And even though I think I am go­ing to stick with emac­s, learn­ing vim was still valu­able.  Un­like emac­s, vi is part of the POSIX stan­dard, so it's in­clud­ed in pret­ty much ev­ery UNIX dis­tri­bu­tion.  I'll be glad when I find my­self on a min­i­mal com­mand line and know how to use a de­cent text ed­i­tor.  And any­way, you can't re­al­ly know which one will be your way un­til you try them both.  I re­al­ly thought I would end up us­ing vim, as it was so pop­u­lar among all the peo­ple I know who use com­mand line ed­i­tors. But I guess there is on­ly  <a href="http://www.dina.dk/~abraham/religion/">One True Ed­i­tor</a>.</p> 
  <p><strong>ED­IT:</strong>  I found out how to make emacs re­al­ly fast.  The key is to run one process of emacs in dae­mon mod­e, and have the rest con­nect to that.  Then you on­ly have to wait for the start­up once (per com­put­er ses­sion).  To do it, just set your  <code>ED­I­TOR</code>  to  <code>'emac­sclient -a "" -n­w'</code>  (and you might al­so want to alias  <code>emacs</code>  to that as well).  What this does is con­nect to the emacs dae­mon.  The  <code>-a ""</code>  starts one if it is­n't al­ready start­ed (y­ou can al­so do this your­self with  <code>emacs --­dae­mon</code>.  If you on­ly want to use the dae­mon ver­sion if you've specif­i­cal­ly start­ed it, re­place  <code>""</code>  with  <code>emacs</code>.  This will con­nect to the dae­mon if it's run­ning, and oth­er­wise just start a new emacs process.   </p> 
  <p>The  <code>-nw</code>  keeps it from run­ning in win­dow mod­e.  Re­move this if you use the GUI ver­sion of emac­s.  This is nec­es­sary to make it work cor­rect­ly with mul­ti­ple tab­s.  This is so fast that you should nev­er re­al­ly even need to use  <code>C-z</code>  to quick­ly ex­it emac­s.   <code>C-x C-c</code>  is just fine, be­cause re­open­ing will be in­stan­ta­neous.  I like this be­cause I was start­ing to ac­cu­mu­late back­ground emacs pro­cess­es that I for­got about.</p> 
- <p>This prob­a­bly re­quires a fair­ly new ver­sion of emac­s, pos­si­bly even the de­vel­op­ment ver­sion.</p></div>
+ <p>This prob­a­bly re­quires a fair­ly new ver­sion of emac­s, pos­si­bly even the de­vel­op­ment ver­sion.</p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../03/vim-vs-emacs-part-2/" rel="prev">← Previous post</a>
+                <a href="../../03/vim-vs-emacs-part-2/" rel="prev" title="Vim vs. Emacs (Part 2)">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../../06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu/" rel="next">Next post →</a>
+                <a href="../../../06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu/" rel="next" title="How to install the development version of IPython Qtconsole and Notebook in Ubuntu">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -234,13 +278,20 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -257,24 +308,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -290,4 +348,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

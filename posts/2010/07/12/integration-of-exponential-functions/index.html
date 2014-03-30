@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Integration of exponential functions | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2010/07/12/integration-of-exponential-functions/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,35 +32,42 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2010/07/12/integration-of-exponential-functions/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2010/07/12/integration-of-exponential-functions/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="Integration of exponential functions">
-            <meta name="og:description" content="So for the first time this sum­mer, I missed my blog­ging dead­line.  I have been on va­ca­tion for the past few week­s, and have spent a good bit of the last week in the car, driv­ing home. But that'">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Integration of exponential functions">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2010/07/12/integration-of-exponential-functions/">
+            <meta name="og:description" content="So for the first time this sum­mer, I missed my blog­ging dead­line.  I have been on va­ca­tion for the past few week­s, and have spent a good bit of the last week in the car, driv­ing home. But that'">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -57,15 +76,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -80,8 +106,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -91,28 +119,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">Integration of exponential functions</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Integration of exponential functions</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2010-07-12T06:22:06-05:00" itemprop="datePublished">2010-07-12 06:22</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2010-07-12T06:22:06-05:00" itemprop="datePublished" title="Publication date">2010-07-12 06:22</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2010/07/12/integration-of-exponential-functions.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
-          |  
-        More posts about 
-    <span itemprop="keywords">
-        <a class="tag p-category" href="../../../../../categories/mathjax/"><span class="badge badge-info">mathjax</span></a>
-    </span>
+    </header>
 
-
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>So for the first time this sum­mer, I missed my blog­ging dead­line.  I have been on va­ca­tion for the past few week­s, and have spent a good bit of the last week in the car, driv­ing home. But that's not my ex­cuse.  I was on va­ca­tion the week be­fore, when I wrote up my  <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">lengthy blog post on the Risch Al­go­rithm</a>.  My ex­cuse is that I want­ed to fin­ish up my  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>  func­tion be­fore I post­ed, so I could write about it.  Well, I fin­ished it on Thurs­day (to­day is Sun­day, the post was due Fri­day), but I ran in­to un­ex­pect­ed bugs (imag­ine that) that has post­poned it ac­tu­al­ly work­ing un­til now. I al­so end­ed up do­ing API changes 3 dif­fer­ent times (they are ba­si­cal­ly in­cre­men­tal­ly all one change, from sup­port­ing on­ly one ex­ten­sion to prop­er­ly sup­port­ing mul­ti­ple ex­ten­sion­s.  Look for long com­mits in my re­cent com­mit his­to­ry in my branch if you are in­ter­est­ed).   </p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>So for the first time this sum­mer, I missed my blog­ging dead­line.  I have been on va­ca­tion for the past few week­s, and have spent a good bit of the last week in the car, driv­ing home. But that's not my ex­cuse.  I was on va­ca­tion the week be­fore, when I wrote up my  <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">lengthy blog post on the Risch Al­go­rithm</a>.  My ex­cuse is that I want­ed to fin­ish up my  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>  func­tion be­fore I post­ed, so I could write about it.  Well, I fin­ished it on Thurs­day (to­day is Sun­day, the post was due Fri­day), but I ran in­to un­ex­pect­ed bugs (imag­ine that) that has post­poned it ac­tu­al­ly work­ing un­til now. I al­so end­ed up do­ing API changes 3 dif­fer­ent times (they are ba­si­cal­ly in­cre­men­tal­ly all one change, from sup­port­ing on­ly one ex­ten­sion to prop­er­ly sup­port­ing mul­ti­ple ex­ten­sion­s.  Look for long com­mits in my re­cent com­mit his­to­ry in my branch if you are in­ter­est­ed).   </p> 
  <p>So here is the func­tion.  It in­te­grates ex­po­nen­tial func­tion­s.  You still have to man­u­al­ly cre­ate the dif­fer­en­tial ex­ten­sion, as be­fore.  Here are some ex­am­ples.  You can try them in my  <a href="http://github.com/asmeurer/sympy/tree/integration2">in­te­gra­tion2</a>  branch (I have re­based over Ma­teusz's lat­est polys9up­date.  The lat­est branch is al­ways in­te­gra­tion<code>n</code>, where  <code>n</code>  is the largest in­te­ger avail­able).   </p> 
  <p><strong>Hov­er over the code and click on the left­-­most, "view source" icon (a pa­per icon with  <tt>&lt; &gt;</tt>  over it) to view with­out break­s.  Opens in a new win­dow.</strong></p> 
  <p>[code lan­guage="py"]</p> 
@@ -243,19 +273,30 @@ MathJax.Hub.Config({
  <p>NotIm­ple­ment­ed­Er­ror: The abil­i­ty to solve the para­met­ric log­a­rith­mic de­riv­a­tive prob­lem is re­quired to solve this RDE</p> 
  <p>[/­code]</p> 
  <p>So feel free to give this a try and let me know what you think.  You will have to do the prepars­ing as I have done above, which means that you al­so have to be care­ful that any ex­ten­sion that you make is not the de­riv­a­tive or log­a­rith­mic de­riv­a­tive of an el­e­ment of the field you have al­ready built up.  You al­so can­not use al­ge­bra­ic func­tion­s, as I men­tioned be­fore, in­clud­ing things like $la­tex e^\frac{\log{x}}{2}$ (func­tions like these are called the log­a­rith­mic de­riv­a­tives of k(t)-rad­i­cal­s, which I will al­so dis­cuss in a fu­ture "The Risch Al­go­rith­m" post).  If you just use sim­ple ex­ten­sions like  <code>t1 = tan(x);t=­ex­p(x)</code>  like I have above, you won't need to wor­ry about this.  Each de­riv­a­tive Poly should be in the vari­able that it is the de­riv­a­tive of (e.g., start with  <code>Poly(1, x)</code>, then add  <code>Poly(1 + t1<strong>2, t1)</strong></code>,  <code>Poly(t2*(1 + t12), t2)</code>, etc.).  Ev­ery­thing else should be a Poly in  <code>t</code>, the last el­e­ment of the ex­ten­sion.  And in cause you did­n't get it, the last ex­ten­sion must be an ex­po­nen­tial func­tion.   </p> 
- <p>Al­so, I did­n't have to do it in any of the above ex­am­ples, but the first and sec­ond ar­gu­ments to  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>   <em>must</em>  be can­celed (<code>a, d = a.­can­cel(d, in­clude=True)</code>  will do this for you), or you will get a wrong re­sult!  I spent a good day of de­bug­ging un­til I fig­ured this out.  The ex­is­tence of oth­er bugs did­n't help.</p></div>
+ <p>Al­so, I did­n't have to do it in any of the above ex­am­ples, but the first and sec­ond ar­gu­ments to  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>   <em>must</em>  be can­celed (<code>a, d = a.­can­cel(d, in­clude=True)</code>  will do this for you), or you will get a wrong re­sult!  I spent a good day of de­bug­ging un­til I fig­ured this out.  The ex­is­tence of oth­er bugs did­n't help.</p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+        <ul itemprop="keywords" class="tags">
+           <li><a class="tag p-category" href="../../../../../categories/mathjax/" rel="tag">mathjax</a></li>
+        </ul>
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../../06/30/the-risch-algorithm-part-1/" rel="prev">← Previous post</a>
+                <a href="../../../06/30/the-risch-algorithm-part-1/" rel="prev" title="The Risch Algorithm: Part 1">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../17/a-hard-week/" rel="next">Next post →</a>
+                <a href="../../17/a-hard-week/" rel="next" title="A hard week">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -273,19 +314,23 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
         <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
-        });
-        </script>
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
         <script src="../../../../../assets/js/mathjax.js"></script>
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -302,24 +347,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -335,4 +387,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

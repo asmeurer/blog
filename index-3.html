@@ -1,17 +1,29 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="My blog">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Aaron Meurer's Blog (old posts, page 3) | Aaron Meurer's Blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/index-3.html">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -21,25 +33,25 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/index-3.html">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
-    
-    
 <link rel="stylesheet" type="text/css" href="assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -48,15 +60,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="archive.html">Archives</a>
-                </li><li><a href="categories/index.html">Tags</a>
-                </li><li><a href="rss.xml">RSS</a>
+                <li>
+<a href="archive.html">Archives</a>
+                </li>
+<li>
+<a href="categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -67,8 +86,10 @@ MathJax.Hub.Config({
                 
                     
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -78,14 +99,25 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/06/04/pudb-a-better-python-debugger/" class="u-url">PuDB, a better Python debugger</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-06-04T20:59:17-05:00">2010-06-04 20:59</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>So  <a href="http://haz-tech.blogspot.com/">Chris­tian Muise</a>  un­wit­ting­ly just re­mind­ed me on IRC that I for­got to men­tion the main method that I used to learn how the heurisch func­tion works in my last blog post.  I usu­al­ly on­ly use a de­bug­ger when I have a re­al­ly hard bug I need to fig­ure out, when the print state­ments aren't enough.  The rea­son for this is that the de­bug­ger that I had been us­ing, win­pdb, is, well, a pain to use.  There are so many lit­tle bugs, at least in Mac OS X, that it is al­most not worth while to use it un­less I need to.  For ex­am­ple, restart­ing a script from the de­bug­ger does­n't work.  If I pass a point that I want­ed to see, I have to com­plete­ly close the win­pdb win­dow and restart it from the com­mand line, which takes about half a minute.  Al­so, win­pdb us­es it's own vari­ant of pdb, which seems to cause more prob­lems than it cre­ates (like bug­ging me about sympy im­port­ing pdb some­where  <em>ev­ery time</em>  I start de­bug­ging.)</p> 
+<div class="postindex">
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/06/04/pudb-a-better-python-debugger/" class="u-url">PuDB, a better Python debugger</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/06/04/pudb-a-better-python-debugger/" rel="bookmark"><time class="published dt-published" datetime="2010-06-04T20:59:17-05:00" itemprop="datePublished" title="Publication date">2010-06-04 20:59</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2010/06/04/pudb-a-better-python-debugger/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/04/pudb-a-better-python-debugger.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So  <a href="http://haz-tech.blogspot.com/">Chris­tian Muise</a>  un­wit­ting­ly just re­mind­ed me on IRC that I for­got to men­tion the main method that I used to learn how the heurisch func­tion works in my last blog post.  I usu­al­ly on­ly use a de­bug­ger when I have a re­al­ly hard bug I need to fig­ure out, when the print state­ments aren't enough.  The rea­son for this is that the de­bug­ger that I had been us­ing, win­pdb, is, well, a pain to use.  There are so many lit­tle bugs, at least in Mac OS X, that it is al­most not worth while to use it un­less I need to.  For ex­am­ple, restart­ing a script from the de­bug­ger does­n't work.  If I pass a point that I want­ed to see, I have to com­plete­ly close the win­pdb win­dow and restart it from the com­mand line, which takes about half a minute.  Al­so, win­pdb us­es it's own vari­ant of pdb, which seems to cause more prob­lems than it cre­ates (like bug­ging me about sympy im­port­ing pdb some­where  <em>ev­ery time</em>  I start de­bug­ging.)</p> 
  <p>But I re­al­ly want­ed to be able to step through the heurisch code to see ex­act­ly how it work­s, be­cause many of the im­ple­men­ta­tion de­tail­s, such as gath­er­ing the com­po­nents of an ex­pres­sion, will be sim­i­lar if not ex­act­ly the same in the full al­go­rith­m.  So I start­ed my quest for a bet­ter de­bug­ger.  For me, the ide­al de­bug­ger is the C de­bug­ger in XCode.  That de­bug­ger has saved me in most of my pro­gram­ming as­sign­ments in C.  But it is on­ly for C based lan­guages (C, Ob­jec­tive-C, prob­a­bly C++, …), not Python.  So I did a Google search, and it turns out that there is a list of Python de­bug­gers  <a href="http://wiki.python.org/moin/PythonDebuggers">here</a>.  So I went through them, and I did­n't have to go far.  The very first one,  <a href="http://pypi.python.org/pypi/pudb">pudb</a>, turns out to be awe­some!</p> 
  <p>You can watch this  <a href="http://vimeo.com/5255125">screen­cast</a>  to get a bet­ter idea of the fea­tures, or even bet­ter in­stall it and check them out.  The de­bug­ger runs in the con­sole, not in some half-hacked GUI (half-hacked is what any non-­Co­coa GUI looks like in Mac OS X).  The on­ly down side to this is that you have to use the key­board to do ev­ery­thing, but it ends up not be­ing too bad.  And you can press '?' at any time to see the pos­si­ble com­mand­s.   </p> 
  <p>To in­stall it, just do  <code>easy_in­stall pudb</code>.  To run it, just cre­ate a script of what you want to de­bug, and do  <code>python -m pud­b.run my-scrip­t.py  </code>  and it just work­s! I have a line that says  <code>alias pud­b='python -m pud­b.run'</code>  in my  <code>.pro­file</code>, which makes it even eas­i­er to run.  If you want to set a break point in the code, you can ei­ther nav­i­gate there from with­in pudb by press­ing 'm', or you add a line that says  <code>from pudb im­port set_­trace; set_­trace()</code>  to the code (if you add the line to your code, you don't even need to cre­ate a scrip­t.  Just ex­e­cute the code in IPython and when it hits that line, it will load the de­bug­ger).   </p> 
@@ -131,23 +163,28 @@ MathJax.Hub.Config({
  <p>A while back On­drej mod­i­fied the code to have a dif­fer­ent col­or the­me, and I fol­lowed suit.  See  <a href="https://github.com/certik/PuDB/commit/38fed5024d022c5d6d1961c917026e021a833a9e#comments">this con­ver­sa­tion at GitHub</a>.  So now, in­stead of look­ing like a DOS ter­mi­nal, in PuDB for me looks like this:</p> 
  <p><a href="2010/07/screen-shot-2010-07-28-at-12-51-36-pm.png"><img src="2010/07/screen-shot-2010-07-28-at-12-51-36-pm.png" alt="PuDB XCode Midnight Theme Colors" title="PuDB XCode Midnight Theme Colors" width="450" height="360" class="size-full wp-image-682"></a>   This is ex­act­ly the same col­ors as my code in XCode, the ed­i­tor I use, with the Mid­night Theme.  It's pret­ty easy to change the col­ors to what­ev­er you wan­t.  Right now, you have to ed­it the source, but On­drej or I might some­day make it so you can have themes.   </p> 
  <p>Al­so, hav­ing used this all sum­mer (and it was a life-saver hav­ing it in mul­ti­ple oc­ca­sion­s, and I am sure made my de­vel­op­ment speed at least twice as fast in oth­er­s), I have one ad­di­tion­al gripe.  It is too dif­fi­cult to ar­row up to the vari­able that you want to ac­cess in the vari­ables view.  It would be nice to have a page up­/­page down fea­ture there.   </p> 
- <p>UP­DATE 4: PuDB has since im­proved a lot, in­clude many fix­es by my­self. It now sup­ports themes, saved set­tings, vari­able name wrap­ping, and more. See  <a href="http://asmeurersympy.wordpress.com/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">this fol­lowup post</a>.  </p></div>
-        </div>
-            
+ <p>UP­DATE 4: PuDB has since im­proved a lot, in­clude many fix­es by my­self. It now sup­ports themes, saved set­tings, vari­able name wrap­ping, and more. See  <a href="http://asmeurersympy.wordpress.com/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">this fol­lowup post</a>.  </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/06/04/update-for-this-week/" class="u-url">Update for this week</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/06/04/update-for-this-week/" rel="bookmark"><time class="published dt-published" datetime="2010-06-04T18:45:26-05:00" itemprop="datePublished" title="Publication date">2010-06-04 18:45</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/06/04/pudb-a-better-python-debugger/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/04/pudb-a-better-python-debugger.html">Comments</a>
+    <a href="posts/2010/06/04/update-for-this-week/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/04/update-for-this-week.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/06/04/update-for-this-week/" class="u-url">Update for this week</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-06-04T18:45:26-05:00">2010-06-04 18:45</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>So I start­ed writ­ing up a blog post on how ra­tio­nal func­tion in­te­gra­tion work­s, but On­drej  <a href="http://groups.google.com/group/sympy/browse_thread/thread/7d7dceb34db45302">wants a blog post</a>  ev­ery week by the end of I don't think I would do it jus­tice by rush­ing to fin­ish it now (read: I'm to lazy to do it).  So in­stead, I'll just give a short post (if that's pos­si­ble for me) on what I have been do­ing this week.   </p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So I start­ed writ­ing up a blog post on how ra­tio­nal func­tion in­te­gra­tion work­s, but On­drej  <a href="http://groups.google.com/group/sympy/browse_thread/thread/7d7dceb34db45302">wants a blog post</a>  ev­ery week by the end of I don't think I would do it jus­tice by rush­ing to fin­ish it now (read: I'm to lazy to do it).  So in­stead, I'll just give a short post (if that's pos­si­ble for me) on what I have been do­ing this week.   </p> 
  <p>I fin­ished up writ­ing doctests for the poly­no­mi­als mod­ule for now (see  <a href="http://code.google.com/p/sympy/issues/detail?id=1949">is­sue 1949</a>), so now this week I start­ed look­ing at the in­te­gra­tor.  In par­tic­u­lar, I went through each of the 40 is­sues with the  <a href="http://code.google.com/p/sympy/issues/list?q=label:Integration">In­te­gra­tion la­bel</a>  and added them to a test file that I can mon­i­tor through­out the sum­mer to see my progress.  It is the test_­fail­ing_in­te­gral­s.py file in my  <a href="http://github.com/asmeurer/sympy/tree/integration">In­te­gra­tion branch</a>, where all my work will be go­ing for the fore­see­able fu­ture.  So if you want to fol­low my work, fol­low that branch.  Here are some ob­ser­va­tions from those is­sues:</p> 
  <ul>
 <li> 
@@ -172,96 +209,121 @@ MathJax.Hub.Config({
 <p>In [18]: print in­te­grate(f(x).d­if­f(x)**2, x)</p> 
  <p>2<em>D(f(x), x)</em>f(x)/3 - 2<em>x</em>D(f(x), x, x)<em>f(x)/3 + x</em>D(f(x), x)**2/3</p> 
  <p>The prob­lem is in the step where it com­putes the de­riv­a­tive of the com­po­nents, it tries to com­pute the de­riv­a­tive of f(x).d­if­f(x) in terms of a dum­my vari­able, but it re­duces to 0 be­cause dif­f(x2, x) == 0.  Thus, it treats f(x).d­if­f(x) like some­thing that has a 0 third deriva­tive, i.e., x**2.   </p> 
- <p>Well that's it.  I knew I could­n't make a short blog post :).  If you want to help, I have three branch­es that need re­view (<a href="http://code.google.com/p/sympy/issues/detail?id=1883">1</a>,  <a href="http://code.google.com/p/sympy/issues/detail?id=1949">2</a>,  <a href="http://code.google.com/p/sympy/issues/detail?id=1843">3</a>), and ex­cept for the last one, my work is based on top of the oth­er two, so none of my in­te­gra­tion work can be pushed in un­til those two re­viewed pos­i­tive­ly.   </p></div>
-        </div>
-            
+ <p>Well that's it.  I knew I could­n't make a short blog post :).  If you want to help, I have three branch­es that need re­view (<a href="http://code.google.com/p/sympy/issues/detail?id=1883">1</a>,  <a href="http://code.google.com/p/sympy/issues/detail?id=1949">2</a>,  <a href="http://code.google.com/p/sympy/issues/detail?id=1843">3</a>), and ex­cept for the last one, my work is based on top of the oth­er two, so none of my in­te­gra­tion work can be pushed in un­til those two re­viewed pos­i­tive­ly.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/05/26/more-information-on-my-google-summer-of-code-project-this-year/" class="u-url">More information on my Google Summer of Code project this year</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/05/26/more-information-on-my-google-summer-of-code-project-this-year/" rel="bookmark"><time class="published dt-published" datetime="2010-05-26T17:33:38-05:00" itemprop="datePublished" title="Publication date">2010-05-26 17:33</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/06/04/update-for-this-week/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/04/update-for-this-week.html">Comments</a>
+    <a href="posts/2010/05/26/more-information-on-my-google-summer-of-code-project-this-year/#disqus_thread" data-disqus-identifier="cache/posts/2010/05/26/more-information-on-my-google-summer-of-code-project-this-year.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/05/26/more-information-on-my-google-summer-of-code-project-this-year/" class="u-url">More information on my Google Summer of Code project this year</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-05-26T17:33:38-05:00">2010-05-26 17:33</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>So, as I not­ed  <a href="http://asmeurersympy.wordpress.com/2010/04/26/gsoc-2010/trackback/">here</a>, I have been ac­cept­ed in­to the Google Sum­mer of Code pro­gram again this year.  I men­tioned that my project in­volved im­prov­ing the in­te­gra­tor, but I did­n't say much oth­er than that.  So here I plan on say­ing a bit more.  If you want more de­tail­s, you can read my ap­pli­ca­tion  <a href="http://wiki.sympy.org/wiki/User:Asmeurer/GSoC2010_Application">on the SymPy wi­ki</a>.   </p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So, as I not­ed  <a href="http://asmeurersympy.wordpress.com/2010/04/26/gsoc-2010/trackback/">here</a>, I have been ac­cept­ed in­to the Google Sum­mer of Code pro­gram again this year.  I men­tioned that my project in­volved im­prov­ing the in­te­gra­tor, but I did­n't say much oth­er than that.  So here I plan on say­ing a bit more.  If you want more de­tail­s, you can read my ap­pli­ca­tion  <a href="http://wiki.sympy.org/wiki/User:Asmeurer/GSoC2010_Application">on the SymPy wi­ki</a>.   </p> 
  <p>My goal is to im­prove the in­te­gra­tor in SymPy, in oth­er word­s, the back end to the  <code>in­te­grate()</code>  func­tion.  This is no easy task.  Cur­rent­ly, SymPy has a pret­ty dec­net in­te­gra­tion en­gine.  It is even able to solve some in­te­grals that no oth­er sys­tem is known to be able to solve (the sec­ond in­te­gral  <a href="http://en.wikipedia.org/wiki/Risch_algorithm#Implementation">here</a>). But, as I dis­cov­ered of­ten many times through­out my work on ODEs last year, the in­te­gra­tor can of­ten leave some­thing to be de­sired.  There are two prob­lems that I hope to ad­dress.   </p> 
  <p>First, the in­te­gra­tor of­ten fails on el­e­men­tary in­te­gral­s.  This is be­cause all of the in­te­gra­tion in SymPy is based on a heuris­tic called the Risch-Nor­man al­go­rith­m.  Sym­bol­ic in­te­gra­tion has been com­plete­ly solved in the form of the Risch al­go­rith­m, mean­ing that there ex­ists an al­go­rithm to de­ter­mine if an el­e­men­tary func­tion has an el­e­men­tary anti­deriv­a­tive or not, and to find it if it does.  This al­go­rith­m, called the Risch al­go­rith­m, is ex­treme­ly com­pli­cat­ed, to the ex­tent that no com­put­er al­ge­bra sys­tem has ev­er com­plete­ly im­ple­ment­ed all the parts of it.  My plan is to be­gin im­ple­ment­ing the full al­go­rithm in SymPy.  I don't ex­pect to fin­ish the whole thing -- as I said no one ev­er has.  Rather, I hope to make a good head­way in­to what is known as the tran­scen­den­tal part.  The Risch al­go­rithm is bro­ken up in­to four part­s: ra­tio­nal part, the tran­scen­den­tal part, the al­ge­bra­ic part, and the mixed part.   </p> 
  <p>The ra­tio­nal part is in­volves in­te­grat­ing ra­tio­nal func­tions (func­tions of the form $la­tex \frac{a_nx^n + a_{n-1}x^{n-1} + \c­dots + a_2x^2 + a_1x + a_0}{b_nx^n + b_{n-1}x^{n-1} + \c­dots + b_2x^2 + a_1x + a_0}$).  The ra­tio­nal part is the eas­i­est part in the sense that the al­go­rithm is the sim­plest, and al­so that all ra­tio­nal func­tion in­te­grals are el­e­men­tary (a term that I will de­fine lat­er).  Ra­tio­nal func­tion in­te­gra­tion is al­ready im­ple­ment­ed in sympy in ful­l, though I may give a brief out­line of how it works in a lat­er post.   </p> 
  <p>The tran­scen­den­tal part is the part that I will be im­ple­ment­ing this sum­mer.  My guide will be  <a href="http://www.amazon.com/Symbolic-Integration-Transcendental-Computation-Mathematics/dp/3540214933/ref=sr_1_fkmr0_2?ie=UTF8&amp;qid=1274894380&amp;sr=8-2-fkmr0"><em>Sym­bol­ic In­te­gra­tion I: Tran­scen­den­tal Func­tions</em>  by Manuel Bron­stein</a>, which de­scribes and proves the tran­scen­den­tal part of the al­go­rithm in some 300+ pages.  I will try to ex­plain a lit­tle of how the al­go­rithm works in some blog post­s, but un­der­stand that it is very com­plex.  There­fore, I will prob­a­bly ex­plain it with­out prov­ing things.  If you are in­ter­est­ed in buy­ing the book and learn­ing the al­go­rithm rig­or­ous­ly, the on­ly pre­req­ui­sites that I can tell are cal­cu­lus (so you know what an in­te­gral and a de­riv­a­tive are), and a se­mes­ter of ab­stract al­ge­bra (y­ou need to know about rings, field­s, ide­al­s, ho­mo­mor­phism­s, etc., as well as the var­i­ous the­o­rems re­lat­ing them).   </p> 
  <p>In the book, I am still in the part that de­vel­ops the the­o­ry called dif­fer­en­tial al­ge­bra nec­es­sary to prove the in­te­gra­tion al­go­rithm cor­rec­t.  So to be­gin the GSoC pro­gram, I am work­ing on learn­ing the polys mod­ule in sympy.  My method of do­ing this is to write doctests for all the func­tions in the mod­ule.  It's a daunt­ing task, but it's been prob­a­bly the best way of learn­ing how a com­put­er mod­ule works that I have ev­er tried.  You re­al­ly have to un­der­stand all as­pects of a func­tion to write a doctest for it, the types of the pa­ram­e­ters and re­turn val­ue, as well as what the al­go­rithm is ac­tu­al­ly do­ing.  It's es­pe­cial­ly help­ful that the code for the func­tions is right be­low the doc­string for each func­tion, so I can see how it re­al­ly works on the in­sid­e, re­mov­ing the mys­tery of the mod­ule.  Fur­ther­more, it will serve as a ref­er­ence for me for the re­main­der of the sum­mer, as well for any­one else who wants to learn the polys mod­ule, or just needs to de­bug it.  I've al­so ran in­to sev­er­al bugs and in­ef­fi­cien­cies in the mod­ule that I have tak­en the lib­er­ty of fix­ing.   </p> 
- <p>Well that's it for this post.  If you want to fol­low my progress on the doctest­s, my branch is  <a href="http://github.com/asmeurer/sympy/tree/polydocs-polys9">http://github.­com/as­meur­er/sympy/tree/poly­doc­s-polys9</a>.  Note that the branch will be very un­sta­ble un­til I fin­ish at some point at the end of this week or the be­gin­ning of the nex­t.   </p></div>
-        </div>
-            
+ <p>Well that's it for this post.  If you want to fol­low my progress on the doctest­s, my branch is  <a href="http://github.com/asmeurer/sympy/tree/polydocs-polys9">http://github.­com/as­meur­er/sympy/tree/poly­doc­s-polys9</a>.  Note that the branch will be very un­sta­ble un­til I fin­ish at some point at the end of this week or the be­gin­ning of the nex­t.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/04/26/gsoc-2010/" class="u-url">GSoC 2010</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/04/26/gsoc-2010/" rel="bookmark"><time class="published dt-published" datetime="2010-04-26T22:05:39-05:00" itemprop="datePublished" title="Publication date">2010-04-26 22:05</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/05/26/more-information-on-my-google-summer-of-code-project-this-year/#disqus_thread" data-disqus-identifier="cache/posts/2010/05/26/more-information-on-my-google-summer-of-code-project-this-year.html">Comments</a>
+    <a href="posts/2010/04/26/gsoc-2010/#disqus_thread" data-disqus-identifier="cache/posts/2010/04/26/gsoc-2010.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/04/26/gsoc-2010/" class="u-url">GSoC 2010</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-04-26T22:05:39-05:00">2010-04-26 22:05</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>So I ap­plied for Google Sum­mer of Code again this year, and I got ac­cept­ed!  I will post more here lat­er, but you can read the pro­pos­al ab­stract  <a href="http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/python/t127230762920">here</a>.  The project is to im­prove the in­te­gra­tor in SymPy, mak­ing it faster, and able to solve more in­te­gral­s.   </p></div>
-        </div>
-            
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So I ap­plied for Google Sum­mer of Code again this year, and I got ac­cept­ed!  I will post more here lat­er, but you can read the pro­pos­al ab­stract  <a href="http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/python/t127230762920">here</a>.  The project is to im­prove the in­te­gra­tor in SymPy, mak­ing it faster, and able to solve more in­te­gral­s.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/04/06/latest-sympy-makes-it-to-fink/" class="u-url">Latest SymPy makes it to Fink</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/04/06/latest-sympy-makes-it-to-fink/" rel="bookmark"><time class="published dt-published" datetime="2010-04-06T19:41:16-05:00" itemprop="datePublished" title="Publication date">2010-04-06 19:41</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/04/26/gsoc-2010/#disqus_thread" data-disqus-identifier="cache/posts/2010/04/26/gsoc-2010.html">Comments</a>
+    <a href="posts/2010/04/06/latest-sympy-makes-it-to-fink/#disqus_thread" data-disqus-identifier="cache/posts/2010/04/06/latest-sympy-makes-it-to-fink.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/04/06/latest-sympy-makes-it-to-fink/" class="u-url">Latest SymPy makes it to Fink</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-04-06T19:41:16-05:00">2010-04-06 19:41</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>Look at this screen­shot:
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>Look at this screen­shot:
  <a href="2010/04/screen-shot-2010-04-06-at-1-25-10-pm.png"><img src="2010/04/screen-shot-2010-04-06-at-1-25-10-pm.png" alt="" title="SymPy makes it to Fink" width="450" height="112" class="alignnone size-full wp-image-364"></a></p> 
- <p>So the lat­est ver­sion of SymPy fi­nal­ly made it in­to  <a href="http://www.finkproject.org/">fink</a>.  Nor­mal­ly, this would­n't be that ex­cit­ing, but be­fore this, the most re­cent ver­sion in fink was 0.6.4, which was be­fore I ev­er joined the pro­jec­t, with the ex­cep­tion of two com­mit­s.  So this is the first ver­sion on fink to in­clude all of my con­tri­bu­tion­s, in­clud­ing my 2009 Google Sum­mer of Code work.   </p></div>
-        </div>
-            
+ <p>So the lat­est ver­sion of SymPy fi­nal­ly made it in­to  <a href="http://www.finkproject.org/">fink</a>.  Nor­mal­ly, this would­n't be that ex­cit­ing, but be­fore this, the most re­cent ver­sion in fink was 0.6.4, which was be­fore I ev­er joined the pro­jec­t, with the ex­cep­tion of two com­mit­s.  So this is the first ver­sion on fink to in­clude all of my con­tri­bu­tion­s, in­clud­ing my 2009 Google Sum­mer of Code work.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/" class="u-url">Automatically Remove Trailing Whitespace in XCode</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/" rel="bookmark"><time class="published dt-published" datetime="2009-12-29T23:56:46-06:00" itemprop="datePublished" title="Publication date">2009-12-29 23:56</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/04/06/latest-sympy-makes-it-to-fink/#disqus_thread" data-disqus-identifier="cache/posts/2010/04/06/latest-sympy-makes-it-to-fink.html">Comments</a>
+    <a href="posts/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/#disqus_thread" data-disqus-identifier="cache/posts/2009/12/29/automatically-remove-trailing-whitespace-in-xcode.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/" class="u-url">Automatically Remove Trailing Whitespace in XCode</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2009-12-29T23:56:46-06:00">2009-12-29 23:56</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>I like XCode, and I use it to ed­it all of my source for SymPy.   But, like many ed­i­tors, it likes to au­to-in­dent new lines to the lev­el of in­den­ta­tion of the pre­vi­ous line.  This is a use­ful fea­ture, but it makes for train­ing white­space out the wa­zoo, since blank lines will be in­dent­ed in.  I am con­stant­ly find­ing my­self us­ing SymPy's strip_whites­pace script to clean up my files.   </p> 
- <p>This bugged me enough that I Googled a so­lu­tion, and found  <a href="http://code.google.com/p/google-toolbox-for-mac/wiki/GTMXcodePlugin">this</a>.  It is a sim­ple XCode plug­in that, among oth­er things, adds an op­tion to strip trail­ing white­space on save.  Just in­stall in the Plug­Ins fold­er in the XCode pack­age and en­able the op­tion in the new Google pane of the XCode pref­er­ences.   </p></div>
-        </div>
-            
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>I like XCode, and I use it to ed­it all of my source for SymPy.   But, like many ed­i­tors, it likes to au­to-in­dent new lines to the lev­el of in­den­ta­tion of the pre­vi­ous line.  This is a use­ful fea­ture, but it makes for train­ing white­space out the wa­zoo, since blank lines will be in­dent­ed in.  I am con­stant­ly find­ing my­self us­ing SymPy's strip_whites­pace script to clean up my files.   </p> 
+ <p>This bugged me enough that I Googled a so­lu­tion, and found  <a href="http://code.google.com/p/google-toolbox-for-mac/wiki/GTMXcodePlugin">this</a>.  It is a sim­ple XCode plug­in that, among oth­er things, adds an op­tion to strip trail­ing white­space on save.  Just in­stall in the Plug­Ins fold­er in the XCode pack­age and en­able the op­tion in the new Google pane of the XCode pref­er­ences.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2009/11/13/how-to-get-both-32-bit/" class="u-url">How to get both 32-bit and 64-bit Python in Snow Leopard</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2009/11/13/how-to-get-both-32-bit/" rel="bookmark"><time class="published dt-published" datetime="2009-11-13T01:16:42-06:00" itemprop="datePublished" title="Publication date">2009-11-13 01:16</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/#disqus_thread" data-disqus-identifier="cache/posts/2009/12/29/automatically-remove-trailing-whitespace-in-xcode.html">Comments</a>
+    <a href="posts/2009/11/13/how-to-get-both-32-bit/#disqus_thread" data-disqus-identifier="cache/posts/2009/11/13/how-to-get-both-32-bit.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2009/11/13/how-to-get-both-32-bit/" class="u-url">How to get both 32-bit and 64-bit Python in Snow Leopard</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2009-11-13T01:16:42-06:00">2009-11-13 01:16</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>We had some dis­cus­sion on one of the Python is­sues about whether my Python in Snow Leop­ard should be 32-bit or 64-bit.  I orig­i­nal­ly thought that it was tied to what the ker­nel was, but I turned out to be wrong.  </p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>We had some dis­cus­sion on one of the Python is­sues about whether my Python in Snow Leop­ard should be 32-bit or 64-bit.  I orig­i­nal­ly thought that it was tied to what the ker­nel was, but I turned out to be wrong.  </p> 
  <p>From what I dis­cov­ered, the im­por­tant thing is what the Python was com­piled as.  You can tell what your Python has been com­piled as by run­ning:</p> 
  <p><code></code></p> 
  <p>&gt;&gt;&gt; im­port sys</p> 
@@ -288,23 +350,28 @@ MathJax.Hub.Config({
  <p>SymPy us­es hash val­ues to or­der ar­gu­ments, so of­ten it hap­pens that be­hav­ior in one ar­chi­tec­ture will not show up in the oth­er.  These prob­lems are of­ten hard to track and fix, but the worst is when things work fine on the ma­chine you are work­ing on.  This ac­tu­al­ly hap­pened to me with my GSoC projec­t.  I was renum­ber­ing the ar­bi­trary con­stants in the print­ing or­der in an ex­pres­sion, but it turned out that the print­ing or­der of an ex­pres­sion can be de­pen­dent on .args or­der, so I had to mod­i­fy the tests to can­on­ize the num­ber­ing first.</p> 
  <p>So here comes the crux of the post.  It turns out that on Mac OS X, if you in­stall the bi­na­ry from python.org (Mac In­stall­er Disk Im­age), this in­stalls a 32-bit Python (for com­pat­i­bil­i­ty rea­son­s) in /Li­brary/Frame­work­s/Python.frame­work/Ver­sion­s/2.6/bin/python2.6</p> 
  <p>.  How­ev­er, if you in­stall Python us­ing 64-bit fink in Snow Leop­ard, it will com­pile it from source in­to 64-bit, and in­stall it in­to /sw/bin/python2.6.   </p> 
- <p>So now I have an easy way to test both ar­chi­tec­tures with­out hav­ing to ssh in­to some oth­er ma­chine, which was what I was do­ing be­fore.   </p></div>
-        </div>
-            
+ <p>So now I have an easy way to test both ar­chi­tec­tures with­out hav­ing to ssh in­to some oth­er ma­chine, which was what I was do­ing be­fore.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2009/09/07/google-summer-of-code-2009-wrap-up/" class="u-url">Google Summer of Code 2009 Wrap Up</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2009/09/07/google-summer-of-code-2009-wrap-up/" rel="bookmark"><time class="published dt-published" datetime="2009-09-07T06:49:12-05:00" itemprop="datePublished" title="Publication date">2009-09-07 06:49</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2009/11/13/how-to-get-both-32-bit/#disqus_thread" data-disqus-identifier="cache/posts/2009/11/13/how-to-get-both-32-bit.html">Comments</a>
+    <a href="posts/2009/09/07/google-summer-of-code-2009-wrap-up/#disqus_thread" data-disqus-identifier="cache/posts/2009/09/07/google-summer-of-code-2009-wrap-up.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2009/09/07/google-summer-of-code-2009-wrap-up/" class="u-url">Google Summer of Code 2009 Wrap Up</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2009-09-07T06:49:12-05:00">2009-09-07 06:49</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>Sor­ry about the ex­treme de­lay with this.  I of course have been busy with class­es.</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>Sor­ry about the ex­treme de­lay with this.  I of course have been busy with class­es.</p> 
  <p>Note that this will just be a sum­ma­ry of the sum­mer, with my com­ments look­ing back on it.  If you want more de­tails on each in­di­vid­u­al thing that I im­ple­ment­ed, look back on my pre­vi­ous blog post­s.</p> 
  <p>Let me start from the be­gin­ning.  Around late Feb­ru­ary to ear­ly March of this year, I dis­cov­ered the ex­is­tence of Google Sum­mer of Code.  I knew that I want­ed to do some kind of work this sum­mer, prefer­ably an in­tern­ship, so it piqued my in­ter­est.  At that time, the men­tor­ing or­ga­ni­za­tions were still ap­ply­ing for GSoC 2009, so I could on­ly look at the ones from 2008.  Most of them were ei­ther Lin­ux things or Web things, nei­ther of which I had any ex­pe­ri­ence in or am I much in­ter­est­ed in.  I took a free course in Python at my Uni­ver­si­ty the pre­vi­ous semester, and it was the pro­gram­ming lan­guage that I knew best at the time.  I had learned some Ja­va in my first se­mes­ter CS class (did I men­tion that this was my first year at col­lege?), and I hat­ed it, and I was still learn­ing C for my sec­ond se­mes­ter CS class.  So I looked at what the Python Foun­da­tion had to of­fer.  I am a dou­ble ma­jor in math and com­put­er sci­ence, so I looked un­der the math­/­science head­ing.  That's when I saw SymPy.</p> 
  <p>I should not that I have been ahead in Math.  It was my sec­ond semester, and I was tak­ing Dis­crete Math­e­mat­ic­s, Or­di­nary Dif­fer­en­tial Equa­tion­s, Ba­sic Con­cepts of Math, and Vec­tor Anal­y­sis.  So I looked for project ideas on the SymPy page that re­lat­ed to what I knew.  The on­ly one that I saw, oth­er than core im­prove­ments, was to im­prove the ODE solv­ing ca­pa­bil­i­ties.  I got in­to con­tact with the com­mu­ni­ty and looked at the source, find­ing that it was on­ly ca­pa­ble of solv­ing 1st or­der lin­ear equa­tions and some spe­cial cas­es of 2nd or­der lin­ear ho­mo­ge­neous equa­tions with con­stant co­ef­fi­cients.  I al­ready at that point knew sev­er­al meth­ods from my ODE course, and I knew much of what I would learn.   </p> 
@@ -364,23 +431,28 @@ MathJax.Hub.Config({
  <li> 
  <p>Good luck.</p>  
   </li> 
- </ul></div>
-        </div>
-            
+ </ul>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2009/08/17/undetermined-coefficients/" class="u-url">Undetermined Coefficients</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2009/08/17/undetermined-coefficients/" rel="bookmark"><time class="published dt-published" datetime="2009-08-17T22:33:00-05:00" itemprop="datePublished" title="Publication date">2009-08-17 22:33</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2009/09/07/google-summer-of-code-2009-wrap-up/#disqus_thread" data-disqus-identifier="cache/posts/2009/09/07/google-summer-of-code-2009-wrap-up.html">Comments</a>
+    <a href="posts/2009/08/17/undetermined-coefficients/#disqus_thread" data-disqus-identifier="cache/posts/2009/08/17/undetermined-coefficients.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2009/08/17/undetermined-coefficients/" class="u-url">Undetermined Coefficients</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2009-08-17T22:33:00-05:00">2009-08-17 22:33</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><em>[Sorry for the delay in this post.  I was having some difficulties coming up with some of the rationales below. Also, classes have started, which has made me very busy.]</em>
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<em>[Sorry for the delay in this post.  I was having some difficulties coming up with some of the rationales below. Also, classes have started, which has made me very busy.]</em>
 <p>If there was one ODE solv­ing method that I did not want to im­ple­ment this sum­mer, it was un­de­ter­mined co­ef­fi­cients.  I did­n't re­al­ly like the method too much when we did it my my ODE class (though it was not as un­en­joy­able as se­ries meth­od­s).  The thing that I nev­er re­al­ly un­der­stood very well is to what ex­tent you have to mul­ti­ply terms in the tri­al func­tion by pow­ers of x to make them lin­ear­ly in­de­pen­dent of the so­lu­tion to the gen­er­al equa­tion.  We did our ODEs home­work in Maple, so I would usu­al­ly just keep try­ing high­er pow­ers of x un­til I got a so­lu­tion.  But to im­ple­ment it in SymPy, I had to have a much bet­ter un­der­stand­ing of the ex­act rules for it.</p> 
  <p>From a user's point of view, the method of un­de­ter­mined co­ef­fi­cients is much bet­ter than the method of vari­a­tion of pa­ram­e­ter­s.  While it is true that vari­a­tion of pa­ram­e­ters is a gen­er­al method and un­de­ter­mined co­ef­fi­cients on­ly works on a spe­cial class of func­tion­s, un­de­ter­mined co­ef­fi­cients re­quires no in­te­gra­tion or ad­vanced sim­pli­fi­ca­tion, so it is fast (very fast, as well shall see be­low).  All that the CAS has to do is fig­ure out what a tri­al func­tion looks like, plug it in­to the ODE, and solve for the co­ef­fi­cients, which is a sys­tem of lin­ear equa­tion­s.   </p> 
  <p>On the oth­er hand, from the pro­gram­mer's point of view,  <a href="http://asmeurersympy.wordpress.com/2009/08/01/variation-of-parameters-and-more/">vari­a­tion of pa­ram­e­ters</a>  is much bet­ter.  All you have to do is take the Wron­skian of the gen­er­al so­lu­tion set and use it to set up some in­te­gral­s.  But the Wron­skian has to be sim­pli­fied, and if the gen­er­al so­lu­tion con­tains sin's and cos's, this re­quires trigono­met­ric sim­pli­fi­ca­tion not cur­rent­ly avail­able in SymPy (although it looks like the  <a href="http://code.google.com/p/sympy/issues/detail?id=1598">new Polys mod­ule</a>  will be mak­ing a big leap for­ward in this area).  Al­so, in­te­gra­tion is slow, and in SymPy, it of­ten fails (hangs forever).   </p> 
@@ -566,58 +638,56 @@ Out[25]: 3.22222222222
  <p>So we don't have or­ders of mag­ni­tude any­more, but it is still 2 to 3 times faster.  Of course, most ODEs of this form  <em>will</em>  have sin or cos terms in them, so the or­der of mag­ni­tude im­prove­ment over vari­a­tion of pa­ram­e­ters can prob­a­bly be at­trib­uted to un­de­ter­mined co­ef­fi­cients in gen­er­al.   </p> 
  <p>Of course, we know that vari­a­tion of pa­ram­e­ters will still be use­ful, be­cause func­tions like $la­tex \l­n{x}$, $la­tex \sec{x}$ and $la­tex \frac{1}{x}$ do not have a fi­nite num­ber of lin­ear­ly in­de­pen­dent deriva­tives, and so you can­not ap­ply the method of un­de­ter­mined co­ef­fi­cients to them.   </p> 
  <p>There is one last thing I want to men­tion.  You can in­deed mul­ti­ply any poly­no­mi­al, ex­po­nen­tial, sin, or cos func­tions to­geth­er and still get a func­tion that has a fi­nite num­ber of lin­ear­ly in­de­pen­dent so­lu­tion­s, but if you mul­ti­ply two or more of the trig func­tion­s, you have to ap­ply the  <a href="http://en.wikipedia.org/wiki/Trig_identities#Power-reduction_formulas">pow­er re­duc­tion rules</a>  to the re­sult­ing func­tion to get it in terms of sin and cos alone.  Un­for­tu­nate­ly, SymPy does not yet have a  <a href="http://code.google.com/p/sympy/issues/detail?id=1590">func­tion</a>  that can do this, so to solve such a dif­fer­en­tial equa­tion with un­de­ter­mined co­ef­fi­cients (rec­om­mend­ed, see above), you will have to ap­ply them man­u­al­ly your­self.  Al­so, just for the record, it does­n't play well with ex­po­nen­tials in the form of sin's and cos's or the oth­er way around (com­plex co­ef­fi­cients on the ar­gu­ments), so you should back con­vert those first too.   </p> 
- <p>Well, this con­cludes the first of two blog posts that I promised.  I al­so promised that I would write about my sum­mer of code ex­pe­ri­ences.  Not on­ly is this im­por­tant to me, but it is a  <a href="http://code.google.com/p/sympy/wiki/GSoC2009">re­quire­ment</a>.  I re­al­ly  <em>hope</em>  to get this done soon, but with class­es, who knows.   </p></div>
-        </div>
-            
+ <p>Well, this con­cludes the first of two blog posts that I promised.  I al­so promised that I would write about my sum­mer of code ex­pe­ri­ences.  Not on­ly is this im­por­tant to me, but it is a  <a href="http://code.google.com/p/sympy/wiki/GSoC2009">re­quire­ment</a>.  I re­al­ly  <em>hope</em>  to get this done soon, but with class­es, who knows.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2009/08/17/los-alamos-sprint/" class="u-url">Los Alamos "Sprint"</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2009/08/17/los-alamos-sprint/" rel="bookmark"><time class="published dt-published" datetime="2009-08-17T18:42:57-05:00" itemprop="datePublished" title="Publication date">2009-08-17 18:42</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2009/08/17/undetermined-coefficients/#disqus_thread" data-disqus-identifier="cache/posts/2009/08/17/undetermined-coefficients.html">Comments</a>
+    <a href="posts/2009/08/17/los-alamos-sprint/#disqus_thread" data-disqus-identifier="cache/posts/2009/08/17/los-alamos-sprint.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2009/08/17/los-alamos-sprint/" class="u-url">Los Alamos "Sprint"</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2009-08-17T18:42:57-05:00">2009-08-17 18:42</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>Last week­end, Luke came to vis­it On­drej in Los Alam­os, so I de­cid­ed to drive him up from Al­bu­querque and vis­it him again.  It was nice meet­ing Luke and see­ing On­drej again.   </p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>Last week­end, Luke came to vis­it On­drej in Los Alam­os, so I de­cid­ed to drive him up from Al­bu­querque and vis­it him again.  It was nice meet­ing Luke and see­ing On­drej again.   </p> 
  <p>Aside from cod­ing (the main thing that I did was fix an ug­ly match bug that was pre­vent­ing dsolve() from rec­og­niz­ing cer­tain ODEs), we vis­it­ed the atom­ic mu­se­um in Los Alam­os, the  <a href="http://en.wikipedia.org/wiki/Valles_Caldera">Valles Caldera</a>, and some of the sur­round­ing hot springs.   </p> 
  <p>Here are some pic­tures that Luke took with his iPhone.  Stupid Word­Press seems to in­sist on flip­ping some of them (I can't fix it):</p> 
  <p>[gallery]</p> 
- <p>This is one of three posts that I plan on do­ing this week.  I just fin­ished my GSoC project to­day/last night, so I will be blog­ging about that.  I plan on do­ing a post on the method of Un­de­ter­mined Co­ef­fi­cients, as well as some oth­er things that I man­aged to do.  The oth­er post will be my gen­er­al mus­ings/ad­vice for GSoC. That will prob­a­bly be my last post here in a while.  I plan on con­tin­u­ing work with SymPy, but I get very busy with class­es, so I most like­ly won't be do­ing much un­til next sum­mer.</p></div>
-        </div>
-            
-        
-    <p>
-        <a href="posts/2009/08/17/los-alamos-sprint/#disqus_thread" data-disqus-identifier="cache/posts/2009/08/17/los-alamos-sprint.html">Comments</a>
+ <p>This is one of three posts that I plan on do­ing this week.  I just fin­ished my GSoC project to­day/last night, so I will be blog­ging about that.  I plan on do­ing a post on the method of Un­de­ter­mined Co­ef­fi­cients, as well as some oth­er things that I man­aged to do.  The oth­er post will be my gen­er­al mus­ings/ad­vice for GSoC. That will prob­a­bly be my last post here in a while.  I plan on con­tin­u­ing work with SymPy, but I get very busy with class­es, so I most like­ly won't be do­ing much un­til next sum­mer.</p>
+</div>
+    </div>
+    </article>
+</div>
 
-
-        </p></article>
-    
-        <div>
+        <nav class="postindexpager">
         <ul class="pager">
             <li class="previous">
-                <a href="index-4.html" rel="prev">← Newer posts</a>
+                <a href="index-4.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
-                <a href="index-2.html" rel="next">Older posts →</a>
+                <a href="index-2.html" rel="next">Older posts</a>
             </li>
         </ul>
-        </div>
+        </nav>
 
-    
+
         
        <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
 
 
-	
+
         <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
-        });
-        </script>
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
         <script src="assets/js/mathjax.js"></script>
 
 
@@ -636,24 +706,31 @@ Out[25]: 3.22222222222
 </div>
 
 
-            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="assets/js/tipuesearch_set.js"></script>
@@ -669,4 +746,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

@@ -1,17 +1,29 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="My blog">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Aaron Meurer's Blog (old posts, page 4) | Aaron Meurer's Blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/index-4.html">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -21,25 +33,25 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/index-4.html">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
-    
-    
 <link rel="stylesheet" type="text/css" href="assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -48,15 +60,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="archive.html">Archives</a>
-                </li><li><a href="categories/index.html">Tags</a>
-                </li><li><a href="rss.xml">RSS</a>
+                <li>
+<a href="archive.html">Archives</a>
+                </li>
+<li>
+<a href="categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -67,8 +86,10 @@ MathJax.Hub.Config({
                 
                     
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -78,14 +99,25 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/" class="u-url">Prototype risch_integrate() function ready for testing!</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-08-05T22:30:00-05:00">2010-08-05 22:30</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>So to­day I fi­nal­ly fin­ished up the pro­to­type func­tion I talked about  <a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/">last week</a>.  The func­tion is called  <code>risch_in­te­grate()</code>  and is avail­able at my  <a href="http://github.com/asmeurer/sympy/tree/integration3">in­te­gra­tion3</a>  branch.  Un­like the in­ner lev­el func­tions I have show­cased in  <a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/">pre­vi­ous</a>   <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">blog posts</a>, this func­tion does not re­quire you to do sub­sti­tu­tion for dum­my vari­ables and man­u­al­ly cre­ate a list of deriva­tives, etc.  All you have to do is pass it a func­tion and the in­te­gra­tion vari­able, and it will re­turn the re­sult, just like nor­mal  <code>in­te­grate()</code>. I have spent the past few days work­ing on a mon­ster of a func­tion called  <code>build_ex­ten­sion()</code>  that does this prepars­ing work for you.  The rea­son that the func­tion was so hard to write is that the tran­scen­den­tal Risch Al­go­rithm is very pick­y.   <em>Ev­ery</em>  dif­fer­en­tial ex­ten­sion has to be tran­scen­den­tal over the pre­vi­ous ex­ten­sion­s.  This means that if you have a func­tion like $la­tex e^x + e^{\frac{x}{2}}$, you can­not write this as $la­tex t_0 + t_1$ with $la­tex t_0=e^x$ and $la­tex t_1=e^{\frac{x}{2}}$ be­cause $la­tex t_0$ and $la­tex t_1$ will each be al­ge­bra­ic over the oth­er ($la­tex t_0=t_1^2$).  You al­so can­not let $la­tex t_0=e^{x}$ and re­write the whole in­te­gral in terms of $la­tex t_0$ be­cause you will get $la­tex t_0 + \sqrt{t_0}$, which is an al­ge­bra­ic func­tion.  The on­ly way that you can do it is to let $la­tex t_0=e^{\frac{x}{2}}$, and then your func­tion will be $la­tex t_0^2 + t_0$.   </p> 
+<div class="postindex">
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/" class="u-url">Prototype risch_integrate() function ready for testing!</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/" rel="bookmark"><time class="published dt-published" datetime="2010-08-05T22:30:00-05:00" itemprop="datePublished" title="Publication date">2010-08-05 22:30</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/#disqus_thread" data-disqus-identifier="cache/posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So to­day I fi­nal­ly fin­ished up the pro­to­type func­tion I talked about  <a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/">last week</a>.  The func­tion is called  <code>risch_in­te­grate()</code>  and is avail­able at my  <a href="http://github.com/asmeurer/sympy/tree/integration3">in­te­gra­tion3</a>  branch.  Un­like the in­ner lev­el func­tions I have show­cased in  <a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/">pre­vi­ous</a>   <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">blog posts</a>, this func­tion does not re­quire you to do sub­sti­tu­tion for dum­my vari­ables and man­u­al­ly cre­ate a list of deriva­tives, etc.  All you have to do is pass it a func­tion and the in­te­gra­tion vari­able, and it will re­turn the re­sult, just like nor­mal  <code>in­te­grate()</code>. I have spent the past few days work­ing on a mon­ster of a func­tion called  <code>build_ex­ten­sion()</code>  that does this prepars­ing work for you.  The rea­son that the func­tion was so hard to write is that the tran­scen­den­tal Risch Al­go­rithm is very pick­y.   <em>Ev­ery</em>  dif­fer­en­tial ex­ten­sion has to be tran­scen­den­tal over the pre­vi­ous ex­ten­sion­s.  This means that if you have a func­tion like $la­tex e^x + e^{\frac{x}{2}}$, you can­not write this as $la­tex t_0 + t_1$ with $la­tex t_0=e^x$ and $la­tex t_1=e^{\frac{x}{2}}$ be­cause $la­tex t_0$ and $la­tex t_1$ will each be al­ge­bra­ic over the oth­er ($la­tex t_0=t_1^2$).  You al­so can­not let $la­tex t_0=e^{x}$ and re­write the whole in­te­gral in terms of $la­tex t_0$ be­cause you will get $la­tex t_0 + \sqrt{t_0}$, which is an al­ge­bra­ic func­tion.  The on­ly way that you can do it is to let $la­tex t_0=e^{\frac{x}{2}}$, and then your func­tion will be $la­tex t_0^2 + t_0$.   </p> 
  <p>Now, for­tu­nate­ly, there is an al­go­rithm that pro­vides nec­es­sary and suf­fi­cient con­di­tions for de­ter­min­ing if an ex­ten­sion is al­ge­bra­ic over the pre­vi­ous ones.  It's called the Risch Struc­ture The­o­rem­s.  My first or­der of busi­ness this week was to fin­ish im­ple­ment­ing these.  This is ac­tu­al­ly the rea­son that I we had to wait un­til now to get this pro­to­type func­tion.  The Struc­ture The­o­rems are at the very end of Bron­stein's book, and the in­te­gra­tion al­go­rithm is not cor­rect with­out them (name­ly, it is not cor­rect if you add an al­ge­bra­ic ex­ten­sion).  I just re­cent­ly got to them in my read­ing.  Ac­tu­al­ly, I skipped some work on tan­gent in­te­gra­tion so I could get to them first.  I hope to talk a lit­tle about them in a fu­ture "Risch In­te­gra­tion" blog post, though be aware that they re­quire some ex­treme­ly in­tense al­ge­bra­ic ma­chin­ery to prove, so I won't be giv­ing any proof­s.</p> 
  <p>Even though these al­go­rithms can tell me, for ex­am­ple, that I should­n't have added $la­tex t_0=e^x$ above be­cause it makes $la­tex e^{\frac{x}{2}}=\sqrt{t_0}$, that means that I have to go back and restart my search for an ex­ten­sion so that I can try to get $la­tex t_0=e^{\frac{x}{2}}$ in­stead.  So I wrote a sim­ple func­tion that takes the ar­gu­ments of the ex­po­nen­tials and de­ter­mines the low­est com­mon fac­tor.  This heuris­tic saves a lot of time.   </p> 
  <p>I al­so no­ticed (ac­tu­al­ly, Chris Smith in­ad­ver­tent­ly point­ed it out to me; su­per thanks to him), that the Struc­ture The­o­rem al­go­rithms on­ly tell you if the terms are the same as mono­mi­al­s.  It would tell you that $la­tex e^x = e^{x + 1}$ be­cause both sat­is­fy $la­tex Dt=t$.  There­fore, I had to al­so mod­i­fy the struc­ture the­o­rem al­go­rithms to pull out any con­stant ter­m.   </p> 
@@ -94,7 +126,8 @@ MathJax.Hub.Config({
  <p>It is ex­act­ly the same for log­a­rithm­s, ex­cept in that case, when a new log­a­rithm is al­ge­bra­ic in terms of old ones, it can be writ­ten as a lin­ear com­bi­na­tion of them.  This means that there are nev­er any rad­i­cals to wor­ry about, though you do al­so have to wor­ry about con­stants.  For ex­am­ple, $la­tex \log{(x)}$ looks the same as $la­tex \log{(2x)}$ be­cause they both sat­is­fy $la­tex Dt=\frac{1}{x}$.  An ex­am­ple of a log­a­rithm that is al­ge­bra­ic over old ones is $la­tex \log{(x^2 - 1)}$ over $la­tex \log{(x + 1)}$ and $la­tex \log{(x - 1)}$, be­cause $la­tex \log{(x^2 - 1)}=\log{((x + 1)(x - 1))}=\log{(x + 1)} + \log{(x - 1)}$.   </p> 
  <p>The par­al­lels be­tween ex­po­nen­tials and log­a­rithms are amaz­ing.  For the struc­ture the­o­rem­s, the ex­po­nen­tial case is ex­act­ly the same as the log­a­rith­mic case ex­cept re­plac­ing ad­di­tion with mul­ti­pli­ca­tion and mul­ti­pli­ca­tion with ex­po­nen­ti­a­tion.  For the ex­po­nen­tial case, you need the ar­gu­ments of the al­ready added log­a­rithms to find the al­ge­bra­ic de­pen­dence, and the ar­gu­ments of the al­ready added ex­po­nen­tials to find the con­stant ter­m.  For the log­a­rith­mic case, you need the ar­gu­ments of the al­ready added ex­po­nen­tials to find the al­ge­bra­ic de­pen­dence, and the ar­gu­ments of the al­ready added log­a­rithms to find the con­tent ter­m. Ev­ery­thing else is ex­act­ly the same, ex­cept for the shift in op­er­a­tors.  Of course, I re­al­ize why these things are, math­e­mat­i­cal­ly, but the sym­me­try still amaz­ing to me.  I will hope­ful­ly ex­plain in more de­tail in my fu­ture Struc­ture The­o­rems post.   </p> 
  <p>So on­to the  <code>risch_in­te­grate()</code>  func­tion.  Here is the text that I have ba­si­cal­ly put in my  <a href="http://github.com/asmeurer/sympy/commit/e3cd5f18f86fd6377836f33f726182c8bd4dc1a0">com­mit mes­sage</a>, the  <a href="http://code.google.com/p/sympy/issues/detail?q=2010">apt­ly num­bered is­sue</a>  that I have cre­at­ed for it, and the  <a href="http://groups.google.com/group/sympy/browse_thread/thread/2464fa764f6f47aa">post to the mail­ing list</a>  (it's not so much that I am lazy as that I was re­al­ly ex­cit­ed to get this out there).</p> 
- <p></p><blockquote>
+ <p></p>
+<blockquote>
 <p>I have ready in my in­te­gra­tion3 branch a pro­to­type risch_in­te­grate() func­tion that is a user-lev­el func­tion for the full Risch Al­go­rithm I have been im­ple­ment­ing this sum­mer.  Pull from h<a href="//github.com/asmeurer/sympy/tree/integration3">ttp://github.­com/as­meur­er/sympy/tree/in­te­gra­tion3</a>.</p> 
  <p>This is NOT ready to go in.  It is a pro­to­type func­tion that I am mak­ing avail­able so peo­ple can try out the new al­go­rithm and hope­ful­ly help me to find the bugs in it.  Please pass it your fa­vorite non-ele­men­tary in­te­grals and see if it can de­ter­mine that they are not el­e­men­tary.  If you try to pass it a very crazy func­tion at ran­dom, the chances are pret­ty high that it will not be el­e­men­tary.  So a bet­ter way to test it is to come up with a crazy func­tion, then dif­fer­en­ti­ate it. Then pass the de­riv­a­tive and see if it can give you your orig­i­nal func­tion back.  Note that it will prob­a­bly not look ex­act­ly the same as your orig­i­nal func­tion, and may dif­fer by a con­stan­t.  You should ver­i­fy by dif­fer­en­ti­at­ing the re­sult you get and call­ing can­cel() (or sim­pli­fy(), but usu­al­ly can­cel() is enough) on the dif­fer­ence.</p> 
  <p>So you can re­view the code too, if you like, but just know that things are not sta­ble yet, and this is­n't strict­ly a branch for re­view.   </p> 
@@ -200,23 +233,28 @@ x + ───────────────────────── 
  <p>In [8]: can­cel(risch_in­te­grate(f, x, han­dle_­first='­ex­p').d­if­f(x) - f)</p> 
  <p>Out­[8]: 0</p> 
  <p>[/­code]</p> 
- <p>So go now, and pull my  <a href="//github.com/asmeurer/sympy/tree/integration3">branch</a>, and try this func­tion out.  And re­port any prob­lems that you have back to me, ei­ther through the mail­ing list, IR­C, is­sue 2010, or as a com­ment to this blog post (I don't re­al­ly care how).</p></div>
-        </div>
-            
+ <p>So go now, and pull my  <a href="//github.com/asmeurer/sympy/tree/integration3">branch</a>, and try this func­tion out.  And re­port any prob­lems that you have back to me, ei­ther through the mail­ing list, IR­C, is­sue 2010, or as a com­ment to this blog post (I don't re­al­ly care how).</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/07/31/integration-of-primitive-functions/" class="u-url">Integration of primitive functions</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/07/31/integration-of-primitive-functions/" rel="bookmark"><time class="published dt-published" datetime="2010-07-31T06:44:31-05:00" itemprop="datePublished" title="Publication date">2010-07-31 06:44</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/#disqus_thread" data-disqus-identifier="cache/posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing.html">Comments</a>
+    <a href="posts/2010/07/31/integration-of-primitive-functions/#disqus_thread" data-disqus-identifier="cache/posts/2010/07/31/integration-of-primitive-functions.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/07/31/integration-of-primitive-functions/" class="u-url">Integration of primitive functions</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-07-31T06:44:31-05:00">2010-07-31 06:44</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><strong>Integration of Primitive Functions</strong>
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<strong>Integration of Primitive Functions</strong>
 <p>So this past week, I had an­oth­er break through in my projec­t.  The  <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">first break through</a>, as you may re­cal­l, was the com­ple­tion of the  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>  func­tion, which al­lowed for the in­te­gra­tion in hy­per­ex­po­nen­tial ex­ten­sion­s, in­clud­ing prov­ing the nonex­is­tence of el­e­men­tary in­te­gral­s.  Now I have worked my way up to this lev­el on the oth­er ma­jor half of the in­te­gra­tion al­go­rithm (ac­tu­al­ly, ma­jor third; more on that lat­er): in­te­gra­tion of prim­i­tive el­e­ments.   </p> 
  <p>This time, I can re­fer you to my  <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">pre­vi­ous blog post</a>  for def­i­ni­tion­s.  The chief thing here is that there is now a func­tion in my  <tt>in­te­gra­tion3</tt>  branch called  <code>in­te­grate_prim­i­tive()</code>, and it is used pri­mar­i­ly for in­te­grat­ing func­tions with log­a­rithm­s.</p> 
  <p>So, how about some ex­am­ples?  The first one comes from  <a href="http://">Al­go­rithms for com­put­er al­ge­bra By Kei­th O. Ged­des, Stephen R. Cza­por, George Labahn</a>  (ex­am­ple 12.8).  I like it be­cause it con­tains both ex­po­nen­tials and log­a­rithm­s, in a way that they do not de­pend on each oth­er, so it can be in­te­grat­ed with ei­ther  <code>in­te­grate_prim­i­tive()</code>  or  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>.  In ei­ther case, the poly­no­mi­al part is $la­tex \frac{x}{x + 1}$, so re­cur­sive­ly call­ing the oth­er func­tion is not re­quired.  (for those of you who have been fol­low­ing my  <tt>in­te­gra­tion3</tt>  branch, you may no­tice that this is bla­tant­ly tak­en from the com­mit his­to­ry).</p> 
@@ -356,23 +394,28 @@ x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x +
  <p>So here is what I plan on do­ing.  Right now, I am go­ing to fo­cus my work on  <strong>1</strong>, since most of  <strong>2</strong>  can't be done un­til it is any­way.  But more im­por­tant­ly, I want to have a pro­to­type user-lev­el func­tion for the Risch Al­go­rith­m.  The rea­son I want this is so that peo­ple can try it out, with­out hav­ing to do the prepars­ing like I did above, but rather they can just call  <code>risch_in­te­grate(f, x)</code>, and it will re­turn the in­te­gral of  <code>f</code>, prove that it is non-ele­men­tary and re­duce it in­to the el­e­men­tary and non-ele­men­tary part­s, or ex­plain why it can­not do it (ei­ther be­cause the func­tion is not tran­scen­den­tal or be­cause some­thing is not im­ple­ment­ed yet).  My chief de­sire for do­ing this is so that peo­ple can try out my code and find the bugs in it for me.  I have al­ready found many crit­i­cal er­rors in the code (re­turns a wrong re­sult), and I want to iron these out be­fore any­thing goes in.  The best way to do this will be to re­lease a work­ing user-lev­el func­tion and hope that peo­ple try it out for me.   </p> 
  <p>Al­so, even if  <strong>2</strong>  and  <strong>3</strong>  are not fin­ished, if I have  <strong>1</strong>, I can in­te­grate it with  <code>in­te­grate()</code>  (no pun in­tend­ed) and just have it bail if it rais­es  <code>NotIm­ple­ment­ed­Er­ror</code>  I will need to come up with a way to dif­fer­en­ti­ate be­tween this and the case where it re­turns an un­eval­u­at­ed  <code>In­te­gral</code>  be­cause it has proven that an el­e­men­tary anti­deriv­a­tive does not ex­ist.  Any sug­ges­tion­s?</p> 
  <p>I plan on con­tin­u­ing work af­ter the sum­mer un­til I fin­ish  <strong>1</strong>  through  <strong>3</strong>, though I won't pre­tend that my work won't slow down con­sid­er­ably when I start class­es in Au­gust.  I al­so prom­ise to fin­ish the  <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">Risch Al­go­rithm posts</a>  that I promised.</p> 
- <p>And for what it's worth, I plan on work­ing my ass off this next two week­s.</p></div>
-        </div>
-            
+ <p>And for what it's worth, I plan on work­ing my ass off this next two week­s.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions/" class="u-url">The Risch Algorithm: Part 2, Elementary Functions</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions/" rel="bookmark"><time class="published dt-published" datetime="2010-07-24T03:32:57-05:00" itemprop="datePublished" title="Publication date">2010-07-24 03:32</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/07/31/integration-of-primitive-functions/#disqus_thread" data-disqus-identifier="cache/posts/2010/07/31/integration-of-primitive-functions.html">Comments</a>
+    <a href="posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions/#disqus_thread" data-disqus-identifier="cache/posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions/" class="u-url">The Risch Algorithm: Part 2, Elementary Functions</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-07-24T03:32:57-05:00">2010-07-24 03:32</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>In  <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">Part 1</a>  of this se­ries of blog post­s, I gave what I be­lieved to be the pre­req­ui­sites to un­der­stand­ing the math­e­mat­ics be­hind the Risch Al­go­rithm (a­side from a ba­sic un­der­stand­ing of de­riv­a­tives and in­te­grals from cal­cu­lus).  In this post, I will elab­o­rate on what is meant by "ele­men­tary func­tion," a term that is thrown around a lot when talk­ing about Risch in­te­gra­tion.</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>In  <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">Part 1</a>  of this se­ries of blog post­s, I gave what I be­lieved to be the pre­req­ui­sites to un­der­stand­ing the math­e­mat­ics be­hind the Risch Al­go­rithm (a­side from a ba­sic un­der­stand­ing of de­riv­a­tives and in­te­grals from cal­cu­lus).  In this post, I will elab­o­rate on what is meant by "ele­men­tary func­tion," a term that is thrown around a lot when talk­ing about Risch in­te­gra­tion.</p> 
  <p>The usu­al def­i­ni­tion of el­e­men­tary func­tion giv­en in cal­cu­lus is any func­tion that is a con­stan­t, a poly­no­mi­al, an ex­po­nen­tial ($la­tex e^x$, $la­tex 2^x$), a log­a­rithm ($la­tex \l­n({x})$, $la­tex \log_{10}({x})$), one of the stan­dard trig func­tions or their in­vers­es (s­in, cos, tan, arc­sin, ar­c­cos, arc­tan, etc.), and any com­bi­na­tion of these func­tions via ad­di­tion, sub­trac­tion, mul­ti­pli­ca­tion, di­vi­sion, tak­ing pow­er­s, and com­po­si­tion.  Thus, even a func­tion as crazy as  <a href="2010/07/crazy-function.png"><img src="2010/07/crazy-function.png" alt="" title="crazy function" width="193" height="41" class="alignnone size-full wp-image-632"></a>  is el­e­men­tary, by this def­i­ni­tion.   </p> 
  <p>But for the rig­or­ous def­i­ni­tion of an el­e­men­tary func­tion, we must take in­to con­sid­er­a­tion what field we are work­ing over.  Be­fore I get in­to that, I need some def­i­ni­tion­s.  Sup­pose that $la­tex k$ is the field we are work­ing over.  You can imag­ine that $la­tex k=\­math­b­b{Q}(x)$, the field of ra­tio­nal func­tions in x with ra­tio­nal num­ber co­ef­fi­cients.  As with the pre­vi­ous post, imag­ine $la­tex t$ as a func­tion, for ex­am­ple, $la­tex t = f(x)$.  Let $la­tex K$ be a dif­fer­en­tial ex­ten­sion of $la­tex k$.  We have not de­fined this, but it ba­si­cal­ly means that our deriva­tion $la­tex D$ works the same in $la­tex K$ as it does in $la­tex k$.  You can imag­ine here that $la­tex K=k[t]$.   </p> 
  <p>We say that $la­tex t \in K$ is a  <strong>prim­i­tive</strong>  over $la­tex k$ if $la­tex Dt \in k$.  In oth­er word­s, the de­riv­a­tive of $la­tex t$ is does not con­tain $la­tex t$, on­ly el­e­ments of $la­tex k$.  Ob­vi­ous­ly, by the def­i­ni­tion of a deriva­tion (see the  <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">last post</a>  in the se­ries), any el­e­ment of $la­tex k$ is a prim­i­tive over $la­tex K$, be­cause the de­riv­a­tive of any el­e­ment of a field is again an el­e­ment of that field (y­ou can see this by the def­i­ni­tion of a deriva­tion, al­so giv­en in the last post).  But al­so if $la­tex t=log(a)$ for some $la­tex a \in k$, then $la­tex t$ is a prim­i­tive over $la­tex k$, be­cause $la­tex Dt=\frac{­Da}{a}\in k$.   </p> 
@@ -385,23 +428,28 @@ x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x +
  <p>Now you may be won­der­ing: we've cov­ered al­ge­bra­ic func­tion­s, ex­po­nen­tials and log­a­rithm­s, and ob­vi­ous­ly ra­tio­nal func­tions are el­e­ments of $la­tex \math­b­b{Q}(x)$, but what about trigono­met­ric func­tion­s?  Well, from a the­o­ret­i­cal stand point, we can make our lives eas­i­er by notic­ing that all the com­mon trigono­met­ric func­tions can be rep­re­sent­ed as ex­po­nen­tials and log­a­rithms over $la­tex \math­b­b{Q}(i)$.  For ex­am­ple, $la­tex \cos{x} = \frac{e^{ix} + e^{-ix}}{2}$.  You can see  <a href="http://en.wikipedia.org/wiki/Trig_identities#Exponential_definitions">here</a>  that all the com­mon trig func­tions can be rep­re­sent­ed as com­plex ex­po­nen­tials or log­a­rithms like this.  How­ev­er, from an al­go­rith­mic stand­point, we don't want do con­vert all trig ex­pres­sions in­to com­plex ex­po­nen­tials and log­a­rithms in or­der to in­te­grate them.  For one thing, our fi­nal re­sult will be in terms of com­plex ex­po­nen­tials and log­a­rithm­s, not the orig­i­nal func­tions we start­ed with, and con­vert­ing them back may or may not be an easy thing to do.  Al­so, aside from the fact that we have dif­fer­ent func­tions than we were ex­pect­ing, we al­so will end up with an an­swer con­tain­ing $la­tex \sqrt{-1}$, even if our orig­i­nal in­te­grand did not.   </p> 
  <p>For­tu­nate­ly, the in­te­grat­ing tan­gents di­rect­ly is a solved prob­lem, just like in­te­grat­ing al­ge­braic, ex­po­nen­tial, or log­a­rith­mic func­tions is solved.  We can't in­te­grate func­tions like $la­tex \s­in{x}$ or $la­tex \cos{x}$ di­rect­ly as mono­mi­als like we can with $la­tex \tan{x}$ or $la­tex e^x$, be­cause the de­riv­a­tives of sin and cos are not poly­no­mi­als in their re­spec­tive selves with co­ef­fi­cients in $la­tex \math­b­b{C}(x)$.  How­ev­er, we can use a trick or two to in­te­grate them.  One way is to re­write $la­tex \cos{x}=\frac{1 - \tan^2{\frac{x}{2}}}{1 + \tan^2{\frac{x}{2}}}$ and pro­ceed to in­te­grate it as a tan­gen­t.  An­oth­er al­ter­na­tive is to write $la­tex \cos{x}=\frac{1}{\sec{x}}=\sqrt{\frac{1}{\sec^2{x}}}=\sqrt{\frac{1}{\­tan^2{x} + 1}}$.  This func­tion is al­ge­bra­ic over $la­tex \math­b­b{Q}(x, \tan{(x)})$, but if we do not al­ready have $la­tex \tan{x}$ in our dif­fer­en­tial ex­ten­sion, it is tran­scen­den­tal, and we can re­write it as $la­tex e^{-\frac{\log{(1 + \tan^2{x})}}{2}}$ (this is used in Bron­stein's tex­t, so I be­lieve what I just said is cor­rec­t, though I haven't ver­i­fied it with the struc­ture the­o­rems just yet).   These both work us­ing the rel­e­vant iden­ti­ties for sin too.  Of course, there is still the prob­lem of rewrit­ing the fi­nal in­te­grand back in terms of sin or cos.  Oth­er­wise, you will get some­thing like $la­tex \frac{2e^x\­tan({\frac{x}{2}}) - \tan^2({\frac{x}{2}})e^x + e^x}{2 + 2\­tan^2({\frac{x}{2}})}$ in­stead of $la­tex \frac{e^x(\s­in{(x)} + \cos{(x)})}{2}$ for $la­tex \in­t{\­cos{(x)}e^xdx}$.  Bron­stein does­n't elab­o­rate on this too much in his book, so it is some­thing that I will have to fig­ure out on my own.</p> 
  <p>The sec­ond op­tion I gave above leads nice­ly in­to the main point I want­ed to make here about el­e­men­tary func­tion­s.  No­tice that ev­ery­where in the def­i­ni­tions above, things de­pend on the field we are work­ing in.  There­fore, $la­tex e^{\­tan{x}}$ can­not be an el­e­men­tary ex­ten­sion over $la­tex \math­b­b{Q}(x)$, but it can be over $la­tex \math­b­b{Q}(x, \tan{x})$.  Al­so, the  <a href="http://en.wikipedia.org/wiki/Error_function">er­ror func­tion</a>, de­fined as $la­tex \math­rm{er­f}{(x)} = \frac{2}{\sqrt{\pi}}\in­t{e^{-x^2}dx}$ can­not be an el­e­men­tary ex­ten­sion over $la­tex \math­b­b{Q}(x)$, but it can over $la­tex \math­b­b{Q}(x, e^{-x^2})$. In fact this is how we can in­te­grate in terms of some spe­cial func­tion­s, in­clud­ing the er­ror func­tion: by man­u­al­ly adding $la­tex e^{-x^2}$ (or what­ev­er) to our dif­fer­en­tial ex­ten­sion.   There­fore, the usu­al def­i­ni­tion of an el­e­men­tary an­ti-derivaitve and the above Risch Al­go­rithm def­i­ni­tion of an el­e­men­tary in­te­gral co­in­cide on­ly when the ex­ten­sion con­sists on­ly of el­e­men­tary func­tions of the form of the usu­al def­i­ni­tion (note that above, our fi­nal fields are $la­tex \math­b­b{Q}(x, \tan{x}, e^{\­tan{x}})$ and $la­tex \math­b­b{Q}(x, e^{-x^2}, \math­rm{er­f}{(x)})$, re­spec­tive­ly).   </p> 
- <p>Orig­i­nal­ly, I was al­so go­ing to talk about Li­ou­ville's The­o­rem in this blog post, but I think it has al­ready got­ten long enough (read "I'm get­ting tired"), so I'll put that off un­til next time.   </p></div>
-        </div>
-            
+ <p>Orig­i­nal­ly, I was al­so go­ing to talk about Li­ou­ville's The­o­rem in this blog post, but I think it has al­ready got­ten long enough (read "I'm get­ting tired"), so I'll put that off un­til next time.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/07/17/a-hard-week/" class="u-url">A hard week</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/07/17/a-hard-week/" rel="bookmark"><time class="published dt-published" datetime="2010-07-17T04:38:22-05:00" itemprop="datePublished" title="Publication date">2010-07-17 04:38</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions/#disqus_thread" data-disqus-identifier="cache/posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions.html">Comments</a>
+    <a href="posts/2010/07/17/a-hard-week/#disqus_thread" data-disqus-identifier="cache/posts/2010/07/17/a-hard-week.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/07/17/a-hard-week/" class="u-url">A hard week</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-07-17T04:38:22-05:00">2010-07-17 04:38</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>Af­ter last week's  <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">break­through</a>, work this week has been very slow.  I start­ed work­ing on the Para­met­ric Risch Dif­fer­en­tial Equa­tion Prob­lem, which is al­most iden­ti­cal to the Risch Dif­fer­en­tial Equa­tion Prob­lem in how it is solved, ex­cept there are a few ex­tra step­s.  Un­for­tu­nate­ly, be­cause it is so sim­i­lar, Bron­stein breezes through the de­scrip­tion.  This is fine for the parts that are the same, but he is a lit­tle un­clear on how some of the new parts fit in.  Al­so, his pseu­docode has a line more or less say­ing  </p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>Af­ter last week's  <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">break­through</a>, work this week has been very slow.  I start­ed work­ing on the Para­met­ric Risch Dif­fer­en­tial Equa­tion Prob­lem, which is al­most iden­ti­cal to the Risch Dif­fer­en­tial Equa­tion Prob­lem in how it is solved, ex­cept there are a few ex­tra step­s.  Un­for­tu­nate­ly, be­cause it is so sim­i­lar, Bron­stein breezes through the de­scrip­tion.  This is fine for the parts that are the same, but he is a lit­tle un­clear on how some of the new parts fit in.  Al­so, his pseu­docode has a line more or less say­ing  </p> 
  <p>[code]</p> 
  <p>if r1 = … = rn = 0 then
     N = -1
@@ -414,23 +462,28 @@ else
  <p>where M is a ma­trix.  It is not very clear what this is sup­posed to mean in the case where N = -1.  Ob­vi­ous­ly, you can't have a a ma­trix with neg­a­tive di­men­sion­s.  Clear­ly, this means that this par­tic­u­lar func­tion does­n't ap­ply some­how in this case, but I am not re­al­ly even sure where it fits in to the whole al­go­rithm at this point in read­ing.  Af­ter read­ing a few more pages in, it gives a few hints here and there on how it is to be used, but nev­er is it ex­plic­it­ly shown, in pseu­docode or oth­er­wise.  So for now, I think my best bet is to read ahead and get a fuller un­der­stand­ing of the com­plete func­tion be­fore I try im­ple­ment­ing any­thing (this is what I had been do­ing be­fore, but I caught up to my­self).   </p> 
  <p>Al­so, on an un­re­lat­ed note, I just found out to­day that I passed my  <a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/faqs#evaluations">Google Sum­mer of Code midterm eval­u­a­tion</a>.  This means that I will re­ceive half of my stipend for the pro­gram (the oth­er half comes af­ter pass­ing the fi­nal eval­u­a­tion at the end of the sum­mer), and that I can con­tin­ue work­ing on my project in the pro­gram.   </p> 
  <p>ED­IT:</p> 
- <p>Lat­er in the tex­t, it runs through an ex­am­ple and says "… $la­tex dc = -1$, hence M and A are 0 by 0 ma­tri­ces."  So ob­vi­ous­ly, that is what was mean­t.   </p></div>
-        </div>
-            
+ <p>Lat­er in the tex­t, it runs through an ex­am­ple and says "… $la­tex dc = -1$, hence M and A are 0 by 0 ma­tri­ces."  So ob­vi­ous­ly, that is what was mean­t.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/07/12/integration-of-exponential-functions/" class="u-url">Integration of exponential functions</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/07/12/integration-of-exponential-functions/" rel="bookmark"><time class="published dt-published" datetime="2010-07-12T06:22:06-05:00" itemprop="datePublished" title="Publication date">2010-07-12 06:22</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/07/17/a-hard-week/#disqus_thread" data-disqus-identifier="cache/posts/2010/07/17/a-hard-week.html">Comments</a>
+    <a href="posts/2010/07/12/integration-of-exponential-functions/#disqus_thread" data-disqus-identifier="cache/posts/2010/07/12/integration-of-exponential-functions.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/07/12/integration-of-exponential-functions/" class="u-url">Integration of exponential functions</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-07-12T06:22:06-05:00">2010-07-12 06:22</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>So for the first time this sum­mer, I missed my blog­ging dead­line.  I have been on va­ca­tion for the past few week­s, and have spent a good bit of the last week in the car, driv­ing home. But that's not my ex­cuse.  I was on va­ca­tion the week be­fore, when I wrote up my  <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">lengthy blog post on the Risch Al­go­rithm</a>.  My ex­cuse is that I want­ed to fin­ish up my  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>  func­tion be­fore I post­ed, so I could write about it.  Well, I fin­ished it on Thurs­day (to­day is Sun­day, the post was due Fri­day), but I ran in­to un­ex­pect­ed bugs (imag­ine that) that has post­poned it ac­tu­al­ly work­ing un­til now. I al­so end­ed up do­ing API changes 3 dif­fer­ent times (they are ba­si­cal­ly in­cre­men­tal­ly all one change, from sup­port­ing on­ly one ex­ten­sion to prop­er­ly sup­port­ing mul­ti­ple ex­ten­sion­s.  Look for long com­mits in my re­cent com­mit his­to­ry in my branch if you are in­ter­est­ed).   </p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So for the first time this sum­mer, I missed my blog­ging dead­line.  I have been on va­ca­tion for the past few week­s, and have spent a good bit of the last week in the car, driv­ing home. But that's not my ex­cuse.  I was on va­ca­tion the week be­fore, when I wrote up my  <a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/">lengthy blog post on the Risch Al­go­rithm</a>.  My ex­cuse is that I want­ed to fin­ish up my  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>  func­tion be­fore I post­ed, so I could write about it.  Well, I fin­ished it on Thurs­day (to­day is Sun­day, the post was due Fri­day), but I ran in­to un­ex­pect­ed bugs (imag­ine that) that has post­poned it ac­tu­al­ly work­ing un­til now. I al­so end­ed up do­ing API changes 3 dif­fer­ent times (they are ba­si­cal­ly in­cre­men­tal­ly all one change, from sup­port­ing on­ly one ex­ten­sion to prop­er­ly sup­port­ing mul­ti­ple ex­ten­sion­s.  Look for long com­mits in my re­cent com­mit his­to­ry in my branch if you are in­ter­est­ed).   </p> 
  <p>So here is the func­tion.  It in­te­grates ex­po­nen­tial func­tion­s.  You still have to man­u­al­ly cre­ate the dif­fer­en­tial ex­ten­sion, as be­fore.  Here are some ex­am­ples.  You can try them in my  <a href="http://github.com/asmeurer/sympy/tree/integration2">in­te­gra­tion2</a>  branch (I have re­based over Ma­teusz's lat­est polys9up­date.  The lat­est branch is al­ways in­te­gra­tion<code>n</code>, where  <code>n</code>  is the largest in­te­ger avail­able).   </p> 
  <p><strong>Hov­er over the code and click on the left­-­most, "view source" icon (a pa­per icon with  <tt>&lt; &gt;</tt>  over it) to view with­out break­s.  Opens in a new win­dow.</strong></p> 
  <p>[code lan­guage="py"]</p> 
@@ -561,23 +614,28 @@ else
  <p>NotIm­ple­ment­ed­Er­ror: The abil­i­ty to solve the para­met­ric log­a­rith­mic de­riv­a­tive prob­lem is re­quired to solve this RDE</p> 
  <p>[/­code]</p> 
  <p>So feel free to give this a try and let me know what you think.  You will have to do the prepars­ing as I have done above, which means that you al­so have to be care­ful that any ex­ten­sion that you make is not the de­riv­a­tive or log­a­rith­mic de­riv­a­tive of an el­e­ment of the field you have al­ready built up.  You al­so can­not use al­ge­bra­ic func­tion­s, as I men­tioned be­fore, in­clud­ing things like $la­tex e^\frac{\log{x}}{2}$ (func­tions like these are called the log­a­rith­mic de­riv­a­tives of k(t)-rad­i­cal­s, which I will al­so dis­cuss in a fu­ture "The Risch Al­go­rith­m" post).  If you just use sim­ple ex­ten­sions like  <code>t1 = tan(x);t=­ex­p(x)</code>  like I have above, you won't need to wor­ry about this.  Each de­riv­a­tive Poly should be in the vari­able that it is the de­riv­a­tive of (e.g., start with  <code>Poly(1, x)</code>, then add  <code>Poly(1 + t1<strong>2, t1)</strong></code>,  <code>Poly(t2*(1 + t12), t2)</code>, etc.).  Ev­ery­thing else should be a Poly in  <code>t</code>, the last el­e­ment of the ex­ten­sion.  And in cause you did­n't get it, the last ex­ten­sion must be an ex­po­nen­tial func­tion.   </p> 
- <p>Al­so, I did­n't have to do it in any of the above ex­am­ples, but the first and sec­ond ar­gu­ments to  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>   <em>must</em>  be can­celed (<code>a, d = a.­can­cel(d, in­clude=True)</code>  will do this for you), or you will get a wrong re­sult!  I spent a good day of de­bug­ging un­til I fig­ured this out.  The ex­is­tence of oth­er bugs did­n't help.</p></div>
-        </div>
-            
+ <p>Al­so, I did­n't have to do it in any of the above ex­am­ples, but the first and sec­ond ar­gu­ments to  <code>in­te­grate_hy­per­ex­po­nen­tial()</code>   <em>must</em>  be can­celed (<code>a, d = a.­can­cel(d, in­clude=True)</code>  will do this for you), or you will get a wrong re­sult!  I spent a good day of de­bug­ging un­til I fig­ured this out.  The ex­is­tence of oth­er bugs did­n't help.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/06/30/the-risch-algorithm-part-1/" class="u-url">The Risch Algorithm: Part 1</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/06/30/the-risch-algorithm-part-1/" rel="bookmark"><time class="published dt-published" datetime="2010-06-30T03:43:00-05:00" itemprop="datePublished" title="Publication date">2010-06-30 03:43</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/07/12/integration-of-exponential-functions/#disqus_thread" data-disqus-identifier="cache/posts/2010/07/12/integration-of-exponential-functions.html">Comments</a>
+    <a href="posts/2010/06/30/the-risch-algorithm-part-1/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/30/the-risch-algorithm-part-1.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/06/30/the-risch-algorithm-part-1/" class="u-url">The Risch Algorithm: Part 1</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-06-30T03:43:00-05:00">2010-06-30 03:43</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>My work this week is­n't very in­ter­est­ing, even in­so­much as my work any week is in­ter­est­ing, so this week I have elect­ed to start a se­ries of blog posts about the Risch Al­go­rithm in gen­er­al.  I will start out with the ba­sics in this post.</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>My work this week is­n't very in­ter­est­ing, even in­so­much as my work any week is in­ter­est­ing, so this week I have elect­ed to start a se­ries of blog posts about the Risch Al­go­rithm in gen­er­al.  I will start out with the ba­sics in this post.</p> 
  <p>Any­one who has tak­en Cal­cu­lus knows a hand­ful of heuris­tics to cal­cu­late in­te­gral­s.  u-­sub­sti­tu­tion, par­tial frac­tion­s, in­te­gra­tion by part­s, trigono­met­ric sub­sti­tu­tion, and ta­ble in­te­gra­tion are a few of the more pop­u­lar ones.  These are gen­er­al enough to work for most in­te­grals that are en­coun­tered in prob­lems in Physic­s, En­gi­neer­ing, and so on, as well as most of those gen­er­at­ed by solv­ing dif­fer­en­tial equa­tions from the same field­s.  But these fall short in a cou­ple of ways.  First of­f, they are just heuris­tic­s.  If they fail, it does not mean that no in­te­gral ex­ist­s.  This means that they are use­less for prov­ing that cer­tain func­tion­s, such as $la­tex e^{-x^2}$ do not have in­te­gral­s, no mat­ter how hard you try to find them.  Sec­ond, they work for on­ly rel­a­tive­ly sim­ple func­tion­s.  For ex­am­ple, sup­pose you have a ra­tio­nal func­tion in $la­tex \log{x}$ and $la­tex x$.  An ex­am­ple would be $la­tex \frac{(\log{x})^2 + 2\log{x} + x^2 + 1}{x\log{x} + 2x^3}$.  We are not in­ter­est­ed in in­te­grat­ing this func­tion, but rather in find­ing it back giv­en its deriva­tive, $la­tex - \frac{1 + 7 x^{2} \log{x} + \log{x} + (\log{x})^2 + 3 x^{2} + 6 x^{2} (\log{x})^2 + (\log{x})^3 + 2 x^{4}}{4 x^{4} \log{x} + x^{2} (\log{x})^2 + 4 x^{6}}$.  The on­ly method I named above that would come even close to be­ing ap­pli­ca­ble to this in­te­grand is par­tial frac­tion­s.  This re­quires mul­ti­vari­ate par­tial frac­tion de­com­po­si­tion (with re­spect to $la­tex x$ and $la­tex \log{x}$), and gives $la­tex -{\frac {2\,{x}^{2}+1+\log{x} }{{x}^{2}}}+{\frac {-1+8\,{x}^{4}-16\,{x}^{6}-{x}^{2}}{ \left( \log{x} +2\,{x}^{2} \right) ^{2}{x}^{2}}}+{\frac {-3\,{x}^{2}+12\,{x}^{4}-1}{ \left( \log{x} +2\,{x}^{2} \right) {x}^{2}}}$, which brings us no clos­er to a so­lu­tion.  </p> 
  <p>The rea­son that I start­ed with a func­tion and then com­put­ed its de­riv­a­tive was to show how easy it is to come up with a very com­pli­cat­ed func­tion that has an el­e­men­tary an­ti-deriva­tive.  There­fore, we see that the meth­ods from cal­cu­lus are not the ones to use if we want an in­te­gra­tion al­go­rithm that is com­plete.  The Risch In­te­gra­tion Al­go­rithm is based on a com­plete­ly dif­fer­ent ap­proach.  At its core lies Li­ou­ville's The­o­rem, which gives us the form of any el­e­men­tary an­ti-deriva­tive.   (I wish to point out at this point that heuris­tics like this are still use­ful in a com­put­er al­ge­bra sys­tem such as SymPy as fast pre­proces­sors to the full in­te­gra­tion al­go­rith­m).</p> 
  <p>The Risch Al­go­rithm works by do­ing poly­no­mi­al ma­nip­u­la­tions on the in­te­grand, which is en­tire­ly de­ter­min­is­tic (non-heuris­tic), and gives us the pow­er of all the the­o­rems of al­ge­bra, al­low­ing us to ac­tu­al­ly prove that an­ti-deriva­tives can­not ex­ist when they don't.  To start of­f, we have to look at deriva­tion­s.  As I said, ev­ery­thing with the Risch Al­go­rithm is looked at al­ge­bra­i­cal­ly (as op­posed to an­a­lyt­i­cal­ly).  The first thing to look at is the de­riv­a­tive it­self.  We de­fine a deriva­tion as any func­tion $la­tex D$ on a ring $la­tex R$ that sat­is­fies two prop­er­ties:</p> 
@@ -602,41 +660,51 @@ else
  </ol>
 <p>The first con­di­tion is nec­es­sary be­cause the we are on­ly go­ing to deal with the trance­nen­tal ver­sion of the Risch Al­go­rithm (the al­ge­bra­ic case is solved too, but the so­lu­tion method is quite dif­fer­en­t, and I am not im­ple­ment­ing it this sum­mer).  The sec­ond con­di­tion just says that the de­riv­a­tive of t is a poly­no­mi­al in t and a ra­tio­nal func­tion in x.  The func­tions I men­tioned above all sat­is­fy these prop­er­ties for $la­tex K = \math­b­b{Q}$.  The­o­rems in anal­y­sis show that $la­tex \log{x}$, $la­tex e^x$, and $la­tex \tan{x}$ are all tran­scen­den­tal over $la­tex \math­b­b{Q}[x]$.  This is ac­tu­al­ly the on­ly use of anal­y­sis that we make in the in­te­gra­tion al­go­rith­m.  Al­so, we see that if $la­tex t_1=\log{x}$, $la­tex t_2=e^x$, and $la­tex t_3=\­tan{x}$, then $la­tex Dt_1=\frac{1}{x}$, $la­tex Dt_2=t_2$, and $la­tex Dt_3=1 + t_3^2$, which are all poly­no­mi­als in their re­spec­tive $la­tex t_i$ and ra­tio­nal func­tions in $la­tex x$.  In the al­go­rith­m, $la­tex K$ is ac­tu­al­ly a tow­er of mono­mi­al ex­ten­sions of $la­tex \math­b­b{Q}$, so $la­tex t_n$ is a mono­mi­al over $la­tex \math­b­b{Q}(x, t_1, \dot­s, t_{n-1})$.   This al­lows us to work with func­tions like $la­tex e^{\­tan{x}}$.  We can't make $la­tex t=e^{\­tan{x}}$ di­rect­ly be­cause $la­tex \frac{d}{dx}e^{\­tan{x}} = (1 + \tan^2{x})e^{\­tan{x}}$ is not a poly­no­mi­al in $la­tex t$ (it al­so con­tains $la­tex \tan{x}$) .  But if we let $la­tex t_1$ be such that $la­tex Dt_1=1 + t_1^2$, i.e., $la­tex t_1=\­tan{x}$, then we can let $la­tex t_2$ be such that $la­tex Dt_2=(1 + t_1^2)t_2$, i.e., $la­tex t_2=e^{\­tan{x}}$.  Re­mem­ber that the $la­tex t_i$ are all "func­tion­s" of x, but there is no need to write $la­tex t=t(x)$ as long as we re­mem­ber that $la­tex Dt\neq 0$, i.e., $la­tex t\not \in Con­st_D(K)$.  This is an­oth­er ad­van­tage of us­ing al­ge­bra­ic over an­a­lyt­ic meth­od­s; it al­lows us to re­duce an in­te­gral down to a ra­tio­nal func­tion in the "sym­bol­s" $la­tex x$ and $la­tex t_1, t_2, \dot­s, t_n$.  By con­ven­tion, we make the first ex­ten­sion $la­tex t_0$ such that $la­tex Dt_0=1$, i.e., $la­tex t_0=x$.  I will just call it $la­tex x$ here in­stead of $la­tex t_0$, to avoid con­fu­sion.   </p> 
  <p>This is the prepars­ing that I al­lud­ed to in an  <a href="http://asmeurersympy.wordpress.com/2010/06/26/quick-update/">ear­li­er post</a>  that I have not im­ple­ment­ed yet.  The rea­son that I haven't im­ple­ment­ed it yet is not just be­cause I haven't got­ten around to it.  We have to be care­ful when we build up the ex­ten­sion that each el­e­ment is in­deed tran­scen­den­tal over the al­ready built-up field $la­tex k$.  For ex­am­ple, al­though it ap­pears tran­scen­den­tal, the func­tion $la­tex e^{\frac{1}{2}\log{(1 + x^2)}}$ is re­al­ly al­ge­bra­ic be­cause it equals $la­tex \sqrt{1 + x^2}$.  There are ad­di­tion­al re­quire­ments, such that each ex­ten­sion is not the de­riv­a­tive of log­a­rith­mic de­riv­a­tive of an el­e­ment of $la­tex k$ (see al­so the ex­am­ple I gave in the pre­vi­ous post).  This is the part that I was talk­ing about in my  <a href="http://asmeurersympy.wordpress.com/2010/06/26/quick-update/">pre­vi­ous post</a>  that is not writ­ten out as much as the oth­er al­go­rithms in Bron­stein's book.  So this is al­go­rith­mi­cal­ly solved, just like the rest of the Al­go­rith­m, but it is non-triv­ial and may end up be­ing the hard­est part of the al­go­rithm for me to im­ple­men­t, just be­cause it will prob­a­bly re­quire the most fig­ur­ing out on my part.   </p> 
- <p>So we can see that we can con­vert a tran­scen­den­tal in­te­gral, such as the one above, in­to a ra­tio­nal func­tion in x and mono­mi­al ex­ten­sions $la­tex t_1, t_2, \dot­s, t_n$.  For ex­am­ple, the above in­te­grand would be­come $la­tex - \frac{1 + t + t^{2} + 3 x^{2} + 6 t^{2} x^{2} + 7 t x^{2} + t^{3} + 2 x^{4}}{t^{2} x^{2} + 4 t x^{4} + 4 x^{6}}$.  We then per­form cer­tain poly­no­mi­al ma­nip­u­la­tions on this in­te­grand, us­ing the fact that $la­tex Dx=1$ and $la­tex Dt=\frac{1}{x}$.  For the tran­scen­den­tal case of the Risch Al­go­rith­m, this is sim­i­lar to the ra­tio­nal func­tion in­te­gra­tion that I out­lined in  <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/">this post</a>, and has Li­ou­ville's The­o­rem at its core.  This is where I will start off next time.   </p></div>
-        </div>
-            
+ <p>So we can see that we can con­vert a tran­scen­den­tal in­te­gral, such as the one above, in­to a ra­tio­nal func­tion in x and mono­mi­al ex­ten­sions $la­tex t_1, t_2, \dot­s, t_n$.  For ex­am­ple, the above in­te­grand would be­come $la­tex - \frac{1 + t + t^{2} + 3 x^{2} + 6 t^{2} x^{2} + 7 t x^{2} + t^{3} + 2 x^{4}}{t^{2} x^{2} + 4 t x^{4} + 4 x^{6}}$.  We then per­form cer­tain poly­no­mi­al ma­nip­u­la­tions on this in­te­grand, us­ing the fact that $la­tex Dx=1$ and $la­tex Dt=\frac{1}{x}$.  For the tran­scen­den­tal case of the Risch Al­go­rith­m, this is sim­i­lar to the ra­tio­nal func­tion in­te­gra­tion that I out­lined in  <a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/">this post</a>, and has Li­ou­ville's The­o­rem at its core.  This is where I will start off next time.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/06/26/quick-update/" class="u-url">Quick Update</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/06/26/quick-update/" rel="bookmark"><time class="published dt-published" datetime="2010-06-26T03:16:52-05:00" itemprop="datePublished" title="Publication date">2010-06-26 03:16</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/06/30/the-risch-algorithm-part-1/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/30/the-risch-algorithm-part-1.html">Comments</a>
+    <a href="posts/2010/06/26/quick-update/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/26/quick-update.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/06/26/quick-update/" class="u-url">Quick Update</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-06-26T03:16:52-05:00">2010-06-26 03:16</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>I've spend most of this week sit­ting in a car, so while I have been able to do some work, I haven't had much time to write up a blog post.  So, to com­ply with  <a href="http://groups.google.com/group/sympy/browse_thread/thread/7d7dceb34db45302">On­drej's rule</a>, here is a quick up­date.</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>I've spend most of this week sit­ting in a car, so while I have been able to do some work, I haven't had much time to write up a blog post.  So, to com­ply with  <a href="http://groups.google.com/group/sympy/browse_thread/thread/7d7dceb34db45302">On­drej's rule</a>, here is a quick up­date.</p> 
  <p>I have been work­ing my way through Bron­stein's book.  I fin­ished the out­er al­go­rith­mic lay­er of the im­plan­ta­tion.  Ba­si­cal­ly, the al­go­rithm does poly­no­mi­als ma­nip­u­la­tion on the in­te­grand.  It first re­duces the in­te­grand in­to small­er in­te­gral­s, un­til it gets to an in­te­gral where a sub­prob­lem must be solved to solve it.  The sub­prob­lem that must be solved dif­fers de­pend­ing on the type of the in­te­gral.  The first one that comes up in Bron­stein's text is the Risch Dif­fer­en­tial Equa­tion, which aris­es from the in­te­gra­tion of ex­po­nen­tial func­tion­s.  (I will ex­plain all of these thing in more de­tail in a fu­ture blog post).  At this point, the al­go­rithms be­gin to re­cur­sive­ly de­pend on each oth­er, re­quir­ing me to im­ple­ment more and more al­go­rithms at a time in or­der for each to work.  To make things worse, a very fun­da­men­tal set of al­go­rithms are on­ly de­scribed in the tex­t, not giv­en in pseu­do-­code, so I have had to fig­ure those things out.   These are al­go­rithms to de­ter­mine if a dif­fer­en­tial ex­ten­sion is a de­riv­a­tive or log­a­rith­mic de­riv­a­tive of el­e­ments that have al­ready been ex­tend­ed.  Again, I will ex­plain bet­ter in a fu­ture post, but the idea is that you re­place el­e­ments in an in­te­grand with dum­my vari­ables, but each el­e­ment has to be tran­scen­den­tal over the pre­vi­ous el­e­ments.  So if you have $la­tex \int (e^x + e^{x^2} + e^{x + x*^2})dx$, and you set $la­tex t_1 = e^x$ and $la­tex t_2 = e^{x^2}$ ($la­tex Dt_1 = t_1$ and $la­tex Dt_2 = 2x­t_2$), then you can­not make $la­tex t_3 = e^{x + x^2}$ be­cause $la­tex e^{x + x^2} = t_1t_2$.  The abil­i­ty to de­ter­mine if an el­e­ment is a de­riv­a­tive or a log­a­rith­mic de­riv­a­tive of an el­e­ment of the al­ready build dif­fer­en­tial ex­ten­sion is im­por­tant not on­ly for build­ing up the ex­ten­sion for the in­te­grand (ba­si­cal­ly the prepars­ing), but al­so for solv­ing some of the cas­es of the sub­prob­lems such as the Risch Dif­fer­en­tial Equa­tion prob­lem.</p> 
- <p>So I am still fig­ur­ing out some of the de­tails on that one.  The de­scrip­tion in the book is pret­ty good (this is prob­a­bly the best writ­ten math text­book I have ev­er seen), but I still have had to fig­ure out some of the math­e­mat­i­cal de­tails on pa­per (which is some­thing I en­joy any­way, but it can be more stress­ful).  Hope­ful­ly by the next time I can have some code that is work­ing enough to ac­tu­al­ly demon­strate solv­ing some com­plex in­te­gral­s, (with man­u­al prepars­ing), and even more ex­cit­ing­ly, prove that some non-ele­men­tary in­te­gral­s, such as the clas­sic $la­tex \int e^{-x^2}dx$, are in­deed so.   And I al­so hope to have some more ex­pla­na­tions on how the Risch al­go­rithm works in fu­ture post­s.   </p></div>
-        </div>
-            
+ <p>So I am still fig­ur­ing out some of the de­tails on that one.  The de­scrip­tion in the book is pret­ty good (this is prob­a­bly the best writ­ten math text­book I have ev­er seen), but I still have had to fig­ure out some of the math­e­mat­i­cal de­tails on pa­per (which is some­thing I en­joy any­way, but it can be more stress­ful).  Hope­ful­ly by the next time I can have some code that is work­ing enough to ac­tu­al­ly demon­strate solv­ing some com­plex in­te­gral­s, (with man­u­al prepars­ing), and even more ex­cit­ing­ly, prove that some non-ele­men­tary in­te­gral­s, such as the clas­sic $la­tex \int e^{-x^2}dx$, are in­deed so.   And I al­so hope to have some more ex­pla­na­tions on how the Risch al­go­rithm works in fu­ture post­s.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/" class="u-url">Strange Python Behavior (can someone please explain to me what is going on here?)</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/" rel="bookmark"><time class="published dt-published" datetime="2010-06-16T04:49:06-05:00" itemprop="datePublished" title="Publication date">2010-06-16 04:49</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/06/26/quick-update/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/26/quick-update.html">Comments</a>
+    <a href="posts/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/" class="u-url">Strange Python Behavior (can someone please explain to me what is going on here?)</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-06-16T04:49:06-05:00">2010-06-16 04:49</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">Every once in a while</a>, seemingly really simple Python code does something completely unexpected for me. Look at the following snippet of Python code.  This is run straight from the 2.6.5 interpreter, with no other commands executed.  Do you notice anything strange?
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">Every once in a while</a>, seemingly really simple Python code does something completely unexpected for me. Look at the following snippet of Python code.  This is run straight from the 2.6.5 interpreter, with no other commands executed.  Do you notice anything strange?
 <p>[code lan­guage="py"]</p> 
  <p>$python</p> 
  <p>Python 2.6.5 (r265:79359, Mar 24 2010, 01:32:55)  </p> 
@@ -767,23 +835,28 @@ NameEr­ror: glob­al name 'a' is not de­fined</p>
  <p>&gt;&gt;&gt; in­te­grate(1/(x**5 + 1), x)</p> 
  <p>log(1 + x)/5 + Root­Sum(625<em>_t<strong>4 + 125*_t</strong>3 + 25</em>_t<em><em>2 + 5</em>_t + 1, Lamb­da(_t, _t</em>log(x + 5*_t)))                                                    </p> 
  <p>[/­code]</p> 
- <p>Stil­l, this has been a very good learn­ing ex­pe­ri­ence.   </p></div>
-        </div>
-            
+ <p>Stil­l, this has been a very good learn­ing ex­pe­ri­ence.   </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/06/15/a-weeklog/" class="u-url">A Weeklog</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/06/15/a-weeklog/" rel="bookmark"><time class="published dt-published" datetime="2010-06-15T21:45:22-05:00" itemprop="datePublished" title="Publication date">2010-06-15 21:45</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here.html">Comments</a>
+    <a href="posts/2010/06/15/a-weeklog/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/15/a-weeklog.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/06/15/a-weeklog/" class="u-url">A Weeklog</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-06-15T21:45:22-05:00">2010-06-15 21:45</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><a href="http://ondrejcertik.blogspot.com/2010/06/week-may-30-june-4.html">These</a> <a href="http://ondrejcertik.blogspot.com/2010/06/week-june-5-june-11.html">seem</a> <a href="http://haz-tech.blogspot.com/2010/06/plowing-forward.html">to</a> <a href="http://ojensen.wordpress.com/2010/06/15/array-arguments/">be</a> all the rave these days, so I figured, why not jump on the bandwagon:
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<a href="http://ondrejcertik.blogspot.com/2010/06/week-may-30-june-4.html">These</a> <a href="http://ondrejcertik.blogspot.com/2010/06/week-june-5-june-11.html">seem</a> <a href="http://haz-tech.blogspot.com/2010/06/plowing-forward.html">to</a> <a href="http://ojensen.wordpress.com/2010/06/15/array-arguments/">be</a> all the rave these days, so I figured, why not jump on the bandwagon:
 <p><code></code></p> 
  <p>Aaron-Meur­er:­doc aaron­meur­er20100615153531(in­te­gra­tion$)$git weekre­port  </p> 
  <p>Aaron Meur­er (20):
@@ -807,23 +880,28 @@ NameEr­ror: glob­al name 'a' is not de­fined</p>
       Re­write poly­no­mi­al_re­duce() non-re­cur­sive­ly
       Add in­te­grate_hy­per­tan­gen­t_poly­no­mi­al()
       Add in­te­grate_non­lin­ear_no_spe­cial­s()
- </p></div>
-        </div>
-            
+ </p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2010/06/11/integration-of-rational-functions/" class="u-url">Integration of rational functions</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2010/06/11/integration-of-rational-functions/" rel="bookmark"><time class="published dt-published" datetime="2010-06-11T19:39:58-05:00" itemprop="datePublished" title="Publication date">2010-06-11 19:39</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2010/06/15/a-weeklog/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/15/a-weeklog.html">Comments</a>
+    <a href="posts/2010/06/11/integration-of-rational-functions/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/11/integration-of-rational-functions.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2010/06/11/integration-of-rational-functions/" class="u-url">Integration of rational functions</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2010-06-11T19:39:58-05:00">2010-06-11 19:39</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>So for this week's blog post I will try to ex­plain how the gen­er­al al­go­rithm for in­te­grat­ing ra­tio­nal func­tions work­s.  Re­call that a  <a href="http://en.wikipedia.org/wiki/Rational_function">ra­tio­nal func­tion</a>  is the quo­tient of two poly­no­mi­al­s.  We know that us­ing com­mon de­nom­i­na­tors, we can con­vert the sum of any num­ber of ra­tio­nal func­tions in­to a sin­gle quo­tien­t, $la­tex \frac{a_nx^n + a_{n-1}x^{n-1} + \c­dots + a_2x^2 + a_1x + a_0}{b_nx^n + b_{n-1}x^{n-1} + \c­dots + b_2x^2 + a_1x + a_0}$.  Al­so, us­ing  <a href="http://en.wikipedia.org/wiki/Polynomial_division">poly­no­mi­al di­vi­sion</a>  we can re­write any ra­tio­nal func­tion as the sum of a poly­no­mi­al and the quo­tient of two poly­no­mi­als such that the de­gree of the nu­mer­a­tor is less than the de­gree of the de­nom­i­na­tor ($la­tex F(x) = \frac{b(x)}{c(x)} = p(x) + \frac{r(x)}{g(x)}$, with $la­tex deg(r) &lt; deg(g)$).  Fur­ther­more, we know that the rep­re­sen­ta­tion of a ra­tio­nal func­tion is not unique.  For ex­am­ple, $la­tex \frac{(x + 1)(x - 1)}{(x + 2)(x - 1)}$ is the same as $la­tex \frac{x + 1}{x + 2}$ ex­cept at the point $la­tex x = 1$, and $la­tex \frac{(x - 1)^2}{x - 1}$ is the same as $la­tex x - 1$ ev­ery­where.  But by us­ing  <a href="http://en.wikipedia.org/wiki/Euclid%27s_algorithm_for_polynomials#Polynomials">Eu­clid's al­go­rithm</a>  for find­ing the GCD of poly­no­mi­als on the nu­mer­a­tor and the de­nom­i­na­tor, along with poly­no­mi­al di­vi­sion on each,  we can can­cel all com­mon fac­tors to get a rep­re­sen­ta­tion that is unique (as­sum­ing we ex­pand all fac­tors in­to one poly­no­mi­al).  Fi­nal­ly, us­ing poly­no­mi­al di­vi­sion with re­main­der, we can re­write any ra­tio­nal func­tion $la­tex F(x)$ as $la­tex \frac{a(x)}{b(x)} = p(x) + \frac{a(x)}{d(x)}$, where $la­tex a(x)$, $la­tex b(x)$, $la­tex c(x)$, $la­tex d(x)$, and $la­tex p(x)$ are all poly­no­mi­al­s, and the de­gree of $la­tex a$ is less than the de­gree of $la­tex d$.   </p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>So for this week's blog post I will try to ex­plain how the gen­er­al al­go­rithm for in­te­grat­ing ra­tio­nal func­tions work­s.  Re­call that a  <a href="http://en.wikipedia.org/wiki/Rational_function">ra­tio­nal func­tion</a>  is the quo­tient of two poly­no­mi­al­s.  We know that us­ing com­mon de­nom­i­na­tors, we can con­vert the sum of any num­ber of ra­tio­nal func­tions in­to a sin­gle quo­tien­t, $la­tex \frac{a_nx^n + a_{n-1}x^{n-1} + \c­dots + a_2x^2 + a_1x + a_0}{b_nx^n + b_{n-1}x^{n-1} + \c­dots + b_2x^2 + a_1x + a_0}$.  Al­so, us­ing  <a href="http://en.wikipedia.org/wiki/Polynomial_division">poly­no­mi­al di­vi­sion</a>  we can re­write any ra­tio­nal func­tion as the sum of a poly­no­mi­al and the quo­tient of two poly­no­mi­als such that the de­gree of the nu­mer­a­tor is less than the de­gree of the de­nom­i­na­tor ($la­tex F(x) = \frac{b(x)}{c(x)} = p(x) + \frac{r(x)}{g(x)}$, with $la­tex deg(r) &lt; deg(g)$).  Fur­ther­more, we know that the rep­re­sen­ta­tion of a ra­tio­nal func­tion is not unique.  For ex­am­ple, $la­tex \frac{(x + 1)(x - 1)}{(x + 2)(x - 1)}$ is the same as $la­tex \frac{x + 1}{x + 2}$ ex­cept at the point $la­tex x = 1$, and $la­tex \frac{(x - 1)^2}{x - 1}$ is the same as $la­tex x - 1$ ev­ery­where.  But by us­ing  <a href="http://en.wikipedia.org/wiki/Euclid%27s_algorithm_for_polynomials#Polynomials">Eu­clid's al­go­rithm</a>  for find­ing the GCD of poly­no­mi­als on the nu­mer­a­tor and the de­nom­i­na­tor, along with poly­no­mi­al di­vi­sion on each,  we can can­cel all com­mon fac­tors to get a rep­re­sen­ta­tion that is unique (as­sum­ing we ex­pand all fac­tors in­to one poly­no­mi­al).  Fi­nal­ly, us­ing poly­no­mi­al di­vi­sion with re­main­der, we can re­write any ra­tio­nal func­tion $la­tex F(x)$ as $la­tex \frac{a(x)}{b(x)} = p(x) + \frac{a(x)}{d(x)}$, where $la­tex a(x)$, $la­tex b(x)$, $la­tex c(x)$, $la­tex d(x)$, and $la­tex p(x)$ are all poly­no­mi­al­s, and the de­gree of $la­tex a$ is less than the de­gree of $la­tex d$.   </p> 
  <p>We know from cal­cu­lus that the in­te­gral of any ra­tio­nal func­tion con­sists of three part­s: the poly­no­mi­al part, the ra­tio­nal part, and the log­a­rith­mic part (con­sid­er arc­tan­gents as com­plex log­a­rithm­s).  The poly­no­mi­al part is just the in­te­gral of $la­tex p(x)$ above.  The ra­tio­nal part is an­oth­er ra­tio­nal func­tion, and the log­a­rith­mic part, which is a sum of log­a­rithms of the form $la­tex a\log{s(x)}$, where $la­tex a$ is an al­ge­bra­ic con­stant and $la­tex s(x)$ is a poly­no­mi­al (note that if $la­tex s(x)$ is a ra­tio­nal func­tion, we can split it in­to two log­a­rithms of poly­no­mi­als us­ing the log iden­ti­ties).   </p> 
  <p>To find the ra­tio­nal part, we first need to know about square-free fac­tor­iza­tion­s.  An im­por­tant re­sult in al­ge­bra is that any poly­no­mi­al with ra­tio­nal co­ef­fi­cients can be fac­tored unique­ly in­to ir­re­duc­ible poly­no­mi­als with ra­tio­nal co­ef­fi­cients, up to mul­ti­pli­ca­tion of a non-ze­ro con­stant and re­order­ing of fac­tors, sim­i­lar to how any in­te­ger can be fac­tored unique­ly in­to primes up to mul­ti­pli­ca­tion of 1 and -1 and re­order­ing of fac­tors (tech­ni­cal­ly, it is with co­ef­fi­cients from a unique fac­tor­iza­tion do­main, for which the ra­tio­nals is a spe­cial case, and up to mul­ti­pli­ca­tion of a unit, which for ra­tio­nals is ev­ery non-ze­ro con­stan­t).  A poly­no­mi­al is square-free if this unique fac­tor­iza­tion does not have any poly­no­mi­als with pow­ers greater than 1.  An­oth­er the­o­rem from al­ge­bra tells us that ir­re­duc­ible poly­no­mi­als over the ra­tio­nals do not have any re­peat­ed root­s, and so giv­en this, it is not hard to see that a poly­no­mi­al be­ing square-free is equiv­a­lent to it not hav­ing re­peat­ed root­s.   </p> 
  <p>A  <a href="http://en.wikipedia.org/wiki/Square-free_factorization">square-free fac­tor­iza­tion</a>  of a poly­no­mi­al is a list of poly­no­mi­al­s, $la­tex P_1P_2^2 \c­dots P_n^n$, where each $la­tex P_i$ is square-free (in oth­er word­s, $la­tex P_1$ is the prod­uct of all the fac­tors of de­gree 1, $la­tex P_2$ is the prod­uct of all the fac­tors of de­gree 2, and so on).  There is a rel­a­tive­ly sim­ple al­go­rithm to com­pute the square-free fac­tor­iza­tion of a poly­no­mi­al, which is based on the fact that $la­tex gcd(P, \frac{d­p}{dx})$ re­duces the pow­er of each ir­re­duc­ible fac­tor by 1.  For ex­am­ple:</p> 
@@ -838,38 +916,31 @@ NameEr­ror: glob­al name 'a' is not de­fined</p>
  <p>It turns out that the above $la­tex gcd(A-\al­pha\frac{d­D}{dx}, D)$ will ap­pear in the PRS of $la­tex D$ and $la­tex A-t\frac{d­D}{dx}$.  Fur­ther­more, we can use the PRS to im­me­di­ate­ly find the re­sul­tant $la­tex R=re­sul­tan­t_t(A-t\frac{d­D}{dx}, D)$, which as we saw, is all we need to com­pute the log­a­rith­mic part.   </p> 
  <p>So that's ra­tio­nal in­te­gra­tion.  I hope I haven't bored you too much, and that this made at least a lit­tle sense.  I al­so hope that it was all cor­rec­t.  Note that this en­tire al­go­rithm has al­ready been im­ple­ment­ed in SymPy, so if you plug a ra­tio­nal func­tion in to  <code>in­te­grate()</code>, you should get back a so­lu­tion.  How­ev­er, I de­scribe it here be­cause the tran­scen­den­tal case of the Risch Al­go­rithm is just a gen­er­al­iza­tion of ra­tio­nal func­tion in­te­gra­tion.</p> 
  <p>As for work up­dates, I found that the Poly ver­sion of the heur­sitic Risch al­go­rithm was con­sid­er­ably slow­er than the orig­i­nal ver­sion, due to in­ef­fi­cien­cies in the way the poly­no­mi­als are cur­rent­ly rep­re­sent­ed in SymPy.  So I have put that aside, and I have start­ed im­ple­ment­ing al­go­rithms from the full al­go­rith­m.  There's not much to say on that fron­t.  It's te­dious work.  I copy the al­go­rithm from Bron­stein's book, then try make sure that it is cor­rect based on the few ex­am­ples giv­en and from the math­e­mat­i­cal back­ground given, and when I'm sat­is­fied, I move on to the next one.  Fol­low my  <a href="http://github.com/asmeurer/sympy/tree/integration">in­te­gra­tion</a>  branch if you are in­ter­est­ed.</p> 
- <p>In my next post, I'll try to de­fine some terms, like "ele­men­tary func­tion," and in­tro­duce a lit­tle dif­fer­en­tial al­ge­bra, so you can un­der­stand a lit­tle bit of the na­ture of the gen­er­al in­te­gra­tion al­go­rith­m.</p></div>
-        </div>
-            
-        
-    <p>
-        <a href="posts/2010/06/11/integration-of-rational-functions/#disqus_thread" data-disqus-identifier="cache/posts/2010/06/11/integration-of-rational-functions.html">Comments</a>
+ <p>In my next post, I'll try to de­fine some terms, like "ele­men­tary func­tion," and in­tro­duce a lit­tle dif­fer­en­tial al­ge­bra, so you can un­der­stand a lit­tle bit of the na­ture of the gen­er­al in­te­gra­tion al­go­rith­m.</p>
+</div>
+    </div>
+    </article>
+</div>
 
-
-        </p></article>
-    
-        <div>
+        <nav class="postindexpager">
         <ul class="pager">
             <li class="previous">
-                <a href="index-5.html" rel="prev">← Newer posts</a>
+                <a href="index-5.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
-                <a href="index-3.html" rel="next">Older posts →</a>
+                <a href="index-3.html" rel="next">Older posts</a>
             </li>
         </ul>
-        </div>
+        </nav>
 
-    
+
         
        <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
 
 
-	
+
         <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-          tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}
-        });
-        </script>
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
         <script src="assets/js/mathjax.js"></script>
 
 
@@ -888,24 +959,31 @@ NameEr­ror: glob­al name 'a' is not de­fined</p>
 </div>
 
 
-            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="assets/js/tipuesearch_set.js"></script>
@@ -921,4 +999,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

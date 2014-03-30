@@ -1,17 +1,29 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="My blog">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Aaron Meurer's Blog (old posts, page 7) | Aaron Meurer's Blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/index-7.html">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -21,25 +33,25 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/index-7.html">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
-    
-    
 <link rel="stylesheet" type="text/css" href="assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -48,15 +60,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="archive.html">Archives</a>
-                </li><li><a href="categories/index.html">Tags</a>
-                </li><li><a href="rss.xml">RSS</a>
+                <li>
+<a href="archive.html">Archives</a>
+                </li>
+<li>
+<a href="categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -67,8 +86,10 @@ MathJax.Hub.Config({
                 
                     
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -78,14 +99,25 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2012/09/19/infinitely-nested-lists-in-python/" class="u-url">Infinitely nested lists in Python</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2012-09-19T04:21:08-05:00">2012-09-19 04:21</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>Read­ers of this blog know that I some­times like to write about some  <a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">strange</a>,  <a href="http://asmeurersympy.wordpress.com/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/">un­ex­pect­ed</a>, and  <a href="http://asmeurersympy.wordpress.com/2011/03/15/true-is-true-is-false-is-true-is-false/">un­usu­al</a>  things in Python that I stum­ble across.  This post is an­oth­er one of those.</p> 
+<div class="postindex">
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/09/19/infinitely-nested-lists-in-python/" class="u-url">Infinitely nested lists in Python</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/09/19/infinitely-nested-lists-in-python/" rel="bookmark"><time class="published dt-published" datetime="2012-09-19T04:21:08-05:00" itemprop="datePublished" title="Publication date">2012-09-19 04:21</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/2012/09/19/infinitely-nested-lists-in-python/#disqus_thread" data-disqus-identifier="cache/posts/2012/09/19/infinitely-nested-lists-in-python.html">Comments</a>
+
+
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>Read­ers of this blog know that I some­times like to write about some  <a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">strange</a>,  <a href="http://asmeurersympy.wordpress.com/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/">un­ex­pect­ed</a>, and  <a href="http://asmeurersympy.wordpress.com/2011/03/15/true-is-true-is-false-is-true-is-false/">un­usu­al</a>  things in Python that I stum­ble across.  This post is an­oth­er one of those.</p> 
  <p>First, look at this</p> 
  <p>[code lan­guage="py"]</p> 
  <p>&gt;&gt;&gt; a = []</p> 
@@ -149,24 +181,30 @@ Run­timeEr­ror: max­i­mum re­cur­sion depth ex­ceed­ed in com­par­i­s
  <p><code>a[0] is b</code>  holds (i.e., they are ex­act­ly the same ob­ject in mem­o­ry), so  <code>==</code>  is able to short­-­cir­cuit on them.  But to test  <code>a[0] == a</code>  it has to re­cur­sive­ly com­pare the el­e­ments of  <code>a</code>  and  <code>a[0]</code>.  Since it is in­fin­ite­ly nest­ed, this leads to a re­cur­sion er­ror.  Now an in­ter­est­ing ques­tion: why does this hap­pen?  Is it be­cause  <code>==</code>  on lists us­es a depth first search?  If it were some­how pos­si­ble to com­pare these two ob­ject­s, would they be equal?</p> 
  <p>One is re­mind­ed of  <a href="http://en.wikipedia.org/wiki/Russel%27s_paradox">Rus­sel's para­dox</a>, and the rea­son why in  <a href="http://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">ax­iomat­ic set the­o­ry</a>, sets are not al­lowed to con­tain them­selves.  </p> 
  <p>Think­ing of this brought me to my fi­nal ques­tion.  Is it pos­si­ble to make a Python  <code>set</code>  that con­tains it­self?  The an­swer is ob­vi­ous­ly no, be­cause  <code>set</code>  ob­jects can on­ly con­tain hash­able ob­ject­s, and  <code>set</code>  is not hash­able.  But  <code>frozenset</code>,  <code>set</code>'s coun­ter­part, is hash­able.  So can you cre­ate a  <code>frozenset</code>  that con­tains it­self?  The same for  <code>tu­ple</code>.  The method I used for  <code>a</code>  above won't work, be­cause  <code>a</code>  must be mu­ta­ble to ap­pend it to it­self.</p> 
- <p></p></div>
-        </div>
-            
+ <p></p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/08/31/isympy-i-a-saner-interactive-environment/" class="u-url">isympy -I:  A saner interactive environment</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/08/31/isympy-i-a-saner-interactive-environment/" rel="bookmark"><time class="published dt-published" datetime="2012-08-31T03:30:08-05:00" itemprop="datePublished" title="Publication date">2012-08-31 03:30</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2012/09/19/infinitely-nested-lists-in-python/#disqus_thread" data-disqus-identifier="cache/posts/2012/09/19/infinitely-nested-lists-in-python.html">Comments</a>
+    <a href="posts/2012/08/31/isympy-i-a-saner-interactive-environment/#disqus_thread" data-disqus-identifier="cache/posts/2012/08/31/isympy-i-a-saner-interactive-environment.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2012/08/31/isympy-i-a-saner-interactive-environment/" class="u-url">isympy -I:  A saner interactive environment</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2012-08-31T03:30:08-05:00">2012-08-31 03:30</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>As  <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">promised</a>, here is an­oth­er post de­scrib­ing a new fea­ture in the up­com­ing  <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.2">SymPy 0.7.2</a>.</p> 
- <p></p><h3>Automatic Symbol Definition</h3>
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>As  <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">promised</a>, here is an­oth­er post de­scrib­ing a new fea­ture in the up­com­ing  <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.2">SymPy 0.7.2</a>.</p> 
+ <p></p>
+<h3>Automatic Symbol Definition</h3>
 <p>While not as ground break­ing as the fea­ture I de­scribed in my  <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">last post</a>, this fea­ture is still quite use­ful. As you may know, SymPy is in­her­ent­ly a Python li­brary, mean­ing that it lives by the rules of Python. If you want to use any name, whether it be a Sym­bol or a func­tion (like cos), you need to de­fine it (in the case of Sym­bol­s), or im­port it (in the case of func­tions that come with SymPy). We pro­vide the script  <code>isympy</code>  with SymPy to as­sist with this. This script au­to­mat­i­cal­ly runs IPython (if it's in­stalled), im­ports all names from sympy (<code>from sympy im­port *</code>), and de­fines com­mon sym­bol names (like  <code>x</code>,  <code>y</code>, and  <code>z</code>).</p> 
  <p>But if you want to use a Sym­bol that is not one of the ones pre­de­fined by  <code>isympy</code>, you will get some­thing like</p> 
  <p>[code lan­guage="py"]</p> 
@@ -229,7 +267,8 @@ Out[2]: 0.5
 
 
 
-Of course, if you just want a float­ing point num­ber, you can just use  <code>N()</code>  or  <code>.e­valf()</code></li> 
+Of course, if you just want a float­ing point num­ber, you can just use  <code>N()</code>  or  <code>.e­valf()</code>
+</li> 
      <li>This works by pars­ing the text and wrap­ping all in­te­ger lit­er­als with  <code>In­te­ger()</code>. This means that if you have a vari­able set to a Python in­t, it will still act like a Python in­t:[­code lan­guage="py"]
 In [6]: a = in­t(1)
 
@@ -251,23 +290,28 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
      <li>The same as be­fore: this will on­ly work in­ter­ac­tive­ly. If you want to re­use your code out­side of  <code>isympy -i</code>, you should take care of any in­t/int by rewrit­ing it as S(in­t)/in­t.</li> 
  </ul>
 
-<p>Since these are both use­ful fea­tures, we've added a way that you can get them both at on­ce: by do­ing  <code>isympy -I</code>  (the "I" stands for "In­ter­ac­tive"). If we add sim­i­lar fea­tures in the fu­ture, we will al­so add them to the  <code>-I</code>  short­cut (for ex­am­ple, we may add an op­tion to al­low  <code>^</code>  to au­to­mat­i­cal­ly be re­placed with  <code>**</code>).</p></div>
-        </div>
-            
+<p>Since these are both use­ful fea­tures, we've added a way that you can get them both at on­ce: by do­ing  <code>isympy -I</code>  (the "I" stands for "In­ter­ac­tive"). If we add sim­i­lar fea­tures in the fu­ture, we will al­so add them to the  <code>-I</code>  short­cut (for ex­am­ple, we may add an op­tion to al­low  <code>^</code>  to au­to­mat­i­cal­ly be re­placed with  <code>**</code>).</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/08/21/sympy-live-sphinx-extension/" class="u-url">SymPy Live Sphinx Extension</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/08/21/sympy-live-sphinx-extension/" rel="bookmark"><time class="published dt-published" datetime="2012-08-21T05:09:13-05:00" itemprop="datePublished" title="Publication date">2012-08-21 05:09</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2012/08/31/isympy-i-a-saner-interactive-environment/#disqus_thread" data-disqus-identifier="cache/posts/2012/08/31/isympy-i-a-saner-interactive-environment.html">Comments</a>
+    <a href="posts/2012/08/21/sympy-live-sphinx-extension/#disqus_thread" data-disqus-identifier="cache/posts/2012/08/21/sympy-live-sphinx-extension.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2012/08/21/sympy-live-sphinx-extension/" class="u-url">SymPy Live Sphinx Extension</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2012-08-21T05:09:13-05:00">2012-08-21 05:09</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>I did­n't blog about SymPy all sum­mer, so I thought I would write a post about my fa­vorite fea­ture of the up­com­ing SymPy 0.7.2 re­lease.  In fac­t, this fea­ture has got me more ex­cit­ed than any oth­er fea­ture from any ver­sion of SymPy.  Yeah, it's that good.</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>I did­n't blog about SymPy all sum­mer, so I thought I would write a post about my fa­vorite fea­ture of the up­com­ing SymPy 0.7.2 re­lease.  In fac­t, this fea­ture has got me more ex­cit­ed than any oth­er fea­ture from any ver­sion of SymPy.  Yeah, it's that good.</p> 
  <p>The fea­ture is the SymPy Live Sphinx ex­ten­sion.  To start, if you don't know about it, check out  <a href="http://live.sympy.org/" target="_blank">SymPy Live</a>.  This is a con­sole that runs on the  <a href="https://developers.google.com/appengine/">App En­gine</a>.  We've ac­tu­al­ly had this for quite some time, but this win­ter, it got a huge up­grade thanks to the con­tri­bu­tion of some  <a href="http://www.google-melange.com/gci/homepage/google/gci2011">GCI</a>  stu­dents.  Ba­si­cal­ly, SymPy Live lets you try out SymPy in your brows­er com­plete­ly for free, be­cause it runs all the code on the App En­gine.  Ac­tu­al­ly, the con­sole is a full Python con­sole, so you can ac­tu­al­ly run any valid Python com­mand on it.  This past win­ter, GCI stu­dents up­grad­ed the look of the site, added a mo­bile ver­sion (vis­it live.sympy.org on your phone), and added oth­er neat fea­tures like search his­to­ry and au­to­com­ple­tion.</p> 
  <p>Now,  <a href="http://sphinx.pocoo.org/">Sphinx</a>  is the doc­u­men­ta­tion sys­tem that we use to gen­er­ate  <a href="http://docs.sympy.org/">SymPy's html doc­u­men­ta­tion</a>. Last year, when I was at the  <a href="http://asmeurersympy.wordpress.com/2011/07/17/the-scipy-2011-conference/">SciPy Con­fer­ence</a>, Ma­teusz had an idea at the sprints to cre­ate an ex­ten­sion link­ing SymPy Live and Sphinx, so that the ex­am­ples in Sphinx could be eas­i­ly run in SymPy Live.  He did­n't fin­ish the ex­ten­sion, but I'm hap­py to re­port that thanks to David Li, who was al­so one of the afore­men­tioned G­CI stu­dents, the ex­ten­sion is now com­plete, and is run­ning live on our  <a href="http://docs.sympy.org/dev/">de­vel­op­ment docs</a>.  When SymPy 0.7.2 is re­leased (soon I promise), it will be part of the ofi­cial doc­u­men­ta­tion.</p> 
  <p>The best way to see how awe­some this is is to vis­it the web­site and check it out.  Y­ou will need a mod­ern brows­er (the lat­est ver­sion of Fire­fox, Sa­far­i, or Chrome will work, IE might work too).  Go to a page in the de­vel­op­ment docs with doc­u­men­ta­tion ex­am­ples, for ex­am­ple,  <a href="http://docs.sympy.org/dev/tutorial.html#algebra">http://­doc­s.sympy.org/de­v/­tu­to­ri­al.htm­l#al­ge­bra</a>, and click on one of the ex­am­ples (or click on one of the green "Run code block in SymPy Live" but­ton­s). You should see a con­sole pop up from the bot­tom-right of the screen, and run your code.  For ex­am­ple:</p> 
@@ -275,23 +319,28 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
  <p>You can ac­cess or hide the con­sole at any time by click­ing on the green box at the bot­tom-right of the page.  If you click on "Set­tings", you will see that you can change all the same set­tings as the reg­u­lar SymPy Live con­sole, such as the print­er type, and the keys for ex­e­cu­tion and au­to­com­ple­tion.  Ad­di­tion­al­ly, there is a new set­ting, "E­val­u­a­tion Mod­e", which changes how the Sphinx ex­am­ples are eval­u­at­ed.  The de­fault is "E­val­u­ate".  In this mod­e, if you click on an ex­am­ple, it is ex­e­cut­ed im­me­di­ate­ly.  The oth­er op­tion is "Copy­".  In this mod­e, if you click an ex­am­ple, it is copied to the con­sole, but not ex­e­cut­ed right away. This way, you can ed­it the code to try some­thing dif­fer­en­t.  Re­mem­ber, this is a full fledged Python con­sole run­ning SymPy, so you can try lit­er­al­ly any­thing</p> 
  <p>So play with this and  <a href="http://groups.google.com/group/sympy">let us know</a>  what you think.  We would love to hear ways that we can im­prove the ex­pe­ri­ence even fur­ther.  In par­tic­u­lar, I think we should think about ways to make the "Copy" mode more user-friend­ly.  Sug­ges­tions wel­come!  Al­so, please  <a href="http://code.google.com/p/sympy/issues">re­port any bugs</a>.</p> 
  <p>And one word of warn­ing:  even though these are the de­vel­op­ment doc­s, SymPy Live is still run­ning SymPy 0.7.1.  So some ex­am­ples may not work un­til 0.7.2 is re­leased, at which point we will up­date SymPy Live.</p> 
- <p>I be­lieve that this ex­ten­sion rep­re­sents the fu­ture of in­ter­ac­tive doc­u­men­ta­tion. I hope you en­joy.</p></div>
-        </div>
-            
+ <p>I be­lieve that this ex­ten­sion rep­re­sents the fu­ture of in­ter­ac­tive doc­u­men­ta­tion. I hope you en­joy.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/07/09/emacs-7-months-later/" class="u-url">Emacs: 7 months later</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/07/09/emacs-7-months-later/" rel="bookmark"><time class="published dt-published" datetime="2012-07-09T05:24:05-05:00" itemprop="datePublished" title="Publication date">2012-07-09 05:24</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2012/08/21/sympy-live-sphinx-extension/#disqus_thread" data-disqus-identifier="cache/posts/2012/08/21/sympy-live-sphinx-extension.html">Comments</a>
+    <a href="posts/2012/07/09/emacs-7-months-later/#disqus_thread" data-disqus-identifier="cache/posts/2012/07/09/emacs-7-months-later.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2012/07/09/emacs-7-months-later/" class="u-url">Emacs: 7 months later</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2012-07-09T05:24:05-05:00">2012-07-09 05:24</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>In my  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/">fi­nal post</a>  about my switch­ing to Emac­s, a  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/#comment-544">com­menter</a>, Scot­t, asked me, "It has been a while since you start­ed us­ing Emac­s. I’m just cu­ri­ous. How is your ex­pe­ri­ence so far now that you have more ex­pe­ri­ence and a more com­plete con­fig­u­ra­tion?"  My re­ply was get­ting quite long, so I fig­ured it would be best suit­ed as a new post.</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>In my  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/">fi­nal post</a>  about my switch­ing to Emac­s, a  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/#comment-544">com­menter</a>, Scot­t, asked me, "It has been a while since you start­ed us­ing Emac­s. I’m just cu­ri­ous. How is your ex­pe­ri­ence so far now that you have more ex­pe­ri­ence and a more com­plete con­fig­u­ra­tion?"  My re­ply was get­ting quite long, so I fig­ured it would be best suit­ed as a new post.</p> 
  <p>The short an­swer is, most­ly the same since I wrote that  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3">Vim vs. Emacs (part 3)</a>. Once you use some­thing a lot, you no­tice all kinds of things that could use im­prove­ments. Some of them are just mi­nor an­noy­ances. For ex­am­ple, many in­ter­ac­tive com­mands in Emacs (but not al­l!) re­quire you to type out "yes" in­stead of just "y" as a con­fir­ma­tion. Oth­ers are more se­ri­ous, like the need for a re­al re­place­ment of Su­perTab from vim.</p> 
  <p>I ac­tu­al­ly did­n't have much free time to work on con­fig­ur­ing Emacs dur­ing the school year, and once the sum­mer start­ed, my com­put­er died, and I've been work­ing of an old lap­top run­ning Lin­ux un­til I can get a new one. For­tu­nate­ly, I had the fore­sight to put all my Emacs con­fig­u­ra­tion  <a href="https://github.com/asmeurer/dotfiles">on­line on GitHub</a>, so it was easy to get my con­fig­u­ra­tion again. I've no­ticed that in Lin­ux, the Alt key (i.e., Meta) is used for oth­er things, so it does­n't work so well in Emacs (e.g., press­ing Alt with­out any oth­er keys some­times ac­ti­vates a menu that re­moves the key­board fo­cus, and al­so C-M short­cuts don't seem to work at al­l).</p> 
  <p>I've mem­o­rized very few key­board short­cut­s, even ones that might be use­ful to me (e.g., I don't re­mem­ber the short­cut to jump to a match­ing paren­the­sis). Usu­al­ly, if I am us­ing some mode or some­thing and I want to know how to do some­thing, I just Google it, and gen­er­al­ly find the an­swer with­in a few sec­ond­s.</p> 
@@ -308,23 +357,28 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
  <p>Ul­ti­mate­ly, I'm quite pleased with how us­er friend­ly Emacs is, and with how easy it is to find out how to do al­most any­thing I want just by Googling it. Con­fig­u­ra­tion is an up­hill bat­tle.  Emacs has a ton of great pack­ages, many of which are in­clud­ed, but al­most none are en­abled by de­fault.  Just to­day I dis­cov­ered Ido mod­e, thanks to  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/#comment-543">  David Li</a>.  I feel that in the long ter­m, as I learn Emacs Lisp, I can make it do what­ev­er I wan­t.  It pro­vides a good base­line edit­ing ex­pe­ri­ence, and a good frame­work for con­fig­ur­ing it to do what­ev­er you wan­t, and al­so enough peo­ple use it that 99% of the things you want are al­ready done by some­body.</p> 
  <!-- LocalWords:  SuperTab isearch flymake Makefile WordPress repo -->
 
-<p></p></div>
-        </div>
-            
+<p></p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu/" class="u-url">How to install the development version of IPython Qtconsole and Notebook in Ubuntu</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu/" rel="bookmark"><time class="published dt-published" datetime="2012-06-14T05:49:08-05:00" itemprop="datePublished" title="Publication date">2012-06-14 05:49</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2012/07/09/emacs-7-months-later/#disqus_thread" data-disqus-identifier="cache/posts/2012/07/09/emacs-7-months-later.html">Comments</a>
+    <a href="posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu/#disqus_thread" data-disqus-identifier="cache/posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu/" class="u-url">How to install the development version of IPython Qtconsole and Notebook in Ubuntu</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2012-06-14T05:49:08-05:00">2012-06-14 05:49</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>Both the awe­some  <a href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">IPython note­book</a>  and  <a href="http://ipython.org/ipython-doc/stable/interactive/qtconsole.html">Qt­con­sole</a>  are in the Ubun­tu repos­i­to­ries, so if you just want to use the sta­ble re­leased ver­sion­s, you can just do</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>Both the awe­some  <a href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">IPython note­book</a>  and  <a href="http://ipython.org/ipython-doc/stable/interactive/qtconsole.html">Qt­con­sole</a>  are in the Ubun­tu repos­i­to­ries, so if you just want to use the sta­ble re­leased ver­sion­s, you can just do</p> 
  <p>[code lan­guage="bash"]</p> 
  <p>su­do ap­t-get in­stall ipython-note­book ipython-qt­con­sole</p> 
  <p>[/­code]</p> 
@@ -342,23 +396,28 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
 <p>su­do python set­up.py de­vel­op</p> 
  <p>[/­code]</p> 
  <p>To up­date, just cd in­to that ipython di­rec­to­ry and type  <code>git pull</code>.  That's it.  Now type  <code>ipython note­book</code>  or  <code>ipython qt­con­sole</code>  to get the mag­ic.</p> 
- <p>ED­IT: Af­ter you do this,  <code>ap­t-get</code>  will start bug­ging you ev­ery time that you use it that a bunch of pack­ages are no longer need­ed.  These are the ones that you do need for the qt­con­sole and the note­book, so you should not au­tore­move them as it says.  Rather, set them as man­u­al­ly in­stalled by copy­ing the list of pack­ages that it tells you about and  <code>su­do ap­t-get in­stall</code>ing them.</p></div>
-        </div>
-            
+ <p>ED­IT: Af­ter you do this,  <code>ap­t-get</code>  will start bug­ging you ev­ery time that you use it that a bunch of pack­ages are no longer need­ed.  These are the ones that you do need for the qt­con­sole and the note­book, so you should not au­tore­move them as it says.  Rather, set them as man­u­al­ly in­stalled by copy­ing the list of pack­ages that it tells you about and  <code>su­do ap­t-get in­stall</code>ing them.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/01/13/vim-vs-emacs-part-3/" class="u-url">Vim vs. Emacs (Part 3)</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/01/13/vim-vs-emacs-part-3/" rel="bookmark"><time class="published dt-published" datetime="2012-01-13T23:01:39-06:00" itemprop="datePublished" title="Publication date">2012-01-13 23:01</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu/#disqus_thread" data-disqus-identifier="cache/posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu.html">Comments</a>
+    <a href="posts/2012/01/13/vim-vs-emacs-part-3/#disqus_thread" data-disqus-identifier="cache/posts/2012/01/13/vim-vs-emacs-part-3.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2012/01/13/vim-vs-emacs-part-3/" class="u-url">Vim vs. Emacs (Part 3)</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2012-01-13T23:01:39-06:00">2012-01-13 23:01</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>See parts  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">1</a>  and  <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/">2</a>.</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>See parts  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">1</a>  and  <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/">2</a>.</p> 
  <p>Some more com­ments af­ter us­ing emacs for a while:</p> 
  <div class="code"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>I finally found the perfect tab completion solution. It took way too much searching for how awesome it is.  It's called <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://cx4a.org/software/auto-complete/manual.html"</span><span class="nt">&gt;</span>auto-complete-mode<span class="nt">&lt;/a&gt;</span>.  The best way to get an idea of what this is is to watch <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.youtube.com/watch?v=rGVVnDxwJYE"</span><span class="nt">&gt;</span>this screencast<span class="nt">&lt;/a&gt;</span>.  Basically, it shows you a completion list automatically.  It uses the <span class="nt">&lt;em&gt;</span>TAB<span class="nt">&lt;/em&gt;</span> key to do completion (to me, this is a no brainer, but for some reason, no other completion extension that I found did this, requiring you to do all kinds of nonsense in your .emacs file).  It's got cool features like simple fuzzy matching and intelligent matching (so the first completion is what you tend to use, instead of just the first one that matches).  To quote the author, "a goal of auto-complete-mode is to provide a system that does what users want without any command." I couldn't agree with that goal more. If you install it, I recommend adding <span class="nt">&lt;code&gt;</span>(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)<span class="nt">&lt;/code&gt;</span> to your .emacs, so that you can use M-TAB to force the completion menu to come up.  This generally happens automatically, but I think this is the only way to get fuzzy matching, for example. Actually, you can also just use <span class="nt">&lt;code&gt;</span>(ac-set-trigger-key "TAB")<span class="nt">&lt;/code&gt;</span>, which intelligently sets TAB to complete or indent, based on which one you more likely want.  This seems to work pretty well to me.<span class="nt">&lt;/li&gt;</span>
 
@@ -454,23 +513,28 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
  <p>At any rate, I rec­om­mend that any­one who wants to give com­mand line ed­i­tors a chance do what I did: learn both vim and emac­s.  My blog posts should be enough to give you some good ad­vice.  I went cold-­turkey, and I rec­om­mend that you do too, but on­ly do it if you won't have any im­por­tant edit­ing to do for a few week­s, as your edit­ing rate will slow down a lot as you are learn­ing for both ed­i­tors.  And even though I think I am go­ing to stick with emac­s, learn­ing vim was still valu­able.  Un­like emac­s, vi is part of the POSIX stan­dard, so it's in­clud­ed in pret­ty much ev­ery UNIX dis­tri­bu­tion.  I'll be glad when I find my­self on a min­i­mal com­mand line and know how to use a de­cent text ed­i­tor.  And any­way, you can't re­al­ly know which one will be your way un­til you try them both.  I re­al­ly thought I would end up us­ing vim, as it was so pop­u­lar among all the peo­ple I know who use com­mand line ed­i­tors. But I guess there is on­ly  <a href="http://www.dina.dk/~abraham/religion/">One True Ed­i­tor</a>.</p> 
  <p><strong>ED­IT:</strong>  I found out how to make emacs re­al­ly fast.  The key is to run one process of emacs in dae­mon mod­e, and have the rest con­nect to that.  Then you on­ly have to wait for the start­up once (per com­put­er ses­sion).  To do it, just set your  <code>ED­I­TOR</code>  to  <code>'emac­sclient -a "" -n­w'</code>  (and you might al­so want to alias  <code>emacs</code>  to that as well).  What this does is con­nect to the emacs dae­mon.  The  <code>-a ""</code>  starts one if it is­n't al­ready start­ed (y­ou can al­so do this your­self with  <code>emacs --­dae­mon</code>.  If you on­ly want to use the dae­mon ver­sion if you've specif­i­cal­ly start­ed it, re­place  <code>""</code>  with  <code>emacs</code>.  This will con­nect to the dae­mon if it's run­ning, and oth­er­wise just start a new emacs process.   </p> 
  <p>The  <code>-nw</code>  keeps it from run­ning in win­dow mod­e.  Re­move this if you use the GUI ver­sion of emac­s.  This is nec­es­sary to make it work cor­rect­ly with mul­ti­ple tab­s.  This is so fast that you should nev­er re­al­ly even need to use  <code>C-z</code>  to quick­ly ex­it emac­s.   <code>C-x C-c</code>  is just fine, be­cause re­open­ing will be in­stan­ta­neous.  I like this be­cause I was start­ing to ac­cu­mu­late back­ground emacs pro­cess­es that I for­got about.</p> 
- <p>This prob­a­bly re­quires a fair­ly new ver­sion of emac­s, pos­si­bly even the de­vel­op­ment ver­sion.</p></div>
-        </div>
-            
+ <p>This prob­a­bly re­quires a fair­ly new ver­sion of emac­s, pos­si­bly even the de­vel­op­ment ver­sion.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/01/03/vim-vs-emacs-part-2/" class="u-url">Vim vs. Emacs (Part 2)</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/01/03/vim-vs-emacs-part-2/" rel="bookmark"><time class="published dt-published" datetime="2012-01-03T07:30:37-06:00" itemprop="datePublished" title="Publication date">2012-01-03 07:30</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2012/01/13/vim-vs-emacs-part-3/#disqus_thread" data-disqus-identifier="cache/posts/2012/01/13/vim-vs-emacs-part-3.html">Comments</a>
+    <a href="posts/2012/01/03/vim-vs-emacs-part-2/#disqus_thread" data-disqus-identifier="cache/posts/2012/01/03/vim-vs-emacs-part-2.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2012/01/03/vim-vs-emacs-part-2/" class="u-url">Vim vs. Emacs (Part 2)</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2012-01-03T07:30:37-06:00">2012-01-03 07:30</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>As I not­ed in  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">part 1</a>, I have de­cid­ed to switch to a com­mand line text ed­i­tor.  I de­cid­ed that, to be fair, I would try both vim and emac­s.  And to force my­self to learn them, I de­cid­ed to use them cold-­turkey.   </p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>As I not­ed in  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">part 1</a>, I have de­cid­ed to switch to a com­mand line text ed­i­tor.  I de­cid­ed that, to be fair, I would try both vim and emac­s.  And to force my­self to learn them, I de­cid­ed to use them cold-­turkey.   </p> 
  <p>Since I'm go­ing cold-­turkey, I am do­ing this over my break from class­es, so that I can weed out any dif­fi­cul­ties dur­ing a pe­ri­od when I can live with slow text edit­ing if nec­es­sary.  This is a one month break.  I have reached (rough­ly) the half way point.  For the first half, I used noth­ing but vim to ed­it tex­t.  Now, I will use noth­ing but emac­s.</p> 
  <p>Now that I've stopped us­ing vim (for now any­way), my view of it is­n't much dif­fer­ent from what I wrote in the first part.  A lot of things there were ad­dressed by com­menters (or rather com­menter).  I still feel that it's not an a method of text edit­ing that fits my head.  My en­tire life, I've used text ed­i­tors where typ­ing in­serts tex­t, and var­i­ous con­trol char­ac­ters do things like move around faster.   </p> 
  <p>En­ter emac­s. It does ex­act­ly this.  Al­so a ton more.</p> 
@@ -534,23 +598,28 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
 
 <p>Al­so, it re­al­ly irks me how in vim, if you are at the end of a line and press  <code>l</code>  (or right-ar­row), in­stead of mov­ing to the be­gin­ning of the next line, it beep­s!  In emac­s, if you are at the end of a the line and type  <code>C-f</code>, it moves to the be­gin­ning of the next line (ac­tu­al­ly, it tech­ni­cal­ly moves just be­yond the line, in case you want to ap­pend, which is an­oth­er an­noy­ing thing about vim: you have to use  <code>A</code>, not  <code>i</code>,  to add text to the end of a line).  </p> 
  <p>Well, that's it for now.  I will hold off on the ques­tions un­til af­ter I go through all the cus­tomiza­tion­s, as it seems that, un­like vim, emacs has many things al­ready built-in (but we al­ready knew that, did­n't we :).  So I have just one ques­tion for read­er­s: does any­one know of a re­al­ly good emacs cheat­sheet?  The  <a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">one I used for vim</a>  was re­al­ly awe­some, but I haven't found any­thing equal for emac­s.  I find my­self search­ing the tu­to­ri­al when­ev­er I for­get some­thing, which is not very ef­fi­cien­t, so I would ap­pre­ci­ate some­thing bet­ter. Oth­er­wise, I'll just find some­thing de­cent and print it out, as it would be bet­ter than noth­ing.</p> 
- <p>And if any­one cares, you can see what I've got for my .emacs file so far at  <a href="https://github.com/asmeurer/dotfiles/blob/master/.emacs">http­s://github.­com/as­meur­er/­dot­files/blob/­mas­ter/.emacs</a>.</p></div>
-        </div>
-            
+ <p>And if any­one cares, you can see what I've got for my .emacs file so far at  <a href="https://github.com/asmeurer/dotfiles/blob/master/.emacs">http­s://github.­com/as­meur­er/­dot­files/blob/­mas­ter/.emacs</a>.</p>
+</div>
+    </div>
+    </article>
+    <article class="h-entry post-text">
+    <header>
+        <h1 class="p-name entry-title"><a href="posts/2012/01/01/2011-in-review/" class="u-url">2011 in review</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="posts/2012/01/01/2011-in-review/" rel="bookmark"><time class="published dt-published" datetime="2012-01-01T00:00:49-06:00" itemprop="datePublished" title="Publication date">2012-01-01 00:00</time></a></p>
+                <p class="commentline">
         
-    <p>
-        <a href="posts/2012/01/03/vim-vs-emacs-part-2/#disqus_thread" data-disqus-identifier="cache/posts/2012/01/03/vim-vs-emacs-part-2.html">Comments</a>
+    <a href="posts/2012/01/01/2011-in-review/#disqus_thread" data-disqus-identifier="cache/posts/2012/01/01/2011-in-review.html">Comments</a>
 
 
-        </p></article>
-        <article class="postbox h-entry post-text">
-        <h1 class="p-name"><a href="posts/2012/01/01/2011-in-review/" class="u-url">2011 in review</a>
-        <small>  
-             Posted: <time class="published dt-published" datetime="2012-01-01T00:00:49-06:00">2012-01-01 00:00</time>
-        </small></h1>
-        <hr>
-        <div class="e-content">
-        <div><p></p><p>The Word­Press.­com stats helper mon­keys pre­pared a 2011 an­nu­al re­port for this blog.</p> 
+        </p>
+</div>
+    </header>
+    <div class="e-content entry-content">
+    <div>
+<p></p>
+<p>The Word­Press.­com stats helper mon­keys pre­pared a 2011 an­nu­al re­port for this blog.</p> 
      <div style="background:url('wp-content/mu-plugins/annual-reports/img/emailteaser.jpg') no-repeat center center;height:300px;"></div>
     <p>Here's an ex­cerp­t:</p> 
  <div class="code"><pre><span class="nt">&lt;blockquote&gt;</span>The concert hall at the Syndey Opera House holds 2,700 people.  This blog was viewed about <span class="nt">&lt;strong&gt;</span>11,000<span class="nt">&lt;/strong&gt;</span> times in 2011.  If it were a concert at Sydney Opera House, it would take about 4 sold-out performances for that many people to see it.<span class="nt">&lt;/blockquote&gt;</span>
@@ -558,33 +627,29 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
 </pre></div>
 
 
-<p></p></div>
-        </div>
-            
-        
-    <p>
-        <a href="posts/2012/01/01/2011-in-review/#disqus_thread" data-disqus-identifier="cache/posts/2012/01/01/2011-in-review.html">Comments</a>
+<p></p>
+</div>
+    </div>
+    </article>
+</div>
 
-
-        </p></article>
-    
-        <div>
+        <nav class="postindexpager">
         <ul class="pager">
             <li class="previous">
-                <a href="index.html" rel="prev">← Newer posts</a>
+                <a href="index.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
-                <a href="index-6.html" rel="next">Older posts →</a>
+                <a href="index-6.html" rel="next">Older posts</a>
             </li>
         </ul>
-        </div>
+        </nav>
 
-    
+
         
        <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
 
 
-	
+
 
 
         </div>
@@ -602,24 +667,31 @@ Note that to even do that ex­am­ple, I had to man­u­al­ly make  <code>a</co
 </div>
 
 
-            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="assets/js/tipuesearch_set.js"></script>
@@ -635,4 +707,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

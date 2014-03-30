@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Vim vs. Emacs (Part 1) | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/12/20/vim-vs-emacs-part-1/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,35 +32,42 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/12/20/vim-vs-emacs-part-1/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/12/20/vim-vs-emacs-part-1/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="Vim vs. Emacs (Part 1)">
-            <meta name="og:description" content="So about a month or so ago, I de­cid­ed that I need­ed to start learn­ing a com­mand line text ed­i­tor.  XCode, the ed­i­tor I had been us­ing for Python files, did­n't work very well with the new ve">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Vim vs. Emacs (Part 1)">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/12/20/vim-vs-emacs-part-1/">
+            <meta name="og:description" content="So about a month or so ago, I de­cid­ed that I need­ed to start learn­ing a com­mand line text ed­i­tor.  XCode, the ed­i­tor I had been us­ing for Python files, did­n't work very well with the new ve">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -57,15 +76,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -80,8 +106,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -91,22 +119,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">Vim vs. Emacs (Part 1)</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Vim vs. Emacs (Part 1)</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2011-12-20T08:17:43-06:00" itemprop="datePublished">2011-12-20 08:17</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2011-12-20T08:17:43-06:00" itemprop="datePublished" title="Publication date">2011-12-20 08:17</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2011/12/20/vim-vs-emacs-part-1.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>So about a month or so ago, I de­cid­ed that I need­ed to start learn­ing a com­mand line text ed­i­tor.  XCode, the ed­i­tor I had been us­ing for Python files, did­n't work very well with the new ver­sion (in par­tic­u­lar, the  <a href="http://asmeurersympy.wordpress.com/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/">es­sen­tial plug­in</a>  that I'd been us­ing to clear trail­ing white­space on save does­n't yet work in XCode 4).  I'd been us­ing Tex­tWran­gler for oth­er things, and start­ed to switch to it for Python edit­ing too.  As far as free GUI text ed­i­tors on the Mac go, Tex­tWran­gler is the best.   </p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>So about a month or so ago, I de­cid­ed that I need­ed to start learn­ing a com­mand line text ed­i­tor.  XCode, the ed­i­tor I had been us­ing for Python files, did­n't work very well with the new ver­sion (in par­tic­u­lar, the  <a href="http://asmeurersympy.wordpress.com/2009/12/29/automatically-remove-trailing-whitespace-in-xcode/">es­sen­tial plug­in</a>  that I'd been us­ing to clear trail­ing white­space on save does­n't yet work in XCode 4).  I'd been us­ing Tex­tWran­gler for oth­er things, and start­ed to switch to it for Python edit­ing too.  As far as free GUI text ed­i­tors on the Mac go, Tex­tWran­gler is the best.   </p> 
  <p>But I'd seen some of the nice fea­tures that vim has, like au­to­mat­i­cal­ly keep­ing all lines un­der 80 char­ac­ter­s, on a friend's com­put­er, and I de­cid­ed that I should try it.</p> 
  <p>Now, I had had a lit­tle pri­or ex­pe­ri­ence with both vim and emac­s, but all that I re­mem­bered was for vim that  <code>i</code>  in­serts and  <code>ZZ</code>  quits (for when I ac­ci­den­tal­ly open it) and for emac­s, that  <code>M-X doc­tor</code>  starts the psy­chi­a­trist.  </p> 
  <p>So I've de­cid­ed to try them out, do­ing it cold tur­key.  To make sure that I choose the bet­ter one, I've de­cid­ed to try both.  So, start­ing about a week ago, I've been us­ing noth­ing but vim for all my text edit­ing.  Start­ing in Jan­uary, I will try us­ing emac­s, and af­ter two week­s, I will see what I like bet­ter.</p> 
@@ -132,21 +168,30 @@ MathJax.Hub.Config({
 
 
 <p><strong>ED­IT: I thought of some more ques­tion­s:</strong> 
-     </p><li>Is there a way to make vim con­sid­er camel­Case to be word bound­aries?</li> 
+     </p>
+<li>Is there a way to make vim con­sid­er camel­Case to be word bound­aries?</li> 
  <p>Fi­nal­ly, if any­one else is think­ing of start­ing vim, I have some use­ful things I've al­ready found in my .vim­r­c. So you might take a look at that, and add the ones that you like to your .vim­r­c.  Fi­nal­ly, if you are on Mac OS X, you should use  <a href="http://www.iterm2.com/#/section/home">iTer­m2</a>.  Ac­tu­al­ly, you should use this re­gard­less of what text ed­i­tor you use.  It's a very good Ter­mi­nal.app re­place­ment that has vir­tu­al­ly all the fea­tures (with a cou­ple of ex­cep­tion­s) as Ter­mi­nal.ap­p, and a ton of ex­tra ones.  The one I want to men­tion here is mouse re­port­ing sup­port, so you can use your mouse to do things in vim.  This is very use­ful, as some­times, e.g., when se­lect­ing tex­t, us­ing the mouse is just more ef­fi­cien­t.  Al­so, if you get frus­trat­ed try­ing to re­mem­ber the com­mands that will move around you faster than  <code>h</code>,  <code>j</code>,  <code>k</code>, and  <code>l</code>, you can just click on where you want to go.</p> 
- <p>:wq</p></div>
+ <p>:wq</p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../../08/18/sqrtx-now-prints-as-sqrtx/" rel="prev">← Previous post</a>
+                <a href="../../../08/18/sqrtx-now-prints-as-sqrtx/" rel="prev" title="sqrt(x) now prints as " sqrt>Previous post</a>
             </li>
             <li class="next">
-                <a href="../../../../2012/01/01/2011-in-review/" rel="next">Next post →</a>
+                <a href="../../../../2012/01/01/2011-in-review/" rel="next" title="2011 in review">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -164,13 +209,20 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -187,24 +239,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -220,4 +279,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Emacs: One year later | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2013/01/01/emacs-one-year-later/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,35 +32,42 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2013/01/01/emacs-one-year-later/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2013/01/01/emacs-one-year-later/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="Emacs: One year later">
-            <meta name="og:description" content="As read­ers of this blog may re­mem­ber, back in 2011, I de­cid­ed to move to a com­mand-­line based ed­i­tor. For rough­ly two weeks in De­cem­ber, 2011, I ex­clu­sive­ly used Vim, and for the same a">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Emacs: One year later">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2013/01/01/emacs-one-year-later/">
+            <meta name="og:description" content="As read­ers of this blog may re­mem­ber, back in 2011, I de­cid­ed to move to a com­mand-­line based ed­i­tor. For rough­ly two weeks in De­cem­ber, 2011, I ex­clu­sive­ly used Vim, and for the same a">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -57,15 +76,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -80,8 +106,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -91,22 +119,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">Emacs: One year later</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Emacs: One year later</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2013-01-01T09:51:21-06:00" itemprop="datePublished">2013-01-01 09:51</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2013-01-01T09:51:21-06:00" itemprop="datePublished" title="Publication date">2013-01-01 09:51</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2013/01/01/emacs-one-year-later.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>As read­ers of this blog may re­mem­ber, back in 2011, I de­cid­ed to move to a com­mand-­line based ed­i­tor. For rough­ly two weeks in De­cem­ber, 2011, I ex­clu­sive­ly used Vim, and for the same amount of time in Jan­uary, 2012, I used ex­clu­sive­ly Emac­s. I had used a lit­tle of each ed­i­tor in the past, but this was my first time us­ing them to do true edit­ing work. My ex­pe­ri­ences are chron­i­cled in my blog posts (parts  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/" title="1">1</a>,  <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/" title="2">2</a>,  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/" title="3">3</a>, and  <a href="http://asmeurersympy.wordpress.com/2012/07/09/emacs-7-months-later/" title="7 months later follow up">7 months lat­er fol­low up</a>).   </p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>As read­ers of this blog may re­mem­ber, back in 2011, I de­cid­ed to move to a com­mand-­line based ed­i­tor. For rough­ly two weeks in De­cem­ber, 2011, I ex­clu­sive­ly used Vim, and for the same amount of time in Jan­uary, 2012, I used ex­clu­sive­ly Emac­s. I had used a lit­tle of each ed­i­tor in the past, but this was my first time us­ing them to do true edit­ing work. My ex­pe­ri­ences are chron­i­cled in my blog posts (parts  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/" title="1">1</a>,  <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/" title="2">2</a>,  <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/" title="3">3</a>, and  <a href="http://asmeurersympy.wordpress.com/2012/07/09/emacs-7-months-later/" title="7 months later follow up">7 months lat­er fol­low up</a>).   </p> 
  <p>To sum­ma­rize, I de­cid­ed to use Emac­s, as I found it to be much more in­tu­itive, and much more user-friend­ly.  To­day, Jan­u­ary 1, marks the one-year point of my us­ing Emacs as my sole text ed­i­tor, with some ex­cep­tions (no­tably, I'm cur­rent­ly writ­ing this blog post in the browser).  So I'd like to make some ob­ser­va­tion­s:</p> 
  <div class="code"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>Either one of these editors (Vim or Emacs) is going to really suck unless you are willing to make a serious investment in customizing them and installing nice addons. For the second point, Emacs has an advantage, because the philosophy of Vim is to be barebones whereas the philosophy of Emacs is to be featureful, so that in particular many things that were once addons of Emacs are now included in the standard installation.  For customization, on the one hand, Emacs is easier, because it has a nice interface (<span class="nt">&lt;code&gt;</span>M-x customize<span class="nt">&lt;/code&gt;</span>), but on the other hand, Vim's scripting language is much easier to hack on than Emacs lisp (I still can't code in Lisp to save my life; it's a very challenging programming language).<span class="nt">&lt;br&gt;&lt;br&gt;</span>But my point here is that neither has really great defaults. For example, in Emacs, <span class="nt">&lt;code&gt;</span>M-space<span class="nt">&lt;/code&gt;</span> is bound to <span class="nt">&lt;code&gt;</span>just-one-space<span class="nt">&lt;/code&gt;</span>, which is great for programming.  What it does is remove all spaces around the cursor, except for one.  But to be really useful, it also should include newlines.  It doesn't do this by default.  Rather, you have to call it with a negative argument.  So to be really useful, you have to add
 </pre></div>
@@ -191,19 +227,27 @@ MathJax.Hub.Config({
 
 <blockquote>Vim is great for text <em>editing</em>, but not so hot for text <em>writing</em> (unless you always write text perfectly, so that you never need to leave insert mode until you are done typing). Just the simple act of deleting a mistyped word (yes, word, that happens a lot when you are decently fast touch typist) takes several keystrokes, when it should in my opinion only take one (two if you count the meta-key).</blockquote>
 
-<p>Need­less to say, I find Emacs to be great for both text edit­ing and text writ­ing.  </p></div>
+<p>Need­less to say, I find Emacs to be great for both text edit­ing and text writ­ing.  </p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../../../2012/12/30/2012-in-review/" rel="prev">← Previous post</a>
+                <a href="../../../../2012/12/30/2012-in-review/" rel="prev" title="2012 in review">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../28/tip-for-debugging-sympy-with-pudb/" rel="next">Next post →</a>
+                <a href="../../28/tip-for-debugging-sympy-with-pudb/" rel="next" title="Tip for debugging SymPy with PuDB">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -221,13 +265,20 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -244,24 +295,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -277,4 +335,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

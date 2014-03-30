@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>How to make attributes un-inheritable in Python using descriptors | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,35 +32,42 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="How to make attributes un-inheritable in Python using descriptors">
-            <meta name="og:description" content="For http­s://github.­com/sympy/sympy/pul­l/1969, and pre­vi­ous work at http­s://github.­com/sympy/sympy/pul­l/1901, we added the abil­i­ty for the SymPy doctester to run or not run doctests con­di­ti">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="How to make attributes un-inheritable in Python using descriptors">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors/">
+            <meta name="og:description" content="For http­s://github.­com/sympy/sympy/pul­l/1969, and pre­vi­ous work at http­s://github.­com/sympy/sympy/pul­l/1901, we added the abil­i­ty for the SymPy doctester to run or not run doctests con­di­ti">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -57,15 +76,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -80,8 +106,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -91,22 +119,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">How to make attributes un-inheritable in Python using descriptors</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">How to make attributes un-inheritable in Python using descriptors</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2013-04-06T02:49:13-05:00" itemprop="datePublished">2013-04-06 02:49</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2013-04-06T02:49:13-05:00" itemprop="datePublished" title="Publication date">2013-04-06 02:49</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2013/04/06/how-to-make-attributes-un-inheritable-in-python-using-descriptors.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>For http­s://github.­com/sympy/sympy/pul­l/1969, and pre­vi­ous work at http­s://github.­com/sympy/sympy/pul­l/1901, we added the abil­i­ty for the SymPy doctester to run or not run doctests con­di­tion­al­ly de­pend­ing on whether or not re­quired ex­ter­nal de­pen­den­cies are in­stalled. This means that for ex­am­ple we can doctest all the plot­ting ex­am­ples with­out them fail­ing when mat­plotlib is not in­stalled.  </p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>For http­s://github.­com/sympy/sympy/pul­l/1969, and pre­vi­ous work at http­s://github.­com/sympy/sympy/pul­l/1901, we added the abil­i­ty for the SymPy doctester to run or not run doctests con­di­tion­al­ly de­pend­ing on whether or not re­quired ex­ter­nal de­pen­den­cies are in­stalled. This means that for ex­am­ple we can doctest all the plot­ting ex­am­ples with­out them fail­ing when mat­plotlib is not in­stalled.  </p> 
  <p>For func­tion­s, this is as easy as dec­o­rat­ing the func­tion with  <code>@doctest_de­pends</code>, which adds the at­tribute  <code>_doctest_de­pend­s_on</code>  to the func­tion with a list of what de­pen­den­cies the doctest de­pends on. The doctest will then not run the doctest un­less those de­pen­den­cies are in­stalled.</p> 
  <p>For class­es, this is not so easy. Ide­al­ly, one could just de­fine  <code>_doctest_de­pend­s_on</code>  as an at­tribute of the class. How­ev­er, the is­sue is that with class­es, we have in­her­i­tance. But if class  <code>A</code>  has a doc­string with a doctest that de­pends on some mod­ules, it does­n't mean that a sub­class  <code>B</code>  of  <code>A</code>  will have a doctest that does.   </p> 
  <p>Re­al­ly, what we need to do is to dec­o­rate the doc­string it­self, not the class. Un­for­tu­nate­ly, Python does not al­low adding at­tributes to strings</p> 
@@ -205,19 +241,27 @@ At­tribu­teEr­ror: 'str' ob­ject has no at­tribute 'x'</p>
  <p>[/­code]</p> 
  <p>For SymPy, we can't use class dec­o­ra­tors be­cause we still sup­port Python 2.5, and they were in­tro­duced in Python 2.6. The best work around is to just call  <code>Class.at­tribute = no­sub­class­es(­Class.at­tribute, Class)</code>  af­ter the class def­i­ni­tion. Un­for­tu­nate­ly, you can't ac­cess a class in­side its def­i­ni­tion like you can with func­tion­s, so this has to go at the end.  </p> 
  <p><strong>Name Man­gling</strong></p> 
- <p>Af­ter com­ing up with all this, I re­mem­bered that Python al­ready has a pret­ty stan­dard way to de­fine at­tributes in such a way that sub­class­es won't have ac­cess to them. All you have to do is use two un­der­scores be­fore the name, like  <code><strong>x</strong></code>, and it will be  <a href="http://docs.python.org/2/reference/expressions.html#atom-identifiers">name man­gled</a>. This means that the name will be re­named to  <code>_class­namex</code>  out­side the class def­i­ni­tion. The name will not be in­her­it­ed by sub­class­es.  There are some sub­tleties with this, par­tic­u­lar­ly for strange class names (names that are too long, or names that be­gin with an un­der­score). I  <a href="http://stackoverflow.com/q/15845931/161801">asked about this on Stack­Over­flow</a>. The best an­swer is that there was a func­tion in the stan­dard li­brary, but it was re­moved in Python 3. My tests re­veal that the be­hav­ior is dif­fer­ent in CPYthon than in PyPy, so get­ting it right for ev­ery pos­si­ble class is non­triv­ial. The de­scrip­tor thing should work ev­ery­where, though.  On the oth­er hand,  <code>getat­tr(ob­j, '_' + ob­j.<strong>class</strong>.<strong>name</strong>  + at­tribute­name)</code>  will work 99% of the time, and is much eas­i­er both to write and to un­der­stand than the de­scrip­tor.  </p></div>
+ <p>Af­ter com­ing up with all this, I re­mem­bered that Python al­ready has a pret­ty stan­dard way to de­fine at­tributes in such a way that sub­class­es won't have ac­cess to them. All you have to do is use two un­der­scores be­fore the name, like  <code><strong>x</strong></code>, and it will be  <a href="http://docs.python.org/2/reference/expressions.html#atom-identifiers">name man­gled</a>. This means that the name will be re­named to  <code>_class­namex</code>  out­side the class def­i­ni­tion. The name will not be in­her­it­ed by sub­class­es.  There are some sub­tleties with this, par­tic­u­lar­ly for strange class names (names that are too long, or names that be­gin with an un­der­score). I  <a href="http://stackoverflow.com/q/15845931/161801">asked about this on Stack­Over­flow</a>. The best an­swer is that there was a func­tion in the stan­dard li­brary, but it was re­moved in Python 3. My tests re­veal that the be­hav­ior is dif­fer­ent in CPYthon than in PyPy, so get­ting it right for ev­ery pos­si­ble class is non­triv­ial. The de­scrip­tor thing should work ev­ery­where, though.  On the oth­er hand,  <code>getat­tr(ob­j, '_' + ob­j.<strong>class</strong>.<strong>name</strong>  + at­tribute­name)</code>  will work 99% of the time, and is much eas­i­er both to write and to un­der­stand than the de­scrip­tor.  </p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../../03/03/when-does-xlogy-ylogx/" rel="prev">← Previous post</a>
+                <a href="../../../03/03/when-does-xlogy-ylogx/" rel="prev" title="When does x^log(y) = y^log(x)?">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../../07/02/scipy-2013/" rel="next">Next post →</a>
+                <a href="../../../07/02/scipy-2013/" rel="next" title="SciPy 2013">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -235,13 +279,20 @@ At­tribu­teEr­ror: 'str' ob­ject has no at­tribute 'x'</p>
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -258,24 +309,31 @@ At­tribu­teEr­ror: 'str' ob­ject has no at­tribute 'x'</p>
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -291,4 +349,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Vim vs. Emacs (Part 2) | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2012/01/03/vim-vs-emacs-part-2/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,35 +32,42 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2012/01/03/vim-vs-emacs-part-2/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2012/01/03/vim-vs-emacs-part-2/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="Vim vs. Emacs (Part 2)">
-            <meta name="og:description" content="As I not­ed in  part 1, I have de­cid­ed to switch to a com­mand line text ed­i­tor.  I de­cid­ed that, to be fair, I would try both vim and emac­s.  And to force my­self to learn them, I de­cid­ed to">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Vim vs. Emacs (Part 2)">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2012/01/03/vim-vs-emacs-part-2/">
+            <meta name="og:description" content="As I not­ed in  part 1, I have de­cid­ed to switch to a com­mand line text ed­i­tor.  I de­cid­ed that, to be fair, I would try both vim and emac­s.  And to force my­self to learn them, I de­cid­ed to">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -57,15 +76,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -80,8 +106,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -91,22 +119,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">Vim vs. Emacs (Part 2)</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Vim vs. Emacs (Part 2)</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2012-01-03T07:30:37-06:00" itemprop="datePublished">2012-01-03 07:30</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2012-01-03T07:30:37-06:00" itemprop="datePublished" title="Publication date">2012-01-03 07:30</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2012/01/03/vim-vs-emacs-part-2.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>As I not­ed in  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">part 1</a>, I have de­cid­ed to switch to a com­mand line text ed­i­tor.  I de­cid­ed that, to be fair, I would try both vim and emac­s.  And to force my­self to learn them, I de­cid­ed to use them cold-­turkey.   </p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>As I not­ed in  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">part 1</a>, I have de­cid­ed to switch to a com­mand line text ed­i­tor.  I de­cid­ed that, to be fair, I would try both vim and emac­s.  And to force my­self to learn them, I de­cid­ed to use them cold-­turkey.   </p> 
  <p>Since I'm go­ing cold-­turkey, I am do­ing this over my break from class­es, so that I can weed out any dif­fi­cul­ties dur­ing a pe­ri­od when I can live with slow text edit­ing if nec­es­sary.  This is a one month break.  I have reached (rough­ly) the half way point.  For the first half, I used noth­ing but vim to ed­it tex­t.  Now, I will use noth­ing but emac­s.</p> 
  <p>Now that I've stopped us­ing vim (for now any­way), my view of it is­n't much dif­fer­ent from what I wrote in the first part.  A lot of things there were ad­dressed by com­menters (or rather com­menter).  I still feel that it's not an a method of text edit­ing that fits my head.  My en­tire life, I've used text ed­i­tors where typ­ing in­serts tex­t, and var­i­ous con­trol char­ac­ters do things like move around faster.   </p> 
  <p>En­ter emac­s. It does ex­act­ly this.  Al­so a ton more.</p> 
@@ -170,19 +206,27 @@ MathJax.Hub.Config({
 
 <p>Al­so, it re­al­ly irks me how in vim, if you are at the end of a line and press  <code>l</code>  (or right-ar­row), in­stead of mov­ing to the be­gin­ning of the next line, it beep­s!  In emac­s, if you are at the end of a the line and type  <code>C-f</code>, it moves to the be­gin­ning of the next line (ac­tu­al­ly, it tech­ni­cal­ly moves just be­yond the line, in case you want to ap­pend, which is an­oth­er an­noy­ing thing about vim: you have to use  <code>A</code>, not  <code>i</code>,  to add text to the end of a line).  </p> 
  <p>Well, that's it for now.  I will hold off on the ques­tions un­til af­ter I go through all the cus­tomiza­tion­s, as it seems that, un­like vim, emacs has many things al­ready built-in (but we al­ready knew that, did­n't we :).  So I have just one ques­tion for read­er­s: does any­one know of a re­al­ly good emacs cheat­sheet?  The  <a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">one I used for vim</a>  was re­al­ly awe­some, but I haven't found any­thing equal for emac­s.  I find my­self search­ing the tu­to­ri­al when­ev­er I for­get some­thing, which is not very ef­fi­cien­t, so I would ap­pre­ci­ate some­thing bet­ter. Oth­er­wise, I'll just find some­thing de­cent and print it out, as it would be bet­ter than noth­ing.</p> 
- <p>And if any­one cares, you can see what I've got for my .emacs file so far at  <a href="https://github.com/asmeurer/dotfiles/blob/master/.emacs">http­s://github.­com/as­meur­er/­dot­files/blob/­mas­ter/.emacs</a>.</p></div>
+ <p>And if any­one cares, you can see what I've got for my .emacs file so far at  <a href="https://github.com/asmeurer/dotfiles/blob/master/.emacs">http­s://github.­com/as­meur­er/­dot­files/blob/­mas­ter/.emacs</a>.</p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../01/2011-in-review/" rel="prev">← Previous post</a>
+                <a href="../../01/2011-in-review/" rel="prev" title="2011 in review">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../13/vim-vs-emacs-part-3/" rel="next">Next post →</a>
+                <a href="../../13/vim-vs-emacs-part-3/" rel="next" title="Vim vs. Emacs (Part 3)">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -200,13 +244,20 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -223,24 +274,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -256,4 +314,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Fixing bugs in the release candidate | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/06/17/fixing-bugs-in-the-release-candidate/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,35 +32,42 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/06/17/fixing-bugs-in-the-release-candidate/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/06/17/fixing-bugs-in-the-release-candidate/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="Fixing bugs in the release candidate">
-            <meta name="og:description" content="This week, I most­ly worked on fix­ing bugs that peo­ple found in the  re­lease can­di­date  I re­leased last week.  I dis­cov­ered right af­ter re­leas­ing it that it did not work in Python 2.4 or 2.">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Fixing bugs in the release candidate">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/06/17/fixing-bugs-in-the-release-candidate/">
+            <meta name="og:description" content="This week, I most­ly worked on fix­ing bugs that peo­ple found in the  re­lease can­di­date  I re­leased last week.  I dis­cov­ered right af­ter re­leas­ing it that it did not work in Python 2.4 or 2.">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -57,15 +76,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -80,8 +106,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -91,22 +119,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">Fixing bugs in the release candidate</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Fixing bugs in the release candidate</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2011-06-17T04:00:55-05:00" itemprop="datePublished">2011-06-17 04:00</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2011-06-17T04:00:55-05:00" itemprop="datePublished" title="Publication date">2011-06-17 04:00</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2011/06/17/fixing-bugs-in-the-release-candidate.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>This week, I most­ly worked on fix­ing bugs that peo­ple found in the  <a href="http://asmeurersympy.wordpress.com/2011/06/13/sympy-0-7-0-rc1-is-out/">re­lease can­di­date</a>  I re­leased last week.  I dis­cov­ered right af­ter re­leas­ing it that it did not work in Python 2.4 or 2.5 be­cause of a syn­tax er­ror.  So I fixed those and cre­at­ed SymPy 0.7.0.r­c2 (<a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.tar.gz" target="_blank">source</a>;  <a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.win32.exe" target="_blank">win­dows in­stall­er</a>).   </p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>This week, I most­ly worked on fix­ing bugs that peo­ple found in the  <a href="http://asmeurersympy.wordpress.com/2011/06/13/sympy-0-7-0-rc1-is-out/">re­lease can­di­date</a>  I re­leased last week.  I dis­cov­ered right af­ter re­leas­ing it that it did not work in Python 2.4 or 2.5 be­cause of a syn­tax er­ror.  So I fixed those and cre­at­ed SymPy 0.7.0.r­c2 (<a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.tar.gz" target="_blank">source</a>;  <a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.win32.exe" target="_blank">win­dows in­stall­er</a>).   </p> 
  <p>Things were go­ing pret­ty smooth­ly with that, un­til Re­na­to Coutin­ho dis­cov­ered that there were test fail­ures in Python 2.4 on Win­dows, and that the tests failed if ran twice in the same ses­sion (i.e., by us­ing  <code>test()</code>  in isympy).  I was able to fix the fail­ures re­sult­ing from two ses­sion­s, which were al­most all caused by a test mod­i­fy­ing some glob­al val­ue or be­ing writ­ten in a way that did not al­low it to pass when run twice.  But I do not have a Win­dows ma­chine, so I could­n't re­pro­duce the Win­dows fail­ures.</p> 
  <p>For­tu­nate­ly, yes­ter­day, Re­na­to, Chris Smith, and I were able to de­bug the prob­lems over IR­C.  The main prob­lem was that sympy/­core/e­valf.py had code</p> 
  <p>[code lan­guage="py"]</p> 
@@ -124,19 +160,27 @@ MathJax.Hub.Config({
  <p>The prob­lem was that  <code>n</code>  was an  <code>mpz</code>, or gmpy in­te­ger.  But Python 2.4 and ealier do not sup­port non-int types as the in­dex to list­s.  It was­n't un­til Python 2.5's  <a href="http://docs.python.org/reference/datamodel.html?highlight=__index__#object.__index__" target="_blank"><code><strong>in­dex</strong></code></a>  method that non-in­t/­long types were able to be used as slice in­dices.   </p> 
  <p>This id­iom was be­ing used in sev­er­al places through­out the code, so rather than try to patch them al­l, we de­cid­ed to just dis­able the gmpy back­end in mp­math for Python 2.4.  This is­sue had nev­er come up be­fore to my knowl­edge, so it seems that he was the first per­son to run the mp­math tests in Python 2.4 with gmpy in­stalled.   </p> 
  <p>So now tests should be pass­ing ev­ery­where in the  <a href="github.com/sympy/sympy/tree/0.7.0" target="_blank">0.7.0 branch</a>.  Please con­tin­ue to test it, though.  If it will make it eas­i­er to test, I will cre­ate a 0.7.0.r­c3 with all the lat­est fix­es.  Oth­er­wise, bar­ring any fur­ther ma­jor fix­es, I will re­lease 0.7.0 fi­nal in about a week.</p> 
- <p>And a big thanks for Re­na­to Coutin­ho and Chris Smith for help­ing me de­bug and fix these bugs.    </p></div>
+ <p>And a big thanks for Re­na­to Coutin­ho and Chris Smith for help­ing me de­bug and fix these bugs.    </p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../13/sympy-0-7-0-rc1-is-out/" rel="prev">← Previous post</a>
+                <a href="../../13/sympy-0-7-0-rc1-is-out/" rel="prev" title="SymPy 0.7.0.rc1 is out!">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../24/import_module-the-hopefully-last-fix-for-0-7-0/" rel="next">Next post →</a>
+                <a href="../../24/import_module-the-hopefully-last-fix-for-0-7-0/" rel="next" title="import_module (the (hopefully) last fix for 0.7.0)">Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -154,13 +198,20 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -177,24 +228,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -210,4 +268,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>

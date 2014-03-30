@@ -1,16 +1,28 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns#
+        article: http://ogp.me/ns/article#
+    " lang="en">
+    <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aaron Meurer">
+    <meta name="viewport" content="width=device-width">
     <title>Hacking PuDB: Now an even better Python debugger | Aaron Meurer's Blog</title>
+
+    
+            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
+
+      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">
+
+
+
     
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -20,36 +32,43 @@ MathJax.Hub.Config({
 });
 </script>
 
-            <link href="../../../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-      <link rel="canonical" href="http://asmeurer.github.io/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../../rss.xml">
-
-    
-
-        <meta name="twitter:card" content="summary">
-        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">
-            <meta name="twitter:site:id" content="123456">
-            <meta name="twitter:creator:id" content="654321">
-        <meta name="og:title" content="Hacking PuDB: Now an even better Python debugger">
-            <meta name="og:description" content="Read­ers of this blog may re­mem­ber last year when I  wrote  about this awe­some vis­ual con­sole Python de­bug­ger called  PuDB.  I sug­gest you read that post if you haven't. 
- At the end of that p">
-
-
-
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
 <link rel="stylesheet" type="text/css" href="../../../../../assets/css/tipuesearch.css">
-</head><body><div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+</head>
+<body>
+<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+
+
+
+    
+
+    <meta name="author" content="Aaron Meurer">
+    
+        <meta name="og:title" content="Hacking PuDB: Now an even better Python debugger">
+        <meta name="og:url" content="http://asmeurer.github.io/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/">
+            <meta name="og:description" content="Read­ers of this blog may re­mem­ber last year when I  wrote  about this awe­some vis­ual con­sole Python de­bug­ger called  PuDB.  I sug­gest you read that post if you haven't. 
+ At the end of that p">
+        <meta name="og:site_name" content="Aaron Meurer's Blog">
+        <meta name="og:type" content="article">
+
+    
+        <meta name="twitter:card" content="summary">
+            <meta name="twitter:site:id" content="123456">
+            <meta name="twitter:creator:id" content="654321">
+
+    
+
+
 
 
 
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid"><!-- This keeps the margins nice -->
+    <div class="container-fluid">
+<!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -58,15 +77,22 @@ MathJax.Hub.Config({
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
-        </div><!-- /.navbar-header -->
+        </div>
+<!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="../../../../../archive.html">Archives</a>
-                </li><li><a href="../../../../../categories/index.html">Tags</a>
-                </li><li><a href="../../../../../rss.xml">RSS</a>
+                <li>
+<a href="../../../../../archive.html">Archives</a>
+                </li>
+<li>
+<a href="../../../../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../../../../rss.xml">RSS</a>
 
-            </li></ul>
+            </li>
+</ul>
                 
 <span class="navbar-form pull-left">
 <input type="text" id="tipue_search_input">
@@ -81,8 +107,10 @@ MathJax.Hub.Config({
     </li>
 
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
 </nav>
 
 <!-- End of Menubar -->
@@ -92,22 +120,30 @@ MathJax.Hub.Config({
         <!--Body content-->
         <div class="row">
             
-    <article class="postbox post-text">
-    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
-    <h1 class="p-name" itemprop="headline name">Hacking PuDB: Now an even better Python debugger</h1>
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Hacking PuDB: Now an even better Python debugger</a></h1>
 
-    <hr>
-    <small>
-        Posted: <time class="published dt-published" datetime="2011-08-08T03:16:10-05:00" itemprop="datePublished">2011-08-08 03:16</time>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Aaron Meurer</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2011-08-08T03:16:10-05:00" itemprop="datePublished" title="Publication date">2011-08-08 03:16</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/2011/08/08/hacking-pudb-now-an-even-better-python-debugger.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-        
+    </header>
 
-    </small>
-    <hr>
-    <div class="e-content" itemprop="articleBody text">
-    <div><p></p><p>Read­ers of this blog may re­mem­ber last year when I  <a href="http://asmeurersympy.wordpress.com/2010/06/04/pudb-a-better-python-debugger/" target="_blank">wrote</a>  about this awe­some vis­ual con­sole Python de­bug­ger called  <a href="http://pypi.python.org/pypi/pudb" target="_blank">PuDB</a>.  I sug­gest you read that post if you haven't.</p> 
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p></p>
+<p>Read­ers of this blog may re­mem­ber last year when I  <a href="http://asmeurersympy.wordpress.com/2010/06/04/pudb-a-better-python-debugger/" target="_blank">wrote</a>  about this awe­some vis­ual con­sole Python de­bug­ger called  <a href="http://pypi.python.org/pypi/pudb" target="_blank">PuDB</a>.  I sug­gest you read that post if you haven't.</p> 
  <p>At the end of that post, I not­ed that Ondřej and I had hacked it to make the col­ors more liv­able.  Well, a cou­ple of weeks ago, GitHub us­er  <a href="https://github.com/jtriley" target="_blank">jtri­ley</a>  sent me an email ask­ing me to back port my changes.</p> 
  <p>A lot has changed since I wrote my blog post last year.  PuDB now has an of­fi­cial  <a href="http://lists.tiker.net/listinfo/pudb" target="_blank">mail­ing list</a>  and an of­fi­cial  <a href="https://github.com/inducer/pudb" target="_blank">GitHub re­po</a>.</p> 
  <p>So I delet­ed my  <a href="https://github.com/asmeurer/pudb" target="_blank">GitHub clone</a>  and re­forked from the of­fi­cial ver­sion.   </p> 
@@ -152,19 +188,27 @@ MathJax.Hub.Config({
  <p>in your code wher­ev­er you want to set a break point, or you can do  <code>python -m pud­b.run scrip­t.py</code>.</p> 
  <p>This awe­some tool has in­creased my pro­duc­tiv­i­ty ten­fold since I dis­cov­ered it, and has helped me track down bugs that would have oth­er­wise ex­treme­ly dif­fi­cult if not im­pos­si­ble to find.  And now, it's just bet­ter.</p> 
  <p>PuDB us­es the  <a href="http://excess.org/urwid/" target="_blank">ur­wid li­brary</a>  to do all its con­sole GUI mag­ic.  This li­brary makes it pret­ty easy to do a lot of stuff. For ex­am­ple, it au­to­mat­i­cal­ly does rel­a­tive siz­ing of wid­get­s, so, for ex­am­ple, when you re­size the vari­ables, stack, or break­points views, you are ac­tu­al­ly in­creas­ing the rel­a­tive size of each, not the size in char­ac­ter­s.  This makes it por­ta­ble against any ter­mi­nal size.  The li­brary al­so made cod­ing the prefs win­dow autoup­date mag­ic very easy.</p> 
- <p>Al­so, I just want to note that git and GitHub make col­lab­o­ra­tion like this very easy.  I just forked his pro­jec­t, made some im­prove­ments, and sub­mit­ted them as pull re­quest­s.  Then it was easy to dis­cuss the changes.  If the code had not been on GitHub and es­pe­cial­ly if it had not been in git, I prob­a­bly would have nev­er both­ered to sub­mit my con­tri­bu­tions up­stream.  I high­ly rec­om­mend that ev­ery open source project use git and GitHub.</p></div>
+ <p>Al­so, I just want to note that git and GitHub make col­lab­o­ra­tion like this very easy.  I just forked his pro­jec­t, made some im­prove­ments, and sub­mit­ted them as pull re­quest­s.  Then it was easy to dis­cuss the changes.  If the code had not been on GitHub and es­pe­cial­ly if it had not been in git, I prob­a­bly would have nev­er both­ered to sub­mit my con­tri­bu­tions up­stream.  I high­ly rec­om­mend that ev­ery open source project use git and GitHub.</p>
+</div>
     </div>
-    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
     
         <ul class="pager">
             <li class="previous">
-                <a href="../../../07/30/sympy-0-7-1-released/" rel="prev">← Previous post</a>
+                <a href="../../../07/30/sympy-0-7-1-released/" rel="prev" title="SymPy 0.7.1 Released">Previous post</a>
             </li>
             <li class="next">
-                <a href="../../18/sqrtx-now-prints-as-sqrtx/" rel="next">Next post →</a>
+                <a href="../../18/sqrtx-now-prints-as-sqrtx/" rel="next" title="sqrt(x) now prints as " sqrt>Next post</a>
             </li>
         </ul>
 
+    </nav>
+    </aside>
+        <section class="comments">
+        <h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -182,13 +226,20 @@ MathJax.Hub.Config({
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section>
     
 
-    </article>
+</article>
+
+        
+       <script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
         </div>
         <!--End of body content-->
@@ -205,24 +256,31 @@ MathJax.Hub.Config({
 </div>
 
 
-            <script src="../../../../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-
+            <script src="../../../../../assets/js/all-nocdn.js"></script>
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
-<ul><li><a class="addthis_button_facebook"></a>
-</li><li><a class="addthis_button_google_plusone_share"></a>
-</li><li><a class="addthis_button_linkedin"></a>
-</li><li><a class="addthis_button_twitter"></a>
-</li></ul>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
 </div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
 
 
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 <script type="text/javascript" src="../../../../../assets/js/tipuesearch_set.js"></script>
@@ -238,4 +296,5 @@ $(document).ready(function() {
 </script>
 
 
-</body></html>
+</body>
+</html>
