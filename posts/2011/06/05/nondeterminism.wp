@@ -54,7 +54,7 @@ Out[5]: 0
 
 
 
-(remember that $\log{(x^n)}=n\log{(x)}$).  The integral can be expressed in terms of any of the logarithms in the expression.  It happens to be expressed in terms of $\log{(x^4)}$ because that happened to be the first one that came out of <code>a.atoms(log)</code> during iteration.  This is problematic.  First, it's not exactly what is expected.  The ideal solution would be if the answer was written in terms of $\log{(x)}$.  
+(remember that $latex \log{(x^n)}=n\log{(x)}$).  The integral can be expressed in terms of any of the logarithms in the expression.  It happens to be expressed in terms of $latex \log{(x^4)}$ because that happened to be the first one that came out of <code>a.atoms(log)</code> during iteration.  This is problematic.  First, it's not exactly what is expected.  The ideal solution would be if the answer was written in terms of $latex \log{(x)}$.  
 
 
 
@@ -159,7 +159,7 @@ So what I think I really need to do is to do some research on what order of buil
 
 
 
-There can also be more heuristics for this.  Currently, there are heuristics for exponentials to prefer rewriting $e^{2x}$ as $\left({e^{x}}\right)^2$ instead of rewriting $e^{x}$ as $\sqrt{e^{2x}}$ (this is necessary not only for keeping things in terms of the nicer looking gcds but also because <code>risch_integrate()</code> doesn't know how to handle algebraic extensions like square roots). I didn't realize it at the time, but the corollary heuristic for logarithms should try to rewrite $\log{(x^2)}$ in terms of $\log{(x)}$ and not the other way around.  We can use the exact same gcd algorithm (called <a href="https://github.com/asmeurer/sympy/blob/integration3/sympy/integrals/risch.py#L44"><code>integer_powers()</code></a> in <code>risch.py</code>, and I now realize that it should actually be called <code>integer_multiples()</code>) as we do for the exponential, only use the powers of the arguments instead of coefficients.  This might require some factorization to do completely correctly, so it certainly requires some thought.  
+There can also be more heuristics for this.  Currently, there are heuristics for exponentials to prefer rewriting $latex e^{2x}$ as $latex \left({e^{x}}\right)^2$ instead of rewriting $latex e^{x}$ as $latex \sqrt{e^{2x}}$ (this is necessary not only for keeping things in terms of the nicer looking gcds but also because <code>risch_integrate()</code> doesn't know how to handle algebraic extensions like square roots). I didn't realize it at the time, but the corollary heuristic for logarithms should try to rewrite $latex \log{(x^2)}$ in terms of $latex \log{(x)}$ and not the other way around.  We can use the exact same gcd algorithm (called <a href="https://github.com/asmeurer/sympy/blob/integration3/sympy/integrals/risch.py#L44"><code>integer_powers()</code></a> in <code>risch.py</code>, and I now realize that it should actually be called <code>integer_multiples()</code>) as we do for the exponential, only use the powers of the arguments instead of coefficients.  This might require some factorization to do completely correctly, so it certainly requires some thought.  
 
 
 

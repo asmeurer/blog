@@ -9,19 +9,19 @@ The Transcendental Risch Algorithm is very picky.  Every elementary extension (r
 
 
 
-The bad news is that recognizing algebraic functions is not as easy as looking for things like $\sqrt{x}$ and $(x + 2)^{\frac{3}{2}}$.  The reason is that with transcendental functions we can have hidden algebraic relations.  For example, in each of the following sets, the elements are algebraically dependent over $\mathbb{C}$:
+The bad news is that recognizing algebraic functions is not as easy as looking for things like $latex \sqrt{x}$ and $latex (x + 2)^{\frac{3}{2}}$.  The reason is that with transcendental functions we can have hidden algebraic relations.  For example, in each of the following sets, the elements are algebraically dependent over $latex \mathbb{C}$:
 
 
 
-1. $\{x, e^x, e^{x + 1}\}$
+1. $latex \{x, e^x, e^{x + 1}\}$
 
-2. $\{x, \log{(x)}, e^\frac{\log{(x)}}{2}\}$
+2. $latex \{x, \log{(x)}, e^\frac{\log{(x)}}{2}\}$
 
-3. $\{x, \log{(x)}, \log{(x + 1)}, \log{(2x^2 + 2x)}\}$
+3. $latex \{x, \log{(x)}, \log{(x + 1)}, \log{(2x^2 + 2x)}\}$
 
 
 
-Can you see the algebraic relations?  If you have been reading this blog for long enough, you should be able to.  In the first set, we see that $e^{x + 1} - ee^x = 0$, in 2., which is an example that I have given probably about five times now in my blog, ${\left(e^\frac{\log{(x)}}{2}\right)}^2 - x = 0$ (i.e., $e^\frac{\log{(x)}}{2} = \sqrt{x}$), and in 3. $\log{(x)} + \log{(x + 1)} + \log{(2)} - \log{(2x^2 + 2x)} = 0$ (in each case, I have given the relation in terms of the minimal polynomial that equals 0, which is the definition of <a href="http://en.wikipedia.org/wiki/Algebraic_dependence">algebraic dependence</a>). 
+Can you see the algebraic relations?  If you have been reading this blog for long enough, you should be able to.  In the first set, we see that $latex e^{x + 1} - ee^x = 0$, in 2., which is an example that I have given probably about five times now in my blog, $latex {\left(e^\frac{\log{(x)}}{2}\right)}^2 - x = 0$ (i.e., $latex e^\frac{\log{(x)}}{2} = \sqrt{x}$), and in 3. $latex \log{(x)} + \log{(x + 1)} + \log{(2)} - \log{(2x^2 + 2x)} = 0$ (in each case, I have given the relation in terms of the minimal polynomial that equals 0, which is the definition of <a href="http://en.wikipedia.org/wiki/Algebraic_dependence">algebraic dependence</a>). 
 
 
 
@@ -29,7 +29,7 @@ Now, the good news is that there is a complete algorithm for not only determinin
 
 
 
-Notice that in the above sets, if you remove the last element, the remaining terms are algebraically independent.  In other words, you can algebraically rewrite the last term in terms of the remaining.  We have $e^{x + 1} = ee^x$, $e^\frac{\log{(x)}}{2} = \sqrt{x}$, and $\log{(2x^2 + 2x)} = \log{(2)} + \log{(x)} + \log{(x + 1)}$.  
+Notice that in the above sets, if you remove the last element, the remaining terms are algebraically independent.  In other words, you can algebraically rewrite the last term in terms of the remaining.  We have $latex e^{x + 1} = ee^x$, $latex e^\frac{\log{(x)}}{2} = \sqrt{x}$, and $latex \log{(2x^2 + 2x)} = \log{(2)} + \log{(x)} + \log{(x + 1)}$.  
 
 
 

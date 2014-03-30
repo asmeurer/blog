@@ -9,7 +9,7 @@ This time, I can refer you to my <a href="http://asmeurersympy.wordpress.com/201
 
 
 
-So, how about some examples?  The first one comes from <a href="http://">Algorithms for computer algebra By Keith O. Geddes, Stephen R. Czapor, George Labahn</a> (example 12.8).  I like it because it contains both exponentials and logarithms, in a way that they do not depend on each other, so it can be integrated with either <code>integrate_primitive()</code> or <code>integrate_hyperexponential()</code>.  In either case, the polynomial part is $\frac{x}{x + 1}$, so recursively calling the other function is not required.  (for those of you who have been following my <tt>integration3</tt> branch, you may notice that this is blatantly taken from the commit history).
+So, how about some examples?  The first one comes from <a href="http://">Algorithms for computer algebra By Keith O. Geddes, Stephen R. Czapor, George Labahn</a> (example 12.8).  I like it because it contains both exponentials and logarithms, in a way that they do not depend on each other, so it can be integrated with either <code>integrate_primitive()</code> or <code>integrate_hyperexponential()</code>.  In either case, the polynomial part is $latex \frac{x}{x + 1}$, so recursively calling the other function is not required.  (for those of you who have been following my <tt>integration3</tt> branch, you may notice that this is blatantly taken from the commit history).
 
 
 
@@ -112,11 +112,11 @@ Out[10]:
 
 [/code]
 
-An explanation:  <code>f</code> is the function we are integrating.  Preparsing is not implemented yet, so we have to do it manually in <tt>[5]</tt>.  <tt>[8]</tt> is the list of derivations of the monomials we are working with, <code>[x, t0, t1]</code>, which represent $x$, $e^{x^2}$, and $\log{(x + 1)}$, respectively. Because the outermost monomial is a logarithm (primitive), we call <code>integrate_primitive()</code> on it.  The last argument of the function is the back substitution list, in reverse order because that is the order we have to back substitute in.  We can see the result contains an unevaluated Integral.  This is because the recursive calls to integrate over the smaller extensions have not yet been implemented.  In the final version, <code>integrate()</code> will automatically call <code>ratint()</code> in this case on it to give the complete answer.  The second argument of the result, True, indicates that the integral was elementary and that this is the complete integral.
+An explanation:  <code>f</code> is the function we are integrating.  Preparsing is not implemented yet, so we have to do it manually in <tt>[5]</tt>.  <tt>[8]</tt> is the list of derivations of the monomials we are working with, <code>[x, t0, t1]</code>, which represent $latex x$, $latex e^{x^2}$, and $latex \log{(x + 1)}$, respectively. Because the outermost monomial is a logarithm (primitive), we call <code>integrate_primitive()</code> on it.  The last argument of the function is the back substitution list, in reverse order because that is the order we have to back substitute in.  We can see the result contains an unevaluated Integral.  This is because the recursive calls to integrate over the smaller extensions have not yet been implemented.  In the final version, <code>integrate()</code> will automatically call <code>ratint()</code> in this case on it to give the complete answer.  The second argument of the result, True, indicates that the integral was elementary and that this is the complete integral.
 
 
 
-Because the extensions did not depend on each other, we could have also integrated in $\mathbb{Q}(x, \log{(x + 1)}, e^{x^2})$ instead of $\mathbb{Q}(x, e^{x^2}, \log{(x + 1)})$:
+Because the extensions did not depend on each other, we could have also integrated in $latex \mathbb{Q}(x, \log{(x + 1)}, e^{x^2})$ instead of $latex \mathbb{Q}(x, e^{x^2}, \log{(x + 1)})$:
 
 
 
@@ -176,7 +176,7 @@ Out[16]: 0
 
 
 
-We can see in each case, the remaining unevaluated <code>Integral</code> was in $\mathbb{Q}(x)$ only, meaning that the recursive call to <code>integrate_hyperexponential()</code> or <code>integrate_primitive()</code>, respectively, would not have been necessary. Finally, we can see that choosing the correct extension to integrate over can make a difference, time wise:
+We can see in each case, the remaining unevaluated <code>Integral</code> was in $latex \mathbb{Q}(x)$ only, meaning that the recursive call to <code>integrate_hyperexponential()</code> or <code>integrate_primitive()</code>, respectively, would not have been necessary. Finally, we can see that choosing the correct extension to integrate over can make a difference, time wise:
 
 
 
@@ -230,7 +230,7 @@ Out[23]: (0, False)
 
 
 
-The second argument, <code>False</code>, indicates that the integral was non-elementary.  Namely, the function has proven that the function $f - D(0) = \frac{1}{\log{(x)}}$ does not have an elementary anti-derivative over $\mathbb{Q}(x, \log{(x)})$ (see the <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">previous post</a> for more information).
+The second argument, <code>False</code>, indicates that the integral was non-elementary.  Namely, the function has proven that the function $latex f - D(0) = \frac{1}{\log{(x)}}$ does not have an elementary anti-derivative over $latex \mathbb{Q}(x, \log{(x)})$ (see the <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">previous post</a> for more information).
 
 
 
@@ -286,7 +286,7 @@ NotImplementedError: Remaining cases for Poly RDE not yet implemented.
 
 
 
-Now one thing that I want to add from the above examples taken from the commit message is that logarithms are not the only function that are primitive.  The Li function (the logarithmic integral, as above), considered as an elementary extension of $\mathbb{Q}(x, \log{(x)})$ is also primitive.  But even among the commonly defined elementary functions, there is one other, acrtangents.  
+Now one thing that I want to add from the above examples taken from the commit message is that logarithms are not the only function that are primitive.  The Li function (the logarithmic integral, as above), considered as an elementary extension of $latex \mathbb{Q}(x, \log{(x)})$ is also primitive.  But even among the commonly defined elementary functions, there is one other, acrtangents.  
 
 
 
@@ -335,7 +335,7 @@ Out[34]:
 
 
 
-Due to a bug in the code right now, the final version returns the non-elementary integral in the final result.  Suffice it to say that it has proven that $\int {\frac{\arctan{(x)}}{x} dx}$ is non-elementary. As far as I know, this isn't any special function.  Actually, it's just a random function containing arctan that looked non-elementary to me that I plugged in and found out that I was correct.  It's very similar in form to the <a href="http://en.wikipedia.org/wiki/Exponential_integral">exponential integral</a> (Ei) or the <a href="http://en.wikipedia.org/wiki/Sine_integral#Sine_integral">Sine/Cosine Integral</a> (Si/Ci), which is how I guessed that it would be non-elementary.  Maybe it should be called ATi().
+Due to a bug in the code right now, the final version returns the non-elementary integral in the final result.  Suffice it to say that it has proven that $latex \int {\frac{\arctan{(x)}}{x} dx}$ is non-elementary. As far as I know, this isn't any special function.  Actually, it's just a random function containing arctan that looked non-elementary to me that I plugged in and found out that I was correct.  It's very similar in form to the <a href="http://en.wikipedia.org/wiki/Exponential_integral">exponential integral</a> (Ei) or the <a href="http://en.wikipedia.org/wiki/Sine_integral#Sine_integral">Sine/Cosine Integral</a> (Si/Ci), which is how I guessed that it would be non-elementary.  Maybe it should be called ATi().
 
 
 
@@ -347,7 +347,7 @@ So it has come to my attention that the suggested "pencils down" date is one wee
 
 
 
-<em>1. Implement the preparsing algorithms. </em> This part is two-fold.  First, I need to implement algorithms based on the Risch Structure Theorems, which allow me to determine if an extension is algebraic or not (if it is algebraic, we cannot integrate it because only the transcendental part is implemented).  The other part will be the function that actually goes through an expression and tries to build up a differential extension from it so it can be integrated.  This can be a tricky part. For example, if we want to integrate $f = e^x + e^{\frac{x}{2}}$, we want to first choose $t_1=e^{\frac{x}{2}}$ so that $f = t_1^2 + t_1$, because if we choose $t_1=e^x$, then $t_2=e^{\frac{x}{2}}=\sqrt{t_1}$ will be algebraic over $\mathbb{Q}(x, t_1)$.  This is one case where we might try adding an algebraic extensions but where it can be avoided.  The solution will have to be to go through and find the common denominators of the exponentials.  I'm also considering that this might happen in more advanced ways, so it could be necessary for the function to backtrack in the extension tree to see if it can do it in an entirely transcendental way.  Fortunately, the Risch Structure Theorems give us a decision procedure for determining if an extension can be written in terms of the previous extensions (is algebraic over it), but this will still be a very hard function to get right.
+<em>1. Implement the preparsing algorithms. </em> This part is two-fold.  First, I need to implement algorithms based on the Risch Structure Theorems, which allow me to determine if an extension is algebraic or not (if it is algebraic, we cannot integrate it because only the transcendental part is implemented).  The other part will be the function that actually goes through an expression and tries to build up a differential extension from it so it can be integrated.  This can be a tricky part. For example, if we want to integrate $latex f = e^x + e^{\frac{x}{2}}$, we want to first choose $latex t_1=e^{\frac{x}{2}}$ so that $latex f = t_1^2 + t_1$, because if we choose $latex t_1=e^x$, then $latex t_2=e^{\frac{x}{2}}=\sqrt{t_1}$ will be algebraic over $latex \mathbb{Q}(x, t_1)$.  This is one case where we might try adding an algebraic extensions but where it can be avoided.  The solution will have to be to go through and find the common denominators of the exponentials.  I'm also considering that this might happen in more advanced ways, so it could be necessary for the function to backtrack in the extension tree to see if it can do it in an entirely transcendental way.  Fortunately, the Risch Structure Theorems give us a decision procedure for determining if an extension can be written in terms of the previous extensions (is algebraic over it), but this will still be a very hard function to get right.
 
 
 
@@ -355,7 +355,7 @@ So it has come to my attention that the suggested "pencils down" date is one wee
 
 
 
-<em> 3. Implement the hypertangent case. </em> The ability to integrate in tangent extensions is the other <em>third</em> I mentioned above.  Since tangents require more special casing, I plan on doing this only after I have finished <strong>1</strong> and <strong>2</strong>.  This is actually not much work, because most of the algorithms for solving the particular subproblem for tangents (called the <em>Coupled Risch Differential Equation</em>) are exactly the same as those for solving the subproblem for hyperexponentials (the <em>Risch Differential Equation</em>), which are already (mostly) implemented in the hyperexponential part.  There are only a few extra functions that need to be written for it.  Also, you will still be able to integrate functions that contain tangents, such as $e^{\tan{(x)}}$ (recall <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">last time</a> that we showed that <code>integrate_hyperexponential()</code> can prove that this does not have an elementary integral).  It just won't be able to integrate when the top-most extension is a tangent.
+<em> 3. Implement the hypertangent case. </em> The ability to integrate in tangent extensions is the other <em>third</em> I mentioned above.  Since tangents require more special casing, I plan on doing this only after I have finished <strong>1</strong> and <strong>2</strong>.  This is actually not much work, because most of the algorithms for solving the particular subproblem for tangents (called the <em>Coupled Risch Differential Equation</em>) are exactly the same as those for solving the subproblem for hyperexponentials (the <em>Risch Differential Equation</em>), which are already (mostly) implemented in the hyperexponential part.  There are only a few extra functions that need to be written for it.  Also, you will still be able to integrate functions that contain tangents, such as $latex e^{\tan{(x)}}$ (recall <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">last time</a> that we showed that <code>integrate_hyperexponential()</code> can prove that this does not have an elementary integral).  It just won't be able to integrate when the top-most extension is a tangent.
 
 
 

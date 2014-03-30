@@ -1,4 +1,4 @@
-<html><body><p>So I have spent the past week refactoring expand so that you can have more control over what expansion methods you use.  With the present method, expand takes in hints which defaults to basic.  basic distributed multiplication over addition ($x(y+z) \rightarrow xy+xz$), expanded multinomial expressions ($(x+y)^2 \rightarrow x^2+2xy+y^2$), expanded logarithms ($\log{x^2} \rightarrow 2\log{x}$ and $\log{xy} \rightarrow \log{x}+\log{y}$), and expanded powers ($(xy)^n \rightarrow x^ny^n$ and $e^{x+y} \rightarrow e^{x}e^{y}$).  
+<html><body><p>So I have spent the past week refactoring expand so that you can have more control over what expansion methods you use.  With the present method, expand takes in hints which defaults to basic.  basic distributed multiplication over addition ($latex x(y+z) \rightarrow xy+xz$), expanded multinomial expressions ($latex (x+y)^2 \rightarrow x^2+2xy+y^2$), expanded logarithms ($latex \log{x^2} \rightarrow 2\log{x}$ and $latex \log{xy} \rightarrow \log{x}+\log{y}$), and expanded powers ($latex (xy)^n \rightarrow x^ny^n$ and $latex e^{x+y} \rightarrow e^{x}e^{y}$).  
 
 
 If you wanted to do any of these things, you had to use expand_basic, which did all of them.  Also, you had no control on how deep the expansion went.  It went all they way down in recursion, so if you only wanted, for example, to distribute multiplication  on the top level, it was impossible.  
@@ -9,13 +9,13 @@ So I decided to start and fix <a href="http://code.google.com/p/sympy/issues/det
 
 
 
-With my patch, you can now choose to expand using each of the above individually with the log, mul, multinomial, power_exp, power_base.  In addition to this, you also now have complete control of how deep the expression recurses in the expand.  Previously, you couldn't, for example, expand $x(y+e^{x(y+z)})$ to $xy+xe^{x(y+z)}$. (It would also distribute the exponent, then expand to $e^{xy}e^{xz}$).  Now, you can choose to only distribute multiplication over addition, and to only do it on the top level.  
+With my patch, you can now choose to expand using each of the above individually with the log, mul, multinomial, power_exp, power_base.  In addition to this, you also now have complete control of how deep the expression recurses in the expand.  Previously, you couldn't, for example, expand $latex x(y+e^{x(y+z)})$ to $latex xy+xe^{x(y+z)}$. (It would also distribute the exponent, then expand to $latex e^{xy}e^{xz}$).  Now, you can choose to only distribute multiplication over addition, and to only do it on the top level.  
 
 
 
 <strong>Automatic expansion of exponents</strong>
 
-I mentioned above that expand would expand $e^{xy+xz}$ to $e^{xy}e^{xz}$. Actually, in the current version of SymPy, this would not happen because it automatically combines exponents like $e^{xy}e^{xz}$ to $e^{xy+xz}$.  
+I mentioned above that expand would expand $latex e^{xy+xz}$ to $latex e^{xy}e^{xz}$. Actually, in the current version of SymPy, this would not happen because it automatically combines exponents like $latex e^{xy}e^{xz}$ to $latex e^{xy+xz}$.  
 
 
 
@@ -23,7 +23,7 @@ I have been working for the past few weeks changing this as per <a href="http://
 
 
 
-Because some things, like the gruntz algorithm, rely on automatic combining of exponents, so I had to rework powsimp, which combined exponents but also combined bases ($x^ay^a$ to $(xy)^a$) so that it could only combine exponents.  That way, I could use it to get the old behavior where I needed it.  Use <code>powsimp(expr, deep=True, combine='exp')</code> in my branch to get the old automatic behavior.  
+Because some things, like the gruntz algorithm, rely on automatic combining of exponents, so I had to rework powsimp, which combined exponents but also combined bases ($latex x^ay^a$ to $latex (xy)^a$) so that it could only combine exponents.  That way, I could use it to get the old behavior where I needed it.  Use <code>powsimp(expr, deep=True, combine='exp')</code> in my branch to get the old automatic behavior.  
 
 
 
@@ -31,7 +31,7 @@ Because some things, like the gruntz algorithm, rely on automatic combining of e
 
 <strong>So what does this have to do with ODEs?</strong>
 
-When I started working on separable equations, I wanted to be able to separate things like $e^{x+y}$ into $e^xe^y$, which is separable in $x$ and $y$.  So that is why I needed to refactor expand (I don't, for example, want to change $x(y+1)$ to $xy+x$ because the later is not easily recognizable as separate.  Doing this or course required that SymPy didn't automatically put back together $e^xe^y$ into $e^{x+y}$, so I had to fix that issue as well.  
+When I started working on separable equations, I wanted to be able to separate things like $latex e^{x+y}$ into $latex e^xe^y$, which is separable in $latex x$ and $latex y$.  So that is why I needed to refactor expand (I don't, for example, want to change $latex x(y+1)$ to $latex xy+x$ because the later is not easily recognizable as separate.  Doing this or course required that SymPy didn't automatically put back together $latex e^xe^y$ into $latex e^{x+y}$, so I had to fix that issue as well.  
 
 
 

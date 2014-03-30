@@ -9,7 +9,7 @@ First, the integrator often fails on elementary integrals.  This is because all 
 
 
 
-The rational part is involves integrating rational functions (functions of the form $\frac{a_nx^n + a_{n-1}x^{n-1} + \cdots + a_2x^2 + a_1x + a_0}{b_nx^n + b_{n-1}x^{n-1} + \cdots + b_2x^2 + a_1x + a_0}$).  The rational part is the easiest part in the sense that the algorithm is the simplest, and also that all rational function integrals are elementary (a term that I will define later).  Rational function integration is already implemented in sympy in full, though I may give a brief outline of how it works in a later post.  
+The rational part is involves integrating rational functions (functions of the form $latex \frac{a_nx^n + a_{n-1}x^{n-1} + \cdots + a_2x^2 + a_1x + a_0}{b_nx^n + b_{n-1}x^{n-1} + \cdots + b_2x^2 + a_1x + a_0}$).  The rational part is the easiest part in the sense that the algorithm is the simplest, and also that all rational function integrals are elementary (a term that I will define later).  Rational function integration is already implemented in sympy in full, though I may give a brief outline of how it works in a later post.  
 
 
 
