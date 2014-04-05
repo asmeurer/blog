@@ -35,9 +35,9 @@
     
         <meta name="og:title" content="Moving to GitHub pages with Nikola">
         <meta name="og:url" content="http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/">
-            <meta name="og:description" content="So I've fi­nal­ly de­cid­ed to move my blog from Word­press to GitHub pages.  I
-high­ly rec­om­mend it if you are tech­ni­cal­ly skilled enough to do it. I was
-get­ting pret­ty an­noyed at Word­press.">
+            <meta name="og:description" content="So I've finally decided to move my blog from Wordpress to GitHub pages.  I
+highly recommend it if you are technically skilled enough to do it. I was
+getting pretty annoyed at Wordpress. It forces you ">
         <meta name="og:site_name" content="Aaron Meurer's Blog">
         <meta name="og:type" content="article">
 
@@ -133,99 +133,99 @@ get­ting pret­ty an­noyed at Word­press.">
 
     <div class="e-content entry-content" itemprop="articleBody text">
     <div>
-<p>So I've fi­nal­ly de­cid­ed to move my blog from Word­press to GitHub pages.  I
-high­ly rec­om­mend it if you are tech­ni­cal­ly skilled enough to do it. I was
-get­ting pret­ty an­noyed at Word­press. It forces you to write your posts in­
-html (or else us­ing their WYSI­WYG ed­i­tor), the word­press.­com is locked down,
-­so you can't add any Javascrip­t, their math is stuck in the past ren­der­ing png
-in­stead of us­ing Math­Jax. The list goes on.</p> 
- <p>With GitHub pages, I can write my posts in Mark­down, and I have full con­trol
-over ev­ery­thing. And there is no lock in. If I de­cide I don't like the
-­soft­ware that is gen­er­at­ing the post­s, I can eas­i­ly move to some­thing else,
-s­ince the post con­tent it­self is all Mark­down (or the oc­ca­sion­al rst or
-IPython note­book if I want to do some­thing that Mark­down does­n't sup­port­). I
-­can use Math­Jax for math (like \( e^{i\pi} + 1 = 0 \)). Word­press.­com
-­does­n't let you in­stall abti­rary Javascript on your blog, so you can't do
-things like in­stall Math­Jax or en­able some cool side­bar thing (like a Twit­ter
-feed).</p> 
- <h2>Setting up GitHub Pages</h2>
-<p>First, you need to set up GitHub pages. This is a bit con­fus­ing, be­cause there
-are ac­tu­al­ly two kinds of GitHub pages, us­er pages and project pages. User
-­pages are if you have a re­po named  <code>user­name.github.io</code>  (or  <code>.com</code>). The pages
-are served from the  <code>mas­ter</code>  branch.</p> 
- <p>For project pages, you add a  <code>gh-­pages</code>  branch to any one of your pro­ject­s,
-and GitHub hosts the con­tent au­to­mat­i­cal­ly at
- <code>user­name.github.io/pro­ject­name</code>. I orig­i­nal­ly had my blog con­tent at
- <code>as­meur­er.github.io</code>, but I did­n't like that I had to do ev­ery­thing in mas­ter,
-both the gen­er­at­ed and orig­i­nal con­tent. So in­stead I cre­at­ed a re­po called
- <code>blog</code>. I have my con­tent in the  <code>mas­ter</code>  branch and the gen­er­at­ed pages in­
-the  <code>gh-­pages</code>  branch (more on this lat­er). At my
- <a href="https://github.com/asmeurer/asmeurer.github.com"><code>as­meur­er.github.­com</code></a>  re­po,
-I just have for now a ba­sic re­di­rect to the blog. In the fu­ture, I may want to
-put ad­di­tion­al, non-blog con­tent on the web­site, and it would go there (or in­
-a sep­a­rate project re­po with its own  <code>gh-­pages</code>  branch).</p> 
- <h2>Nikola</h2>
-<p>I had ini­tial­ly planned on us­ing
- <a href="http://blog.getpelican.com/">Pel­i­can</a>. How­ev­er, I got stalled on the
-­Word­press im­port. I like that Pel­i­can is writ­ten in Python, but I was not too
-­keen on their abra­sive
- <a href="https://github.com/getpelican/pelican/blob/master/LICENSE">li­cense</a>. Frankly,
-I should­n't say too many bad things about Pel­i­can be­cause I nev­er re­al­ly tried
-that hard with it.</p> 
- <p>I have de­cid­ed to try  <a href="http://getnikola.com/">Niko­la</a>  in­stead. It's al­so
-writ­ten in Python. It has a very nice
- <a href="https://github.com/getnikola/nikola/blob/master/LICENSE.txt">li­cense</a>. I like
-the phi­los­o­phy of the  <a href="http://getnikola.com/handbook.html">man­u­al</a>:</p> 
- <blockquote>
-<p>DON'T READ THIS MAN­U­AL. IF YOU NEED TO READ IT I FAILED, JUST USE THE THING.</p> 
- </blockquote>
-<p>I've al­so dis­cov­ered that the
- <a href="https://groups.google.com/forum/#!forum/nikola-discuss">Niko­la com­mu­ni­ty</a>  is
- <em>very</em>  nice. And of course, even if Niko­la ends up not be­ing for me, it will
-be easy to switch, be­cause my ac­tu­al con­tent is just some Mark­down files that
-I own.</p> 
- <h3>Getting started</h3>
-<p>Get­ting start­ed with Niko­la is pret­ty easy. First, you need to in­stall it. It
-has a  <em>ton</em>  of de­pen­den­cies (for­tu­nate­ly all Python, so it won't be that
-hard). In ad­di­tion to the ones in the re­quire­ments.tx­t, you should al­so
-in­stall  <code>mark­down</code>  and  <code>we­bas­sets</code>. While us­ing  <code>niko­la</code>, it will tell you if
-y­ou don't have some­thing in­stalled that you should, so if you see that, just
-in­stall what it tells you to.  If you use  <code>con­da</code>  and Mac OS X, I have
-u­pload­ed all the de­pen­den­cies to my  <a href="https://binstar.org/asmeurer/">Bin­star</a>,
-­so you can just  <code>con­da in­stall -c as­meur­er niko­la</code>. Oh and don't wor­ry, Niko­la
-and its de­pen­den­cies ful­ly sup­port Python 3 (I would­n't be us­ing it if they
-­did­n't).</p> 
- <p>Then you just run the com­mands from
-http://get­niko­la.­com/hand­book.htm­l#al­l-y­ou-need-­to-­know.</p> 
- <p>One thing that does­n't tell you is that af­ter you init the site, you should
-walk through  <code>con­f.py</code>  and change the set­tings to your lik­ing.</p> 
- <p>An­oth­er trick not there is that you can add</p> 
- <div class="codehilite"><pre><span class="nb">eval</span> <span class="s2">"`nikola tabcompletion`"</span>
+<p>So I've finally decided to move my blog from Wordpress to GitHub pages.  I
+highly recommend it if you are technically skilled enough to do it. I was
+getting pretty annoyed at Wordpress. It forces you to write your posts in
+html (or else using their WYSIWYG editor), the wordpress.com is locked down,
+so you can't add any Javascript, their math is stuck in the past rendering png
+instead of using MathJax. The list goes on.</p>
+<p>With GitHub pages, I can write my posts in Markdown, and I have full control
+over everything. And there is no lock in. If I decide I don't like the
+software that is generating the posts, I can easily move to something else,
+since the post content itself is all Markdown (or the occasional rst or
+IPython notebook if I want to do something that Markdown doesn't support). I
+can use MathJax for math (like \( e^{i\pi} + 1 = 0 \)). Wordpress.com
+doesn't let you install abtirary Javascript on your blog, so you can't do
+things like install MathJax or enable some cool sidebar thing (like a Twitter
+feed).</p>
+<h2>Setting up GitHub Pages</h2>
+<p>First, you need to set up GitHub pages. This is a bit confusing, because there
+are actually two kinds of GitHub pages, user pages and project pages. User
+pages are if you have a repo named <code>username.github.io</code> (or <code>.com</code>). The pages
+are served from the <code>master</code> branch.</p>
+<p>For project pages, you add a <code>gh-pages</code> branch to any one of your projects,
+and GitHub hosts the content automatically at
+<code>username.github.io/projectname</code>. I originally had my blog content at
+<code>asmeurer.github.io</code>, but I didn't like that I had to do everything in master,
+both the generated and original content. So instead I created a repo called
+<code>blog</code>. I have my content in the <code>master</code> branch and the generated pages in
+the <code>gh-pages</code> branch (more on this later). At my
+<a href="https://github.com/asmeurer/asmeurer.github.com"><code>asmeurer.github.com</code></a> repo,
+I just have for now a basic redirect to the blog. In the future, I may want to
+put additional, non-blog content on the website, and it would go there (or in
+a separate project repo with its own <code>gh-pages</code> branch).</p>
+<h2>Nikola</h2>
+<p>I had initially planned on using
+<a href="http://blog.getpelican.com/">Pelican</a>. However, I got stalled on the
+Wordpress import. I like that Pelican is written in Python, but I was not too
+keen on their abrasive
+<a href="https://github.com/getpelican/pelican/blob/master/LICENSE">license</a>. Frankly,
+I shouldn't say too many bad things about Pelican because I never really tried
+that hard with it.</p>
+<p>I have decided to try <a href="http://getnikola.com/">Nikola</a> instead. It's also
+written in Python. It has a very nice
+<a href="https://github.com/getnikola/nikola/blob/master/LICENSE.txt">license</a>. I like
+the philosophy of the <a href="http://getnikola.com/handbook.html">manual</a>:</p>
+<blockquote>
+<p>DON'T READ THIS MANUAL. IF YOU NEED TO READ IT I FAILED, JUST USE THE THING.</p>
+</blockquote>
+<p>I've also discovered that the
+<a href="https://groups.google.com/forum/#!forum/nikola-discuss">Nikola community</a> is
+<em>very</em> nice. And of course, even if Nikola ends up not being for me, it will
+be easy to switch, because my actual content is just some Markdown files that
+I own.</p>
+<h3>Getting started</h3>
+<p>Getting started with Nikola is pretty easy. First, you need to install it. It
+has a <em>ton</em> of dependencies (fortunately all Python, so it won't be that
+hard). In addition to the ones in the requirements.txt, you should also
+install <code>markdown</code> and <code>webassets</code>. While using <code>nikola</code>, it will tell you if
+you don't have something installed that you should, so if you see that, just
+install what it tells you to.  If you use <code>conda</code> and Mac OS X, I have
+uploaded all the dependencies to my <a href="https://binstar.org/asmeurer/">Binstar</a>,
+so you can just <code>conda install -c asmeurer nikola</code>. Oh and don't worry, Nikola
+and its dependencies fully support Python 3 (I wouldn't be using it if they
+didn't).</p>
+<p>Then you just run the commands from
+http://getnikola.com/handbook.html#all-you-need-to-know.</p>
+<p>One thing that doesn't tell you is that after you init the site, you should
+walk through <code>conf.py</code> and change the settings to your liking.</p>
+<p>Another trick not there is that you can add</p>
+<div class="codehilite"><pre><span class="nb">eval</span> <span class="s2">"`nikola tabcompletion`"</span>
 </pre></div>
 
 
-<p>to your Bash pro­file to get tab com­ple­tion.</p> 
- <h3>Tricks</h3>
-<p>Here are some use­ful trick­s:</p> 
- <ul>
-<li> 
- <p>To en­able Math­­­Jax, you have to type   <code>math­­­jax</code>   in a line by it­­self in the
-meta­­da­­ta file. There are some bugs right now, but ide­al­­ly you could do in­­­line
-­­math with   <code>$math$</code>   and dis­­­play math with   <code>$$­­math­­$$</code>.   <code>$math$</code>   does­n't work
-cur­ren­t­­ly, but you can do   <code>\\(­­math­­\\)</code>   (both   <code>\</code>s are re­quired, al­though this
-is like­­ly a bug). You can do   <code>\\[­­math­­\\]</code>   for dis­­­play math.  Here are some
-ex­am­­ples. In­­­line: \( \sin ^2{x} + \cos^2{x} = 1\). Dis­­­play: $$ e^{i\pi} + 1 = 0 .$$</p>  
-  </li> 
- <li> 
- <p>Your one-stop com­­mand when blog­ging is   <code>niko­la au­­to</code>. This re­quires
-    <code>livereload</code>. This will serve the blog on lo­­cal­host, and au­­to­­mat­i­­cal­­ly
-  re­build it when any change is made (and I re­al­­ly mean   <em>any</em>   change: it can
-  even de­­tect when you change Niko­la it­­self).</p>  
-  </li> 
- <li> 
- <p>I have the fol­low­ing in my con­f.py to de­­ploy:</p>  
-  </li> 
- </ul>
+<p>to your Bash profile to get tab completion.</p>
+<h3>Tricks</h3>
+<p>Here are some useful tricks:</p>
+<ul>
+<li>
+<p>To enable MathJax, you have to type <code>mathjax</code> in a line by itself in the
+metadata file. There are some bugs right now, but ideally you could do inline
+math with <code>$math$</code> and display math with <code>$$math$$</code>. <code>$math$</code> doesn't work
+currently, but you can do <code>\\(math\\)</code> (both <code>\</code>s are required, although this
+is likely a bug). You can do <code>\\[math\\]</code> for display math.  Here are some
+examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 .$$</p>
+</li>
+<li>
+<p>Your one-stop command when blogging is <code>nikola auto</code>. This requires
+  <code>livereload</code>. This will serve the blog on localhost, and automatically
+  rebuild it when any change is made (and I really mean <em>any</em> change: it can
+  even detect when you change Nikola itself).</p>
+</li>
+<li>
+<p>I have the following in my conf.py to deploy:</p>
+</li>
+</ul>
 <div class="codehilite"><pre><span class="n">DEPLOY_COMMANDS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s">"git checkout gh-pages"</span><span class="p">,</span>
     <span class="s">"rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ ."</span><span class="p">,</span>
@@ -237,12 +237,12 @@ ex­am­­ples. In­­­line: \( \sin ^2{x} + \cos^2{x} = 1\). Dis­­­play: $$
 </pre></div>
 
 
-<p>WARN­ING: These com­mands are dan­ger­ous. If you don't prop­er­ly ex­clude things
-­like  <code>.git</code>, you will wipe your en­tire git his­to­ry. I  <em>high­ly</em>  rec­om­mend
-­com­mit­ting ev­ery­thing and push­ing to GitHub be­fore de­ploy­ing.</p> 
- <ul>
-<li>Use</li> 
- </ul>
+<p>WARNING: These commands are dangerous. If you don't properly exclude things
+like <code>.git</code>, you will wipe your entire git history. I <em>highly</em> recommend
+committing everything and pushing to GitHub before deploying.</p>
+<ul>
+<li>Use</li>
+</ul>
 <div class="codehilite"><pre><span class="n">_site</span><span class="o">/</span>
 <span class="o">*</span><span class="p">.</span><span class="n">pyc</span>
 <span class="p">.</span><span class="n">DS_Store</span>
@@ -252,39 +252,39 @@ ex­am­­ples. In­­­line: \( \sin ^2{x} + \cos^2{x} = 1\). Dis­­­play: $$
 </pre></div>
 
 
-<p>for your  <code>.git­ig­nore</code>.</p> 
- <ul>
-<li>De­spite what it says on the Niko­la page, be sure to read the doc­s, be­cause
-there are a lot of cool fea­tures you won't know about un­less you read about
-them. Al­so be sure to read through  <code>con­f.py</code>.</li> 
- </ul>
+<p>for your <code>.gitignore</code>.</p>
+<ul>
+<li>Despite what it says on the Nikola page, be sure to read the docs, because
+there are a lot of cool features you won't know about unless you read about
+them. Also be sure to read through <code>conf.py</code>.</li>
+</ul>
 <h3>Wordpress import</h3>
-<p><strong>This is some­thing that I am still fig­ur­ing out. You can see the progress at
-   <a href="http://asmeurer.github.io/blog/old_blog">http://as­meur­er.github.io/blog/old_blog</a></strong></p> 
- <p>Im­port­ing from Word­press is pret­ty easy ac­tu­al­ly (at least in the­o­ry). First
-y­ou need to go to the Word­press site dash­board and go to "Ex­port" from the
-"­Tool­s" menu. From here you can down­load an XML file with all your
-­con­tent. Then just do</p> 
- <div class="codehilite"><pre><span class="n">nikola</span> <span class="n">import_wordpress</span> <span class="n">export_file</span><span class="p">.</span><span class="n">xml</span>
+<p><strong>This is something that I am still figuring out. You can see the progress at
+  <a href="http://asmeurer.github.io/blog/old_blog">http://asmeurer.github.io/blog/old_blog</a></strong></p>
+<p>Importing from Wordpress is pretty easy actually (at least in theory). First
+you need to go to the Wordpress site dashboard and go to "Export" from the
+"Tools" menu. From here you can download an XML file with all your
+content. Then just do</p>
+<div class="codehilite"><pre><span class="n">nikola</span> <span class="n">import_wordpress</span> <span class="n">export_file</span><span class="p">.</span><span class="n">xml</span>
 </pre></div>
 
 
-<p>Note that the cur­rent ver­sion of Niko­la as of this writ­ing (6.3.0) does­n't do
+<p>Note that the current version of Nikola as of this writing (6.3.0) doesn't do
 this right, so you'll need to use the
- <a href="https://github.com/getnikola/nikola">git mas­ter</a>. There are some is­sues with­
-the im­port, since Word­press has its own markup that it does­n't know ev­ery­thing
-about, so you may need to go in and fix things. Or re­port them as bugs to
-Niko­la and reim­port when they are fixed.</p> 
- <p>You'll need to go through the posts and make sure that they are ren­dered
-­cor­rect­ly (this is one rea­son I haven't fin­ished do­ing it yet).</p> 
- <p>For com­ments, you first need to cre­ate a Dis­qus ac­coun­t, and en­able it in your
-­con­f.py. You should then up­load the xml file that you ex­port­ed from Word­press
-­to Dis­qus. At this point, the com­ments should just work, be­cause Niko­la set­s
-the Dis­qus url for the im­port­ed com­ments to the old Word­press url (look at the
-Dis­qus sec­tion of one of the built pages).</p> 
- <p>I don't know how to au­to­mat­i­cal­ly back­link from Word­press back to
-Niko­la. Maybe I should just au­to­mat­i­cal­ly gen­er­ate some links and paste them
-in man­u­al­ly.</p>
+<a href="https://github.com/getnikola/nikola">git master</a>. There are some issues with
+the import, since Wordpress has its own markup that it doesn't know everything
+about, so you may need to go in and fix things. Or report them as bugs to
+Nikola and reimport when they are fixed.</p>
+<p>You'll need to go through the posts and make sure that they are rendered
+correctly (this is one reason I haven't finished doing it yet).</p>
+<p>For comments, you first need to create a Disqus account, and enable it in your
+conf.py. You should then upload the xml file that you exported from Wordpress
+to Disqus. At this point, the comments should just work, because Nikola sets
+the Disqus url for the imported comments to the old Wordpress url (look at the
+Disqus section of one of the built pages).</p>
+<p>I don't know how to automatically backlink from Wordpress back to
+Nikola. Maybe I should just automatically generate some links and paste them
+in manually.</p>
 </div>
     </div>
     <aside class="postpromonav">
