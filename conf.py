@@ -487,21 +487,21 @@ PRETTY_URLS = True
 # Do you want a add a Mathjax config file?
 # MATHJAX_CONFIG = ""
 
-# If you are using the compile-ipynb plugin, just add this one:
-MATHJAX_CONFIG = """
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-   tex2jax: {
-       inlineMath: [ ['$','$'], ["\\\(","\\\)"], ['$ latex','$'], ['$latex','$'] ],
-       displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ]
-   },
-   displayAlign: 'left', // Change this to 'center' to center equations.
-   "HTML-CSS": {
-       styles: {'.MathJax_Display': {"margin": 0}}
-   }
-});
-</script>
-"""
+# # If you are using the compile-ipynb plugin, just add this one:
+# MATHJAX_CONFIG = """
+# <script type="text/x-mathjax-config">
+# MathJax.Hub.Config({
+#    tex2jax: {
+#        inlineMath: [ ['$','$'], ["\\\(","\\\)"], ],
+#        displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ]
+#    },
+#    displayAlign: 'left', // Change this to 'center' to center equations.
+#    "HTML-CSS": {
+#        styles: {'.MathJax_Display': {"margin": 0}}
+#    }
+# });
+# </script>
+# """
 
 # Do you want to customize the nbconversion of your IPython notebook?
 # IPYNB_CONFIG = {}
