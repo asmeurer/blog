@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -185,12 +185,15 @@ We should release *at least* once a month.  I think that if the process is autom
  <p>So On­drej sug­gest­ed mov­ing to fab­ric/­va­grant. At the SciPy 2013 sprints, he start­ed work­ing on a fab­file that au­to­mates the whole process. Ba­si­cal­ly va­grant is a pre­de­fined Lin­ux vir­tu­al ma­chine that makes it easy to make ev­ery­thing com­plete­ly re­pro­ducible. Fab­ric is a tool that makes it easy to write com­mands (in Python) that are run on that ma­chine.  </p> 
  <p>Build­ing the ba­sic stuff was easy, but I want to au­to­mate  <em>ev­ery­thing</em>. So far, not ev­ery­thing is done yet, but we're get­ting close. For ex­am­ple, in ad­di­tion to build­ing the tar­ball­s, the fab­ric script checks the con­tents of the tar­ball against  <code>git ls-­files</code>  to make sure that noth­ing is in­clud­ed that should­n't be or left out ac­ci­den­tal­ly (and, in­deed, we caught some miss­ing files that weren't in­clud­ed in the tar­ball, in­clud­ing the READ­ME).  </p> 
  <p>You can run all this your­self. Check­out the 0.7.3 branch from SymPy, then cd in­to the re­lease di­rec­to­ry, and read the README. Ba­si­cal­ly, you just in­stall Fab­ric and Va­grant if you don't have them al­ready, then run</p> 
- <p>[code]</p> 
- <p>va­grant up</p> 
- <p>fab va­grant pre­pare</p> 
- <p>fab va­grant re­lease</p> 
- <p>[/­code]</p> 
- <p>Note that this down­loads a 280 MB vir­tu­al ma­chine, so it will take some time to run for the first time. When you do this, the re­leas­es are in the  <code>re­lease</code>  di­rec­to­ry.  </p> 
+ <div class="codehilite"><pre><span class="n">vagrant</span> <span class="n">up</span>
+
+<span class="n">fab</span> <span class="n">vagrant</span> <span class="n">prepare</span>
+
+<span class="n">fab</span> <span class="n">vagrant</span> <span class="n">release</span>
+</pre></div>
+
+
+<p>Note that this down­loads a 280 MB vir­tu­al ma­chine, so it will take some time to run for the first time. When you do this, the re­leas­es are in the  <code>re­lease</code>  di­rec­to­ry.  </p> 
  <p>Fi­nal­ly, I up­load­ed 0.7.3.r­c1 to GitHub us­ing the new re­leas­es fea­ture. This is what the re­lease looks like on GitHub, from the us­er point of view</p> 
  <p><a href="../../../../../2013/07/screenshot-2013-07-06-22-05-31.png"><img src="../../../../../2013/07/screenshot-2013-07-06-22-05-31.png" alt="SymPy 0.7.3.rc1" width="450" height="260" class="alignnone size-full wp-image-1352"></a></p> 
  <p>This is what it looks like to me</p> 

@@ -7,7 +7,8 @@ To summarize, I decided to use Emacs, as I found it to be much more intuitive, a
 	</p><li>Either one of these editors (Vim or Emacs) is going to really suck unless you are willing to make a serious investment in customizing them and installing nice addons. For the second point, Emacs has an advantage, because the philosophy of Vim is to be barebones whereas the philosophy of Emacs is to be featureful, so that in particular many things that were once addons of Emacs are now included in the standard installation.  For customization, on the one hand, Emacs is easier, because it has a nice interface (<code>M-x customize</code>), but on the other hand, Vim's scripting language is much easier to hack on than Emacs lisp (I still can't code in Lisp to save my life; it's a very challenging programming language).<br><br>But my point here is that neither has really great defaults. For example, in Emacs, <code>M-space</code> is bound to <code>just-one-space</code>, which is great for programming.  What it does is remove all spaces around the cursor, except for one.  But to be really useful, it also should include newlines.  It doesn't do this by default.  Rather, you have to call it with a negative argument.  So to be really useful, you have to add
 
 
-[sourcecode]
+```
+
 
 (defun just-one-space-with-newline ()
   "Call just-one-space with a negative argument"
@@ -17,9 +18,7 @@ To summarize, I decided to use Emacs, as I found it to be much more intuitive, a
 
 (global-set-key (kbd "M-SPC") 'just-one-space-with-newline)
 
-
-~~~~~~~~~~~~
-
+[/sourcecode]
 
 
 
@@ -57,7 +56,8 @@ There's really something to be said about GUI editors, which give these things t
 
 check-syntax:
 	$(CC) -o nul $(FLAGS) -S $(CHK_SOURCES)
-[/code]
+
+```
 
 
 
@@ -65,7 +65,8 @@ check-syntax:
 
 
 
-[code]
+```
+
 
 ;; ===== Turn on flymake-mode ====
 
@@ -86,7 +87,8 @@ check-syntax:
   (interactive)
   (local-set-key "\M-n" 'flymake-goto-next-error)
   (local-set-key "\M-p" 'flymake-goto-prev-error))
-[/code]
+
+```
 
 
 
@@ -106,7 +108,8 @@ Actually, what I really would like is not syntax checking (I rarely make syntax 
 	<li>In <a href="http://asmeurersympy.wordpress.com/2012/01/13/vim-vs-emacs-part-3/">part 3</a> mentioned that <a href="http://www.dr-qubit.org/predictive/predictive-user-manual/html/index.php">predictive mode</a> was cool, but not very useful.  What it does is basically add tab completion for every word in the English language.  Actually, I've found using auto-complete-mode even when editing text (or LaTeX) to be very useful.  Unlike predictive mode, it only guesses words that you've already typed  (it turns out that you tend to type the same words over and over, and doubly so if those words are LaTeX math commands).  Also, predictive mode has a set order of words, which supposedly helps to use it with muscle memory, whereas auto-complete-mode tries to learn what words you are more likely to use based on some basic statistical machine-learning.  Also, auto-complete-mode has a much better visual UI and smarter defaults than predictive mode. The result is that it's actually quite useful and makes typing plain text, as well as LaTeX (actually, pretty much anything, as long as you tend to use the same words repeatedly) much faster.  I recommend enabling auto-complete-mode almost everywhere using hooks, like
 
 
-[code]
+```
+
 
 (add-hook 'latex-mode-hook 'auto-complete-mode)
 
@@ -116,7 +119,8 @@ Actually, what I really would like is not syntax checking (I rarely make syntax 
 
 ;; etc.
 
-[/code]
+
+```
 
 
 

@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -48,11 +48,12 @@ MathJax.Hub.Config({
     
         <meta name="og:title" content="Tip for debugging SymPy with PuDB">
         <meta name="og:url" content="http://asmeurer.github.io/posts/2013/01/28/tip-for-debugging-sympy-with-pudb/">
-            <meta name="og:description" content='Usu­al­ly, when I de­bug SymPy code with  PuDB, I cre­ate a script that calls the code, then I put a   
- [code lan­guage="py"] 
- im­port pud­b; pud­b.set_­trace() 
- [/­code] 
- in the SymPy li­brary co'>
+            <meta name="og:description" content="Usu­al­ly, when I de­bug SymPy code with  PuDB, I cre­ate a script that calls the code, then I put a   
+ import pudb; pudb.set_trace()
+
+
+
+in the SymPy li­brary code where I want to start de­bug­ging. ">
         <meta name="og:site_name" content="Aaron Meurer's Blog">
         <meta name="og:type" content="article">
 
@@ -147,10 +148,11 @@ MathJax.Hub.Config({
     <div>
 <p></p>
 <p>Usu­al­ly, when I de­bug SymPy code with  <a href="http://asmeurersympy.wordpress.com/2010/06/04/pudb-a-better-python-debugger/">PuDB</a>, I cre­ate a script that calls the code, then I put a  </p> 
- <p>[code lan­guage="py"]</p> 
- <p>im­port pud­b; pud­b.set_­trace()</p> 
- <p>[/­code]</p> 
- <p>in the SymPy li­brary code where I want to start de­bug­ging. But this is an­noy­ing, first be­cause I have to cre­ate the scrip­t, and sec­ond, be­cause I have to mod­i­fy the li­brary code, and there's al­ways the risk of ac­ci­den­tal­ly com­mit­ing that.  Al­so, if I want to start de­bug­ging some­where else, I have to ed­it the files and change it.</p> 
+ <div class="codehilite"><pre><span class="kn">import</span> <span class="nn">pudb</span><span class="p">;</span> <span class="n">pudb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+</pre></div>
+
+
+<p>in the SymPy li­brary code where I want to start de­bug­ging. But this is an­noy­ing, first be­cause I have to cre­ate the scrip­t, and sec­ond, be­cause I have to mod­i­fy the li­brary code, and there's al­ways the risk of ac­ci­den­tal­ly com­mit­ing that.  Al­so, if I want to start de­bug­ging some­where else, I have to ed­it the files and change it.</p> 
  <p>Well, I just fig­ured out a bet­ter way.   <del datetime="2013-01-30T02:32:19+00:00">First, if you haven't al­ready, add an alias like this in your bash con­fig file (<code>~/.pro­file</code>  or  <code>~/.bashrc</code>):<code>alias pud­b='python -m pud­b.run</code>.</del>   <i>As of  <a href="https://github.com/inducer/pudb/pull/54">this pull re­quest</a>, this is no longer nec­es­sary.  A  <code>pudb</code>  script is in­stalled au­to­mat­i­cal­ly with PuD­B.</i></p> 
  <p>This will let you run  <code>pudb scrip­t.py</code>  to de­bug  <code>scrip­t.py</code>.   <del datetime="2013-02-05T04:22:39+00:00">Nex­t, start PuD­B. It does­n't mat­ter with what. You can just run  <code>touch test.py</code>, and then  <code>pudb test.py</code>.</del>    <i>It oc­cured to me that you can just set the break­point when start­ing isympy with PuD­B.</i></p> 
  <p>Now, press  <code>m</code>, and nav­i­gate to where in the li­brary code you want to start de­bug­ging.  It al­so helps to use  <code>/</code>  to search the cur­rent file and  <code>L</code>  to jump to a spe­cif­ic line.  When you get to the line where you want to start de­bug­ging, press  <code>b</code>  to set a break­point. You can do this in mul­ti­ple places if you wan­t.</p> 

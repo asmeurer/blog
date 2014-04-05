@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -146,7 +146,7 @@ MathJax.Hub.Config({
 <p></p>
 <p>See parts  <a href="http://asmeurersympy.wordpress.com/2011/12/20/vim-vs-emacs-part-1/">1</a>  and  <a href="http://asmeurersympy.wordpress.com/2012/01/03/vim-vs-emacs-part-2/">2</a>.</p> 
  <p>Some more com­ments af­ter us­ing emacs for a while:</p> 
- <div class="code"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>I finally found the perfect tab completion solution. It took way too much searching for how awesome it is.  It's called <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://cx4a.org/software/auto-complete/manual.html"</span><span class="nt">&gt;</span>auto-complete-mode<span class="nt">&lt;/a&gt;</span>.  The best way to get an idea of what this is is to watch <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.youtube.com/watch?v=rGVVnDxwJYE"</span><span class="nt">&gt;</span>this screencast<span class="nt">&lt;/a&gt;</span>.  Basically, it shows you a completion list automatically.  It uses the <span class="nt">&lt;em&gt;</span>TAB<span class="nt">&lt;/em&gt;</span> key to do completion (to me, this is a no brainer, but for some reason, no other completion extension that I found did this, requiring you to do all kinds of nonsense in your .emacs file).  It's got cool features like simple fuzzy matching and intelligent matching (so the first completion is what you tend to use, instead of just the first one that matches).  To quote the author, "a goal of auto-complete-mode is to provide a system that does what users want without any command." I couldn't agree with that goal more. If you install it, I recommend adding <span class="nt">&lt;code&gt;</span>(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)<span class="nt">&lt;/code&gt;</span> to your .emacs, so that you can use M-TAB to force the completion menu to come up.  This generally happens automatically, but I think this is the only way to get fuzzy matching, for example. Actually, you can also just use <span class="nt">&lt;code&gt;</span>(ac-set-trigger-key "TAB")<span class="nt">&lt;/code&gt;</span>, which intelligently sets TAB to complete or indent, based on which one you more likely want.  This seems to work pretty well to me.<span class="nt">&lt;/li&gt;</span>
+ <div class="codehilite"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>I finally found the perfect tab completion solution. It took way too much searching for how awesome it is.  It's called <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://cx4a.org/software/auto-complete/manual.html"</span><span class="nt">&gt;</span>auto-complete-mode<span class="nt">&lt;/a&gt;</span>.  The best way to get an idea of what this is is to watch <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.youtube.com/watch?v=rGVVnDxwJYE"</span><span class="nt">&gt;</span>this screencast<span class="nt">&lt;/a&gt;</span>.  Basically, it shows you a completion list automatically.  It uses the <span class="nt">&lt;em&gt;</span>TAB<span class="nt">&lt;/em&gt;</span> key to do completion (to me, this is a no brainer, but for some reason, no other completion extension that I found did this, requiring you to do all kinds of nonsense in your .emacs file).  It's got cool features like simple fuzzy matching and intelligent matching (so the first completion is what you tend to use, instead of just the first one that matches).  To quote the author, "a goal of auto-complete-mode is to provide a system that does what users want without any command." I couldn't agree with that goal more. If you install it, I recommend adding <span class="nt">&lt;code&gt;</span>(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)<span class="nt">&lt;/code&gt;</span> to your .emacs, so that you can use M-TAB to force the completion menu to come up.  This generally happens automatically, but I think this is the only way to get fuzzy matching, for example. Actually, you can also just use <span class="nt">&lt;code&gt;</span>(ac-set-trigger-key "TAB")<span class="nt">&lt;/code&gt;</span>, which intelligently sets TAB to complete or indent, based on which one you more likely want.  This seems to work pretty well to me.<span class="nt">&lt;/li&gt;</span>
 
 <span class="nt">&lt;li&gt;</span>Speaking of indenting, emacs has a pretty nice indentation feature for Python.  You just press <span class="nt">&lt;code&gt;</span>TAB<span class="nt">&lt;/code&gt;</span> repeatedly, and it cycles through all the syntactically legal indentations.  I find this to be more useful than the usual <span class="nt">&lt;code&gt;</span>TAB<span class="nt">&lt;/code&gt;</span> indents behavior of most editors. Note that by default, it won't automatically indent, even with trivial indentations (i.e., keeping the previous indentation).  This is easy to fix, though.  Just add <span class="nt">&lt;code&gt;</span>(define-key global-map (kbd "RET") 'newline-and-indent)<span class="nt">&lt;/code&gt;</span> to your .emacs file.  This will make <span class="nt">&lt;code&gt;</span>RET<span class="nt">&lt;/code&gt;</span> do the same thing as <span class="nt">&lt;code&gt;</span>C-j<span class="nt">&lt;/code&gt;</span>, i.e., basically the equivalent of <span class="nt">&lt;code&gt;</span>RET TAB<span class="nt">&lt;/code&gt;</span>.<span class="nt">&lt;/li&gt;</span>
 
@@ -155,16 +155,21 @@ MathJax.Hub.Config({
 
 
 <p>But un­like all the oth­er hun­dreds of emacs fea­tures that I don't use, this one was se­ri­ous­ly slow­ing down my work­flow.  It adds three or four sec­onds to the start­up time of emacs when load­ing from with­in a git repos­i­to­ry.  So I did some Googling and added this to my .emacs file:</p> 
- <p>[code]</p> 
- <p>;; Dis­able all the ver­sion con­trol stuff          </p> 
- <p>;; Makes emacs load much faster in­side git re­pos  </p> 
- <p>(setq vc-han­dled-back­ends nil)</p> 
- <p>[/­code]</p> 
- <p>(<em>un­re­lat­ed: Why does­n't Word­Press sup­port lisp as a lan­guage for syn­tax high­light­ing?</em>)</p> 
+ <div class="codehilite"><pre><span class="p">;;</span> <span class="n">Disable</span> <span class="n">all</span> <span class="n">the</span> <span class="n">version</span> <span class="n">control</span> <span class="n">stuff</span>         
+
+<span class="p">;;</span> <span class="n">Makes</span> <span class="n">emacs</span> <span class="n">load</span> <span class="n">much</span> <span class="n">faster</span> <span class="n">inside</span> <span class="n">git</span> <span class="n">repos</span> 
+
+
+
+<span class="p">(</span><span class="n">setq</span> <span class="n">vc</span><span class="o">-</span><span class="n">handled</span><span class="o">-</span><span class="n">backends</span> <span class="n">nil</span><span class="p">)</span>
+</pre></div>
+
+
+<p>(<em>un­re­lat­ed: Why does­n't Word­Press sup­port lisp as a lan­guage for syn­tax high­light­ing?</em>)</p> 
  <p>This dis­ables the ver­sion con­trol stuff, mak­ing emacs load fast again (vir­tu­al­ly as fast as vim, ac­tu­al­ly).</p> 
 
 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>Speaking of making emacs go faster, make sure you compile all your extensions into byte code.  For whatever reason, emacs doesn't do this automatically, even though compiled files run much faster, and it doesn't take very long.  The easiest way is to use <span class="nt">&lt;code&gt;</span>M-x byte-compile-file<span class="nt">&lt;/code&gt;</span> from within emacs.  Just make sure that if you modify the .el file that you recompile the byte code, or it will continue to use the old version.<span class="nt">&lt;/li&gt;</span>
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>Speaking of making emacs go faster, make sure you compile all your extensions into byte code.  For whatever reason, emacs doesn't do this automatically, even though compiled files run much faster, and it doesn't take very long.  The easiest way is to use <span class="nt">&lt;code&gt;</span>M-x byte-compile-file<span class="nt">&lt;/code&gt;</span> from within emacs.  Just make sure that if you modify the .el file that you recompile the byte code, or it will continue to use the old version.<span class="nt">&lt;/li&gt;</span>
 
 
 
@@ -172,29 +177,36 @@ MathJax.Hub.Config({
 </pre></div>
 
 
-<p>[code]</p> 
- <p>;; ===== En­able mouse sup­port ====</p> 
- <p>(re­quire 'x­t-­mouse)                    </p> 
- <p>(x­ter­m-­mouse-­mod­e)</p> 
- <p>[/­code]</p> 
- <p>in your .emacs file.  And then it just work­s.  It needs some tweak­ing (e.g., it does­n't play so well with mo­men­tum scrolling), but at least it work­s. I thought I was go­ing to hang my­self with­out mouse sup­port. Be­cause frankly, as good as the move­ment com­mands are, mov­ing with the mouse is so much eas­i­er some­times (the same is true for vim too, btw).</p> 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>I compiled the git version of emacs (it's not very hard btw).  I did this to see if the mouse suport "bug" was fixed there, but I've gone ahead and kept using it, as it's nicer.  But I didn't figure out how to configure it to not load in an X window. So for now, I've aliased <span class="nt">&lt;code&gt;</span>emacs<span class="nt">&lt;/code&gt;</span> to <span class="nt">&lt;code&gt;</span>emacs -nw<span class="nt">&lt;/code&gt;</span>. I'm sure I just need to add some flag to <span class="nt">&lt;code&gt;</span>configure<span class="nt">&lt;/code&gt;</span>, but I haven't gotten around to looking it up yet.<span class="nt">&lt;/li&gt;</span>
+<div class="codehilite"><pre><span class="p">;;</span> <span class="o">=====</span> <span class="n">Enable</span> <span class="n">mouse</span> <span class="n">support</span> <span class="o">====</span>
+
+<span class="p">(</span><span class="n">require</span> <span class="err">'</span><span class="n">xt</span><span class="o">-</span><span class="n">mouse</span><span class="p">)</span>                   
+
+<span class="p">(</span><span class="n">xterm</span><span class="o">-</span><span class="n">mouse</span><span class="o">-</span><span class="n">mode</span><span class="p">)</span>
+</pre></div>
+
+
+<p>in your .emacs file.  And then it just work­s.  It needs some tweak­ing (e.g., it does­n't play so well with mo­men­tum scrolling), but at least it work­s. I thought I was go­ing to hang my­self with­out mouse sup­port. Be­cause frankly, as good as the move­ment com­mands are, mov­ing with the mouse is so much eas­i­er some­times (the same is true for vim too, btw).</p> 
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>I compiled the git version of emacs (it's not very hard btw).  I did this to see if the mouse suport "bug" was fixed there, but I've gone ahead and kept using it, as it's nicer.  But I didn't figure out how to configure it to not load in an X window. So for now, I've aliased <span class="nt">&lt;code&gt;</span>emacs<span class="nt">&lt;/code&gt;</span> to <span class="nt">&lt;code&gt;</span>emacs -nw<span class="nt">&lt;/code&gt;</span>. I'm sure I just need to add some flag to <span class="nt">&lt;code&gt;</span>configure<span class="nt">&lt;/code&gt;</span>, but I haven't gotten around to looking it up yet.<span class="nt">&lt;/li&gt;</span>
 
 <span class="nt">&lt;li&gt;</span>I found out how to allow editing in the Isearch mode (again, thanks to the help-gnu-emacs list).  You need to install the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/asmeurer/dotfiles/blob/master/.emacs.d/lisp/isearch%2B.el"</span><span class="nt">&gt;</span>isearch+<span class="nt">&lt;/a&gt;</span> extension, add the following to your .emacs,
 </pre></div>
 
 
-<p>[code]</p> 
- <p>;; ===== isearch+ =====          </p> 
- <p>(re­quire 'isearch+)</p> 
- <p>[/­code]</p> 
- <p>and most im­por­tant­ly, you need to ed­it the file and un­com­ment all the com­m­mands you want to al­low.  If you fol­low my link above, it goes to my per­son­al dot­files re­po, where I've al­ready done that.</p> 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>On a related note, this is the first of several emacs extensions I've installed that I've edited the extension file itself for.  The rest, I just had to add some code to .emacs.  In most cases, there was already a variable or suggested code snippet to add to .emacs to get what I wanted.
+<div class="codehilite"><pre><span class="p">;;</span> <span class="o">=====</span> <span class="n">isearch</span><span class="o">+</span> <span class="o">=====</span>         
+
+
+
+<span class="p">(</span><span class="n">require</span> <span class="err">'</span><span class="n">isearch</span><span class="o">+</span><span class="p">)</span>
+</pre></div>
+
+
+<p>and most im­por­tant­ly, you need to ed­it the file and un­com­ment all the com­m­mands you want to al­low.  If you fol­low my link above, it goes to my per­son­al dot­files re­po, where I've al­ready done that.</p> 
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>On a related note, this is the first of several emacs extensions I've installed that I've edited the extension file itself for.  The rest, I just had to add some code to .emacs.  In most cases, there was already a variable or suggested code snippet to add to .emacs to get what I wanted.
 </pre></div>
 
 
 <p>On the oth­er hand, with vim, I had to ed­it vir­tu­al­ly ev­ery ex­ten­sion I in­stalled to make it do what I wan­t.  I'm not sure what this mean­s, though.  It could be a state­ment about one of many things: how the emacs com­mu­ni­ty pro­vides nicer de­fault­s, how the vim lan­guage is eas­i­er to use, and hence more invit­ing for me to ed­it the files, or how I haven't got­ten around to mess­ing with cer­tain things yet.</p> 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>If you do a lot of work with LaTeX, check out <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.gnu.org/software/auctex/"</span><span class="nt">&gt;</span>AUCTeX<span class="nt">&lt;/a&gt;</span>. I haven't used it enough yet to say much about it, but from what I've played around with, it's pretty awesome.  And if you use a windowed version of emacs, it's got a really awesome preview mode.<span class="nt">&lt;/li&gt;</span>
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>If you do a lot of work with LaTeX, check out <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.gnu.org/software/auctex/"</span><span class="nt">&gt;</span>AUCTeX<span class="nt">&lt;/a&gt;</span>. I haven't used it enough yet to say much about it, but from what I've played around with, it's pretty awesome.  And if you use a windowed version of emacs, it's got a really awesome preview mode.<span class="nt">&lt;/li&gt;</span>
 
 <span class="nt">&lt;li&gt;</span>If you're bored, check out the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.dr-qubit.org/predictive/predictive-user-manual/html/index.php"</span><span class="nt">&gt;</span>predictive<span class="nt">&lt;/a&gt;</span> extension.  It's actually not as helpful as you'd think (unlike the very similar auto-complete-mode module mentioned above).  But it's kind of cool to turn on and play around with when you're typing something.  Maybe you'll learn new words or something.<span class="nt">&lt;/li&gt;</span>
 
@@ -203,7 +215,7 @@ MathJax.Hub.Config({
 
 
 <p>Some emacs ques­tion­s:</p> 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>I tried <span class="nt">&lt;code&gt;</span>(define-abbrev global-abbrev-table "Ondrej" "Ondřej")<span class="nt">&lt;/code&gt;</span>, so that when I type Ondrej it give me Ondřej.  But it doesn't work.  Is this a bug or what? If I do <span class="nt">&lt;code&gt;</span>(define-abbrev global-abbrev-table "foo" "bar")<span class="nt">&lt;/code&gt;</span> and type "foo", it turns into "bar", but the above leaves Ondrej alone. <span class="nt">&lt;em&gt;</span>EDIT: I guess this was an emacs bug.  It doesn't seem to be there any more (perhaps it was fixed with the git version or something).<span class="nt">&lt;/em&gt;&lt;/li&gt;</span>
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>I tried <span class="nt">&lt;code&gt;</span>(define-abbrev global-abbrev-table "Ondrej" "Ondřej")<span class="nt">&lt;/code&gt;</span>, so that when I type Ondrej it give me Ondřej.  But it doesn't work.  Is this a bug or what? If I do <span class="nt">&lt;code&gt;</span>(define-abbrev global-abbrev-table "foo" "bar")<span class="nt">&lt;/code&gt;</span> and type "foo", it turns into "bar", but the above leaves Ondrej alone. <span class="nt">&lt;em&gt;</span>EDIT: I guess this was an emacs bug.  It doesn't seem to be there any more (perhaps it was fixed with the git version or something).<span class="nt">&lt;/em&gt;&lt;/li&gt;</span>
 
 <span class="nt">&lt;li&gt;</span>Is there a way to reload .emacs without closing emacs? I'm doing that a lot these days. <span class="nt">&lt;em&gt;</span>EDIT: I found it. Do <span class="nt">&lt;code&gt;</span>M-x load-file RET ~/.emacs<span class="nt">&lt;/code&gt;&lt;/em&gt;&lt;/li&gt;</span>
 
@@ -214,25 +226,25 @@ MathJax.Hub.Config({
 <p>This Tues­day will mark the point where I will have spend as long us­ing emacs as I did us­ing vim. But al­ready, I feel more com­pe­tent with emac­s.  I won't re­peat what I said in my last post, but I just want to say that the abil­i­ty to ed­it and write at the same time makes me way more pro­duc­tive.  The fact that it us­es key­board short­cuts that I'm al­ready used to prob­a­bly helps a lot too.  Even so, I've not used any kind of cheat sheet for emacs (s­ince I nev­er re­al­ly found any that were any good), and yet I feel like I've mem­o­rized more key com­mands now than I ev­er did with vim, for which I did use a  <a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">cheat sheet</a>.   </p> 
  <p>So I re­al­ly don't see my­self go­ing back to vim at this point.</p> 
  <p>I'm ac­tu­al­ly sur­prised.  Vir­tu­al­ly ev­ery­one I know who us­es a com­mand line ed­i­tor us­es vim.  It's def­i­nite­ly the more pop­u­lar of the two.  But hav­ing tried both, I can on­ly spec­u­late as to why.  Vim has a much high­er learn­ing curve than emac­s.  Ev­ery­body grows up learn­ing how to write text in ed­i­tors like Mi­cro­soft Word, TextE­d­it, Notepad, etc., that all work fun­da­men­tal­ly like emac­s: if you type tex­t, it en­ters the tex­t.  If you want to do ad­vanced edit­ing with the key­board, you hold down some meta keys and type chord­ed key­board short­cut­s.  The vim modal edit­ing method­ol­o­gy is so dif­fer­ent from this, that it sur­pris­es me that so many peo­ple go to the trou­ble of learn­ing it (I mean, to the point that they are more ef­fi­cient with it).  I can see the ben­e­fit over GUI ed­i­tors, which have noth­ing on ei­ther vim or emacs with re­gards to cus­tomiza­tion, or just the plain edit­ing pow­er that is re­al­ly nec­es­sary for cod­ing. My guess­es why peo­ple use vim:</p> 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>They are shown vim first, so just use it.
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>They are shown vim first, so just use it.
 </pre></div>
 
 
 
 
-<div class="code"><pre><span class="nt">&lt;li&gt;</span>They are turned off by the massiveness of emacs (it seems contradictory to me, since the whole point of using a command line editor is to get more power, but I could see it).
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>They are turned off by the massiveness of emacs (it seems contradictory to me, since the whole point of using a command line editor is to get more power, but I could see it).
 </pre></div>
 
 
 
 
-<div class="code"><pre><span class="nt">&lt;li&gt;</span>They are turned off by emacs lisp.
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>They are turned off by emacs lisp.
 </pre></div>
 
 
 
 
-<div class="code"><pre><span class="nt">&lt;li&gt;</span>Some combination of those.<span class="nt">&lt;/li&gt;</span>
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>Some combination of those.<span class="nt">&lt;/li&gt;</span>
 </pre></div>
 
 

@@ -5,17 +5,19 @@ First, look at this
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a = []
 
-&gt;&gt;&gt; a.append(a)
+>>> a = []
 
-&gt;&gt;&gt; a
+>>> a.append(a)
+
+>>> a
 
 [[...]]
 
-[/code]
+
+```
 
 
 
@@ -23,17 +25,19 @@ What am I doing here?  I'm creating a list, <code>a</code>, and I'm adding it to
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a[0] is a
 
-True
-
-&gt;&gt;&gt; a[0] == a
+>>> a[0] is a
 
 True
 
-[/code]
+>>> a[0] == a
+
+True
+
+
+```
 
 
 
@@ -45,33 +49,35 @@ The first thing I wondered when I saw this was just how clever the printer was a
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a = []
 
-&gt;&gt;&gt; b = []
+>>> a = []
 
-&gt;&gt;&gt; a.append(b)
+>>> b = []
 
-&gt;&gt;&gt; b.append(a)
+>>> a.append(b)
 
-&gt;&gt;&gt; a
+>>> b.append(a)
 
-[[[...]]]
-
-&gt;&gt;&gt; b
+>>> a
 
 [[[...]]]
 
-&gt;&gt;&gt; a[0] is b
+>>> b
+
+[[[...]]]
+
+>>> a[0] is b
 
 True
 
-&gt;&gt;&gt; b[0] is a
+>>> b[0] is a
 
 True
 
-[/code]
+
+```
 
 
 
@@ -79,33 +85,28 @@ So it still works.  I had thought that maybe repr just catches <code>RuntimeErro
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a = []
 
-&gt;&gt;&gt; for i in range(10000):
+>>> a = []
+
+>>> for i in range(10000):
 
 ...     a = [a]
 
 ... 
 
-&gt;&gt;&gt; a
+>>> a
 
 Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-RuntimeError: maximum recursion depth exceeded while getting the repr of a list
-
-[/code]
+  File "<stdinreplaceme line in runtimeerror: maximum recursion depth exceeded while getting the repr of a list and by way case you were wondering it is possible to catch>RuntimeError (using the same <code>a</code> as the previous code block)
 
 
 
-And by the way, in case you were wondering, it is possible to catch a <code>RuntimeError</code> (using the same <code>a</code> as the previous code block)
+```py
 
 
-
-[code language="py"]
-
-&gt;&gt;&gt; try:
+>>> try:
 
 ...     print(a)
 
@@ -117,7 +118,8 @@ And by the way, in case you were wondering, it is possible to catch a <code>Runt
 
 no way
 
-[/code]
+
+```
 
 
 
@@ -129,23 +131,17 @@ Back to infinitely nested lists, we saw that printing works, but there are some 
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a[0] == b
+
+>>> a[0] == b
 
 True
 
-&gt;&gt;&gt; a[0] == a
+>>> a[0] == a
 
 Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-RuntimeError: maximum recursion depth exceeded in comparison
-
-[/code]
-
-
-
-<code>a[0] is b</code> holds (i.e., they are exactly the same object in memory), so <code>==</code> is able to short-circuit on them.  But to test <code>a[0] == a</code> it has to recursively compare the elements of <code>a</code> and <code>a[0]</code>.  Since it is infinitely nested, this leads to a recursion error.  Now an interesting question: why does this happen?  Is it because <code>==</code> on lists uses a depth first search?  If it were somehow possible to compare these two objects, would they be equal?
+  File "<stdinreplaceme line in runtimeerror: maximum recursion depth exceeded comparison>a[0] is b holds (i.e., they are exactly the same object in memory), so <code>==</code> is able to short-circuit on them.  But to test <code>a[0] == a</code> it has to recursively compare the elements of <code>a</code> and <code>a[0]</code>.  Since it is infinitely nested, this leads to a recursion error.  Now an interesting question: why does this happen?  Is it because <code>==</code> on lists uses a depth first search?  If it were somehow possible to compare these two objects, would they be equal?
 
 
 
@@ -157,4 +153,4 @@ Thinking of this brought me to my final question.  Is it possible to make a Pyth
 
 
 
-</p></body></html>
+</stdinreplaceme></stdinreplaceme></p></body></html>

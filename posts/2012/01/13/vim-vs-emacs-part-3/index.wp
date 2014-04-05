@@ -15,7 +15,8 @@ But unlike all the other hundreds of emacs features that I don't use, this one w
 
 
 
-[code]
+```
+
 
 ;; Disable all the version control stuff         
 
@@ -25,7 +26,8 @@ But unlike all the other hundreds of emacs features that I don't use, this one w
 
 (setq vc-handled-backends nil)
 
-[/code]
+
+```
 
 
 
@@ -45,7 +47,8 @@ This disables the version control stuff, making emacs load fast again (virtually
 	<li>I finally figured out how to enable mouse support.  For whatever reason, Googling got me nowhere with this, so I ended up asking on the <a href="https://lists.gnu.org/mailman/listinfo/help-gnu-emacs">help-gnu-emacs</a> list, which was very helpful.  The solution is to put
 
 
-[code]
+```
+
 
 ;; ===== Enable mouse support ====
                                       
@@ -53,7 +56,8 @@ This disables the version control stuff, making emacs load fast again (virtually
 
 (xterm-mouse-mode)
 
-[/code]
+
+```
 
 
 
@@ -65,7 +69,8 @@ in your .emacs file.  And then it just works.  It needs some tweaking (e.g., it 
 	<li>I found out how to allow editing in the Isearch mode (again, thanks to the help-gnu-emacs list).  You need to install the <a href="https://github.com/asmeurer/dotfiles/blob/master/.emacs.d/lisp/isearch%2B.el">isearch+</a> extension, add the following to your .emacs,
 
 
-[code]
+```
+
 
 ;; ===== isearch+ =====         
 
@@ -73,7 +78,8 @@ in your .emacs file.  And then it just works.  It needs some tweaking (e.g., it 
 
 (require 'isearch+)
 
-[/code]
+
+```
 
 
 

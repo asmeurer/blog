@@ -15,7 +15,8 @@ So, how about some examples?  The first one comes from <a href="http://">Algorit
 
 <strong>Hover over the code and click on the left-most, "view source" icon (a paper icon with <tt>&lt; &gt;</tt> over it) to view without breaks.  Opens in a new window.</strong>
 
-[code language="py"]
+```py
+
 
 In [1]: from sympy.integrals.risch import integrate_primitive,
 
@@ -110,7 +111,8 @@ Out[10]:
 
 ⎝                                                        log (1 + x) - x ⋅ℯ                       ⎠
 
-[/code]
+
+```
 
 An explanation:  <code>f</code> is the function we are integrating.  Preparsing is not implemented yet, so we have to do it manually in <tt>[5]</tt>.  <tt>[8]</tt> is the list of derivations of the monomials we are working with, <code>[x, t0, t1]</code>, which represent $latex x$, $latex e^{x^2}$, and $latex \log{(x + 1)}$, respectively. Because the outermost monomial is a logarithm (primitive), we call <code>integrate_primitive()</code> on it.  The last argument of the function is the back substitution list, in reverse order because that is the order we have to back substitute in.  We can see the result contains an unevaluated Integral.  This is because the recursive calls to integrate over the smaller extensions have not yet been implemented.  In the final version, <code>integrate()</code> will automatically call <code>ratint()</code> in this case on it to give the complete answer.  The second argument of the result, True, indicates that the integral was elementary and that this is the complete integral.
 
@@ -120,7 +122,8 @@ Because the extensions did not depend on each other, we could have also integrat
 
 
 
-[code language="py"]
+```py
+
 
 In [11]: a1, d1 = map(lambda i: Poly(i, t0), f.subs(exp(x**2), t0).subs(log(x + 1), t1).as_numer_denom())
 
@@ -154,13 +157,15 @@ Out[14]:
 
 ⎝                                                      - x⋅log (1 + x) + x ⋅ℯ                       ⎠
 
-[/code]
+
+```
 
 We can verify by taking the derivative that the results in each case are antiderivatives of the original function, <code>f</code>, even though they appear different.
 
 
 
-[code language="py"]
+```py
+
 
 In [15]: cancel(r[0].diff(x) - f)
 
@@ -172,7 +177,8 @@ In [16]: cancel(r1[0].diff(x) - f)
 
 Out[16]: 0
 
-[/code]
+
+```
 
 
 
@@ -180,7 +186,8 @@ We can see in each case, the remaining unevaluated <code>Integral</code> was in 
 
 
 
-[code language="py"]
+```py
+
 
 In [17]: %timeit integrate_primitive(a, d, D, [x, t0, t1], [lambda x: log(x + 1), lambda x: exp(x**2)])
 
@@ -192,7 +199,8 @@ In [18]: %timeit integrate_hyperexponential(a1, d1, D1, [x, t1, t0], [lambda x: 
 
 1 loops, best of 3: 2.63 s per loop
 
-[/code]
+
+```
 
 
 
@@ -200,7 +208,8 @@ Just as with the exponential case, the function can prove the integrals are non-
 
 
 
-[code language="py"]
+```py
+
 
 In [19]: f1 = 1/log(x)
 
@@ -226,7 +235,8 @@ In [23]: integrate_primitive(a, d, [Poly(1, x), Poly(1/x, t1)], [x, t1], [log])
 
 Out[23]: (0, False)
 
-[/code]
+
+```
 
 
 
@@ -238,7 +248,8 @@ Finally, be aware that, just as with <code>integrate_hyperexponential()</code> m
 
 
 
-[code language="py"]
+```py
+
 
 In [25]: f = log(log(x))**2
 
@@ -282,7 +293,8 @@ In [31]: integrate_primitive(a, d, D, [x, t0, t1], [lambda x: log(log(x)), log])
 
 NotImplementedError: Remaining cases for Poly RDE not yet implemented.
 
-[/code]
+
+```
 
 
 
@@ -290,7 +302,8 @@ Now one thing that I want to add from the above examples taken from the commit m
 
 
 
-[code language="py"]
+```py
+
 
 In [32]: diff(atan(x)**2, x)
 
@@ -331,7 +344,8 @@ Out[34]:
 
 ⎝⌡                  ⎠
 
-[/code]
+
+```
 
 
 

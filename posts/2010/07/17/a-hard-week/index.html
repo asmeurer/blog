@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -143,16 +143,19 @@ MathJax.Hub.Config({
     <div>
 <p></p>
 <p>Af­ter last week's  <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">break­through</a>, work this week has been very slow.  I start­ed work­ing on the Para­met­ric Risch Dif­fer­en­tial Equa­tion Prob­lem, which is al­most iden­ti­cal to the Risch Dif­fer­en­tial Equa­tion Prob­lem in how it is solved, ex­cept there are a few ex­tra step­s.  Un­for­tu­nate­ly, be­cause it is so sim­i­lar, Bron­stein breezes through the de­scrip­tion.  This is fine for the parts that are the same, but he is a lit­tle un­clear on how some of the new parts fit in.  Al­so, his pseu­docode has a line more or less say­ing  </p> 
- <p>[code]</p> 
- <p>if r1 = … = rn = 0 then
-    N = -1
-else
-    N = max(deg(r1), …, deg(rn))</p> 
- <p>for i from 0 to N
-    for j from 1 to m
-        Mij = co­ef­fi­cien­t(r­j, t^i)</p> 
- <p>[/­code]</p> 
- <p>where M is a ma­trix.  It is not very clear what this is sup­posed to mean in the case where N = -1.  Ob­vi­ous­ly, you can't have a a ma­trix with neg­a­tive di­men­sion­s.  Clear­ly, this means that this par­tic­u­lar func­tion does­n't ap­ply some­how in this case, but I am not re­al­ly even sure where it fits in to the whole al­go­rithm at this point in read­ing.  Af­ter read­ing a few more pages in, it gives a few hints here and there on how it is to be used, but nev­er is it ex­plic­it­ly shown, in pseu­docode or oth­er­wise.  So for now, I think my best bet is to read ahead and get a fuller un­der­stand­ing of the com­plete func­tion be­fore I try im­ple­ment­ing any­thing (this is what I had been do­ing be­fore, but I caught up to my­self).   </p> 
+ <div class="codehilite"><pre><span class="k">if</span> <span class="n">r1</span> <span class="o">=</span> <span class="err">…</span> <span class="o">=</span> <span class="n">rn</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="k">else</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">deg</span><span class="p">(</span><span class="n">r1</span><span class="p">),</span> <span class="err">…</span><span class="p">,</span> <span class="n">deg</span><span class="p">(</span><span class="n">rn</span><span class="p">))</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="n">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">N</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="n">from</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">m</span>
+        <span class="n">Mij</span> <span class="o">=</span> <span class="n">coefficient</span><span class="p">(</span><span class="n">rj</span><span class="p">,</span> <span class="n">t</span><span class="o">^</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+
+
+<p>where M is a ma­trix.  It is not very clear what this is sup­posed to mean in the case where N = -1.  Ob­vi­ous­ly, you can't have a a ma­trix with neg­a­tive di­men­sion­s.  Clear­ly, this means that this par­tic­u­lar func­tion does­n't ap­ply some­how in this case, but I am not re­al­ly even sure where it fits in to the whole al­go­rithm at this point in read­ing.  Af­ter read­ing a few more pages in, it gives a few hints here and there on how it is to be used, but nev­er is it ex­plic­it­ly shown, in pseu­docode or oth­er­wise.  So for now, I think my best bet is to read ahead and get a fuller un­der­stand­ing of the com­plete func­tion be­fore I try im­ple­ment­ing any­thing (this is what I had been do­ing be­fore, but I caught up to my­self).   </p> 
  <p>Al­so, on an un­re­lat­ed note, I just found out to­day that I passed my  <a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/faqs#evaluations">Google Sum­mer of Code midterm eval­u­a­tion</a>.  This means that I will re­ceive half of my stipend for the pro­gram (the oth­er half comes af­ter pass­ing the fi­nal eval­u­a­tion at the end of the sum­mer), and that I can con­tin­ue work­ing on my project in the pro­gram.   </p> 
  <p>ED­IT:</p> 
  <p>Lat­er in the tex­t, it runs through an ex­am­ple and says "… $la­tex dc = -1$, hence M and A are 0 by 0 ma­tri­ces."  So ob­vi­ous­ly, that is what was mean­t.   </p>

@@ -91,7 +91,8 @@ You can run all this yourself. Checkout the 0.7.3 branch from SymPy, then cd int
 
 
 
-[code]
+```
+
 
 vagrant up
 
@@ -99,7 +100,8 @@ fab vagrant prepare
 
 fab vagrant release
 
-[/code]
+
+```
 
 
 

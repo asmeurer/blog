@@ -1,7 +1,8 @@
 <html><body><p>Just a few moments ago, <a href="https://github.com/sympy/sympy/pull/548" target="_blank">a branch</a> was pushed in that fixed one of my biggest grievances in SymPy, if not the biggest.  Previously we had this behavior:
 
 
-[code language="py"]
+```py
+
 
 In [1]: sqrt(x)
 
@@ -13,7 +14,8 @@ In [2]: solve(x**2 - 2, x)
 
 Out[2]: [-2**(1/2), 2**(1/2)]
 
-[/code]
+
+```
 
 
 
@@ -21,7 +23,8 @@ Now suppose you took the output of those expressions and pasted them into isympy
 
 
 
-[code language="py"]
+```py
+
 
 In [3]: x**(1/2)
 
@@ -33,7 +36,8 @@ In [4]: [-2**(1/2), 2**(1/2)]
 
 Out[4]: [-1.41421356237, 1.41421356237]
 
-[/code]
+
+```
 
 
 
@@ -41,7 +45,8 @@ That's with <code>__future__.division</code>.  Here's what would happen with old
 
 
 
-[code language="py"]
+```py
+
 
 In [2]: x**(1/2)
 
@@ -53,7 +58,8 @@ In [3]: [-2**(1/2), 2**(1/2)]
 
 Out[3]: [-1, 1]
 
-[/code]
+
+```
 
 
 
@@ -65,7 +71,8 @@ The problem is that Python evaluates <code>1/2</code> to <code>0.5</code> (or <c
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: sympify("x**(1/2)")
 
@@ -77,7 +84,8 @@ In [2]: sympify("[-2**(1/2), 2**(1/2)]")
 
 Out[2]: [-2**(1/2), 2**(1/2)]
 
-[/code]
+
+```
 
 
 
@@ -85,7 +93,8 @@ If that was too much typing for you, you could use the <code>S()</code> shortcut
 
 
 
-[code language="py"]
+```py
+
 
 In [3]: S("x**(1/2)")
 
@@ -97,7 +106,8 @@ In [4]: S("[-2**(1/2), 2**(1/2)]")
 
 Out[4]: [-2**(1/2), 2**(1/2)]
 
-[/code]
+
+```
 
 
 
@@ -105,7 +115,8 @@ This solution is fine if you want to paste an expression into a SymPy session, b
 
 
 
-[code language="py"]
+```py
+
 
 In [5]: x**(S(1)/2)
 
@@ -117,7 +128,8 @@ In [6]: [-2**(S(1)/2), 2**(S(1)/2)]
 
 Out[6]: [-2**(1/2), 2**(1/2)]
 
-[/code]
+
+```
 
 
 
@@ -129,7 +141,8 @@ Well, this last item should make you think.  If <code>sqrt(x)</code> is more rea
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: sqrt(x)
 
@@ -141,7 +154,8 @@ In [2]: solve(x**2 - 2, x)
 
 Out[2]: [-sqrt(2), sqrt(2)]
 
-[/code]
+
+```
 
 
 
@@ -149,13 +163,14 @@ You can obviously just copy and paste these results, and you get the exact same 
 
 
 
-[code language="py"]
+```py
+
 
 Before:
 
-&gt;&gt;&gt; e = ((2+2*sqrt(2))*x+(2+sqrt(8))*y)/(2+sqrt(2))
+>>> e = ((2+2*sqrt(2))*x+(2+sqrt(8))*y)/(2+sqrt(2))
 
-&gt;&gt;&gt; radsimp(e)
+>>> radsimp(e)
 
 2**(1/2)*x + 2**(1/2)*y
 
@@ -163,21 +178,23 @@ Before:
 
 After:
 
-&gt;&gt;&gt; radsimp(e)
+>>> radsimp(e)
 
 sqrt(2)*x + sqrt(2)*y
 
-[/code]
+
+```
 
 
 
-[code language="py"]
+```py
+
 
 Before:
 
-&gt;&gt;&gt; b = besselj(n, z)
+>>> b = besselj(n, z)
 
-&gt;&gt;&gt; b.rewrite(jn)
+>>> b.rewrite(jn)
 
 2**(1/2)*z**(1/2)*jn(n - 1/2, z)/pi**(1/2)
 
@@ -185,21 +202,23 @@ Before:
 
 After:
 
-&gt;&gt;&gt; b.rewrite(jn)
+>>> b.rewrite(jn)
 
 sqrt(2)*sqrt(z)*jn(n - 1/2, z)/sqrt(pi)
 
-[/code]
+
+```
 
 
 
-[code language="py"]
+```py
+
 
 Before:
 
-&gt;&gt;&gt; x = sympify('-1/(-3/2+(1/2)*sqrt(5))*sqrt(3/2-1/2*sqrt(5))')
+>>> x = sympify('-1/(-3/2+(1/2)*sqrt(5))*sqrt(3/2-1/2*sqrt(5))')
 
-&gt;&gt;&gt; x
+>>> x
 
 (3/2 - 5**(1/2)/2)**(-1/2)
 
@@ -207,11 +226,12 @@ Before:
 
 After
 
-&gt;&gt;&gt; x
+>>> x
 
 1/sqrt(3/2 - sqrt(5)/2)
 
-[/code]
+
+```
 
 
 
@@ -231,13 +251,15 @@ This is a big change, and I believe it will fix the copy-paste problem for 90% o
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: x**Rational(3, 2)
 
 Out[1]: x**(3/2)
 
-[/code]
+
+```
 
 
 
@@ -245,13 +267,15 @@ Also, as you may have noticed in the last example above, a rational number that 
 
 
 
-[code language="py"]
+```py
+
 
 In [2]: (1 + x)/2
 
 Out[2]: x/2 + 1/2
 
-[/code]
+
+```
 
 
 
@@ -259,7 +283,8 @@ Therefore, I'm leaving the <a href="http://code.google.com/p/sympy/issues/detail
 
 
 
-[code language="py"]
+```py
+
 
 In [3]: sqrt(x**3)
 
@@ -271,7 +296,8 @@ In [4]: sqrt(x)**3
 
 Out[4]: x**(3/2)
 
-[/code]
+
+```
 
 
 
@@ -291,17 +317,19 @@ Another idea, which is probably not a good one, is to always print <code>int/int
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; Rational(1, 2)
+
+>>> Rational(1, 2)
 
 S(1)/2
 
-&gt;&gt;&gt; x**Rational(4, 5)
+>>> x**Rational(4, 5)
 
 x**(S(4)/5)
 
-[/code]
+
+```
 
 
 

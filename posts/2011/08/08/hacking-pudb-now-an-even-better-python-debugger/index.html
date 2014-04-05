@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -182,10 +182,11 @@ MathJax.Hub.Config({
  <p><a href="../../../../../2011/08/screen-shot-2011-08-07-at-8-41-30-pm.png"><img src="http://asmeurersympy.files.wordpress.com/2011/08/screen-shot-2011-08-07-at-8-41-30-pm.png?w=243" alt="" title="PuDB Prefs Window" width="243" height="300" class="size-medium wp-image-1023"></a></p> 
  <p>So if you're not al­ready us­ing this awe­some Python de­bug­ger, you should.  You can  <code>pip in­stall pudb</code>, or  <a href="https://github.com/inducer/pudb" target="_blank">fork it</a>  at GitHub.</p> 
  <p>Run­ning it in your code is very easy.  Just add</p> 
- <p>[code lang="py"]</p> 
- <p>im­port pud­b;pud­b.set_­trace()</p> 
- <p>[/­code]</p> 
- <p>in your code wher­ev­er you want to set a break point, or you can do  <code>python -m pud­b.run scrip­t.py</code>.</p> 
+ <div class="codehilite"><pre><span class="kn">import</span> <span class="nn">pudb</span><span class="p">;</span><span class="n">pudb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+</pre></div>
+
+
+<p>in your code wher­ev­er you want to set a break point, or you can do  <code>python -m pud­b.run scrip­t.py</code>.</p> 
  <p>This awe­some tool has in­creased my pro­duc­tiv­i­ty ten­fold since I dis­cov­ered it, and has helped me track down bugs that would have oth­er­wise ex­treme­ly dif­fi­cult if not im­pos­si­ble to find.  And now, it's just bet­ter.</p> 
  <p>PuDB us­es the  <a href="http://excess.org/urwid/" target="_blank">ur­wid li­brary</a>  to do all its con­sole GUI mag­ic.  This li­brary makes it pret­ty easy to do a lot of stuff. For ex­am­ple, it au­to­mat­i­cal­ly does rel­a­tive siz­ing of wid­get­s, so, for ex­am­ple, when you re­size the vari­ables, stack, or break­points views, you are ac­tu­al­ly in­creas­ing the rel­a­tive size of each, not the size in char­ac­ter­s.  This makes it por­ta­ble against any ter­mi­nal size.  The li­brary al­so made cod­ing the prefs win­dow autoup­date mag­ic very easy.</p> 
  <p>Al­so, I just want to note that git and GitHub make col­lab­o­ra­tion like this very easy.  I just forked his pro­jec­t, made some im­prove­ments, and sub­mit­ted them as pull re­quest­s.  Then it was easy to dis­cuss the changes.  If the code had not been on GitHub and es­pe­cial­ly if it had not been in git, I prob­a­bly would have nev­er both­ered to sub­mit my con­tri­bu­tions up­stream.  I high­ly rec­om­mend that ev­ery open source project use git and GitHub.</p>

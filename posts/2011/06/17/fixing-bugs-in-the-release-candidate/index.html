@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -145,19 +145,22 @@ MathJax.Hub.Config({
 <p>This week, I most­ly worked on fix­ing bugs that peo­ple found in the  <a href="http://asmeurersympy.wordpress.com/2011/06/13/sympy-0-7-0-rc1-is-out/">re­lease can­di­date</a>  I re­leased last week.  I dis­cov­ered right af­ter re­leas­ing it that it did not work in Python 2.4 or 2.5 be­cause of a syn­tax er­ror.  So I fixed those and cre­at­ed SymPy 0.7.0.r­c2 (<a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.tar.gz" target="_blank">source</a>;  <a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.win32.exe" target="_blank">win­dows in­stall­er</a>).   </p> 
  <p>Things were go­ing pret­ty smooth­ly with that, un­til Re­na­to Coutin­ho dis­cov­ered that there were test fail­ures in Python 2.4 on Win­dows, and that the tests failed if ran twice in the same ses­sion (i.e., by us­ing  <code>test()</code>  in isympy).  I was able to fix the fail­ures re­sult­ing from two ses­sion­s, which were al­most all caused by a test mod­i­fy­ing some glob­al val­ue or be­ing writ­ten in a way that did not al­low it to pass when run twice.  But I do not have a Win­dows ma­chine, so I could­n't re­pro­duce the Win­dows fail­ures.</p> 
  <p>For­tu­nate­ly, yes­ter­day, Re­na­to, Chris Smith, and I were able to de­bug the prob­lems over IR­C.  The main prob­lem was that sympy/­core/e­valf.py had code</p> 
- <p>[code lan­guage="py"]</p> 
- <p>INF = 1e1000</p> 
- <p>MI­NUS_INF = -1e1000</p> 
- <p>[/­code]</p> 
- <p>These were in­tend­ed to give  <code>float('in­f')</code>  and  <code>float('-in­f')</code>, re­spec­tive­ly (float­ing point in­fin­i­ty and neg­a­tive in­fin­i­ty). And they did do this… on all plat­forms ex­cept for Python 2.4 on Win­dows.  From what I can tell from what Chris told me, on that plat­form it in­stead gives 1.0.  Strange­ly,  <code>float('in­f')</code>  did not give float­ing point in­fin­i­ty ei­ther.  We dis­cov­ered that  <code>float(mp­math­_in­f)</code>  did give float­ing point in­fin­i­ty, where  <code>mp­math­_inf</code>  is mp­math­'s in­fin­i­ty.  This of course al­so works in all oth­er plat­form­s, so chang­ing it made the code work ev­ery­where.</p> 
+ <div class="codehilite"><pre><span class="n">INF</span> <span class="o">=</span> <span class="mf">1e1000</span>
+
+<span class="n">MINUS_INF</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1e1000</span>
+</pre></div>
+
+
+<p>These were in­tend­ed to give  <code>float('in­f')</code>  and  <code>float('-in­f')</code>, re­spec­tive­ly (float­ing point in­fin­i­ty and neg­a­tive in­fin­i­ty). And they did do this… on all plat­forms ex­cept for Python 2.4 on Win­dows.  From what I can tell from what Chris told me, on that plat­form it in­stead gives 1.0.  Strange­ly,  <code>float('in­f')</code>  did not give float­ing point in­fin­i­ty ei­ther.  We dis­cov­ered that  <code>float(mp­math­_in­f)</code>  did give float­ing point in­fin­i­ty, where  <code>mp­math­_inf</code>  is mp­math­'s in­fin­i­ty.  This of course al­so works in all oth­er plat­form­s, so chang­ing it made the code work ev­ery­where.</p> 
  <p>Af­ter that, there was on­ly one test fail­ure left in Win­dows (o­rig­i­nal­ly there were dozens of er­rors, but all but one were caused by the above prob­lem).  It turns out that the  <code>sub­pro­cess</code>  mod­ule from the code­gen mod­ule was caus­ing the test run­ner to fail en­tire­ly.  Our so­lu­tion was to skip this test com­plete­ly in Python 2.4 on Win­dows.</p> 
  <p>So now we had all tests pass­ing on all plat­forms with all ground type­s, even if run twice from with­in the same ses­sion.</p> 
  <p>But it turned out there was still one more er­ror lurk­ing, found by Re­na­to.  A bunch of mp­math tests failed in Python 2.4 when gmpy was in­stalled.  I had nev­er got­ten gmpy to com­pile, so I have on­ly had it in­stalled on my ma­chine for those Python ex­e­cuta­bles in­stalled by fink (2.5-2.7, 64-bit).   </p> 
  <p>It turns out that mp­math us­es gmpy if it is in­stalled.  There were a few places in the code where it was do­ing things like line 1947 of mp­math­/libm­p/gam­maze­ta.py, shown be­low:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>re­turn mpf_­pos(s­mal­l­_­fac­to­ri­al_­cache[n-1], prec, rnd)</p> 
- <p>[/­code]</p> 
- <p>The prob­lem was that  <code>n</code>  was an  <code>mpz</code>, or gmpy in­te­ger.  But Python 2.4 and ealier do not sup­port non-int types as the in­dex to list­s.  It was­n't un­til Python 2.5's  <a href="http://docs.python.org/reference/datamodel.html?highlight=__index__#object.__index__" target="_blank"><code><strong>in­dex</strong></code></a>  method that non-in­t/­long types were able to be used as slice in­dices.   </p> 
+ <div class="codehilite"><pre><span class="k">return</span> <span class="n">mpf_pos</span><span class="p">(</span><span class="n">small_factorial_cache</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">prec</span><span class="p">,</span> <span class="n">rnd</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The prob­lem was that  <code>n</code>  was an  <code>mpz</code>, or gmpy in­te­ger.  But Python 2.4 and ealier do not sup­port non-int types as the in­dex to list­s.  It was­n't un­til Python 2.5's  <a href="http://docs.python.org/reference/datamodel.html?highlight=__index__#object.__index__" target="_blank"><code><strong>in­dex</strong></code></a>  method that non-in­t/­long types were able to be used as slice in­dices.   </p> 
  <p>This id­iom was be­ing used in sev­er­al places through­out the code, so rather than try to patch them al­l, we de­cid­ed to just dis­able the gmpy back­end in mp­math for Python 2.4.  This is­sue had nev­er come up be­fore to my knowl­edge, so it seems that he was the first per­son to run the mp­math tests in Python 2.4 with gmpy in­stalled.   </p> 
  <p>So now tests should be pass­ing ev­ery­where in the  <a href="github.com/sympy/sympy/tree/0.7.0" target="_blank">0.7.0 branch</a>.  Please con­tin­ue to test it, though.  If it will make it eas­i­er to test, I will cre­ate a 0.7.0.r­c3 with all the lat­est fix­es.  Oth­er­wise, bar­ring any fur­ther ma­jor fix­es, I will re­lease 0.7.0 fi­nal in about a week.</p> 
  <p>And a big thanks for Re­na­to Coutin­ho and Chris Smith for help­ing me de­bug and fix these bugs.    </p>

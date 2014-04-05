@@ -1,11 +1,13 @@
 <html><body><p>Both the awesome <a href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">IPython notebook</a> and <a href="http://ipython.org/ipython-doc/stable/interactive/qtconsole.html">Qtconsole</a> are in the Ubuntu repositories, so if you just want to use the stable released versions, you can just do
 
 
-[code language="bash"]
+```bash
+
 
 sudo apt-get install ipython-notebook ipython-qtconsole
 
-[/code]
+
+```
 
 
 
@@ -13,7 +15,8 @@ and be on your way.  But the git development version has a lot of cool new featu
 
 
 
-[code language="bash"]
+```bash
+
 
 # First install git, if you don't already have it
 
@@ -35,7 +38,8 @@ sudo apt-get remove ipython-notebook ipython -qtconsole ipython
 
 sudo python setup.py develop
 
-[/code]
+
+```
 
 
 

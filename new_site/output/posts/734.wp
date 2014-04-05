@@ -1,8 +1,0 @@
-<html><body><p>OK, fink claims that f2py is installed as a virtual package to numpy.
-
-
-<a href="http://pastebin.com/prhZ6DNu">This</a> is my <code>quiet=False</code> output.
-
-
-
-Sorry, I actually don't know anything about numpy, Fortran, or code generation, but seeing SymPy faster than the other guy always perks my interest :)</p></body></html>

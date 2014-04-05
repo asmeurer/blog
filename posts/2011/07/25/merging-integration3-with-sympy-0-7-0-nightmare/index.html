@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -160,24 +160,36 @@ MathJax.Hub.Config({
  <p>Then, I had to fix a few bugs that caused test fail­ures.  Sev­er­al se­man­tics were changed in the re­lease.  I think the ones that I had to change were the re­nam­ing of  <code>has_any_sym­bols</code>  to just  <code>has</code>, the re­nam­ing of  <code>Poly.as_ba­sic()</code>  to  <code>Poly.as_­ex­pr()</code>, and the swap­ping of the mean­ings of  <code>quo</code>  and  <code>exquo</code>  in the polys.  There were al­so some doctest fail­ures due to the change to lex­i­co­graph­ic or­der­ing in the print­er.</p> 
  <p>Af­ter all that, there were two re­gres­sions that caused test fail­ures.  The first was the fol­low­ing:</p> 
  <p>Be­fore:</p> 
- <p>[code lang="py"]</p> 
- <p>In [1]: In­te­gral((­ex­p(x<em>log(x))</em>log(x)), x).­sub­s(­ex­p(x<em>log(x)), x</em>*x)</p> 
- <p>Out­[1]:  </p> 
- <p>⌠              </p> 
- <p>⎮  x           </p> 
- <p>⎮ x ⋅log(x) dx</p> 
- <p>⌡              </p> 
- <p>[/­code]</p> 
- <p>Af­ter:</p> 
- <p>[code lang="py"]</p> 
- <p>In [1]: In­te­gral((­ex­p(x<em>log(x))</em>log(x)), x).­sub­s(­ex­p(x<em>log(x)), x</em>*x)</p> 
- <p>Out­[1]:  </p> 
- <p>⌠                     </p> 
- <p>⎮  x⋅log(x)           </p> 
- <p>⎮ ℯ        ⋅log(x) dx</p> 
- <p>⌡                     </p> 
- <p>[/­code]</p> 
- <p>This sub­sti­tu­tion is nec­es­sary be­cause the Risch al­go­rithm re­quires ex­pres­sions like $la­tex x^x$ to be rewrit­ten as $la­tex e^{x\log(x)}$ be­fore it can in­te­grate them, but I try to con­vert them back af­ter in­te­grat­ing so that the us­er gets the same thing in the re­sult that he en­tered.  I cre­at­ed  <a href="http://code.google.com/p/sympy/issues/detail?id=2571" target="_blank">is­sue 2571</a>  for this.</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">Integral</span><span class="p">((</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> 
+
+<span class="err">⌠</span>             
+
+<span class="err">⎮</span>  <span class="n">x</span>          
+
+<span class="err">⎮</span> <span class="n">x</span> <span class="err">⋅</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">dx</span>
+
+<span class="err">⌡</span>             
+</pre></div>
+
+
+<p>Af­ter:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">Integral</span><span class="p">((</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> 
+
+<span class="err">⌠</span>                    
+
+<span class="err">⎮</span>  <span class="n">x</span><span class="err">⋅</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>          
+
+<span class="err">⎮</span> <span class="err">ℯ</span>        <span class="err">⋅</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">dx</span>
+
+<span class="err">⌡</span>                    
+</pre></div>
+
+
+<p>This sub­sti­tu­tion is nec­es­sary be­cause the Risch al­go­rithm re­quires ex­pres­sions like $la­tex x^x$ to be rewrit­ten as $la­tex e^{x\log(x)}$ be­fore it can in­te­grate them, but I try to con­vert them back af­ter in­te­grat­ing so that the us­er gets the same thing in the re­sult that he en­tered.  I cre­at­ed  <a href="http://code.google.com/p/sympy/issues/detail?id=2571" target="_blank">is­sue 2571</a>  for this.</p> 
  <p>The sec­ond was that I had sev­er­al places in my doc­strings with things like</p> 
  <blockquote>
 
@@ -187,32 +199,36 @@ Given a derivation D on k[t] and f, g in k(t) with f weakly normalized with resp
 
 <p>The prob­lem here is the "raise NonEle­men­tary­In­te­gralEx­cep­tion," part.  The code qual­i­ty check­er things that this is an old style ex­cep­tion (like  <code>raise Ex­cep­tion, mes­sage</code>), due to a poor­ly formed reg­u­lar ex­pres­sion.  I fixed this in a  <a href="https://github.com/sympy/sympy/pull/511" target="_blank">pull re­quest</a>.</p> 
  <p>The good news is that now a lot of stuff works that did­n't be­fore be­cause of fix­es that were re­quired that on­ly ex­ist­ed in  <code>mas­ter</code>.  For ex­am­ple, the fol­low­ing did not work be­fore, but now does due to im­prove­ments to  <code>Root­Sum</code>:</p> 
- <p>[code lang="py"]</p> 
- <p>In [1]: risch_in­te­grate(1/(­ex­p(5*x) + ex­p(x) + 1), x)</p> 
- <p>Out­[1]: 
-           ⎛    2                                                          <br> 
-x + Root­Sum⎝21⋅z  + 6⋅z + 1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>4/4 - 3381*_i</strong>3/4  </p> 
- <div class="code"><pre>                                   <span class="err">⎞</span>          <span class="err">⎛</span>     <span class="mi">3</span>        <span class="mi">2</span>
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> 
+           <span class="err">⎛</span>    <span class="mi">2</span>                                                           
+<span class="n">x</span> <span class="o">+</span> <span class="n">RootSum</span><span class="err">⎝</span><span class="mi">21</span><span class="err">⋅</span><span class="n">z</span>  <span class="o">+</span> <span class="mi">6</span><span class="err">⋅</span><span class="n">z</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">(</span><span class="n">_i</span><span class="p">,</span> <span class="n">_i</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mi">3381</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3381</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span> 
+
+
+                                       <span class="err">⎞</span>          <span class="err">⎛</span>     <span class="mi">3</span>        <span class="mi">2</span>          
+<span class="o">-</span> <span class="mi">625</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">125</span><span class="o">*</span><span class="n">_i</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="p">))</span><span class="err">⎠</span> <span class="o">+</span> <span class="n">RootSum</span><span class="err">⎝</span><span class="mi">161</span><span class="err">⋅</span><span class="n">z</span>  <span class="o">+</span> <span class="mi">115</span><span class="err">⋅</span><span class="n">z</span>  <span class="o">+</span> <span class="mi">19</span><span class="err">⋅</span><span class="n">z</span> <span class="o">+</span> 
+
+
+
+<span class="mi">1</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">(</span><span class="n">_i</span><span class="p">,</span> <span class="n">_i</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mi">3381</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3381</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">625</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">125</span><span class="o">*</span><span class="n">_i</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span>
+
+
+             <span class="err">⎞</span>
+ <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="p">))</span><span class="err">⎠</span>
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">cancel</span><span class="p">(</span><span class="n">risch_integrate</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
+      <span class="mi">1</span>      
+<span class="err">─────────────</span>
+ <span class="mi">5</span><span class="err">⋅</span><span class="n">x</span>    <span class="n">x</span>    
+<span class="err">ℯ</span>    <span class="o">+</span> <span class="err">ℯ</span>  <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 
 
-<ul>
-<li>625<em>_i</em><em>2/2 - 125</em>_i/2 + ex­p(x) - 5))⎠ + Root­Sum⎝161⋅z  + 115⋅z  + 19⋅z +  </li> 
- </ul>
-<p>1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>4/4 - 3381*_i</strong>3/4 - 625<em>_i</em><em>2/2 - 125</em>_i/2 +</p> 
- <div class="code"><pre>         <span class="err">⎞</span>
-</pre></div>
-
-
-<p>ex­p(x) - 5))⎠</p> 
- <p>In [2]: can­cel(risch_in­te­grate(1/(­ex­p(5*x) + ex­p(x) + 1), x).d­if­f(x))</p> 
- <p>Out­[2]: 
-      1     <br> 
-─────────────
- 5⋅x    x   <br> 
-ℯ    + ℯ  + 1</p> 
- <p>[/­code]</p> 
- <p>The gen­er­al def­i­ni­tion of the log­a­rith­mic part of an in­te­gral is a sum over the roots of a poly­no­mi­al, which must be ex­pressed as a  <code>Root­Sum</code>  in the gen­er­al case.  Pre­vi­ous­ly,  <code>Root­Sum.d­iff</code>  did not work, but thanks to Ma­teusz, an al­go­rithm for com­put­ing ex­act­ly the Root­Sum where the Lamb­da ex­pres­sion is a ra­tio­nal func­tion was im­ple­ment­ed (see  <a href="http://mattpap.github.com/scipy-2011-tutorial/html/mathematics.html#summing-roots-of-polynomials" target="_blank">this bit</a>  from our SciPy tu­to­ri­al for an idea on how this work­s), so now the Risch Al­go­rithm can work with Root­Sum ob­jects just as well with as an or­di­nary sum of log­a­rithm­s.</p> 
+<p>The gen­er­al def­i­ni­tion of the log­a­rith­mic part of an in­te­gral is a sum over the roots of a poly­no­mi­al, which must be ex­pressed as a  <code>Root­Sum</code>  in the gen­er­al case.  Pre­vi­ous­ly,  <code>Root­Sum.d­iff</code>  did not work, but thanks to Ma­teusz, an al­go­rithm for com­put­ing ex­act­ly the Root­Sum where the Lamb­da ex­pres­sion is a ra­tio­nal func­tion was im­ple­ment­ed (see  <a href="http://mattpap.github.com/scipy-2011-tutorial/html/mathematics.html#summing-roots-of-polynomials" target="_blank">this bit</a>  from our SciPy tu­to­ri­al for an idea on how this work­s), so now the Risch Al­go­rithm can work with Root­Sum ob­jects just as well with as an or­di­nary sum of log­a­rithm­s.</p> 
  <p>Al­so, there was a bug in the square free al­go­rithm in my branch that was fixed in  <code>mas­ter</code>  that was caus­ing wrong re­sults (I don't re­mem­ber the ex­pres­sion that pro­duced them right now), and al­so there was a fix by me in  <code>mas­ter</code>  to make  <code>is_ra­tional_­func­tion()</code>  faster, as it was sig­nif­i­cant­ly slow­ing down the cal­cu­la­tion of some in­te­grals (for ex­am­ple,  <code>risch_in­te­grate(Ad­d(<em>(ex­p(i</em>x) for i in range(1000))))</code>, which is still slow to cal­cu­late, but now it's be­cause of oth­er things).</p> 
  <p><strong>About big branch­es</strong></p> 
  <p>So this merge, along with the poly12 fi­as­co (which by the way, I think part of the rea­son git made me do all these merge con­flict res­o­lu­tions was be­cause  <code>polys12</code>  was re­based from the  <code>polys11</code>  I had merged in­to in­te­gra­tion3), has shown me very clear­ly that it is very bad to go off with your own branch and do a lot of work and wait a long time be­fore merg­ing it back in­to the main re­po.</p> 

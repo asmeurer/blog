@@ -22,28 +22,30 @@ I have to give the vim tutorial some credit for one thing, though.  It has bette
 
 
 
-[code]
+```
+
   1. Move the cursor to the second line in the phrase below.
   2. Type  dd  to delete the line.
   3. Now move to the fourth line.
   4. Type   2dd   to delete two lines.
 
 
----&gt;  1)  Roses are red,
+--->  1)  Roses are red,
 
----&gt;  2)  Mud is fun,
+--->  2)  Mud is fun,
 
----&gt;  3)  Violets are blue,
+--->  3)  Violets are blue,
 
----&gt;  4)  I have a car,
+--->  4)  I have a car,
 
----&gt;  5)  Clocks tell time,
+--->  5)  Clocks tell time,
 
----&gt;  6)  Sugar is sweet
+--->  6)  Sugar is sweet
 
----&gt;  7)  And so are you.
+--->  7)  And so are you.
 
-[/code]
+
+```
 
 
 
@@ -51,16 +53,18 @@ whereas in the emacs tutorial, you just have
 
 
 
-[code]
+```
 
-&gt;&gt; Kill a line, move around, kill another line.
+
+>> Kill a line, move around, kill another line.
    Then do C-y to get back the second killed line.
    Then do M-y and it will be replaced by the first killed line.
    Do more M-y's and see what you get.  Keep doing them until
    the second kill line comes back, and then a few more.
    If you like, you can try giving M-y positive and negative
    arguments.
-[/code]
+
+```
 
 
 

@@ -1,11 +1,13 @@
 <html><body><p>Usually, when I debug SymPy code with <a href="http://asmeurersympy.wordpress.com/2010/06/04/pudb-a-better-python-debugger/">PuDB</a>, I create a script that calls the code, then I put a 
 
 
-[code language="py"]
+```py
+
 
 import pudb; pudb.set_trace()
 
-[/code]
+
+```
 
 
 

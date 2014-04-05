@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -160,15 +160,21 @@ MathJax.Hub.Config({
      <li>
 <strong>Don't just dis­cuss the the­o­ry.</strong>  I sus­pect that this may be more of a prob­lem with SymPy than for oth­er or­ga­ni­za­tion­s, be­cause SymPy is very math based, so many of the pro­pos­als to SymPy in­volve com­plex math­e­mat­ic­s. One of the big­gest is­sues I saw in pro­pos­als was that stu­dents dis­cussed the the­o­ry of what they want­ed to im­ple­ment too much and not enough of the ac­tu­al im­ple­men­ta­tion. It's easy to do this, but dis­cussing the im­ple­men­ta­tion is ac­tu­al­ly more im­por­tant than the the­o­ry of what you want to do.  
  <p>An easy way to do this is to give a "fake" ex­am­­ple ses­­sion show­ing how your code might work af­ter it is com­­plet­ed.  For ex­am­­ple, if you were writ­ing a pro­­pos­al for a PDE solver, you might in­­­clude some­thing like</p>  
-  <p>[code lan­guage="py"]</p>  
-  <p>&gt;&gt;&gt; u = Func­­tion('u')</p>  
-  <p>&gt;&gt;&gt; # Solve the Heat Equa­­tion in one di­­men­­sion</p>  
-  <p>&gt;&gt;&gt; pde­s­olve(u(x, t).d­if­f(t) - c*<em>2</em>u(x, t).d­if­f(x, x), u(x), {u(x, 0):f(x), u(0, t):0, u(0, pi):0}, method­­='sep­a­ra­­tion of var­i­ables')   </p>  
-  <p>2/pi<em>Sum(In­te­­gral(f(x)</em>sin(n<em>x), x)</em>sin(n<em>x)</em>ex­p(-n<strong>2*c</strong>2*t), (n, 1, oo))</p>  
-  <p>&gt;&gt;&gt; # Use Fouri­er Tran­s­­forms to get d'Alem­bert's So­lu­­tion to the Wave Equa­­tion</p>  
-  <p>&gt;&gt;&gt; …</p>  
-  <p>[/­­code]</p>  
-  <p>in your pro­­pos­al.  Just say­ing "I plan to im­­ple­­ment solvers for PDEs us­ing sep­a­ra­­tion of var­i­ables and Fouri­er Tran­s­­for­m­s" tells us on­­ly what we al­ready know, which is that you can solve PDEs us­ing sep­a­ra­­tion of var­i­ables and Fouri­er Tran­s­­for­m­s.  What we don't know is how it will look.  The above ex­am­­ple shows how the PDE, in­i­­tial/bound­­ary con­di­­tion­s, and method are en­tered by the user, and how the out­­put look­s.    </p>  
+  <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span>   <span class="n">u</span>   <span class="o">=</span>   <span class="n">Func­tion</span><span class="p">(</span><span class="s">'u'</span><span class="p">)</span> 
+
+ <span class="o">&gt;&gt;&gt;</span>   <span class="c"># Solve the Heat Equa­tion in one di­men­sion</span> 
+
+ <span class="o">&gt;&gt;&gt;</span>   <span class="n">pde­s­olve</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>   <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>   <span class="o">-</span>   <span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>   <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>   <span class="n">x</span><span class="p">),</span>   <span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>   <span class="p">{</span><span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>   <span class="mi">0</span><span class="p">):</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>   <span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>   <span class="n">t</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span>   <span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>   <span class="n">pi</span><span class="p">):</span><span class="mi">0</span><span class="p">},</span>   <span class="n">method</span><span class="o">=</span><span class="s">'sep­a­ra­tion of vari­ables'</span><span class="p">)</span>  
+
+ <span class="mi">2</span><span class="o">/</span><span class="n">pi</span><span class="o">*</span><span class="n">Sum</span><span class="p">(</span><span class="n">In­te­gral</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">x</span><span class="p">),</span>   <span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">),</span>   <span class="p">(</span><span class="n">n</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>   <span class="n">oo</span><span class="p">))</span> 
+
+ <span class="o">&gt;&gt;&gt;</span>   <span class="c"># Use Fouri­er Trans­forms to get d'Alem­bert's So­lu­tion to the Wave Equa­tion</span> 
+
+ <span class="o">&gt;&gt;&gt;</span>   <span class="err">…</span> 
+ </pre></div> 
+
+
+ <p>in your pro­­pos­al.  Just say­ing "I plan to im­­ple­­ment solvers for PDEs us­ing sep­a­ra­­tion of var­i­ables and Fouri­er Tran­s­­for­m­s" tells us on­­ly what we al­ready know, which is that you can solve PDEs us­ing sep­a­ra­­tion of var­i­ables and Fouri­er Tran­s­­for­m­s.  What we don't know is how it will look.  The above ex­am­­ple shows how the PDE, in­i­­tial/bound­­ary con­di­­tion­s, and method are en­tered by the user, and how the out­­put look­s.    </p>  
   <p>A more ad­­vanced thing that you can do is to give ac­­tu­al pro­­to­­type code. This is not re­quired, but it can show that you are ded­i­­cat­ed enough to get a start, and can de­mon­s­trate how things will work for more com­­pli­­cat­ed pro­jec­t­s.</p>
 </li> 
      <li>

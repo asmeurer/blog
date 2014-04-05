@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -48,9 +48,14 @@ MathJax.Hub.Config({
     
         <meta name="og:title" content="True is True is False is True is False">
         <meta name="og:url" content="http://asmeurer.github.io/posts/2011/03/15/true-is-true-is-false-is-true-is-false/">
-            <meta name="og:description" content='Time for  an­oth­er   one  of my WTF Python blog post­s.  Yes­ter­day, I ran­dom­ly typed this in a Python ses­sion (it was late at night): 
- [code lan­guage="py"] 
- &gt;&gt;&gt; True is True is False is True '>
+            <meta name="og:description" content="Time for  an­oth­er   one  of my WTF Python blog post­s.  Yes­ter­day, I ran­dom­ly typed this in a Python ses­sion (it was late at night): 
+ &gt;&gt;&gt; True is True is False is True is False
+
+False
+
+
+
+First">
         <meta name="og:site_name" content="Aaron Meurer's Blog">
         <meta name="og:type" content="article">
 
@@ -145,104 +150,200 @@ MathJax.Hub.Config({
     <div>
 <p></p>
 <p>Time for  <a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">an­oth­er</a>   <a href="http://asmeurersympy.wordpress.com/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/">one</a>  of my WTF Python blog post­s.  Yes­ter­day, I ran­dom­ly typed this in a Python ses­sion (it was late at night):</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; True is True is False is True is False</p> 
- <p>False</p> 
- <p>[/­code]</p> 
- <p>First a lit­tle back­ground, in case you don't know.  The  <code>is</code>  op­er­a­tor in Python does ex­act ob­ject com­par­i­son in mem­o­ry. Un­like  <code>==</code>, which on­ly com­pares it two ob­jects are equal,  <code>is</code>  on­ly re­turns True if both ar­gu­ments have the same mem­o­ry ad­dress.  So you can have some­thing like:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; a = 12345</p> 
- <p>&gt;&gt;&gt; b = 12345</p> 
- <p>&gt;&gt;&gt; a == b</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; a is b</p> 
- <p>False</p> 
- <p>[/­code]</p> 
- <p>Now, there are a hand­ful of Python built-ins that are al­ways equal one an­oth­er with the  <code>is</code>  op­er­a­tor.   <code>True</code>  and  <code>False</code>  are two such con­stants:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; a = True</p> 
- <p>&gt;&gt;&gt; b = True</p> 
- <p>&gt;&gt;&gt; a == b</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; a is b</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; c = False</p> 
- <p>&gt;&gt;&gt; d = False</p> 
- <p>&gt;&gt;&gt; c == d</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; c is d</p> 
- <p>True</p> 
- <p>[/­code]</p> 
- <p>Now, go­ing back to the above, we see that each  <code>is</code>  re­turns  <code>True</code>  or  <code>False</code>, which is then eval­u­at­ed with the next one.  Or at least that is what you would think is hap­pen­ing.  But go back and look at it again, and see if you can fig­ure out what it should eval­u­ate to.  You could prob­a­bly guess that some­thing was amiss from the fact that I was blog­ging about it.  If you haven't fig­ured it out al­ready, look at the fol­low­ing:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; True is True is False is True is False</p> 
- <p>False</p> 
- <p>&gt;&gt;&gt; (((True is True) is False) is True) is False</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; True is (True is (False is (True is False)))</p> 
- <p>True</p> 
- <p>[/­code]</p> 
- <p>So it seems that  <code>is</code>  does not as­so­ciate to the left or to the right.  Let's see if we can fig­ure out what is go­ing on.  First of­f,  <code>True is True</code>, etc. do be­have as you ex­pect them to:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; True is True</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; False is False</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; True is False</p> 
- <p>False</p> 
- <p>&gt;&gt;&gt; False is True</p> 
- <p>False</p> 
- <p>[/­code]</p> 
- <p>It is when we start us­ing mul­ti­ple  <code>is</code>s in the same state­ment that we start see­ing prob­lem­s:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; False is False is False</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; (False is False) is False</p> 
- <p>False</p> 
- <p>[/­code]</p> 
- <p>So what's go­ing on here?   <code>False is False</code>  is True, so maybe it is short­-­cir­cuit­ing some­how.   </p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; True is False is False</p> 
- <p>False</p> 
- <p>&gt;&gt;&gt; False is False is True</p> 
- <p>False</p> 
- <p>[/­code]</p> 
- <p>No, that is not it.  Those re­duce to  <code>False is False</code>  and  <code>True is True</code>  when as­so­ci­at­ing to the left, re­spec­tive­ly, and  <code>True is True</code>  and  <code>True is True</code>  when as­so­ci­at­ing to the right.   </p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">False</span>
+
+<span class="bp">False</span>
+</pre></div>
+
+
+<p>First a lit­tle back­ground, in case you don't know.  The  <code>is</code>  op­er­a­tor in Python does ex­act ob­ject com­par­i­son in mem­o­ry. Un­like  <code>==</code>, which on­ly com­pares it two ob­jects are equal,  <code>is</code>  on­ly re­turns True if both ar­gu­ments have the same mem­o­ry ad­dress.  So you can have some­thing like:</p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">12345</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">12345</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+
+<span class="bp">False</span>
+</pre></div>
+
+
+<p>Now, there are a hand­ful of Python built-ins that are al­ways equal one an­oth­er with the  <code>is</code>  op­er­a­tor.   <code>True</code>  and  <code>False</code>  are two such con­stants:</p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">==</span> <span class="n">d</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="ow">is</span> <span class="n">d</span>
+
+<span class="bp">True</span>
+</pre></div>
+
+
+<p>Now, go­ing back to the above, we see that each  <code>is</code>  re­turns  <code>True</code>  or  <code>False</code>, which is then eval­u­at­ed with the next one.  Or at least that is what you would think is hap­pen­ing.  But go back and look at it again, and see if you can fig­ure out what it should eval­u­ate to.  You could prob­a­bly guess that some­thing was amiss from the fact that I was blog­ging about it.  If you haven't fig­ured it out al­ready, look at the fol­low­ing:</p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">False</span>
+
+<span class="bp">False</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(((</span><span class="bp">True</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="bp">True</span> <span class="ow">is</span> <span class="p">(</span><span class="bp">True</span> <span class="ow">is</span> <span class="p">(</span><span class="bp">False</span> <span class="ow">is</span> <span class="p">(</span><span class="bp">True</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">)))</span>
+
+<span class="bp">True</span>
+</pre></div>
+
+
+<p>So it seems that  <code>is</code>  does not as­so­ciate to the left or to the right.  Let's see if we can fig­ure out what is go­ing on.  First of­f,  <code>True is True</code>, etc. do be­have as you ex­pect them to:</p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">True</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">False</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">False</span>
+
+<span class="bp">False</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">True</span>
+
+<span class="bp">False</span>
+</pre></div>
+
+
+<p>It is when we start us­ing mul­ti­ple  <code>is</code>s in the same state­ment that we start see­ing prob­lem­s:</p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">False</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="bp">False</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span>
+
+<span class="bp">False</span>
+</pre></div>
+
+
+<p>So what's go­ing on here?   <code>False is False</code>  is True, so maybe it is short­-­cir­cuit­ing some­how.   </p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="bp">True</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">False</span>
+
+<span class="bp">False</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">is</span> <span class="bp">True</span>
+
+<span class="bp">False</span>
+</pre></div>
+
+
+<p>No, that is not it.  Those re­duce to  <code>False is False</code>  and  <code>True is True</code>  when as­so­ci­at­ing to the left, re­spec­tive­ly, and  <code>True is True</code>  and  <code>True is True</code>  when as­so­ci­at­ing to the right.   </p> 
  <p>Fi­nal­ly, at this point, it oc­curs to me what is re­al­ly go­ing on.  Have you fig­ured it out too (or maybe you al­ready knew all along)?  Maybe you can guess it from this state­men­t, which us­es  <code>None</code>, an­oth­er built-in ob­ject that al­ways com­pares equal to it­self with the  <code>is</code>  op­er­a­tor:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; None is None is None</p> 
- <p>True</p> 
- <p>[/­code]</p> 
- <p>So you see what is hap­pen­ing?   <code>is</code>  does­n't as­so­ciate at al­l.  Rather, us­ing mul­ti­ple  <code>is</code>s in one state­ment does mul­ti­ple com­par­isons at once.  Any  <code>a is b is … x</code>  will re­turn  <code>True</code>  if  <code>a</code>,  <code>b</code>, …, and  <code>x</code>  are all equal by the  <code>is</code>  op­er­a­tor (they share the same iden­ti­ty or mem­o­ry ad­dress), and  <code>False</code>  oth­er­wise.  Ac­tu­al­ly, this is­n't sur­pris­ing, since  <code>==</code>  works the same way:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; False == False == False</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; (False == False) == False</p> 
- <p>False</p> 
- <p>[/­code]</p> 
- <p>This syn­tax can ac­tu­al­ly be use­ful to test equal­i­ty of three or more items at once ef­fi­cient­ly (Python will not eval­u­ate the same op­er­and more than on­ce, and it short cir­cuit­s).  But it can be con­fus­ing when com­par­ing with  <code>True</code>  or  <code>False</code>, since  <code>a is b</code>  and  <code>a == b</code>  them­selves eval­u­ate to one of those val­ues.  So re­mem­ber that it is NOT as­so­cia­tive in any way.  Rather, it acts as an n-way com­par­i­son.  </p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="bp">None</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">is</span> <span class="bp">None</span>
+
+<span class="bp">True</span>
+</pre></div>
+
+
+<p>So you see what is hap­pen­ing?   <code>is</code>  does­n't as­so­ciate at al­l.  Rather, us­ing mul­ti­ple  <code>is</code>s in one state­ment does mul­ti­ple com­par­isons at once.  Any  <code>a is b is … x</code>  will re­turn  <code>True</code>  if  <code>a</code>,  <code>b</code>, …, and  <code>x</code>  are all equal by the  <code>is</code>  op­er­a­tor (they share the same iden­ti­ty or mem­o­ry ad­dress), and  <code>False</code>  oth­er­wise.  Ac­tu­al­ly, this is­n't sur­pris­ing, since  <code>==</code>  works the same way:</p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="bp">False</span> <span class="o">==</span> <span class="bp">False</span> <span class="o">==</span> <span class="bp">False</span>
+
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="bp">False</span> <span class="o">==</span> <span class="bp">False</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span>
+
+<span class="bp">False</span>
+</pre></div>
+
+
+<p>This syn­tax can ac­tu­al­ly be use­ful to test equal­i­ty of three or more items at once ef­fi­cient­ly (Python will not eval­u­ate the same op­er­and more than on­ce, and it short cir­cuit­s).  But it can be con­fus­ing when com­par­ing with  <code>True</code>  or  <code>False</code>, since  <code>a is b</code>  and  <code>a == b</code>  them­selves eval­u­ate to one of those val­ues.  So re­mem­ber that it is NOT as­so­cia­tive in any way.  Rather, it acts as an n-way com­par­i­son.  </p> 
  <p>Fi­nal­ly, as  <a href="http://docs.python.org/reference/expressions.html#summary">this ta­ble</a>  of op­er­a­tor prece­dence in Python shows,  <code>is</code>  and  <code>==</code>  have the same prece­dence in Python.  There­fore, it should be pos­si­ble to com­bine the two in these same state­men­t.  In­deed, you can:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; a = 12345</p> 
- <p>&gt;&gt;&gt; b = 12345</p> 
- <p>&gt;&gt;&gt; c = b</p> 
- <p>&gt;&gt;&gt; a == b == c</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; a is b is c</p> 
- <p>False</p> 
- <p>&gt;&gt;&gt; # Be­cause this is False</p> 
- <p>...  </p> 
- <p>&gt;&gt;&gt; a is b</p> 
- <p>False</p> 
- <p>&gt;&gt;&gt; # But this is True</p> 
- <p>...  </p> 
- <p>&gt;&gt;&gt; b is c</p> 
- <p>True</p> 
- <p>&gt;&gt;&gt; # So we get</p> 
- <p>...  </p> 
- <p>&gt;&gt;&gt; a == b is c</p> 
- <p>True</p> 
- <p>[/­code]</p>
+ <p>```py</p> 
+ <blockquote>
+<blockquote>
+<blockquote>
+<p>a = 12345</p> 
+ <p>b = 12345</p> 
+ <p>c = b</p> 
+ <p>a == b == c</p> 
+ </blockquote>
+</blockquote>
+</blockquote>
+<p>True</p> 
+ <blockquote>
+<blockquote>
+<blockquote>
+<p>a is b is c</p> 
+ </blockquote>
+</blockquote>
+</blockquote>
+<p>False</p> 
+ <blockquote>
+<blockquote>
+<blockquote>
+<h2>Because this is False</h2>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>...  </p> 
+ <blockquote>
+<blockquote>
+<blockquote>
+<p>a is b</p> 
+ </blockquote>
+</blockquote>
+</blockquote>
+<p>False</p> 
+ <blockquote>
+<blockquote>
+<blockquote>
+<h2>But this is True</h2>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>...  </p> 
+ <blockquote>
+<blockquote>
+<blockquote>
+<p>b is c</p> 
+ </blockquote>
+</blockquote>
+</blockquote>
+<p>True</p> 
+ <blockquote>
+<blockquote>
+<blockquote>
+<h2>So we get</h2>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>...  </p> 
+ <blockquote>
+<blockquote>
+<blockquote>
+<p>a == b is c</p> 
+ </blockquote>
+</blockquote>
+</blockquote>
+<p>True</p> 
+ <p>```</p>
 </div>
     </div>
     <aside class="postpromonav">

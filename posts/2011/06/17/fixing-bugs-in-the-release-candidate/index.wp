@@ -9,13 +9,15 @@ Fortunately, yesterday, Renato, Chris Smith, and I were able to debug the proble
 
 
 
-[code language="py"]
+```py
+
 
 INF = 1e1000
 
 MINUS_INF = -1e1000
 
-[/code]
+
+```
 
 
 
@@ -39,11 +41,13 @@ It turns out that mpmath uses gmpy if it is installed.  There were a few places 
 
 
 
-[code language="py"]
+```py
+
 
 return mpf_pos(small_factorial_cache[n-1], prec, rnd)
 
-[/code]
+
+```
 
 
 

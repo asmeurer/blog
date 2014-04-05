@@ -23,7 +23,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -122,7 +122,7 @@ MathJax.Hub.Config({
  <p>Now, I had had a lit­tle pri­or ex­pe­ri­ence with both vim and emac­s, but all that I re­mem­bered was for vim that  <code>i</code>  in­serts and  <code>ZZ</code>  quits (for when I ac­ci­den­tal­ly open it) and for emac­s, that  <code>M-X doc­tor</code>  starts the psy­chi­a­trist.  </p> 
  <p>So I've de­cid­ed to try them out, do­ing it cold tur­key.  To make sure that I choose the bet­ter one, I've de­cid­ed to try both.  So, start­ing about a week ago, I've been us­ing noth­ing but vim for all my text edit­ing.  Start­ing in Jan­uary, I will try us­ing emac­s, and af­ter two week­s, I will see what I like bet­ter.</p> 
  <p>My opin­ions so far on vim:</p> 
- <div class="code"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>The tutorials suck.  The best tutorial is <span class="nt">&lt;code&gt;</span>vimtutor<span class="nt">&lt;/code&gt;</span> (type that in the command line), which I think comes with vim.  It's not bad, but it leaves out a few things that I would consider to be essential to a tutorial, for example, how to scroll (answer: use CTRL-D and CTRL-U).  I started the emacs tutorial a while back, and while I never finished it, from what I remember, it was much better (and I also remember that the first thing it talked about was how to scroll by more than one line at a time). It also left out the <span class="nt">&lt;code&gt;</span>.<span class="nt">&lt;/code&gt;</span> command, which I think is rather useful.  I did print out <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html"</span><span class="nt">&gt;</span>this cheatsheet<span class="nt">&lt;/a&gt;</span> and have it sitting next to me on my desk.  That has helped a lot.  I hope I can find something similar for emacs when I get to it.<span class="nt">&lt;/li&gt;</span>
+ <div class="codehilite"><pre><span class="nt">&lt;/p&gt;&lt;li&gt;</span>The tutorials suck.  The best tutorial is <span class="nt">&lt;code&gt;</span>vimtutor<span class="nt">&lt;/code&gt;</span> (type that in the command line), which I think comes with vim.  It's not bad, but it leaves out a few things that I would consider to be essential to a tutorial, for example, how to scroll (answer: use CTRL-D and CTRL-U).  I started the emacs tutorial a while back, and while I never finished it, from what I remember, it was much better (and I also remember that the first thing it talked about was how to scroll by more than one line at a time). It also left out the <span class="nt">&lt;code&gt;</span>.<span class="nt">&lt;/code&gt;</span> command, which I think is rather useful.  I did print out <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html"</span><span class="nt">&gt;</span>this cheatsheet<span class="nt">&lt;/a&gt;</span> and have it sitting next to me on my desk.  That has helped a lot.  I hope I can find something similar for emacs when I get to it.<span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;li&gt;</span>vim is too line oriented.  vi started out as an extension to ed, the line editor, so this is not surprising.  But I still can't understand why pressing <span class="nt">&lt;code&gt;</span>l<span class="nt">&lt;/code&gt;</span> at the end of a line can't bring me to the beginning of the next line.  Maybe I'm just still doing it wrong (supposedly, you should rarely use <span class="nt">&lt;code&gt;</span>h<span class="nt">&lt;/code&gt;</span> and <span class="nt">&lt;code&gt;</span>l<span class="nt">&lt;/code&gt;</span> over more efficient moving commands).  <span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;li&gt;</span>Somewhat related to the last point, vim really likes to ring the terminal bell a lot. To quote <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://en.wikipedia.org/wiki/Editor_war"</span><span class="nt">&gt;</span>Wikipedia<span class="nt">&lt;/a&gt;</span>, "vi has two modes – 'beep repeatedly' and 'break everything'"<span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;li&gt;</span>I managed to customize it to the point of usability (there are still several things I need to go in and figure out how to fix).  See https://github.com/asmeurer/dotfiles for my .vimrc and .vim/ files.  I found a decent Python syntax file, but it's actually not that great.  I modified it to color single quoted strings different from double quoted strings (a feature I missed from Xcode). I still need to make a better color scheme (preferably the same as Xcode's midnight), but this is enough work that I've put it off.<span class="nt">&lt;/li&gt;</span>
@@ -133,7 +133,7 @@ MathJax.Hub.Config({
 
 
 <p>If there are any vim ex­perts out there read­ing this, I have some ques­tion­s:</p> 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>Is there an easy way to get a list of and jump to a function/class definition in a Python file?  In Xcode and TextWrangler, there was a nice popup at the top of the window that I could access these from.  In vim, so far the best I've found is searching for it, which isn't very efficient.<span class="nt">&lt;/li&gt;</span>
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>Is there an easy way to get a list of and jump to a function/class definition in a Python file?  In Xcode and TextWrangler, there was a nice popup at the top of the window that I could access these from.  In vim, so far the best I've found is searching for it, which isn't very efficient.<span class="nt">&lt;/li&gt;</span>
 
 <span class="nt">&lt;li&gt;</span>I got TAB to indent 4 spaces in Python, but for some reason, when I create a new line after a <span class="nt">&lt;code&gt;</span>:<span class="nt">&lt;/code&gt;</span>, it puts 8 extra spaces. I wouldn't be surprised if this is the result of some mismatch/error in <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/asmeurer/dotfiles"</span><span class="nt">&gt;</span>my .vimrc or .vim/ files<span class="nt">&lt;/a&gt;</span>, but I don't know how to fix it<span class="nt">&lt;/li&gt;</span>
 
@@ -168,115 +168,198 @@ MathJax.Hub.Config({
     <div>
 <p></p>
 <p>Just a few mo­ments ago,  <a href="https://github.com/sympy/sympy/pull/548" target="_blank">a branch</a>  was pushed in that fixed one of my big­gest griev­ances in SymPy, if not the big­gest.  Pre­vi­ous­ly we had this be­hav­ior:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: sqrt(x)</p> 
- <p>Out­[1]: x**(1/2)</p> 
- <p>In [2]: solve(x**2 - 2, x)</p> 
- <p>Out­[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>[/­code]</p> 
- <p>Now sup­pose you took the out­put of those ex­pres­sions and past­ed them in­to isympy:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [3]: x**(1/2)</p> 
- <p>Out­[3]: x**0.5</p> 
- <p>In [4]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>Out­[4]: [-1.41421356237, 1.41421356237]</p> 
- <p>[/­code]</p> 
- <p>That's with  <code><strong>fu­ture</strong>.di­vi­sion</code>.  Here's what would hap­pen with old di­vi­sion:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [2]: x**(1/2)</p> 
- <p>Out­[2]: 1</p> 
- <p>In [3]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>Out­[3]: [-1, 1]</p> 
- <p>[/­code]</p> 
- <p>This is be­cause with old di­vi­sion,  <code>1/2</code>  eval­u­ates to  <code>0</code>.</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>Now sup­pose you took the out­put of those ex­pres­sions and past­ed them in­to isympy:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.41421356237</span><span class="p">,</span> <span class="mf">1.41421356237</span><span class="p">]</span>
+</pre></div>
+
+
+<p>That's with  <code><strong>fu­ture</strong>.di­vi­sion</code>.  Here's what would hap­pen with old di­vi­sion:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="mi">1</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+
+<p>This is be­cause with old di­vi­sion,  <code>1/2</code>  eval­u­ates to  <code>0</code>.</p> 
  <p>The prob­lem is that Python eval­u­ates  <code>1/2</code>  to  <code>0.5</code>  (or  <code>0</code>) be­fore SymPy has a change to con­vert it to a Ra­tio­nal.  There were sev­er­al ways that peo­ple got around this.  If you copy an ex­pres­sion with num­ber di­vi­sion in it and want to paste it in­to a SymPy ses­sion, the eas­i­est way to do this was to pass it as a string to  <code>sympi­fy()</code>:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: sympi­fy("x**(1/2)")</p> 
- <p>Out­[1]: x**(1/2)</p> 
- <p>In [2]: sympi­fy("[-2<strong>(1/2), 2</strong>(1/2)]")</p> 
- <p>Out­[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>[/­code]</p> 
- <p>If that was too much typ­ing for you, you could use the  <code>S()</code>  short­cut to  <code>sympi­fy()</code></p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [3]: S("x**(1/2)")</p> 
- <p>Out­[3]: x**(1/2)</p> 
- <p>In [4]: S("[-2<strong>(1/2), 2</strong>(1/2)]")</p> 
- <p>Out­[4]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>[/­code]</p> 
- <p>This so­lu­tion is fine if you want to paste an ex­pres­sion in­to a SymPy ses­sion, but it's not a very clean one if you want to paste code in­to a scrip­t. For that, you need to mod­i­fy the code so that it no longer con­tains Python in­t/Python in­t.  The eas­i­est way to do this is to sympi­fy one of the ints.  So you would do some­thing like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [5]: x**(S(1)/2)</p> 
- <p>Out­[5]: x**(1/2)</p> 
- <p>In [6]: [-2<strong>(S(1)/2), 2</strong>(S(1)/2)]</p> 
- <p>Out­[6]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>[/­code]</p> 
- <p>This was­n't ter­ri­bly read­able, though.  The  <em>best</em>  way to fix the prob­lem when you had a pow­er of one half was to use  <code>sqrt()</code>, which is a short­cut to  <code>Pow(…, Ra­tio­nal(1, 2))</code>.   </p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">sympify</span><span class="p">(</span><span class="s">"x**(1/2)"</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">sympify</span><span class="p">(</span><span class="s">"[-2**(1/2), 2**(1/2)]"</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>If that was too much typ­ing for you, you could use the  <code>S()</code>  short­cut to  <code>sympi­fy()</code></p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">S</span><span class="p">(</span><span class="s">"x**(1/2)"</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">S</span><span class="p">(</span><span class="s">"[-2**(1/2), 2**(1/2)]"</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>This so­lu­tion is fine if you want to paste an ex­pres­sion in­to a SymPy ses­sion, but it's not a very clean one if you want to paste code in­to a scrip­t. For that, you need to mod­i­fy the code so that it no longer con­tains Python in­t/Python in­t.  The eas­i­est way to do this is to sympi­fy one of the ints.  So you would do some­thing like</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>This was­n't ter­ri­bly read­able, though.  The  <em>best</em>  way to fix the prob­lem when you had a pow­er of one half was to use  <code>sqrt()</code>, which is a short­cut to  <code>Pow(…, Ra­tio­nal(1, 2))</code>.   </p> 
  <p>Well, this last item should make you think.  If  <code>sqrt(x)</code>  is more read­able than  <code>x<strong>(S(1)/2)</strong></code>  or even  <code>x(1/2)</code>, why not print it like that in the first place.  Well, I thought so, so I changed the string print­er, and now this is the way that SymPy work­s.  So 90% of the time, you can just paste the re­sult of  <code>str()</code>  or  <code>print</code>, and it will just work, be­cause there won't be any  <code>**(1/2)</code>, which was by far the most com­mon prob­lem of "Python eval­u­at­ing the ex­pres­sion to some­thing be­fore we can."  In the git mas­ter, SymPy now be­haves like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: sqrt(x)</p> 
- <p>Out­[1]: sqrt(x)</p> 
- <p>In [2]: solve(x**2 - 2, x)</p> 
- <p>Out­[2]: [-sqrt(2), sqrt(2)]</p> 
- <p>[/­code]</p> 
- <p>You can ob­vi­ous­ly just copy and paste these re­sult­s, and you get the ex­act same thing back.  Not on­ly does this make ex­pres­sions more copy­-and-­pastable, but the out­put is  <em>much</em>  nicer in terms of read­abil­i­ty.  Here are some be­fore and af­ters that come from ac­tu­al SymPy doctests that I had to change af­ter fix­ing the print­er:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>Be­fore:</p> 
- <p>&gt;&gt;&gt; e = ((2+2<em>sqrt(2))</em>x+(2+sqrt(8))*y)/(2+sqrt(2))</p> 
- <p>&gt;&gt;&gt; rad­sim­p(e)</p> 
- <p>2<strong>(1/2)*x + 2</strong>(1/2)*y</p> 
- <p>Af­ter:</p> 
- <p>&gt;&gt;&gt; rad­sim­p(e)</p> 
- <p>sqrt(2)<em>x + sqrt(2)</em>y</p> 
- <p>[/­code]</p> 
- <p>[code lan­guage="py"]</p> 
- <p>Be­fore:</p> 
- <p>&gt;&gt;&gt; b = besselj(n, z)</p> 
- <p>&gt;&gt;&gt; b.rewrite(jn)</p> 
- <p>2<strong>(1/2)*z</strong>(1/2)<em>jn(n - 1/2, z)/pi</em>*(1/2)</p> 
- <p>Af­ter:</p> 
- <p>&gt;&gt;&gt; b.rewrite(jn)</p> 
- <p>sqrt(2)<em>sqrt(z)</em>jn(n - 1/2, z)/sqrt(pi)</p> 
- <p>[/­code]</p> 
- <p>[code lan­guage="py"]</p> 
- <p>Be­fore:</p> 
- <p>&gt;&gt;&gt; x = sympi­fy('-1/(-3/2+(1/2)<em>sqrt(5))</em>sqrt(3/2-1/2*sqrt(5))')</p> 
- <p>&gt;&gt;&gt; x</p> 
- <p>(3/2 - 5<strong>(1/2)/2)</strong>(-1/2)</p> 
- <p>Af­ter</p> 
- <p>&gt;&gt;&gt; x</p> 
- <p>1/sqrt(3/2 - sqrt(5)/2)</p> 
- <p>[/­code]</p> 
- <p>And not on­ly is  <code>sqrt(x)</code>  eas­i­er to read than  <code>x**(1/2)</code>  but it's few­er char­ac­ter­s.</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>You can ob­vi­ous­ly just copy and paste these re­sult­s, and you get the ex­act same thing back.  Not on­ly does this make ex­pres­sions more copy­-and-­pastable, but the out­put is  <em>much</em>  nicer in terms of read­abil­i­ty.  Here are some be­fore and af­ters that come from ac­tu­al SymPy doctests that I had to change af­ter fix­ing the print­er:</p> 
+ <div class="codehilite"><pre><span class="n">Before</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">radsimp</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">y</span>
+
+
+
+<span class="n">After</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">radsimp</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">y</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span class="n">Before</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">besselj</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">jn</span><span class="p">)</span>
+
+<span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">jn</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">/</span><span class="n">pi</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">After</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">jn</span><span class="p">)</span>
+
+<span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">jn</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span class="n">Before</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="s">'-1/(-3/2+(1/2)*sqrt(5))*sqrt(3/2-1/2*sqrt(5))'</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+
+<span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">After</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+
+<span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>And not on­ly is  <code>sqrt(x)</code>  eas­i­er to read than  <code>x**(1/2)</code>  but it's few­er char­ac­ter­s.</p> 
  <p>In the course of chang­ing this, I went ahead and did some greps of the repos­i­to­ry to get rid of all  <code><strong>(S(1)/2)</strong></code>,  <code>Ra­tio­nal(1, 2)</code>  and sim­i­lar through­out the code base (not just in the out­put of doctests where the change had to be made), re­plac­ing them with just  <code>sqrt</code>.  Big thanks to Chris Smith for help­ing me catch all in­stances of this.  Now the code should be a lit­tle eas­i­er to read and main­tain.</p> 
  <p><strong>Fu­ture Work</strong></p> 
  <p>This is a big change, and I be­lieve it will fix the copy­-­paste prob­lem for 90% of ex­pres­sion­s. But it does not solve it com­plete­ly.  It is still pos­si­ble to get in­t/int in the string form of an ex­pres­sion.  On­ly pow­ers of 1/2 and -1/2 are con­vert­ed to sqrt, so any oth­er ra­tio­nal pow­er will still print as a/b, like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: x**Ra­tional(3, 2)</p> 
- <p>Out­[1]: x**(3/2)</p> 
- <p>[/­code]</p> 
- <p>Al­so, as you may have no­ticed in the last ex­am­ple above, a ra­tio­nal num­ber that sits by it­self will still be print­ed as in­t/in­t, like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [2]: (1 + x)/2</p> 
- <p>Out­[2]: x/2 + 1/2</p> 
- <p>[/­code]</p> 
- <p>There­fore, I'm leav­ing the  <a href="http://code.google.com/p/sympy/issues/detail?id=2359" target="_blank">is­sue for this</a>  open to dis­cuss po­ten­tial fu­ture fix­es to the string print­er.  One idea is to cre­ate a  <code>root</code>  func­tion that is a short­cut to  <code>root(x, a) == x**(1/a)</code>. This would work for ra­tio­nal pow­ers where the nu­mer­a­tor is 1.  For oth­er ra­tio­nal pow­er­s, we could then den­est these with an in­te­ger pow­er.  It's im­por­tant to do this in the right or­der, though, as they are not equiv­a­len­t.  You can see that SymPy au­to-sim­pli­fies it when it is math­e­mat­i­cal­ly cor­rect in all cas­es, and not when it is not:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [3]: sqrt(x**3)</p> 
- <p>Out­[3]: sqrt(x**3)</p> 
- <p>In [4]: sqrt(x)**3</p> 
- <p>Out­[4]: x**(3/2)</p> 
- <p>[/­code]</p> 
- <p>Thus $la­tex \left­(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $la­tex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, re­place $la­tex x$ with -1).</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Al­so, as you may have no­ticed in the last ex­am­ple above, a ra­tio­nal num­ber that sits by it­self will still be print­ed as in­t/in­t, like</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">x</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+
+
+<p>There­fore, I'm leav­ing the  <a href="http://code.google.com/p/sympy/issues/detail?id=2359" target="_blank">is­sue for this</a>  open to dis­cuss po­ten­tial fu­ture fix­es to the string print­er.  One idea is to cre­ate a  <code>root</code>  func­tion that is a short­cut to  <code>root(x, a) == x**(1/a)</code>. This would work for ra­tio­nal pow­ers where the nu­mer­a­tor is 1.  For oth­er ra­tio­nal pow­er­s, we could then den­est these with an in­te­ger pow­er.  It's im­por­tant to do this in the right or­der, though, as they are not equiv­a­len­t.  You can see that SymPy au­to-sim­pli­fies it when it is math­e­mat­i­cal­ly cor­rect in all cas­es, and not when it is not:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Thus $la­tex \left­(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $la­tex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, re­place $la­tex x$ with -1).</p> 
  <p>So the idea would be to print  <code>Pow(­ex­pr, Ra­tio­nal(a, b))</code>  as  <code>root(­ex­pr, b)**a</code>.   </p> 
  <p>The mer­its of this are de­bat­able, but any­way I think we should have this  <code>root()</code>  func­tion in any case (see  <a href="http://code.google.com/p/sympy/issues/detail?id=2643" target="_blank">is­sue 2643</a>).</p> 
  <p>An­oth­er idea, which is prob­a­bly not a good one, is to al­ways print  <code>in­t/int</code>  as  <code>S(in­t)/int</code>.  So we would get</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; Ra­tio­nal(1, 2)</p> 
- <p>S(1)/2</p> 
- <p>&gt;&gt;&gt; x**Ra­tional(4, 5)</p> 
- <p>x**(S(4)/5)</p> 
- <p>[/­code]</p> 
- <p>This is prob­a­bly a bad idea be­cause even though ex­pres­sions would al­ways be copy­-­pastable, they would be slight­ly less read­able.   </p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This is prob­a­bly a bad idea be­cause even though ex­pres­sions would al­ways be copy­-­pastable, they would be slight­ly less read­able.   </p> 
  <p>By the way, in case you did­n't catch it, all of these changes on­ly af­fect the string print­er.  The pret­ty print­er re­mained un­af­fect­ed, and would un­der any ad­di­tion­al changes, as it is­n't copy­-­pastable any­way, and al­ready does a su­perb job of print­ing root­s.</p>
 </div>
     </div>
@@ -337,10 +420,11 @@ MathJax.Hub.Config({
  <p><a href="2011/08/screen-shot-2011-08-07-at-8-41-30-pm.png"><img src="http://asmeurersympy.files.wordpress.com/2011/08/screen-shot-2011-08-07-at-8-41-30-pm.png?w=243" alt="" title="PuDB Prefs Window" width="243" height="300" class="size-medium wp-image-1023"></a></p> 
  <p>So if you're not al­ready us­ing this awe­some Python de­bug­ger, you should.  You can  <code>pip in­stall pudb</code>, or  <a href="https://github.com/inducer/pudb" target="_blank">fork it</a>  at GitHub.</p> 
  <p>Run­ning it in your code is very easy.  Just add</p> 
- <p>[code lang="py"]</p> 
- <p>im­port pud­b;pud­b.set_­trace()</p> 
- <p>[/­code]</p> 
- <p>in your code wher­ev­er you want to set a break point, or you can do  <code>python -m pud­b.run scrip­t.py</code>.</p> 
+ <div class="codehilite"><pre><span class="kn">import</span> <span class="nn">pudb</span><span class="p">;</span><span class="n">pudb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+</pre></div>
+
+
+<p>in your code wher­ev­er you want to set a break point, or you can do  <code>python -m pud­b.run scrip­t.py</code>.</p> 
  <p>This awe­some tool has in­creased my pro­duc­tiv­i­ty ten­fold since I dis­cov­ered it, and has helped me track down bugs that would have oth­er­wise ex­treme­ly dif­fi­cult if not im­pos­si­ble to find.  And now, it's just bet­ter.</p> 
  <p>PuDB us­es the  <a href="http://excess.org/urwid/" target="_blank">ur­wid li­brary</a>  to do all its con­sole GUI mag­ic.  This li­brary makes it pret­ty easy to do a lot of stuff. For ex­am­ple, it au­to­mat­i­cal­ly does rel­a­tive siz­ing of wid­get­s, so, for ex­am­ple, when you re­size the vari­ables, stack, or break­points views, you are ac­tu­al­ly in­creas­ing the rel­a­tive size of each, not the size in char­ac­ter­s.  This makes it por­ta­ble against any ter­mi­nal size.  The li­brary al­so made cod­ing the prefs win­dow autoup­date mag­ic very easy.</p> 
  <p>Al­so, I just want to note that git and GitHub make col­lab­o­ra­tion like this very easy.  I just forked his pro­jec­t, made some im­prove­ments, and sub­mit­ted them as pull re­quest­s.  Then it was easy to dis­cuss the changes.  If the code had not been on GitHub and es­pe­cial­ly if it had not been in git, I prob­a­bly would have nev­er both­ered to sub­mit my con­tri­bu­tions up­stream.  I high­ly rec­om­mend that ev­ery open source project use git and GitHub.</p>
@@ -673,24 +757,36 @@ MathJax.Hub.Config({
  <p>Then, I had to fix a few bugs that caused test fail­ures.  Sev­er­al se­man­tics were changed in the re­lease.  I think the ones that I had to change were the re­nam­ing of  <code>has_any_sym­bols</code>  to just  <code>has</code>, the re­nam­ing of  <code>Poly.as_ba­sic()</code>  to  <code>Poly.as_­ex­pr()</code>, and the swap­ping of the mean­ings of  <code>quo</code>  and  <code>exquo</code>  in the polys.  There were al­so some doctest fail­ures due to the change to lex­i­co­graph­ic or­der­ing in the print­er.</p> 
  <p>Af­ter all that, there were two re­gres­sions that caused test fail­ures.  The first was the fol­low­ing:</p> 
  <p>Be­fore:</p> 
- <p>[code lang="py"]</p> 
- <p>In [1]: In­te­gral((­ex­p(x<em>log(x))</em>log(x)), x).­sub­s(­ex­p(x<em>log(x)), x</em>*x)</p> 
- <p>Out­[1]:  </p> 
- <p>⌠              </p> 
- <p>⎮  x           </p> 
- <p>⎮ x ⋅log(x) dx</p> 
- <p>⌡              </p> 
- <p>[/­code]</p> 
- <p>Af­ter:</p> 
- <p>[code lang="py"]</p> 
- <p>In [1]: In­te­gral((­ex­p(x<em>log(x))</em>log(x)), x).­sub­s(­ex­p(x<em>log(x)), x</em>*x)</p> 
- <p>Out­[1]:  </p> 
- <p>⌠                     </p> 
- <p>⎮  x⋅log(x)           </p> 
- <p>⎮ ℯ        ⋅log(x) dx</p> 
- <p>⌡                     </p> 
- <p>[/­code]</p> 
- <p>This sub­sti­tu­tion is nec­es­sary be­cause the Risch al­go­rithm re­quires ex­pres­sions like $la­tex x^x$ to be rewrit­ten as $la­tex e^{x\log(x)}$ be­fore it can in­te­grate them, but I try to con­vert them back af­ter in­te­grat­ing so that the us­er gets the same thing in the re­sult that he en­tered.  I cre­at­ed  <a href="http://code.google.com/p/sympy/issues/detail?id=2571" target="_blank">is­sue 2571</a>  for this.</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">Integral</span><span class="p">((</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> 
+
+<span class="err">⌠</span>             
+
+<span class="err">⎮</span>  <span class="n">x</span>          
+
+<span class="err">⎮</span> <span class="n">x</span> <span class="err">⋅</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">dx</span>
+
+<span class="err">⌡</span>             
+</pre></div>
+
+
+<p>Af­ter:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">Integral</span><span class="p">((</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> 
+
+<span class="err">⌠</span>                    
+
+<span class="err">⎮</span>  <span class="n">x</span><span class="err">⋅</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>          
+
+<span class="err">⎮</span> <span class="err">ℯ</span>        <span class="err">⋅</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">dx</span>
+
+<span class="err">⌡</span>                    
+</pre></div>
+
+
+<p>This sub­sti­tu­tion is nec­es­sary be­cause the Risch al­go­rithm re­quires ex­pres­sions like $la­tex x^x$ to be rewrit­ten as $la­tex e^{x\log(x)}$ be­fore it can in­te­grate them, but I try to con­vert them back af­ter in­te­grat­ing so that the us­er gets the same thing in the re­sult that he en­tered.  I cre­at­ed  <a href="http://code.google.com/p/sympy/issues/detail?id=2571" target="_blank">is­sue 2571</a>  for this.</p> 
  <p>The sec­ond was that I had sev­er­al places in my doc­strings with things like</p> 
  <blockquote>
 
@@ -700,32 +796,36 @@ Given a derivation D on k[t] and f, g in k(t) with f weakly normalized with resp
 
 <p>The prob­lem here is the "raise NonEle­men­tary­In­te­gralEx­cep­tion," part.  The code qual­i­ty check­er things that this is an old style ex­cep­tion (like  <code>raise Ex­cep­tion, mes­sage</code>), due to a poor­ly formed reg­u­lar ex­pres­sion.  I fixed this in a  <a href="https://github.com/sympy/sympy/pull/511" target="_blank">pull re­quest</a>.</p> 
  <p>The good news is that now a lot of stuff works that did­n't be­fore be­cause of fix­es that were re­quired that on­ly ex­ist­ed in  <code>mas­ter</code>.  For ex­am­ple, the fol­low­ing did not work be­fore, but now does due to im­prove­ments to  <code>Root­Sum</code>:</p> 
- <p>[code lang="py"]</p> 
- <p>In [1]: risch_in­te­grate(1/(­ex­p(5*x) + ex­p(x) + 1), x)</p> 
- <p>Out­[1]: 
-           ⎛    2                                                          <br> 
-x + Root­Sum⎝21⋅z  + 6⋅z + 1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>4/4 - 3381*_i</strong>3/4  </p> 
- <div class="code"><pre>                                   <span class="err">⎞</span>          <span class="err">⎛</span>     <span class="mi">3</span>        <span class="mi">2</span>
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> 
+           <span class="err">⎛</span>    <span class="mi">2</span>                                                           
+<span class="n">x</span> <span class="o">+</span> <span class="n">RootSum</span><span class="err">⎝</span><span class="mi">21</span><span class="err">⋅</span><span class="n">z</span>  <span class="o">+</span> <span class="mi">6</span><span class="err">⋅</span><span class="n">z</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">(</span><span class="n">_i</span><span class="p">,</span> <span class="n">_i</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mi">3381</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3381</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span> 
+
+
+                                       <span class="err">⎞</span>          <span class="err">⎛</span>     <span class="mi">3</span>        <span class="mi">2</span>          
+<span class="o">-</span> <span class="mi">625</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">125</span><span class="o">*</span><span class="n">_i</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="p">))</span><span class="err">⎠</span> <span class="o">+</span> <span class="n">RootSum</span><span class="err">⎝</span><span class="mi">161</span><span class="err">⋅</span><span class="n">z</span>  <span class="o">+</span> <span class="mi">115</span><span class="err">⋅</span><span class="n">z</span>  <span class="o">+</span> <span class="mi">19</span><span class="err">⋅</span><span class="n">z</span> <span class="o">+</span> 
+
+
+
+<span class="mi">1</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">(</span><span class="n">_i</span><span class="p">,</span> <span class="n">_i</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mi">3381</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3381</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">625</span><span class="o">*</span><span class="n">_i</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">125</span><span class="o">*</span><span class="n">_i</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span>
+
+
+             <span class="err">⎞</span>
+ <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="p">))</span><span class="err">⎠</span>
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">cancel</span><span class="p">(</span><span class="n">risch_integrate</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
+      <span class="mi">1</span>      
+<span class="err">─────────────</span>
+ <span class="mi">5</span><span class="err">⋅</span><span class="n">x</span>    <span class="n">x</span>    
+<span class="err">ℯ</span>    <span class="o">+</span> <span class="err">ℯ</span>  <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 
 
-<ul>
-<li>625<em>_i</em><em>2/2 - 125</em>_i/2 + ex­p(x) - 5))⎠ + Root­Sum⎝161⋅z  + 115⋅z  + 19⋅z +  </li> 
- </ul>
-<p>1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>4/4 - 3381*_i</strong>3/4 - 625<em>_i</em><em>2/2 - 125</em>_i/2 +</p> 
- <div class="code"><pre>         <span class="err">⎞</span>
-</pre></div>
-
-
-<p>ex­p(x) - 5))⎠</p> 
- <p>In [2]: can­cel(risch_in­te­grate(1/(­ex­p(5*x) + ex­p(x) + 1), x).d­if­f(x))</p> 
- <p>Out­[2]: 
-      1     <br> 
-─────────────
- 5⋅x    x   <br> 
-ℯ    + ℯ  + 1</p> 
- <p>[/­code]</p> 
- <p>The gen­er­al def­i­ni­tion of the log­a­rith­mic part of an in­te­gral is a sum over the roots of a poly­no­mi­al, which must be ex­pressed as a  <code>Root­Sum</code>  in the gen­er­al case.  Pre­vi­ous­ly,  <code>Root­Sum.d­iff</code>  did not work, but thanks to Ma­teusz, an al­go­rithm for com­put­ing ex­act­ly the Root­Sum where the Lamb­da ex­pres­sion is a ra­tio­nal func­tion was im­ple­ment­ed (see  <a href="http://mattpap.github.com/scipy-2011-tutorial/html/mathematics.html#summing-roots-of-polynomials" target="_blank">this bit</a>  from our SciPy tu­to­ri­al for an idea on how this work­s), so now the Risch Al­go­rithm can work with Root­Sum ob­jects just as well with as an or­di­nary sum of log­a­rithm­s.</p> 
+<p>The gen­er­al def­i­ni­tion of the log­a­rith­mic part of an in­te­gral is a sum over the roots of a poly­no­mi­al, which must be ex­pressed as a  <code>Root­Sum</code>  in the gen­er­al case.  Pre­vi­ous­ly,  <code>Root­Sum.d­iff</code>  did not work, but thanks to Ma­teusz, an al­go­rithm for com­put­ing ex­act­ly the Root­Sum where the Lamb­da ex­pres­sion is a ra­tio­nal func­tion was im­ple­ment­ed (see  <a href="http://mattpap.github.com/scipy-2011-tutorial/html/mathematics.html#summing-roots-of-polynomials" target="_blank">this bit</a>  from our SciPy tu­to­ri­al for an idea on how this work­s), so now the Risch Al­go­rithm can work with Root­Sum ob­jects just as well with as an or­di­nary sum of log­a­rithm­s.</p> 
  <p>Al­so, there was a bug in the square free al­go­rithm in my branch that was fixed in  <code>mas­ter</code>  that was caus­ing wrong re­sults (I don't re­mem­ber the ex­pres­sion that pro­duced them right now), and al­so there was a fix by me in  <code>mas­ter</code>  to make  <code>is_ra­tional_­func­tion()</code>  faster, as it was sig­nif­i­cant­ly slow­ing down the cal­cu­la­tion of some in­te­grals (for ex­am­ple,  <code>risch_in­te­grate(Ad­d(<em>(ex­p(i</em>x) for i in range(1000))))</code>, which is still slow to cal­cu­late, but now it's be­cause of oth­er things).</p> 
  <p><strong>About big branch­es</strong></p> 
  <p>So this merge, along with the poly12 fi­as­co (which by the way, I think part of the rea­son git made me do all these merge con­flict res­o­lu­tions was be­cause  <code>polys12</code>  was re­based from the  <code>polys11</code>  I had merged in­to in­te­gra­tion3), has shown me very clear­ly that it is very bad to go off with your own branch and do a lot of work and wait a long time be­fore merg­ing it back in­to the main re­po.</p> 
@@ -761,7 +861,7 @@ x + Root­Sum⎝21⋅z  + 6⋅z + 1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>
  <p></p>
 <ul>
     <li>I met a  <em>ton</em>  of cool peo­ple.  This in­clud­ed meet­ing sev­er­al peo­ple who I had pre­vi­ous­ly known from mail­ing lists in per­son for the first time.  I met the SymPy de­vel­op­ers Ma­teusz Pa­proc­ki and Andy Ter­rel, and I al­so had al­ready known or heard about peo­ple like Fer­nan­do Perez, Gael Varo­quaux, and Robert Kern.  There are a lot of peo­ple out there who are ex­cit­ed to be us­ing Python for their re­search, which is a re­al re­fresh­er from my uni­ver­si­ty, where ev­ery­one is us­ing Mat­lab and Maple.</li> 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>Mateusz and I gave a tutorial on SymPy.  This was one of the four introductory track tutorials.  This was a great experience to teach SymPy to people.  You can see the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://mattpap.github.com/scipy-2011-tutorial/html/index.html"</span><span class="nt">&gt;</span>Sphinx document<span class="nt">&lt;/a&gt;</span> that we used, and there should eventually be a video posted at the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://conference.scipy.org/scipy2011/tutorials.php#mateusz"</span><span class="nt">&gt;</span>SciPy 2011 website<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/li&gt;</span>
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>Mateusz and I gave a tutorial on SymPy.  This was one of the four introductory track tutorials.  This was a great experience to teach SymPy to people.  You can see the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://mattpap.github.com/scipy-2011-tutorial/html/index.html"</span><span class="nt">&gt;</span>Sphinx document<span class="nt">&lt;/a&gt;</span> that we used, and there should eventually be a video posted at the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://conference.scipy.org/scipy2011/tutorials.php#mateusz"</span><span class="nt">&gt;</span>SciPy 2011 website<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/li&gt;</span>
 
 <span class="nt">&lt;li&gt;</span>In addition to our tutorial, I attended some of the other tutorials.  I particularly enjoyed the NumPy tutorial. Having never used NumPy before, I now feel comfortable with the basics.  I also attended Gael Varoquaux's tutorial on scikits.learn and Corran Webster's tutorial on Matplotlib, Traits, and Chaco. My only regret is that the advanced track and introductory track tutorials were held at the same time, so I could not attend half of them.  I plan to watch the ones I missed online.<span class="nt">&lt;/li&gt;</span>
 
@@ -779,7 +879,7 @@ x + Root­Sum⎝21⋅z  + 6⋅z + 1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>
      <li>Again, re­gret­tably, I could not at­tend half of the talks be­cause they were held at the same time.  For­tu­nate­ly, they filmed all of them, so I hope to watch them all on­line when they are post­ed (and I rec­om­mend that you do too).</li>
 </ul>
     
-<div class="code"><pre><span class="nt">&lt;li&gt;</span>The sprints were a great time for getting together and hacking together.  I worked with Min Ragan-Kelley to make isympy work with the new IPython.  Having fixed this, I now want to release 0.7.1 very soon, so I used some of the time during the sprints getting ready for that.  We already have <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.1"</span><span class="nt">&gt;</span>preliminary release notes<span class="nt">&lt;/a&gt;</span>, and my hope is to create a release candidate on Monday (tomorrow).  I also finished up my <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/pull/491"</span><span class="nt">&gt;</span>MathJax branch<span class="nt">&lt;/a&gt;</span> and finished reviewing and pushed in Tom's first GSoC pull request, which has a lot of really cool stuff relating to converting hypergeometric functions and Meijer G-functions into standard elementary functions.  This will all be in the release.
+<div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>The sprints were a great time for getting together and hacking together.  I worked with Min Ragan-Kelley to make isympy work with the new IPython.  Having fixed this, I now want to release 0.7.1 very soon, so I used some of the time during the sprints getting ready for that.  We already have <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.1"</span><span class="nt">&gt;</span>preliminary release notes<span class="nt">&lt;/a&gt;</span>, and my hope is to create a release candidate on Monday (tomorrow).  I also finished up my <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/sympy/sympy/pull/491"</span><span class="nt">&gt;</span>MathJax branch<span class="nt">&lt;/a&gt;</span> and finished reviewing and pushed in Tom's first GSoC pull request, which has a lot of really cool stuff relating to converting hypergeometric functions and Meijer G-functions into standard elementary functions.  This will all be in the release.
 </pre></div>
 
 
@@ -787,7 +887,7 @@ x + Root­Sum⎝21⋅z  + 6⋅z + 1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>
  <p>We al­so had a cou­ple of peo­ple from the con­fer­ence come to our ta­ble and work on SymPy.  These were peo­ple who were new to SymPy, and I think at­tend­ed our tu­to­ri­al.  One of them, Em­ma Hogan, worked a lit­tle bit on im­prov­ing our doc­u­men­ta­tion, and has sub­mit­ted a  <a href="https://github.com/sympy/sympy/pull/490">pull re­quest</a>.</p> 
 
 
- <div class="code"><pre><span class="nt">&lt;li&gt;</span>Austin, TX is a nice city with lots of fun places to go, but it is also very humid, which is something I could barely stand (I am used to the same heat, but in Albuquerque it is dry heat).  One interesting thing that some of us went and saw was the bats.  The bridge over this lake in Austin has over a million bats living under it, and at night they all fly out to feed.  <span class="nt">&lt;/li&gt;</span>
+ <div class="codehilite"><pre><span class="nt">&lt;li&gt;</span>Austin, TX is a nice city with lots of fun places to go, but it is also very humid, which is something I could barely stand (I am used to the same heat, but in Albuquerque it is dry heat).  One interesting thing that some of us went and saw was the bats.  The bridge over this lake in Austin has over a million bats living under it, and at night they all fly out to feed.  <span class="nt">&lt;/li&gt;</span>
 </pre></div>
 
 
@@ -1114,56 +1214,70 @@ x + Root­Sum⎝21⋅z  + 6⋅z + 1, Lamb­da(_i, _i<em>log(-3381</em>_i<strong>
 <p>So ev­ery­thing seemed to be ready to go for the 0.7.0 re­lease, when some­one  <a href="https://groups.google.com/d/topic/sympy/9FOPjxC0D6s/discussion" target="_blank">point­ed out</a>  a test fail­ure in Python 2.5.   </p> 
  <p>It turned out that there is a bug in numpy (see the  <a href="http://projects.scipy.org/numpy/ticket/1872" target="_blank">numpy is­sue page</a>  for more in­for­ma­tion), that was caus­ing the quan­tum mod­ule to fail en­tire­ly when im­port­ed in Python 2.5 with numpy in­stalled.</p> 
  <p>Be­cause there was no easy way around the bug, the so­lu­tion was to dis­able numpy com­plete­ly in Python 2.5 in the quan­tum mod­ule.  But this en­tailed writ­ing the fol­low­ing code id­iom</p> 
- <p>[code lan­guage="python"]</p> 
- <p>im­port sys</p> 
- <p>im­port warn­ings</p> 
- <p>numpy_­sup­port­ed = True</p> 
- <p>if sys.ver­sion_in­fo &lt; (2, 6):
-    warn­ings.warn("­Can­not use numpy in Python 2.4/2.5.")
-    numpy_­sup­port­ed = False
-else:
-    try:
-        im­port numpy as np
-    ex­cept Im­portEr­ror:
-        numpy_­sup­port­ed = False
-[/­code]</p> 
- <p>in all the half dozen files that im­port numpy in the quan­tum mod­ule.   </p> 
- <p>So clear­ly, SymPy need­ed a more cen­tral­ized way to han­dle im­port­ing op­tion­al ex­ter­nal mod­ules.  Hence, I wrote the  <code>im­port_­mod­ule()</code>  func­tion.  The func­tion at­tempts to im­port a mod­ule giv­en it's name. It re­turns the mod­ule if it can be im­port­ed and None if it can­not.  It sup­ports check­ing the ver­sion of Python or the ver­sion of the li­brary and not im­port­ing it if ei­ther are too old.  It al­so sup­ports emit­ting warn­ings when the mod­ule is not avail­able or the ver­sion is too old.  Thus, the above id­iom re­duces to</p> 
- <p>[code lan­guage="python"]</p> 
- <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
- <p>np = im­port_­mod­ule('numpy', min_python_ver­sion=(2, 6))</p> 
- <p>[/­code]</p> 
- <p>And that's it. The func­tion will au­to­mat­i­cal­ly warn if numpy can­not be im­port­ed be­cause the Python ver­sion is too old.</p> 
+ <div class="codehilite"><pre><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+
+
+<span class="n">numpy_supported</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="n">import_module</span><span class="p">()</span> <span class="n">function</span><span class="o">.</span>  <span class="n">The</span> <span class="n">function</span> <span class="n">attempts</span> <span class="n">to</span> <span class="kn">import</span> <span class="nn">a</span> <span class="nn">module</span> <span class="nn">given</span> <span class="nn">it</span><span class="s">'s name. It returns the module if it can be imported and None if it cannot.  It supports checking the version of Python or the version of the library and not importing it if either are too old.  It also supports emitting warnings when the module is not available or the version is too old.  Thus, the above idiom reduces to</span>
+
+
+
+<span class="sb">``</span><span class="err">`</span><span class="n">python</span>
+
+
+<span class="kn">from</span> <span class="nn">sympy.external</span> <span class="kn">import</span> <span class="n">import_module</span>
+
+
+
+<span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s">'numpy'</span><span class="p">,</span> <span class="n">min_python_version</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+
+
+<p>And that's it. The func­tion will au­to­mat­i­cal­ly warn if numpy can­not be im­port­ed be­cause the Python ver­sion is too old.</p> 
  <p>Any kind of  <code>numpy_­sup­port­ed</code>  vari­able in the code can be re­placed by test­ing the  <code>np</code>  vari­able it­self, like</p> 
- <p>[code lan­guage="python"]</p> 
- <p>if np:
-    # Do some numpy stuff
-else:
-    # np is None
-    # Do what­ev­er you do when it is not avail­able
-[/­code]</p> 
- <p>This method has an ad­di­tion­al ad­van­tage, which is that the warn­ings can be cus­tom­ized by set­ting vari­able hook­s.  So, for ex­am­ple, the test run­ner can dis­able all warn­ings by do­ing</p> 
- <p>[code lan­guage="python"]</p> 
- <p>im­port sympy.ex­ter­nal</p> 
- <p>sympy.ex­ter­nal.im­port­tool­s.WARN_OLD_VER­SION = False</p> 
- <p>sympy.ex­ter­nal.im­port­tool­s.WARN_NOT_IN­STALLED = False</p> 
- <p>[/­code]</p> 
- <p>I ac­tu­al­ly did make the test run­ner do this, and al­so set both to True when the  <code>SYMPY_DE­BUG</code>  en­vi­ron­ment vari­able is set to True (by de­fault,  <code>WARN_NOT_IN­STALLED</code>  is False and  <code>WARN_OLD_VER­SION</code>  is True).</p> 
+ <div class="codehilite"><pre><span class="k">if</span> <span class="n">np</span><span class="p">:</span>
+    <span class="c"># Do some numpy stuff</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c"># np is None</span>
+    <span class="c"># Do whatever you do when it is not available</span>
+</pre></div>
+
+
+<p>This method has an ad­di­tion­al ad­van­tage, which is that the warn­ings can be cus­tom­ized by set­ting vari­able hook­s.  So, for ex­am­ple, the test run­ner can dis­able all warn­ings by do­ing</p> 
+ <div class="codehilite"><pre><span class="kn">import</span> <span class="nn">sympy.external</span>
+
+<span class="n">sympy</span><span class="o">.</span><span class="n">external</span><span class="o">.</span><span class="n">importtools</span><span class="o">.</span><span class="n">WARN_OLD_VERSION</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">sympy</span><span class="o">.</span><span class="n">external</span><span class="o">.</span><span class="n">importtools</span><span class="o">.</span><span class="n">WARN_NOT_INSTALLED</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+
+
+<p>I ac­tu­al­ly did make the test run­ner do this, and al­so set both to True when the  <code>SYMPY_DE­BUG</code>  en­vi­ron­ment vari­able is set to True (by de­fault,  <code>WARN_NOT_IN­STALLED</code>  is False and  <code>WARN_OLD_VER­SION</code>  is True).</p> 
  <p>There are some caveat­s.  First, note that the func­tion does it's mag­ic us­ing the built-in  <code><strong>im­port</strong>()</code>  func­tion.  To im­port a sub­mod­ule (like  <code>sympy.quan­tum</code>), you need to pass some stuff to the  <code>from­list</code>  ar­gu­ment of  <code><strong>im­port</strong>()</code>.  It's al­so a good idea to pass names to this if you plan to repli­cate  <code>from mod­ule im­port stuff</code>  (in­stead of just  <code>im­port mod­ule</code>), be­cause some mod­ules use lazy im­port­ing and oth­er mag­ic that pre­vent you from ac­cess­ing names di­rect­ly from  <code>mod­ule.stuff</code>  with­out im­port­ing  <code>stuff</code>  first.</p> 
  <p>To do this, just pass the ar­gu­ments to  <code><strong>im­port</strong>()</code>  to  <code>im­port_­mod­ule()</code>  us­ing the  <code><strong>im­port</strong>kwargs</code>  key­word ar­gu­men­t, like</p> 
- <p>[code lan­guage="python"]</p> 
- <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
- <h2>Do this instead of "from matplotlib import pyplot" or "import matplotlib.pyplot as pyplot"</h2>
-<p>mat­plotlib = im­port_­mod­ule('­mat­plotlib',  <strong>im­port</strong>kwargs={'from­list':['py­plot']})</p> 
- <p>py­plot = mat­plotlib.py­plot</p> 
- <p>[/­code]</p> 
- <p>Sec­ond, for mod­ule ver­sion check­ing it looks at  <code>mod­ule.<strong>ver­sion</strong></code>.  Some mod­ules use a dif­fer­ent method (for ex­am­ple, gmpy).  You can use the oth­er method by pass­ing the prop­er ar­gu­ments to  <code>im­port_­mod­ule()</code>.  For ex­am­ple, ver­sions of gmpy low­er than 1.03 have a bug that pre­vent its use in SymPy (ba­si­cal­ly,  <code>in­t(large mpz)</code>  did not au­to­mat­i­cal­ly con­vert the num­ber to a  <code>long</code>).  So to im­port gmpy, but on­ly if it's ver­sion 1.03 or new­er, you would use</p> 
- <p>[code lan­guage="python"]</p> 
- <p>from sympy.ex­ter­nal im­port im­port_­mod­ule</p> 
- <p>gmpy = im­port_­mod­ule('gmpy', min_­mod­ule_ver­sion='1.03',
-    mod­ule_ver­sion_at­tr='ver­sion', mod­ule_ver­sion_at­tr_­cal­l_args=())
-[/­code]</p> 
- <p>This tells it to check the ver­sion of gmpy us­ing  <code>gmpy.ver­sion()</code>, and to im­port it on­ly if it's at least 1.03 (note that this works by the fact that Python lex­i­co­graph­i­cal­ly com­pares strings and tu­ples, so  <code>'1.02' &lt; '1.03'</code>  re­turns True).</p> 
+ <div class="codehilite"><pre><span class="kn">from</span> <span class="nn">sympy.external</span> <span class="kn">import</span> <span class="n">import_module</span>
+
+<span class="c"># Do this instead of "from matplotlib import pyplot" or "import matplotlib.pyplot as pyplot"</span>
+
+<span class="n">matplotlib</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s">'matplotlib'</span><span class="p">,</span> <span class="n">__import__kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'fromlist'</span><span class="p">:[</span><span class="s">'pyplot'</span><span class="p">]})</span>
+
+<span class="n">pyplot</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span>
+</pre></div>
+
+
+<p>Sec­ond, for mod­ule ver­sion check­ing it looks at  <code>mod­ule.<strong>ver­sion</strong></code>.  Some mod­ules use a dif­fer­ent method (for ex­am­ple, gmpy).  You can use the oth­er method by pass­ing the prop­er ar­gu­ments to  <code>im­port_­mod­ule()</code>.  For ex­am­ple, ver­sions of gmpy low­er than 1.03 have a bug that pre­vent its use in SymPy (ba­si­cal­ly,  <code>in­t(large mpz)</code>  did not au­to­mat­i­cal­ly con­vert the num­ber to a  <code>long</code>).  So to im­port gmpy, but on­ly if it's ver­sion 1.03 or new­er, you would use</p> 
+ <div class="codehilite"><pre><span class="kn">from</span> <span class="nn">sympy.external</span> <span class="kn">import</span> <span class="n">import_module</span>
+
+<span class="n">gmpy</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s">'gmpy'</span><span class="p">,</span> <span class="n">min_module_version</span><span class="o">=</span><span class="s">'1.03'</span><span class="p">,</span>
+    <span class="n">module_version_attr</span><span class="o">=</span><span class="s">'version'</span><span class="p">,</span> <span class="n">module_version_attr_call_args</span><span class="o">=</span><span class="p">())</span>
+</pre></div>
+
+
+<p>This tells it to check the ver­sion of gmpy us­ing  <code>gmpy.ver­sion()</code>, and to im­port it on­ly if it's at least 1.03 (note that this works by the fact that Python lex­i­co­graph­i­cal­ly com­pares strings and tu­ples, so  <code>'1.02' &lt; '1.03'</code>  re­turns True).</p> 
  <p>The sympy.ex­ter­nal mod­ule is com­plete­ly in­de­pen­dent of the rest of SymPy (it does not call  <code>sympy/<strong>init</strong>.py</code>), so you can use it even out­side of sympy with­out the per­for­mance penal­ty that im­port­ing all of sympy might bring.   </p> 
  <p>So, hope­ful­ly this is the last is­sue to fix for the 0.7.0 re­lease.  You can still test it at  <a href="https://github.com/sympy/sympy/tree/0.7.0" target="_blank">http­s://github.­com/sympy/sympy/tree/0.7.0</a>.  If peo­ple wan­t, I will cre­ate an­oth­er re­lease can­di­date.  Oth­er­wise, I will re­lease 0.7.0 fi­nal on Mon­day (bar­ring any fur­ther prob­lem­s).</p>
 </div>
@@ -1189,19 +1303,22 @@ else:
 <p>This week, I most­ly worked on fix­ing bugs that peo­ple found in the  <a href="http://asmeurersympy.wordpress.com/2011/06/13/sympy-0-7-0-rc1-is-out/">re­lease can­di­date</a>  I re­leased last week.  I dis­cov­ered right af­ter re­leas­ing it that it did not work in Python 2.4 or 2.5 be­cause of a syn­tax er­ror.  So I fixed those and cre­at­ed SymPy 0.7.0.r­c2 (<a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.tar.gz" target="_blank">source</a>;  <a href="http://code.google.com/p/sympy/downloads/detail?name=sympy-0.7.0.rc2.win32.exe" target="_blank">win­dows in­stall­er</a>).   </p> 
  <p>Things were go­ing pret­ty smooth­ly with that, un­til Re­na­to Coutin­ho dis­cov­ered that there were test fail­ures in Python 2.4 on Win­dows, and that the tests failed if ran twice in the same ses­sion (i.e., by us­ing  <code>test()</code>  in isympy).  I was able to fix the fail­ures re­sult­ing from two ses­sion­s, which were al­most all caused by a test mod­i­fy­ing some glob­al val­ue or be­ing writ­ten in a way that did not al­low it to pass when run twice.  But I do not have a Win­dows ma­chine, so I could­n't re­pro­duce the Win­dows fail­ures.</p> 
  <p>For­tu­nate­ly, yes­ter­day, Re­na­to, Chris Smith, and I were able to de­bug the prob­lems over IR­C.  The main prob­lem was that sympy/­core/e­valf.py had code</p> 
- <p>[code lan­guage="py"]</p> 
- <p>INF = 1e1000</p> 
- <p>MI­NUS_INF = -1e1000</p> 
- <p>[/­code]</p> 
- <p>These were in­tend­ed to give  <code>float('in­f')</code>  and  <code>float('-in­f')</code>, re­spec­tive­ly (float­ing point in­fin­i­ty and neg­a­tive in­fin­i­ty). And they did do this… on all plat­forms ex­cept for Python 2.4 on Win­dows.  From what I can tell from what Chris told me, on that plat­form it in­stead gives 1.0.  Strange­ly,  <code>float('in­f')</code>  did not give float­ing point in­fin­i­ty ei­ther.  We dis­cov­ered that  <code>float(mp­math­_in­f)</code>  did give float­ing point in­fin­i­ty, where  <code>mp­math­_inf</code>  is mp­math­'s in­fin­i­ty.  This of course al­so works in all oth­er plat­form­s, so chang­ing it made the code work ev­ery­where.</p> 
+ <div class="codehilite"><pre><span class="n">INF</span> <span class="o">=</span> <span class="mf">1e1000</span>
+
+<span class="n">MINUS_INF</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1e1000</span>
+</pre></div>
+
+
+<p>These were in­tend­ed to give  <code>float('in­f')</code>  and  <code>float('-in­f')</code>, re­spec­tive­ly (float­ing point in­fin­i­ty and neg­a­tive in­fin­i­ty). And they did do this… on all plat­forms ex­cept for Python 2.4 on Win­dows.  From what I can tell from what Chris told me, on that plat­form it in­stead gives 1.0.  Strange­ly,  <code>float('in­f')</code>  did not give float­ing point in­fin­i­ty ei­ther.  We dis­cov­ered that  <code>float(mp­math­_in­f)</code>  did give float­ing point in­fin­i­ty, where  <code>mp­math­_inf</code>  is mp­math­'s in­fin­i­ty.  This of course al­so works in all oth­er plat­form­s, so chang­ing it made the code work ev­ery­where.</p> 
  <p>Af­ter that, there was on­ly one test fail­ure left in Win­dows (o­rig­i­nal­ly there were dozens of er­rors, but all but one were caused by the above prob­lem).  It turns out that the  <code>sub­pro­cess</code>  mod­ule from the code­gen mod­ule was caus­ing the test run­ner to fail en­tire­ly.  Our so­lu­tion was to skip this test com­plete­ly in Python 2.4 on Win­dows.</p> 
  <p>So now we had all tests pass­ing on all plat­forms with all ground type­s, even if run twice from with­in the same ses­sion.</p> 
  <p>But it turned out there was still one more er­ror lurk­ing, found by Re­na­to.  A bunch of mp­math tests failed in Python 2.4 when gmpy was in­stalled.  I had nev­er got­ten gmpy to com­pile, so I have on­ly had it in­stalled on my ma­chine for those Python ex­e­cuta­bles in­stalled by fink (2.5-2.7, 64-bit).   </p> 
  <p>It turns out that mp­math us­es gmpy if it is in­stalled.  There were a few places in the code where it was do­ing things like line 1947 of mp­math­/libm­p/gam­maze­ta.py, shown be­low:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>re­turn mpf_­pos(s­mal­l­_­fac­to­ri­al_­cache[n-1], prec, rnd)</p> 
- <p>[/­code]</p> 
- <p>The prob­lem was that  <code>n</code>  was an  <code>mpz</code>, or gmpy in­te­ger.  But Python 2.4 and ealier do not sup­port non-int types as the in­dex to list­s.  It was­n't un­til Python 2.5's  <a href="http://docs.python.org/reference/datamodel.html?highlight=__index__#object.__index__" target="_blank"><code><strong>in­dex</strong></code></a>  method that non-in­t/­long types were able to be used as slice in­dices.   </p> 
+ <div class="codehilite"><pre><span class="k">return</span> <span class="n">mpf_pos</span><span class="p">(</span><span class="n">small_factorial_cache</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">prec</span><span class="p">,</span> <span class="n">rnd</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The prob­lem was that  <code>n</code>  was an  <code>mpz</code>, or gmpy in­te­ger.  But Python 2.4 and ealier do not sup­port non-int types as the in­dex to list­s.  It was­n't un­til Python 2.5's  <a href="http://docs.python.org/reference/datamodel.html?highlight=__index__#object.__index__" target="_blank"><code><strong>in­dex</strong></code></a>  method that non-in­t/­long types were able to be used as slice in­dices.   </p> 
  <p>This id­iom was be­ing used in sev­er­al places through­out the code, so rather than try to patch them al­l, we de­cid­ed to just dis­able the gmpy back­end in mp­math for Python 2.4.  This is­sue had nev­er come up be­fore to my knowl­edge, so it seems that he was the first per­son to run the mp­math tests in Python 2.4 with gmpy in­stalled.   </p> 
  <p>So now tests should be pass­ing ev­ery­where in the  <a href="posts/2011/06/17/fixing-bugs-in-the-release-candidate/github.com/sympy/sympy/tree/0.7.0" target="_blank">0.7.0 branch</a>.  Please con­tin­ue to test it, though.  If it will make it eas­i­er to test, I will cre­ate a 0.7.0.r­c3 with all the lat­est fix­es.  Oth­er­wise, bar­ring any fur­ther ma­jor fix­es, I will re­lease 0.7.0 fi­nal in about a week.</p> 
  <p>And a big thanks for Re­na­to Coutin­ho and Chris Smith for help­ing me de­bug and fix these bugs.    </p>

@@ -9,13 +9,18 @@ With GitHub pages, I can write my posts in Markdown, and I have full control
 over everything. And there is no lock in. If I decide I don't like the
 software that is generating the posts, I can easily move to something else,
 since the post content itself is all Markdown (or the occasional rst or
-IPython notebook if I want to do something that Markdown doesn't support).
+IPython notebook if I want to do something that Markdown doesn't support). I
+can use MathJax for math (like \\( e^{i\pi} + 1 = 0 \\)). Wordpress.com
+doesn't let you install abtirary Javascript on your blog, so you can't do
+things like install MathJax or enable some cool sidebar thing (like a Twitter
+feed).
 
-Here's the guide on how to do it. First, you need to set up GitHub pages. This
-is a bit confusing, because there are actually two kinds of GitHub pages, user
-pages and project pages. User pages are if you have a repo named
-`username.github.io` (or `.com`). The pages are served from the `master`
-branch.
+# Setting up GitHub Pages
+
+First, you need to set up GitHub pages. This is a bit confusing, because there
+are actually two kinds of GitHub pages, user pages and project pages. User
+pages are if you have a repo named `username.github.io` (or `.com`). The pages
+are served from the `master` branch.
 
 For project pages, you add a `gh-pages` branch to any one of your projects,
 and GitHub hosts the content automatically at
@@ -61,7 +66,9 @@ install `markdown` and `webassets`. While using `nikola`, it will tell you if
 you don't have something installed that you should, so if you see that, just
 install what it tells you to.  If you use `conda` and Mac OS X, I have
 uploaded all the dependencies to my [Binstar](https://binstar.org/asmeurer/),
-so you can just `conda install -c asmeurer nikola`.
+so you can just `conda install -c asmeurer nikola`. Oh and don't worry, Nikola
+and its dependencies fully support Python 3 (I wouldn't be using it if they
+didn't).
 
 Then you just run the commands from
 http://getnikola.com/handbook.html#all-you-need-to-know.
@@ -77,11 +84,65 @@ eval "`nikola tabcompletion`"
 
 to your Bash profile to get tab completion.
 
+## Tricks
+
+Here are some useful tricks:
+
+- To enable MathJax, you have to type `mathjax` in a line by itself in the
+metadata file. There are some bugs right now, but ideally you could do inline
+math with `$math$` and display math with `$$math$$`. `$math$` doesn't work
+currently, but you can do `\\(math\\)` (both `\`s are required, although this
+is likely a bug). You can do `\\[math\\]` for display math.  Here are some
+examples. Inline: \\( \sin ^2{x} + \cos^2{x} = 1\\). Display: $$ e^{i\pi} + 1 = 0 .$$
+
+- Your one-stop command when blogging is `nikola auto`. This requires
+  `livereload`. This will serve the blog on localhost, and automatically
+  rebuild it when any change is made (and I really mean *any* change: it can
+  even detect when you change Nikola itself).
+
+- I have the following in my conf.py to deploy:
+
+```python
+DEPLOY_COMMANDS = [
+    "git checkout gh-pages",
+    "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
+    "git add -A",
+    "git commit -a -m 'Updating blog content'",
+    "git push",
+    "git checkout master",
+]
+```
+
+WARNING: These commands are dangerous. If you don't properly exclude things
+like `.git`, you will wipe your entire git history. I *highly* recommend
+committing everything and pushing to GitHub before deploying.
+
+- Use
+
+```
+_site/
+*.pyc
+.DS_Store
+.doit.db.db
+cache/
+output/
+```
+
+for your `.gitignore`.
+
+- Despite what it says on the Nikola page, be sure to read the docs, because
+there are a lot of cool features you won't know about unless you read about
+them. Also be sure to read through `conf.py`.
+
 ## Wordpress import
 
-Importing from Wordpress is pretty easy actually. First you need to go to the
-Wordpress site dashboard and go to "Export" from the "Tools" menu. From here
-you can download an XML file with all your content. Then just do
+**This is something that I am still figuring out. You can see the progress at
+  [http://asmeurer.github.io/blog/old_blog](http://asmeurer.github.io/blog/old_blog)**
+
+Importing from Wordpress is pretty easy actually (at least in theory). First
+you need to go to the Wordpress site dashboard and go to "Export" from the
+"Tools" menu. From here you can download an XML file with all your
+content. Then just do
 
 ```
 nikola import_wordpress export_file.xml
@@ -94,15 +155,15 @@ the import, since Wordpress has its own markup that it doesn't know everything
 about, so you may need to go in and fix things. Or report them as bugs to
 Nikola and reimport when they are fixed.
 
+You'll need to go through the posts and make sure that they are rendered
+correctly (this is one reason I haven't finished doing it yet).
+
 For comments, you first need to create a Disqus account, and enable it in your
 conf.py. You should then upload the xml file that you exported from Wordpress
 to Disqus. At this point, the comments should just work, because Nikola sets
 the Disqus url for the imported comments to the old Wordpress url (look at the
 Disqus section of one of the built pages).
 
-If there's a mismatch, or if you need to make the urls match your new site for
-some reason, you can use a url map csv. Nikola generates one automatically,
-but you should make sure that it's correct.
-
-The Disqus import can take a while to register (according to Disqus, it can
-take up to 24 hours).
+I don't know how to automatically backlink from Wordpress back to
+Nikola. Maybe I should just automatically generate some links and paste them
+in manually.

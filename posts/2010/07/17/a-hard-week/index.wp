@@ -1,7 +1,8 @@
 <html><body><p>After last week's <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">breakthrough</a>, work this week has been very slow.  I started working on the Parametric Risch Differential Equation Problem, which is almost identical to the Risch Differential Equation Problem in how it is solved, except there are a few extra steps.  Unfortunately, because it is so similar, Bronstein breezes through the description.  This is fine for the parts that are the same, but he is a little unclear on how some of the new parts fit in.  Also, his pseudocode has a line more or less saying 
 
 
-[code]
+```
+
 
 if r1 = … = rn = 0 then
     N = -1
@@ -14,7 +15,8 @@ for i from 0 to N
         Mij = coefficient(rj, t^i)
 
 
-[/code]
+
+```
 
 
 

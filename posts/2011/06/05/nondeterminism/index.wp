@@ -11,7 +11,8 @@ I also did some work on the Risch Algorithm, though it wasn't very much.  One of
 
 <strong>Hover over the code and click on the left-most, "view source" icon (a paper icon with <tt>&lt; &gt;</tt> over it) to view without breaks.  Opens in a new window.</strong>
 
-[code language="py"]
+```py
+
 
 In [1]: a = Add(*(log(x**i) for i in range(10)))
 
@@ -36,7 +37,8 @@ Out[4]:
         45⋅x⋅log⎝x ⎠
 -45⋅x + ────────────
              4      
-[/code]
+
+```
 
 
 
@@ -44,13 +46,15 @@ This is correct, since we have
 
 
 
-[code language="py"]
+```py
+
 
 In [5]: expand(b.diff(x) - a)
 
 Out[5]: 0
 
-[/code]
+
+```
 
 
 
@@ -62,11 +66,13 @@ But it's actually worse than that.  Like I mentioned, this is nondeterministic. 
 
 
 
-[code language="py"]
+```py
+
 
 for i in range(100):
     print risch_integrate(Add(*(log(x**j) for j in range(i))), x)
-[/code]
+
+```
 
 
 
@@ -82,7 +88,8 @@ The problem is how to sort the atoms.  We recently added a <code>sort_key()</cod
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: f = (x*(x + 1)*((x**2*exp(2*x**2) - log(x + 1)**2)**2 +
    ...: 2*x*exp(3*x**2)*(x - (2*x**3 + 2*x**2 + x + 1)*log(x + 1))))/((x +
@@ -151,7 +158,8 @@ In [8]: cancel(risch_integrate(f, x, handle_first='exp').diff(x) - f)
 
 Out[8]: 0
 
-[/code]
+
+```
 
 
 
@@ -169,7 +177,8 @@ I discovered that there's an easier way to show the nondeterminism of the above 
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: a = Add(*(log(x**i) for i in range(10)))
 
@@ -205,7 +214,8 @@ Out[6]:
         45⋅z⋅log⎝z ⎠
 -45⋅z + ────────────
              2      
-[/code]
+
+```
 
 
 

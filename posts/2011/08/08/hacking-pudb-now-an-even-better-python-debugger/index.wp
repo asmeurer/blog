@@ -99,11 +99,13 @@ Running it in your code is very easy.  Just add
 
 
 
-[code lang="py"]
+```py
+
 
 import pudb;pudb.set_trace()
 
-[/code]
+
+```
 
 
 

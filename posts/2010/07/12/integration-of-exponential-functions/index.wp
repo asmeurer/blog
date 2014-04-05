@@ -7,7 +7,8 @@ So here is the function.  It integrates exponential functions.  You still have t
 
 <strong>Hover over the code and click on the left-most, "view source" icon (a paper icon with <tt>&lt; &gt;</tt> over it) to view without breaks.  Opens in a new window.</strong>
 
-[code language="py"]
+```py
+
 
 In [1]: from sympy.integrals.risch import *
 
@@ -73,7 +74,8 @@ Out[10]:
 
 ⎝                   ⌡                                 ⎠
 
-[/code]
+
+```
 
 
 
@@ -89,7 +91,8 @@ Another example:
 
 
 
-[code language="py"]
+```py
+
 
 
 
@@ -140,7 +143,8 @@ Out[8]: (0, False)
 
 
 
-[/code]
+
+```
 
 
 
@@ -148,7 +152,8 @@ Here the second argument of the solution is <code>False</code>, which indicates 
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: from sympy.integrals.risch import *
 
@@ -201,7 +206,8 @@ Out[8]:
 
 
 
-[/code]
+
+```
 
 
 
@@ -213,7 +219,8 @@ Finally, the full algorithm appears to be faster (probably asymptotically faster
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: from sympy.integrals.risch import *
 
@@ -263,7 +270,8 @@ In [8]: %timeit integrate(rd, x)
 
 
 
-[/code]
+
+```
 
 
 
@@ -271,7 +279,8 @@ Of course, keep in mind that I am timing what will be an internal function again
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: from sympy.integrals.risch import *
 
@@ -319,7 +328,8 @@ In [8]: %timeit integrate(rd, x)
 
 1 loops, best of 3: 2.78 s per loop
 
-[/code]
+
+```
 
 
 
@@ -327,7 +337,8 @@ There is one thing I should mention.  I haven't implemented all the cases in <co
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: from sympy.integrals.risch import *
 
@@ -367,7 +378,8 @@ In [7]: integrate_hyperexponential(a, d, [Poly(1, x), Poly(1 + t1**2, t1), Poly(
 
 NotImplementedError: The ability to solve the parametric logarithmic derivative problem is required to solve this RDE
 
-[/code]
+
+```
 
 
 

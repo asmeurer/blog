@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -167,43 +167,87 @@ MathJax.Hub.Config({
  <p>This func­tion has not been in­te­grat­ed in any way with the al­ready</p> 
  <p>ex­ist­ing in­te­grate() yet, and you can use it to com­pare.</p> 
  <p>Ex­am­ples:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: risch_in­te­grate(­ex­p(x**2), x)</p> 
- <p>Out­[1]:</p> 
- <p>⌠</p> 
- <p>⎮  ⎛ 2⎞</p> 
- <p>⎮  ⎝x ⎠</p> 
- <p>⎮ ℯ     dx</p> 
- <p>⌡</p> 
- <p>In [2]: risch_in­te­grate(x*<em>100</em>ex­p(x), x).d­if­f(x)</p> 
- <p>Out­[2]:
- 100  x
-x   ⋅ℯ</p> 
- <p>In [3]: %timeit risch_in­te­grate(x*<em>100</em>ex­p(x), x).d­if­f(x)</p> 
- <p>1 loop­s, best of 3: 270 ms per loop</p> 
- <p>In [4]: in­te­grate(x*<em>100</em>ex­p(x), x)</p> 
- <p>... hangs ...</p> 
- <p>In [5]: risch_in­te­grate(x/log(x), x)</p> 
- <p>Out­[5]:</p> 
- <p>⌠</p> 
- <p>⎮   x</p> 
- <p>⎮ ────── dx</p> 
- <p>⎮ log(x)</p> 
- <p>⌡</p> 
- <p>In [6]: risch_in­te­grate(log(x)**10, x).d­if­f(x)</p> 
- <p>Out­[6]:
-   10
-log  (x)</p> 
- <p>In [7]: in­te­grate(log(x)**10, x).d­if­f(x)</p> 
- <p>Out­[7]:
-   10
-log  (x)</p> 
- <p>In [8]: %timeit risch_in­te­grate(log(x)**10, x).d­if­f(x)</p> 
- <p>10 loop­s, best of 3: 159 ms per loop</p> 
- <p>In [9]: %timeit in­te­grate(log(x)**10, x).d­if­f(x)</p> 
- <p>1 loop­s, best of 3: 2.35 s per loop</p> 
- <p>[/­code]</p> 
- <p>Be warned that things are still very bug­gy and you should al­ways ver­i­fy</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+
+<span class="err">⌠</span>
+
+<span class="err">⎮</span>  <span class="err">⎛</span> <span class="mi">2</span><span class="err">⎞</span>
+
+<span class="err">⎮</span>  <span class="err">⎝</span><span class="n">x</span> <span class="err">⎠</span>
+
+<span class="err">⎮</span> <span class="err">ℯ</span>     <span class="n">dx</span>
+
+<span class="err">⌡</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">100</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+ <span class="mi">100</span>  <span class="n">x</span>
+<span class="n">x</span>   <span class="err">⋅ℯ</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">100</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="mi">1</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">270</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">integrate</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">100</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="o">...</span> <span class="n">hangs</span> <span class="o">...</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span>
+
+<span class="err">⌠</span>
+
+<span class="err">⎮</span>   <span class="n">x</span>
+
+<span class="err">⎮</span> <span class="err">──────</span> <span class="n">dx</span>
+
+<span class="err">⎮</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="err">⌡</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span>
+   <span class="mi">10</span>
+<span class="n">log</span>  <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">integrate</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span>
+   <span class="mi">10</span>
+<span class="n">log</span>  <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="mi">10</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">159</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">integrate</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="mi">1</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">2.35</span> <span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
+</pre></div>
+
+
+<p>Be warned that things are still very bug­gy and you should al­ways ver­i­fy</p> 
  <p>re­sults by dif­fer­en­ti­at­ing.  Usu­al­ly, can­cel(d­if­f(re­sult, x) - re­sult)</p> 
  <p>should be enough.  This should go to 0.</p> 
  <p>So please, please, PLEASE, try out this func­tion and re­port any bugs that you find.  It is not nec­es­sary to re­port NotIm­ple­ment­ed­Er­ror bugs, be­cause I al­ready know about those (I put them in there), and as I men­tioned above, they are all planned to dis­ap­pear.  Al­so, I am con­tin­u­al­ly up­dat­ing my branch with fix­es, so you should do a "git pul­l" and try again be­fore you re­port any­thing.</p> 
@@ -215,50 +259,76 @@ log  (x)</p>
  <p>If  <code>han­dle_­first == 'log'</code>  (the de­fault right now), then it will gath­er all log­a­rithms first, and then ex­po­nen­tials (in­so­much as it can do it in that or­der).  If  <code>han­dle_­first='­ex­p'</code>, it gath­ers ex­po­nen­tials first.  The dif­fer­ence is that the Risch Al­go­rithm in­te­grates re­cur­sive­ly, one ex­ten­sion at a time, start­ing with the out­er-­most one. So if you have an ex­pres­sion with both log­a­rithms and ex­po­nen­tial­s, such that they do not de­pend on each oth­er,  <code>han­dle_­first == 'log'</code>  will in­te­grate the ex­po­nen­tials first, be­cause they will be gath­ered last (be at the top of the tow­er of ex­ten­sion­s), and  <code>han­dle_­first == 'ex­p'</code>  will in­te­grate the log­a­rithms first.  Right now, I have de­fault­ed to 'log' be­cause the ex­po­nen­tial in­te­gra­tion al­go­rithm is slight­ly more com­plete.  If you get  <code>NotIm­ple­ment­ed­Er­ror</code>  with one, it is pos­si­ble (though I don't know for sure yet) that you might get an an­swer with the oth­er.   </p> 
  <p>Al­so, they can give dif­fer­ent look­ing re­sult­s, and at dif­fer­ent speed­s.  For ex­am­ple:</p> 
  <p><strong>Hov­er over the code and click on the left­-­most, "view source" icon (a pa­per icon with  <tt>&lt; &gt;</tt>  over it) to view with­out break­s.  Opens in a new win­dow.</strong></p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: f = (x<em>(x + 1)</em>((x<strong>2<em>ex­p(2</em>x</strong>2) - log(x + 1)<strong>2)</strong>2 +
-   ...: 2<em>x</em>ex­p(3<em>x<strong>2)<em>(x - (2</em>x</strong>3 + 2</em>x<strong>2 + x + 1)<em>log(x + 1))))/((x +
-   ...: 1)</em>log(x + 1)</strong>2 - (x<strong>3 + x</strong>2)<em>ex­p(2</em>x<strong>2))</strong>2</p> 
- <p>In [2]: f</p> 
- <p>Out­[2]: 
-          ⎛                          2                                                   ⎞
-          ⎜⎛                       2⎞                                                   2⎟
-          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
-x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠</p> 
- <p>──────────────────────────────────────────────────────────────────────────────────────────
-                                                                2                        <br> 
-                         ⎛                                    2⎞                         <br> 
-                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟                         <br> 
-                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠                           </p> 
- <p>In [3]: risch_in­te­grate(f, x, han­dle_­first='log')</p> 
- <p>Out­[3]: 
-       ⎛              ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞                            <br> 
-       ⎜log(1 + x)    ⎝x ⎠⎟                   ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞              <br> 
-    log⎜────────── + ℯ    ⎟                log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠              <br> 
-       ⎝    x             ⎠                   ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)   <br> 
-x + ─────────────────────── - log(1 + x) - ───────────────────────── + ──────────────────────────
-               2                                       2                                        2
-                                                                              2           3  2⋅x 
-                                                                       - x⋅log (1 + x) + x ⋅ℯ     </p> 
- <p>In [4]: risch_in­te­grate(f, x, han­dle_­first='­ex­p')</p> 
- <p>Out­[4]: 
-       ⎛                ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞        ⎛ 2⎞            <br> 
-       ⎜                ⎝x ⎠⎟                   ⎜                ⎝x ⎠⎟        ⎝x ⎠            <br> 
-    log⎝log(1 + x) + x⋅ℯ    ⎠                log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)<br> 
-x + ───────────────────────── - log(1 + x) - ───────────────────────── - ──────────────────────
-                2                                        2                                    2
-                                                                            2           2  2⋅x 
-                                                                         log (1 + x) - x ⋅ℯ     </p> 
- <p>In [5]: %timeit risch_in­te­grate(f, x, han­dle_­first='log')</p> 
- <p>1 loop­s, best of 3: 1.49 s per loop</p> 
- <p>In [6]: %timeit risch_in­te­grate(f, x, han­dle_­first='­ex­p')</p> 
- <p>1 loop­s, best of 3: 1.21 s per loop</p> 
- <p>In [7]: can­cel(risch_in­te­grate(f, x, han­dle_­first='log').d­if­f(x) - f)</p> 
- <p>Out­[7]: 0</p> 
- <p>In [8]: can­cel(risch_in­te­grate(f, x, han­dle_­first='­ex­p').d­if­f(x) - f)</p> 
- <p>Out­[8]: 0</p> 
- <p>[/­code]</p> 
- <p>So go now, and pull my  <a href="//github.com/asmeurer/sympy/tree/integration3">branch</a>, and try this func­tion out.  And re­port any prob­lems that you have back to me, ei­ther through the mail­ing list, IR­C, is­sue 2010, or as a com­ment to this blog post (I don't re­al­ly care how).</p>
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+   <span class="o">...</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))))</span><span class="o">/</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span>
+   <span class="o">...</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">f</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
+          <span class="err">⎛</span>                          <span class="mi">2</span>                                                   <span class="err">⎞</span>
+          <span class="err">⎜⎛</span>                       <span class="mi">2</span><span class="err">⎞</span>                                                   <span class="mi">2</span><span class="err">⎟</span>
+          <span class="err">⎜⎜</span>     <span class="mi">2</span>           <span class="mi">2</span>  <span class="mi">2</span><span class="err">⋅</span><span class="n">x</span> <span class="err">⎟</span>        <span class="err">⎛</span>    <span class="err">⎛</span>           <span class="mi">2</span>      <span class="mi">3</span><span class="err">⎞</span>           <span class="err">⎞</span>  <span class="mi">3</span><span class="err">⋅</span><span class="n">x</span> <span class="err">⎟</span>
+<span class="n">x</span><span class="err">⋅</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="err">⋅⎝⎝</span><span class="o">-</span> <span class="n">log</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span> <span class="err">⋅ℯ</span>    <span class="err">⎠</span>  <span class="o">+</span> <span class="mi">2</span><span class="err">⋅</span><span class="n">x</span><span class="err">⋅⎝</span><span class="n">x</span> <span class="o">-</span> <span class="err">⎝</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="err">⋅</span><span class="n">x</span>  <span class="o">+</span> <span class="mi">2</span><span class="err">⋅</span><span class="n">x</span> <span class="err">⎠⋅</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="err">⎠⋅ℯ</span>    <span class="err">⎠</span>
+
+<span class="err">──────────────────────────────────────────────────────────────────────────────────────────</span>
+                                                                <span class="mi">2</span>                         
+                         <span class="err">⎛</span>                                    <span class="mi">2</span><span class="err">⎞</span>                          
+                         <span class="err">⎜</span>   <span class="mi">2</span>                  <span class="err">⎛</span> <span class="mi">2</span>    <span class="mi">3</span><span class="err">⎞</span>  <span class="mi">2</span><span class="err">⋅</span><span class="n">x</span> <span class="err">⎟</span>                          
+                         <span class="err">⎝</span><span class="n">log</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="err">⋅</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="err">⎝</span><span class="n">x</span>  <span class="o">+</span> <span class="n">x</span> <span class="err">⎠⋅ℯ</span>    <span class="err">⎠</span>                          
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">handle_first</span><span class="o">=</span><span class="s">'log'</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> 
+       <span class="err">⎛</span>              <span class="err">⎛</span> <span class="mi">2</span><span class="err">⎞⎞</span>                   <span class="err">⎛</span>                <span class="err">⎛</span> <span class="mi">2</span><span class="err">⎞⎞</span>                             
+       <span class="err">⎜</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>    <span class="err">⎝</span><span class="n">x</span> <span class="err">⎠⎟</span>                   <span class="err">⎜</span>  <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>    <span class="err">⎝</span><span class="n">x</span> <span class="err">⎠⎟</span>          <span class="err">⎛</span> <span class="mi">2</span><span class="err">⎞</span>               
+    <span class="n">log</span><span class="err">⎜──────────</span> <span class="o">+</span> <span class="err">ℯ</span>    <span class="err">⎟</span>                <span class="n">log</span><span class="err">⎜</span><span class="o">-</span> <span class="err">──────────</span> <span class="o">+</span> <span class="err">ℯ</span>    <span class="err">⎟</span>       <span class="mi">2</span>  <span class="err">⎝</span><span class="n">x</span> <span class="err">⎠</span>               
+       <span class="err">⎝</span>    <span class="n">x</span>             <span class="err">⎠</span>                   <span class="err">⎝</span>      <span class="n">x</span>             <span class="err">⎠</span>      <span class="n">x</span> <span class="err">⋅ℯ</span>    <span class="err">⋅</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>    
+<span class="n">x</span> <span class="o">+</span> <span class="err">───────────────────────</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="err">─────────────────────────</span> <span class="o">+</span> <span class="err">──────────────────────────</span>
+               <span class="mi">2</span>                                       <span class="mi">2</span>                                        <span class="mi">2</span>
+                                                                              <span class="mi">2</span>           <span class="mi">3</span>  <span class="mi">2</span><span class="err">⋅</span><span class="n">x</span> 
+                                                                       <span class="o">-</span> <span class="n">x</span><span class="err">⋅</span><span class="n">log</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span> <span class="err">⋅ℯ</span>    
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">handle_first</span><span class="o">=</span><span class="s">'exp'</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> 
+       <span class="err">⎛</span>                <span class="err">⎛</span> <span class="mi">2</span><span class="err">⎞⎞</span>                   <span class="err">⎛</span>                <span class="err">⎛</span> <span class="mi">2</span><span class="err">⎞⎞</span>        <span class="err">⎛</span> <span class="mi">2</span><span class="err">⎞</span>             
+       <span class="err">⎜</span>                <span class="err">⎝</span><span class="n">x</span> <span class="err">⎠⎟</span>                   <span class="err">⎜</span>                <span class="err">⎝</span><span class="n">x</span> <span class="err">⎠⎟</span>        <span class="err">⎝</span><span class="n">x</span> <span class="err">⎠</span>             
+    <span class="n">log</span><span class="err">⎝</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="err">⋅ℯ</span>    <span class="err">⎠</span>                <span class="n">log</span><span class="err">⎝</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="err">⋅ℯ</span>    <span class="err">⎠</span>     <span class="n">x</span><span class="err">⋅ℯ</span>    <span class="err">⋅</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>  
+<span class="n">x</span> <span class="o">+</span> <span class="err">─────────────────────────</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="err">─────────────────────────</span> <span class="o">-</span> <span class="err">──────────────────────</span>
+                <span class="mi">2</span>                                        <span class="mi">2</span>                                    <span class="mi">2</span>
+                                                                            <span class="mi">2</span>           <span class="mi">2</span>  <span class="mi">2</span><span class="err">⋅</span><span class="n">x</span> 
+                                                                         <span class="n">log</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span> <span class="err">⋅ℯ</span>    
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">handle_first</span><span class="o">=</span><span class="s">'log'</span><span class="p">)</span>
+
+<span class="mi">1</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">1.49</span> <span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">risch_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">handle_first</span><span class="o">=</span><span class="s">'exp'</span><span class="p">)</span>
+
+<span class="mi">1</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">1.21</span> <span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">cancel</span><span class="p">(</span><span class="n">risch_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">handle_first</span><span class="o">=</span><span class="s">'log'</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="mi">0</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">cancel</span><span class="p">(</span><span class="n">risch_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">handle_first</span><span class="o">=</span><span class="s">'exp'</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>So go now, and pull my  <a href="//github.com/asmeurer/sympy/tree/integration3">branch</a>, and try this func­tion out.  And re­port any prob­lems that you have back to me, ei­ther through the mail­ing list, IR­C, is­sue 2010, or as a com­ment to this blog post (I don't re­al­ly care how).</p>
 </div>
     </div>
     <aside class="postpromonav">

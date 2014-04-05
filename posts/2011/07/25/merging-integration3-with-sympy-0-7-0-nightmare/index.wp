@@ -39,7 +39,8 @@ After all that, there were two regressions that caused test failures.  The first
 
 Before:
 
-[code lang="py"]
+```py
+
 
 In [1]: Integral((exp(x*log(x))*log(x)), x).subs(exp(x*log(x)), x**x)
 
@@ -53,13 +54,15 @@ Out[1]:
 
 ⌡             
 
-[/code]
+
+```
 
 
 
 After:
 
-[code lang="py"]
+```py
+
 
 In [1]: Integral((exp(x*log(x))*log(x)), x).subs(exp(x*log(x)), x**x)
 
@@ -73,7 +76,8 @@ Out[1]:
 
 ⌡                    
 
-[/code]
+
+```
 
 
 
@@ -101,7 +105,8 @@ The good news is that now a lot of stuff works that didn't before because of fix
 
 
 
-[code lang="py"]
+```py
+
 
 
 
@@ -132,7 +137,8 @@ Out[2]:
  5⋅x    x    
 ℯ    + ℯ  + 1
 
-[/code]
+
+```
 
 
 

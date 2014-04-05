@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -149,42 +149,40 @@ While not as ground break­ing as the fea­ture I de­scribed in my  last po">
 <h3>Automatic Symbol Definition</h3>
 <p>While not as ground break­ing as the fea­ture I de­scribed in my  <a href="http://asmeurersympy.wordpress.com/2012/08/21/sympy-live-sphinx-extension/">last post</a>, this fea­ture is still quite use­ful. As you may know, SymPy is in­her­ent­ly a Python li­brary, mean­ing that it lives by the rules of Python. If you want to use any name, whether it be a Sym­bol or a func­tion (like cos), you need to de­fine it (in the case of Sym­bol­s), or im­port it (in the case of func­tions that come with SymPy). We pro­vide the script  <code>isympy</code>  with SymPy to as­sist with this. This script au­to­mat­i­cal­ly runs IPython (if it's in­stalled), im­ports all names from sympy (<code>from sympy im­port *</code>), and de­fines com­mon sym­bol names (like  <code>x</code>,  <code>y</code>, and  <code>z</code>).</p> 
  <p>But if you want to use a Sym­bol that is not one of the ones pre­de­fined by  <code>isympy</code>, you will get some­thing like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: r*x</p> 
- <hr>
-<p>NameEr­ror                                 Trace­back (most re­cent call last)
- in ()
-----&gt; 1 r*x</p> 
- <p>NameEr­ror: name 'r' is not de­fined</p> 
- <p>[/­code]</p> 
- <p>The best so­lu­tion for this has been ei­ther to type  <code>var('r')</code>, which will cre­ate the Sym­bol  <code>r</code>  and in­ject it in­to the names­pace, or to wrap your text in a string and pass it to  <code>sympi­fy()</code>, like  <code>sympi­fy("r*x")</code>. Nei­ther of these are very friend­ly in in­ter­ac­tive mod­e.</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">r</span><span class="o">*</span><span class="n">x</span>
+
+<span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">NameError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+ <span class="ow">in</span> <span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">r</span><span class="o">*</span><span class="n">x</span>
+
+
+
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s">'r'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div>
+
+
+<p>The best so­lu­tion for this has been ei­ther to type  <code>var('r')</code>, which will cre­ate the Sym­bol  <code>r</code>  and in­ject it in­to the names­pace, or to wrap your text in a string and pass it to  <code>sympi­fy()</code>, like  <code>sympi­fy("r*x")</code>. Nei­ther of these are very friend­ly in in­ter­ac­tive mod­e.</p> 
  <p>In SymPy 0.7.2,  <code>isympy</code>  has a new com­mand line op­tion,  <code>isympy -a</code>, which will en­able a mech­a­nism that will au­to­mat­i­cal­ly de­fine all un­de­fined names as Sym­bols for you:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: r*x</p> 
- <p>Out­[1]: r⋅x</p> 
- <p>[/­code]</p> 
- <p>There are some caveats to be aware of when us­ing this fea­ture:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">r</span><span class="o">*</span><span class="n">x</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">r</span><span class="err">⋅</span><span class="n">x</span>
+</pre></div>
+
+
+<p>There are some caveats to be aware of when us­ing this fea­ture:</p> 
  <ul>
-    <li>Names must be un­de­fined for  <code>isympy -a</code>  to work. If you type some­thing like  <code>S*x</code>, you'll get:[­code lan­guage="py"]
+    <li>Names must be un­de­fined for  <code>isympy -a</code>  to work. If you type some­thing like  <code>S*x</code>, you'll get:```py
+
 In [3]: S*x
 
 ---------------------------------------------------------------------------
 
 ­Type­Er­ror                                 Trace­back (most re­cent call last)
 
-&lt;ipython-in­put-3-6656a97ea7b0&gt; in &lt;mod­ule&gt;()
-
-----&gt; 1 S*x
-
-
-
-­Type­Er­ror: un­sup­port­ed op­er­and type­(s) for *: 'S­in­gle­ton­Reg­istry' and 'Sym­bol­'
-
-[/­code]
-
-
-
-That's be­cause  <code>S</code>  is al­ready de­fined (it's the  <code>Sin­gle­ton­Reg­istry</code>, and al­so a short­cut to  <code>sympi­fy()</code>). To use a name that's al­ready de­fined, ei­ther cre­ate it man­u­al­ly with  <code>var()</code>  or delete it us­ing  <code>del</code>.</li> 
+ <ipython-input-3-6656a97ea7b0replaceme in s typeerror: unsupported operand type for and that because>S is al­ready de­fined (it's the  <code>Sin­gle­ton­Reg­istry</code>, and al­so a short­cut to  <code>sympi­fy()</code>). To use a name that's al­ready de­fined, ei­ther cre­ate it man­u­al­ly with  <code>var()</code>  or delete it us­ing  <code>del</code>.</ipython-input-3-6656a97ea7b0replaceme>
+</li> 
      <li>This on­ly works on the top lev­el names­pace. If you de­fine a func­tion with an un­de­fined name, it will not au­to­mat­i­cal­ly de­fine that sym­bol when run.</li> 
      <li>This works by catch­ing NameEr­ror, defin­ing the name, and then re-run­ning the ex­pres­sion. If you have a mul­ti­line state­men­t, any lines be­fore the un­de­fined name will be run be­fore the NameEr­ror will be caugh­t. This usu­al­ly won't hap­pen, but it's a po­ten­tial side-­ef­fect to be aware of. We plan to re­write it us­ing ei­ther ast or to­k­enize to avoid this is­sue.</li> 
      <li>Ob­vi­ous­ly, this is in­tend­ed for in­ter­ac­tive use on­ly. If you copy code and put it in a scrip­t, or in some oth­er place where some­one might be ex­pect­ed to run it, but not nec­es­sar­i­ly from  <code>isympy -a</code>, you should in­clude sym­bol def­i­ni­tion­s.</li> 
@@ -194,37 +192,24 @@ That's be­cause  <code>S</code>  is al­ready de­fined (it's the  <code>Sin­g
 
 <p>A sec­ond thing that is an­noy­ing with Python and SymPy is that some­thing like  <code>1/2</code>  will be in­ter­pret­ed com­plete­ly by Python, with­out any SymPy. This means that some­thing like  <code>1/2 + x</code>  will give ei­ther  <code>0 + x</code>  or  <code>0.5 + x</code>, de­pend­ing on whether or not  <code><strong>fu­ture</strong>.di­vi­sion</code>  has been im­port­ed.  <code>isympy</code>  has al­ways ran  <code>from  <strong>fu­ture</strong>  im­port di­vi­sion</code>, so that you'll get the lat­ter, but we usu­al­ly would pre­fer to get  <code>Ra­tio­nal(1, 2)</code>. Pre­vi­ous­ly, the best way to do this was again to ei­ther run it through  <code>sympi­fy()</code>  as a string, or to sympi­fy at least one of the num­bers (here the  <code>S()</code>  short­cut to  <code>sympi­fy()</code>  is use­ful, be­cause you can type just  <code>S(1)/2</code>).</p> 
  <p>With SymPy 0.7.2, you can run  <code>isympy -i</code>, and it will au­to­mat­i­cal­ly wrap all in­te­gers lit­er­als with  <code>In­te­ger()</code>. The re­sult is that  <code>1/2</code>  pro­duces  <code>Ra­tio­nal(1, 2)</code>:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: 1/2 + x</p> 
- <p>Out­[1]: x + 1/2</p> 
- <p>[/­code]</p> 
- <p>Again, there are a cou­ple of caveat­s:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+
+
+<p>Again, there are a cou­ple of caveat­s:</p> 
  <ul>
-    <li>If you want to get Python style di­vi­sion, you just need to wrap both ar­gu­ments in  <code>in­t()</code>:[­code lan­guage="py"]
+    <li>If you want to get Python style di­vi­sion, you just need to wrap both ar­gu­ments in  <code>in­t()</code>:```py
+
 In [2]: in­t(1)/in­t(2)
 
 Out[2]: 0.5
 
-[/­code]
 
 
+wzx­hzd­k:3
 
-Of course, if you just want a float­ing point num­ber, you can just use  <code>N()</code>  or  <code>.e­valf()</code>
-</li> 
-     <li>This works by pars­ing the text and wrap­ping all in­te­ger lit­er­als with  <code>In­te­ger()</code>. This means that if you have a vari­able set to a Python in­t, it will still act like a Python in­t:[­code lan­guage="py"]
-In [6]: a = in­t(1)
-
-
-
-In [7]: b = in­t(2)
-
-
-
-In [8]: a/b
-
-Out[8]: 0.5
-
-[/­code]
 
 
 

@@ -9,7 +9,8 @@ Because there was no easy way around the bug, the solution was to disable numpy 
 
 
 
-[code language="python"]
+```python
+
 
 import sys
 
@@ -19,27 +20,12 @@ import warnings
 
 numpy_supported = True
 
-if sys.version_info &lt; (2, 6):
-    warnings.warn("Cannot use numpy in Python 2.4/2.5.")
-    numpy_supported = False
-else:
-    try:
-        import numpy as np
-    except ImportError:
-        numpy_supported = False
-[/code]
+if sys.version_info import_module() function.  The function attempts to import a module given it's name. It returns the module if it can be imported and None if it cannot.  It supports checking the version of Python or the version of the library and not importing it if either are too old.  It also supports emitting warnings when the module is not available or the version is too old.  Thus, the above idiom reduces to
 
 
 
-in all the half dozen files that import numpy in the quantum module.  
+```python
 
-
-
-So clearly, SymPy needed a more centralized way to handle importing optional external modules.  Hence, I wrote the <code>import_module()</code> function.  The function attempts to import a module given it's name. It returns the module if it can be imported and None if it cannot.  It supports checking the version of Python or the version of the library and not importing it if either are too old.  It also supports emitting warnings when the module is not available or the version is too old.  Thus, the above idiom reduces to
-
-
-
-[code language="python"]
 
 from sympy.external import import_module
 
@@ -47,7 +33,8 @@ from sympy.external import import_module
 
 np = import_module('numpy', min_python_version=(2, 6))
 
-[/code]
+
+```
 
 
 
@@ -59,14 +46,16 @@ Any kind of <code>numpy_supported</code> variable in the code can be replaced by
 
 
 
-[code language="python"]
+```python
+
 
 if np:
     # Do some numpy stuff
 else:
     # np is None
     # Do whatever you do when it is not available
-[/code]
+
+```
 
 
 
@@ -74,7 +63,8 @@ This method has an additional advantage, which is that the warnings can be custo
 
 
 
-[code language="python"]
+```python
+
 
 import sympy.external
 
@@ -82,7 +72,8 @@ sympy.external.importtools.WARN_OLD_VERSION = False
 
 sympy.external.importtools.WARN_NOT_INSTALLED = False
 
-[/code]
+
+```
 
 
 
@@ -98,7 +89,8 @@ To do this, just pass the arguments to <code>__import__()</code> to <code>import
 
 
 
-[code language="python"]
+```python
+
 
 from sympy.external import import_module
 
@@ -108,7 +100,8 @@ matplotlib = import_module('matplotlib', __import__kwargs={'fromlist':['pyplot']
 
 pyplot = matplotlib.pyplot
 
-[/code]
+
+```
 
 
 
@@ -116,13 +109,15 @@ Second, for module version checking it looks at <code>module.__version__</code>.
 
 
 
-[code language="python"]
+```python
+
 
 from sympy.external import import_module
 
 gmpy = import_module('gmpy', min_module_version='1.03',
     module_version_attr='version', module_version_attr_call_args=())
-[/code]
+
+```
 
 
 

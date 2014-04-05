@@ -1,656 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog (mathjax)</title><link>http://asmeurer.github.io/</link><description></description><language>en</language><lastBuildDate>Sun, 30 Mar 2014 11:56:27 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>When does x^log(y) = y^log(x)?</title><link>http://asmeurer.github.io/posts/2013/03/03/when-does-xlogy-ylogx/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;em&gt;In this blog post, when I write $latex \log(x)$, I mean the natural logarithm, or log base $latex e$, i.e., $latex \ln(x)$.&lt;/em&gt;
-&lt;p&gt;A dis­cus­sion on a  &lt;a href="https://github.com/sympy/sympy/pull/1845"&gt;pull re­quest&lt;/a&gt;  got me think­ing about this ques­tion: what are the so­lu­tions to the com­plex equa­tion $la­tex x^{\log{(y)}} = y^{\log(x)}$?  At the out­set, they look like dif­fer­ent ex­pres­sion­s.  But clear­ly there some so­lu­tion­s. For ex­am­ple, if $la­tex x = y$, then ob­vi­ous­ly the two ex­pres­sions will be the same.  We prob­a­bly should ex­clude $la­tex x = y = 0$, though note that even if $la­tex 0^{\log(0)}$ is well-de­fined (prob­a­bly if it is it is ei­ther 0 or com­plex $la­tex \in­fty$), it will be the same well-de­fined val­ue. But for the re­main­der of this blog post, I'll as­sume that $la­tex x$ and $la­tex y$ are nonze­ro.&lt;/p&gt; 
- &lt;p&gt;Now, ob­serve that if we ap­ply $la­tex \log$ to both sides of the equa­tion, we get $la­tex \log{\left­(x^{\log(y)}\right )} = \log {\left (y^{\log(x)}\right )}$.  Now, sup­pos­ing that we can ap­ply the fa­mous log­a­rithm ex­po­nent rule, we would get $la­tex \log(x)\log(y) = \log(y)\log(x)$, which means that if ad­di­tion­al­ly $la­tex \log$ is one-­to-one, we would have that the orig­i­nal ex­pres­sions must be equal.&lt;/p&gt; 
- &lt;p&gt;The sec­ond ques­tion, that of  &lt;a href="http://en.wikipedia.org/wiki/Injective_function"&gt;in­jec­tiv­i­ty&lt;/a&gt;, is eas­i­er to an­swer than the first, so I'll ad­dress it first.  Note that the com­plex ex­po­nen­tial is not one-­to-one, be­cause for ex­am­ple $la­tex e^0 = e^{2\pi i} = 1$.  But we still de­fine the com­plex log­a­rithm as the "in­verse" of the com­plex ex­po­nen­tial.  What this re­al­ly means is that the com­plex log­a­rithm is strict­ly speak­ing not a func­tion, be­cause it is not well-de­fined. Re­call that the def­i­ni­tion of one-­to-one means that $la­tex f(x) = f(y)$ im­plies $la­tex x = y$, and that the def­i­ni­tion of well-de­fined is that $la­tex x = y$ im­plies $la­tex f(x) = f(y)$.  It is clear to see here that $la­tex f$ be­ing one-­to-one is the same as $la­tex f^{-1}$ be­ing well-de­fined and visa-ver­sa ($la­tex f^{-1}$ here is the same loose def­i­ni­tion of an in­verse as say­ing that the com­plex log­a­rithm is the in­verse of the com­plex ex­po­nen­tial).&lt;/p&gt; 
- &lt;p&gt;So note that the com­plex log­a­rithm is not well-de­fined ex­act­ly be­cause the com­plex ex­po­nen­tial is not one-­to-one.  We of course fix this prob­lem by mak­ing it well-de­fined, i.e., it nor­mal­ly is mul­ti­val­ued, but we pick a sin­gle val­ue con­sis­tent­ly (i.e., we pick a  &lt;a href="http://en.wikipedia.org/wiki/Branch_point#Complex_logarithm"&gt;branch&lt;/a&gt;), so that it is well-de­fined.  For the re­main­der of this blog post, I will as­sume the stan­dard choice of branch cut for the com­plex log­a­rith­m, i.e., the branch cut is along the neg­a­tive ax­is, and we choose the branch where, for $la­tex x &amp;gt; 0$, $la­tex \log(x)$ is re­al and $la­tex \log(-x) = \log(x) + i\pi$.&lt;/p&gt; 
- &lt;p&gt;My point here is that we au­to­mat­i­cal­ly know that the com­plex log­a­rithm is one-­to-one be­cause we know that the com­plex ex­po­nen­tial is well-de­fined.&lt;/p&gt; 
- &lt;p&gt;So our ques­tion boils down to, when does the iden­ti­ty $la­tex \log{\left (z^a\right)} = a \log(z)$ hold?  In SymPy, this iden­ti­ty is on­ly ap­plied by  &lt;code&gt;ex­pand_log()&lt;/code&gt;  or  &lt;code&gt;log­com­bine()&lt;/code&gt;  when $la­tex a$ is re­al and $la­tex z$ is pos­i­tive, so let us as­sume that we know that it holds un­der those con­di­tion­s. Note that it al­so holds for some oth­er val­ues too.  For ex­am­ple, by our def­i­ni­tion $la­tex \log{\left (e^{i\pi}\right)} = \log(-1) = \log(1) + i\pi = i\pi = i\pi\log(e)$.  For our ex­am­ple, this means that $la­tex x = e$, $la­tex y = -1$ is a non-triv­ial so­lu­tion (non-triv­ial mean­ing $la­tex x \neq y$).   Ac­tu­al­ly, the way that the com­plex log­a­rithm be­ing the "in­verse" of the com­plex ex­po­nen­tial works is that $la­tex e^{\log(x)} = x$ for all $la­tex x$ (on the oth­er hand $la­tex \log{\left­(e^x\right)} \neq x$ in gen­er­al), so that if $la­tex x = e$, then $la­tex x^{\log(y)} = e^{\log(y)} = y$ and $la­tex y^{\log(x)} = y^{\log(e)} = y^1 = y$.  In oth­er word­s, $la­tex x = e$ is al­ways a so­lu­tion, for any $la­tex y\, (\neq 0)$ (and sim­i­lar­ly $la­tex y = e$ for all $la­tex x$).  In terms of our ques­tion of when $la­tex \log{\left­(z^a\right)} = a\log(z)$, this just says that this al­ways true for $la­tex a = \log(e) = 1$, re­gard­less of $la­tex z$, which is ob­vi­ous.  We can al­so no­tice that this iden­ti­ty al­ways holds for $la­tex a = 0$, re­gard­less of $la­tex z$. In terms of our orig­i­nal equa­tion, this means that $la­tex x = e^0 = 1$ is a so­lu­tion for all $la­tex y$ (and as be­fore, $la­tex y = 1$ for all $la­tex x$).&lt;/p&gt; 
- &lt;p&gt;Note that $la­tex z &amp;gt; 0$ and $la­tex a$ re­al cor­re­sponds to $la­tex x, y &amp;gt; 0$ and $la­tex \log(x), \log(y)$ re­al, re­spec­tive­ly, (which are the same con­di­tion).  So we have so far that the fol­low­ing are so­lu­tions to $la­tex x^{\log(y)} = y^{\log(x)}$:&lt;/p&gt; 
- &lt;ul&gt;
-    &lt;li&gt;&lt;span style="line-height:13px;"&gt;$la­­tex x, y &amp;gt; 0$&lt;/span&gt;&lt;/li&gt; 
-     &lt;li&gt;$la­tex x = y$&lt;/li&gt; 
-     &lt;li&gt;$la­tex x = e$, $la­tex y$ ar­bi­trary&lt;/li&gt; 
-     &lt;li&gt;$la­tex y = e$, $la­tex x$ ar­bi­trary&lt;/li&gt; 
-     &lt;li&gt;$la­tex x = 1$, $la­tex y$ ar­bi­trary&lt;/li&gt; 
-     &lt;li&gt;$la­tex y = 1$, $la­tex x$ ar­bi­trary&lt;/li&gt; 
- &lt;/ul&gt;
-
-&lt;p&gt;Now let's look at some cas­es where $la­tex \log{\left (z^a\right)} \neq a\log(z)$.  If $la­tex z &amp;lt; 0$ and $la­tex a$ is a nonze­ro even in­te­ger, then $la­tex z^a &amp;gt; 0$ so $la­tex \log{\left (z^a \right)}) = \log{\left (\left (-z\right )^a \right )} = a\log(-z)$, where­as $la­tex a\log(z) = a(\log(-z) + i\pi)$, which are dif­fer­ent by our as­sump­tion that $la­tex a \neq 0$.  If $la­tex a$ is an odd in­te­ger not equal to 1, then $la­tex z^a &amp;lt; 0$, so $la­tex \log{\left (z^a \right)} = \log{\left (-z^a \right )} + i\pi$ = $la­tex \log{\left (\left­(- z\right)^{a} \right )} + i\pi$  &lt;em&gt;Word­press is re­fus­ing to ren­der this. It should be&lt;/em&gt;  log((-z)^a) + iπ = $la­tex a\log(-z) + i\pi$, where­as $la­tex a\log(z) = a(\log(-z) + i\pi)$ again, which is not the same be­cause $la­tex a \neq 1$. This means that if we let $la­tex x &amp;lt; 0$ and $la­tex y = e^a$, where $la­tex a \neq 0, 1$, we get a non-­so­lu­tion (and the same if we swap $la­tex x$ and $la­tex y$).   &lt;/p&gt; 
- &lt;p&gt;This is as far as I got tonight. Word­press is ar­bi­trar­i­ly not ren­der­ing that La­TeX for no good rea­son.  That and the very ug­ly La­TeX im­ages is piss­ing me off (why word­press.­com has­n't switched to Math­JaX yet is be­yond me).  The next time I get some free time, I am go­ing to se­ri­ous­ly con­sid­er switch­ing my blog to some­thing host­ed on GitHub, prob­a­bly us­ing the IPython note­book.  I wel­come any hints peo­ple can give me on that, es­pe­cial­ly con­cern­ing mi­grat­ing pages from this blog.&lt;/p&gt; 
- &lt;p&gt;Here is some work on find­ing the rest of the so­lu­tion­s: the gen­er­al def­i­ni­tion of $la­tex \log(x)$ is $la­tex \log(|x|) + i\arg(x)$, where $la­tex \arg(x)$ is cho­sen in $la­tex (-\pi, \pi]$.  There­fore, if $la­tex \log{\left­(z^a\right )} = a\log(z)$, we must have $la­tex \arg(z^a) = a\arg(z)$.  I be­lieve a de­scrip­tion of all such com­plex $la­tex z$ and $la­tex a$ will give all so­lu­tions $la­tex x = z$, $la­tex y = e^a$ (and $la­tex y = z$, $la­tex x = e^a$) to $la­tex x^{\log(y)} = y^{\log(x)}$.  I need to ver­i­fy that, though, and I al­so need to think about how to de­scribe such $la­tex z$ and $la­tex a$. I will (hope­ful­ly) con­tin­ue this post lat­er, ei­ther by edit­ing this one or writ­ing a new one (de­pend­ing on how much more I come up with­).   &lt;/p&gt; 
- &lt;p&gt;Any com­ments to this post are wel­come.  I know you can't pre­view com­ments, but if you want to use math, just write it as  &lt;code&gt;$la­tex math$&lt;/code&gt;  (like  &lt;code&gt;$la­tex \log(x)$&lt;/code&gt;  for $la­tex \log(x)$). If you mess some­thing up, I'll ed­it your com­ment and fix it.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2013/03/03/when-does-xlogy-ylogx/</guid><pubDate>Sun, 03 Mar 2013 12:49:35 GMT</pubDate></item><item><title>sqrt(x) now prints as "sqrt(x)"</title><link>http://asmeurer.github.io/posts/2011/08/18/sqrtx-now-prints-as-sqrtx/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Just a few mo­ments ago,  &lt;a href="https://github.com/sympy/sympy/pull/548" target="_blank"&gt;a branch&lt;/a&gt;  was pushed in that fixed one of my big­gest griev­ances in SymPy, if not the big­gest.  Pre­vi­ous­ly we had this be­hav­ior:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: sqrt(x)&lt;/p&gt; 
- &lt;p&gt;Out­[1]: x**(1/2)&lt;/p&gt; 
- &lt;p&gt;In [2]: solve(x**2 - 2, x)&lt;/p&gt; 
- &lt;p&gt;Out­[2]: [-2&lt;strong&gt;(1/2), 2&lt;/strong&gt;(1/2)]&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;Now sup­pose you took the out­put of those ex­pres­sions and past­ed them in­to isympy:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [3]: x**(1/2)&lt;/p&gt; 
- &lt;p&gt;Out­[3]: x**0.5&lt;/p&gt; 
- &lt;p&gt;In [4]: [-2&lt;strong&gt;(1/2), 2&lt;/strong&gt;(1/2)]&lt;/p&gt; 
- &lt;p&gt;Out­[4]: [-1.41421356237, 1.41421356237]&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;That's with  &lt;code&gt;&lt;strong&gt;fu­ture&lt;/strong&gt;.di­vi­sion&lt;/code&gt;.  Here's what would hap­pen with old di­vi­sion:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [2]: x**(1/2)&lt;/p&gt; 
- &lt;p&gt;Out­[2]: 1&lt;/p&gt; 
- &lt;p&gt;In [3]: [-2&lt;strong&gt;(1/2), 2&lt;/strong&gt;(1/2)]&lt;/p&gt; 
- &lt;p&gt;Out­[3]: [-1, 1]&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;This is be­cause with old di­vi­sion,  &lt;code&gt;1/2&lt;/code&gt;  eval­u­ates to  &lt;code&gt;0&lt;/code&gt;.&lt;/p&gt; 
- &lt;p&gt;The prob­lem is that Python eval­u­ates  &lt;code&gt;1/2&lt;/code&gt;  to  &lt;code&gt;0.5&lt;/code&gt;  (or  &lt;code&gt;0&lt;/code&gt;) be­fore SymPy has a change to con­vert it to a Ra­tio­nal.  There were sev­er­al ways that peo­ple got around this.  If you copy an ex­pres­sion with num­ber di­vi­sion in it and want to paste it in­to a SymPy ses­sion, the eas­i­est way to do this was to pass it as a string to  &lt;code&gt;sympi­fy()&lt;/code&gt;:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: sympi­fy("x**(1/2)")&lt;/p&gt; 
- &lt;p&gt;Out­[1]: x**(1/2)&lt;/p&gt; 
- &lt;p&gt;In [2]: sympi­fy("[-2&lt;strong&gt;(1/2), 2&lt;/strong&gt;(1/2)]")&lt;/p&gt; 
- &lt;p&gt;Out­[2]: [-2&lt;strong&gt;(1/2), 2&lt;/strong&gt;(1/2)]&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;If that was too much typ­ing for you, you could use the  &lt;code&gt;S()&lt;/code&gt;  short­cut to  &lt;code&gt;sympi­fy()&lt;/code&gt;&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [3]: S("x**(1/2)")&lt;/p&gt; 
- &lt;p&gt;Out­[3]: x**(1/2)&lt;/p&gt; 
- &lt;p&gt;In [4]: S("[-2&lt;strong&gt;(1/2), 2&lt;/strong&gt;(1/2)]")&lt;/p&gt; 
- &lt;p&gt;Out­[4]: [-2&lt;strong&gt;(1/2), 2&lt;/strong&gt;(1/2)]&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;This so­lu­tion is fine if you want to paste an ex­pres­sion in­to a SymPy ses­sion, but it's not a very clean one if you want to paste code in­to a scrip­t. For that, you need to mod­i­fy the code so that it no longer con­tains Python in­t/Python in­t.  The eas­i­est way to do this is to sympi­fy one of the ints.  So you would do some­thing like&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [5]: x**(S(1)/2)&lt;/p&gt; 
- &lt;p&gt;Out­[5]: x**(1/2)&lt;/p&gt; 
- &lt;p&gt;In [6]: [-2&lt;strong&gt;(S(1)/2), 2&lt;/strong&gt;(S(1)/2)]&lt;/p&gt; 
- &lt;p&gt;Out­[6]: [-2&lt;strong&gt;(1/2), 2&lt;/strong&gt;(1/2)]&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;This was­n't ter­ri­bly read­able, though.  The  &lt;em&gt;best&lt;/em&gt;  way to fix the prob­lem when you had a pow­er of one half was to use  &lt;code&gt;sqrt()&lt;/code&gt;, which is a short­cut to  &lt;code&gt;Pow(…, Ra­tio­nal(1, 2))&lt;/code&gt;.   &lt;/p&gt; 
- &lt;p&gt;Well, this last item should make you think.  If  &lt;code&gt;sqrt(x)&lt;/code&gt;  is more read­able than  &lt;code&gt;x&lt;strong&gt;(S(1)/2)&lt;/strong&gt;&lt;/code&gt;  or even  &lt;code&gt;x(1/2)&lt;/code&gt;, why not print it like that in the first place.  Well, I thought so, so I changed the string print­er, and now this is the way that SymPy work­s.  So 90% of the time, you can just paste the re­sult of  &lt;code&gt;str()&lt;/code&gt;  or  &lt;code&gt;print&lt;/code&gt;, and it will just work, be­cause there won't be any  &lt;code&gt;**(1/2)&lt;/code&gt;, which was by far the most com­mon prob­lem of "Python eval­u­at­ing the ex­pres­sion to some­thing be­fore we can."  In the git mas­ter, SymPy now be­haves like&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: sqrt(x)&lt;/p&gt; 
- &lt;p&gt;Out­[1]: sqrt(x)&lt;/p&gt; 
- &lt;p&gt;In [2]: solve(x**2 - 2, x)&lt;/p&gt; 
- &lt;p&gt;Out­[2]: [-sqrt(2), sqrt(2)]&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;You can ob­vi­ous­ly just copy and paste these re­sult­s, and you get the ex­act same thing back.  Not on­ly does this make ex­pres­sions more copy­-and-­pastable, but the out­put is  &lt;em&gt;much&lt;/em&gt;  nicer in terms of read­abil­i­ty.  Here are some be­fore and af­ters that come from ac­tu­al SymPy doctests that I had to change af­ter fix­ing the print­er:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;Be­fore:&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; e = ((2+2&lt;em&gt;sqrt(2))&lt;/em&gt;x+(2+sqrt(8))*y)/(2+sqrt(2))&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; rad­sim­p(e)&lt;/p&gt; 
- &lt;p&gt;2&lt;strong&gt;(1/2)*x + 2&lt;/strong&gt;(1/2)*y&lt;/p&gt; 
- &lt;p&gt;Af­ter:&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; rad­sim­p(e)&lt;/p&gt; 
- &lt;p&gt;sqrt(2)&lt;em&gt;x + sqrt(2)&lt;/em&gt;y&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;Be­fore:&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; b = besselj(n, z)&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; b.rewrite(jn)&lt;/p&gt; 
- &lt;p&gt;2&lt;strong&gt;(1/2)*z&lt;/strong&gt;(1/2)&lt;em&gt;jn(n - 1/2, z)/pi&lt;/em&gt;*(1/2)&lt;/p&gt; 
- &lt;p&gt;Af­ter:&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; b.rewrite(jn)&lt;/p&gt; 
- &lt;p&gt;sqrt(2)&lt;em&gt;sqrt(z)&lt;/em&gt;jn(n - 1/2, z)/sqrt(pi)&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;Be­fore:&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; x = sympi­fy('-1/(-3/2+(1/2)&lt;em&gt;sqrt(5))&lt;/em&gt;sqrt(3/2-1/2*sqrt(5))')&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; x&lt;/p&gt; 
- &lt;p&gt;(3/2 - 5&lt;strong&gt;(1/2)/2)&lt;/strong&gt;(-1/2)&lt;/p&gt; 
- &lt;p&gt;Af­ter&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; x&lt;/p&gt; 
- &lt;p&gt;1/sqrt(3/2 - sqrt(5)/2)&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;And not on­ly is  &lt;code&gt;sqrt(x)&lt;/code&gt;  eas­i­er to read than  &lt;code&gt;x**(1/2)&lt;/code&gt;  but it's few­er char­ac­ter­s.&lt;/p&gt; 
- &lt;p&gt;In the course of chang­ing this, I went ahead and did some greps of the repos­i­to­ry to get rid of all  &lt;code&gt;&lt;strong&gt;(S(1)/2)&lt;/strong&gt;&lt;/code&gt;,  &lt;code&gt;Ra­tio­nal(1, 2)&lt;/code&gt;  and sim­i­lar through­out the code base (not just in the out­put of doctests where the change had to be made), re­plac­ing them with just  &lt;code&gt;sqrt&lt;/code&gt;.  Big thanks to Chris Smith for help­ing me catch all in­stances of this.  Now the code should be a lit­tle eas­i­er to read and main­tain.&lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;Fu­ture Work&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;This is a big change, and I be­lieve it will fix the copy­-­paste prob­lem for 90% of ex­pres­sion­s. But it does not solve it com­plete­ly.  It is still pos­si­ble to get in­t/int in the string form of an ex­pres­sion.  On­ly pow­ers of 1/2 and -1/2 are con­vert­ed to sqrt, so any oth­er ra­tio­nal pow­er will still print as a/b, like&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: x**Ra­tional(3, 2)&lt;/p&gt; 
- &lt;p&gt;Out­[1]: x**(3/2)&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;Al­so, as you may have no­ticed in the last ex­am­ple above, a ra­tio­nal num­ber that sits by it­self will still be print­ed as in­t/in­t, like&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [2]: (1 + x)/2&lt;/p&gt; 
- &lt;p&gt;Out­[2]: x/2 + 1/2&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;There­fore, I'm leav­ing the  &lt;a href="http://code.google.com/p/sympy/issues/detail?id=2359" target="_blank"&gt;is­sue for this&lt;/a&gt;  open to dis­cuss po­ten­tial fu­ture fix­es to the string print­er.  One idea is to cre­ate a  &lt;code&gt;root&lt;/code&gt;  func­tion that is a short­cut to  &lt;code&gt;root(x, a) == x**(1/a)&lt;/code&gt;. This would work for ra­tio­nal pow­ers where the nu­mer­a­tor is 1.  For oth­er ra­tio­nal pow­er­s, we could then den­est these with an in­te­ger pow­er.  It's im­por­tant to do this in the right or­der, though, as they are not equiv­a­len­t.  You can see that SymPy au­to-sim­pli­fies it when it is math­e­mat­i­cal­ly cor­rect in all cas­es, and not when it is not:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [3]: sqrt(x**3)&lt;/p&gt; 
- &lt;p&gt;Out­[3]: sqrt(x**3)&lt;/p&gt; 
- &lt;p&gt;In [4]: sqrt(x)**3&lt;/p&gt; 
- &lt;p&gt;Out­[4]: x**(3/2)&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;Thus $la­tex \left­(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $la­tex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, re­place $la­tex x$ with -1).&lt;/p&gt; 
- &lt;p&gt;So the idea would be to print  &lt;code&gt;Pow(­ex­pr, Ra­tio­nal(a, b))&lt;/code&gt;  as  &lt;code&gt;root(­ex­pr, b)**a&lt;/code&gt;.   &lt;/p&gt; 
- &lt;p&gt;The mer­its of this are de­bat­able, but any­way I think we should have this  &lt;code&gt;root()&lt;/code&gt;  func­tion in any case (see  &lt;a href="http://code.google.com/p/sympy/issues/detail?id=2643" target="_blank"&gt;is­sue 2643&lt;/a&gt;).&lt;/p&gt; 
- &lt;p&gt;An­oth­er idea, which is prob­a­bly not a good one, is to al­ways print  &lt;code&gt;in­t/int&lt;/code&gt;  as  &lt;code&gt;S(in­t)/int&lt;/code&gt;.  So we would get&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; Ra­tio­nal(1, 2)&lt;/p&gt; 
- &lt;p&gt;S(1)/2&lt;/p&gt; 
- &lt;p&gt;&amp;gt;&amp;gt;&amp;gt; x**Ra­tional(4, 5)&lt;/p&gt; 
- &lt;p&gt;x**(S(4)/5)&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;This is prob­a­bly a bad idea be­cause even though ex­pres­sions would al­ways be copy­-­pastable, they would be slight­ly less read­able.   &lt;/p&gt; 
- &lt;p&gt;By the way, in case you did­n't catch it, all of these changes on­ly af­fect the string print­er.  The pret­ty print­er re­mained un­af­fect­ed, and would un­der any ad­di­tion­al changes, as it is­n't copy­-­pastable any­way, and al­ready does a su­perb job of print­ing root­s.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2011/08/18/sqrtx-now-prints-as-sqrtx/</guid><pubDate>Thu, 18 Aug 2011 08:11:32 GMT</pubDate></item><item><title>Merging integration3 with sympy-0.7.0 nightmare</title><link>http://asmeurer.github.io/posts/2011/07/25/merging-integration3-with-sympy-0-7-0-nightmare/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;For a long time, there have been sev­er­al prob­lems in my  &lt;code&gt;in­te­gra­tion3&lt;/code&gt;  branch that were fixed in  &lt;code&gt;mas­ter&lt;/code&gt;.  I de­cid­ed that as an in­cen­tive to fin­ish the re­lease, I would hold off on merg­ing  &lt;code&gt;mas­ter&lt;/code&gt;  in­to my branch un­til the 0.7.0 re­lease was fin­ished.  Well, here's a lit­tle time­line:&lt;/p&gt; 
- &lt;p&gt;&lt;/p&gt;&lt;ul&gt;
-    &lt;li&gt;&lt;strong&gt;June 28, 2011:&lt;/strong&gt;  SymPy 0.7.0 fi­nal is re­leased.&lt;/li&gt; 
-     &lt;li&gt;&lt;strong&gt;June 29, 2011:&lt;/strong&gt;  I type  &lt;code&gt;git merge sympy-0.7.0&lt;/code&gt;  in my  &lt;code&gt;in­te­gra­tion3&lt;/code&gt;  branch.&lt;/li&gt; 
-     &lt;li&gt;&lt;strong&gt;Ju­ly 24, 2011 (to­day; tech­ni­cal­ly Ju­ly 25 be­cause it's 2 AM):&lt;/strong&gt;  I fin­ish merg­ing  &lt;code&gt;sympy-0.7.0&lt;/code&gt;  in­to  &lt;code&gt;in­te­gra­tion3&lt;/code&gt;.&lt;/li&gt; 
- &lt;/ul&gt;
-&lt;p&gt;That's right, it took me over three week­s---al­most a mon­th---­to merge  &lt;code&gt;sympy-0.7.0&lt;/code&gt;  in­to  &lt;code&gt;in­te­gra­tion3&lt;/code&gt;  (grant­ed, I worked on oth­er things at the same time, such as the  &lt;a href="https://github.com/asmeurer/sympy/commit/52657848516ce7f4f7119b921d6b8d64131b58d3" target="_blank"&gt;SciPy 2011 con­fer­ence&lt;/a&gt;, but to me, any merge that takes longer than a day to com­plete is a prob­lem).  This is be­cause git de­cid­ed that I need­ed to fix as a merge con­flict just about ev­ery sin­gle change in the re­lease branch since the base of  &lt;code&gt;in­te­gra­tion3&lt;/code&gt;.  The to­tal was over 100 files.  You can see the fi­nal merge com­mit  &lt;a href="https://github.com/asmeurer/sympy/commit/52657848516ce7f4f7119b921d6b8d64131b58d3" target="_blank"&gt;here&lt;/a&gt;.&lt;/p&gt; 
- &lt;p&gt;So I start­ed  &lt;code&gt;git merge­tool&lt;/code&gt;, with­out which this whole or­deal would have been 10 times worse.  The merge­tool, which on my com­put­er is open­dif­f, i.e., File Merge, gave the cor­rect change by de­fault in most cas­es, so I ac­tu­al­ly did not have to man­u­al­ly fix the ma­jor­i­ty of the con­flict­s.  But I did have to go through and do a lot of them.  I had to man­u­al­ly check each dif­fer­ence in the polys, as I had made sev­er­al changes there in the course of work­ing on  &lt;code&gt;in­te­gra­tion3&lt;/code&gt;.  In sev­er­al oc­ci­saion­s, I had to re­search a change us­ing  &lt;code&gt;git log -S&lt;/code&gt;  and fan­cy meth­od­s.  And I no­ticed at least two re­gres­sions in the polys, which I fixed.&lt;/p&gt; 
- &lt;p&gt;merge­tool was use­less against  &lt;code&gt;risch.py&lt;/code&gt;  and  &lt;code&gt;test_risch.py&lt;/code&gt;, be­cause in my branch I had re­named these to  &lt;code&gt;heurisch.py&lt;/code&gt;  and  &lt;code&gt;test_heurisch.py&lt;/code&gt;.  For­tu­nate­ly, these were not re­al­ly mod­i­fied much by me, so I could ba­si­cal­ly just re­place them with the  &lt;code&gt;sympy-0.7.0&lt;/code&gt;  ver­sion­s.&lt;/p&gt; 
- &lt;p&gt;Once I fin­ished merg­ing I had to deal with test fail­ures.  This was part­ly ex­pect­ed, as my branch has al­ways had test fail­ures due to my hack dis­abling al­ge­bra­ic sub­sti­tu­tion in  &lt;code&gt;exp&lt;/code&gt;, which is re­quired for  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  to work, but there were al­so sev­er­al un­re­lat­ed ones.   &lt;/p&gt; 
- &lt;p&gt;Some of these were caused by wrong merge con­flict res­o­lu­tions by me.  So I went through  &lt;code&gt;git diff sympy-0.7.0&lt;/code&gt;  change by change and made sure that noth­ing was dif­fer­ent that I did­n't want to be.  I would rec­om­mend do­ing this for any big merge.&lt;/p&gt; 
- &lt;p&gt;Then, I had to fix a few bugs that caused test fail­ures.  Sev­er­al se­man­tics were changed in the re­lease.  I think the ones that I had to change were the re­nam­ing of  &lt;code&gt;has_any_sym­bols&lt;/code&gt;  to just  &lt;code&gt;has&lt;/code&gt;, the re­nam­ing of  &lt;code&gt;Poly.as_ba­sic()&lt;/code&gt;  to  &lt;code&gt;Poly.as_­ex­pr()&lt;/code&gt;, and the swap­ping of the mean­ings of  &lt;code&gt;quo&lt;/code&gt;  and  &lt;code&gt;exquo&lt;/code&gt;  in the polys.  There were al­so some doctest fail­ures due to the change to lex­i­co­graph­ic or­der­ing in the print­er.&lt;/p&gt; 
- &lt;p&gt;Af­ter all that, there were two re­gres­sions that caused test fail­ures.  The first was the fol­low­ing:&lt;/p&gt; 
- &lt;p&gt;Be­fore:&lt;/p&gt; 
- &lt;p&gt;[code lang="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: In­te­gral((­ex­p(x&lt;em&gt;log(x))&lt;/em&gt;log(x)), x).­sub­s(­ex­p(x&lt;em&gt;log(x)), x&lt;/em&gt;*x)&lt;/p&gt; 
- &lt;p&gt;Out­[1]:  &lt;/p&gt; 
- &lt;p&gt;⌠              &lt;/p&gt; 
- &lt;p&gt;⎮  x           &lt;/p&gt; 
- &lt;p&gt;⎮ x ⋅log(x) dx&lt;/p&gt; 
- &lt;p&gt;⌡              &lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;Af­ter:&lt;/p&gt; 
- &lt;p&gt;[code lang="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: In­te­gral((­ex­p(x&lt;em&gt;log(x))&lt;/em&gt;log(x)), x).­sub­s(­ex­p(x&lt;em&gt;log(x)), x&lt;/em&gt;*x)&lt;/p&gt; 
- &lt;p&gt;Out­[1]:  &lt;/p&gt; 
- &lt;p&gt;⌠                     &lt;/p&gt; 
- &lt;p&gt;⎮  x⋅log(x)           &lt;/p&gt; 
- &lt;p&gt;⎮ ℯ        ⋅log(x) dx&lt;/p&gt; 
- &lt;p&gt;⌡                     &lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;This sub­sti­tu­tion is nec­es­sary be­cause the Risch al­go­rithm re­quires ex­pres­sions like $la­tex x^x$ to be rewrit­ten as $la­tex e^{x\log(x)}$ be­fore it can in­te­grate them, but I try to con­vert them back af­ter in­te­grat­ing so that the us­er gets the same thing in the re­sult that he en­tered.  I cre­at­ed  &lt;a href="http://code.google.com/p/sympy/issues/detail?id=2571" target="_blank"&gt;is­sue 2571&lt;/a&gt;  for this.&lt;/p&gt; 
- &lt;p&gt;The sec­ond was that I had sev­er­al places in my doc­strings with things like&lt;/p&gt; 
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog (mathjax)</title><link>http://asmeurer.github.io/</link><description></description><language>en</language><lastBuildDate>Fri, 04 Apr 2014 20:08:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Moving to GitHub pages with Nikola</title><link>http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;So I've fi­nal­ly de­cid­ed to move my blog from Word­press to GitHub pages.  I
+high­ly rec­om­mend it if you are tech­ni­cal­ly skilled enough to do it. I was
+get­ting pret­ty an­noyed at Word­press. It forces you to write your posts in­
+html (or else us­ing their WYSI­WYG ed­i­tor), the word­press.­com is locked down,
+­so you can't add any Javascrip­t, their math is stuck in the past ren­der­ing png
+in­stead of us­ing Math­Jax. The list goes on.&lt;/p&gt; 
+ &lt;p&gt;With GitHub pages, I can write my posts in Mark­down, and I have full con­trol
+over ev­ery­thing. And there is no lock in. If I de­cide I don't like the
+­soft­ware that is gen­er­at­ing the post­s, I can eas­i­ly move to some­thing else,
+s­ince the post con­tent it­self is all Mark­down (or the oc­ca­sion­al rst or
+IPython note­book if I want to do some­thing that Mark­down does­n't sup­port­). I
+­can use Math­Jax for math (like \( e^{i\pi} + 1 = 0 \)). Word­press.­com
+­does­n't let you in­stall abti­rary Javascript on your blog, so you can't do
+things like in­stall Math­Jax or en­able some cool side­bar thing (like a Twit­ter
+feed).&lt;/p&gt; 
+ &lt;h2&gt;Setting up GitHub Pages&lt;/h2&gt;
+&lt;p&gt;First, you need to set up GitHub pages. This is a bit con­fus­ing, be­cause there
+are ac­tu­al­ly two kinds of GitHub pages, us­er pages and project pages. User
+­pages are if you have a re­po named  &lt;code&gt;user­name.github.io&lt;/code&gt;  (or  &lt;code&gt;.com&lt;/code&gt;). The pages
+are served from the  &lt;code&gt;mas­ter&lt;/code&gt;  branch.&lt;/p&gt; 
+ &lt;p&gt;For project pages, you add a  &lt;code&gt;gh-­pages&lt;/code&gt;  branch to any one of your pro­ject­s,
+and GitHub hosts the con­tent au­to­mat­i­cal­ly at
+ &lt;code&gt;user­name.github.io/pro­ject­name&lt;/code&gt;. I orig­i­nal­ly had my blog con­tent at
+ &lt;code&gt;as­meur­er.github.io&lt;/code&gt;, but I did­n't like that I had to do ev­ery­thing in mas­ter,
+both the gen­er­at­ed and orig­i­nal con­tent. So in­stead I cre­at­ed a re­po called
+ &lt;code&gt;blog&lt;/code&gt;. I have my con­tent in the  &lt;code&gt;mas­ter&lt;/code&gt;  branch and the gen­er­at­ed pages in­
+the  &lt;code&gt;gh-­pages&lt;/code&gt;  branch (more on this lat­er). At my
+ &lt;a href="https://github.com/asmeurer/asmeurer.github.com"&gt;&lt;code&gt;as­meur­er.github.­com&lt;/code&gt;&lt;/a&gt;  re­po,
+I just have for now a ba­sic re­di­rect to the blog. In the fu­ture, I may want to
+put ad­di­tion­al, non-blog con­tent on the web­site, and it would go there (or in­
+a sep­a­rate project re­po with its own  &lt;code&gt;gh-­pages&lt;/code&gt;  branch).&lt;/p&gt; 
+ &lt;h2&gt;Nikola&lt;/h2&gt;
+&lt;p&gt;I had ini­tial­ly planned on us­ing
+ &lt;a href="http://blog.getpelican.com/"&gt;Pel­i­can&lt;/a&gt;. How­ev­er, I got stalled on the
+­Word­press im­port. I like that Pel­i­can is writ­ten in Python, but I was not too
+­keen on their abra­sive
+ &lt;a href="https://github.com/getpelican/pelican/blob/master/LICENSE"&gt;li­cense&lt;/a&gt;. Frankly,
+I should­n't say too many bad things about Pel­i­can be­cause I nev­er re­al­ly tried
+that hard with it.&lt;/p&gt; 
+ &lt;p&gt;I have de­cid­ed to try  &lt;a href="http://getnikola.com/"&gt;Niko­la&lt;/a&gt;  in­stead. It's al­so
+writ­ten in Python. It has a very nice
+ &lt;a href="https://github.com/getnikola/nikola/blob/master/LICENSE.txt"&gt;li­cense&lt;/a&gt;. I like
+the phi­los­o­phy of the  &lt;a href="http://getnikola.com/handbook.html"&gt;man­u­al&lt;/a&gt;:&lt;/p&gt; 
  &lt;blockquote&gt;
-
-Given a derivation D on k[t] and f, g in k(t) with f weakly normalized with respect to t, either raise NonElementaryIntegralException, in which case the equation Dy + f*y == g has no solution in k(t), or the quadruplet (a, b, c, h) such that a, h in k[t], b, c in k, and for any solution y in k(t) of Dy + f*y == g, q = y*h in k satisfies a*Dq + b*q == c.
-
-&lt;/blockquote&gt;
-
-&lt;p&gt;The prob­lem here is the "raise NonEle­men­tary­In­te­gralEx­cep­tion," part.  The code qual­i­ty check­er things that this is an old style ex­cep­tion (like  &lt;code&gt;raise Ex­cep­tion, mes­sage&lt;/code&gt;), due to a poor­ly formed reg­u­lar ex­pres­sion.  I fixed this in a  &lt;a href="https://github.com/sympy/sympy/pull/511" target="_blank"&gt;pull re­quest&lt;/a&gt;.&lt;/p&gt; 
- &lt;p&gt;The good news is that now a lot of stuff works that did­n't be­fore be­cause of fix­es that were re­quired that on­ly ex­ist­ed in  &lt;code&gt;mas­ter&lt;/code&gt;.  For ex­am­ple, the fol­low­ing did not work be­fore, but now does due to im­prove­ments to  &lt;code&gt;Root­Sum&lt;/code&gt;:&lt;/p&gt; 
- &lt;p&gt;[code lang="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: risch_in­te­grate(1/(­ex­p(5*x) + ex­p(x) + 1), x)&lt;/p&gt; 
- &lt;p&gt;Out­[1]: 
-           ⎛    2                                                          &lt;br&gt; 
-x + Root­Sum⎝21⋅z  + 6⋅z + 1, Lamb­da(_i, _i&lt;em&gt;log(-3381&lt;/em&gt;_i&lt;strong&gt;4/4 - 3381*_i&lt;/strong&gt;3/4  &lt;/p&gt; 
- &lt;div class="code"&gt;&lt;pre&gt;                                   &lt;span class="err"&gt;⎞&lt;/span&gt;          &lt;span class="err"&gt;⎛&lt;/span&gt;     &lt;span class="mi"&gt;3&lt;/span&gt;        &lt;span class="mi"&gt;2&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;ul&gt;
-&lt;li&gt;625&lt;em&gt;_i&lt;/em&gt;&lt;em&gt;2/2 - 125&lt;/em&gt;_i/2 + ex­p(x) - 5))⎠ + Root­Sum⎝161⋅z  + 115⋅z  + 19⋅z +  &lt;/li&gt; 
- &lt;/ul&gt;
-&lt;p&gt;1, Lamb­da(_i, _i&lt;em&gt;log(-3381&lt;/em&gt;_i&lt;strong&gt;4/4 - 3381*_i&lt;/strong&gt;3/4 - 625&lt;em&gt;_i&lt;/em&gt;&lt;em&gt;2/2 - 125&lt;/em&gt;_i/2 +&lt;/p&gt; 
- &lt;div class="code"&gt;&lt;pre&gt;         &lt;span class="err"&gt;⎞&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;ex­p(x) - 5))⎠&lt;/p&gt; 
- &lt;p&gt;In [2]: can­cel(risch_in­te­grate(1/(­ex­p(5*x) + ex­p(x) + 1), x).d­if­f(x))&lt;/p&gt; 
- &lt;p&gt;Out­[2]: 
-      1     &lt;br&gt; 
-─────────────
- 5⋅x    x   &lt;br&gt; 
-ℯ    + ℯ  + 1&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;The gen­er­al def­i­ni­tion of the log­a­rith­mic part of an in­te­gral is a sum over the roots of a poly­no­mi­al, which must be ex­pressed as a  &lt;code&gt;Root­Sum&lt;/code&gt;  in the gen­er­al case.  Pre­vi­ous­ly,  &lt;code&gt;Root­Sum.d­iff&lt;/code&gt;  did not work, but thanks to Ma­teusz, an al­go­rithm for com­put­ing ex­act­ly the Root­Sum where the Lamb­da ex­pres­sion is a ra­tio­nal func­tion was im­ple­ment­ed (see  &lt;a href="http://mattpap.github.com/scipy-2011-tutorial/html/mathematics.html#summing-roots-of-polynomials" target="_blank"&gt;this bit&lt;/a&gt;  from our SciPy tu­to­ri­al for an idea on how this work­s), so now the Risch Al­go­rithm can work with Root­Sum ob­jects just as well with as an or­di­nary sum of log­a­rithm­s.&lt;/p&gt; 
- &lt;p&gt;Al­so, there was a bug in the square free al­go­rithm in my branch that was fixed in  &lt;code&gt;mas­ter&lt;/code&gt;  that was caus­ing wrong re­sults (I don't re­mem­ber the ex­pres­sion that pro­duced them right now), and al­so there was a fix by me in  &lt;code&gt;mas­ter&lt;/code&gt;  to make  &lt;code&gt;is_ra­tional_­func­tion()&lt;/code&gt;  faster, as it was sig­nif­i­cant­ly slow­ing down the cal­cu­la­tion of some in­te­grals (for ex­am­ple,  &lt;code&gt;risch_in­te­grate(Ad­d(&lt;em&gt;(ex­p(i&lt;/em&gt;x) for i in range(1000))))&lt;/code&gt;, which is still slow to cal­cu­late, but now it's be­cause of oth­er things).&lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;About big branch­es&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;So this merge, along with the poly12 fi­as­co (which by the way, I think part of the rea­son git made me do all these merge con­flict res­o­lu­tions was be­cause  &lt;code&gt;polys12&lt;/code&gt;  was re­based from the  &lt;code&gt;polys11&lt;/code&gt;  I had merged in­to in­te­gra­tion3), has shown me very clear­ly that it is very bad to go off with your own branch and do a lot of work and wait a long time be­fore merg­ing it back in­to the main re­po.&lt;/p&gt; 
- &lt;p&gt;This is what was done with  &lt;code&gt;polys12&lt;/code&gt;.  Ma­teusz had a lot of new poly­no­mi­als code that he de­vel­oped in one big branch, and when it fi­nal­ly came to merg­ing it back in, it was a mess.  This was for sev­er­al rea­son­s, which I do not want to dis­cuss too much here, but it be­came clear to ev­ery­one I think that do­ing this was bad, and that it would have been bet­ter to have sub­mit­ted many changes as pull re­quests as they were made than keep­ing them all to­geth­er in one big branch for a long time.&lt;/p&gt; 
- &lt;p&gt;This mod­el al­so af­fect­ed my work, as I had to work off of lat­est the polys branch, not  &lt;code&gt;mas­ter&lt;/code&gt;, as my work re­lied heav­i­ly on the lat­est and great­est in the polys.   &lt;/p&gt; 
- &lt;p&gt;Well, with this merge of the main re­po in­to my branch, I see that my branch is start­ing to be­come the same way.  I orig­i­nal­ly thought that I should fin­ish the Risch al­go­rithm be­fore sub­mit­ting it to be merged in­to  &lt;code&gt;mas­ter&lt;/code&gt;.  I know know that this is the wrong ap­proach.  De­vel­op­ment in  &lt;code&gt;mas­ter&lt;/code&gt;  is too fast to keep code away from it for too long.  The di­ver­gence makes it more and more dif­fi­cult to merge back with ev­ery time.  Fur­ther­more, there are re­gres­sions that were nev­er no­ticed to be re­gres­sions be­cause the code that would have shown them ex­ist­ed on­ly in my branch.  Now I have to fix the­se, where­as if the code were in  &lt;code&gt;mas­ter&lt;/code&gt;, the re­gres­sion would have nev­er hap­pened in the first place, be­cause the au­thor would have seen it im­me­di­ate­ly from the test fail­ures.&lt;/p&gt; 
- &lt;p&gt;I al­so thought that I should wait to merge be­cause there were so many bugs in my code.  But I see now that this is al­so wrong.  Merg­ing with  &lt;code&gt;mas­ter&lt;/code&gt;  will help me find these bugs, as peo­ple will ac­tu­al­ly use my code.  Sure, I've asked peo­ple to try out  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;, and some peo­ple have (and I thank you), but hav­ing it in the de­fault  &lt;code&gt;in­te­grate()&lt;/code&gt;  in  &lt;code&gt;mas­ter&lt;/code&gt;  will re­sult in find­ing more bugs in the code than I ev­er would alone, which is ba­si­cal­ly the way it is right now with the code liv­ing on­ly in my own branch.&lt;/p&gt; 
- &lt;p&gt;I would pre­pare my code for merg­ing with  &lt;code&gt;mas­ter&lt;/code&gt;  to­day, if it weren't for this  &lt;code&gt;ex­p.­subs&lt;/code&gt;  hack, which caus­es test fail­ures and is tech­ni­cal­ly a re­gres­sion, but is re­quired for the prepars­ing code to the Risch al­go­rithm to work.  This is why I  &lt;a href="http://groups.google.com/group/sympy/browse_thread/thread/4a19d0f39f51fda6#" target="_blank"&gt;wrote to the list&lt;/a&gt;  two weeks ago ask­ing for ad­vice on how to struc­ture the sub­sti­tu­tion code so that we can nice­ly have var­i­ous kinds of sub­sti­tu­tions (e.g., ex­act like I need and al­ge­bra­ic like cur­rent­ly ex­ists in  &lt;code&gt;exp&lt;/code&gt;) liv­ing to­geth­er with­out clut­ter­ing up the code.&lt;/p&gt; 
- &lt;p&gt;There­fore, I am go­ing to fo­cus my en­er­gies on fix­ing this subs prob­lem so I can get my code merged with  &lt;code&gt;mas­ter&lt;/code&gt;.  Then, when this is done, I will con­tin­ue my work on im­ple­ment­ing the re­main­ing cas­es of the Risch al­go­rith­m.   &lt;/p&gt; 
- &lt;p&gt;So let this tale be a warn­ing to peo­ple work­ing on a lot of code in a big branch.  This es­pe­cial­ly ap­plies to our GSoC stu­dents, as it's ex­treme­ly easy to let your code ac­cu­mu­late when you're a GSoC stu­dent (tech­ni­cal­ly this branch of mine is a GSoC branch).  I see that some of our stu­dents are do­ing a bet­ter job of this than oth­er­s.  To those who have your code all in one big branch that has­n't been merged, I rec­om­mend you ready your branch for merge now.  And in the fu­ture, try to break your code up in­to small but still mean­ing­ful chunks and sub­mit those as pull re­quest­s.  With git, it's easy to base the code you are cur­rent­ly work­ing on on code that has­n't been merged yet, while still keep­ing things in small chunks for the pull re­quest­s.   &lt;/p&gt; 
- &lt;p&gt;On the oth­er hand, git will on­ly take you so far if you keep ev­ery­thing in a big branch, be­cause there are go­ing to be changes in  &lt;code&gt;mas­ter&lt;/code&gt;  that will af­fect your work, no mat­ter how iso­lat­ed you think it is, and these are the sorts of things that it is im­pos­si­ble for git to fix for you.  But if your code is in  &lt;code&gt;mas­ter&lt;/code&gt;, it will be sup­port­ed by ev­ery­one, and any ma­jor change that af­fects it will have to fix it. For ex­am­ple, if some­one changes a print­er and the doctests change, then he will have to change your doctest too if it's in  &lt;code&gt;mas­ter&lt;/code&gt;, but if it's in your branch, then you will have to fix it when you next merge/re­base with­/a­gainst  &lt;code&gt;mas­ter&lt;/code&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2011/07/25/merging-integration3-with-sympy-0-7-0-nightmare/</guid><pubDate>Mon, 25 Jul 2011 14:25:13 GMT</pubDate></item><item><title>Nondeterminism</title><link>http://asmeurer.github.io/posts/2011/06/05/nondeterminism/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;So from Sat­ur­day to Wednes­day of this week, I was on va­ca­tion to the Grand Canyon with­out my com­put­er.  There­fore, I did not do a whole lot with re­spect to SymPy this week.  The va­ca­tion was very fun, though.  My fam­i­ly and I hiked to the bot­tom of the Grand Canyon and stayed a day at the bot­tom in a lodge at Phan­tom Ranch, then hiked back up.  I would high­ly rec­om­mend it to any­one who does not mind do­ing a lit­tle hik­ing.   &lt;/p&gt; 
- &lt;p&gt;Re­gard­ing what I did do, oth­er than catch­ing up on the email from when I was gone, I did some more work fin­ish­ing patch­es for the re­lease.  We are now  &lt;em&gt;very&lt;/em&gt;  close to hav­ing a re­lease.  All the re­main­ing  &lt;a href="http://code.google.com/p/sympy/issues/list?q=label:Milestone-Release0.7.0"&gt;block­ing is­sues&lt;/a&gt;  ei­ther have patch­es that need to be re­viewed, or de­ci­sions that need to be made.&lt;/p&gt; 
- &lt;p&gt;I al­so did some work on the Risch Al­go­rith­m, though it was­n't very much.  One of my fa­vorite ways to "do work" on the code is to stress test  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  and if I find a bug or find that it runs too slow, see what needs to be done to fix it.  This week, I dis­cov­ered that  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  has a bit of non­de­ter­min­ism built in­to it.  Ac­tu­al­ly, I al­ready knew this, but I re­cent­ly found an ex­am­ple that demon­strates it very nice­ly.  The prob­lem is that when it builds the ex­ten­sion to in­te­grate the func­tion,  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  us­es  &lt;code&gt;.atom­s()&lt;/code&gt;  to get the parts of the ex­pres­sion (for ex­am­ple,  &lt;code&gt;ex­pr.atom­s(log)&lt;/code&gt;  gets all the log­a­rithms in  &lt;code&gt;ex­pr&lt;/code&gt;).  But  &lt;code&gt;.atom­s()&lt;/code&gt;  re­turns a set (I be­lieve this is for per­for­mance rea­son­s, though I'm not cer­tain).  So we get things like&lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;Hov­er over the code and click on the left­-­most, "view source" icon (a pa­per icon with  &lt;tt&gt;&amp;lt; &amp;gt;&lt;/tt&gt;  over it) to view with­out break­s.  Opens in a new win­dow.&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: a = Ad­d(&lt;em&gt;(log(x&lt;/em&gt;*i) for i in range(10)))&lt;/p&gt; 
- &lt;p&gt;In [2]: a&lt;/p&gt; 
- &lt;p&gt;Out­[2]: 
-            ⎛ 2⎞      ⎛ 3⎞      ⎛ 4⎞      ⎛ 5⎞      ⎛ 6⎞      ⎛ 7⎞      ⎛ 8⎞      ⎛ 9⎞
-log(x) + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠ + log⎝x ⎠&lt;/p&gt; 
- &lt;p&gt;In [3]: b = risch_in­te­grate(a, x)&lt;/p&gt; 
- &lt;p&gt;In [4]: b&lt;/p&gt; 
- &lt;p&gt;Out­[4]: 
-                ⎛ 4⎞
-        45⋅x⋅log⎝x ⎠
--45⋅x + ────────────
-             4     &lt;br&gt; 
-[/­code]&lt;/p&gt; 
- &lt;p&gt;This is cor­rec­t, since we have&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [5]: ex­pand(b.d­if­f(x) - a)&lt;/p&gt; 
- &lt;p&gt;Out­[5]: 0&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;(re­mem­ber that $la­tex \log{(x^n)}=n\log{(x)}$).  The in­te­gral can be ex­pressed in terms of any of the log­a­rithms in the ex­pres­sion.  It hap­pens to be ex­pressed in terms of $la­tex \log{(x^4)}$ be­cause that hap­pened to be the first one that came out of  &lt;code&gt;a.atom­s(log)&lt;/code&gt;  dur­ing it­er­a­tion.  This is prob­lem­at­ic.  First, it's not ex­act­ly what is ex­pect­ed.  The ide­al so­lu­tion would be if the an­swer was writ­ten in terms of $la­tex \log{(x)}$.   &lt;/p&gt; 
- &lt;p&gt;But it's ac­tu­al­ly worse than that.  Like I men­tioned, this is non­de­ter­min­is­tic.  It de­pends on the or­der of it­er­a­tion through a set, which is not guar­an­teed to be in any par­tic­u­lar or­der.  In­deed, if I run the fol­low­ing in 32-bit Python 2.7 and again in 64-bit Python 2.7), the out­put is ex­act­ly the same ex­cept for  &lt;code&gt;i&lt;/code&gt;  = 64 to  &lt;code&gt;i&lt;/code&gt;  = 77.&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;for i in range(100):
-    print risch_in­te­grate(Ad­d(&lt;em&gt;(log(x&lt;/em&gt;*j) for j in range(i))), x)
-[/­code]&lt;/p&gt; 
- &lt;p&gt;The ac­tu­al out­put seems to fol­low a pat­tern, though it's had to dis­cern ex­act­ly what it is.  The out­put for 32-bit is  &lt;a href="https://gist.github.com/1008685" title="32-bit Python risch_integrate(logarithms)" target="_blank"&gt;http­s://gist.github.­com/1008685&lt;/a&gt;  and the out­put for 64-bit is  &lt;a href="https://gist.github.com/1008684" title="64-bit Python risch_integrate(logarithms)" target="_blank"&gt;http­s://gist.github.­com/1008684&lt;/a&gt;  (sor­ry, I for­got to print  &lt;code&gt;i&lt;/code&gt;; just sub­tract 4 from the line num­ber).   &lt;/p&gt; 
- &lt;p&gt;So this has got­ten me think­ing about how to re­duce non­de­ter­min­is­m.  Clear­ly, I need to sort the re­sult of  &lt;code&gt;.atom­s()&lt;/code&gt;, or else  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  might re­turn a dif­fer­ent (though equiv­a­len­t) re­sult on dif­fer­ent plat­form­s. Ac­tu­al­ly, I've seen  &lt;code&gt;list(set)&lt;/code&gt;  re­turn a dif­fer­ent re­sult in the  &lt;em&gt;same&lt;/em&gt;  Python ses­sion.  That means that you could po­ten­tial­ly get some­thing like  &lt;code&gt;risch_in­te­grate(­ex­pr, x) == risch_in­te­grate(­ex­pr, x) =&amp;gt; False&lt;/code&gt;!&lt;/p&gt; 
- &lt;p&gt;The prob­lem is how to sort the atom­s.  We re­cent­ly added a  &lt;code&gt;sort_key()&lt;/code&gt;  func­tion that can be passed as a key to  &lt;code&gt;sort­ed()&lt;/code&gt;, which is com­plete­ly de­ter­min­is­tic and plat­form in­de­pen­den­t.  That would solve the de­ter­min­ism prob­lem, but ac­tu­al­ly, I think this re­quires more thought.  The or­der that the dif­fer­en­tial ex­ten­sion is built in can af­fect not on­ly the form of the re­sult­ing anti­deriv­a­tive (though it will al­ways be equiv­a­len­t, up to a con­stan­t), but al­so the speed with which it is com­put­ed.  To take an ex­am­ple from  &lt;a href="http://code.google.com/p/sympy/issues/detail?id=2010#c1"&gt;is­sue 2010&lt;/a&gt;, the is­sue about  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  (y­ou may al­so  &lt;a href="http://asmeurersympy.wordpress.com/2010/08/05/prototype-risch_integrate-function-ready-for-testing/"&gt;rec­og­nize&lt;/a&gt;  this ex­am­ple if you are a reg­u­lar read­er of this blog), the  &lt;code&gt;han­dle_­first&lt;/code&gt;  key­word ar­gu­ment to  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  af­fects if it builds the ex­ten­sion tow­er look­ing for log­a­rithms first or ex­po­nen­tials first.  Which­ever comes last is what is in­te­grat­ed first (the tow­er is in­te­grat­ed from the top to the bot­tom).  If the last ex­ten­sion was an ex­po­nen­tial, then it us­es the ex­po­nen­tial al­go­rith­m.  If it was a log­a­rith­m, then it us­es the log­a­rithm al­go­rith­m.  These are com­plete­ly dif­fer­ent al­go­rithm­s, and in­deed the re­sults can ap­pear in dif­fer­ent forms (and some­times, one will raise NotIm­ple­ment­ed­Er­ror while the oth­er will work be­cause I have im­ple­ment­ed the ex­po­nen­tial al­go­rithm more com­plete­ly than the log­a­rith­mic one).  It al­so af­fects the speed be­cause the in­te­grand might be of a dif­fer­ent "type" in the dif­fer­ent ex­ten­sion­s.  In the ex­am­ple be­low, the an­swers are dif­fer­ent be­cause it tries to make the ar­gu­ment of the log­a­rith­mic part mon­ic with re­spect to the ex­po­nen­tial or the log­a­rith­m, re­spec­tive­ly. Al­so no­tice the speed dif­fer­ence.  This can be ex­as­per­at­ed more for in­te­grands of dif­fer­ent forms than this one.&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: f = (x&lt;em&gt;(x + 1)&lt;/em&gt;((x&lt;strong&gt;2&lt;em&gt;ex­p(2&lt;/em&gt;x&lt;/strong&gt;2) - log(x + 1)&lt;strong&gt;2)&lt;/strong&gt;2 +
-   ...: 2&lt;em&gt;x&lt;/em&gt;ex­p(3&lt;em&gt;x&lt;strong&gt;2)&lt;em&gt;(x - (2&lt;/em&gt;x&lt;/strong&gt;3 + 2&lt;/em&gt;x&lt;strong&gt;2 + x + 1)&lt;em&gt;log(x + 1))))/((x +
-   ...: 1)&lt;/em&gt;log(x + 1)&lt;/strong&gt;2 - (x&lt;strong&gt;3 + x&lt;/strong&gt;2)&lt;em&gt;ex­p(2&lt;/em&gt;x&lt;strong&gt;2))&lt;/strong&gt;2&lt;/p&gt; 
- &lt;p&gt;In [2]: f&lt;/p&gt; 
- &lt;p&gt;Out­[2]: 
-          ⎛                          2                                                   ⎞
-          ⎜⎛                       2⎞                                                   2⎟
-          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
-x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠&lt;/p&gt; 
- &lt;p&gt;──────────────────────────────────────────────────────────────────────────────────────────
-                                                                2                        &lt;br&gt; 
-                         ⎛                                    2⎞                         &lt;br&gt; 
-                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟                         &lt;br&gt; 
-                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠                           &lt;/p&gt; 
- &lt;p&gt;In [3]: risch_in­te­grate(f, x, han­dle_­first='log')&lt;/p&gt; 
- &lt;p&gt;Out­[3]: 
-       ⎛              ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞                            &lt;br&gt; 
-       ⎜log(1 + x)    ⎝x ⎠⎟                   ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞              &lt;br&gt; 
-    log⎜────────── + ℯ    ⎟                log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠              &lt;br&gt; 
-       ⎝    x             ⎠                   ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)   &lt;br&gt; 
-x + ─────────────────────── - log(1 + x) - ───────────────────────── + ──────────────────────────
-               2                                       2                                        2
-                                                                              2           3  2⋅x 
-                                                                       - x⋅log (1 + x) + x ⋅ℯ     &lt;/p&gt; 
- &lt;p&gt;In [4]: risch_in­te­grate(f, x, han­dle_­first='­ex­p')&lt;/p&gt; 
- &lt;p&gt;Out­[4]: 
-       ⎛                ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞        ⎛ 2⎞            &lt;br&gt; 
-       ⎜                ⎝x ⎠⎟                   ⎜                ⎝x ⎠⎟        ⎝x ⎠            &lt;br&gt; 
-    log⎝log(1 + x) + x⋅ℯ    ⎠                log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)&lt;br&gt; 
-x + ───────────────────────── - log(1 + x) - ───────────────────────── - ──────────────────────
-                2                                        2                                    2
-                                                                            2           2  2⋅x 
-                                                                         log (1 + x) - x ⋅ℯ     &lt;/p&gt; 
- &lt;p&gt;In [5]: %timeit risch_in­te­grate(f, x, han­dle_­first='log')&lt;/p&gt; 
- &lt;p&gt;1 loop­s, best of 3: 1.49 s per loop&lt;/p&gt; 
- &lt;p&gt;In [6]: %timeit risch_in­te­grate(f, x, han­dle_­first='­ex­p')&lt;/p&gt; 
- &lt;p&gt;1 loop­s, best of 3: 1.21 s per loop&lt;/p&gt; 
- &lt;p&gt;In [7]: can­cel(risch_in­te­grate(f, x, han­dle_­first='log').d­if­f(x) - f)&lt;/p&gt; 
- &lt;p&gt;Out­[7]: 0&lt;/p&gt; 
- &lt;p&gt;In [8]: can­cel(risch_in­te­grate(f, x, han­dle_­first='­ex­p').d­if­f(x) - f)&lt;/p&gt; 
- &lt;p&gt;Out­[8]: 0&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;So what I think I re­al­ly need to do is to do some re­search on what or­der of build­ing the tow­er makes it the most ef­fi­cien­t.  Al­so,  &lt;code&gt;han­dle_­first&lt;/code&gt;  needs to be mod­i­fied to be more dy­nam­ic than just look­ing at ex­po­nen­tials or log­a­rithms first, but al­so con­sid­er­ing which ex­po­nen­tials or log­a­rithms to look at first, and the oth­ers might be rewrit­ten in terms of those (this need­ed to be done any­way to make it work for three types of ex­ten­sion­s: ex­po­nen­tial­s, log­a­rithm­s, and tan­gents).   &lt;/p&gt; 
- &lt;p&gt;There can al­so be more heuris­tics for this.  Cur­rent­ly, there are heuris­tics for ex­po­nen­tials to pre­fer rewrit­ing $la­tex e^{2x}$ as $la­tex \left­({e^{x}}\right)^2$ in­stead of rewrit­ing $la­tex e^{x}$ as $la­tex \sqrt{e^{2x}}$ (this is nec­es­sary not on­ly for keep­ing things in terms of the nicer look­ing gcds but al­so be­cause  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  does­n't know how to han­dle al­ge­bra­ic ex­ten­sions like square root­s). I did­n't re­al­ize it at the time, but the corol­lary heuris­tic for log­a­rithms should try to re­write $la­tex \log{(x^2)}$ in terms of $la­tex \log{(x)}$ and not the oth­er way around.  We can use the ex­act same gcd al­go­rithm (called  &lt;a href="https://github.com/asmeurer/sympy/blob/integration3/sympy/integrals/risch.py#L44"&gt;&lt;code&gt;in­te­ger_pow­er­s()&lt;/code&gt;&lt;/a&gt;  in  &lt;code&gt;risch.py&lt;/code&gt;, and I now re­al­ize that it should ac­tu­al­ly be called  &lt;code&gt;in­te­ger_­mul­ti­ples()&lt;/code&gt;) as we do for the ex­po­nen­tial, on­ly use the pow­ers of the ar­gu­ments in­stead of co­ef­fi­cients.  This might re­quire some fac­tor­iza­tion to do com­plete­ly cor­rect­ly, so it cer­tain­ly re­quires some thought.   &lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;Up­date&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;I dis­cov­ered that there's an eas­i­er way to show the non­de­ter­min­ism of the above than run­ning it on dif­fer­ent ar­chi­tec­tures.  You just have to change the vari­able of in­te­gra­tion:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: a = Ad­d(&lt;em&gt;(log(x&lt;/em&gt;*i) for i in range(10)))&lt;/p&gt; 
- &lt;p&gt;In [2]: risch_in­te­grate(a, x)&lt;/p&gt; 
- &lt;p&gt;Out­[2]: 
-                ⎛ 4⎞
-        45⋅x⋅log⎝x ⎠
--45⋅x + ────────────
-             4       &lt;/p&gt; 
- &lt;p&gt;In [3]: b = Ad­d(&lt;em&gt;(log(y&lt;/em&gt;*i) for i in range(10)))&lt;/p&gt; 
- &lt;p&gt;In [4]: risch_in­te­grate(b, y)&lt;/p&gt; 
- &lt;p&gt;Out­[4]: -45⋅y + 45⋅y⋅log(y)&lt;/p&gt; 
- &lt;p&gt;In [5]: c = Ad­d(&lt;em&gt;(log(z&lt;/em&gt;*i) for i in range(10)))&lt;/p&gt; 
- &lt;p&gt;In [6]: risch_in­te­grate(c, z)&lt;/p&gt; 
- &lt;p&gt;Out­[6]: 
-                ⎛ 2⎞
-        45⋅z⋅log⎝z ⎠
--45⋅z + ────────────
-             2     &lt;br&gt; 
-[/­code]&lt;/p&gt; 
- &lt;p&gt;Clear­ly the code for this needs to be do­ing some canon­i­cal­iza­tion.  &lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2011/06/05/nondeterminism/</guid><pubDate>Sun, 05 Jun 2011 11:08:21 GMT</pubDate></item><item><title>Update for the Beginning of the Summer</title><link>http://asmeurer.github.io/posts/2011/05/26/update-for-the-beginning-of-the-summer/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;So the Google Sum­mer of Code cod­ing pe­ri­od of­fi­cial­ly start­ed on Mon­day, and in sol­i­dar­i­ty with the stu­dents, I will be blog­ging once a week about var­i­ous things.  Some of the posts will just be about what I have done that week.  Oth­ers will be con­tin­u­a­tions of my Risch Al­go­rithm se­ries of blog posts (see parts  &lt;a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/" target="_blank"&gt;0&lt;/a&gt;,  &lt;a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/" target="_blank"&gt;1&lt;/a&gt;,  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/" target="_blank"&gt;2&lt;/a&gt;, and  &lt;a href="http://asmeurersympy.wordpress.com/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem/" target="_blank"&gt;3&lt;/a&gt;).   &lt;/p&gt; 
- &lt;p&gt;This week, I will do the for­mer.  I have spend the past sev­er­al weeks pre­par­ing for the re­lease.  The main thing right now is to clear out  &lt;a href="http://code.google.com/p/sympy/issues/list?can=2&amp;amp;q=Milestone%3DRelease0.7.0+&amp;amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary+Stars&amp;amp;cells=tiles" target="_blank"&gt;the is­sues that are block­ing the re­lease&lt;/a&gt;.  I merged in a branch that in­clud­ed all of my polys re­lat­ed fix­es from my in­te­gra­tion3 branch. Along with sim­i­lar branch from ear­li­er that had some non-polys re­lat­ed fix­es (like some fix­es to the in­te­gral­s), all of my fix­es from in­te­gra­tion3 not di­rect­ly re­lat­ed to my im­ple­men­ta­tion of the Risch Al­go­rithm should no be in mas­ter.  &lt;/p&gt; 
- &lt;p&gt;Once those is­sues are fixed, I should be ready to make a re­lease can­di­date for the re­lease.  The last re­lease was over a year ago (March 2010), and we've racked up  &lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.0" target="_blank"&gt;quite a few changes&lt;/a&gt;  since then.  A few big ones are:&lt;/p&gt; 
- &lt;p&gt;&lt;/p&gt;&lt;ul&gt;
-    &lt;li&gt;   &lt;strong&gt;The new polys&lt;/strong&gt;.  This is (in my opin­ion) the big­gest change.  Be­cause of the new polys, ev­ery­thing is faster, and sim­pli­fi­ca­tion is far more pow­er­ful than it was be­fore.  This is for a few rea­son­s.  The big­gest rea­son is that the new polys al­low poly­no­mi­als in any kind of ex­pres­sion, not just Sym­bol­s.  This means that you can do things like fac­tor the ex­pres­sion $la­tex \cos^2{x} + 2\­cos{x} + 1$.  As you can imag­ine, many sim­pli­fi­ca­tions of com­plex ex­pres­sions are noth­ing more than poly­no­mi­al sim­pli­fi­ca­tion­s, where the poly­no­mi­al is in some func­tion.  
- &lt;p&gt;In ad­di­­tion to this, the new polys have a much faster im­­ple­­men­­ta­­tion, and if you have gmpy in­­stalled, it will use that and be even faster.  There are al­­so sev­er­al faster al­­go­rith­m­s, like a faster al­­go­rithm for mul­ti­­var­i­ate fac­­tor­iza­­­tion, that have been im­­ple­­men­t­ed. These all lead to blaz­ing fast sim­­pli­­fi­­ca­­tion and poly­no­mi­al minip­u­la­­tion in SymPy.&lt;/p&gt;&lt;/li&gt; 
- &lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;li&amp;gt;&amp;lt;strong&amp;gt;&lt;/span&gt;The Quantum Module&lt;span class="nt"&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;.  Unfortunatly, I can't say much about this, since I don't know anything about quantum physics.  Furthermore, at the time of the writing of this blog post, that part of the release notes hasn't been written yet.  Suffice it say that thanks to two GSoC projects from last summer (see &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"http://code.google.com/p/sympy/wiki/SymbolicQMReport"&lt;/span&gt; &lt;span class="na"&gt;target=&lt;/span&gt;&lt;span class="s"&gt;"_blank"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;this&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; and &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"http://code.google.com/p/sympy/wiki/Quantum_Computation_Report"&lt;/span&gt; &lt;span class="na"&gt;target=&lt;/span&gt;&lt;span class="s"&gt;"_blank"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;this&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; page), we now have a quantum physics module.  A lot of the stuff in that module, from my understanding, is unique to SymPy, which is very exciting.  (By the way, if you're interested in this, Brian Granger can tell you more about it).&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-
-&lt;span class="nt"&gt;&amp;lt;li&amp;gt;&amp;lt;strong&amp;gt;&lt;/span&gt;Various backwards incompatible changes&lt;span class="nt"&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;.  We've taken advantage of the fact that this will be a point release (0.7.0) to clean up some old cruft.
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;/p&gt;&lt;ul&gt;
-    &lt;li&gt;We've re­named the func­tions  &lt;code&gt;ab­s()&lt;/code&gt;  and  &lt;code&gt;sum()&lt;/code&gt;  to  &lt;code&gt;Ab­s()&lt;/code&gt;  and  &lt;code&gt;sum­ma­tion()&lt;/code&gt;, re­spec­tive­ly, be­cause they con­flict­ed with built-in names (although thanks to  &lt;code&gt;&lt;strong&gt;abs&lt;/strong&gt;&lt;/code&gt;  mag­ic,  &lt;code&gt;ab­s(­ex­pr)&lt;/code&gt;  will still work with the built-in  &lt;code&gt;ab­s()&lt;/code&gt;  func­tion).   &lt;/li&gt; 
- &lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;This will be the last release to support Python 2.4.  This will be a big benefit to not have to support Python 2.4 anymore after this release.  There were &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"http://docs.python.org/whatsnew/2.5.html"&lt;/span&gt; &lt;span class="na"&gt;target=&lt;/span&gt;&lt;span class="s"&gt;"_blank"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;a ton of features&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; added in Python 2.5 that we have had to either manually re-implement (like any() and all()), or have had to do without (like the with statement).    Also, this will make porting to Python 3 much easier (this is one of our GSoC projects).  &lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-
-
-
-&lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;We split the class Basic, which is the base class of all SymPy types, into Basic and a subclass Expr.  Mathematical objects like &lt;span class="nt"&gt;&amp;lt;code&amp;gt;&lt;/span&gt;cos(x)&lt;span class="nt"&gt;&amp;lt;/code&amp;gt;&lt;/span&gt; or &lt;span class="nt"&gt;&amp;lt;code&amp;gt;&lt;/span&gt;x*y*z**2&lt;span class="nt"&gt;&amp;lt;/code&amp;gt;&lt;/span&gt; are instances of Expr.  Objects that do not make sense in mathematical expressions, but still want to have some of the standard SymPy methods like .args and .subs() are Basic.  For example, a Set object is Basic, but not Expr.&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-
-
-
-&lt;span class="nt"&gt;&amp;lt;li&amp;gt;&amp;lt;strong&amp;gt;&lt;/span&gt;Lots of little bug fixes and new features&lt;span class="nt"&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;.  See the &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"https://github.com/sympy/sympy/wiki/Release-Notes-for-0.7.0"&lt;/span&gt; &lt;span class="na"&gt;target=&lt;/span&gt;&lt;span class="s"&gt;"_blank"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;release notes&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;.&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/ul&gt;
-
-&lt;p&gt;Once we have the re­lease out, I plan to go back to work on the Risch Al­go­rith­m.  I am very close to fin­ish­ing the ex­po­nen­tial case, which means that once I do, any tran­scen­den­tal el­e­men­tary func­tion built up of on­ly ex­po­nen­tial ex­ten­sions could be in­te­grat­ed or proven not to have an el­e­men­tary in­te­gral by my al­go­rith­m.  I al­so want to start get­ting the code ready to merge with the main code base, so that it can go in the next re­lease (0.7.1).   &lt;/p&gt; 
- &lt;p&gt;Fi­nal­ly, I want to an­nounce that I have been se­lect­ed for a  &lt;a href="http://conference.scipy.org/scipy2011/student.php" target="_blank"&gt;stu­dent spon­sor­ship&lt;/a&gt;  to the SciPy 2011 con­fer­ence in Austin, TX in the week of Ju­ly 11. Ma­teusz and I will be pre­sent­ing a tu­to­ri­al on SymPy.  This will be the first time I have ev­er at­tend­ed a con­fer­ence, and I am very ex­cit­ed.   &lt;/p&gt;&lt;/ul&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2011/05/26/update-for-the-beginning-of-the-summer/</guid><pubDate>Thu, 26 May 2011 10:41:50 GMT</pubDate></item><item><title>Major API Change for the Risch Algorithm Functions</title><link>http://asmeurer.github.io/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I have been able to get to work again on the Risch Al­go­rithm now that I have a month win­ter break from class­es.  So the first thing I did was com­mit a bunch of bug fix­es that had been sit­ting there since the end of the sum­mer.  Then, I set out to make a ma­jor in­ter­nal API change to the en­tire Risch Al­go­rith­m.&lt;/p&gt; 
- &lt;p&gt;Let me give some back­ground.  When I first start­ed pro­gram­ming the Risch Al­go­rithm at the be­gin­ning of the sum­mer, I did­n't have a very good idea of how dif­fer­en­tial ex­ten­sions worked yet (re­mem­ber that I pro­grammed the al­go­rithm as I learned it from Bron­stein's book).  Let me use the func­tion  &lt;code&gt;deriva­tion()&lt;/code&gt;  to demon­strate how the API has changed.   &lt;code&gt;deriva­tion()&lt;/code&gt;  takes the Poly  &lt;code&gt;p&lt;/code&gt;  in  &lt;code&gt;t&lt;/code&gt;  and com­putes the de­riv­a­tive (&lt;code&gt;t&lt;/code&gt;  is some tran­scen­den­tal ex­ten­sion, like $la­tex e^x$).  Al­so, the in­te­gra­tion vari­able is  &lt;code&gt;x&lt;/code&gt;.  The first in­ter­nal API that I used was&lt;/p&gt; 
- &lt;p&gt;&lt;code&gt;deriva­tion(p, D, x, t)&lt;/code&gt;&lt;/p&gt; 
- &lt;p&gt;where  &lt;code&gt;D&lt;/code&gt;  is a Poly of the de­riv­a­tive of  &lt;code&gt;t&lt;/code&gt;, and  &lt;code&gt;x&lt;/code&gt;  and  &lt;code&gt;t&lt;/code&gt;  are Sym­bols (see  &lt;a href="https://github.com/asmeurer/sympy/commit/0f6a3d90f724118fadc5fdaf290a0cb3e3963efd"&gt;this com­mit&lt;/a&gt;).   The prob­lem here is that  &lt;code&gt;p&lt;/code&gt;  might not be in just one sym­bol,  &lt;code&gt;t&lt;/code&gt;, but in many. This would hap­pen when­ev­er the func­tion had more than one tran­scen­den­tal func­tion, or ex­ten­sion, in it.  So, for ex­am­ple, $la­tex e^x\log{x}$ would have this prob­lem. Sur­pris­ing­ly, ac­cord­ing to the git log, it took me un­til Ju­ly 4 to fig­ure this out (that above linked com­mit, which is the first oc­cur­rence of this func­tion and when I start­ed the full al­go­rith­m, dates from June 7, so it took me al­most a mon­th!), af­ter which I had al­ready writ­ten a good por­tion of the Risch Al­go­rith­m.  I changed the API to&lt;/p&gt; 
- &lt;p&gt;&lt;code&gt;deriva­tion(p, D, x, T)&lt;/code&gt;&lt;/p&gt; 
- &lt;p&gt;where  &lt;code&gt;T&lt;/code&gt;  is a list of the ex­ten­sion vari­ables and  &lt;code&gt;D&lt;/code&gt;  is a list of the deriva­tions of the re­spec­tive el­e­ments of  &lt;code&gt;T&lt;/code&gt;  with re­spect to the low­er el­e­ments and x (see  &lt;a href="https://github.com/asmeurer/sympy/commit/20b7a5f8ca8dec579065f85583f11cc0955b96f0"&gt;this com­mit&lt;/a&gt;).  Now, the deriva­tion of  &lt;code&gt;x&lt;/code&gt;  is al­ways  &lt;code&gt;Poly(1, x)&lt;/code&gt;, so I did­n't think it was nec­es­sary to in­clude it.  But it turns out that it is eas­i­er to just al­ways in­clude this in  &lt;code&gt;D&lt;/code&gt;  rather than try to spe­cial case it in the code.  Al­so, the low­est ex­ten­sion vari­able,  &lt;code&gt;x&lt;/code&gt;, is­n't used very of­ten in the code, so it al­so does­n't make much sense to keep it sep­a­rate from the rest of the vari­ables in  &lt;code&gt;T&lt;/code&gt;.  Now this did­n't take me as long to fig­ure out (Ju­ly 11).  There­fore, I changed the API to just&lt;/p&gt; 
- &lt;p&gt;&lt;code&gt;deriva­tion(p, D, T)&lt;/code&gt;&lt;/p&gt; 
- &lt;p&gt;where the first el­e­ment of  &lt;code&gt;T&lt;/code&gt;  is al­ways  &lt;code&gt;x&lt;/code&gt;  and the first el­e­ment of  &lt;code&gt;D&lt;/code&gt;  is al­ways  &lt;code&gt;Poly(1, x)&lt;/code&gt;  (see  &lt;a href="https://github.com/asmeurer/sympy/commit/bca2b19844ae71aa1ef8e27a9f77eabb70b4aa5f"&gt;this com­mit&lt;/a&gt;).&lt;/p&gt; 
- &lt;p&gt;Now this API worked quite well for the re­main­der of the sum­mer.  How­ev­er, at the very end, I dis­cov­ered that a func­tion re­quired to han­dle some spe­cial cas­es in cer­tain parts of the al­go­rithm need­ed four more lists (the el­e­ments of the ex­ten­sion that are log­a­rithm­s, the el­e­ments of the ex­ten­sion that are ex­po­nen­tial­s, the ar­gu­ments of those log­a­rithm­s, and the ar­gu­ments of those ex­po­nen­tial­s).  I had pre­vi­ous­ly thought that these lists would on­ly be need­ed when cre­at­ing the ex­ten­sion at the be­gin­ning of in­te­gra­tion, but it turned out that this was not the case and that they could be need­ed in sev­er­al rather deep places in the al­go­rith­m.  The on­ly way to get them there would be to pass them through to ev­ery sin­gle func­tion in the al­go­rith­m.     &lt;/p&gt; 
- &lt;p&gt;So I was faced with a dilem­ma.  I did­n't want to pass six ar­gu­ments through each func­tion just be­cause a few might need them al­l.  I knew that the an­swer was to cre­ate an ob­ject to store all the da­ta for a dif­fer­en­tial ex­ten­sion and to just pass this ob­ject around.  Un­for­tu­nate­ly, this hap­pened at the very end of the sum­mer, so I had­n't been able to do that un­til now.   &lt;/p&gt; 
- &lt;p&gt;This brings us to now.  Over the past cou­ple of week­s, I cre­at­ed an ob­ject called  &lt;code&gt;Dif­fer­en­tialEx­ten­sion&lt;/code&gt;, and re­placed the API in the Risch Al­go­rithm to use it.  See  &lt;a href="https://github.com/asmeurer/sympy/commit/d9d9548625513188aaa663621bfe4e097aebf741"&gt;this com­mit&lt;/a&gt;  and  &lt;a href="https://github.com/asmeurer/sympy/commit/1935b6d6e1fdf8eae4deb5a4f56ea53c5d6989fa"&gt;this com­mit&lt;/a&gt;  and some of the ones in be­tween to see what I did. More or less, the ob­ject is like a C struc­t---it does lit­tle more than hold a lot of in­for­ma­tion as at­tributes.  How­ev­er, at the sug­ges­tion of Ro­nan Lamy on the  &lt;a href="http://groups.google.com/group/sympy/browse_thread/thread/a051b5ba1fb5cb4d"&gt;mail­ing list&lt;/a&gt;, I have moved all the rel­e­vant code for build­ing the ex­ten­sion from the  &lt;code&gt;build_ex­ten­sion()&lt;/code&gt;  func­tion in­to  &lt;code&gt;Dif­fer­en­tialEx­ten­sion.&lt;strong&gt;init&lt;/strong&gt;()&lt;/code&gt;.  I have al­so cre­at­ed some "mag­ic" to han­dle the re­cur­sive na­ture of the al­go­rith­m.  A Dif­fer­en­tialEx­ten­sion ob­ject has an at­tribute  &lt;code&gt;lev­el&lt;/code&gt;, which rep­re­sents the lev­el of the ex­ten­sion that the al­go­rithm is work­ing in.  So you can store all the deriva­tions of the ex­ten­sion in  &lt;code&gt;Dif­fer­en­tialEx­ten­sion.D&lt;/code&gt;, but on­ly have  &lt;code&gt;Dif­fer­en­tialEx­ten­sion.d&lt;/code&gt;  point to the "cur­ren­t" out­er­most deriva­tion.  This re­places things like&lt;/p&gt; 
- &lt;p&gt;&lt;code&gt;D = D[:-1]&lt;/code&gt;&lt;/p&gt; 
- &lt;p&gt;T = T[:-1]&lt;/p&gt; 
- &lt;p&gt;   &lt;/p&gt; 
- &lt;p&gt;from the old API to just&lt;/p&gt; 
- &lt;p&gt;&lt;code&gt;DE.decre­men­t_level()&lt;/code&gt;&lt;/p&gt; 
- &lt;p&gt;&lt;/p&gt; 
- &lt;p&gt;(and then lat­er on,  &lt;code&gt;DE.in­cre­men­t_level()&lt;/code&gt;).  The en­tire API is now just&lt;/p&gt; 
- &lt;p&gt;&lt;code&gt;deriva­tion(p, DE)&lt;/code&gt;&lt;/p&gt; 
- &lt;p&gt;where  &lt;code&gt;DE&lt;/code&gt;  is a  &lt;code&gt;Dif­fer­en­tialEx­ten­sion&lt;/code&gt;  ob­jec­t.  Chang­ing the API of the en­tire code base at this point was a bit of work, but I have fi­nal­ly fin­ished it, and I must say, this is much clean­er.  True, you now have to use  &lt;code&gt;DE.t&lt;/code&gt;  ev­ery­where in­stead of  &lt;code&gt;t&lt;/code&gt;  (with  &lt;code&gt;t = T[-1]&lt;/code&gt;  at the top of the func­tion), which is three char­ac­ters more space for ev­ery use, but I think in the end it is clean­er.  For ex­am­ple, the func­tion that used to be&lt;/p&gt; 
- &lt;p&gt;&lt;code&gt;is_log_deriv_k_t_rad­i­cal(­fa, fd, L_K, E_K, L_args, E_args, D, T)&lt;/code&gt;&lt;/p&gt; 
- &lt;p&gt;is now just&lt;/p&gt; 
- &lt;p&gt;&lt;code&gt;is_log_deriv_k_t_rad­i­cal(­fa, fd, DE)&lt;/code&gt;.&lt;/p&gt; 
- &lt;p&gt;Al­so, be­cause it is an ob­jec­t, I can do cool things like over­ride  &lt;code&gt;Dif­fer­en­tialEx­ten­sion.&lt;strong&gt;str&lt;/strong&gt;()&lt;/code&gt;  to print out a tu­ple of the most im­por­tant at­tributes of the ob­jec­t, mak­ing de­bug­ging much eas­i­er (now there is just one print state­ment in­stead of five).   &lt;/p&gt; 
- &lt;p&gt;An­oth­er thing I had to do was to al­low the cre­ation of these ob­jects man­u­al­ly, be­cause what is now  &lt;code&gt;Dif­fer­en­tialEx­ten­sion.&lt;strong&gt;init&lt;/strong&gt;()&lt;/code&gt;  can­not yet han­dle, for ex­am­ple, tan­gent ex­ten­sion­s, but some of the tests in­volve those.  So I cre­at­ed an  &lt;code&gt;ex­ten­sion&lt;/code&gt;  flag to  &lt;code&gt;&lt;strong&gt;init&lt;/strong&gt;()&lt;/code&gt;  to which you could pass a dic­tio­nary, and it would cre­ate a skele­ton ex­ten­sion from that (see  &lt;a href="https://github.com/asmeurer/sympy/commit/7121b06eab3f1e0f8464c287438fb7175f07762b"&gt;this com­mit&lt;/a&gt;).  I made it smart enough to cre­ate some at­tributes au­to­mat­i­cal­ly, so I on­ly have to pass the list  &lt;code&gt;D&lt;/code&gt;  in most test­s---it cre­ates at­tributes like  &lt;code&gt;T&lt;/code&gt;  from that au­to­mat­i­cal­ly.  Thus, this in some ways made the tests a lit­tle sim­pler, be­cause I did­n't have to wor­ry about  &lt;code&gt;T&lt;/code&gt;  any more.   &lt;/p&gt; 
- &lt;p&gt;We'll see how things go, but this fourth API change should hope­ful­ly be the last.  This should al­so make it much eas­i­er when­ev­er I add trigono­met­ric func­tion sup­port, where I will have to add even more at­tributes to the ob­jec­t.  I won't have to change the code in any ex­ist­ing func­tion (un­less it specif­i­cal­ly needs to be able to know about trig ex­ten­sion­s), be­cause, to them, the in­for­ma­tion in  &lt;code&gt;DE&lt;/code&gt;  will not change.&lt;/p&gt; 
- &lt;p&gt;So the good news be­hind all of this, as I men­tioned at the be­gin­ning of this post, is that I can now write some al­go­rithm that re­quires those  &lt;code&gt;L_K&lt;/code&gt;,  &lt;code&gt;E_K&lt;/code&gt;,  &lt;code&gt;L_args&lt;/code&gt;,  &lt;code&gt;E_args&lt;/code&gt;  vari­ables from ar­bi­trary places with­in the al­go­rith­m.  This should al­low me to com­plete­ly fin­ish the ex­po­nen­tial case.  So look for­ward soon to a  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  that can han­dle com­plete­ly any tran­scen­den­tal func­tion of ex­po­nen­tials (ei­ther pro­duce an in­te­gral or prove that no el­e­men­tary in­te­gral ex­ist­s).   &lt;/p&gt; 
- &lt;p&gt;And just to be clear, this does­n't change any­thing with  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;---this is on­ly an in­ter­nal change. And at the mo­men­t, it does­n't add any fea­tures, though that should soon change. So keep on test­ing it for me!  If you see any er­rors along the lines of "Vari­able t not de­fined," it prob­a­bly means that I missed that one when I was switch­ing the API due to poor test cov­er­age in that area of the code.  I would love to know about any er­rors you find, or, in­deed, any test­ing you do with  &lt;code&gt;risch_in­te­grate&lt;/code&gt;.  Re­mem­ber that you can ob­tain my branch at  &lt;a href="https://github.com/asmeurer/sympy/tree/integration3"&gt;my GitHub ac­count (branch in­te­gra­tion3)&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2010/12/27/major-api-change-for-the-risch-algorithm-functions/</guid><pubDate>Mon, 27 Dec 2010 13:34:30 GMT</pubDate></item><item><title>The Risch Algorithm: Part 3, Liouville's Theorem</title><link>http://asmeurer.github.io/posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;So this is the last of­fi­cial week of the Sum­mer of Code pro­gram, and my work is most­ly con­sist­ing of re­mov­ing  &lt;code&gt;NotIm­ple­ment­ed­Er­ror&lt;/code&gt;s (i.e., im­ple­ment­ing stuff), and fix­ing bugs. None of this is par­tic­u­lar­ly in­ter­est­ing, so in­stead of talk­ing about that, I fig­ured I would pro­duce an­oth­er one of my Risch Al­go­rithm blog post­s.  It is rec­om­mend­ed that you read parts  &lt;a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/"&gt;1&lt;/a&gt;  and  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/"&gt;2&lt;/a&gt;  first, as well as my post on  &lt;a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/"&gt;ra­tio­nal func­tion in­te­gra­tion&lt;/a&gt;, which could be con­sid­ered part 0.&lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;Li­ou­ville's The­o­rem&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;Any­one who's tak­en cal­cu­lus in­tu­itive­ly knows that in­te­gra­tion is hard, while dif­fer­en­ti­a­tion is easy.  For dif­fer­en­ti­a­tion, we can pro­duce the de­riv­a­tive of any el­e­men­tary func­tion, and we can do so eas­i­ly, us­ing a sim­ple al­go­rithm con­sist­ing of the sum and prod­uct rules, the chain rule, and the rules for the de­riv­a­tive of all the var­i­ous el­e­men­tary func­tion­s.  But for in­te­gra­tion, we have to try to work back­ward­s.   &lt;/p&gt; 
- &lt;p&gt;There are two things that make in­te­gra­tion dif­fi­cult.  First is the ex­is­tence of func­tions that sim­ply do not have any el­e­men­tary anti­deriv­a­tive.  $la­tex e^{-x^2}$ is per­haps the most fa­mous ex­am­ple of such a func­tion, since it aris­es from the nor­mal dis­tri­bu­tion in sta­tis­tics.  But there are many oth­er­s.  $la­tex \s­in{(x^2)}$, $la­tex \frac{1}{\log{(x)}}$, and $la­tex x^x$ are some oth­er ex­am­ples of fa­mous non-in­te­grable func­tion­s.   &lt;/p&gt; 
- &lt;p&gt;The sec­ond prob­lem is that no one sin­gle sim­ple rule for work­ing back­wards will al­ways be ap­pli­ca­ble.  We know that u-­sub­sti­tu­tion and in­te­gra­tion by parts are the re­verse of the chain rule and the prod­uct rule, re­spec­tive­ly.  But those meth­ods will on­ly work if those rules were the ones that were ap­plied orig­i­nal­ly, and then on­ly if you chose the right $la­tex u$ and $la­tex dv$.   &lt;/p&gt; 
- &lt;p&gt;But there is a much sim­pler ex­am­ple that gets right down to the point with Li­ou­ville's the­o­rem.  The pow­er rule, which is that $la­tex \frac{d}{dx}x^n=nx^{n-1}$ is eas­i­ly re­versed for in­te­gra­tion.  Giv­en the pow­er rule for dif­fer­en­ti­a­tion, it's easy to see that the re­verse rule should be $la­tex \in­t{x^ndx}=\frac{x^{n+1}}{n+1}$.  This works fine, ex­cept that were are di­vid­ing some­thing, $la­tex n+1$.  In math­e­mat­ic­s, when­ev­er we do that, we have to en­sure that what­ev­er we di­vide by is not 0. In this case, it means that we must as­sert $la­tex n\neq -1$.  This ex­cludes $la­tex \in­t{\frac{1}{x}dx}$.  We know from cal­cu­lus that this in­te­gral re­quires us to in­tro­duce a spe­cial func­tion, the nat­u­ral log­a­rith­m.   &lt;/p&gt; 
- &lt;p&gt;But we see that $la­tex n=-1$ is the on­ly ex­cep­tion to the pow­er rule, so that the in­te­gral of any (&lt;a href="http://en.wikipedia.org/wiki/Laurent_polynomial"&gt;Lau­rent&lt;/a&gt;) poly­no­mi­al is again a (Lau­ren­t) poly­no­mi­al, plus a log­a­rith­m.  Re­call from part 0 (&lt;a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/"&gt;Ra­tio­nal Func­tion In­te­gra­tion&lt;/a&gt;) that the same thing is true for any ra­tio­nal func­tion: the in­te­gral is again a ra­tio­nal func­tion, plus a log­a­rithm (we can com­bine mul­ti­ple log­a­rithms in­to one us­ing the log­a­rith­mic iden­ti­ties, so as­sume for sim­plic­i­ty that there is just one).  The ar­gu­ment is very sim­i­lar, too.  As­sume that we have split the de­nom­i­na­tor ra­tio­nal func­tion in­to lin­ear fac­tors in the  &lt;a href="http://en.wikipedia.org/wiki/Algebraic_splitting_field"&gt;al­ge­bra­ic split­ting field&lt;/a&gt;  (such as the com­plex num­ber­s).  Then per­form a par­tial frac­tions de­com­po­si­tion on the ra­tio­nal func­tion.  Each term in the de­com­po­si­tion will be ei­ther a poly­no­mi­al, or of the form $la­tex \frac{a}{(x - b)^n}$. The in­te­gra­tion of these terms is the same as with the pow­er rule, mak­ing the sub­sti­tu­tion $la­tex u = x - b$. When $la­tex n\geq 2$, the in­te­gral will be $la­tex \frac{-1}{n - 1}\frac{a}{(x - b)^{n - 1}}$; when $la­tex n = 1$, the in­te­gral will be $la­tex a\log{(x - b)}$.  Now com­pu­ta­tion­al­ly, we don't want to work with the al­ge­bra­ic split­ting field, but it turns out that we don't need to ac­tu­al­ly com­pute it to find the in­te­gral.  But the­o­ry is what we are deal­ing with here, so don't wor­ry about that.   &lt;/p&gt; 
- &lt;p&gt;Now the key ob­ser­va­tion about dif­fer­en­ti­a­tion, as I have point­ed out in the ear­li­er parts of this blog post se­ries,  is that the de­riv­a­tive of an el­e­men­tary func­tion can be ex­pressed in terms of it­self, in par­tic­u­lar, as a poly­no­mi­al in it­self.  To put it an­oth­er way, func­tions like $la­tex e^x$, $la­tex \tan{(x)}$, and $la­tex \log{(x)}$ all sat­is­fy lin­ear dif­fer­en­tial equa­tions with ra­tio­nal co­ef­fi­cients (e.g., for the­se, $la­tex y'=y$, $la­tex y'=1 + y^2$, and $la­tex y'=\frac{1}{x}$).   &lt;/p&gt; 
- &lt;p&gt;Now, the the­o­ry gets more com­pli­cat­ed, but it turns out that, us­ing a care­ful anal­y­sis of this fac­t, we can prove a sim­i­lar re­sult to the one about ra­tio­nal func­tions to any el­e­men­tary func­tion. In a nut­shel­l, Li­ou­ville's The­o­rem says this:  if an el­e­men­tary func­tion has an el­e­men­tary in­te­gral, then that in­te­gral is a com­posed on­ly of func­tions from the orig­i­nal in­te­grand, plus a fi­nite num­ber of log­a­rithms of func­tions from the in­te­grand, which can be con­sid­ered one log­a­rith­m, as men­tioned above ("­func­tions from" more specif­i­cal­ly means a ra­tio­nal func­tion in the terms from our el­e­men­tary ex­ten­sion).  Here is the for­mal state­ment of the the­o­rem.&lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;The­o­rem (Liou­ville's The­o­rem - Strong ver­sion)&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;&lt;em&gt;Let $la­tex K$ be a dif­fer­en­tial field, $la­tex C=\­math­rm{­Con­st}(K)$, and $la­tex f\in K$. If there ex­ist an el­e­men­tary ex­ten­sion $la­tex E$ of $la­tex K$ and $la­tex g \in E$ such that $la­tex Dg =f$, then there are $la­tex v \in K$, $la­tex c_1, \dot­s, c_n\in \bar{C}$, and $la­tex u_1, \dot­s,u_n\in K(c_1,\­dot­s,c_n)^*$ such that  &lt;/em&gt;&lt;/p&gt; 
- &lt;h2&gt;
-
-$latex f = Dv + \sum_{i=1}^n c_i\frac{Du_i}{u_i}$.
-
-&lt;/h2&gt;
-
-&lt;p&gt;&lt;/p&gt; 
- &lt;p&gt;Look­ing close­ly at the for­mal state­ment of the the­o­rem, we can see that it says the same thing as my "in a nut­shel­l" state­men­t.  $la­tex K$ is the dif­fer­en­tial ex­ten­sion, say of $la­tex \math­b­b{Q}(x)$, that con­tains all of our el­e­men­tary func­tions (see  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/"&gt;part 2&lt;/a&gt;).  $la­tex E$ is an ex­ten­sion of $la­tex K$.  The whole state­ment of the the­o­rem is that $la­tex E$ need not be ex­tend­ed from $la­tex K$ by any­thing more than some log­a­rithm­s.   $la­tex f$ is our orig­i­nal func­tion and $la­tex g=\int f$.  Re­call from  &lt;a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/"&gt;part 1&lt;/a&gt;  that $la­tex Dg = \frac{­Du}{u}$ is just an­oth­er way of say­ing that $la­tex g = \log{(u)}$.  The rest of the for­mal state­ment is some specifics deal­ing with the con­stant field, which as­sure us that we do not need to in­tro­duce any new con­stants in the in­te­gra­tion. This fact is ac­tu­al­ly im­por­tant to the de­cid­abil­i­ty of the Risch Al­go­rith­m, be­cause many prob­lems about con­stants are ei­ther un­known or un­de­cid­able (such as the tran­scen­dence de­gree of $la­tex \math­b­b{Q}(e, \pi)$).  But this en­sures us that as long as we start with a con­stant field that is com­putable, our con­stant field for our anti­deriv­a­tive will al­so be com­putable, and will in fact be the same field, ex­cept for some pos­si­ble al­ge­bra­ic ex­ten­sions (the $la­tex c_i$).   &lt;/p&gt; 
- &lt;p&gt;At this point, I want to point out that even though my work this sum­mer has been on­ly on the pure­ly tran­scen­den­tal case of the Risch Al­go­rith­m, Li­ou­ville's The­o­rem is true for all el­e­men­tary func­tion­s, which in­cludes al­ge­bra­ic func­tion­s.  How­ev­er, if you re­view the proof of the the­o­rem, the proof of the al­ge­bra­ic part is com­plete­ly dif­fer­ent from the proof of the tran­scen­den­tal part, which is the first clue that the al­ge­bra­ic part of the al­go­rithm is com­plete­ly dif­fer­ent from the tran­scen­den­tal part (and al­so a clue that it is hard­er).&lt;/p&gt; 
- &lt;p&gt;Li­ou­ville's The­o­rem is what al­lows us to prove that a giv­en func­tion does not have an el­e­men­tary an­tideriva­tive, by giv­ing us the form that any anti­deriv­a­tive must have.  We first per­form the same Her­mite Re­duc­tion from the  &lt;a href="http://asmeurersympy.wordpress.com/2010/06/11/integration-of-rational-functions/"&gt;ra­tio­nal in­te­gra­tion case&lt;/a&gt;. Then, a gen­er­al­iza­tion of the same Lazard-Ri­o­boo-­Trager Al­go­rithm due to Roth­stein al­lows us to find the log­a­rith­mic part of any in­te­gral (the $la­tex \sum_{i=1}^n c_i\frac{­Du_i}{u_i}$ from Li­ou­ville's The­o­rem).   &lt;/p&gt; 
- &lt;p&gt;Now a dif­fer­ence here is that some­times, the part of the in­te­grand that cor­re­sponds to the $la­tex \frac{a}{x - b}$ for gen­er­al func­tions does­n't al­ways have an el­e­men­tary in­te­gral (these are called  &lt;em&gt;sim­ple&lt;/em&gt;  func­tion­s.  I think I will talk about them in more de­tail in a fu­ture post in this se­ries).   An ex­am­ple of this is $la­tex \frac{1}{\log{(x)}}$.  Suf­fice it to say that any el­e­men­tary in­te­gral of $la­tex \frac{1}{\log{(x)}}$ must be part of some log-ex­ten­sion of $la­tex \math­b­b{Q}(x, \log{(x)})$, and that we can prove that no such log­a­rith­mic ex­ten­sion ex­ists in the course of try­ing to com­pute it with the Lazard-Ri­o­boo-Roth­stein-­Trager Al­go­rith­m.&lt;/p&gt; 
- &lt;p&gt;In the ra­tio­nal func­tion case, af­ter we found the ra­tio­nal part and the log­a­rith­mic part, we were prac­ti­cal­ly done, be­cause the on­ly re­main­ing part was a poly­no­mi­al.  Well, for the gen­er­al tran­scen­den­tal func­tion case, we are left with an ana­logue, which are called  &lt;em&gt;re­duced&lt;/em&gt;  func­tion­s, and we are far from done.  This is the hard­est part of the in­te­gra­tion al­go­rith­m.  This will al­so be the top­ic of a fu­ture post in this se­ries.  Suf­fice it to say that this is where most of the proofs of non-in­te­gra­bil­i­ty come from, in­clud­ing the oth­er in­te­grals than $la­tex \frac{1}{\log{(x)}}$ that I gave above.   &lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;Con­clu­sion&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;That's it for now.  Orig­i­nal­ly, I was al­so go­ing to in­clude a bit on the struc­ture the­o­rems too, but I think I am go­ing to save that for part 4 in­stead.  I may or may not have an­oth­er post ready be­fore the of­fi­cial end of cod­ing date for Google Sum­mer of Code, which is Mon­day (three days from now).  I want to make a post with some nice graphs com­par­ing the tim­ings of the new  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  and the old  &lt;code&gt;heurisch()&lt;/code&gt;  (what is cur­rent­ly be­hind SymPy's  &lt;code&gt;in­te­grate()&lt;/code&gt;).  But as I have said be­fore, I plan on con­tin­u­ing cod­ing the in­te­gra­tion al­go­rithm be­yond the pro­gram un­til I fin­ish it, and even be­yond that (there are lots of cool ways that the al­go­rithm can be ex­tend­ed to work with spe­cial func­tion­s, there's def­i­nite in­te­gra­tion with Mei­jer-G func­tion­s, and there's of course the al­ge­bra­ic part of the al­go­rith­m, which is a much larg­er chal­lenge).  And along with it, I plan to con­tin­ue keep­ing you up­dat­ed with blog post­s, in­clud­ing at least all the Risch Al­go­rithm se­ries posts that I have promised (I have count­ed at least three top­ics that I have ex­plic­it­ly promised but haven't done yet).  And of course, there will be the manda­to­ry GSoC wrap-up blog post, de­tail­ing my work for the sum­mer.   &lt;/p&gt; 
- &lt;p&gt;Please con­tin­ue to test my pro­to­type  &lt;a href="http://asmeurersympy.wordpress.com/2010/08/05/prototype-risch_integrate-function-ready-for-testing/"&gt;&lt;code&gt;risch_in­te­grate()&lt;/code&gt;&lt;/a&gt;  func­tion in my  &lt;a href="http://github.com/asmeurer/sympy/tree/integration3"&gt;in­te­gra­tion3&lt;/a&gt;  branch, and tell me what you think (or if you find a bug).&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2010/08/14/the-risch-algorithm-part-3-liouvilles-theorem/</guid><pubDate>Sat, 14 Aug 2010 07:55:23 GMT</pubDate></item><item><title>Prototype risch_integrate() function ready for testing!</title><link>http://asmeurer.github.io/posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;So to­day I fi­nal­ly fin­ished up the pro­to­type func­tion I talked about  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/"&gt;last week&lt;/a&gt;.  The func­tion is called  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  and is avail­able at my  &lt;a href="http://github.com/asmeurer/sympy/tree/integration3"&gt;in­te­gra­tion3&lt;/a&gt;  branch.  Un­like the in­ner lev­el func­tions I have show­cased in  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/"&gt;pre­vi­ous&lt;/a&gt;   &lt;a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/"&gt;blog posts&lt;/a&gt;, this func­tion does not re­quire you to do sub­sti­tu­tion for dum­my vari­ables and man­u­al­ly cre­ate a list of deriva­tives, etc.  All you have to do is pass it a func­tion and the in­te­gra­tion vari­able, and it will re­turn the re­sult, just like nor­mal  &lt;code&gt;in­te­grate()&lt;/code&gt;. I have spent the past few days work­ing on a mon­ster of a func­tion called  &lt;code&gt;build_ex­ten­sion()&lt;/code&gt;  that does this prepars­ing work for you.  The rea­son that the func­tion was so hard to write is that the tran­scen­den­tal Risch Al­go­rithm is very pick­y.   &lt;em&gt;Ev­ery&lt;/em&gt;  dif­fer­en­tial ex­ten­sion has to be tran­scen­den­tal over the pre­vi­ous ex­ten­sion­s.  This means that if you have a func­tion like $la­tex e^x + e^{\frac{x}{2}}$, you can­not write this as $la­tex t_0 + t_1$ with $la­tex t_0=e^x$ and $la­tex t_1=e^{\frac{x}{2}}$ be­cause $la­tex t_0$ and $la­tex t_1$ will each be al­ge­bra­ic over the oth­er ($la­tex t_0=t_1^2$).  You al­so can­not let $la­tex t_0=e^{x}$ and re­write the whole in­te­gral in terms of $la­tex t_0$ be­cause you will get $la­tex t_0 + \sqrt{t_0}$, which is an al­ge­bra­ic func­tion.  The on­ly way that you can do it is to let $la­tex t_0=e^{\frac{x}{2}}$, and then your func­tion will be $la­tex t_0^2 + t_0$.   &lt;/p&gt; 
- &lt;p&gt;Now, for­tu­nate­ly, there is an al­go­rithm that pro­vides nec­es­sary and suf­fi­cient con­di­tions for de­ter­min­ing if an ex­ten­sion is al­ge­bra­ic over the pre­vi­ous ones.  It's called the Risch Struc­ture The­o­rem­s.  My first or­der of busi­ness this week was to fin­ish im­ple­ment­ing these.  This is ac­tu­al­ly the rea­son that I we had to wait un­til now to get this pro­to­type func­tion.  The Struc­ture The­o­rems are at the very end of Bron­stein's book, and the in­te­gra­tion al­go­rithm is not cor­rect with­out them (name­ly, it is not cor­rect if you add an al­ge­bra­ic ex­ten­sion).  I just re­cent­ly got to them in my read­ing.  Ac­tu­al­ly, I skipped some work on tan­gent in­te­gra­tion so I could get to them first.  I hope to talk a lit­tle about them in a fu­ture "Risch In­te­gra­tion" blog post, though be aware that they re­quire some ex­treme­ly in­tense al­ge­bra­ic ma­chin­ery to prove, so I won't be giv­ing any proof­s.&lt;/p&gt; 
- &lt;p&gt;Even though these al­go­rithms can tell me, for ex­am­ple, that I should­n't have added $la­tex t_0=e^x$ above be­cause it makes $la­tex e^{\frac{x}{2}}=\sqrt{t_0}$, that means that I have to go back and restart my search for an ex­ten­sion so that I can try to get $la­tex t_0=e^{\frac{x}{2}}$ in­stead.  So I wrote a sim­ple func­tion that takes the ar­gu­ments of the ex­po­nen­tials and de­ter­mines the low­est com­mon fac­tor.  This heuris­tic saves a lot of time.   &lt;/p&gt; 
- &lt;p&gt;I al­so no­ticed (ac­tu­al­ly, Chris Smith in­ad­ver­tent­ly point­ed it out to me; su­per thanks to him), that the Struc­ture The­o­rem al­go­rithms on­ly tell you if the terms are the same as mono­mi­al­s.  It would tell you that $la­tex e^x = e^{x + 1}$ be­cause both sat­is­fy $la­tex Dt=t$.  There­fore, I had to al­so mod­i­fy the struc­ture the­o­rem al­go­rithms to pull out any con­stant ter­m.   &lt;/p&gt; 
- &lt;p&gt;It can still be nec­es­sary to restart build­ing the ex­ten­sion even with the above heuris­tic.  For ex­am­ple, if you have $la­tex e^x + e^{x^2} + e^{\frac{x}{2} + x^2}$, and start with $la­tex t_0=e^x$ and $la­tex t_1=e^{x^2}$, then the struc­ture the­o­rems will tell you that $la­tex e^{x/2 + x^2} = \sqrt{t_0}t_1$, which we can­not use be­cause of the rad­i­cal.  The so­lu­tion it us­es is to split it up as $la­tex e^x + e^{x^2} + e^{\frac{x}{2}}e^{x^2}$ (the struc­ture the­o­rems tell you ex­act­ly how to do this so you are split­ting in terms of the oth­er ex­po­nen­tial­s) and then restart the ex­ten­sion build­ing en­tire­ly.  This can be an ex­pen­sive op­er­a­tion, be­cause you have to re­build $la­tex t_0$ and $la­tex t_1$, but this time, the heuris­tic func­tion I wrote from above han­dles the $la­tex e^{\frac{x}{2}}$ cor­rect­ly, mak­ing $la­tex t_0=e^{\frac{x}{2}}$, with the fi­nal an­swer $la­tex t_0^2 + t_1 + t_0t_1$.  I could have prob­a­bly made it smarter by on­ly go­ing back to be­fore the con­flict­ing ex­ten­sion­s, but this was quite a bit more work, and adds more dif­fi­cul­ties such as non-triv­ial re­la­tion­ship­s, so I just took the lazy way and restart­ed com­plete­ly.  It does­n't take  &lt;em&gt;that&lt;/em&gt;  much time.   &lt;/p&gt; 
- &lt;p&gt;Of course, some­times, you can­not add a new ex­po­nen­tial, no mat­ter how you add the ex­ten­sion­s.  The clas­sic ex­am­ple is $la­tex e^{\frac{\log{(x)}}{2}}$, which you can see is ac­tu­al­ly equal to $la­tex \sqrt{x}$, an al­ge­bra­ic func­tion.  There­fore, I had to im­ple­ment some tricky log­ic to keep the  &lt;code&gt;build_ex­ten­sion()&lt;/code&gt;  func­tion from try­ing again in­fin­ite­ly.  I hope I did it right, so that it nev­er in­fi­nite loop­s, and nev­er fails when it re­al­ly can be done.  On­ly time and test­ing will tel­l.&lt;/p&gt; 
- &lt;p&gt;It is ex­act­ly the same for log­a­rithm­s, ex­cept in that case, when a new log­a­rithm is al­ge­bra­ic in terms of old ones, it can be writ­ten as a lin­ear com­bi­na­tion of them.  This means that there are nev­er any rad­i­cals to wor­ry about, though you do al­so have to wor­ry about con­stants.  For ex­am­ple, $la­tex \log{(x)}$ looks the same as $la­tex \log{(2x)}$ be­cause they both sat­is­fy $la­tex Dt=\frac{1}{x}$.  An ex­am­ple of a log­a­rithm that is al­ge­bra­ic over old ones is $la­tex \log{(x^2 - 1)}$ over $la­tex \log{(x + 1)}$ and $la­tex \log{(x - 1)}$, be­cause $la­tex \log{(x^2 - 1)}=\log{((x + 1)(x - 1))}=\log{(x + 1)} + \log{(x - 1)}$.   &lt;/p&gt; 
- &lt;p&gt;The par­al­lels be­tween ex­po­nen­tials and log­a­rithms are amaz­ing.  For the struc­ture the­o­rem­s, the ex­po­nen­tial case is ex­act­ly the same as the log­a­rith­mic case ex­cept re­plac­ing ad­di­tion with mul­ti­pli­ca­tion and mul­ti­pli­ca­tion with ex­po­nen­ti­a­tion.  For the ex­po­nen­tial case, you need the ar­gu­ments of the al­ready added log­a­rithms to find the al­ge­bra­ic de­pen­dence, and the ar­gu­ments of the al­ready added ex­po­nen­tials to find the con­stant ter­m.  For the log­a­rith­mic case, you need the ar­gu­ments of the al­ready added ex­po­nen­tials to find the al­ge­bra­ic de­pen­dence, and the ar­gu­ments of the al­ready added log­a­rithms to find the con­tent ter­m. Ev­ery­thing else is ex­act­ly the same, ex­cept for the shift in op­er­a­tors.  Of course, I re­al­ize why these things are, math­e­mat­i­cal­ly, but the sym­me­try still amaz­ing to me.  I will hope­ful­ly ex­plain in more de­tail in my fu­ture Struc­ture The­o­rems post.   &lt;/p&gt; 
- &lt;p&gt;So on­to the  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;  func­tion.  Here is the text that I have ba­si­cal­ly put in my  &lt;a href="http://github.com/asmeurer/sympy/commit/e3cd5f18f86fd6377836f33f726182c8bd4dc1a0"&gt;com­mit mes­sage&lt;/a&gt;, the  &lt;a href="http://code.google.com/p/sympy/issues/detail?q=2010"&gt;apt­ly num­bered is­sue&lt;/a&gt;  that I have cre­at­ed for it, and the  &lt;a href="http://groups.google.com/group/sympy/browse_thread/thread/2464fa764f6f47aa"&gt;post to the mail­ing list&lt;/a&gt;  (it's not so much that I am lazy as that I was re­al­ly ex­cit­ed to get this out there).&lt;/p&gt; 
- &lt;p&gt;&lt;/p&gt;&lt;blockquote&gt;
-&lt;p&gt;I have ready in my in­te­gra­tion3 branch a pro­to­type risch_in­te­grate() func­tion that is a user-lev­el func­tion for the full Risch Al­go­rithm I have been im­ple­ment­ing this sum­mer.  Pull from h&lt;a href="//github.com/asmeurer/sympy/tree/integration3"&gt;ttp://github.­com/as­meur­er/sympy/tree/in­te­gra­tion3&lt;/a&gt;.&lt;/p&gt; 
- &lt;p&gt;This is NOT ready to go in.  It is a pro­to­type func­tion that I am mak­ing avail­able so peo­ple can try out the new al­go­rithm and hope­ful­ly help me to find the bugs in it.  Please pass it your fa­vorite non-ele­men­tary in­te­grals and see if it can de­ter­mine that they are not el­e­men­tary.  If you try to pass it a very crazy func­tion at ran­dom, the chances are pret­ty high that it will not be el­e­men­tary.  So a bet­ter way to test it is to come up with a crazy func­tion, then dif­fer­en­ti­ate it. Then pass the de­riv­a­tive and see if it can give you your orig­i­nal func­tion back.  Note that it will prob­a­bly not look ex­act­ly the same as your orig­i­nal func­tion, and may dif­fer by a con­stan­t.  You should ver­i­fy by dif­fer­en­ti­at­ing the re­sult you get and call­ing can­cel() (or sim­pli­fy(), but usu­al­ly can­cel() is enough) on the dif­fer­ence.&lt;/p&gt; 
- &lt;p&gt;So you can re­view the code too, if you like, but just know that things are not sta­ble yet, and this is­n't strict­ly a branch for re­view.   &lt;/p&gt; 
- &lt;p&gt;So far, this func­tion on­ly sup­ports ex­po­nen­tials and log­a­rithm­s.&lt;/p&gt; 
- &lt;p&gt;Sup­port for trigono­met­ric func­tions is planned.  Al­ge­bra­ic func­tions are&lt;/p&gt; 
- &lt;p&gt;not sup­port­ed. If the func­tion re­turns an un­eval­u­at­ed In­te­gral, it means&lt;/p&gt; 
- &lt;p&gt;that it has proven the in­te­gral to be non-ele­men­tary.  Note that sev­er­al&lt;/p&gt; 
- &lt;p&gt;cas­es are still not im­ple­ment­ed, so you may get NotIm­ple­ment­ed­Er­ror&lt;/p&gt; 
- &lt;p&gt;in­stead. Even­tu­al­ly, these will all be elim­i­nat­ed, and the on­ly&lt;/p&gt; 
- &lt;p&gt;NotIm­ple­ment­ed­Er­ror you should see from this func­tion is&lt;/p&gt; 
- &lt;p&gt;NotIm­ple­ment­ed­Er­ror("Al­ge­bra­ic ex­ten­sions are not sup­port­ed.")&lt;/p&gt; 
- &lt;p&gt;This func­tion has not been in­te­grat­ed in any way with the al­ready&lt;/p&gt; 
- &lt;p&gt;ex­ist­ing in­te­grate() yet, and you can use it to com­pare.&lt;/p&gt; 
- &lt;p&gt;Ex­am­ples:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: risch_in­te­grate(­ex­p(x**2), x)&lt;/p&gt; 
- &lt;p&gt;Out­[1]:&lt;/p&gt; 
- &lt;p&gt;⌠&lt;/p&gt; 
- &lt;p&gt;⎮  ⎛ 2⎞&lt;/p&gt; 
- &lt;p&gt;⎮  ⎝x ⎠&lt;/p&gt; 
- &lt;p&gt;⎮ ℯ     dx&lt;/p&gt; 
- &lt;p&gt;⌡&lt;/p&gt; 
- &lt;p&gt;In [2]: risch_in­te­grate(x*&lt;em&gt;100&lt;/em&gt;ex­p(x), x).d­if­f(x)&lt;/p&gt; 
- &lt;p&gt;Out­[2]:
- 100  x
-x   ⋅ℯ&lt;/p&gt; 
- &lt;p&gt;In [3]: %timeit risch_in­te­grate(x*&lt;em&gt;100&lt;/em&gt;ex­p(x), x).d­if­f(x)&lt;/p&gt; 
- &lt;p&gt;1 loop­s, best of 3: 270 ms per loop&lt;/p&gt; 
- &lt;p&gt;In [4]: in­te­grate(x*&lt;em&gt;100&lt;/em&gt;ex­p(x), x)&lt;/p&gt; 
- &lt;p&gt;... hangs ...&lt;/p&gt; 
- &lt;p&gt;In [5]: risch_in­te­grate(x/log(x), x)&lt;/p&gt; 
- &lt;p&gt;Out­[5]:&lt;/p&gt; 
- &lt;p&gt;⌠&lt;/p&gt; 
- &lt;p&gt;⎮   x&lt;/p&gt; 
- &lt;p&gt;⎮ ────── dx&lt;/p&gt; 
- &lt;p&gt;⎮ log(x)&lt;/p&gt; 
- &lt;p&gt;⌡&lt;/p&gt; 
- &lt;p&gt;In [6]: risch_in­te­grate(log(x)**10, x).d­if­f(x)&lt;/p&gt; 
- &lt;p&gt;Out­[6]:
-   10
-log  (x)&lt;/p&gt; 
- &lt;p&gt;In [7]: in­te­grate(log(x)**10, x).d­if­f(x)&lt;/p&gt; 
- &lt;p&gt;Out­[7]:
-   10
-log  (x)&lt;/p&gt; 
- &lt;p&gt;In [8]: %timeit risch_in­te­grate(log(x)**10, x).d­if­f(x)&lt;/p&gt; 
- &lt;p&gt;10 loop­s, best of 3: 159 ms per loop&lt;/p&gt; 
- &lt;p&gt;In [9]: %timeit in­te­grate(log(x)**10, x).d­if­f(x)&lt;/p&gt; 
- &lt;p&gt;1 loop­s, best of 3: 2.35 s per loop&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;Be warned that things are still very bug­gy and you should al­ways ver­i­fy&lt;/p&gt; 
- &lt;p&gt;re­sults by dif­fer­en­ti­at­ing.  Usu­al­ly, can­cel(d­if­f(re­sult, x) - re­sult)&lt;/p&gt; 
- &lt;p&gt;should be enough.  This should go to 0.&lt;/p&gt; 
- &lt;p&gt;So please, please, PLEASE, try out this func­tion and re­port any bugs that you find.  It is not nec­es­sary to re­port NotIm­ple­ment­ed­Er­ror bugs, be­cause I al­ready know about those (I put them in there), and as I men­tioned above, they are all planned to dis­ap­pear.  Al­so, I am con­tin­u­al­ly up­dat­ing my branch with fix­es, so you should do a "git pul­l" and try again be­fore you re­port any­thing.&lt;/p&gt; 
- &lt;p&gt;Al­so, I am aware that there are test fail­ures.  This is be­cause I had to hack ex­p._e­val_­sub­s() to on­ly do ex­act sub­sti­tu­tion (no al­ge­bra­ic sub­sti­tu­tion).  It's just a quick hack workaround, and I should even­tu­al­ly get a re­al fix.   &lt;/p&gt; 
- &lt;p&gt;Fi­nal­ly, I'm think­ing there needs to be a way to dif­fer­en­ti­ate be­tween an un­eval­u­at­ed In­te­gral be­cause the in­te­gra­tor failed and an un­eval­u­at­ed In­te­gral be­cause it has proven the in­te­gral to be non-ele­men­tary.  Any ideas?&lt;/p&gt; 
+&lt;p&gt;DON'T READ THIS MAN­U­AL. IF YOU NEED TO READ IT I FAILED, JUST USE THE THING.&lt;/p&gt; 
  &lt;/blockquote&gt;
+&lt;p&gt;I've al­so dis­cov­ered that the
+ &lt;a href="https://groups.google.com/forum/#!forum/nikola-discuss"&gt;Niko­la com­mu­ni­ty&lt;/a&gt;  is
+ &lt;em&gt;very&lt;/em&gt;  nice. And of course, even if Niko­la ends up not be­ing for me, it will
+be easy to switch, be­cause my ac­tu­al con­tent is just some Mark­down files that
+I own.&lt;/p&gt; 
+ &lt;h3&gt;Getting started&lt;/h3&gt;
+&lt;p&gt;Get­ting start­ed with Niko­la is pret­ty easy. First, you need to in­stall it. It
+has a  &lt;em&gt;ton&lt;/em&gt;  of de­pen­den­cies (for­tu­nate­ly all Python, so it won't be that
+hard). In ad­di­tion to the ones in the re­quire­ments.tx­t, you should al­so
+in­stall  &lt;code&gt;mark­down&lt;/code&gt;  and  &lt;code&gt;we­bas­sets&lt;/code&gt;. While us­ing  &lt;code&gt;niko­la&lt;/code&gt;, it will tell you if
+y­ou don't have some­thing in­stalled that you should, so if you see that, just
+in­stall what it tells you to.  If you use  &lt;code&gt;con­da&lt;/code&gt;  and Mac OS X, I have
+u­pload­ed all the de­pen­den­cies to my  &lt;a href="https://binstar.org/asmeurer/"&gt;Bin­star&lt;/a&gt;,
+­so you can just  &lt;code&gt;con­da in­stall -c as­meur­er niko­la&lt;/code&gt;. Oh and don't wor­ry, Niko­la
+and its de­pen­den­cies ful­ly sup­port Python 3 (I would­n't be us­ing it if they
+­did­n't).&lt;/p&gt; 
+ &lt;p&gt;Then you just run the com­mands from
+http://get­niko­la.­com/hand­book.htm­l#al­l-y­ou-need-­to-­know.&lt;/p&gt; 
+ &lt;p&gt;One thing that does­n't tell you is that af­ter you init the site, you should
+walk through  &lt;code&gt;con­f.py&lt;/code&gt;  and change the set­tings to your lik­ing.&lt;/p&gt; 
+ &lt;p&gt;An­oth­er trick not there is that you can add&lt;/p&gt; 
+ &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="s2"&gt;"`nikola tabcompletion`"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Al­so, look­ing at the in­te­gral from the pre­vi­ous blog post, you can get the dif­fer­ent re­sults by us­ing the  &lt;code&gt;han­dle_log&lt;/code&gt;  ar­gu­ment to  &lt;code&gt;risch_in­te­grate()&lt;/code&gt;:&lt;/p&gt; 
- &lt;p&gt;If  &lt;code&gt;han­dle_­first == 'log'&lt;/code&gt;  (the de­fault right now), then it will gath­er all log­a­rithms first, and then ex­po­nen­tials (in­so­much as it can do it in that or­der).  If  &lt;code&gt;han­dle_­first='­ex­p'&lt;/code&gt;, it gath­ers ex­po­nen­tials first.  The dif­fer­ence is that the Risch Al­go­rithm in­te­grates re­cur­sive­ly, one ex­ten­sion at a time, start­ing with the out­er-­most one. So if you have an ex­pres­sion with both log­a­rithms and ex­po­nen­tial­s, such that they do not de­pend on each oth­er,  &lt;code&gt;han­dle_­first == 'log'&lt;/code&gt;  will in­te­grate the ex­po­nen­tials first, be­cause they will be gath­ered last (be at the top of the tow­er of ex­ten­sion­s), and  &lt;code&gt;han­dle_­first == 'ex­p'&lt;/code&gt;  will in­te­grate the log­a­rithms first.  Right now, I have de­fault­ed to 'log' be­cause the ex­po­nen­tial in­te­gra­tion al­go­rithm is slight­ly more com­plete.  If you get  &lt;code&gt;NotIm­ple­ment­ed­Er­ror&lt;/code&gt;  with one, it is pos­si­ble (though I don't know for sure yet) that you might get an an­swer with the oth­er.   &lt;/p&gt; 
- &lt;p&gt;Al­so, they can give dif­fer­ent look­ing re­sult­s, and at dif­fer­ent speed­s.  For ex­am­ple:&lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;Hov­er over the code and click on the left­-­most, "view source" icon (a pa­per icon with  &lt;tt&gt;&amp;lt; &amp;gt;&lt;/tt&gt;  over it) to view with­out break­s.  Opens in a new win­dow.&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: f = (x&lt;em&gt;(x + 1)&lt;/em&gt;((x&lt;strong&gt;2&lt;em&gt;ex­p(2&lt;/em&gt;x&lt;/strong&gt;2) - log(x + 1)&lt;strong&gt;2)&lt;/strong&gt;2 +
-   ...: 2&lt;em&gt;x&lt;/em&gt;ex­p(3&lt;em&gt;x&lt;strong&gt;2)&lt;em&gt;(x - (2&lt;/em&gt;x&lt;/strong&gt;3 + 2&lt;/em&gt;x&lt;strong&gt;2 + x + 1)&lt;em&gt;log(x + 1))))/((x +
-   ...: 1)&lt;/em&gt;log(x + 1)&lt;/strong&gt;2 - (x&lt;strong&gt;3 + x&lt;/strong&gt;2)&lt;em&gt;ex­p(2&lt;/em&gt;x&lt;strong&gt;2))&lt;/strong&gt;2&lt;/p&gt; 
- &lt;p&gt;In [2]: f&lt;/p&gt; 
- &lt;p&gt;Out­[2]: 
-          ⎛                          2                                                   ⎞
-          ⎜⎛                       2⎞                                                   2⎟
-          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
-x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠&lt;/p&gt; 
- &lt;p&gt;──────────────────────────────────────────────────────────────────────────────────────────
-                                                                2                        &lt;br&gt; 
-                         ⎛                                    2⎞                         &lt;br&gt; 
-                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟                         &lt;br&gt; 
-                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠                           &lt;/p&gt; 
- &lt;p&gt;In [3]: risch_in­te­grate(f, x, han­dle_­first='log')&lt;/p&gt; 
- &lt;p&gt;Out­[3]: 
-       ⎛              ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞                            &lt;br&gt; 
-       ⎜log(1 + x)    ⎝x ⎠⎟                   ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞              &lt;br&gt; 
-    log⎜────────── + ℯ    ⎟                log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠              &lt;br&gt; 
-       ⎝    x             ⎠                   ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)   &lt;br&gt; 
-x + ─────────────────────── - log(1 + x) - ───────────────────────── + ──────────────────────────
-               2                                       2                                        2
-                                                                              2           3  2⋅x 
-                                                                       - x⋅log (1 + x) + x ⋅ℯ     &lt;/p&gt; 
- &lt;p&gt;In [4]: risch_in­te­grate(f, x, han­dle_­first='­ex­p')&lt;/p&gt; 
- &lt;p&gt;Out­[4]: 
-       ⎛                ⎛ 2⎞⎞                   ⎛                ⎛ 2⎞⎞        ⎛ 2⎞            &lt;br&gt; 
-       ⎜                ⎝x ⎠⎟                   ⎜                ⎝x ⎠⎟        ⎝x ⎠            &lt;br&gt; 
-    log⎝log(1 + x) + x⋅ℯ    ⎠                log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)&lt;br&gt; 
-x + ───────────────────────── - log(1 + x) - ───────────────────────── - ──────────────────────
-                2                                        2                                    2
-                                                                            2           2  2⋅x 
-                                                                         log (1 + x) - x ⋅ℯ     &lt;/p&gt; 
- &lt;p&gt;In [5]: %timeit risch_in­te­grate(f, x, han­dle_­first='log')&lt;/p&gt; 
- &lt;p&gt;1 loop­s, best of 3: 1.49 s per loop&lt;/p&gt; 
- &lt;p&gt;In [6]: %timeit risch_in­te­grate(f, x, han­dle_­first='­ex­p')&lt;/p&gt; 
- &lt;p&gt;1 loop­s, best of 3: 1.21 s per loop&lt;/p&gt; 
- &lt;p&gt;In [7]: can­cel(risch_in­te­grate(f, x, han­dle_­first='log').d­if­f(x) - f)&lt;/p&gt; 
- &lt;p&gt;Out­[7]: 0&lt;/p&gt; 
- &lt;p&gt;In [8]: can­cel(risch_in­te­grate(f, x, han­dle_­first='­ex­p').d­if­f(x) - f)&lt;/p&gt; 
- &lt;p&gt;Out­[8]: 0&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;So go now, and pull my  &lt;a href="//github.com/asmeurer/sympy/tree/integration3"&gt;branch&lt;/a&gt;, and try this func­tion out.  And re­port any prob­lems that you have back to me, ei­ther through the mail­ing list, IR­C, is­sue 2010, or as a com­ment to this blog post (I don't re­al­ly care how).&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2010/08/05/prototype-risch_integrate-function-ready-for-testing/</guid><pubDate>Fri, 06 Aug 2010 03:30:00 GMT</pubDate></item><item><title>Integration of primitive functions</title><link>http://asmeurer.github.io/posts/2010/07/31/integration-of-primitive-functions/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;strong&gt;Integration of Primitive Functions&lt;/strong&gt;
-&lt;p&gt;So this past week, I had an­oth­er break through in my projec­t.  The  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/"&gt;first break through&lt;/a&gt;, as you may re­cal­l, was the com­ple­tion of the  &lt;code&gt;in­te­grate_hy­per­ex­po­nen­tial()&lt;/code&gt;  func­tion, which al­lowed for the in­te­gra­tion in hy­per­ex­po­nen­tial ex­ten­sion­s, in­clud­ing prov­ing the nonex­is­tence of el­e­men­tary in­te­gral­s.  Now I have worked my way up to this lev­el on the oth­er ma­jor half of the in­te­gra­tion al­go­rithm (ac­tu­al­ly, ma­jor third; more on that lat­er): in­te­gra­tion of prim­i­tive el­e­ments.   &lt;/p&gt; 
- &lt;p&gt;This time, I can re­fer you to my  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/"&gt;pre­vi­ous blog post&lt;/a&gt;  for def­i­ni­tion­s.  The chief thing here is that there is now a func­tion in my  &lt;tt&gt;in­te­gra­tion3&lt;/tt&gt;  branch called  &lt;code&gt;in­te­grate_prim­i­tive()&lt;/code&gt;, and it is used pri­mar­i­ly for in­te­grat­ing func­tions with log­a­rithm­s.&lt;/p&gt; 
- &lt;p&gt;So, how about some ex­am­ples?  The first one comes from  &lt;a href="http://asmeurer.github.io/"&gt;Al­go­rithms for com­put­er al­ge­bra By Kei­th O. Ged­des, Stephen R. Cza­por, George Labahn&lt;/a&gt;  (ex­am­ple 12.8).  I like it be­cause it con­tains both ex­po­nen­tials and log­a­rithm­s, in a way that they do not de­pend on each oth­er, so it can be in­te­grat­ed with ei­ther  &lt;code&gt;in­te­grate_prim­i­tive()&lt;/code&gt;  or  &lt;code&gt;in­te­grate_hy­per­ex­po­nen­tial()&lt;/code&gt;.  In ei­ther case, the poly­no­mi­al part is $la­tex \frac{x}{x + 1}$, so re­cur­sive­ly call­ing the oth­er func­tion is not re­quired.  (for those of you who have been fol­low­ing my  &lt;tt&gt;in­te­gra­tion3&lt;/tt&gt;  branch, you may no­tice that this is bla­tant­ly tak­en from the com­mit his­to­ry).&lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;Hov­er over the code and click on the left­-­most, "view source" icon (a pa­per icon with  &lt;tt&gt;&amp;lt; &amp;gt;&lt;/tt&gt;  over it) to view with­out break­s.  Opens in a new win­dow.&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [1]: from sympy.in­te­gral­s.risch im­port in­te­grate_prim­i­tive,&lt;/p&gt; 
- &lt;p&gt;in­te­grate_hy­per­ex­po­nen­tial&lt;/p&gt; 
- &lt;p&gt;In [2]: f = (x&lt;em&gt;(x + 1)&lt;/em&gt;((x&lt;strong&gt;2&lt;em&gt;ex­p(2&lt;/em&gt;x&lt;/strong&gt;2) - log(x + 1)&lt;strong&gt;2)&lt;/strong&gt;2 +&lt;/p&gt; 
- &lt;p&gt;2&lt;em&gt;x&lt;/em&gt;ex­p(3&lt;em&gt;x&lt;strong&gt;2)&lt;em&gt;(x - (2&lt;/em&gt;x&lt;/strong&gt;3 + 2&lt;/em&gt;x*&lt;em&gt;2 + x + 1)&lt;/em&gt;log(x + 1))))/((x +&lt;/p&gt; 
- &lt;p&gt;1)&lt;em&gt;log(x + 1)&lt;strong&gt;2 - (x&lt;/strong&gt;3 + x&lt;strong&gt;2)&lt;em&gt;ex­p(2&lt;/em&gt;x&lt;/strong&gt;2))&lt;/em&gt;*2&lt;/p&gt; 
- &lt;p&gt;In [3]: f&lt;/p&gt; 
- &lt;p&gt;Out­[3]:
-          ⎛                          2                                                   ⎞
-          ⎜⎛                       2⎞                                                   2⎟
-          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
-x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠&lt;/p&gt; 
- &lt;p&gt;──────────────────────────────────────────────────────────────────────────────────────────
-                                                                2
-                         ⎛                                    2⎞
-                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟
-                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠&lt;/p&gt; 
- &lt;p&gt;In [4]: var('t0, t1')&lt;/p&gt; 
- &lt;p&gt;Out­[4]: (t₀, t₁)&lt;/p&gt; 
- &lt;p&gt;In [5]: a, d = map(lamb­da i: Poly(i, t1), f.­sub­s(­ex­p(x**2),&lt;/p&gt; 
- &lt;p&gt;t0).­sub­s(log(x + 1), t1).as_nu­mer_­de­nom())&lt;/p&gt; 
- &lt;p&gt;In [6]: a&lt;/p&gt; 
- &lt;p&gt;Out­[6]:&lt;/p&gt; 
- &lt;p&gt;Poly((x + x&lt;strong&gt;2)*t1&lt;/strong&gt;4 + (-2&lt;em&gt;t0&lt;strong&gt;2*x&lt;/strong&gt;3 - 2&lt;/em&gt;t0&lt;strong&gt;2*x&lt;/strong&gt;4)&lt;em&gt;t1&lt;/em&gt;*2 +&lt;/p&gt; 
- &lt;p&gt;(-2&lt;em&gt;t0&lt;strong&gt;3*x&lt;/strong&gt;2 - 4&lt;/em&gt;t0&lt;strong&gt;3*x&lt;/strong&gt;3 - 6&lt;em&gt;t0&lt;strong&gt;3*x&lt;/strong&gt;4 - 8&lt;/em&gt;t0&lt;strong&gt;3*x&lt;/strong&gt;5 -&lt;/p&gt; 
- &lt;p&gt;4&lt;em&gt;t0&lt;strong&gt;3*x&lt;/strong&gt;6)&lt;/em&gt;t1 + 2&lt;em&gt;t0&lt;strong&gt;3*x&lt;/strong&gt;3 + 2&lt;/em&gt;t0&lt;strong&gt;3*x&lt;/strong&gt;4 + t0&lt;em&gt;   &lt;/em&gt;4&lt;em&gt;x&lt;/em&gt;*5 +&lt;/p&gt; 
- &lt;p&gt;t0&lt;strong&gt;4*x&lt;/strong&gt;6, t1, do­main='Z­Z[x,t0]')&lt;/p&gt; 
- &lt;p&gt;In [7]: d&lt;/p&gt; 
- &lt;p&gt;Out­[7]: Poly((1 + 2&lt;em&gt;x + x&lt;strong&gt;2)*t1&lt;/strong&gt;4 + (-2&lt;/em&gt;t0&lt;strong&gt;2*x&lt;/strong&gt;2 - 4*t0&lt;strong&gt;2*x&lt;/strong&gt;3 -&lt;/p&gt; 
- &lt;p&gt;2&lt;em&gt;t0&lt;strong&gt;2*x&lt;/strong&gt;4)&lt;/em&gt;t1&lt;strong&gt;2 + t0&lt;/strong&gt;4&lt;em&gt;x&lt;strong&gt;4 + 2*t0&lt;/strong&gt;4&lt;/em&gt;x&lt;strong&gt;5 + t0&lt;/strong&gt;4&lt;em&gt;x&lt;/em&gt;*6, t1,&lt;/p&gt; 
- &lt;p&gt;do­main='Z­Z[x,t0]')&lt;/p&gt; 
- &lt;p&gt;In [8]: D = [Poly(1, x), Poly(2&lt;em&gt;x&lt;/em&gt;t0, t0), Poly(1/(x + 1), t1)]&lt;/p&gt; 
- &lt;p&gt;In [9]: r = in­te­grate_prim­i­tive(a, d, D, [x, t0, t1], [lamb­da x: log(x +&lt;/p&gt; 
- &lt;p&gt;1), lamb­da x: ex­p(x**2)])&lt;/p&gt; 
- &lt;p&gt;In [10]: r&lt;/p&gt; 
- &lt;p&gt;Out­[10]:&lt;/p&gt; 
- &lt;p&gt;⎛   ⎛                ⎛ 2⎞⎞      ⎛                ⎛ 2⎞⎞        ⎛ 2⎞                                ⎞&lt;/p&gt; 
- &lt;p&gt;⎜   ⎜                ⎝x ⎠⎟      ⎜                ⎝x ⎠⎟        ⎝x ⎠                ⌠               ⎟&lt;/p&gt; 
- &lt;p&gt;⎜log⎝log(1 + x) + x⋅ℯ    ⎠   log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)     ⎮   x           ⎟&lt;/p&gt; 
- &lt;p&gt;⎜───────────────────────── - ───────────────────────── - ────────────────────── + ⎮ ───── dx, True⎟&lt;/p&gt; 
- &lt;p&gt;⎜            2                           2                                    2   ⎮ 1 + x         ⎟&lt;/p&gt; 
- &lt;p&gt;⎜                                                           2           2  2⋅x    ⌡               ⎟&lt;/p&gt; 
- &lt;p&gt;⎝                                                        log (1 + x) - x ⋅ℯ                       ⎠&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;An ex­pla­na­tion:   &lt;code&gt;f&lt;/code&gt;  is the func­tion we are in­te­grat­ing.  Prepars­ing is not im­ple­ment­ed yet, so we have to do it man­u­al­ly in  &lt;tt&gt;[5]&lt;/tt&gt;.   &lt;tt&gt;[8]&lt;/tt&gt;  is the list of deriva­tions of the mono­mi­als we are work­ing with,  &lt;code&gt;[x, t0, t1]&lt;/code&gt;, which rep­re­sent $la­tex x$, $la­tex e^{x^2}$, and $la­tex \log{(x + 1)}$, re­spec­tive­ly. Be­cause the out­er­most mono­mi­al is a log­a­rithm (prim­i­tive), we call  &lt;code&gt;in­te­grate_prim­i­tive()&lt;/code&gt;  on it.  The last ar­gu­ment of the func­tion is the back sub­sti­tu­tion list, in re­verse or­der be­cause that is the or­der we have to back sub­sti­tute in.  We can see the re­sult con­tains an un­eval­u­at­ed In­te­gral.  This is be­cause the re­cur­sive calls to in­te­grate over the small­er ex­ten­sions have not yet been im­ple­ment­ed.  In the fi­nal ver­sion,  &lt;code&gt;in­te­grate()&lt;/code&gt;  will au­to­mat­i­cal­ly call  &lt;code&gt;rat­in­t()&lt;/code&gt;  in this case on it to give the com­plete an­swer.  The sec­ond ar­gu­ment of the re­sult, True, in­di­cates that the in­te­gral was el­e­men­tary and that this is the com­plete in­te­gral.&lt;/p&gt; 
- &lt;p&gt;Be­cause the ex­ten­sions did not de­pend on each oth­er, we could have al­so in­te­grat­ed in $la­tex \math­b­b{Q}(x, \log{(x + 1)}, e^{x^2})$ in­stead of $la­tex \math­b­b{Q}(x, e^{x^2}, \log{(x + 1)})$:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [11]: a1, d1 = map(lamb­da i: Poly(i, t0), f.­sub­s(­ex­p(x**2), t0).­sub­s(log(x + 1), t1).as_nu­mer_­de­nom())&lt;/p&gt; 
- &lt;p&gt;In [12]: D1 = [Poly(1, x), Poly(1/(x + 1), t1), Poly(2&lt;em&gt;x&lt;/em&gt;t0, t0)]&lt;/p&gt; 
- &lt;p&gt;In [13]: r1 = in­te­grate_hy­per­ex­po­nen­tial(a1, d1, D1, [x, t1, t0], [lamb­da x: ex­p(x**2), lamb­da x: log(x + 1)])&lt;/p&gt; 
- &lt;p&gt;In [14]: r1&lt;/p&gt; 
- &lt;p&gt;Out­[14]:&lt;/p&gt; 
- &lt;p&gt;⎛   ⎛              ⎛ 2⎞⎞      ⎛                ⎛ 2⎞⎞                                                ⎞&lt;/p&gt; 
- &lt;p&gt;⎜   ⎜log(1 + x)    ⎝x ⎠⎟      ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞                                  ⎟&lt;/p&gt; 
- &lt;p&gt;⎜log⎜────────── + ℯ    ⎟   log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠                  ⌠               ⎟&lt;/p&gt; 
- &lt;p&gt;⎜   ⎝    x             ⎠      ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)       ⎮   x           ⎟&lt;/p&gt; 
- &lt;p&gt;⎜─────────────────────── - ───────────────────────── + ────────────────────────── + ⎮ ───── dx, True⎟&lt;/p&gt; 
- &lt;p&gt;⎜           2                          2                                        2   ⎮ 1 + x         ⎟&lt;/p&gt; 
- &lt;p&gt;⎜                                                             2           3  2⋅x    ⌡               ⎟&lt;/p&gt; 
- &lt;p&gt;⎝                                                      - x⋅log (1 + x) + x ⋅ℯ                       ⎠&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;We can ver­i­fy by tak­ing the de­riv­a­tive that the re­sults in each case are anti­deriv­a­tives of the orig­i­nal func­tion,  &lt;code&gt;f&lt;/code&gt;, even though they ap­pear dif­fer­en­t.&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [15]: can­cel(r[0].d­if­f(x) - f)&lt;/p&gt; 
- &lt;p&gt;Out­[15]: 0&lt;/p&gt; 
- &lt;p&gt;In [16]: can­cel(r1[0].d­if­f(x) - f)&lt;/p&gt; 
- &lt;p&gt;Out­[16]: 0&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;We can see in each case, the re­main­ing un­eval­u­at­ed  &lt;code&gt;In­te­gral&lt;/code&gt;  was in $la­tex \math­b­b{Q}(x)$ on­ly, mean­ing that the re­cur­sive call to  &lt;code&gt;in­te­grate_hy­per­ex­po­nen­tial()&lt;/code&gt;  or  &lt;code&gt;in­te­grate_prim­i­tive()&lt;/code&gt;, re­spec­tive­ly, would not have been nec­es­sary. Fi­nal­ly, we can see that choos­ing the cor­rect ex­ten­sion to in­te­grate over can make a dif­fer­ence, time wise:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [17]: %timeit in­te­grate_prim­i­tive(a, d, D, [x, t0, t1], [lamb­da x: log(x + 1), lamb­da x: ex­p(x**2)])&lt;/p&gt; 
- &lt;p&gt;1 loop­s, best of 3: 1.91 s per loop&lt;/p&gt; 
- &lt;p&gt;In [18]: %timeit in­te­grate_hy­per­ex­po­nen­tial(a1, d1, D1, [x, t1, t0], [lamb­da x: ex­p(x**2), lamb­da x: log(x + 1)])&lt;/p&gt; 
- &lt;p&gt;1 loop­s, best of 3: 2.63 s per loop&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;Just as with the ex­po­nen­tial case, the func­tion can prove the in­te­grals are non-ele­men­tary. This is the so-­called  &lt;a href="http://en.wikipedia.org/wiki/Logarithmic_integral"&gt;log­a­rith­mic in­te­gral&lt;/a&gt;:&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [19]: f1 = 1/log(x)&lt;/p&gt; 
- &lt;p&gt;In [20]: a, d = map(lamb­da i: Poly(i, t1), f1.­sub­s(log(x), t1).as_nu­mer_­de­nom())&lt;/p&gt; 
- &lt;p&gt;In [21]: a&lt;/p&gt; 
- &lt;p&gt;Out­[21]: Poly(1, t1, do­main='Z­Z')&lt;/p&gt; 
- &lt;p&gt;In [22]: d&lt;/p&gt; 
- &lt;p&gt;Out­[22]: Poly(t1, t1, do­main='Z­Z')&lt;/p&gt; 
- &lt;p&gt;In [23]: in­te­grate_prim­i­tive(a, d, [Poly(1, x), Poly(1/x, t1)], [x, t1], [log])&lt;/p&gt; 
- &lt;p&gt;Out­[23]: (0, False)&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;The sec­ond ar­gu­men­t,  &lt;code&gt;False&lt;/code&gt;, in­di­cates that the in­te­gral was non-ele­men­tary.  Name­ly, the func­tion has proven that the func­tion $la­tex f - D(0) = \frac{1}{\log{(x)}}$ does not have an el­e­men­tary an­ti-deriva­tive over $la­tex \math­b­b{Q}(x, \log{(x)})$ (see the  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/"&gt;pre­vi­ous post&lt;/a&gt;  for more in­for­ma­tion).&lt;/p&gt; 
- &lt;p&gt;Fi­nal­ly, be aware that, just as with  &lt;code&gt;in­te­grate_hy­per­ex­po­nen­tial()&lt;/code&gt;  many in­te­grals will  raise  &lt;code&gt;NotIm­ple­ment­ed­Er­ror&lt;/code&gt;, be­cause the sub­rou­tines nec­es­sary to solve them have not yet been fin­ished.&lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [25]: f = log(log(x))**2&lt;/p&gt; 
- &lt;p&gt;In [26]: f.d­if­f(x)&lt;/p&gt; 
- &lt;p&gt;Out­[26]:&lt;/p&gt; 
- &lt;p&gt;2⋅log(log(x))&lt;/p&gt; 
- &lt;p&gt;─────────────
-   x⋅log(x)&lt;/p&gt; 
- &lt;p&gt;In [27]: a, d = map(lamb­da i: Poly(i, t1),&lt;/p&gt; 
- &lt;p&gt;can­cel(f.d­if­f(x)).­sub­s(log(x), t0).­sub­s(log(t0), t1).as_nu­mer_­de­nom())&lt;/p&gt; 
- &lt;p&gt;In [28]: a&lt;/p&gt; 
- &lt;p&gt;Out­[28]: Poly(2*t1, t1, do­main='Z­Z')&lt;/p&gt; 
- &lt;p&gt;In [29]: d&lt;/p&gt; 
- &lt;p&gt;Out­[29]: Poly(t0*x, t1, do­main='Z­Z[x,t0]')&lt;/p&gt; 
- &lt;p&gt;In [30]: D = [Poly(1, x), Poly(1/x, t0), Poly(1/(x*t0), t1)]&lt;/p&gt; 
- &lt;p&gt;In [31]: in­te­grate_prim­i­tive(a, d, D, [x, t0, t1], [lamb­da x: log(log(x)), log])&lt;/p&gt; 
- &lt;hr&gt;
-&lt;p&gt;NotIm­ple­ment­ed­Er­ror: Re­main­ing cas­es for Poly RDE not yet im­ple­ment­ed.&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;Now one thing that I want to add from the above ex­am­ples tak­en from the com­mit mes­sage is that log­a­rithms are not the on­ly func­tion that are prim­i­tive.  The Li func­tion (the log­a­rith­mic in­te­gral, as above), con­sid­ered as an el­e­men­tary ex­ten­sion of $la­tex \math­b­b{Q}(x, \log{(x)})$ is al­so prim­i­tive.  But even among the com­mon­ly de­fined el­e­men­tary func­tion­s, there is one oth­er, acr­tan­gents.   &lt;/p&gt; 
- &lt;p&gt;[code lan­guage="py"]&lt;/p&gt; 
- &lt;p&gt;In [32]: dif­f(atan(x)**2, x)&lt;/p&gt; 
- &lt;p&gt;Out­[32]:  &lt;/p&gt; 
- &lt;p&gt;2⋅atan(x)&lt;/p&gt; 
- &lt;p&gt;─────────
-       2 
-  1 + x   &lt;/p&gt; 
- &lt;p&gt;In [33]: in­te­grate_prim­i­tive(Poly(2*t, t), Poly(1 + x&lt;strong&gt;2, t), [Poly(1, x), Poly(1/(1 + x&lt;/strong&gt;2), t)], [x, t], [atan])&lt;/p&gt; 
- &lt;p&gt;Out­[33]:  &lt;/p&gt; 
- &lt;p&gt;⎛    2         ⎞&lt;/p&gt; 
- &lt;p&gt;⎝atan (x), True⎠&lt;/p&gt; 
- &lt;p&gt;In [34]: in­te­grate_prim­i­tive(Poly(t, t), Poly(x, t), [Poly(1, x), Poly(1/(1 + x**2), t)], [x, t], [atan])&lt;/p&gt; 
- &lt;p&gt;Out­[34]:  &lt;/p&gt; 
- &lt;p&gt;⎛⌠                  ⎞&lt;/p&gt; 
- &lt;p&gt;⎜⎮ atan(x)          ⎟&lt;/p&gt; 
- &lt;p&gt;⎜⎮ ─────── dx, False⎟&lt;/p&gt; 
- &lt;p&gt;⎜⎮    x             ⎟&lt;/p&gt; 
- &lt;p&gt;⎝⌡                  ⎠&lt;/p&gt; 
- &lt;p&gt;[/­code]&lt;/p&gt; 
- &lt;p&gt;Due to a bug in the code right now, the fi­nal ver­sion re­turns the non-ele­men­tary in­te­gral in the fi­nal re­sult.  Suf­fice it to say that it has proven that $la­tex \int {\frac{\arc­tan{(x)}}{x} dx}$ is non-ele­men­tary. As far as I know, this is­n't any spe­cial func­tion.  Ac­tu­al­ly, it's just a ran­dom func­tion con­tain­ing arc­tan that looked non-ele­men­tary to me that I plugged in and found out that I was cor­rec­t.  It's very sim­i­lar in form to the  &lt;a href="http://en.wikipedia.org/wiki/Exponential_integral"&gt;ex­po­nen­tial in­te­gral&lt;/a&gt;  (Ei) or the  &lt;a href="http://en.wikipedia.org/wiki/Sine_integral#Sine_integral"&gt;Sine/­Co­sine In­te­gral&lt;/a&gt;  (Si/­Ci), which is how I guessed that it would be non-ele­men­tary.  Maybe it should be called ATi().&lt;/p&gt; 
- &lt;p&gt;&lt;strong&gt;Sta­tus Up­date&lt;/strong&gt;&lt;/p&gt; 
- &lt;p&gt;So it has come to my at­ten­tion that the sug­gest­ed "pen­cils down" date is one week from Mon­day, and the hard "pen­cils down" date is two weeks from Mon­day (see the  &lt;a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/timeline"&gt;Google Sum­mer of Code Time­line&lt;/a&gt;).  Now, no mat­ter how fast I work, my work can­not be pushed in un­til Ma­teusz's lat­est polys branch gets pushed in, be­cause my work is based on top of it.  I plan on con­tin­u­ing work on the in­te­gra­tion al­go­rithm be­yond the sum­mer un­til I fin­ish the tran­scen­den­tal part of the al­go­rith­m, and even af­ter that, I want to look in­to im­ple­ment­ing oth­er in­te­gra­tion re­lat­ed things, like def­i­nite in­te­gra­tion us­ing  &lt;a href="http://en.wikipedia.org/wiki/Meijer-G"&gt;Mei­jer G-­func­tion­s,&lt;/a&gt;  and the al­ge­bra­ic part of the al­go­rith­m.  But for now, these are the things that I need to do for the tran­scen­den­tal part, which is this sum­mer's work:&lt;/p&gt; 
- &lt;p&gt;&lt;em&gt;1. Im­ple­ment the prepars­ing al­go­rithm­s.  &lt;/em&gt;  This part is two-­fold.  First, I need to im­ple­ment al­go­rithms based on the Risch Struc­ture The­o­rem­s, which al­low me to de­ter­mine if an ex­ten­sion is al­ge­bra­ic or not (if it is al­ge­braic, we can­not in­te­grate it be­cause on­ly the tran­scen­den­tal part is im­ple­ment­ed).  The oth­er part will be the func­tion that ac­tu­al­ly goes through an ex­pres­sion and tries to build up a dif­fer­en­tial ex­ten­sion from it so it can be in­te­grat­ed.  This can be a tricky part. For ex­am­ple, if we want to in­te­grate $la­tex f = e^x + e^{\frac{x}{2}}$, we want to first choose $la­tex t_1=e^{\frac{x}{2}}$ so that $la­tex f = t_1^2 + t_1$, be­cause if we choose $la­tex t_1=e^x$, then $la­tex t_2=e^{\frac{x}{2}}=\sqrt{t_1}$ will be al­ge­bra­ic over $la­tex \math­b­b{Q}(x, t_1)$.  This is one case where we might try adding an al­ge­bra­ic ex­ten­sions but where it can be avoid­ed.  The so­lu­tion will have to be to go through and find the com­mon de­nom­i­na­tors of the ex­po­nen­tial­s.  I'm al­so con­sid­er­ing that this might hap­pen in more ad­vanced ways, so it could be nec­es­sary for the func­tion to back­track in the ex­ten­sion tree to see if it can do it in an en­tire­ly tran­scen­den­tal way.  For­tu­nate­ly, the Risch Struc­ture The­o­rems give us a de­ci­sion pro­ce­dure for de­ter­min­ing if an ex­ten­sion can be writ­ten in terms of the pre­vi­ous ex­ten­sions (is al­ge­bra­ic over it), but this will still be a very hard func­tion to get right.&lt;/p&gt; 
- &lt;p&gt;&lt;em&gt;2. Fin­ish the re­main­ing cas­es for  &lt;code&gt;in­te­grate_hy­per­ex­po­nen­tial()&lt;/code&gt;  and  &lt;code&gt;in­te­grate_prim­i­tive()&lt;/code&gt;.&lt;/em&gt;  As you could see in this post, as well as in the  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/"&gt;pre­vi­ous one&lt;/a&gt;, there are many in­te­grals that can­not yet be in­te­grat­ed be­cause the spe­cial cas­es for them have not been im­ple­ment­ed yet.  Most of these ac­tu­al­ly re­ly on im­ple­ment­ing the struc­ture the­o­rem al­go­rithms from  &lt;strong&gt;1&lt;/strong&gt;, and im­ple­ment­ing them once that is fin­ished will not take long, be­cause they will just be straight copy­ing of the pseu­docode from Bron­stein's book.  But some of them, par­tic­u­lar­ly ones from the prim­i­tive case, are not spelt out so well in Bron­stein's book, and will re­quire more think­ing (and thus time) on my part.  I should note that the Struc­ture The­o­rem al­go­rithms are al­so this way.&lt;/p&gt; 
- &lt;p&gt;&lt;em&gt;  3. Im­ple­ment the hy­per­tan­gent case.  &lt;/em&gt;  The abil­i­ty to in­te­grate in tan­gent ex­ten­sions is the oth­er  &lt;em&gt;third&lt;/em&gt;  I men­tioned above.  Since tan­gents re­quire more spe­cial cas­ing, I plan on do­ing this on­ly af­ter I have fin­ished  &lt;strong&gt;1&lt;/strong&gt;  and  &lt;strong&gt;2&lt;/strong&gt;.  This is ac­tu­al­ly not much work, be­cause most of the al­go­rithms for solv­ing the par­tic­u­lar sub­prob­lem for tan­gents (called the  &lt;em&gt;Cou­pled Risch Dif­fer­en­tial Equa­tion&lt;/em&gt;) are ex­act­ly the same as those for solv­ing the sub­prob­lem for hy­per­ex­po­nen­tials (the  &lt;em&gt;Risch Dif­fer­en­tial Equa­tion&lt;/em&gt;), which are al­ready (most­ly) im­ple­ment­ed in the hy­per­ex­po­nen­tial part.  There are on­ly a few ex­tra func­tions that need to be writ­ten for it.  Al­so, you will still be able to in­te­grate func­tions that con­tain tan­gents, such as $la­tex e^{\­tan{(x)}}$ (re­call  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/"&gt;last time&lt;/a&gt;  that we showed that  &lt;code&gt;in­te­grate_hy­per­ex­po­nen­tial()&lt;/code&gt;  can prove that this does not have an el­e­men­tary in­te­gral).  It just won't be able to in­te­grate when the top-­most ex­ten­sion is a tan­gen­t.&lt;/p&gt; 
- &lt;p&gt;So here is what I plan on do­ing.  Right now, I am go­ing to fo­cus my work on  &lt;strong&gt;1&lt;/strong&gt;, since most of  &lt;strong&gt;2&lt;/strong&gt;  can't be done un­til it is any­way.  But more im­por­tant­ly, I want to have a pro­to­type user-lev­el func­tion for the Risch Al­go­rith­m.  The rea­son I want this is so that peo­ple can try it out, with­out hav­ing to do the prepars­ing like I did above, but rather they can just call  &lt;code&gt;risch_in­te­grate(f, x)&lt;/code&gt;, and it will re­turn the in­te­gral of  &lt;code&gt;f&lt;/code&gt;, prove that it is non-ele­men­tary and re­duce it in­to the el­e­men­tary and non-ele­men­tary part­s, or ex­plain why it can­not do it (ei­ther be­cause the func­tion is not tran­scen­den­tal or be­cause some­thing is not im­ple­ment­ed yet).  My chief de­sire for do­ing this is so that peo­ple can try out my code and find the bugs in it for me.  I have al­ready found many crit­i­cal er­rors in the code (re­turns a wrong re­sult), and I want to iron these out be­fore any­thing goes in.  The best way to do this will be to re­lease a work­ing user-lev­el func­tion and hope that peo­ple try it out for me.   &lt;/p&gt; 
- &lt;p&gt;Al­so, even if  &lt;strong&gt;2&lt;/strong&gt;  and  &lt;strong&gt;3&lt;/strong&gt;  are not fin­ished, if I have  &lt;strong&gt;1&lt;/strong&gt;, I can in­te­grate it with  &lt;code&gt;in­te­grate()&lt;/code&gt;  (no pun in­tend­ed) and just have it bail if it rais­es  &lt;code&gt;NotIm­ple­ment­ed­Er­ror&lt;/code&gt;  I will need to come up with a way to dif­fer­en­ti­ate be­tween this and the case where it re­turns an un­eval­u­at­ed  &lt;code&gt;In­te­gral&lt;/code&gt;  be­cause it has proven that an el­e­men­tary anti­deriv­a­tive does not ex­ist.  Any sug­ges­tion­s?&lt;/p&gt; 
- &lt;p&gt;I plan on con­tin­u­ing work af­ter the sum­mer un­til I fin­ish  &lt;strong&gt;1&lt;/strong&gt;  through  &lt;strong&gt;3&lt;/strong&gt;, though I won't pre­tend that my work won't slow down con­sid­er­ably when I start class­es in Au­gust.  I al­so prom­ise to fin­ish the  &lt;a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/"&gt;Risch Al­go­rithm posts&lt;/a&gt;  that I promised.&lt;/p&gt; 
- &lt;p&gt;And for what it's worth, I plan on work­ing my ass off this next two week­s.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2010/07/31/integration-of-primitive-functions/</guid><pubDate>Sat, 31 Jul 2010 11:44:31 GMT</pubDate></item><item><title>The Risch Algorithm: Part 2, Elementary Functions</title><link>http://asmeurer.github.io/posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;In  &lt;a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/"&gt;Part 1&lt;/a&gt;  of this se­ries of blog post­s, I gave what I be­lieved to be the pre­req­ui­sites to un­der­stand­ing the math­e­mat­ics be­hind the Risch Al­go­rithm (a­side from a ba­sic un­der­stand­ing of de­riv­a­tives and in­te­grals from cal­cu­lus).  In this post, I will elab­o­rate on what is meant by "ele­men­tary func­tion," a term that is thrown around a lot when talk­ing about Risch in­te­gra­tion.&lt;/p&gt; 
- &lt;p&gt;The usu­al def­i­ni­tion of el­e­men­tary func­tion giv­en in cal­cu­lus is any func­tion that is a con­stan­t, a poly­no­mi­al, an ex­po­nen­tial ($la­tex e^x$, $la­tex 2^x$), a log­a­rithm ($la­tex \l­n({x})$, $la­tex \log_{10}({x})$), one of the stan­dard trig func­tions or their in­vers­es (s­in, cos, tan, arc­sin, ar­c­cos, arc­tan, etc.), and any com­bi­na­tion of these func­tions via ad­di­tion, sub­trac­tion, mul­ti­pli­ca­tion, di­vi­sion, tak­ing pow­er­s, and com­po­si­tion.  Thus, even a func­tion as crazy as  &lt;a href="http://asmeurer.github.io/2010/07/crazy-function.png"&gt;&lt;img src="http://asmeurer.github.io/2010/07/crazy-function.png" alt="" title="crazy function" width="193" height="41" class="alignnone size-full wp-image-632"&gt;&lt;/a&gt;  is el­e­men­tary, by this def­i­ni­tion.   &lt;/p&gt; 
- &lt;p&gt;But for the rig­or­ous def­i­ni­tion of an el­e­men­tary func­tion, we must take in­to con­sid­er­a­tion what field we are work­ing over.  Be­fore I get in­to that, I need some def­i­ni­tion­s.  Sup­pose that $la­tex k$ is the field we are work­ing over.  You can imag­ine that $la­tex k=\­math­b­b{Q}(x)$, the field of ra­tio­nal func­tions in x with ra­tio­nal num­ber co­ef­fi­cients.  As with the pre­vi­ous post, imag­ine $la­tex t$ as a func­tion, for ex­am­ple, $la­tex t = f(x)$.  Let $la­tex K$ be a dif­fer­en­tial ex­ten­sion of $la­tex k$.  We have not de­fined this, but it ba­si­cal­ly means that our deriva­tion $la­tex D$ works the same in $la­tex K$ as it does in $la­tex k$.  You can imag­ine here that $la­tex K=k[t]$.   &lt;/p&gt; 
- &lt;p&gt;We say that $la­tex t \in K$ is a  &lt;strong&gt;prim­i­tive&lt;/strong&gt;  over $la­tex k$ if $la­tex Dt \in k$.  In oth­er word­s, the de­riv­a­tive of $la­tex t$ is does not con­tain $la­tex t$, on­ly el­e­ments of $la­tex k$.  Ob­vi­ous­ly, by the def­i­ni­tion of a deriva­tion (see the  &lt;a href="http://asmeurersympy.wordpress.com/2010/06/30/the-risch-algorithm-part-1/"&gt;last post&lt;/a&gt;  in the se­ries), any el­e­ment of $la­tex k$ is a prim­i­tive over $la­tex K$, be­cause the de­riv­a­tive of any el­e­ment of a field is again an el­e­ment of that field (y­ou can see this by the def­i­ni­tion of a deriva­tion, al­so giv­en in the last post).  But al­so if $la­tex t=log(a)$ for some $la­tex a \in k$, then $la­tex t$ is a prim­i­tive over $la­tex k$, be­cause $la­tex Dt=\frac{­Da}{a}\in k$.   &lt;/p&gt; 
- &lt;p&gt;We say that $la­tex t \in K^*$ is a  &lt;strong&gt;hy­per­ex­po­nen­tial&lt;/strong&gt;  over $la­tex k$ if $la­tex \frac{Dt}{t}\in k$.  Writ­ten an­oth­er way, $la­tex Dt=at$ for some $la­tex a\in k$.  We know from cal­cu­lus that the func­tions that sat­is­fy dif­fer­en­tial equa­tions of the type $la­tex \frac{dy}{dx}=ay$ are ex­act­ly the ex­po­nen­tial func­tion­s, i.e., $la­tex y=e^{\in­t{a\ dx}}$.   &lt;/p&gt; 
- &lt;p&gt;The last class of func­tions that needs to be con­sid­ered is  &lt;strong&gt;&lt;a href="http://en.wikipedia.org/wiki/Algebraic_function"&gt;al­ge­bra­ic func­tions&lt;/a&gt;&lt;/strong&gt;.  I will not go in­to depth on al­ge­bra­ic func­tion­s, be­cause my work this sum­mer is on­ly on in­te­grat­ing pure­ly tran­scen­den­tal func­tion­s.  There­fore, the on­ly con­cern we shall have with al­ge­bra­ic func­tions in re­la­tion to the in­te­gra­tion al­go­rithm is to make sure that what­ev­er func­tion we are in­te­grat­ing is  &lt;em&gt;not&lt;/em&gt;  al­ge­braic, be­cause the tran­scen­den­tal al­go­rithms will not be valid if they are.  Hope­ful­ly in a fu­ture post I will be able to dis­cuss the Risch Struc­ture The­o­rem­s, which give nec­es­sary and suf­fi­cient con­di­tions for de­terming if a Li­ou­vil­lian func­tion (see next para­graph) is al­ge­bra­ic.   &lt;/p&gt; 
- &lt;p&gt;Now, we say that a func­tion $la­tex t \in K$ is  &lt;strong&gt;Li­ou­vil­lian&lt;/strong&gt;  over $la­tex k$ if $la­tex t$ is al­ge­braic, a prim­i­tive, or a hy­per­ex­po­nen­tial over $la­tex k$.  For $la­tex t\in K$ to be a  &lt;strong&gt;Li­ou­vil­lian mono­mi­al&lt;/strong&gt;  over $la­tex k$, we have the ad­di­tion­al con­di­tion that $la­tex \math­rm{­Con­st}(k) = \math­rm{­Con­st}(k(t))$. This just means that we can­not con­sid­er some­thing like $la­tex \log({2})$ over $la­tex \math­b­b{Q}$ as a Li­ou­vil­lian mono­mi­al.  Oth­er­wise (I be­lieve) we could run in­to un­de­cid­abil­i­ty prob­lem­s.   &lt;/p&gt; 
- &lt;p&gt;We call $la­tex t \in K$ a  &lt;strong&gt;log­a­rithm&lt;/strong&gt;  over $la­tex k$ if $la­tex Dt=\frac{D­b}{b}$ for some $la­tex b \in k^&lt;em&gt;$, i.e., $la­tex t=\log({b})$.  We call $la­tex t \in K^&lt;/em&gt;$ an  &lt;strong&gt;ex­po­nen­tial&lt;/strong&gt;  over $la­tex k$ if $la­tex \frac{Dt}{t}=D­b$ (or $la­tex Dt=t­D­b$) for some $la­tex b \in k$, i.e., $la­tex t=e^b$.  Note the dif­fer­ence be­tween an  &lt;em&gt;ex­po­nen­tial&lt;/em&gt;  mono­mi­al and a  &lt;em&gt;hy­per­ex­po­nen­tial&lt;/em&gt;  mono­mi­al.   &lt;/p&gt; 
- &lt;p&gt;We can fi­nal­ly give the rig­or­ous def­i­ni­tion of an el­e­men­tary ex­ten­sion.  $la­tex K$ is an  &lt;strong&gt;el­e­men­tary ex­ten­sion&lt;/strong&gt;  of $la­tex k$ if there are $la­tex t_1, \dot­s, t_n \in K$ such that $la­tex K=k(t_1,\­dot­s,t_n)$ and $la­tex t_i$ is el­e­men­tary over $la­tex k(t_1, \dot­s, t_{i-1})$ for all $la­tex i \in {1,\­dot­s,n}$.  An  &lt;strong&gt;el­e­men­tary func­tion  &lt;/strong&gt;  is any el­e­ment of an el­e­men­tary ex­ten­sion of $la­tex \math­b­b{C}(x)$ with the deriva­tion $la­tex D=\frac{d}{dx}$.  A func­tion $la­tex f\in k$ has an  &lt;strong&gt;el­e­men­tary in­te­gral&lt;/strong&gt;  over $la­tex k$ if there ex­ists an el­e­men­tary ex­ten­sion $la­tex K$ of $la­tex k$ and $la­tex g\in K$ such that $la­tex Dg=f$, i.e., $la­tex f=\in­t{g}$.   &lt;/p&gt; 
- &lt;p&gt;Usu­al­ly, we start with $la­tex \math­b­b{Q}(x)$, the field of ra­tio­nal func­tions in x with ra­tio­nal num­ber co­ef­fi­cients. We then build up an el­e­men­tary ex­ten­sion one func­tion at a time, with each func­tion ei­ther be­ing a log­a­rithm or ex­po­nen­tial of what we have al­ready built up, or al­ge­bra­ic over it.  As I not­ed above, we will ig­nore al­ge­bra­ic func­tions here.  We gen­er­al­ly start with $la­tex \math­b­b{Q}$ be­cause it is com­putable (im­por­tant prob­lems such as the ze­ro equiv­a­lence prob­lem or the prob­lem of de­ter­min­ing cer­tain field iso­mor­phisms are de­cid­able), but the above def­i­ni­tion lets us start with any sub­field of $la­tex \math­b­b{C}$.   &lt;/p&gt; 
- &lt;p&gt;Now you may be won­der­ing: we've cov­ered al­ge­bra­ic func­tion­s, ex­po­nen­tials and log­a­rithm­s, and ob­vi­ous­ly ra­tio­nal func­tions are el­e­ments of $la­tex \math­b­b{Q}(x)$, but what about trigono­met­ric func­tion­s?  Well, from a the­o­ret­i­cal stand point, we can make our lives eas­i­er by notic­ing that all the com­mon trigono­met­ric func­tions can be rep­re­sent­ed as ex­po­nen­tials and log­a­rithms over $la­tex \math­b­b{Q}(i)$.  For ex­am­ple, $la­tex \cos{x} = \frac{e^{ix} + e^{-ix}}{2}$.  You can see  &lt;a href="http://en.wikipedia.org/wiki/Trig_identities#Exponential_definitions"&gt;here&lt;/a&gt;  that all the com­mon trig func­tions can be rep­re­sent­ed as com­plex ex­po­nen­tials or log­a­rithms like this.  How­ev­er, from an al­go­rith­mic stand­point, we don't want do con­vert all trig ex­pres­sions in­to com­plex ex­po­nen­tials and log­a­rithms in or­der to in­te­grate them.  For one thing, our fi­nal re­sult will be in terms of com­plex ex­po­nen­tials and log­a­rithm­s, not the orig­i­nal func­tions we start­ed with, and con­vert­ing them back may or may not be an easy thing to do.  Al­so, aside from the fact that we have dif­fer­ent func­tions than we were ex­pect­ing, we al­so will end up with an an­swer con­tain­ing $la­tex \sqrt{-1}$, even if our orig­i­nal in­te­grand did not.   &lt;/p&gt; 
- &lt;p&gt;For­tu­nate­ly, the in­te­grat­ing tan­gents di­rect­ly is a solved prob­lem, just like in­te­grat­ing al­ge­braic, ex­po­nen­tial, or log­a­rith­mic func­tions is solved.  We can't in­te­grate func­tions like $la­tex \s­in{x}$ or $la­tex \cos{x}$ di­rect­ly as mono­mi­als like we can with $la­tex \tan{x}$ or $la­tex e^x$, be­cause the de­riv­a­tives of sin and cos are not poly­no­mi­als in their re­spec­tive selves with co­ef­fi­cients in $la­tex \math­b­b{C}(x)$.  How­ev­er, we can use a trick or two to in­te­grate them.  One way is to re­write $la­tex \cos{x}=\frac{1 - \tan^2{\frac{x}{2}}}{1 + \tan^2{\frac{x}{2}}}$ and pro­ceed to in­te­grate it as a tan­gen­t.  An­oth­er al­ter­na­tive is to write $la­tex \cos{x}=\frac{1}{\sec{x}}=\sqrt{\frac{1}{\sec^2{x}}}=\sqrt{\frac{1}{\­tan^2{x} + 1}}$.  This func­tion is al­ge­bra­ic over $la­tex \math­b­b{Q}(x, \tan{(x)})$, but if we do not al­ready have $la­tex \tan{x}$ in our dif­fer­en­tial ex­ten­sion, it is tran­scen­den­tal, and we can re­write it as $la­tex e^{-\frac{\log{(1 + \tan^2{x})}}{2}}$ (this is used in Bron­stein's tex­t, so I be­lieve what I just said is cor­rec­t, though I haven't ver­i­fied it with the struc­ture the­o­rems just yet).   These both work us­ing the rel­e­vant iden­ti­ties for sin too.  Of course, there is still the prob­lem of rewrit­ing the fi­nal in­te­grand back in terms of sin or cos.  Oth­er­wise, you will get some­thing like $la­tex \frac{2e^x\­tan({\frac{x}{2}}) - \tan^2({\frac{x}{2}})e^x + e^x}{2 + 2\­tan^2({\frac{x}{2}})}$ in­stead of $la­tex \frac{e^x(\s­in{(x)} + \cos{(x)})}{2}$ for $la­tex \in­t{\­cos{(x)}e^xdx}$.  Bron­stein does­n't elab­o­rate on this too much in his book, so it is some­thing that I will have to fig­ure out on my own.&lt;/p&gt; 
- &lt;p&gt;The sec­ond op­tion I gave above leads nice­ly in­to the main point I want­ed to make here about el­e­men­tary func­tion­s.  No­tice that ev­ery­where in the def­i­ni­tions above, things de­pend on the field we are work­ing in.  There­fore, $la­tex e^{\­tan{x}}$ can­not be an el­e­men­tary ex­ten­sion over $la­tex \math­b­b{Q}(x)$, but it can be over $la­tex \math­b­b{Q}(x, \tan{x})$.  Al­so, the  &lt;a href="http://en.wikipedia.org/wiki/Error_function"&gt;er­ror func­tion&lt;/a&gt;, de­fined as $la­tex \math­rm{er­f}{(x)} = \frac{2}{\sqrt{\pi}}\in­t{e^{-x^2}dx}$ can­not be an el­e­men­tary ex­ten­sion over $la­tex \math­b­b{Q}(x)$, but it can over $la­tex \math­b­b{Q}(x, e^{-x^2})$. In fact this is how we can in­te­grate in terms of some spe­cial func­tion­s, in­clud­ing the er­ror func­tion: by man­u­al­ly adding $la­tex e^{-x^2}$ (or what­ev­er) to our dif­fer­en­tial ex­ten­sion.   There­fore, the usu­al def­i­ni­tion of an el­e­men­tary an­ti-derivaitve and the above Risch Al­go­rithm def­i­ni­tion of an el­e­men­tary in­te­gral co­in­cide on­ly when the ex­ten­sion con­sists on­ly of el­e­men­tary func­tions of the form of the usu­al def­i­ni­tion (note that above, our fi­nal fields are $la­tex \math­b­b{Q}(x, \tan{x}, e^{\­tan{x}})$ and $la­tex \math­b­b{Q}(x, e^{-x^2}, \math­rm{er­f}{(x)})$, re­spec­tive­ly).   &lt;/p&gt; 
- &lt;p&gt;Orig­i­nal­ly, I was al­so go­ing to talk about Li­ou­ville's The­o­rem in this blog post, but I think it has al­ready got­ten long enough (read "I'm get­ting tired"), so I'll put that off un­til next time.   &lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/2010/07/24/the-risch-algorithm-part-2-elementary-functions/</guid><pubDate>Sat, 24 Jul 2010 08:32:57 GMT</pubDate></item></channel></rss>
+
+&lt;p&gt;to your Bash pro­file to get tab com­ple­tion.&lt;/p&gt; 
+ &lt;h3&gt;Tricks&lt;/h3&gt;
+&lt;p&gt;Here are some use­ful trick­s:&lt;/p&gt; 
+ &lt;ul&gt;
+&lt;li&gt; 
+ &lt;p&gt;To en­able Math­­­Jax, you have to type   &lt;code&gt;math­­­jax&lt;/code&gt;   in a line by it­­self in the
+meta­­da­­ta file. There are some bugs right now, but ide­al­­ly you could do in­­­line
+­­math with   &lt;code&gt;$math$&lt;/code&gt;   and dis­­­play math with   &lt;code&gt;$$­­math­­$$&lt;/code&gt;.   &lt;code&gt;$math$&lt;/code&gt;   does­n't work
+cur­ren­t­­ly, but you can do   &lt;code&gt;\\(­­math­­\\)&lt;/code&gt;   (both   &lt;code&gt;\&lt;/code&gt;s are re­quired, al­though this
+is like­­ly a bug). You can do   &lt;code&gt;\\[­­math­­\\]&lt;/code&gt;   for dis­­­play math.  Here are some
+ex­am­­ples. In­­­line: \( \sin ^2{x} + \cos^2{x} = 1\). Dis­­­play: $$ e^{i\pi} + 1 = 0 .$$&lt;/p&gt;  
+  &lt;/li&gt; 
+ &lt;li&gt; 
+ &lt;p&gt;Your one-stop com­­mand when blog­ging is   &lt;code&gt;niko­la au­­to&lt;/code&gt;. This re­quires
+    &lt;code&gt;livereload&lt;/code&gt;. This will serve the blog on lo­­cal­host, and au­­to­­mat­i­­cal­­ly
+  re­build it when any change is made (and I re­al­­ly mean   &lt;em&gt;any&lt;/em&gt;   change: it can
+  even de­­tect when you change Niko­la it­­self).&lt;/p&gt;  
+  &lt;/li&gt; 
+ &lt;li&gt; 
+ &lt;p&gt;I have the fol­low­ing in my con­f.py to de­­ploy:&lt;/p&gt;  
+  &lt;/li&gt; 
+ &lt;/ul&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;DEPLOY_COMMANDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s"&gt;"git checkout gh-pages"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;"rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ ."&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;"git add -A"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;"git commit -a -m 'Updating blog content'"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;"git push"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;"git checkout master"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;WARN­ING: These com­mands are dan­ger­ous. If you don't prop­er­ly ex­clude things
+­like  &lt;code&gt;.git&lt;/code&gt;, you will wipe your en­tire git his­to­ry. I  &lt;em&gt;high­ly&lt;/em&gt;  rec­om­mend
+­com­mit­ting ev­ery­thing and push­ing to GitHub be­fore de­ploy­ing.&lt;/p&gt; 
+ &lt;ul&gt;
+&lt;li&gt;Use&lt;/li&gt; 
+ &lt;/ul&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;_site&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pyc&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DS_Store&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;doit&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;
+&lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;for your  &lt;code&gt;.git­ig­nore&lt;/code&gt;.&lt;/p&gt; 
+ &lt;ul&gt;
+&lt;li&gt;De­spite what it says on the Niko­la page, be sure to read the doc­s, be­cause
+there are a lot of cool fea­tures you won't know about un­less you read about
+them. Al­so be sure to read through  &lt;code&gt;con­f.py&lt;/code&gt;.&lt;/li&gt; 
+ &lt;/ul&gt;
+&lt;h3&gt;Wordpress import&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;This is some­thing that I am still fig­ur­ing out. You can see the progress at
+   &lt;a href="http://asmeurer.github.io/blog/old_blog"&gt;http://as­meur­er.github.io/blog/old_blog&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt; 
+ &lt;p&gt;Im­port­ing from Word­press is pret­ty easy ac­tu­al­ly (at least in the­o­ry). First
+y­ou need to go to the Word­press site dash­board and go to "Ex­port" from the
+"­Tool­s" menu. From here you can down­load an XML file with all your
+­con­tent. Then just do&lt;/p&gt; 
+ &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;nikola&lt;/span&gt; &lt;span class="n"&gt;import_wordpress&lt;/span&gt; &lt;span class="n"&gt;export_file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that the cur­rent ver­sion of Niko­la as of this writ­ing (6.3.0) does­n't do
+this right, so you'll need to use the
+ &lt;a href="https://github.com/getnikola/nikola"&gt;git mas­ter&lt;/a&gt;. There are some is­sues with­
+the im­port, since Word­press has its own markup that it does­n't know ev­ery­thing
+about, so you may need to go in and fix things. Or re­port them as bugs to
+Niko­la and reim­port when they are fixed.&lt;/p&gt; 
+ &lt;p&gt;You'll need to go through the posts and make sure that they are ren­dered
+­cor­rect­ly (this is one rea­son I haven't fin­ished do­ing it yet).&lt;/p&gt; 
+ &lt;p&gt;For com­ments, you first need to cre­ate a Dis­qus ac­coun­t, and en­able it in your
+­con­f.py. You should then up­load the xml file that you ex­port­ed from Word­press
+­to Dis­qus. At this point, the com­ments should just work, be­cause Niko­la set­s
+the Dis­qus url for the im­port­ed com­ments to the old Word­press url (look at the
+Dis­qus sec­tion of one of the built pages).&lt;/p&gt; 
+ &lt;p&gt;I don't know how to au­to­mat­i­cal­ly back­link from Word­press back to
+Niko­la. Maybe I should just au­to­mat­i­cal­ly gen­er­ate some links and paste them
+in man­u­al­ly.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/</guid><pubDate>Sun, 09 Feb 2014 23:19:18 GMT</pubDate></item></channel></rss>

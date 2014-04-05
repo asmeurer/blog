@@ -13,25 +13,15 @@ Really, what we need to do is to decorate the docstring itself, not the class. U
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a = ""
 
-&gt;&gt;&gt; a.x = 1
+>>> a = ""
+
+>>> a.x = 1
 
 Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-AttributeError: 'str' object has no attribute 'x'
-
-[/code]
-
-
-
-So what we have to do is to create a attribute that doesn't inherit.  
-
-
-
-I had for some time wanted to give <a href="http://docs.python.org/2/howto/descriptor.html">descriptors</a> in Python a try, since they are a cool feature, but also the second most complicated feature in Python (the first is metaclasses). If you don't know what a descriptor is, I recommend reading <a href="http://python-history.blogspot.com/2010/06/inside-story-on-new-style-classes.html?m=1">this blog post</a> by Guido van Rossum, the creator of Python. It's the best explanation of the feature there is.  
+  File "<stdinreplaceme line in attributeerror: object has no attribute so what we have to do is create a that doesn inherit. i had for some time wanted give href="http://docs.python.org/2/howto/descriptor.html">descriptors in Python a try, since they are a cool feature, but also the second most complicated feature in Python (the first is metaclasses). If you don't know what a descriptor is, I recommend reading <a href="http://python-history.blogspot.com/2010/06/inside-story-on-new-style-classes.html?m=1">this blog post</a> by Guido van Rossum, the creator of Python. It's the best explanation of the feature there is.  
 
 
 
@@ -43,13 +33,15 @@ If you've ever wondered how <code>property</code>, <code>classmethod</code>, or 
 
 
 
-[code language="py"]
+```py
+
 
 class A(object):
     def f(self):
         return 1
     f = property(f)
-[/code]
+
+```
 
 
 
@@ -61,7 +53,8 @@ Descriptors can allow method to define arbitrary behavior when called, set, or d
 
 
 
-[code language="py"]
+```py
+
 
 class nosubclasses(object):
     def __init__(self, f, cls):
@@ -73,7 +66,8 @@ class nosubclasses(object):
                 return self.f.__get__(obj, type)
             return self.f
         raise AttributeError
-[/code]
+
+```
 
 
 
@@ -81,7 +75,8 @@ it works like this
 
 
 
-[code language="py"]
+```py
+
 
 In [2]: class MyClass(object):
    ...:     x = 1
@@ -115,49 +110,7 @@ In [80]: MySubclass.x
 
 AttributeError                            Traceback (most recent call last)
 
-&lt;ipython-input-80-2b2f456dd101&gt; in &lt;module&gt;()
-
-----&gt; 1 MySubclass.x
-
-
-
-&lt;ipython-input-51-7fe1b5063367&gt; in __get__(self, obj, type)
-      8                 return self.f.__get__(obj, type)
-      9             return self.f
----&gt; 10         raise AttributeError
-
-
-
-AttributeError:
-
-
-
-In [81]: MySubclass().x
-
----------------------------------------------------------------------------
-
-AttributeError                            Traceback (most recent call last)
-
-&lt;ipython-input-81-93764eeb9948&gt; in &lt;module&gt;()
-
-----&gt; 1 MySubclass().x
-
-
-
-&lt;ipython-input-51-7fe1b5063367&gt; in __get__(self, obj, type)
-      8                 return self.f.__get__(obj, type)
-      9             return self.f
----&gt; 10         raise AttributeError
-
-
-
-AttributeError:
-
-[/code]
-
-
-
-Note that by using the third argument to <code>__get__</code>, this works regardless if the attribute is accessed from the class or the object. I have to call <code>__get__</code> on <code>self.f</code> again if it has it to ensure that the right thing happens if the attribute has other descriptor logic defined (and note that regular methods have descriptor logic defined---that's how they convert the first argument <code>self</code> to implicitly be the calling object).
+<ipython-input-80-2b2f456dd101replaceme in mysubclass.x __get__ obj type return self.f.__get__ self.f raise attributeerror attributeerror: mysubclass traceback recent call last note that by using the third argument to>__get__, this works regardless if the attribute is accessed from the class or the object. I have to call <code>__get__</code> on <code>self.f</code> again if it has it to ensure that the right thing happens if the attribute has other descriptor logic defined (and note that regular methods have descriptor logic defined---that's how they convert the first argument <code>self</code> to implicitly be the calling object).
 
 
 
@@ -165,14 +118,16 @@ One could easily make class decorator that automatically adds the attribute to t
 
 
 
-[code language="py"]
+```py
+
 
 def nosubclass_x(args):
     def _wrapper(cls):
         cls.x = nosubclasses(args, cls)
         return cls
     return _wrapper
-[/code]
+
+```
 
 
 
@@ -180,7 +135,8 @@ This automatically adds the property <code>x</code> to the decorated class with 
 
 
 
-[code language="py"]
+```py
+
 
 In [87]: @nosubclass_x(1)
    ....: class MyClass(object):
@@ -200,26 +156,7 @@ In [89]: MySubclass().x
 
 AttributeError                            Traceback (most recent call last)
 
-&lt;ipython-input-89-93764eeb9948&gt; in &lt;module&gt;()
-
-----&gt; 1 MySubclass().x
-
-
-
-&lt;ipython-input-51-7fe1b5063367&gt; in __get__(self, obj, type)
-      8                 return self.f.__get__(obj, type)
-      9             return self.f
----&gt; 10         raise AttributeError
-
-
-
-AttributeError:
-
-[/code]
-
-
-
-For SymPy, we can't use class decorators because we still support Python 2.5, and they were introduced in Python 2.6. The best work around is to just call <code>Class.attribute = nosubclasses(Class.attribute, Class)</code> after the class definition. Unfortunately, you can't access a class inside its definition like you can with functions, so this has to go at the end. 
+<ipython-input-89-93764eeb9948replaceme in mysubclass __get__ obj type return self.f.__get__ self.f raise attributeerror attributeerror: for sympy we can use class decorators because still support python and they were introduced the best work around is to just call>Class.attribute = nosubclasses(Class.attribute, Class) after the class definition. Unfortunately, you can't access a class inside its definition like you can with functions, so this has to go at the end. 
 
 
 
@@ -227,4 +164,4 @@ For SymPy, we can't use class decorators because we still support Python 2.5, an
 
 
 
-After coming up with all this, I remembered that Python already has a pretty standard way to define attributes in such a way that subclasses won't have access to them. All you have to do is use two underscores before the name, like <code>__x</code>, and it will be <a href="http://docs.python.org/2/reference/expressions.html#atom-identifiers">name mangled</a>. This means that the name will be renamed to <code>_classname__x</code> outside the class definition. The name will not be inherited by subclasses.  There are some subtleties with this, particularly for strange class names (names that are too long, or names that begin with an underscore). I <a href="http://stackoverflow.com/q/15845931/161801">asked about this on StackOverflow</a>. The best answer is that there was a function in the standard library, but it was removed in Python 3. My tests reveal that the behavior is different in CPYthon than in PyPy, so getting it right for every possible class is nontrivial. The descriptor thing should work everywhere, though.  On the other hand, <code>getattr(obj, '_' + obj.__class__.__name__ + attributename)</code> will work 99% of the time, and is much easier both to write and to understand than the descriptor. </p></body></html>
+After coming up with all this, I remembered that Python already has a pretty standard way to define attributes in such a way that subclasses won't have access to them. All you have to do is use two underscores before the name, like <code>__x</code>, and it will be <a href="http://docs.python.org/2/reference/expressions.html#atom-identifiers">name mangled</a>. This means that the name will be renamed to <code>_classname__x</code> outside the class definition. The name will not be inherited by subclasses.  There are some subtleties with this, particularly for strange class names (names that are too long, or names that begin with an underscore). I <a href="http://stackoverflow.com/q/15845931/161801">asked about this on StackOverflow</a>. The best answer is that there was a function in the standard library, but it was removed in Python 3. My tests reveal that the behavior is different in CPYthon than in PyPy, so getting it right for every possible class is nontrivial. The descriptor thing should work everywhere, though.  On the other hand, <code>getattr(obj, '_' + obj.__class__.__name__ + attributename)</code> will work 99% of the time, and is much easier both to write and to understand than the descriptor. </ipython-input-89-93764eeb9948replaceme></ipython-input-80-2b2f456dd101replaceme></stdinreplaceme></p></body></html>

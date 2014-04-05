@@ -1,13 +1,15 @@
 <html><body><p>Time for <a href="http://asmeurersympy.wordpress.com/2009/07/20/modifying-a-list-while-looping-through-it-in-python/">another</a> <a href="http://asmeurersympy.wordpress.com/2010/06/16/strange-python-behavior-can-someone-please-explain-to-me-what-is-going-on-here/">one</a> of my WTF Python blog posts.  Yesterday, I randomly typed this in a Python session (it was late at night):
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; True is True is False is True is False
+
+>>> True is True is False is True is False
 
 False
 
-[/code]
+
+```
 
 
 
@@ -15,21 +17,23 @@ First a little background, in case you don't know.  The <code>is</code> operator
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a = 12345
 
-&gt;&gt;&gt; b = 12345
+>>> a = 12345
 
-&gt;&gt;&gt; a == b
+>>> b = 12345
+
+>>> a == b
 
 True
 
-&gt;&gt;&gt; a is b
+>>> a is b
 
 False
 
-[/code]
+
+```
 
 
 
@@ -37,33 +41,35 @@ Now, there are a handful of Python built-ins that are always equal one another w
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a = True
 
-&gt;&gt;&gt; b = True
+>>> a = True
 
-&gt;&gt;&gt; a == b
+>>> b = True
 
-True
-
-&gt;&gt;&gt; a is b
+>>> a == b
 
 True
 
-&gt;&gt;&gt; c = False
-
-&gt;&gt;&gt; d = False
-
-&gt;&gt;&gt; c == d
+>>> a is b
 
 True
 
-&gt;&gt;&gt; c is d
+>>> c = False
+
+>>> d = False
+
+>>> c == d
 
 True
 
-[/code]
+>>> c is d
+
+True
+
+
+```
 
 
 
@@ -71,21 +77,23 @@ Now, going back to the above, we see that each <code>is</code> returns <code>Tru
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; True is True is False is True is False
+
+>>> True is True is False is True is False
 
 False
 
-&gt;&gt;&gt; (((True is True) is False) is True) is False
+>>> (((True is True) is False) is True) is False
 
 True
 
-&gt;&gt;&gt; True is (True is (False is (True is False)))
+>>> True is (True is (False is (True is False)))
 
 True
 
-[/code]
+
+```
 
 
 
@@ -93,25 +101,27 @@ So it seems that <code>is</code> does not associate to the left or to the right.
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; True is True
 
-True
-
-&gt;&gt;&gt; False is False
+>>> True is True
 
 True
 
-&gt;&gt;&gt; True is False
+>>> False is False
+
+True
+
+>>> True is False
 
 False
 
-&gt;&gt;&gt; False is True
+>>> False is True
 
 False
 
-[/code]
+
+```
 
 
 
@@ -119,17 +129,19 @@ It is when we start using multiple <code>is</code>s in the same statement that w
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; False is False is False
+
+>>> False is False is False
 
 True
 
-&gt;&gt;&gt; (False is False) is False
+>>> (False is False) is False
 
 False
 
-[/code]
+
+```
 
 
 
@@ -137,17 +149,19 @@ So what's going on here?  <code>False is False</code> is True, so maybe it is sh
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; True is False is False
 
-False
-
-&gt;&gt;&gt; False is False is True
+>>> True is False is False
 
 False
 
-[/code]
+>>> False is False is True
+
+False
+
+
+```
 
 
 
@@ -159,13 +173,15 @@ Finally, at this point, it occurs to me what is really going on.  Have you figur
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; None is None is None
+
+>>> None is None is None
 
 True
 
-[/code]
+
+```
 
 
 
@@ -173,17 +189,19 @@ So you see what is happening?  <code>is</code> doesn't associate at all.  Rather
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; False == False == False
+
+>>> False == False == False
 
 True
 
-&gt;&gt;&gt; (False == False) == False
+>>> (False == False) == False
 
 False
 
-[/code]
+
+```
 
 
 
@@ -195,44 +213,46 @@ Finally, as <a href="http://docs.python.org/reference/expressions.html#summary">
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; a = 12345
 
-&gt;&gt;&gt; b = 12345
+>>> a = 12345
 
-&gt;&gt;&gt; c = b
+>>> b = 12345
 
-&gt;&gt;&gt; a == b == c
+>>> c = b
+
+>>> a == b == c
 
 True
 
-&gt;&gt;&gt; a is b is c
+>>> a is b is c
 
 False
 
-&gt;&gt;&gt; # Because this is False
+>>> # Because this is False
 
 ... 
 
-&gt;&gt;&gt; a is b
+>>> a is b
 
 False
 
-&gt;&gt;&gt; # But this is True
+>>> # But this is True
 
 ... 
 
-&gt;&gt;&gt; b is c
+>>> b is c
 
 True
 
-&gt;&gt;&gt; # So we get
+>>> # So we get
 
 ... 
 
-&gt;&gt;&gt; a == b is c
+>>> a == b is c
 
 True
 
-[/code]</p></body></html>
+
+```</p></body></html>

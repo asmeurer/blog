@@ -13,7 +13,8 @@ But if you want to use a Symbol that is not one of the ones predefined by <code>
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: r*x
 
@@ -21,13 +22,14 @@ In [1]: r*x
 
 NameError                                 Traceback (most recent call last)
  in ()
-----&gt; 1 r*x
+----> 1 r*x
 
 
 
 NameError: name 'r' is not defined
 
-[/code]
+
+```
 
 
 
@@ -39,39 +41,30 @@ In SymPy 0.7.2, <code>isympy</code> has a new command line option, <code>isympy 
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: r*x
 
 Out[1]: r⋅x
 
-[/code]
+
+```
 
 
 
 There are some caveats to be aware of when using this feature:
 
 <ul>
-	<li>Names must be undefined for <code>isympy -a</code> to work. If you type something like <code>S*x</code>, you'll get:[code language="py"]
+	<li>Names must be undefined for <code>isympy -a</code> to work. If you type something like <code>S*x</code>, you'll get:```py
+
 In [3]: S*x
 
 ---------------------------------------------------------------------------
 
 TypeError                                 Traceback (most recent call last)
 
-&lt;ipython-input-3-6656a97ea7b0&gt; in &lt;module&gt;()
-
-----&gt; 1 S*x
-
-
-
-TypeError: unsupported operand type(s) for *: 'SingletonRegistry' and 'Symbol'
-
-[/code]
-
-
-
-That's because <code>S</code> is already defined (it's the <code>SingletonRegistry</code>, and also a shortcut to <code>sympify()</code>). To use a name that's already defined, either create it manually with <code>var()</code> or delete it using <code>del</code>.</li>
+<ipython-input-3-6656a97ea7b0replaceme in s typeerror: unsupported operand type for and that because>S is already defined (it's the <code>SingletonRegistry</code>, and also a shortcut to <code>sympify()</code>). To use a name that's already defined, either create it manually with <code>var()</code> or delete it using <code>del</code>.</ipython-input-3-6656a97ea7b0replaceme></li>
 	<li>This only works on the top level namespace. If you define a function with an undefined name, it will not automatically define that symbol when run.</li>
 	<li>This works by catching NameError, defining the name, and then re-running the expression. If you have a multiline statement, any lines before the undefined name will be run before the NameError will be caught. This usually won't happen, but it's a potential side-effect to be aware of. We plan to rewrite it using either ast or tokenize to avoid this issue.</li>
 	<li>Obviously, this is intended for interactive use only. If you copy code and put it in a script, or in some other place where someone might be expected to run it, but not necessarily from <code>isympy -a</code>, you should include symbol definitions.</li>
@@ -91,30 +84,35 @@ With SymPy 0.7.2, you can run <code>isympy -i</code>, and it will automatically 
 
 
 
-[code language="py"]
+```py
+
 
 In [1]: 1/2 + x
 
 Out[1]: x + 1/2
 
-[/code]
+
+```
 
 
 
 Again, there are a couple of caveats:
 
 <ul>
-	<li>If you want to get Python style division, you just need to wrap both arguments in <code>int()</code>:[code language="py"]
+	<li>If you want to get Python style division, you just need to wrap both arguments in <code>int()</code>:```py
+
 In [2]: int(1)/int(2)
 
 Out[2]: 0.5
 
-[/code]
+
+```
 
 
 
 Of course, if you just want a floating point number, you can just use <code>N()</code> or <code>.evalf()</code></li>
-	<li>This works by parsing the text and wrapping all integer literals with <code>Integer()</code>. This means that if you have a variable set to a Python int, it will still act like a Python int:[code language="py"]
+	<li>This works by parsing the text and wrapping all integer literals with <code>Integer()</code>. This means that if you have a variable set to a Python int, it will still act like a Python int:```py
+
 In [6]: a = int(1)
 
 
@@ -127,7 +125,8 @@ In [8]: a/b
 
 Out[8]: 0.5
 
-[/code]
+
+```
 
 
 

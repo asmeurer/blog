@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -48,9 +48,13 @@ MathJax.Hub.Config({
     
         <meta name="og:title" content='sqrt(x) now prints as "sqrt(x)"'>
         <meta name="og:url" content="http://asmeurer.github.io/posts/2011/08/18/sqrtx-now-prints-as-sqrtx/">
-            <meta name="og:description" content='Just a few mo­ments ago,  a branch  was pushed in that fixed one of my big­gest griev­ances in SymPy, if not the big­gest.  Pre­vi­ous­ly we had this be­hav­ior: 
- [code lan­guage="py"] 
- In [1]: sqrt'>
+            <meta name="og:description" content="Just a few mo­ments ago,  a branch  was pushed in that fixed one of my big­gest griev­ances in SymPy, if not the big­gest.  Pre­vi­ous­ly we had this be­hav­ior: 
+ In [1]: sqrt(x)
+
+Out[1]: x**(1/2)
+
+
+">
         <meta name="og:site_name" content="Aaron Meurer's Blog">
         <meta name="og:type" content="article">
 
@@ -145,115 +149,198 @@ MathJax.Hub.Config({
     <div>
 <p></p>
 <p>Just a few mo­ments ago,  <a href="https://github.com/sympy/sympy/pull/548" target="_blank">a branch</a>  was pushed in that fixed one of my big­gest griev­ances in SymPy, if not the big­gest.  Pre­vi­ous­ly we had this be­hav­ior:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: sqrt(x)</p> 
- <p>Out­[1]: x**(1/2)</p> 
- <p>In [2]: solve(x**2 - 2, x)</p> 
- <p>Out­[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>[/­code]</p> 
- <p>Now sup­pose you took the out­put of those ex­pres­sions and past­ed them in­to isympy:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [3]: x**(1/2)</p> 
- <p>Out­[3]: x**0.5</p> 
- <p>In [4]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>Out­[4]: [-1.41421356237, 1.41421356237]</p> 
- <p>[/­code]</p> 
- <p>That's with  <code><strong>fu­ture</strong>.di­vi­sion</code>.  Here's what would hap­pen with old di­vi­sion:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [2]: x**(1/2)</p> 
- <p>Out­[2]: 1</p> 
- <p>In [3]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>Out­[3]: [-1, 1]</p> 
- <p>[/­code]</p> 
- <p>This is be­cause with old di­vi­sion,  <code>1/2</code>  eval­u­ates to  <code>0</code>.</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>Now sup­pose you took the out­put of those ex­pres­sions and past­ed them in­to isympy:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.41421356237</span><span class="p">,</span> <span class="mf">1.41421356237</span><span class="p">]</span>
+</pre></div>
+
+
+<p>That's with  <code><strong>fu­ture</strong>.di­vi­sion</code>.  Here's what would hap­pen with old di­vi­sion:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="mi">1</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+
+<p>This is be­cause with old di­vi­sion,  <code>1/2</code>  eval­u­ates to  <code>0</code>.</p> 
  <p>The prob­lem is that Python eval­u­ates  <code>1/2</code>  to  <code>0.5</code>  (or  <code>0</code>) be­fore SymPy has a change to con­vert it to a Ra­tio­nal.  There were sev­er­al ways that peo­ple got around this.  If you copy an ex­pres­sion with num­ber di­vi­sion in it and want to paste it in­to a SymPy ses­sion, the eas­i­est way to do this was to pass it as a string to  <code>sympi­fy()</code>:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: sympi­fy("x**(1/2)")</p> 
- <p>Out­[1]: x**(1/2)</p> 
- <p>In [2]: sympi­fy("[-2<strong>(1/2), 2</strong>(1/2)]")</p> 
- <p>Out­[2]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>[/­code]</p> 
- <p>If that was too much typ­ing for you, you could use the  <code>S()</code>  short­cut to  <code>sympi­fy()</code></p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [3]: S("x**(1/2)")</p> 
- <p>Out­[3]: x**(1/2)</p> 
- <p>In [4]: S("[-2<strong>(1/2), 2</strong>(1/2)]")</p> 
- <p>Out­[4]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>[/­code]</p> 
- <p>This so­lu­tion is fine if you want to paste an ex­pres­sion in­to a SymPy ses­sion, but it's not a very clean one if you want to paste code in­to a scrip­t. For that, you need to mod­i­fy the code so that it no longer con­tains Python in­t/Python in­t.  The eas­i­est way to do this is to sympi­fy one of the ints.  So you would do some­thing like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [5]: x**(S(1)/2)</p> 
- <p>Out­[5]: x**(1/2)</p> 
- <p>In [6]: [-2<strong>(S(1)/2), 2</strong>(S(1)/2)]</p> 
- <p>Out­[6]: [-2<strong>(1/2), 2</strong>(1/2)]</p> 
- <p>[/­code]</p> 
- <p>This was­n't ter­ri­bly read­able, though.  The  <em>best</em>  way to fix the prob­lem when you had a pow­er of one half was to use  <code>sqrt()</code>, which is a short­cut to  <code>Pow(…, Ra­tio­nal(1, 2))</code>.   </p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">sympify</span><span class="p">(</span><span class="s">"x**(1/2)"</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">sympify</span><span class="p">(</span><span class="s">"[-2**(1/2), 2**(1/2)]"</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>If that was too much typ­ing for you, you could use the  <code>S()</code>  short­cut to  <code>sympi­fy()</code></p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">S</span><span class="p">(</span><span class="s">"x**(1/2)"</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">S</span><span class="p">(</span><span class="s">"[-2**(1/2), 2**(1/2)]"</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>This so­lu­tion is fine if you want to paste an ex­pres­sion in­to a SymPy ses­sion, but it's not a very clean one if you want to paste code in­to a scrip­t. For that, you need to mod­i­fy the code so that it no longer con­tains Python in­t/Python in­t.  The eas­i­est way to do this is to sympi­fy one of the ints.  So you would do some­thing like</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>This was­n't ter­ri­bly read­able, though.  The  <em>best</em>  way to fix the prob­lem when you had a pow­er of one half was to use  <code>sqrt()</code>, which is a short­cut to  <code>Pow(…, Ra­tio­nal(1, 2))</code>.   </p> 
  <p>Well, this last item should make you think.  If  <code>sqrt(x)</code>  is more read­able than  <code>x<strong>(S(1)/2)</strong></code>  or even  <code>x(1/2)</code>, why not print it like that in the first place.  Well, I thought so, so I changed the string print­er, and now this is the way that SymPy work­s.  So 90% of the time, you can just paste the re­sult of  <code>str()</code>  or  <code>print</code>, and it will just work, be­cause there won't be any  <code>**(1/2)</code>, which was by far the most com­mon prob­lem of "Python eval­u­at­ing the ex­pres­sion to some­thing be­fore we can."  In the git mas­ter, SymPy now be­haves like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: sqrt(x)</p> 
- <p>Out­[1]: sqrt(x)</p> 
- <p>In [2]: solve(x**2 - 2, x)</p> 
- <p>Out­[2]: [-sqrt(2), sqrt(2)]</p> 
- <p>[/­code]</p> 
- <p>You can ob­vi­ous­ly just copy and paste these re­sult­s, and you get the ex­act same thing back.  Not on­ly does this make ex­pres­sions more copy­-and-­pastable, but the out­put is  <em>much</em>  nicer in terms of read­abil­i­ty.  Here are some be­fore and af­ters that come from ac­tu­al SymPy doctests that I had to change af­ter fix­ing the print­er:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>Be­fore:</p> 
- <p>&gt;&gt;&gt; e = ((2+2<em>sqrt(2))</em>x+(2+sqrt(8))*y)/(2+sqrt(2))</p> 
- <p>&gt;&gt;&gt; rad­sim­p(e)</p> 
- <p>2<strong>(1/2)*x + 2</strong>(1/2)*y</p> 
- <p>Af­ter:</p> 
- <p>&gt;&gt;&gt; rad­sim­p(e)</p> 
- <p>sqrt(2)<em>x + sqrt(2)</em>y</p> 
- <p>[/­code]</p> 
- <p>[code lan­guage="py"]</p> 
- <p>Be­fore:</p> 
- <p>&gt;&gt;&gt; b = besselj(n, z)</p> 
- <p>&gt;&gt;&gt; b.rewrite(jn)</p> 
- <p>2<strong>(1/2)*z</strong>(1/2)<em>jn(n - 1/2, z)/pi</em>*(1/2)</p> 
- <p>Af­ter:</p> 
- <p>&gt;&gt;&gt; b.rewrite(jn)</p> 
- <p>sqrt(2)<em>sqrt(z)</em>jn(n - 1/2, z)/sqrt(pi)</p> 
- <p>[/­code]</p> 
- <p>[code lan­guage="py"]</p> 
- <p>Be­fore:</p> 
- <p>&gt;&gt;&gt; x = sympi­fy('-1/(-3/2+(1/2)<em>sqrt(5))</em>sqrt(3/2-1/2*sqrt(5))')</p> 
- <p>&gt;&gt;&gt; x</p> 
- <p>(3/2 - 5<strong>(1/2)/2)</strong>(-1/2)</p> 
- <p>Af­ter</p> 
- <p>&gt;&gt;&gt; x</p> 
- <p>1/sqrt(3/2 - sqrt(5)/2)</p> 
- <p>[/­code]</p> 
- <p>And not on­ly is  <code>sqrt(x)</code>  eas­i­er to read than  <code>x**(1/2)</code>  but it's few­er char­ac­ter­s.</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">[</span><span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>You can ob­vi­ous­ly just copy and paste these re­sult­s, and you get the ex­act same thing back.  Not on­ly does this make ex­pres­sions more copy­-and-­pastable, but the out­put is  <em>much</em>  nicer in terms of read­abil­i­ty.  Here are some be­fore and af­ters that come from ac­tu­al SymPy doctests that I had to change af­ter fix­ing the print­er:</p> 
+ <div class="codehilite"><pre><span class="n">Before</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">radsimp</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">y</span>
+
+
+
+<span class="n">After</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">radsimp</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">y</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span class="n">Before</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">besselj</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">jn</span><span class="p">)</span>
+
+<span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">jn</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">/</span><span class="n">pi</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">After</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">jn</span><span class="p">)</span>
+
+<span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">jn</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span class="n">Before</span><span class="p">:</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="s">'-1/(-3/2+(1/2)*sqrt(5))*sqrt(3/2-1/2*sqrt(5))'</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+
+<span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="n">After</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+
+<span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>And not on­ly is  <code>sqrt(x)</code>  eas­i­er to read than  <code>x**(1/2)</code>  but it's few­er char­ac­ter­s.</p> 
  <p>In the course of chang­ing this, I went ahead and did some greps of the repos­i­to­ry to get rid of all  <code><strong>(S(1)/2)</strong></code>,  <code>Ra­tio­nal(1, 2)</code>  and sim­i­lar through­out the code base (not just in the out­put of doctests where the change had to be made), re­plac­ing them with just  <code>sqrt</code>.  Big thanks to Chris Smith for help­ing me catch all in­stances of this.  Now the code should be a lit­tle eas­i­er to read and main­tain.</p> 
  <p><strong>Fu­ture Work</strong></p> 
  <p>This is a big change, and I be­lieve it will fix the copy­-­paste prob­lem for 90% of ex­pres­sion­s. But it does not solve it com­plete­ly.  It is still pos­si­ble to get in­t/int in the string form of an ex­pres­sion.  On­ly pow­ers of 1/2 and -1/2 are con­vert­ed to sqrt, so any oth­er ra­tio­nal pow­er will still print as a/b, like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [1]: x**Ra­tional(3, 2)</p> 
- <p>Out­[1]: x**(3/2)</p> 
- <p>[/­code]</p> 
- <p>Al­so, as you may have no­ticed in the last ex­am­ple above, a ra­tio­nal num­ber that sits by it­self will still be print­ed as in­t/in­t, like</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [2]: (1 + x)/2</p> 
- <p>Out­[2]: x/2 + 1/2</p> 
- <p>[/­code]</p> 
- <p>There­fore, I'm leav­ing the  <a href="http://code.google.com/p/sympy/issues/detail?id=2359" target="_blank">is­sue for this</a>  open to dis­cuss po­ten­tial fu­ture fix­es to the string print­er.  One idea is to cre­ate a  <code>root</code>  func­tion that is a short­cut to  <code>root(x, a) == x**(1/a)</code>. This would work for ra­tio­nal pow­ers where the nu­mer­a­tor is 1.  For oth­er ra­tio­nal pow­er­s, we could then den­est these with an in­te­ger pow­er.  It's im­por­tant to do this in the right or­der, though, as they are not equiv­a­len­t.  You can see that SymPy au­to-sim­pli­fies it when it is math­e­mat­i­cal­ly cor­rect in all cas­es, and not when it is not:</p> 
- <p>[code lan­guage="py"]</p> 
- <p>In [3]: sqrt(x**3)</p> 
- <p>Out­[3]: sqrt(x**3)</p> 
- <p>In [4]: sqrt(x)**3</p> 
- <p>Out­[4]: x**(3/2)</p> 
- <p>[/­code]</p> 
- <p>Thus $la­tex \left­(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $la­tex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, re­place $la­tex x$ with -1).</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Al­so, as you may have no­ticed in the last ex­am­ple above, a ra­tio­nal num­ber that sits by it­self will still be print­ed as in­t/in­t, like</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">x</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+
+
+<p>There­fore, I'm leav­ing the  <a href="http://code.google.com/p/sympy/issues/detail?id=2359" target="_blank">is­sue for this</a>  open to dis­cuss po­ten­tial fu­ture fix­es to the string print­er.  One idea is to cre­ate a  <code>root</code>  func­tion that is a short­cut to  <code>root(x, a) == x**(1/a)</code>. This would work for ra­tio­nal pow­ers where the nu­mer­a­tor is 1.  For oth­er ra­tio­nal pow­er­s, we could then den­est these with an in­te­ger pow­er.  It's im­por­tant to do this in the right or­der, though, as they are not equiv­a­len­t.  You can see that SymPy au­to-sim­pli­fies it when it is math­e­mat­i­cal­ly cor­rect in all cas­es, and not when it is not:</p> 
+ <div class="codehilite"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Thus $la­tex \left­(\sqrt{x}\right)^3 = x^{\frac{3}{2}}$ but $la­tex \sqrt{x^3} \neq x^{\frac{3}{2}}$ (to see this, re­place $la­tex x$ with -1).</p> 
  <p>So the idea would be to print  <code>Pow(­ex­pr, Ra­tio­nal(a, b))</code>  as  <code>root(­ex­pr, b)**a</code>.   </p> 
  <p>The mer­its of this are de­bat­able, but any­way I think we should have this  <code>root()</code>  func­tion in any case (see  <a href="http://code.google.com/p/sympy/issues/detail?id=2643" target="_blank">is­sue 2643</a>).</p> 
  <p>An­oth­er idea, which is prob­a­bly not a good one, is to al­ways print  <code>in­t/int</code>  as  <code>S(in­t)/int</code>.  So we would get</p> 
- <p>[code lan­guage="py"]</p> 
- <p>&gt;&gt;&gt; Ra­tio­nal(1, 2)</p> 
- <p>S(1)/2</p> 
- <p>&gt;&gt;&gt; x**Ra­tional(4, 5)</p> 
- <p>x**(S(4)/5)</p> 
- <p>[/­code]</p> 
- <p>This is prob­a­bly a bad idea be­cause even though ex­pres­sions would al­ways be copy­-­pastable, they would be slight­ly less read­able.   </p> 
+ <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This is prob­a­bly a bad idea be­cause even though ex­pres­sions would al­ways be copy­-­pastable, they would be slight­ly less read­able.   </p> 
  <p>By the way, in case you did­n't catch it, all of these changes on­ly af­fect the string print­er.  The pret­ty print­er re­mained un­af­fect­ed, and would un­der any ad­di­tion­al changes, as it is­n't copy­-­pastable any­way, and al­ready does a su­perb job of print­ing root­s.</p>
 </div>
     </div>

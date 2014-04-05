@@ -22,7 +22,7 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
    tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'], ['$latex','$'] ],
        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
    },
    displayAlign: 'left', // Change this to 'center' to center equations.
@@ -48,9 +48,8 @@ MathJax.Hub.Config({
     
         <meta name="og:title" content="How to install the development version of IPython Qtconsole and Notebo">
         <meta name="og:url" content="http://asmeurer.github.io/posts/2012/06/14/how-to-install-the-development-version-of-ipython-qtconsole-and-notebook-in-ubuntu/">
-            <meta name="og:description" content='Both the awe­some  IPython note­book  and  Qt­con­sole  are in the Ubun­tu repos­i­to­ries, so if you just want to use the sta­ble re­leased ver­sion­s, you can just do 
- [code lan­guage="bash"] 
- su­'>
+            <meta name="og:description" content="Both the awe­some  IPython note­book  and  Qt­con­sole  are in the Ubun­tu repos­i­to­ries, so if you just want to use the sta­ble re­leased ver­sion­s, you can just do 
+ sudo apt-get install ipython-">
         <meta name="og:site_name" content="Aaron Meurer's Blog">
         <meta name="og:type" content="article">
 
@@ -145,23 +144,34 @@ MathJax.Hub.Config({
     <div>
 <p></p>
 <p>Both the awe­some  <a href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">IPython note­book</a>  and  <a href="http://ipython.org/ipython-doc/stable/interactive/qtconsole.html">Qt­con­sole</a>  are in the Ubun­tu repos­i­to­ries, so if you just want to use the sta­ble re­leased ver­sion­s, you can just do</p> 
- <p>[code lan­guage="bash"]</p> 
- <p>su­do ap­t-get in­stall ipython-note­book ipython-qt­con­sole</p> 
- <p>[/­code]</p> 
- <p>and be on your way.  But the git de­vel­op­ment ver­sion has a lot of cool new fea­tures, and you may not want to wait for 0.13 to be re­leased and make its way to the Ubun­tu re­pos.  But you may be think­ing that to use those you will have to fig­ure out all the de­pen­den­cies your­self.  Ac­tu­al­ly, it's pret­ty easy:</p> 
- <p>[code lan­guage="bash"]</p> 
- <h2>First install git, if you don't already have it</h2>
-<p>su­do ap­t-get in­stall git</p> 
- <h2>Then, clone the IPython repo, if you haven't already.</h2>
-<p>git clone git://github.­com/ipython/ipython.git</p> 
- <p>cd ipython</p> 
- <h2>Now just install IPython with apt, then uninstall it.  The dependencies will remain</h2>
-<p>su­do ap­t-get in­stall ipython-note­book ipython-qt­con­sole</p> 
- <p>su­do ap­t-get re­move ipython-note­book ipython -qt­con­sole ipython</p> 
- <h2>Now install the IPython git version in such a way that will keep up to date when you pull</h2>
-<p>su­do python set­up.py de­vel­op</p> 
- <p>[/­code]</p> 
- <p>To up­date, just cd in­to that ipython di­rec­to­ry and type  <code>git pull</code>.  That's it.  Now type  <code>ipython note­book</code>  or  <code>ipython qt­con­sole</code>  to get the mag­ic.</p> 
+ <div class="codehilite"><pre>sudo apt-get install ipython-notebook ipython-qtconsole
+</pre></div>
+
+
+<p>and be on your way.  But the git de­vel­op­ment ver­sion has a lot of cool new fea­tures, and you may not want to wait for 0.13 to be re­leased and make its way to the Ubun­tu re­pos.  But you may be think­ing that to use those you will have to fig­ure out all the de­pen­den­cies your­self.  Ac­tu­al­ly, it's pret­ty easy:</p> 
+ <div class="codehilite"><pre><span class="c"># First install git, if you don't already have it</span>
+
+sudo apt-get install git
+
+<span class="c"># Then, clone the IPython repo, if you haven't already.</span>
+
+git clone git://github.com/ipython/ipython.git
+
+<span class="nb">cd </span>ipython
+
+<span class="c"># Now just install IPython with apt, then uninstall it.  The dependencies will remain</span>
+
+sudo apt-get install ipython-notebook ipython-qtconsole
+
+sudo apt-get remove ipython-notebook ipython -qtconsole ipython
+
+<span class="c"># Now install the IPython git version in such a way that will keep up to date when you pull</span>
+
+sudo python setup.py develop
+</pre></div>
+
+
+<p>To up­date, just cd in­to that ipython di­rec­to­ry and type  <code>git pull</code>.  That's it.  Now type  <code>ipython note­book</code>  or  <code>ipython qt­con­sole</code>  to get the mag­ic.</p> 
  <p>ED­IT: Af­ter you do this,  <code>ap­t-get</code>  will start bug­ging you ev­ery time that you use it that a bunch of pack­ages are no longer need­ed.  These are the ones that you do need for the qt­con­sole and the note­book, so you should not au­tore­move them as it says.  Rather, set them as man­u­al­ly in­stalled by copy­ing the list of pack­ages that it tells you about and  <code>su­do ap­t-get in­stall</code>ing them.</p>
 </div>
     </div>

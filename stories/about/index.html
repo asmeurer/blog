@@ -19,19 +19,6 @@
 
 
     
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-   tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ['$ latex','$'] ],
-       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
-   },
-   displayAlign: 'left', // Change this to 'center' to center equations.
-   "HTML-CSS": {
-       styles: {'.MathJax_Display': {"margin": 0}}
-   }
-});
-</script>
-
         <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
     
@@ -73,6 +60,8 @@ MathJax.Hub.Config({
         <meta name="twitter:card" content="summary">
             <meta name="twitter:site:id" content="123456">
             <meta name="twitter:creator:id" content="654321">
+
+    
 
 
 
@@ -136,7 +125,9 @@ MathJax.Hub.Config({
             
 <article class="storypage" itemscope="itemscope" itemtype="http://schema.org/Article">
     <header>
-        <h1 itemprop="headline name">About</h1>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">About</a></h1>
+
     </header>
     <div itemprop="articleBody text">
     <div>
@@ -162,27 +153,15 @@ MathJax.Hub.Config({
 
 
             <script src="../../assets/js/all-nocdn.js"></script>
-    
-<!-- Social buttons -->
-<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
-<a class="addthis_button_more">Share</a>
-<ul>
-<li>
-<a class="addthis_button_facebook"></a>
-</li>
-<li>
-<a class="addthis_button_google_plusone_share"></a>
-</li>
-<li>
-<a class="addthis_button_linkedin"></a>
-</li>
-<li>
-<a class="addthis_button_twitter"></a>
-</li>
-</ul>
+    <div style="text-align:center">
+<span class="st_twitterfollow_large" displaytext="Twitter Follow" st_username="asmeurer"></span>
+<span class="st_twitter_large" displaytext="Tweet"></span>
+<span class="st_googleplus_large" displaytext="Google +"></span>
+<span class="st_plusone_large" displaytext="Google +1"></span>
+
+<span class="st_email_large" displaytext="Email"></span>
+
 </div>
-<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
-<!-- End of social buttons -->
 
 
     <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
@@ -199,6 +178,10 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 
 
 </body>

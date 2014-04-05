@@ -75,7 +75,8 @@ existing integrate() yet, and you can use it to compare.
 
 Examples:
 
-[code language="py"]
+```py
+
 
 In [1]: risch_integrate(exp(x**2), x)
 
@@ -155,7 +156,8 @@ In [9]: %timeit integrate(log(x)**10, x).diff(x)
 
 1 loops, best of 3: 2.35 s per loop
 
-[/code]
+
+```
 
 
 
@@ -195,7 +197,8 @@ Also, they can give different looking results, and at different speeds.  For exa
 
 <strong>Hover over the code and click on the left-most, "view source" icon (a paper icon with <tt>&lt; &gt;</tt> over it) to view without breaks.  Opens in a new window.</strong>
 
-[code language="py"]
+```py
+
 
 In [1]: f = (x*(x + 1)*((x**2*exp(2*x**2) - log(x + 1)**2)**2 +
    ...: 2*x*exp(3*x**2)*(x - (2*x**3 + 2*x**2 + x + 1)*log(x + 1))))/((x +
@@ -264,7 +267,8 @@ In [8]: cancel(risch_integrate(f, x, handle_first='exp').diff(x) - f)
 
 Out[8]: 0
 
-[/code]
+
+```
 
 
 

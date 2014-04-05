@@ -26,21 +26,23 @@ An easy way to do this is to give a "fake" example session showing how your code
 
 
 
-[code language="py"]
+```py
 
-&gt;&gt;&gt; u = Function('u')
 
-&gt;&gt;&gt; # Solve the Heat Equation in one dimension
+>>> u = Function('u')
 
-&gt;&gt;&gt; pdesolve(u(x, t).diff(t) - c**2*u(x, t).diff(x, x), u(x), {u(x, 0):f(x), u(0, t):0, u(0, pi):0}, method='separation of variables') 
+>>> # Solve the Heat Equation in one dimension
+
+>>> pdesolve(u(x, t).diff(t) - c**2*u(x, t).diff(x, x), u(x), {u(x, 0):f(x), u(0, t):0, u(0, pi):0}, method='separation of variables') 
 
 2/pi*Sum(Integral(f(x)*sin(n*x), x)*sin(n*x)*exp(-n**2*c**2*t), (n, 1, oo))
 
-&gt;&gt;&gt; # Use Fourier Transforms to get d'Alembert's Solution to the Wave Equation
+>>> # Use Fourier Transforms to get d'Alembert's Solution to the Wave Equation
 
-&gt;&gt;&gt; …
+>>> …
 
-[/code]
+
+```
 
 
 
