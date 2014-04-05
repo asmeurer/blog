@@ -516,19 +516,20 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'tables']
 
 # Social buttons. This is sample code for AddThis (which was the default for a
 # long time). Insert anything you want here, or even make it empty.
-# SOCIAL_BUTTONS_CODE = """
-# <!-- Social buttons -->
-# <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
-# <a class="addthis_button_more">Share</a>
-# <ul><li><a class="addthis_button_facebook"></a>
-# <li><a class="addthis_button_google_plusone_share"></a>
-# <li><a class="addthis_button_linkedin"></a>
-# <li><a class="addthis_button_twitter"></a>
-# </ul>
-# </div>
-# <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
-# <!-- End of social buttons -->
-# """
+
+SOCIAL_BUTTONS_CODE = ("""<div style="text-align:center">
+<span class='st_twitterfollow_large' displayText='Twitter Follow' st_username='asmeurer'></span>
+<span class='st_twitter_large' displayText='Tweet'></span>
+<span class='st_googleplus_large' displayText='Google +'></span>
+<span class='st_plusone_large' displayText='Google +1'></span>
+"""
+
+#<span class='st_linkedin_large' displayText='LinkedIn'></span>
++ """
+<span class='st_email_large' displayText='Email'></span>
+<span class='st_sharethis_large' displayText='ShareThis'></span>
+</div>
+""")
 
 # Hide link to source for the posts?
 # HIDE_SOURCELINK = False
@@ -602,6 +603,15 @@ $(document).ready(function() {
     });
 });
 </script>
+"""
+
+# http://www.sharethis.com/get-sharing-tools/#
+# Login using LinkedIn
+
+BODY_END += """
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 """
 
 EXTRA_HEAD_DATA = """
