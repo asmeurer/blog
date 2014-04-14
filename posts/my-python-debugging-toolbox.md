@@ -41,6 +41,8 @@ debugging tool is to allow us to see a sufficient portion of the code's
 execution while maintaining, or in many cases, growing, our high-level
 understanding of what it does.
 
+# Tools that come with the standard library
+
 ## Looking at the code
 
 This is such a simple method that it hardly even counts.  The first thing I do
@@ -58,8 +60,12 @@ debugging tool.
 
 ## `traceback.print_stack`
 
-## PuDB
-
 ## `faulthandler`
 
 ## Writing to another terminal
+
+# Third-party tools
+
+## PuDB
+
+## `IPython.embed`
