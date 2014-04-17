@@ -94,3 +94,5 @@ write
 ## PuDB
 
 ## `IPython.embed`
+
+## git bisect
