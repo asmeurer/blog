@@ -56,6 +56,31 @@ debugging tool.
 
 ## `print` statements
 
+`print` statements (or functions if you're using Python 3 like you're supposed
+to be) are the second simplest method of debugging. `print` is always there,
+and it's easy to type.  They will let you peak into a very specific part of
+your code (whatever specific part you want), and tell you anything whenever it
+is run. They also tell you how many times something is run.
+
+Some useful tricks for print:
+
+- If your code is outputting a lot with your print, pipe into `less`.  This
+  will let you interactively see what is coming out, and you can do things
+  like regex search (`/`).
+
+- Get into the habit of printing a little header with each item. That is,
+  instead of just writing
+
+```python
+print(x)
+```
+
+write
+
+  ```py
+  print('x', x)
+  ```
+
 ## raise an exception
 
 ## `traceback.print_stack`
