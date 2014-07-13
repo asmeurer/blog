@@ -130,9 +130,6 @@ Again, all talks I saw at the conference were good. But those two I felt were
 the best. I should also mention here that I myself gave a talk on Conda (more
 on that later).
 
-<center><iframe width="560" height="315"
-src="//www.youtube.com/embed/UaIvrDWrIWM" frameborder="0" allowfullscreen></iframe></center>
-
 # The Conference
 
 Of course, the talks are only a part of any conference. The best part of SciPy
@@ -148,6 +145,16 @@ IPython Notebook last year and how it has solved the fundamental problems of
 sharing and presenting data analysis, this year, everyone thanked me for my
 work on Conda and how it has basically solved the packaging problem, the
 ubiquitous problem in Python since people started using it.
+
+## Conda: The Packaging Problem Solved
+
+Here is the talk I gave on Conda:
+
+<center><iframe width="560" height="315"
+src="//www.youtube.com/embed/UaIvrDWrIWM" frameborder="0" allowfullscreen></iframe></center>
+
+I made the claim in my talk that Conda has solved the packaging problem, and
+the general feel from people I talked to who are using Conda is that it has.
 
 I think this slide from my presentation summarizes why Conda solves the
 packaging problem.
@@ -167,7 +174,73 @@ system level package manager, which is fundamentally Python agnostic, Conda is
 able to deal with all packages equally, whether that package be a Python
 package, a C extension which other packages link against, or Python itself.
 
-<!-- LocalWords:  Gede Obinna Nwanna iframe src frameborder allowfullscreen
+By being truly cross-platform and user installable, Conda is able to reach the
+maximal number of users, especially those who have historically been hit by
+the packaging problem the hardest, namely, those who are on Windows or those
+who do not have admin rights to install necessary tools to install the
+packages they need.
+
+Finally, Conda installs binaries, not source packages, and its metadata is
+entirely static (you do not need to execute arbitrary Python code to capture
+the metadata of a package).  These two things remove two of the largest
+sources of issues with the existing Python packaging tools, such as compiler
+errors, and nonuniformity in metadata standards (there seem to be as many
+different ways of writing `setup.py` as there are packages on PyPI).
+
+Conda opens up its ecosystem to anybody by making it easy for people to build
+their own Conda packages using reproducible Conda recipes.  And
+[Binstar](https://binstar.org/) makes it easy to share those packages.  I'm
+very excited about Binstar, as I think it does for packaging what GitHub has
+done for open source, i.e., distributes and democratizes it. There are
+challenges on how to deal with this, of course. As with any distributed
+democratized system, Binstar can be a wild west of packages.  Continuum is
+thinking about ways to manage this complexity, which still reaping the
+benefits it provides. If you have any thoughts on things that can be done, let
+me know in the comments section below.
+
+# Sprints
+
+The conference ended with two days of sprints. I mainly helped people with
+Conda packaging.  A key thing for me is that I worked with Aron Ahmadia so
+that HashDist can generate Conda packages. HashDist is a package compiling
+framework that makes it easy to have completely reproducible builds by hashing
+all the information that was used to compile a package, and recompiling when
+any of that information changes. You can learn more about HashDist by watching
+Aron's talk from the conference.
+
+<center><iframe width="560" height="315" src="//www.youtube.com/embed/wviHkzk0AkY"
+frameborder="0" allowfullscreen></iframe></center>
+
+I am now convinced that HashDist is a good solution for people who still want
+the control of compiling their own packages. If HashDist is able to produce
+Conda packages, then you can gain the benefits of both worlds: Conda's
+powerful package management and environment notion, with HashDist's modular
+and reproducible package building framework.
+
+# Other thoughts
+
+The organizers of SciPy did an excellent job this year.  The video crew did
+something which I have not seen before, which is that they uploaded the videos
+of the talks on the same day that the talks were held. My talk, which was held
+right before lunch, was uploaded before the last talk of the day.  Something
+that I saw come out of this is that people not attending the conference were
+able to watch the talks and take part of the conversation with the conference
+attendees, via Twitter and other social media, or by joining the sprints after
+the conference.
+
+The extended three days of talks really took their toll on me. The conference
+starts early enough in the morning and the social events after go so late in
+the evening that each day of the conference I become a little more sleep
+deprived. Usually by two days of tutorials and two days of talks I have hit my
+limit, and this year, I really had a hard time making it through that fifth
+day. Fortunately I can sleep in a little bit for the sprints, as it's not a
+big deal if you miss the beginning.
+
+This year the conference organizers made a push for diversity, and it
+shows. There were noticeably more women at the conference this year, and not
+just insomuch as there were more people at all.
+
+<!-- LocalWords:  Gede Obinna Nwanna iframe src frameborder allowfullscreen -
 -->
-<!--  LocalWords:  - VanderPlas 's
+<!--  LocalWords:  - VanderPlas 's PyDy 's img Ahmadia
  -->
