@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html prefix="
-        og: http://ogp.me/ns#
-        article: http://ogp.me/ns/article#
-    " lang="en">
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
     <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Python Trickery | Aaron Meurer's Blog</title>
 
     
@@ -85,10 +82,11 @@ x=3,)">
 
 
 
+
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
+    <div class="container">
 <!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -97,7 +95,10 @@ x=3,)">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">
+
+                <span id="blog-title">Aaron Meurer's Blog</span>
+            </a>
         </div>
 <!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -112,6 +113,7 @@ x=3,)">
 <li>
 <a href="../../rss.xml">RSS</a>
 
+                
             </li>
 </ul>
                 
@@ -127,11 +129,12 @@ x=3,)">
     <a href="index.md" id="sourcelink">Source</a>
     </li>
 
+                
             </ul>
         </div>
 <!-- /.navbar-collapse -->
     </div>
-<!-- /.container-fluid -->
+<!-- /.container -->
 </nav>
 
 <!-- End of Menubar -->
@@ -141,27 +144,32 @@ x=3,)">
         <!--Body content-->
         <div class="row">
             
+            
 <article class="storypage" itemscope="itemscope" itemtype="http://schema.org/Article">
     <header>
         
     <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Python Trickery</a></h1>
+
+        
 
     </header>
     <div itemprop="articleBody text">
     <div>
 <p>Here are some bits of Python trickery that I have come across. Each of the
 following is invalid syntax.  See if you can figure out why</p>
-<div class="codehilite"><pre><span class="mi">1</span> <span class="o">+</span> <span class="ow">not</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
+<pre class="code literal-block"><span class="mi">1</span> <span class="o">+</span> <span class="ow">not</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre>
 
 
-<div class="codehilite"><pre><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="p">(</span>
+<pre class="code literal-block"><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="p">(</span>
 <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">),</span>
 <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">,)</span>
-</pre></div>
+</pre>
 </div>
     </div>
+    
+
 </article>
 
         </div>
@@ -174,6 +182,7 @@ following is invalid syntax.  See if you can figure out why</p>
     <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
   </a>
 
+            
         </p></footer>
     </div>
 </div>
@@ -209,6 +218,7 @@ $(document).ready(function() {
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
 
 
 </body>

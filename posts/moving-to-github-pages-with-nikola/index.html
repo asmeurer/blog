@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html prefix="
-        og: http://ogp.me/ns#
-        article: http://ogp.me/ns/article#
-    " lang="en">
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
     <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Moving to GitHub pages with Nikola | Aaron Meurer's Blog</title>
 
     
@@ -52,10 +49,11 @@ getting pretty annoyed at Wordpress. It forces you ">
 
 
 
+
 <!-- Menubar -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
+    <div class="container">
 <!-- This keeps the margins nice -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -64,7 +62,10 @@ getting pretty annoyed at Wordpress. It forces you ">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://asmeurer.github.io/">Aaron Meurer's Blog</a>
+            <a class="navbar-brand" href="http://asmeurer.github.io/">
+
+                <span id="blog-title">Aaron Meurer's Blog</span>
+            </a>
         </div>
 <!-- /.navbar-header -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -79,6 +80,7 @@ getting pretty annoyed at Wordpress. It forces you ">
 <li>
 <a href="../../rss.xml">RSS</a>
 
+                
             </li>
 </ul>
                 
@@ -94,11 +96,12 @@ getting pretty annoyed at Wordpress. It forces you ">
     <a href="index.md" id="sourcelink">Source</a>
     </li>
 
+                
             </ul>
         </div>
 <!-- /.navbar-collapse -->
     </div>
-<!-- /.container-fluid -->
+<!-- /.container -->
 </nav>
 
 <!-- End of Menubar -->
@@ -107,6 +110,7 @@ getting pretty annoyed at Wordpress. It forces you ">
     <div class="body-content">
         <!--Body content-->
         <div class="row">
+            
             
 <article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
     
@@ -200,8 +204,8 @@ http://getnikola.com/handbook.html#all-you-need-to-know.</p>
 <p>One thing that doesn't tell you is that after you init the site, you should
 walk through <code>conf.py</code> and change the settings to your liking.</p>
 <p>Another trick not there is that you can add</p>
-<div class="codehilite"><pre><span class="nb">eval</span> <span class="s2">"`nikola tabcompletion`"</span>
-</pre></div>
+<pre class="code literal-block"><span class="nb">eval</span> <span class="s2">"`nikola tabcompletion`"</span>
+</pre>
 
 
 <p>to your Bash profile to get tab completion.</p>
@@ -226,7 +230,7 @@ examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 
 <p>I have the following in my conf.py to deploy:</p>
 </li>
 </ul>
-<div class="codehilite"><pre><span class="n">DEPLOY_COMMANDS</span> <span class="o">=</span> <span class="p">[</span>
+<pre class="code literal-block"><span class="n">DEPLOY_COMMANDS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s">"git checkout gh-pages"</span><span class="p">,</span>
     <span class="s">"rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ ."</span><span class="p">,</span>
     <span class="s">"git add -A"</span><span class="p">,</span>
@@ -234,7 +238,7 @@ examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 
     <span class="s">"git push"</span><span class="p">,</span>
     <span class="s">"git checkout master"</span><span class="p">,</span>
 <span class="p">]</span>
-</pre></div>
+</pre>
 
 
 <p>WARNING: These commands are dangerous. If you don't properly exclude things
@@ -243,13 +247,13 @@ committing everything and pushing to GitHub before deploying.</p>
 <ul>
 <li>Use</li>
 </ul>
-<div class="codehilite"><pre><span class="n">_site</span><span class="o">/</span>
+<pre class="code literal-block"><span class="n">_site</span><span class="o">/</span>
 <span class="o">*</span><span class="p">.</span><span class="n">pyc</span>
 <span class="p">.</span><span class="n">DS_Store</span>
 <span class="p">.</span><span class="n">doit</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">db</span>
 <span class="n">cache</span><span class="o">/</span>
 <span class="n">output</span><span class="o">/</span>
-</pre></div>
+</pre>
 
 
 <p>for your <code>.gitignore</code>.</p>
@@ -265,8 +269,8 @@ them. Also be sure to read through <code>conf.py</code>.</li>
 you need to go to the Wordpress site dashboard and go to "Export" from the
 "Tools" menu. From here you can download an XML file with all your
 content. Then just do</p>
-<div class="codehilite"><pre><span class="n">nikola</span> <span class="n">import_wordpress</span> <span class="n">export_file</span><span class="p">.</span><span class="n">xml</span>
-</pre></div>
+<pre class="code literal-block"><span class="n">nikola</span> <span class="n">import_wordpress</span> <span class="n">export_file</span><span class="p">.</span><span class="n">xml</span>
+</pre>
 
 
 <p>Note that the current version of Nikola as of this writing (6.3.0) doesn't do
@@ -295,6 +299,11 @@ in manually.</p>
         </ul>
 
     
+        <ul class="pager">
+            <li class="next">
+                <a href="../scipy-2014/" rel="next" title="SciPy 2014">Next post</a>
+            </li>
+        </ul>
 
     </nav>
     </aside>
@@ -345,6 +354,7 @@ in manually.</p>
     <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0">
   </a>
 
+            
         </p></footer>
     </div>
 </div>
@@ -380,6 +390,7 @@ $(document).ready(function() {
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
 
 
 </body>
