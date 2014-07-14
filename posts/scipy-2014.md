@@ -10,9 +10,10 @@ year, there were
 [~450 people](https://twitter.com/scopatz/status/488370261150818304).  Aside
 from there being a lot more people, and the main keynotes taking place in a
 larger room, the most noticeable consequence of this is that there were three
-days of talks this year, and three concurrent tracks of talks all three
-days. The conference consisted of two days of tutorials, three days of talks,
-and two days of sprints, running from July 5 to July 12.
+days of talks this year, and three concurrent tracks of talks all three days
+(last year there were two of each). The conference consisted of two days of
+tutorials, three days of talks, and two days of sprints, running from July 5
+to July 12.
 
 # Tutorials
 
