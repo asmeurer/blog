@@ -194,7 +194,7 @@ very excited about Binstar, as I think it does for packaging what GitHub has
 done for open source, i.e., distributes and democratizes it. There are
 challenges on how to deal with this, of course. As with any distributed
 democratized system, Binstar can be a wild west of packages.  Continuum is
-thinking about ways to manage this complexity, which still reaping the
+thinking about ways to manage this complexity, while still reaping the
 benefits it provides. If you have any thoughts on things that can be done, let
 me know in the comments section below.
 
