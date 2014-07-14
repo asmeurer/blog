@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 13 Jul 2014 20:45:30 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>SciPy 2014</title><link>http://asmeurer.github.io/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 13 Jul 2014 20:49:00 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>SciPy 2014</title><link>http://asmeurer.github.io/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
 week-long conference in Austin, TX for scientific computing with Python.&lt;/p&gt;
 &lt;p&gt;This is my third SciPy (I have been to
 &lt;a href="https://asmeurersympy.wordpress.com/2011/07/17/the-scipy-2011-conference/"&gt;2011&lt;/a&gt;
@@ -10,9 +10,10 @@ year, there were
 &lt;a href="https://twitter.com/scopatz/status/488370261150818304"&gt;~450 people&lt;/a&gt;.  Aside
 from there being a lot more people, and the main keynotes taking place in a
 larger room, the most noticeable consequence of this is that there were three
-days of talks this year, and three concurrent tracks of talks all three
-days. The conference consisted of two days of tutorials, three days of talks,
-and two days of sprints, running from July 5 to July 12.&lt;/p&gt;
+days of talks this year, and three concurrent tracks of talks all three days
+(last year there were two of each). The conference consisted of two days of
+tutorials, three days of talks, and two days of sprints, running from July 5
+to July 12.&lt;/p&gt;
 &lt;h2&gt;Tutorials&lt;/h2&gt;
 &lt;p&gt;The conference started on Sunday with tutorials. I gave a tutorial on SymPy
 with &lt;a href="http://matthewrocklin.com/blog/"&gt;Matthew Rocklin&lt;/a&gt; and
