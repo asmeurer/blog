@@ -238,14 +238,14 @@ ONE_FILE_POSTS = False
 # And then do a backup, or run `nikola ping` from the `ping`
 # plugin (`nikola install_plugin ping`).
 # To do manual deployment, set it to []
-DEPLOY_COMMANDS = [
-    "git checkout gh-pages",
-    "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
-    "git add -A",
-    "git commit -a -m 'Updating blog content'",
-    "git push",
-    "git checkout master",
-]
+# DEPLOY_COMMANDS = [
+#     "git checkout gh-pages",
+#     "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
+#     "git add -A",
+#     "git commit -a -m 'Updating blog content'",
+#     "git push",
+#     "git checkout master",
+# ]
 
 # Where the output site should be located
 # If you don't use an absolute path, it will be considered as relative
