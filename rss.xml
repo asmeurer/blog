@@ -1,5 +1,422 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 13 Jul 2014 21:26:06 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>SciPy 2014</title><link>http://asmeurer.github.io/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 17 Aug 2014 15:42:06 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
+long as either as existed.  However, the barrier of entry has always been too
+high, given that I only ever had time to play with them as a hobby.  The
+Objective-C programming language is a bit complicated to learn, especially
+alongside all the memory management that you have to do (and it doesn't help
+that Apple has gone through several memory management schemes through Mac OS X
+versions).  To add on to that, the Cocoa framework is huge, and it's quite
+daunting to even know where to get started with it.&lt;/p&gt;
+&lt;p&gt;Apple's announcement of the
+&lt;a href="https://developer.apple.com/swift/"&gt;Swift programming language&lt;/a&gt; in June, it
+was clear to me that the language would significantly lower the barrier of
+entry.  The XCode 6 beta is now public (i.e., you do not need to have a paid
+Apple Developer account to access it), so anyone can play with Swift.&lt;/p&gt;
+&lt;p&gt;Note that I am still &lt;em&gt;very&lt;/em&gt; new to both Swift and iOS development in general,
+so it's quite likely that some of the things I mention here are actually bad
+ideas.  If you know more than I do and spot a bad thing that I am doing,
+please mention it in the comments.&lt;/p&gt;
+&lt;p&gt;It's also possible that some of the assumptions I've made about the Swift
+language or the Cocoa framework are actually wrong. Please remember that I am
+still a beginner and take what I say with a grain of salt.&lt;/p&gt;
+&lt;h2&gt;The Swift Language&lt;/h2&gt;
+&lt;p&gt;If you don't know how to program at all, I don't know how well this will work
+for you. I already know several language, especially Python, so my experience
+derives from that.&lt;/p&gt;
+&lt;p&gt;First, read through the
+&lt;a href="https://developer.apple.com/swift/resources/"&gt;Swift language guide&lt;/a&gt;. If you
+have XCode 6, you can read it interactively as a Playground. I only have read
+through the first part so far, which gives a high-level overview of the
+language.&lt;/p&gt;
+&lt;p&gt;The Swift language is actually quite easy to learn, especially if you already
+know a high-level language like Python.  A few important things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;var&lt;/code&gt; and &lt;code&gt;let&lt;/code&gt; seem a bit confusing.  The difference is actually quite
+  simple: &lt;code&gt;var&lt;/code&gt; denotes a variable that can change and &lt;code&gt;let&lt;/code&gt; denotes a
+  variable that cannot.  You could in theory just use &lt;code&gt;var&lt;/code&gt; for everything,
+  but &lt;code&gt;let&lt;/code&gt; lets the compiler spot mistakes for you, and it also probably lets
+  it make your code faster.  If you intend to never change the value of a
+  variable, use &lt;code&gt;let&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Swift uses type inference, meaning that you usually don't need to specify
+  types. But when you do, you do so by putting a &lt;code&gt;:&lt;/code&gt; after the variable name,
+  like &lt;code&gt;var a: Int = 2&lt;/code&gt; or &lt;code&gt;func f(a: Int)&lt;/code&gt;.  The exception is the return type
+  of a function, which uses the arrow &lt;code&gt;-&amp;gt;&lt;/code&gt; (if you are familiar with Python 3
+  type annotations, the syntax is exactly the same), &lt;code&gt;func f(a: Int) -&amp;gt; Int&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Swift uses &lt;code&gt;?&lt;/code&gt; after a type name to indicate that a variable could be its
+  given type, or &lt;code&gt;nil&lt;/code&gt;. If you are familiar with Haskell, this is like the
+  Maybe monad.  I know very little Haskell, so I don't know if Swift's
+  implementation of &lt;code&gt;?&lt;/code&gt; is truly a Monad.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Roughly speaking, in many circumstances, you don't know if a variable will
+  actually be the given type or not. A good example of this is with
+  dictionaries. &lt;code&gt;var a: [String: Int]&lt;/code&gt;, this creates a dictionary that maps
+  strings to integers. If you manipulate this dictionary, and then access a
+  key from it, like &lt;code&gt;a[b]&lt;/code&gt;, there is no way for the compiler to know if that
+  key will really be in the dictionary. If the key is in the dictionary, you
+  will get the value of that key. Otherwise, you will get &lt;code&gt;nil&lt;/code&gt;. Hence, the
+  type of &lt;code&gt;a[b]&lt;/code&gt; is &lt;code&gt;Int?&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Swift uses &lt;code&gt;!&lt;/code&gt; to indicate that the value is not &lt;code&gt;nil&lt;/code&gt;, which tells the
+  compiler to compile code that doesn't check for that case.&lt;/p&gt;
+&lt;p&gt;For the most part, you can ignore this as well, at least when you
+  start. Just write code as you would, let XCode add in the types for you, and
+  only worry about types if the compiler tells you something is wrong.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Swift functions often require the parameters be named, for instance, you
+  have to write &lt;code&gt;CGSize(width: 1, height: 2)&lt;/code&gt; instead of just &lt;code&gt;CGSize(1,
+  2)&lt;/code&gt;. This is both for clarity (the former is much easier to read if you
+  aren't familiar with the API for &lt;code&gt;CGSize&lt;/code&gt;, and also because allows
+  polymorphism, i.e., you can define different initializers for the same class
+  with different type signatures. For example, &lt;code&gt;CGRect&lt;/code&gt; can be initialized as
+  &lt;code&gt;CGRect(origin: CGPoint, size: CGSize)&lt;/code&gt; or &lt;code&gt;CGRect(x: Int, y: Int, width:
+  Int, height: Int)&lt;/code&gt;. This can lead to ambiguities in some cases unless you
+  explicitly tell the compiler which version to use.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Learn to read Objective-C&lt;/h2&gt;
+&lt;p&gt;While it is not necessary to write Objective-C any more, it is a good idea to
+know how to read it. The reason is that a lot of good resources on the
+internet are still in Objective-C (also a lot of Apple's example
+documentation). The API names are the same, so this mainly boils down to
+understanding how to convert the basic syntax to Swift. Reading the section of
+the &lt;a href="https://en.wikipedia.org/wiki/Objective_C#Syntax"&gt;Wikipedia article&lt;/a&gt; on
+the syntax of Objective-C should be enough.&lt;/p&gt;
+&lt;p&gt;For instance&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;locationInNode&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;would be translated to&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;locationInNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;h2&gt;Use XCode&lt;/h2&gt;
+&lt;p&gt;If you are comfortable with the Swift language itself, you should get started
+with a project.&lt;/p&gt;
+&lt;p&gt;First off, you should use XCode to edit your code, at least to begin with,
+even if you are accustomed to using another editor.  The reason is that XCode
+is going to do a lot of things for you which will make your life easier and
+reduce the complexity significantly as you get started.  Once you are
+comfortable, you can move to another editor.&lt;/p&gt;
+&lt;p&gt;Some things that XCode will do for you:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Autocompletion&lt;/strong&gt;: The best way to figure out the Cocoa APIs is to use the
+  autocompletion. This pops up when you want to override a method in a
+  subclass, create an object from an existing class, access an attribute of a
+  class, or instantiate a class or call a function (remember that Swift is
+  polymorphic, so it's useful to know all the possible ways to instantiate a
+  class or call a function).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Compiler errors and warnings&lt;/strong&gt;: Swift, being a strictly typed language,
+  will give you a lot of useful compiler errors. It's pretty hard to write a
+  program incorrectly from a type point of view, and have it even compile.
+  XCode integrates this nicely, and it even offers suggestions on how to fix
+  things every once in a while (so that you can just click the button and have
+  it fixed inline).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Direct interaction with the simulator&lt;/strong&gt;: One button will compile your code
+  and start the simulator. If your target is Mac OS X, it will open the
+  application.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Debugger&lt;/strong&gt;: Clicking to the left of a line will set a breakpoint in the
+  debugger.  The Swift debugger seems pretty limited right now. I wasn't able
+  to get any useful information out of the variables view when I used it.  But
+  in my experience using XCode in the past to debug C, its graphical debugger
+  is one of the best.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Configuration settings&lt;/strong&gt;: If you click on the XCode project in the files
+  view (the root node of all the files), you get a view with all the different
+  settings for your project. Most of these you probably won't want to change,
+  but a few are important, like what devices and orientations you want to
+  allow, what operating system versions you want to support, and the name and
+  version of your project.  Editing these outside of XCode requires editing an
+  XML file, which is no fun.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Of course, any editor can potentially do these things, and I'm really looking
+forward to the point where I can just use Emacs to edit Swift code, as the
+XCode editor as an editor is quite annoying.  XCode was the editor that I used
+before I switched to using Emacs, and it's not gotten much better. There are
+still several visual glitches in the editor environment, especially with the
+scope coloring and syntax highlighting. You can edit the keyboard shortcuts in
+the XCode setting to get some things the way you like them (although I found
+that trying to set TAB to autoindent did not work). You can also use a tool
+like &lt;a href="https://pqrs.org/osx/karabiner/"&gt;Karabiner&lt;/a&gt; (previously
+KeyRemap4MacBook) to enable Vim or Emacs editor shortcuts everywhere
+(including XCode).&lt;/p&gt;
+&lt;h2&gt;The iOS Simulator&lt;/h2&gt;
+&lt;p&gt;One disappointing thing that I learned is that you cannot run any iOS program
+you write on an iOS device unless you are in the paid developer program (or if
+you Jailbreak and are willing to go through some hoops). The iOS developer
+program costs $100 a year, and since I'm not sure yet how far I am going to go
+with this, I am holding off on it.&lt;/p&gt;
+&lt;p&gt;The only other option then is to run on the simulator. The simulator is fine,
+the only issue is that there are limits to how you can simulate a touch screen
+on a computer with a mouse.&lt;/p&gt;
+&lt;p&gt;A few things to note about the simulator:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;There are several things you can do with the "hardware" from the hardware
+  menu, such as rotating the device or pressing the home button.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It's worth remembering the keyboard shortcut for pressing the home button,
+  ⇧⌘H, as you can press it twice in quick succession just like on a real
+  device to open the task manger. You can then drag your app up to completely
+  reset it, without having to restart the simulator.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The retina iPad is taller than your display, even if you have a 15" retina
+  display. So be aware that you will need to scroll up and down to see it
+  all. Alternately, you can use a smaller device, like an iPhone, or rotate it
+  to landscape, where it all fits.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The only way to do multitouch is to hold down the Option key. This will
+  create two fingers.  However, it's quite limited as the two fingers are
+  always centered around the center of the screen. Therefore if you want to
+  test multitouching two objects, you'll have to position them symmetrically so
+  that you can grab them both.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Getting started with a project&lt;/h2&gt;
+&lt;p&gt;The best way to start is to start a template project with XCode. I personally
+started with a SpriteKit game for iOS. This created a basic template "Hello
+World" Swift file with the basic &lt;code&gt;SKScene&lt;/code&gt; subclass. Go ahead and compile and
+run this in the simulator to see what it does.&lt;/p&gt;
+&lt;p&gt;There are four important methods of &lt;code&gt;SKScene&lt;/code&gt; which you will want to
+override, &lt;code&gt;didMoveToView&lt;/code&gt;, &lt;code&gt;touchesBegan&lt;/code&gt;, &lt;code&gt;touchesEnded&lt;/code&gt;, and
+&lt;code&gt;update&lt;/code&gt;. &lt;code&gt;didMoveToView&lt;/code&gt; is your initialize for your scene.  Anything that
+should be set up and appear from the very beginning should go
+there. &lt;code&gt;touchesBegan&lt;/code&gt; and &lt;code&gt;touchesEnded&lt;/code&gt; are called when a finger touches the
+screen and when it leaves the screen, respectively. Remember always that iOS
+devices are multitouch devices, so these events can happen concurrently, and
+there can be multiple touches happening at once.  The first argument to these
+methods is a set of touches, which you should iterate over to perform actions
+(the "Hello World" example shows how to do this). Finally, the &lt;code&gt;update&lt;/code&gt; method
+is called every time the scene is updated, at each "frame" essentially.&lt;/p&gt;
+&lt;p&gt;There are other methods, for instance, &lt;code&gt;touchesMoved&lt;/code&gt;. However, I discovered
+that you don't actually want to use &lt;code&gt;touchesMoved&lt;/code&gt; to do what you would think
+you'd use it for, namely, to move stuff around. The reason is that there is no
+easy way to sync up multitouches between &lt;code&gt;touchesBegan&lt;/code&gt; (where you know what
+thing the finger started on) and &lt;code&gt;touchesMoved&lt;/code&gt; to move it around. It works
+well for a single touch, but if you want to be able to move multiple things
+around at once (which I highly recommend, as it leads to a much nicer user
+experience), you have to do things a little differently.&lt;/p&gt;
+&lt;h2&gt;Adding some objects to your environment&lt;/h2&gt;
+&lt;p&gt;There are a lot of classes to create various objects of various shapes. I
+started with &lt;code&gt;SKSpriteNode&lt;/code&gt;, which creates a simple square, because I wanted
+to play around with touch events.&lt;/p&gt;
+&lt;p&gt;I started out with four sprites (yes, it would be better to put these in an
+array, and probably abstract them to a method):&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;sprite1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SKSpriteNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;UIColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;green&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blue&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CGSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;sprite2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SKSpriteNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;UIColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;green&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blue&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CGSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;sprite3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SKSpriteNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;UIColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;green&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blue&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CGSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;sprite4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SKSpriteNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;UIColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;green&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blue&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CGSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;These lines go at the class level. This lets them be accessed from within any
+method of the class.&lt;/p&gt;
+&lt;p&gt;One thing I could not figure out how to do was how to access class variables
+from within other class variables.  In Python, you can do&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Test&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;But in Swift, if you do&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;it tells you that &lt;code&gt;Test.Type does not have a member named 'a'&lt;/code&gt; no the &lt;code&gt;let b =
+a + 1&lt;/code&gt; line.&lt;/p&gt;
+&lt;p&gt;You may have to use properties with getters and setters in this case, which I
+didn't feel like fooling with. The result is that I did not abstract out the
+&lt;code&gt;CGSize(width: 10, height: 10)&lt;/code&gt; into a common variable.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;didMoveToView&lt;/code&gt; method then becomes&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;didMoveToView&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SKView&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;center&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CGPoint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;CGRectGetMidX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;CGRectGetMidY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;sprite1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;center&lt;/span&gt;
+
+        &lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addChild&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;The &lt;code&gt;self.addChild&lt;/code&gt; is the most important method here, as it actually puts the
+sprite in the main view. If you forget this line, none of the sprites will
+show up.&lt;/p&gt;
+&lt;p&gt;If you run this, you will only see the yellow box, because you put them all on
+top of one another in the center of the view.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://asmeurer.github.io/galleries/swift-game-1.png" width="500"&gt;&lt;/p&gt;
+&lt;h2&gt;Adding Basic Physics&lt;/h2&gt;
+&lt;p&gt;We could change the positions so that they do not overlap, but the option I
+went with was to play around with the physics a little. &lt;code&gt;SpriteKit&lt;/code&gt; has a nice
+2D physics engine built in, and it's quite easy to use.&lt;/p&gt;
+&lt;p&gt;So my final &lt;code&gt;didMoveToView&lt;/code&gt; was&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;didMoveToView&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SKView&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="cm"&gt;/* Setup your scene here */&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;center&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CGPoint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;CGRectGetMidX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;CGRectGetMidY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;sprite1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;center&lt;/span&gt;
+
+        &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;physics_body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SKPhysicsBody&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rectangleOfSize&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CGSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="n"&gt;physics_body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;affectedByGravity&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+        &lt;span class="n"&gt;physics_body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;allowsRotation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+
+        &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;physicsBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;physics_body&lt;/span&gt;
+        &lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addChild&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;This creates an &lt;code&gt;SKPhysicsBody&lt;/code&gt; with the exact same size as our
+&lt;code&gt;SKSpriteNode&lt;/code&gt;s (there's probably a more direct way to do this). The
+&lt;code&gt;affectedByGravity&lt;/code&gt; property is important. If you don't set it to &lt;code&gt;false&lt;/code&gt;, all
+the objects will fall off the bottom of the screen. I disabled
+&lt;code&gt;allowsRotation&lt;/code&gt; because I wanted my squares to stay upright. Otherwise when
+when the squares hit one another they will rotate in space.&lt;/p&gt;
+&lt;p&gt;Now &lt;code&gt;SceneKit&lt;/code&gt; will prevent the squares from overlapping with one another, even
+if we put them on top of each other as we have done.&lt;/p&gt;
+&lt;p&gt;So now when we start the simulator, we see&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://asmeurer.github.io/galleries/swift-game-2.png" width="500"&gt;&lt;/p&gt;
+&lt;h2&gt;Making the squares movable&lt;/h2&gt;
+&lt;p&gt;Now, let's make it so that we can move these squares around.  The correct way
+to do this took me some time to figure out.  I finally got some hints from
+&lt;a href="http://eppz.eu/blog/spritekit-drag/"&gt;this site&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The key thing here is that the &lt;code&gt;UITouch&lt;/code&gt; objects remain the same objects for
+the duration of the touch. Their position is updated when the touch
+moves. Hence, you just need to associate each touch with the node that was
+touched when the touch began, and move the node to the position of the touch
+with each update.&lt;/p&gt;
+&lt;p&gt;To start, we will create a dictionary on the class mapping touches to nodes&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;selected&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;UITouch&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SKNode&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;Then, in the &lt;code&gt;touchesBegan&lt;/code&gt; method, map every touch to the node that it
+touches.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;touchesBegan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;touches&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;NSSet&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;withEvent&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;UIEvent&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="cm"&gt;/* Called when a touch begins */&lt;/span&gt;
+
+    &lt;span class="n"&gt;selected&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;AnyObject&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;touches&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;locationInNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;selected&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;UITouch&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nodeAtPoint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;The &lt;code&gt;as UITouch&lt;/code&gt; part is needed because the compiler only knows that touch is
+&lt;code&gt;AnyObject&lt;/code&gt;. This was one of the things that was helpfully suggested by the
+compiler, so I did not really need to know what I was doing to get it right.&lt;/p&gt;
+&lt;p&gt;Note that even if you touch the background behind the squares, you are still
+touching a node, namely, the &lt;code&gt;GameScene&lt;/code&gt; node itself (the node for the class
+you are working on).  This is a very important observation, as it will tell us
+how to get the right position for the node when we update it. It also means
+that we should keep track of which nodes we actually want to be moved by the
+touch. Trying to move the &lt;code&gt;GameScene&lt;/code&gt; node is ignored, at leads to a lot of
+console logs, so we should avoid it.&lt;/p&gt;
+&lt;p&gt;Next, let's write the &lt;code&gt;touchesEnded&lt;/code&gt; method. This method is simple. If a touch
+ends (the finger is removed from the screen), we should remove it from the
+&lt;code&gt;selected&lt;/code&gt; dictionary.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;touchesEnded&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;touches&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;NSSet&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;withEvent&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;UIEvent&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;AnyObject&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;touches&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;selected&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;UITouch&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;To delete an item from a dictionary in Swift, just set it to &lt;code&gt;nil&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now, finally, we need to write the &lt;code&gt;update&lt;/code&gt; method to move the node to the
+current position of the touch.&lt;/p&gt;
+&lt;p&gt;The simplest way to do this is&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;currentTime&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CFTimeInterval&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="cm"&gt;/* Called before each frame is rendered */&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;selected&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;sprite1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite4&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;continue&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;locationInNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;Note that we only modify the position for the four sprite nodes.&lt;/p&gt;
+&lt;p&gt;Modifying the position directly is nice, but it's nice to play around a little
+bit with a third thing from SpriteKit, actions.&lt;/p&gt;
+&lt;p&gt;What we will do instead of setting the position of the node is to tell
+SpriteKit to move the node there in a certain amount of time. If we make this
+time small enough, like &lt;code&gt;0.01&lt;/code&gt; seconds, it will appear to act exactly the
+same. If we up this time, there will be a smooth "lag" where the node catches
+up to the touch. Because the movement always happens in the same amount of
+time, it will move faster if the finger is farther away. This gives the
+squares a nice "frictioney" effect, which is quite nice.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;currentTime&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CFTimeInterval&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="cm"&gt;/* Called before each frame is rendered */&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;selected&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;sprite1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sprite4&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;continue&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;locationInNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SKAction&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;moveTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;runAction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SKAction&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;repeatAction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;There are many other actions we can perform, like rotations and color
+changes.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Here is an example of the movement. You can see it works even with
+multitouch.&lt;/p&gt;
+&lt;video src="http://asmeurer.github.io/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;
+
+&lt;p&gt;Here you can see the movement lag caused by using &lt;code&gt;SKAction.moveTo&lt;/code&gt; with
+&lt;code&gt;duration: 0.1&lt;/code&gt; (note that the mouse itself jumps a bit at the beginning,
+which is due to a delay in the recording).&lt;/p&gt;
+&lt;video src="http://asmeurer.github.io/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;
+
+&lt;p&gt;I have uploaded the full code to
+&lt;a href="https://github.com/asmeurer/GameTest/blob/blog/GameTest/GameScene.swift"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This isn't exactly a "game", but it does lay down the foundations for what you
+would need to write a game in Swift using SpriteKit.  At least for me, it
+shows me the technical basics of how to write some games that I had thought
+about, which mostly involve making shape and moving them around the screen.&lt;/p&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item><item><title>SciPy 2014</title><link>http://asmeurer.github.io/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
 week-long conference in Austin, TX for scientific computing with Python.&lt;/p&gt;
 &lt;p&gt;This is my third SciPy (I have been to
 &lt;a href="https://asmeurersympy.wordpress.com/2011/07/17/the-scipy-2011-conference/"&gt;2011&lt;/a&gt;

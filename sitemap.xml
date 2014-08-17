@@ -6,42 +6,50 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://asmeurer.github.io/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/2014/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/archive.html</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/categories/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/categories/mathjax/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/galleries/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/posts/playing-with-swift-and-sprite-kit/</loc>
+  <lastmod>2014-08-17</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</loc>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/scipy-2014/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/stories/about/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/stories/python-trickery/</loc>
-  <lastmod>2014-07-13</lastmod>
+  <lastmod>2014-08-17</lastmod>
  </url>
 </urlset>
