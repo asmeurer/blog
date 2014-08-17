@@ -1,5 +1,5 @@
 I've always wanted to learn how to write native apps for iOS and the Mac as
-long as either as existed.  However, the barrier of entry has always been too
+long as either has existed.  However, the barrier of entry has always been too
 high, given that I only ever had time to play with them as a hobby.  The
 Objective-C programming language is a bit complicated to learn, especially
 alongside all the memory management that you have to do (and it doesn't help
@@ -465,3 +465,28 @@ This isn't exactly a "game", but it does lay down the foundations for what you
 would need to write a game in Swift using SpriteKit.  At least for me, it
 shows me the technical basics of how to write some games that I had thought
 about, which mostly involve making shape and moving them around the screen.
+
+<!--  LocalWords:  func Haskell CGSize CGRect CGPoint locationInNode SKScene
+ -->
+<!--  LocalWords:  touch.locationInNode Karabiner KeyRemap4MacBook SpriteKit
+ -->
+<!--  LocalWords:  didMoveToView touchesBegan touchesEnded touchesMoved py
+ -->
+<!--  LocalWords:  SKSpriteNode sprite1 UIColor sprite2 sprite3 sprite4 'a'
+ -->
+<!--  LocalWords:  Test.Type SKView CGRectGetMidX self.frame CGRectGetMidY
+ -->
+<!--  LocalWords:  s.position self.addChild img src SKPhysicsBody SceneKit
+ -->
+<!--  LocalWords:  rectangleOfSize body.affectedByGravity body.allowsRotation
+ -->
+<!--  LocalWords:  s.physicsBody affectedByGravity allowsRotation UITouch
+ -->
+<!--  LocalWords:  SKNode NSSet withEvent UIEvent AnyObject nodeAtPoint
+ -->
+<!--  LocalWords:  GameScene currentTime CFTimeInterval node.position
+ -->
+<!--  LocalWords:  frictioney SKAction.moveTo node.runAction autoplay
+ -->
+<!--  LocalWords:  SKAction.repeatAction
+ -->
