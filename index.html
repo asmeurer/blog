@@ -160,23 +160,22 @@ know a high-level language like Python.  A few important things:</p>
   given type, or <code>nil</code>. If you are familiar with Haskell, this is like the
   Maybe monad.  I know very little Haskell, so I don't know if Swift's
   implementation of <code>?</code> is truly a Monad.</p>
-</li>
-</ul>
 <p>Roughly speaking, in many circumstances, you don't know if a variable will
-  actually be the given type or not. A good example of this is with
-  dictionaries. <code>var a: [String: Int]</code>, this creates a dictionary that maps
-  strings to integers. If you manipulate this dictionary, and then access a
-  key from it, like <code>a[b]</code>, there is no way for the compiler to know if that
-  key will really be in the dictionary. If the key is in the dictionary, you
-  will get the value of that key. Otherwise, you will get <code>nil</code>. Hence, the
-  type of <code>a[b]</code> is <code>Int?</code>.</p>
+actually be the given type or not. A good example of this is with
+dictionaries. <code>var a: [String: Int]</code>, this creates a dictionary that maps
+strings to integers. If you manipulate this dictionary, and then access a
+key from it, like <code>a[b]</code>, there is no way for the compiler to know if that
+key will really be in the dictionary. If the key is in the dictionary, you
+will get the value of that key. Otherwise, you will get <code>nil</code>. Hence, the
+type of <code>a[b]</code> is <code>Int?</code>.</p>
 <p>Swift uses <code>!</code> to indicate that the value is not <code>nil</code>, which tells the
-  compiler to compile code that doesn't check for that case.</p>
+compiler to compile code that doesn't check for that case.</p>
 <p>For the most part, you can ignore this as well, at least when you
-  start. Just write code as you would, let XCode add in the types for you, and
-  only worry about types if the compiler tells you something is wrong.</p>
-<ul>
-<li>Swift functions often require the parameters be named, for instance, you
+start. Just write code as you would, let XCode add in the types for you, and
+only worry about types if the compiler tells you something is wrong.</p>
+</li>
+<li>
+<p>Swift functions often require the parameters be named, for instance, you
   have to write <code>CGSize(width: 1, height: 2)</code> instead of just <code>CGSize(1,
   2)</code>. This is both for clarity (the former is much easier to read if you
   aren't familiar with the API for <code>CGSize</code>, and also because allows
@@ -184,7 +183,8 @@ know a high-level language like Python.  A few important things:</p>
   with different type signatures. For example, <code>CGRect</code> can be initialized as
   <code>CGRect(origin: CGPoint, size: CGSize)</code> or <code>CGRect(x: Int, y: Int, width:
   Int, height: Int)</code>. This can lead to ambiguities in some cases unless you
-  explicitly tell the compiler which version to use.</li>
+  explicitly tell the compiler which version to use.</p>
+</li>
 </ul>
 <h2>Learn to read Objective-C</h2>
 <p>While it is not necessary to write Objective-C any more, it is a good idea to

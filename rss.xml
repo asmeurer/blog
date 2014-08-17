@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 17 Aug 2014 15:42:06 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 17 Aug 2014 15:50:50 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
 long as either as existed.  However, the barrier of entry has always been too
 high, given that I only ever had time to play with them as a hobby.  The
 Objective-C programming language is a bit complicated to learn, especially
@@ -51,23 +51,22 @@ know a high-level language like Python.  A few important things:&lt;/p&gt;
   given type, or &lt;code&gt;nil&lt;/code&gt;. If you are familiar with Haskell, this is like the
   Maybe monad.  I know very little Haskell, so I don't know if Swift's
   implementation of &lt;code&gt;?&lt;/code&gt; is truly a Monad.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;p&gt;Roughly speaking, in many circumstances, you don't know if a variable will
-  actually be the given type or not. A good example of this is with
-  dictionaries. &lt;code&gt;var a: [String: Int]&lt;/code&gt;, this creates a dictionary that maps
-  strings to integers. If you manipulate this dictionary, and then access a
-  key from it, like &lt;code&gt;a[b]&lt;/code&gt;, there is no way for the compiler to know if that
-  key will really be in the dictionary. If the key is in the dictionary, you
-  will get the value of that key. Otherwise, you will get &lt;code&gt;nil&lt;/code&gt;. Hence, the
-  type of &lt;code&gt;a[b]&lt;/code&gt; is &lt;code&gt;Int?&lt;/code&gt;.&lt;/p&gt;
+actually be the given type or not. A good example of this is with
+dictionaries. &lt;code&gt;var a: [String: Int]&lt;/code&gt;, this creates a dictionary that maps
+strings to integers. If you manipulate this dictionary, and then access a
+key from it, like &lt;code&gt;a[b]&lt;/code&gt;, there is no way for the compiler to know if that
+key will really be in the dictionary. If the key is in the dictionary, you
+will get the value of that key. Otherwise, you will get &lt;code&gt;nil&lt;/code&gt;. Hence, the
+type of &lt;code&gt;a[b]&lt;/code&gt; is &lt;code&gt;Int?&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Swift uses &lt;code&gt;!&lt;/code&gt; to indicate that the value is not &lt;code&gt;nil&lt;/code&gt;, which tells the
-  compiler to compile code that doesn't check for that case.&lt;/p&gt;
+compiler to compile code that doesn't check for that case.&lt;/p&gt;
 &lt;p&gt;For the most part, you can ignore this as well, at least when you
-  start. Just write code as you would, let XCode add in the types for you, and
-  only worry about types if the compiler tells you something is wrong.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Swift functions often require the parameters be named, for instance, you
+start. Just write code as you would, let XCode add in the types for you, and
+only worry about types if the compiler tells you something is wrong.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Swift functions often require the parameters be named, for instance, you
   have to write &lt;code&gt;CGSize(width: 1, height: 2)&lt;/code&gt; instead of just &lt;code&gt;CGSize(1,
   2)&lt;/code&gt;. This is both for clarity (the former is much easier to read if you
   aren't familiar with the API for &lt;code&gt;CGSize&lt;/code&gt;, and also because allows
@@ -75,7 +74,8 @@ know a high-level language like Python.  A few important things:&lt;/p&gt;
   with different type signatures. For example, &lt;code&gt;CGRect&lt;/code&gt; can be initialized as
   &lt;code&gt;CGRect(origin: CGPoint, size: CGSize)&lt;/code&gt; or &lt;code&gt;CGRect(x: Int, y: Int, width:
   Int, height: Int)&lt;/code&gt;. This can lead to ambiguities in some cases unless you
-  explicitly tell the compiler which version to use.&lt;/li&gt;
+  explicitly tell the compiler which version to use.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Learn to read Objective-C&lt;/h2&gt;
 &lt;p&gt;While it is not necessary to write Objective-C any more, it is a good idea to

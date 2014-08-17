@@ -55,21 +55,21 @@ know a high-level language like Python.  A few important things:
   Maybe monad.  I know very little Haskell, so I don't know if Swift's
   implementation of `?` is truly a Monad.
 
-  Roughly speaking, in many circumstances, you don't know if a variable will
-  actually be the given type or not. A good example of this is with
-  dictionaries. `var a: [String: Int]`, this creates a dictionary that maps
-  strings to integers. If you manipulate this dictionary, and then access a
-  key from it, like `a[b]`, there is no way for the compiler to know if that
-  key will really be in the dictionary. If the key is in the dictionary, you
-  will get the value of that key. Otherwise, you will get `nil`. Hence, the
-  type of `a[b]` is `Int?`.
+    Roughly speaking, in many circumstances, you don't know if a variable will
+    actually be the given type or not. A good example of this is with
+    dictionaries. `var a: [String: Int]`, this creates a dictionary that maps
+    strings to integers. If you manipulate this dictionary, and then access a
+    key from it, like `a[b]`, there is no way for the compiler to know if that
+    key will really be in the dictionary. If the key is in the dictionary, you
+    will get the value of that key. Otherwise, you will get `nil`. Hence, the
+    type of `a[b]` is `Int?`.
 
-  Swift uses `!` to indicate that the value is not `nil`, which tells the
-  compiler to compile code that doesn't check for that case.
+    Swift uses `!` to indicate that the value is not `nil`, which tells the
+    compiler to compile code that doesn't check for that case.
 
-  For the most part, you can ignore this as well, at least when you
-  start. Just write code as you would, let XCode add in the types for you, and
-  only worry about types if the compiler tells you something is wrong.
+    For the most part, you can ignore this as well, at least when you
+    start. Just write code as you would, let XCode add in the types for you, and
+    only worry about types if the compiler tells you something is wrong.
 
 - Swift functions often require the parameters be named, for instance, you
   have to write `CGSize(width: 1, height: 2)` instead of just `CGSize(1,
