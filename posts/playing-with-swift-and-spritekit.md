@@ -435,11 +435,10 @@ override func update(currentTime: CFTimeInterval) {
 There are many other actions we can perform, like rotations and color
 changes.
 
-<object CLASSID="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="320" height="256" CODEBASE="http://www.apple.com/qtactivex/qtplugin.cab">
-    <param name="src" value="sample.mov">
-    <param name="qtsrc" value="rtsp://realmedia.uic.edu/itl/ecampb5/demo_broad.mov">
-    <param name="autoplay" value="true">
-    <param name="loop" value="false">
-    <param name="controller" value="true">
-    <embed src="sample.mov" qtsrc="rtsp://realmedia.uic.edu/itl/ecampb5/demo_broad.mov" width="320" height="256" autoplay="true" loop="false" controller="true" pluginspage="http://www.apple.com/quicktime/"></embed>
-</object>
+You can see the final version
+[here](https://github.com/asmeurer/GameTest/blob/blog/GameTest/GameScene.swift).
+
+This isn't exactly a "game", but it does lay down the foundations for what you
+would need to write a game in Swift using SpriteKit.  At least for me, it
+shows me the technical basics of how to write some games that I had thought
+about, which mostly involve making shape and moving them around the screen.
