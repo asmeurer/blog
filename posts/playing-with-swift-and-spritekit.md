@@ -288,6 +288,8 @@ top of one another in the center of the view.
 
 <img src="/galleries/swift-game-1.png" width=500>
 
+# Adding Basic Physics
+
 We could change the positions so that they do not overlap, but the option I
 went with was to play around with the physics a little. `SpriteKit` has a nice
 2D physics engine built in, and it's quite easy to use.
@@ -327,6 +329,8 @@ if we put them on top of each other as we have done.
 So now when we start the simulator, we see
 
 <img src="/galleries/swift-game-2.png" width=500>
+
+# Making the squares movable
 
 Now, let's make it so that we can move these squares around.  The correct way
 to do this took me some time to figure out.  I finally got some hints from
@@ -435,8 +439,27 @@ override func update(currentTime: CFTimeInterval) {
 There are many other actions we can perform, like rotations and color
 changes.
 
-You can see the final version
-[here](https://github.com/asmeurer/GameTest/blob/blog/GameTest/GameScene.swift).
+# Conclusion
+
+Here is an example of the movement. You can see it works even with
+multitouch.
+
+<video src="../../SpriteKit-Example.mp4"
+  autoplay width="500" loop>
+  Your browser does not support the video tag.
+</video>
+
+Here you can see the movement lag caused by using `SKAction.moveTo` with
+`duration: 0.1` (note that the mouse itself jumps a bit at the beginning,
+which is due to a delay in the recording).
+
+<video src="../../SpriteKit-Example-2.mp4"
+  autoplay width="500" loop>
+  Your browser does not support the video tag.
+</video>
+
+I have uploaded the full code to
+[GitHub](https://github.com/asmeurer/GameTest/blob/blog/GameTest/GameScene.swift).
 
 This isn't exactly a "game", but it does lay down the foundations for what you
 would need to write a game in Swift using SpriteKit.  At least for me, it
