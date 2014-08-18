@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 17 Aug 2014 20:39:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 17 Aug 2014 20:41:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
 long as either has existed.  However, the barrier of entry has always been too
 high, given that I only ever had time to play with them as a hobby.  The
 Objective-C programming language is a bit complicated to learn, especially
@@ -447,7 +447,8 @@ nice.&lt;/p&gt;
 changes.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Here is an example of the movement. You can see it works even with
-multitouch.&lt;/p&gt;
+multitouch.  You can also see the collision physics cause the other squares to
+move out of the way when another square hits them.&lt;/p&gt;
 &lt;video src="http://asmeurer.github.io/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;

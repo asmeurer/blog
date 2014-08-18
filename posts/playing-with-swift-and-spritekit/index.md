@@ -496,7 +496,8 @@ changes.
 # Conclusion
 
 Here is an example of the movement. You can see it works even with
-multitouch.
+multitouch.  You can also see the collision physics cause the other squares to
+move out of the way when another square hits them.
 
 <video src="../../SpriteKit-Example.mp4"
   autoplay width="500" loop>
