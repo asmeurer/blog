@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 17 Aug 2014 15:50:50 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
-long as either as existed.  However, the barrier of entry has always been too
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><language>en</language><lastBuildDate>Sun, 17 Aug 2014 20:39:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
+long as either has existed.  However, the barrier of entry has always been too
 high, given that I only ever had time to play with them as a hobby.  The
 Objective-C programming language is a bit complicated to learn, especially
 alongside all the memory management that you have to do (and it doesn't help
 that Apple has gone through several memory management schemes through Mac OS X
 versions).  To add on to that, the Cocoa framework is huge, and it's quite
 daunting to even know where to get started with it.&lt;/p&gt;
-&lt;p&gt;Apple's announcement of the
+&lt;p&gt;With Apple's announcement of the
 &lt;a href="https://developer.apple.com/swift/"&gt;Swift programming language&lt;/a&gt; in June, it
 was clear to me that the language would significantly lower the barrier of
-entry.  The XCode 6 beta is now public (i.e., you do not need to have a paid
-Apple Developer account to access it), so anyone can play with Swift.&lt;/p&gt;
+entry.  The &lt;a href="https://developer.apple.com/xcode/downloads/"&gt;XCode 6 beta&lt;/a&gt; is
+now public (i.e., you do not need to have a paid Apple Developer account to
+access it), so anyone can play with Swift.&lt;/p&gt;
 &lt;p&gt;Note that I am still &lt;em&gt;very&lt;/em&gt; new to both Swift and iOS development in general,
 so it's quite likely that some of the things I mention here are actually bad
 ideas.  If you know more than I do and spot a bad thing that I am doing,
 please mention it in the comments.&lt;/p&gt;
 &lt;p&gt;It's also possible that some of the assumptions I've made about the Swift
-language or the Cocoa framework are actually wrong. Please remember that I am
-still a beginner and take what I say with a grain of salt.&lt;/p&gt;
+language or the SpriteKit framework are actually wrong. Please remember that I
+am still a beginner and take what I say with a grain of salt.&lt;/p&gt;
 &lt;h2&gt;The Swift Language&lt;/h2&gt;
 &lt;p&gt;If you don't know how to program at all, I don't know how well this will work
 for you. I already know several language, especially Python, so my experience
@@ -53,7 +54,7 @@ know a high-level language like Python.  A few important things:&lt;/p&gt;
   implementation of &lt;code&gt;?&lt;/code&gt; is truly a Monad.&lt;/p&gt;
 &lt;p&gt;Roughly speaking, in many circumstances, you don't know if a variable will
 actually be the given type or not. A good example of this is with
-dictionaries. &lt;code&gt;var a: [String: Int]&lt;/code&gt;, this creates a dictionary that maps
+dictionaries. &lt;code&gt;var a: [String: Int]&lt;/code&gt; creates a dictionary that maps
 strings to integers. If you manipulate this dictionary, and then access a
 key from it, like &lt;code&gt;a[b]&lt;/code&gt;, there is no way for the compiler to know if that
 key will really be in the dictionary. If the key is in the dictionary, you
@@ -69,7 +70,7 @@ only worry about types if the compiler tells you something is wrong.&lt;/p&gt;
 &lt;p&gt;Swift functions often require the parameters be named, for instance, you
   have to write &lt;code&gt;CGSize(width: 1, height: 2)&lt;/code&gt; instead of just &lt;code&gt;CGSize(1,
   2)&lt;/code&gt;. This is both for clarity (the former is much easier to read if you
-  aren't familiar with the API for &lt;code&gt;CGSize&lt;/code&gt;, and also because allows
+  aren't familiar with the API for &lt;code&gt;CGSize&lt;/code&gt;), and because Swift allows
   polymorphism, i.e., you can define different initializers for the same class
   with different type signatures. For example, &lt;code&gt;CGRect&lt;/code&gt; can be initialized as
   &lt;code&gt;CGRect(origin: CGPoint, size: CGSize)&lt;/code&gt; or &lt;code&gt;CGRect(x: Int, y: Int, width:
@@ -77,6 +78,43 @@ only worry about types if the compiler tells you something is wrong.&lt;/p&gt;
   explicitly tell the compiler which version to use.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;I've found Swift to be a very strict language. I don't mean this in the sense
+described by
+&lt;a href="https://en.wikipedia.org/wiki/Strict_programming_language"&gt;this Wikipedia article&lt;/a&gt;. What
+I mean is that Swift typically only lets you do things one way.  This is
+similar to Python's "one way to do it," except Swift enforces this at the
+language level.&lt;/p&gt;
+&lt;p&gt;A nice example of this is that I rarely get a warning from the Swift compiler.
+Just about every message I've gotten from the compiler has been an error. The
+difference is that the program will still compile and run with a warning. This
+is different from C, C++, and Objective-C, which have many warnings that the
+compiler will still compile with. These warnings usually are for things like
+an incorrect pointer type. Since there is really only one type in C, the
+integer (because all data in memory is just integers), the program can still
+run even if you mix your types up a bit.&lt;/p&gt;
+&lt;p&gt;There are also many cases where Swift seems maybe too strict about things,
+although it's clear that it is doing it to try to stray people away from
+common mistakes and antipatterns. For example, the condition of an &lt;code&gt;if&lt;/code&gt;
+statement in Swift must always be of type &lt;code&gt;Bool&lt;/code&gt;. Unlike languages like
+Python, things do not have implicit boolean values. &lt;code&gt;if 1&lt;/code&gt; is a syntax
+error. So is &lt;code&gt;if a&lt;/code&gt; unless &lt;code&gt;a&lt;/code&gt; is type &lt;code&gt;Bool&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This ends up not being a big problem. The things Swift forces you to do feel
+like good programming practices.  This is not unlike how Python "forces" you
+to keep your code indented correctly.  It feels very different from a language
+like Java, where the things that you are forced to do all feel like they are
+there simply to make the compiler writer's life easier.  And indeed, unlike
+Java and Objective-C and much like Python, Swift code requires very little
+boilerplate.  There are no header files for instance.&lt;/p&gt;
+&lt;p&gt;So all said and done, I like Swift. I don't like it as much as Python (I also
+don't have my head wrapped around it as much as Python). But it's far better
+than Objective-C, and that's what matters. Frankly, my biggest gripe with it
+is the ubiquitous use of CamelCasing and two letter prefixing (&lt;code&gt;NS&lt;/code&gt;, &lt;code&gt;CG&lt;/code&gt;,
+&lt;code&gt;SK&lt;/code&gt;; I don't know if there's a name for this) in the API. I adamantly refuse
+to do this with my own variables, because I believe CamelCase reduces
+readability over underscore_casing. I like the Python convention to use
+underscore_casing for variables, functions, and methods, and CamelCase for
+classes (because classes are kind of like proper nouns, and CamelCase is as
+close to Capitalization as possible in programming language conventions).&lt;/p&gt;
 &lt;h2&gt;Learn to read Objective-C&lt;/h2&gt;
 &lt;p&gt;While it is not necessary to write Objective-C any more, it is a good idea to
 know how to read it. The reason is that a lot of good resources on the
@@ -122,7 +160,7 @@ comfortable, you can move to another editor.&lt;/p&gt;
   it fixed inline).&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Direct interaction with the simulator&lt;/strong&gt;: One button will compile your code
+&lt;p&gt;&lt;strong&gt;Direct interaction with the iOS Simulator&lt;/strong&gt;: One button will compile your code
   and start the simulator. If your target is Mac OS X, it will open the
   application.&lt;/p&gt;
 &lt;/li&gt;
@@ -153,7 +191,9 @@ the XCode setting to get some things the way you like them (although I found
 that trying to set TAB to autoindent did not work). You can also use a tool
 like &lt;a href="https://pqrs.org/osx/karabiner/"&gt;Karabiner&lt;/a&gt; (previously
 KeyRemap4MacBook) to enable Vim or Emacs editor shortcuts everywhere
-(including XCode).&lt;/p&gt;
+(including XCode). It doesn't help that XCode 6 is still in beta (at some
+point the editor backend died and all syntax highlighting and tab completion
+stopped working; I managed to fix it by removing a spurious &lt;code&gt;!&lt;/code&gt; in the code)&lt;/p&gt;
 &lt;h2&gt;The iOS Simulator&lt;/h2&gt;
 &lt;p&gt;One disappointing thing that I learned is that you cannot run any iOS program
 you write on an iOS device unless you are in the paid developer program (or if
@@ -194,17 +234,17 @@ on a computer with a mouse.&lt;/p&gt;
 started with a SpriteKit game for iOS. This created a basic template "Hello
 World" Swift file with the basic &lt;code&gt;SKScene&lt;/code&gt; subclass. Go ahead and compile and
 run this in the simulator to see what it does.&lt;/p&gt;
-&lt;p&gt;There are four important methods of &lt;code&gt;SKScene&lt;/code&gt; which you will want to
-override, &lt;code&gt;didMoveToView&lt;/code&gt;, &lt;code&gt;touchesBegan&lt;/code&gt;, &lt;code&gt;touchesEnded&lt;/code&gt;, and
-&lt;code&gt;update&lt;/code&gt;. &lt;code&gt;didMoveToView&lt;/code&gt; is your initialize for your scene.  Anything that
-should be set up and appear from the very beginning should go
-there. &lt;code&gt;touchesBegan&lt;/code&gt; and &lt;code&gt;touchesEnded&lt;/code&gt; are called when a finger touches the
-screen and when it leaves the screen, respectively. Remember always that iOS
-devices are multitouch devices, so these events can happen concurrently, and
-there can be multiple touches happening at once.  The first argument to these
-methods is a set of touches, which you should iterate over to perform actions
-(the "Hello World" example shows how to do this). Finally, the &lt;code&gt;update&lt;/code&gt; method
-is called every time the scene is updated, at each "frame" essentially.&lt;/p&gt;
+&lt;p&gt;There are four important methods of &lt;code&gt;SKScene&lt;/code&gt; which you will want to override,
+&lt;code&gt;didMoveToView&lt;/code&gt;, &lt;code&gt;touchesBegan&lt;/code&gt;, &lt;code&gt;touchesEnded&lt;/code&gt;, and &lt;code&gt;update&lt;/code&gt;. &lt;code&gt;didMoveToView&lt;/code&gt;
+is the initializer for the scene.  Anything that should be set up and appear
+from the very beginning should go there. &lt;code&gt;touchesBegan&lt;/code&gt; and &lt;code&gt;touchesEnded&lt;/code&gt; are
+called when a finger touches the screen and when it leaves the screen,
+respectively. Remember always that iOS devices are multitouch devices, so
+these events can happen concurrently, and there can be multiple touches
+happening at once.  The first argument to these methods is a set of touches,
+which you should iterate over to perform actions (the "Hello World" example
+shows how to do this). Finally, the &lt;code&gt;update&lt;/code&gt; method is called every time the
+scene is updated, at each "frame" essentially.&lt;/p&gt;
 &lt;p&gt;There are other methods, for instance, &lt;code&gt;touchesMoved&lt;/code&gt;. However, I discovered
 that you don't actually want to use &lt;code&gt;touchesMoved&lt;/code&gt; to do what you would think
 you'd use it for, namely, to move stuff around. The reason is that there is no
@@ -212,7 +252,8 @@ easy way to sync up multitouches between &lt;code&gt;touchesBegan&lt;/code&gt; (
 thing the finger started on) and &lt;code&gt;touchesMoved&lt;/code&gt; to move it around. It works
 well for a single touch, but if you want to be able to move multiple things
 around at once (which I highly recommend, as it leads to a much nicer user
-experience), you have to do things a little differently.&lt;/p&gt;
+experience), you have to do things a little differently, as I'll explain
+below.&lt;/p&gt;
 &lt;h2&gt;Adding some objects to your environment&lt;/h2&gt;
 &lt;p&gt;There are a lot of classes to create various objects of various shapes. I
 started with &lt;code&gt;SKSpriteNode&lt;/code&gt;, which creates a simple square, because I wanted
@@ -244,11 +285,11 @@ from within other class variables.  In Python, you can do&lt;/p&gt;
 &lt;/pre&gt;
 
 
-&lt;p&gt;it tells you that &lt;code&gt;Test.Type does not have a member named 'a'&lt;/code&gt; no the &lt;code&gt;let b =
+&lt;p&gt;it tells you that &lt;code&gt;Test.Type does not have a member named 'a'&lt;/code&gt; on the &lt;code&gt;let b =
 a + 1&lt;/code&gt; line.&lt;/p&gt;
 &lt;p&gt;You may have to use properties with getters and setters in this case, which I
 didn't feel like fooling with. The result is that I did not abstract out the
-&lt;code&gt;CGSize(width: 10, height: 10)&lt;/code&gt; into a common variable.&lt;/p&gt;
+&lt;code&gt;CGSize(width: 30, height: 30)&lt;/code&gt; into a common variable.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;didMoveToView&lt;/code&gt; method then becomes&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;didMoveToView&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SKView&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;center&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CGPoint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;CGRectGetMidX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;CGRectGetMidY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -293,12 +334,13 @@ went with was to play around with the physics a little. &lt;code&gt;SpriteKit&lt
 &lt;/pre&gt;
 
 
-&lt;p&gt;This creates an &lt;code&gt;SKPhysicsBody&lt;/code&gt; with the exact same size as our
-&lt;code&gt;SKSpriteNode&lt;/code&gt;s (there's probably a more direct way to do this). The
-&lt;code&gt;affectedByGravity&lt;/code&gt; property is important. If you don't set it to &lt;code&gt;false&lt;/code&gt;, all
-the objects will fall off the bottom of the screen. I disabled
-&lt;code&gt;allowsRotation&lt;/code&gt; because I wanted my squares to stay upright. Otherwise when
-when the squares hit one another they will rotate in space.&lt;/p&gt;
+&lt;p&gt;For each sprite, I create an &lt;code&gt;SKPhysicsBody&lt;/code&gt; with the exact same size as the
+&lt;code&gt;SKSpriteNode&lt;/code&gt;s (there's probably a more direct way to do this), and attach it
+to that node. The &lt;code&gt;affectedByGravity&lt;/code&gt; property is important. If you don't set
+it to &lt;code&gt;false&lt;/code&gt;, all the objects will fall off the bottom of the screen. I
+disabled &lt;code&gt;allowsRotation&lt;/code&gt; because I wanted my squares to stay
+upright. Otherwise when when the squares hit one another they will rotate in
+space.&lt;/p&gt;
 &lt;p&gt;Now &lt;code&gt;SceneKit&lt;/code&gt; will prevent the squares from overlapping with one another, even
 if we put them on top of each other as we have done.&lt;/p&gt;
 &lt;p&gt;So now when we start the simulator, we see&lt;/p&gt;
@@ -310,7 +352,7 @@ to do this took me some time to figure out.  I finally got some hints from
 &lt;p&gt;The key thing here is that the &lt;code&gt;UITouch&lt;/code&gt; objects remain the same objects for
 the duration of the touch. Their position is updated when the touch
 moves. Hence, you just need to associate each touch with the node that was
-touched when the touch began, and move the node to the position of the touch
+touched when the touch began, and move the node to the position of that touch
 with each update.&lt;/p&gt;
 &lt;p&gt;To start, we will create a dictionary on the class mapping touches to nodes&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;selected&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;UITouch&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SKNode&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -372,6 +414,11 @@ current position of the touch.&lt;/p&gt;
 
 
 &lt;p&gt;Note that we only modify the position for the four sprite nodes.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;touch.locationInNode(self)&lt;/code&gt; part took me a long time to figure out. There
+are other methods, like &lt;code&gt;touch.locationInView(nil)&lt;/code&gt;, but this does something
+very strange where the the horizontal axis was doubled (moving the touch one
+inch moved the object two inches), and the vertical axis was inverted. If
+someone knows what was going on there, please let me know.&lt;/p&gt;
 &lt;p&gt;Modifying the position directly is nice, but it's nice to play around a little
 bit with a third thing from SpriteKit, actions.&lt;/p&gt;
 &lt;p&gt;What we will do instead of setting the position of the node is to tell
@@ -380,7 +427,8 @@ time small enough, like &lt;code&gt;0.01&lt;/code&gt; seconds, it will appear to
 same. If we up this time, there will be a smooth "lag" where the node catches
 up to the touch. Because the movement always happens in the same amount of
 time, it will move faster if the finger is farther away. This gives the
-squares a nice "frictioney" effect, which is quite nice.&lt;/p&gt;
+squares a nice "frictioney" effect with some springiness to it, which is quite
+nice.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;currentTime&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CFTimeInterval&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="cm"&gt;/* Called before each frame is rendered */&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;selected&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -405,8 +453,8 @@ multitouch.&lt;/p&gt;
 &lt;/video&gt;
 
 &lt;p&gt;Here you can see the movement lag caused by using &lt;code&gt;SKAction.moveTo&lt;/code&gt; with
-&lt;code&gt;duration: 0.1&lt;/code&gt; (note that the mouse itself jumps a bit at the beginning,
-which is due to a delay in the recording).&lt;/p&gt;
+&lt;code&gt;duration: 0.1&lt;/code&gt; (note that the mouse itself jumps a bit at the beginning, but
+this is due to lag in the recording).&lt;/p&gt;
 &lt;video src="http://asmeurer.github.io/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;
@@ -416,7 +464,42 @@ which is due to a delay in the recording).&lt;/p&gt;
 &lt;p&gt;This isn't exactly a "game", but it does lay down the foundations for what you
 would need to write a game in Swift using SpriteKit.  At least for me, it
 shows me the technical basics of how to write some games that I had thought
-about, which mostly involve making shape and moving them around the screen.&lt;/p&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item><item><title>SciPy 2014</title><link>http://asmeurer.github.io/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
+about, which mostly involve making shapes and moving them around the screen.&lt;/p&gt;
+&lt;!--  LocalWords:  func Haskell CGSize CGRect CGPoint locationInNode SKScene
+ --&gt;
+
+&lt;!--  LocalWords:  touch.locationInNode Karabiner KeyRemap4MacBook SpriteKit
+ --&gt;
+
+&lt;!--  LocalWords:  didMoveToView touchesBegan touchesEnded touchesMoved py
+ --&gt;
+
+&lt;!--  LocalWords:  SKSpriteNode sprite1 UIColor sprite2 sprite3 sprite4 'a'
+ --&gt;
+
+&lt;!--  LocalWords:  Test.Type SKView CGRectGetMidX self.frame CGRectGetMidY
+ --&gt;
+
+&lt;!--  LocalWords:  s.position self.addChild img src SKPhysicsBody SceneKit
+ --&gt;
+
+&lt;!--  LocalWords:  rectangleOfSize body.affectedByGravity body.allowsRotation
+ --&gt;
+
+&lt;!--  LocalWords:  s.physicsBody affectedByGravity allowsRotation UITouch
+ --&gt;
+
+&lt;!--  LocalWords:  SKNode NSSet withEvent UIEvent AnyObject nodeAtPoint
+ --&gt;
+
+&lt;!--  LocalWords:  GameScene currentTime CFTimeInterval node.position
+ --&gt;
+
+&lt;!--  LocalWords:  frictioney SKAction.moveTo node.runAction autoplay
+ --&gt;
+
+&lt;!--  LocalWords:  SKAction.repeatAction
+ --&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item><item><title>SciPy 2014</title><link>http://asmeurer.github.io/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
 week-long conference in Austin, TX for scientific computing with Python.&lt;/p&gt;
 &lt;p&gt;This is my third SciPy (I have been to
 &lt;a href="https://asmeurersympy.wordpress.com/2011/07/17/the-scipy-2011-conference/"&gt;2011&lt;/a&gt;

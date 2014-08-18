@@ -1,5 +1,5 @@
 I've always wanted to learn how to write native apps for iOS and the Mac as
-long as either as existed.  However, the barrier of entry has always been too
+long as either has existed.  However, the barrier of entry has always been too
 high, given that I only ever had time to play with them as a hobby.  The
 Objective-C programming language is a bit complicated to learn, especially
 alongside all the memory management that you have to do (and it doesn't help
@@ -7,11 +7,12 @@ that Apple has gone through several memory management schemes through Mac OS X
 versions).  To add on to that, the Cocoa framework is huge, and it's quite
 daunting to even know where to get started with it.
 
-Apple's announcement of the
+With Apple's announcement of the
 [Swift programming language](https://developer.apple.com/swift/) in June, it
 was clear to me that the language would significantly lower the barrier of
-entry.  The XCode 6 beta is now public (i.e., you do not need to have a paid
-Apple Developer account to access it), so anyone can play with Swift.
+entry.  The [XCode 6 beta](https://developer.apple.com/xcode/downloads/) is
+now public (i.e., you do not need to have a paid Apple Developer account to
+access it), so anyone can play with Swift.
 
 Note that I am still *very* new to both Swift and iOS development in general,
 so it's quite likely that some of the things I mention here are actually bad
@@ -19,8 +20,8 @@ ideas.  If you know more than I do and spot a bad thing that I am doing,
 please mention it in the comments.
 
 It's also possible that some of the assumptions I've made about the Swift
-language or the Cocoa framework are actually wrong. Please remember that I am
-still a beginner and take what I say with a grain of salt.
+language or the SpriteKit framework are actually wrong. Please remember that I
+am still a beginner and take what I say with a grain of salt.
 
 # The Swift Language
 
@@ -57,7 +58,7 @@ know a high-level language like Python.  A few important things:
 
     Roughly speaking, in many circumstances, you don't know if a variable will
     actually be the given type or not. A good example of this is with
-    dictionaries. `var a: [String: Int]`, this creates a dictionary that maps
+    dictionaries. `var a: [String: Int]` creates a dictionary that maps
     strings to integers. If you manipulate this dictionary, and then access a
     key from it, like `a[b]`, there is no way for the compiler to know if that
     key will really be in the dictionary. If the key is in the dictionary, you
@@ -74,12 +75,54 @@ know a high-level language like Python.  A few important things:
 - Swift functions often require the parameters be named, for instance, you
   have to write `CGSize(width: 1, height: 2)` instead of just `CGSize(1,
   2)`. This is both for clarity (the former is much easier to read if you
-  aren't familiar with the API for `CGSize`, and also because allows
+  aren't familiar with the API for `CGSize`), and because Swift allows
   polymorphism, i.e., you can define different initializers for the same class
   with different type signatures. For example, `CGRect` can be initialized as
   `CGRect(origin: CGPoint, size: CGSize)` or `CGRect(x: Int, y: Int, width:
   Int, height: Int)`. This can lead to ambiguities in some cases unless you
   explicitly tell the compiler which version to use.
+
+I've found Swift to be a very strict language. I don't mean this in the sense
+described by
+[this Wikipedia article](https://en.wikipedia.org/wiki/Strict_programming_language). What
+I mean is that Swift typically only lets you do things one way.  This is
+similar to Python's "one way to do it," except Swift enforces this at the
+language level.
+
+A nice example of this is that I rarely get a warning from the Swift compiler.
+Just about every message I've gotten from the compiler has been an error. The
+difference is that the program will still compile and run with a warning. This
+is different from C, C++, and Objective-C, which have many warnings that the
+compiler will still compile with. These warnings usually are for things like
+an incorrect pointer type. Since there is really only one type in C, the
+integer (because all data in memory is just integers), the program can still
+run even if you mix your types up a bit.
+
+There are also many cases where Swift seems maybe too strict about things,
+although it's clear that it is doing it to try to stray people away from
+common mistakes and antipatterns. For example, the condition of an `if`
+statement in Swift must always be of type `Bool`. Unlike languages like
+Python, things do not have implicit boolean values. `if 1` is a syntax
+error. So is `if a` unless `a` is type `Bool`.
+
+This ends up not being a big problem. The things Swift forces you to do feel
+like good programming practices.  This is not unlike how Python "forces" you
+to keep your code indented correctly.  It feels very different from a language
+like Java, where the things that you are forced to do all feel like they are
+there simply to make the compiler writer's life easier.  And indeed, unlike
+Java and Objective-C and much like Python, Swift code requires very little
+boilerplate.  There are no header files for instance.
+
+So all said and done, I like Swift. I don't like it as much as Python (I also
+don't have my head wrapped around it as much as Python). But it's far better
+than Objective-C, and that's what matters. Frankly, my biggest gripe with it
+is the ubiquitous use of CamelCasing and two letter prefixing (`NS`, `CG`,
+`SK`; I don't know if there's a name for this) in the API. I adamantly refuse
+to do this with my own variables, because I believe CamelCase reduces
+readability over underscore_casing. I like the Python convention to use
+underscore_casing for variables, functions, and methods, and CamelCase for
+classes (because classes are kind of like proper nouns, and CamelCase is as
+close to Capitalization as possible in programming language conventions).
 
 # Learn to read Objective-C
 
@@ -130,7 +173,7 @@ Some things that XCode will do for you:
   things every once in a while (so that you can just click the button and have
   it fixed inline).
 
-- **Direct interaction with the simulator**: One button will compile your code
+- **Direct interaction with the iOS Simulator**: One button will compile your code
   and start the simulator. If your target is Mac OS X, it will open the
   application.
 
@@ -158,7 +201,9 @@ the XCode setting to get some things the way you like them (although I found
 that trying to set TAB to autoindent did not work). You can also use a tool
 like [Karabiner](https://pqrs.org/osx/karabiner/) (previously
 KeyRemap4MacBook) to enable Vim or Emacs editor shortcuts everywhere
-(including XCode).
+(including XCode). It doesn't help that XCode 6 is still in beta (at some
+point the editor backend died and all syntax highlighting and tab completion
+stopped working; I managed to fix it by removing a spurious `!` in the code)
 
 # The iOS Simulator
 
@@ -200,17 +245,17 @@ started with a SpriteKit game for iOS. This created a basic template "Hello
 World" Swift file with the basic `SKScene` subclass. Go ahead and compile and
 run this in the simulator to see what it does.
 
-There are four important methods of `SKScene` which you will want to
-override, `didMoveToView`, `touchesBegan`, `touchesEnded`, and
-`update`. `didMoveToView` is your initialize for your scene.  Anything that
-should be set up and appear from the very beginning should go
-there. `touchesBegan` and `touchesEnded` are called when a finger touches the
-screen and when it leaves the screen, respectively. Remember always that iOS
-devices are multitouch devices, so these events can happen concurrently, and
-there can be multiple touches happening at once.  The first argument to these
-methods is a set of touches, which you should iterate over to perform actions
-(the "Hello World" example shows how to do this). Finally, the `update` method
-is called every time the scene is updated, at each "frame" essentially.
+There are four important methods of `SKScene` which you will want to override,
+`didMoveToView`, `touchesBegan`, `touchesEnded`, and `update`. `didMoveToView`
+is the initializer for the scene.  Anything that should be set up and appear
+from the very beginning should go there. `touchesBegan` and `touchesEnded` are
+called when a finger touches the screen and when it leaves the screen,
+respectively. Remember always that iOS devices are multitouch devices, so
+these events can happen concurrently, and there can be multiple touches
+happening at once.  The first argument to these methods is a set of touches,
+which you should iterate over to perform actions (the "Hello World" example
+shows how to do this). Finally, the `update` method is called every time the
+scene is updated, at each "frame" essentially.
 
 There are other methods, for instance, `touchesMoved`. However, I discovered
 that you don't actually want to use `touchesMoved` to do what you would think
@@ -219,7 +264,8 @@ easy way to sync up multitouches between `touchesBegan` (where you know what
 thing the finger started on) and `touchesMoved` to move it around. It works
 well for a single touch, but if you want to be able to move multiple things
 around at once (which I highly recommend, as it leads to a much nicer user
-experience), you have to do things a little differently.
+experience), you have to do things a little differently, as I'll explain
+below.
 
 # Adding some objects to your environment
 
@@ -258,12 +304,12 @@ class Test {
 }
 ```
 
-it tells you that `Test.Type does not have a member named 'a'` no the `let b =
+it tells you that `Test.Type does not have a member named 'a'` on the `let b =
 a + 1` line.
 
 You may have to use properties with getters and setters in this case, which I
 didn't feel like fooling with. The result is that I did not abstract out the
-`CGSize(width: 10, height: 10)` into a common variable.
+`CGSize(width: 30, height: 30)` into a common variable.
 
 The `didMoveToView` method then becomes
 
@@ -316,12 +362,13 @@ override func didMoveToView(view: SKView) {
 }
 ```
 
-This creates an `SKPhysicsBody` with the exact same size as our
-`SKSpriteNode`s (there's probably a more direct way to do this). The
-`affectedByGravity` property is important. If you don't set it to `false`, all
-the objects will fall off the bottom of the screen. I disabled
-`allowsRotation` because I wanted my squares to stay upright. Otherwise when
-when the squares hit one another they will rotate in space.
+For each sprite, I create an `SKPhysicsBody` with the exact same size as the
+`SKSpriteNode`s (there's probably a more direct way to do this), and attach it
+to that node. The `affectedByGravity` property is important. If you don't set
+it to `false`, all the objects will fall off the bottom of the screen. I
+disabled `allowsRotation` because I wanted my squares to stay
+upright. Otherwise when when the squares hit one another they will rotate in
+space.
 
 Now `SceneKit` will prevent the squares from overlapping with one another, even
 if we put them on top of each other as we have done.
@@ -339,7 +386,7 @@ to do this took me some time to figure out.  I finally got some hints from
 The key thing here is that the `UITouch` objects remain the same objects for
 the duration of the touch. Their position is updated when the touch
 moves. Hence, you just need to associate each touch with the node that was
-touched when the touch began, and move the node to the position of the touch
+touched when the touch began, and move the node to the position of that touch
 with each update.
 
 To start, we will create a dictionary on the class mapping touches to nodes
@@ -411,6 +458,12 @@ override func update(currentTime: CFTimeInterval) {
 
 Note that we only modify the position for the four sprite nodes.
 
+The `touch.locationInNode(self)` part took me a long time to figure out. There
+are other methods, like `touch.locationInView(nil)`, but this does something
+very strange where the the horizontal axis was doubled (moving the touch one
+inch moved the object two inches), and the vertical axis was inverted. If
+someone knows what was going on there, please let me know.
+
 Modifying the position directly is nice, but it's nice to play around a little
 bit with a third thing from SpriteKit, actions.
 
@@ -420,7 +473,8 @@ time small enough, like `0.01` seconds, it will appear to act exactly the
 same. If we up this time, there will be a smooth "lag" where the node catches
 up to the touch. Because the movement always happens in the same amount of
 time, it will move faster if the finger is farther away. This gives the
-squares a nice "frictioney" effect, which is quite nice.
+squares a nice "frictioney" effect with some springiness to it, which is quite
+nice.
 
 ```swift
 override func update(currentTime: CFTimeInterval) {
@@ -450,8 +504,8 @@ multitouch.
 </video>
 
 Here you can see the movement lag caused by using `SKAction.moveTo` with
-`duration: 0.1` (note that the mouse itself jumps a bit at the beginning,
-which is due to a delay in the recording).
+`duration: 0.1` (note that the mouse itself jumps a bit at the beginning, but
+this is due to lag in the recording).
 
 <video src="../../SpriteKit-Example-2.mp4"
   autoplay width="500" loop>
@@ -464,4 +518,29 @@ I have uploaded the full code to
 This isn't exactly a "game", but it does lay down the foundations for what you
 would need to write a game in Swift using SpriteKit.  At least for me, it
 shows me the technical basics of how to write some games that I had thought
-about, which mostly involve making shape and moving them around the screen.
+about, which mostly involve making shapes and moving them around the screen.
+
+<!--  LocalWords:  func Haskell CGSize CGRect CGPoint locationInNode SKScene
+ -->
+<!--  LocalWords:  touch.locationInNode Karabiner KeyRemap4MacBook SpriteKit
+ -->
+<!--  LocalWords:  didMoveToView touchesBegan touchesEnded touchesMoved py
+ -->
+<!--  LocalWords:  SKSpriteNode sprite1 UIColor sprite2 sprite3 sprite4 'a'
+ -->
+<!--  LocalWords:  Test.Type SKView CGRectGetMidX self.frame CGRectGetMidY
+ -->
+<!--  LocalWords:  s.position self.addChild img src SKPhysicsBody SceneKit
+ -->
+<!--  LocalWords:  rectangleOfSize body.affectedByGravity body.allowsRotation
+ -->
+<!--  LocalWords:  s.physicsBody affectedByGravity allowsRotation UITouch
+ -->
+<!--  LocalWords:  SKNode NSSet withEvent UIEvent AnyObject nodeAtPoint
+ -->
+<!--  LocalWords:  GameScene currentTime CFTimeInterval node.position
+ -->
+<!--  LocalWords:  frictioney SKAction.moveTo node.runAction autoplay
+ -->
+<!--  LocalWords:  SKAction.repeatAction
+ -->
