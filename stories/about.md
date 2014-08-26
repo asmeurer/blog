@@ -15,6 +15,8 @@ Here are my various social sites:
 
 [Google+](https://plus.google.com/+AaronMeurer/) (I don't really use)
 
+Homepage: You're looking at it.
+
 Personal Email: <a href="mailto:asmeurer@gmail.com" target="_top">
   asmeurer@gmail.com</a>
 
