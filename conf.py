@@ -87,6 +87,7 @@ NAVIGATION_LINKS = {
         ('/archive.html', 'Archives'),
         ('/categories/index.html', 'Tags'),
         ('/rss.xml', 'RSS'),
+        ('/about.html', "About"),
     ),
 }
 
@@ -135,6 +136,7 @@ POSTS = (
     ("posts/*.wp", "posts", "post.tmpl"),
 )
 PAGES = (
+    ("stories/about.md", "", "story.tmpl"),
     ("stories/*.md", "stories", "story.tmpl"),
     ("stories/*.rst", "stories", "story.tmpl"),
     ("stories/*.txt", "stories", "story.tmpl"),
