@@ -66,21 +66,25 @@ Some useful tricks for print:
 
 - If your code is outputting a lot with your print, pipe into `less`.  This
   will let you interactively see what is coming out, and you can do things
-  like regex search (`/`).
+  like regex search (`/`). Alternately write it to a file using `>`.  You may
+  need to add `2>&1` to the end of the command (that's *after* the file
+  redirect, like `python file.py > output 2>&1`) to make debugging output that
+  goes to standard error log to the file.
 
 - Get into the habit of printing a little header with each item. That is,
   instead of just writing
 
-```python
-print(x)
-```
+  ```python
+  print(x)
+  ```
 
-write
+  write
 
   ```py
   print('x', x)
   ```
 
+  This
 ## raise an exception
 
 ## `traceback.print_stack`
