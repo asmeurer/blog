@@ -87,6 +87,8 @@ write
 
 ## `faulthandler`
 
+## `collections` ABCs
+
 ## Writing to another terminal
 
 # Third-party tools
