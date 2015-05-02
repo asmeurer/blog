@@ -600,13 +600,13 @@ SEARCH_FORM = """
 
 BODY_END = """
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"><script>
-<script src="/assets/js/tipuesearch_set.js"></script>
-<script src="/assets/js/tipuesearch.js"></script>
+<script src="assets/js/tipuesearch_set.js"></script>
+<script src="assets/js/tipuesearch.js"></script>
 <script>
 $(document).ready(function() {
     $('#tipue_search_input').tipuesearch({
         'mode': 'json',
-        'contentLocation': '/assets/js/tipuesearch_content.json',
+        'contentLocation': 'assets/js/tipuesearch_content.json',
         'showUrl': false
     });
 });
@@ -614,7 +614,7 @@ $(document).ready(function() {
 """
 
 EXTRA_HEAD_DATA = """
-<link rel="stylesheet" type="text/css" href="/assets/css/tipuesearch.css">
+<link rel="stylesheet" type="text/css" href="assets/css/tipuesearch.css">
 <div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
 """
 
@@ -625,11 +625,6 @@ BODY_END += """
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="https://asmeurer.github.io/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-"""
-
-EXTRA_HEAD_DATA = """
-<link rel="stylesheet" type="text/css" href="/assets/css/tipuesearch.css">
-<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
 """
 
 # Use content distribution networks for jquery and twitter-bootstrap css and js
