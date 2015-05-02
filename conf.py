@@ -593,35 +593,35 @@ SOCIAL_BUTTONS_CODE = ("""<div style="text-align:center">
 # Also, there is a local search plugin you can use, based on Tipue, but it requires setting several
 # options:
 
-SEARCH_FORM = """
-<span class="navbar-form pull-left">
-<input type="text" id="tipue_search_input">
-</span>"""
-
-BODY_END = """
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"><script>
-<script src="assets/js/tipuesearch_set.js"></script>
-<script src="assets/js/tipuesearch.js"></script>
-<script>
-$(document).ready(function() {
-    $('#tipue_search_input').tipuesearch({
-        'mode': 'json',
-        'contentLocation': 'assets/js/tipuesearch_content.json',
-        'showUrl': false
-    });
-});
-</script>
-"""
-
-EXTRA_HEAD_DATA = """
-<link rel="stylesheet" type="text/css" href="assets/css/tipuesearch.css">
-<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
-"""
+# SEARCH_FORM = """
+# <span class="navbar-form pull-left">
+# <input type="text" id="tipue_search_input">
+# </span>"""
+#
+# BODY_END = """
+# <script src="https://code.jquery.com/jquery-2.1.4.min.js"><script>
+# <script src="assets/js/tipuesearch_set.js"></script>
+# <script src="assets/js/tipuesearch.js"></script>
+# <script>
+# $(document).ready(function() {
+#     $('#tipue_search_input').tipuesearch({
+#         'mode': 'json',
+#         'contentLocation': 'assets/js/tipuesearch_content.json',
+#         'showUrl': false
+#     });
+# });
+# </script>
+# """
+#
+# EXTRA_HEAD_DATA = """
+# <link rel="stylesheet" type="text/css" href="assets/css/tipuesearch.css">
+# <div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+# """
 
 # http://www.sharethis.com/get-sharing-tools/#
 # Login using LinkedIn
 
-BODY_END += """
+BODY_END = """
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="https://asmeurer.github.io/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
@@ -712,7 +712,6 @@ USE_BUNDLES = True
 #     'local_search',
 #     'render_mustache',
 # ]
-ENABLED_EXTRAS = ['local_search']
 
 # List of regular expressions, links matching them will always be considered
 # valid by "nikola check -l"
