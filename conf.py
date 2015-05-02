@@ -599,6 +599,7 @@ SEARCH_FORM = """
 </span>"""
 
 BODY_END = """
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"><script>
 <script src="/assets/js/tipuesearch_set.js"></script>
 <script src="/assets/js/tipuesearch.js"></script>
 <script>
