@@ -6,7 +6,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://asmeurer.github.io/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/2014/</loc>
@@ -18,7 +18,55 @@
  </url>
  <url>
   <loc>http://asmeurer.github.io/archive.html</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/plugin/markdown/example.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/plugin/notes-server/notes.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/plugin/notes/notes.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/test/examples/barebones.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/test/examples/embedded-media.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/test/examples/math.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/test/examples/slide-backgrounds.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/test/test-markdown-element-attributes.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/test/test-markdown-slide-attributes.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/test/test-markdown.html</loc>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/assets/reveal/test/test.html</loc>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/categories/</loc>
