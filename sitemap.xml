@@ -10,90 +10,46 @@
  </url>
  <url>
   <loc>http://asmeurer.github.io/2014/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/about/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/archive.html</loc>
   <lastmod>2015-05-02</lastmod>
  </url>
  <url>
-  <loc>http://asmeurer.github.io/assets/reveal/</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/plugin/markdown/example.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/plugin/notes-server/notes.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/plugin/notes/notes.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/test/examples/barebones.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/test/examples/embedded-media.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/test/examples/math.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/test/examples/slide-backgrounds.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/test/test-markdown-element-attributes.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/test/test-markdown-slide-attributes.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/test/test-markdown.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
-  <loc>http://asmeurer.github.io/assets/reveal/test/test.html</loc>
-  <lastmod>2015-05-02</lastmod>
- </url>
- <url>
   <loc>http://asmeurer.github.io/categories/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/categories/mathjax/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/galleries/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/scipy-2014/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/stories/python-trickery/</loc>
-  <lastmod>2015-04-29</lastmod>
+  <lastmod>2015-05-02</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/tipue_search.html</loc>
+  <lastmod>2015-05-02</lastmod>
  </url>
 </urlset>
