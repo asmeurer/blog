@@ -335,7 +335,7 @@ ONE_FILE_POSTS = False
                              # the main (the newest) index page (index.html)
 
 # Name of the theme to use.
-THEME = "bootstrap3"
+THEME = "base"
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.
