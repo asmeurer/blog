@@ -85,8 +85,8 @@ TRANSLATIONS_PATTERN = "{path}.{ext}.{lang}"
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ('/archive.html', 'Archives'),
-        ('/categories/index.html', 'Tags'),
         ('/rss.xml', 'RSS'),
+        ('/about', "About"),
     ),
 }
 
@@ -135,6 +135,7 @@ POSTS = (
     ("posts/*.wp", "posts", "post.tmpl"),
 )
 PAGES = (
+    ("stories/about.md", "", "story.tmpl"),
     ("stories/*.md", "stories", "story.tmpl"),
     ("stories/*.rst", "stories", "story.tmpl"),
     ("stories/*.txt", "stories", "story.tmpl"),
@@ -223,6 +224,8 @@ ONE_FILE_POSTS = False
 # often removed or replaced as well.
 # SLUG_TAG_PATH = True
 
+WRITE_TAG_CLOUD = False
+
 # A list of redirection tuples, [("foo/from.html", "/bar/to.html")].
 #
 # A HTML file will be created in output/foo/from.html that redirects
@@ -238,14 +241,14 @@ ONE_FILE_POSTS = False
 # And then do a backup, or run `nikola ping` from the `ping`
 # plugin (`nikola install_plugin ping`).
 # To do manual deployment, set it to []
-DEPLOY_COMMANDS = [
-    "git checkout gh-pages",
-    "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
-    "git add -A",
-    "git commit -a -m 'Updating blog content'",
-    "git push",
-    "git checkout master",
-]
+# DEPLOY_COMMANDS = [
+#     "git checkout gh-pages",
+#     "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
+#     "git add -A",
+#     "git commit -a -m 'Updating blog content'",
+#     "git push",
+#     "git checkout master",
+# ]
 
 # Where the output site should be located
 # If you don't use an absolute path, it will be considered as relative
@@ -333,7 +336,7 @@ DEPLOY_COMMANDS = [
                              # the main (the newest) index page (index.html)
 
 # Name of the theme to use.
-THEME = "bootstrap3"
+THEME = "base"
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.
@@ -377,10 +380,10 @@ THEME = "bootstrap3"
 
 # A HTML fragment describing the license, for the sidebar.
 LICENSE = """
-<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+<p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license"
-     href="http://creativecommons.org/publicdomain/zero/1.0/">
-    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png"
+     href="https://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="https://i.creativecommons.org/p/zero/1.0/88x31.png"
 style="border-style: none;" alt="CC0" />
   </a>
 """
@@ -433,7 +436,7 @@ COMMENT_SYSTEM_ID = "asmeurer"
 # Create index.html for story folders?
 # STORY_INDEX = False
 # Enable comments on story pages?
-# COMMENTS_IN_STORIES = False
+COMMENTS_IN_STORIES = True
 # Enable comments on picture gallery pages?
 # COMMENTS_IN_GALLERIES = False
 
@@ -591,37 +594,38 @@ SOCIAL_BUTTONS_CODE = ("""<div style="text-align:center">
 # Also, there is a local search plugin you can use, based on Tipue, but it requires setting several
 # options:
 
-SEARCH_FORM = """
-<span class="navbar-form pull-left">
-<input type="text" id="tipue_search_input">
-</span>"""
-
-BODY_END = """
-<script type="text/javascript" src="/assets/js/tipuesearch_set.js"></script>
-<script type="text/javascript" src="/assets/js/tipuesearch.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#tipue_search_input').tipuesearch({
-        'mode': 'json',
-        'contentLocation': '/assets/js/tipuesearch_content.json',
-        'showUrl': false
-    });
-});
-</script>
-"""
+# SEARCH_FORM = """
+# <span class="navbar-form pull-left">
+# <input type="text" id="tipue_search_input">
+# </span>"""
+#
+# BODY_END = """
+# <script src="https://code.jquery.com/jquery-2.1.4.min.js"><script>
+# <script src="assets/js/tipuesearch_set.js"></script>
+# <script src="assets/js/tipuesearch.js"></script>
+# <script>
+# $(document).ready(function() {
+#     $('#tipue_search_input').tipuesearch({
+#         'mode': 'json',
+#         'contentLocation': 'assets/js/tipuesearch_content.json',
+#         'showUrl': false
+#     });
+# });
+# </script>
+# """
+#
+# EXTRA_HEAD_DATA = """
+# <link rel="stylesheet" type="text/css" href="assets/css/tipuesearch.css">
+# <div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
+# """
 
 # http://www.sharethis.com/get-sharing-tools/#
 # Login using LinkedIn
 
-BODY_END += """
+BODY_END = """
 <script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript" src="https://asmeurer.github.io/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-"""
-
-EXTRA_HEAD_DATA = """
-<link rel="stylesheet" type="text/css" href="/assets/css/tipuesearch.css">
-<div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
 """
 
 # Use content distribution networks for jquery and twitter-bootstrap css and js
@@ -709,7 +713,6 @@ USE_BUNDLES = True
 #     'local_search',
 #     'render_mustache',
 # ]
-ENABLED_EXTRAS = ['local_search']
 
 # List of regular expressions, links matching them will always be considered
 # valid by "nikola check -l"
