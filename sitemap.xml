@@ -10,7 +10,7 @@
  </url>
  <url>
   <loc>http://asmeurer.github.io/2014/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/2015/</loc>
@@ -18,7 +18,7 @@
  </url>
  <url>
   <loc>http://asmeurer.github.io/about/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/archive.html</loc>
@@ -26,23 +26,27 @@
  </url>
  <url>
   <loc>http://asmeurer.github.io/categories/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/categories/mathjax/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/galleries/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/posts/my-python-debugging-toolbox/</loc>
+  <lastmod>2015-05-04</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/python-trickery/</loc>
@@ -50,10 +54,14 @@
  </url>
  <url>
   <loc>http://asmeurer.github.io/posts/scipy-2014/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
+ </url>
+ <url>
+  <loc>http://asmeurer.github.io/stories/about/</loc>
+  <lastmod>2015-05-04</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/stories/python-trickery/</loc>
-  <lastmod>2015-05-02</lastmod>
+  <lastmod>2015-05-04</lastmod>
  </url>
 </urlset>

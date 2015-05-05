@@ -148,7 +148,7 @@ the philosophy of the <a href="http://getnikola.com/handbook.html">manual</a>:</
 <p>DON'T READ THIS MANUAL. IF YOU NEED TO READ IT I FAILED, JUST USE THE THING.</p>
 </blockquote>
 <p>I've also discovered that the
-<a href="https://groups.google.com/forum/#!forum/nikola-discuss">Nikola community</a> is
+<a href="https://groups.google.com/forum/#%21forum/nikola-discuss">Nikola community</a> is
 <em>very</em> nice. And of course, even if Nikola ends up not being for me, it will
 be easy to switch, because my actual content is just some Markdown files that
 I own.</p>
@@ -168,58 +168,46 @@ http://getnikola.com/handbook.html#all-you-need-to-know.</p>
 <p>One thing that doesn't tell you is that after you init the site, you should
 walk through <code>conf.py</code> and change the settings to your liking.</p>
 <p>Another trick not there is that you can add</p>
-<pre class="code literal-block"><span class="nb">eval</span> <span class="s2">"`nikola tabcompletion`"</span>
-</pre>
-
-
+<pre><code class="language-bash">eval "`nikola tabcompletion`"
+</code></pre>
 <p>to your Bash profile to get tab completion.</p>
 <h3>Tricks</h3>
 <p>Here are some useful tricks:</p>
 <ul>
-<li>
-<p>To enable MathJax, you have to type <code>mathjax</code> in a line by itself in the
+<li><p>To enable MathJax, you have to type <code>mathjax</code> in a line by itself in the
 metadata file. There are some bugs right now, but ideally you could do inline
 math with <code>$math$</code> and display math with <code>$$math$$</code>. <code>$math$</code> doesn't work
 currently, but you can do <code>\\(math\\)</code> (both <code>\</code>s are required, although this
 is likely a bug). You can do <code>\\[math\\]</code> for display math.  Here are some
-examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 .$$</p>
-</li>
-<li>
-<p>Your one-stop command when blogging is <code>nikola auto</code>. This requires
-  <code>livereload</code>. This will serve the blog on localhost, and automatically
-  rebuild it when any change is made (and I really mean <em>any</em> change: it can
-  even detect when you change Nikola itself).</p>
-</li>
-<li>
-<p>I have the following in my conf.py to deploy:</p>
-</li>
+examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 .$$</p></li>
+<li><p>Your one-stop command when blogging is <code>nikola auto</code>. This requires
+<code>livereload</code>. This will serve the blog on localhost, and automatically
+rebuild it when any change is made (and I really mean <em>any</em> change: it can
+even detect when you change Nikola itself).</p></li>
+<li><p>I have the following in my conf.py to deploy:</p></li>
 </ul>
-<pre class="code literal-block"><span class="n">DEPLOY_COMMANDS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">"git checkout gh-pages"</span><span class="p">,</span>
-    <span class="s">"rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ ."</span><span class="p">,</span>
-    <span class="s">"git add -A"</span><span class="p">,</span>
-    <span class="s">"git commit -a -m 'Updating blog content'"</span><span class="p">,</span>
-    <span class="s">"git push"</span><span class="p">,</span>
-    <span class="s">"git checkout master"</span><span class="p">,</span>
-<span class="p">]</span>
-</pre>
-
-
+<pre><code class="language-python">DEPLOY_COMMANDS = [
+    "git checkout gh-pages",
+    "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
+    "git add -A",
+    "git commit -a -m 'Updating blog content'",
+    "git push",
+    "git checkout master",
+]
+</code></pre>
 <p>WARNING: These commands are dangerous. If you don't properly exclude things
 like <code>.git</code>, you will wipe your entire git history. I <em>highly</em> recommend
 committing everything and pushing to GitHub before deploying.</p>
 <ul>
 <li>Use</li>
 </ul>
-<pre class="code literal-block">_site/
+<pre><code>_site/
 *.pyc
 .DS_Store
 .doit.db.db
 cache/
 output/
-</pre>
-
-
+</code></pre>
 <p>for your <code>.gitignore</code>.</p>
 <ul>
 <li>Despite what it says on the Nikola page, be sure to read the docs, because
@@ -228,15 +216,13 @@ them. Also be sure to read through <code>conf.py</code>.</li>
 </ul>
 <h3>Wordpress import</h3>
 <p><strong>This is something that I am still figuring out. You can see the progress at
-  <a href="http://asmeurer.github.io/blog/old_blog">http://asmeurer.github.io/blog/old_blog</a></strong></p>
+<a href="http://asmeurer.github.io/blog/old_blog">http://asmeurer.github.io/blog/old_blog</a></strong></p>
 <p>Importing from Wordpress is pretty easy actually (at least in theory). First
 you need to go to the Wordpress site dashboard and go to "Export" from the
 "Tools" menu. From here you can download an XML file with all your
 content. Then just do</p>
-<pre class="code literal-block">nikola import_wordpress export_file.xml
-</pre>
-
-
+<pre><code>nikola import_wordpress export_file.xml
+</code></pre>
 <p>Note that the current version of Nikola as of this writing (6.3.0) doesn't do
 this right, so you'll need to use the
 <a href="https://github.com/getnikola/nikola">git master</a>. There are some issues with
@@ -326,6 +312,10 @@ in manually.</p>
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="https://asmeurer.github.io/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
     
     

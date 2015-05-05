@@ -32,12 +32,14 @@
     <meta property="og:url" content="http://asmeurer.github.io/posts/python-trickery/">
     <meta property="og:description" content="Here are some bits of Python trickery that I have come across. Each of the
 following is invalid syntax.  See if you can figure out why
-1.
+
+
+
 1 + not(2)
 
 
 
-2.
+
 f(*(
 i for i in range(10)
 if i % 2),
@@ -111,17 +113,21 @@ x=3,)">
     <div>
 <p>Here are some bits of Python trickery that I have come across. Each of the
 following is invalid syntax.  See if you can figure out why</p>
-<p>1.</p>
-<pre class="code literal-block"><span class="mi">1</span> <span class="o">+</span> <span class="ow">not</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre>
-
-
-<p>2.</p>
-<pre class="code literal-block"><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="p">(</span>
-<span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">),</span>
-<span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">,)</span>
-</pre>
+<ol>
+<li>
+</li>
+</ol>
+<pre><code class="language-py">1 + not(2)
+</code></pre>
+<ol start="2">
+<li>
+</li>
+</ol>
+<pre><code class="language-py">f(*(
+i for i in range(10)
+if i % 2),
+x=3,)
+</code></pre>
 </div>
     </div>
     <aside class="postpromonav">
@@ -189,6 +195,10 @@ following is invalid syntax.  See if you can figure out why</p>
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="https://asmeurer.github.io/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
     
     
