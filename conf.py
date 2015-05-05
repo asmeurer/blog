@@ -156,7 +156,7 @@ PAGES = (
 # 'markdown' is MarkDown
 # 'html' assumes the file is html and just copies it
 COMPILERS = {
-    "markdown": ('.md', '.mdown', '.markdown', '.wp'),
+    "commonmark": ('.md', '.mdown', '.markdown', '.wp'),
     "rest": ('.rst', '.txt'),
     "textile": ('.textile',),
     "txt2tags": ('.t2t',),
@@ -626,6 +626,13 @@ BODY_END = """
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="https://asmeurer.github.io/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "63f8ac0e-a586-4f7b-9c9a-6019890ff304", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+"""
+
+BODY_END += """
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+<script
+src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 """
 
 # Use content distribution networks for jquery and twitter-bootstrap css and js
