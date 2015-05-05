@@ -36,9 +36,9 @@ difficult is the second point. Once a bug is identified, how do we determine
 its source.  The problem is inherent in the fact that the code being run is
 hidden when it is running.  If we were able to act as both human and computer,
 both executing the code and maintaining a high-level understanding of it,
-debugging is not necessary.  In fact, we might say that the goal of a good
-debugging tool is to allow us to see a sufficient portion of the code's
-execution while maintaining, or in many cases, growing, our high-level
+debugging would not be necessary.  In fact, we might say that the goal of a
+good debugging tool is to allow us to see a sufficient portion of the code's
+execution while maintaining, or indeed, growing, our high-level
 understanding of what it does.
 
 # Tools that come with the standard library
