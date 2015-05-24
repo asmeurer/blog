@@ -12,7 +12,7 @@ BLOG_AUTHOR = "Aaron Meurer"
 BLOG_TITLE = "Aaron Meurer's Blog"
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://asmeurer.github.io/blog"
+SITE_URL = "http://asmeurer.github.io/blog/"
 # This is the URL where nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://getnikola.com/"
