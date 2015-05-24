@@ -1,2 +1,2 @@
-Sitemap: http://asmeurer.github.io/sitemapindex.xml
+Sitemap: http://asmeurer.github.io/blog/sitemapindex.xml
 

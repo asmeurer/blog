@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/</link><description>My blog</description><atom:link type="application/rss+xml" href="http://asmeurer.github.io/rss.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 05 May 2015 01:08:59 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python Trickery</title><link>http://asmeurer.github.io/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" type="application/rss+xml" href="http://asmeurer.github.io/blog/rss.xml"></atom:link><language>en</language><lastBuildDate>Sun, 24 May 2015 23:48:19 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python Trickery</title><link>http://asmeurer.github.io/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
 following is invalid syntax.  See if you can figure out why&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -13,7 +13,7 @@ following is invalid syntax.  See if you can figure out why&lt;/p&gt;
 i for i in range(10)
 if i % 2),
 x=3,)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/posts/python-trickery/</guid><pubDate>Mon, 04 May 2015 19:11:46 GMT</pubDate></item><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/python-trickery/</guid><pubDate>Mon, 04 May 2015 19:11:46 GMT</pubDate></item><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
 long as either has existed.  However, the barrier of entry has always been too
 high, given that I only ever had time to play with them as a hobby.  The
 Objective-C programming language is a bit complicated to learn, especially
@@ -281,7 +281,7 @@ sprite in the main view. If you forget this line, none of the sprites will
 show up.&lt;/p&gt;
 &lt;p&gt;If you run this, you will only see the yellow box, because you put them all on
 top of one another in the center of the view.&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://asmeurer.github.io/galleries/swift-game-1.png" width="500"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://asmeurer.github.io/blog/galleries/swift-game-1.png" width="500"&gt;&lt;/p&gt;
 &lt;h2&gt;Adding Basic Physics&lt;/h2&gt;
 &lt;p&gt;We could change the positions so that they do not overlap, but the option I
 went with was to play around with the physics a little. &lt;code&gt;SpriteKit&lt;/code&gt; has a nice
@@ -315,7 +315,7 @@ space.&lt;/p&gt;
 &lt;p&gt;Now &lt;code&gt;SceneKit&lt;/code&gt; will prevent the squares from overlapping with one another, even
 if we put them on top of each other as we have done.&lt;/p&gt;
 &lt;p&gt;So now when we start the simulator, we see&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://asmeurer.github.io/galleries/swift-game-2.png" width="500"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://asmeurer.github.io/blog/galleries/swift-game-2.png" width="500"&gt;&lt;/p&gt;
 &lt;h2&gt;Making the squares movable&lt;/h2&gt;
 &lt;p&gt;Now, let's make it so that we can move these squares around.  The correct way
 to do this took me some time to figure out.  I finally got some hints from
@@ -410,13 +410,13 @@ changes.&lt;/p&gt;
 &lt;p&gt;Here is an example of the movement. You can see it works even with
 multitouch.  You can also see the collision physics cause the other squares to
 move out of the way when another square hits them.&lt;/p&gt;
-&lt;video src="http://asmeurer.github.io/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
+&lt;video src="http://asmeurer.github.io/blog/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;
 &lt;p&gt;Here you can see the movement lag caused by using &lt;code&gt;SKAction.moveTo&lt;/code&gt; with
 &lt;code&gt;duration: 0.1&lt;/code&gt; (note that the mouse itself jumps a bit at the beginning, but
 this is due to lag in the recording).&lt;/p&gt;
-&lt;video src="http://asmeurer.github.io/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
+&lt;video src="http://asmeurer.github.io/blog/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;
 &lt;p&gt;I have uploaded the full code to
@@ -448,7 +448,7 @@ about, which mostly involve making shapes and moving them around the screen.&lt;
 &lt;!--  LocalWords:  frictioney SKAction.moveTo node.runAction autoplay
  --&gt;
 &lt;!--  LocalWords:  SKAction.repeatAction
- --&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item><item><title>SciPy 2014</title><link>http://asmeurer.github.io/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
+ --&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item><item><title>SciPy 2014</title><link>http://asmeurer.github.io/blog/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
 week-long conference in Austin, TX for scientific computing with Python.&lt;/p&gt;
 &lt;p&gt;This is my third SciPy (I have been to
 &lt;a href="https://asmeurersympy.wordpress.com/2011/07/17/the-scipy-2011-conference/"&gt;2011&lt;/a&gt;
@@ -585,7 +585,7 @@ people started using it.&lt;/p&gt;
 the general feel from people I talked to who are using Conda is that it has.&lt;/p&gt;
 &lt;p&gt;I think this slide from my presentation summarizes why Conda solves the
 packaging problem.&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://asmeurer.github.io/galleries/conda_scipy2014_slide.png" width="500"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://asmeurer.github.io/blog/galleries/conda_scipy2014_slide.png" width="500"&gt;&lt;/p&gt;
 &lt;p&gt;One of the most amazing things about the scientific Python community, and one
 of the things that I think really sets it apart from other Python communities,
 is the use of Python alongside other languages, such as C, C++, Fortran, R, or
@@ -664,7 +664,7 @@ just insomuch as there were more people at all.&lt;/p&gt;
 &lt;!-- LocalWords:  Gede Obinna Nwanna iframe src frameborder allowfullscreen -
 --&gt;
 &lt;!--  LocalWords:  - VanderPlas 's PyDy 's img Ahmadia
- --&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/posts/scipy-2014/</guid><pubDate>Sun, 13 Jul 2014 16:52:27 GMT</pubDate></item><item><title>Moving to GitHub pages with Nikola</title><link>http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;So I've finally decided to move my blog from Wordpress to GitHub pages.  I
+ --&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/scipy-2014/</guid><pubDate>Sun, 13 Jul 2014 16:52:27 GMT</pubDate></item><item><title>Moving to GitHub pages with Nikola</title><link>http://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;So I've finally decided to move my blog from Wordpress to GitHub pages.  I
 highly recommend it if you are technically skilled enough to do it. I was
 getting pretty annoyed at Wordpress. It forces you to write your posts in
 html (or else using their WYSIWYG editor), the wordpress.com is locked down,
@@ -801,4 +801,4 @@ the Disqus url for the imported comments to the old Wordpress url (look at the
 Disqus section of one of the built pages).&lt;/p&gt;
 &lt;p&gt;I don't know how to automatically backlink from Wordpress back to
 Nikola. Maybe I should just automatically generate some links and paste them
-in manually.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/posts/moving-to-github-pages-with-nikola/</guid><pubDate>Sun, 09 Feb 2014 23:19:18 GMT</pubDate></item></channel></rss>
+in manually.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</guid><pubDate>Sun, 09 Feb 2014 23:19:18 GMT</pubDate></item></channel></rss>
