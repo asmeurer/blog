@@ -80,6 +80,8 @@ Stuff I've done on my own. In no particular order.
 
 - This [blog](https://github.com/asmeurer/blog).
 
+- My [old blog](https://asmeurersympy.wordpress.com/).
+
 - A
   [presentation](https://asmeurer.github.io/python3-presentation/slides.html)
   about why you should be using Python 3.
