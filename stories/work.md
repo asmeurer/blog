@@ -28,9 +28,9 @@ and most of my open source work is on my
   of open source packages for doing science, math, engineering, data
   analysis in Python.
 
-  - I gave a talk about conda at SciPy 2014. <iframe width="560" height="315"
-    src="https://www.youtube.com/embed/UaIvrDWrIWM" frameborder="0"
-    allowfullscreen></iframe>.
+  I gave a talk about conda at SciPy 2014. <iframe width="560" height="315"
+  src="https://www.youtube.com/embed/UaIvrDWrIWM" frameborder="0"
+  allowfullscreen></iframe>.
 
 # Open source projects that I use heavily and contribute to
 
