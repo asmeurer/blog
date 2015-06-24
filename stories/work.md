@@ -10,6 +10,17 @@ and most of my open source work is on my
   [Google Summer of Code](https://www.google-melange.com/) with SymPy in 2009.
   I've been an active contributor ever since, and am now the lead developer.
 
+  I've touched most parts of SymPy, but the parts that I'm most proud of are
+  the [ODE module](http://docs.sympy.org/latest/modules/solvers/ode.html) (my
+  2009 GSoC project), the implementation of the
+  [Risch integration algorithm](https://en.wikipedia.org/wiki/Risch_algorithm)
+  (my 2010 GSoC project), improvements to the assumptions system (an ongoing
+  project), and the
+  [tutorial](http://docs.sympy.org/latest/tutorial/index.html).
+
+  If you are interested in SymPy or have any questions about it, please email
+  the [SymPy mailing list](https://groups.google.com/forum/#!forum/sympy).
+
 - [Conda](http://conda.pydata.org/docs/), a package manager. I work primarily
   on conda for my day job at
   [Continuum Analytics](http://continuum.io/). Conda is the package manager
