@@ -84,9 +84,10 @@ TRANSLATIONS_PATTERN = "{path}.{ext}.{lang}"
 # You should provide a key-value pair for each used language.
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
+        ('/about', "About"),
+        ('/work', 'Work'),
         ('/archive.html', 'Archives'),
         ('/rss.xml', 'RSS'),
-        ('/about', "About"),
     ),
 }
 
@@ -136,6 +137,7 @@ POSTS = (
 )
 PAGES = (
     ("stories/about.md", "", "story.tmpl"),
+    ("stories/work.md", "", "story.tmpl"),
     ("stories/*.md", "stories", "story.tmpl"),
     ("stories/*.rst", "stories", "story.tmpl"),
     ("stories/*.txt", "stories", "story.tmpl"),
