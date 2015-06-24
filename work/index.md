@@ -1,6 +1,7 @@
 Here are some things that I've worked on. Most of what I do is open source,
 and most of my open source work is on my
-[GitHub page](https://github.com/asmeurer).
+[GitHub page](https://github.com/asmeurer). Everything I do is
+[liberally licensed](http://copyfree.org/) (BSD or MIT) if possible.
 
 # Main projects
 
