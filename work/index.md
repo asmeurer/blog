@@ -68,6 +68,9 @@ Stuff I've done on my own. In no particular order.
 
 ## Good stuff
 
+- [catimg](https://github.com/asmeurer/catimg/). Shows an random image of a
+  cat from Imgur inline in the iTerm2 terminal.
+
 - [prefsync](https://github.com/asmeurer/prefsync), a little tool to help
   sync OS X plist files in a human-readable format.
 
