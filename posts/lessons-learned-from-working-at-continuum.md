@@ -36,6 +36,13 @@
 
 - Far fewer people than I would have thought understand how hard links work.
 
+- Changelogs are useful.
+
+- Semantic versioning is over-hyped.
+
+- If you make something and release it, the first version should be 1.0 (not
+  0.1 or 0.0.1).
+
 - Getting a difficult package to compile is like hacking a computer. All it
   takes is time.
 
