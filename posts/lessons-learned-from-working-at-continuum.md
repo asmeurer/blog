@@ -1,0 +1,68 @@
+- Left to their own devices, people will make the minimal possible solution to
+  packaging. They won't try to architect something. The result will be
+  over-engineered, specific to their use-case, and lack reproducibility.
+
+- The best way to ensure that some software has no bugs is for it to have many
+  users.
+
+- Be wary of the "software would be great if it weren't for all the users"
+  mentality (cf. the previous point).
+
+- Most people don't code defensively. If you are working on a project that
+  requires extreme stability, be cautious of contributions from those outside
+  the development team.
+
+- Hostility towards Windows and Windows users doesn't help anyone. >50% of
+  Anaconda downloads are on Windows.
+
+- For a software updater, stability is the number one priority. If the updater
+  breaks, will a fix be deployed?
+
+- Even if you configure your program to update itself every time it runs you
+  will still get bug reports with arbitrarily old versions.
+
+- Separating components into separate git repositories leads to a
+  philosophical separation of concerns among the components.
+
+- Academics (often) don't know good software practices, nor good licensing
+  practices.
+
+- Neither do some large corporations.
+
+- Avoid over-engineering things.
+
+- Far fewer people than I would have thought understand how hard links work.
+
+- Getting a difficult package to compile is like hacking a computer. All it
+  takes is time.
+
+- It doesn't matter how open source friendly your business is, there will
+  always be people who will be skeptical and point their fingers at the
+  smallest proprietary components, fear monger, and overgeneralize unrelated
+  issues into FUD. These people should generally be ignored.
+
+- People always assume you have way more automation than you really do.
+
+- The Python standard library is not a Zen garden. Some parts of it are
+  completely broken, and if you need to rely on them, you'll have to rewrite
+  them. `shutil.rmtree` on Windows is one example of this.
+
+- Linux is strictly forwards compatible. Windows is strictly backwards
+  compatible.
+
+- On Linux, things tend to be very simple. On Windows, things tend to be very
+  complicated.
+
+- I can't decide about OS X. It lies somewhere in between.
+
+- Nobody uses 32-bit Linux. Why do we even support that?
+
+And some things that I already knew, but were reiterated:
+
+- Open source is more about the open than the source. Develop things in the
+  open, and you will create a community that respects you.
+
+- Don't feed the trolls.
+
+- Avoid object oriented programming when procedural programming will do just
+  fine.
