@@ -24,6 +24,9 @@
 - Separating components into separate git repositories leads to a
   philosophical separation of concerns among the components.
 
+- Everyone who isn't an active developer on the project will ignore this
+  separation and open issues in the wrong repo.
+
 - Academics (often) don't know good software practices, nor good licensing
   practices.
 
@@ -57,6 +60,35 @@
 
 - Nobody uses 32-bit Linux. Why do we even support that?
 
+- People oversimplify the problem of solving for package dependencies in their
+  heads.  No one realizes that it's meaningless to say something like "the
+  dependencies of NumPy" (every build of every version of NumPy has its own
+  set of dependencies, which may or may not be the same).
+
+- Writing a set of rules and a solver to solve against those rules is
+  relatively easy. Writing heuristics to tell users why those rules are
+  unsolvable when they are is hard.
+
+- Some of the smartest people I know, who otherwise make very rational and
+  intelligent decisions, refuse to update to Python 3.
+
+- As an introvert, the option of working from home is great for maintaining
+  sanity.
+
+- [Aeron chairs are awesome](http://blog.codinghorror.com/a-developers-second-most-important-asset/).
+
+- If living in Austin doesn't turn you into a foodie you will at least gain a
+  respect for them.
+
+- Twitter, if used correctly, is a great way to interact with your users.
+
+- Twitter is also a great place to learn new things. Follow
+  [John Cook](https://twitter.com/JohnDCook) and
+  [Bret Victor](https://twitter.com/worrydream).
+
+- One of the best ways to make heavily shared content is to make it on git
+  (at least if you're an expert).
+
 And some things that I already knew, but were reiterated:
 
 - Open source is more about the open than the source. Develop things in the
@@ -66,3 +98,6 @@ And some things that I already knew, but were reiterated:
 
 - Avoid object oriented programming when procedural programming will do just
   fine.
+
+- SAT solvers solve NP-complete problems in general, but they can be very fast
+  to solve common case problems.
