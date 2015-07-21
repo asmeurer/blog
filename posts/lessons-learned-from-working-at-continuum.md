@@ -89,6 +89,10 @@
 - One of the best ways to make heavily shared content is to make it on git
   (at least if you're an expert).
 
+- A good optimization algorithm avoids getting caught in local maxima by
+  trying different parts of the search space that initially appear to be
+  worse. The same approach should be taken in life.
+
 And some things that I already knew, but were reiterated:
 
 - Open source is more about the open than the source. Develop things in the
