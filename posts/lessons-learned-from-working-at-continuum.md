@@ -1,3 +1,18 @@
+Last Friday was my last day working at Continuum Analytics. I enjoyed my
+time at the company, and wish success to it, but the time has come for me to
+move on. Starting later this year, I will start working with
+[Anthony Scopatz](https://twitter.com/scopatz) at his new lab
+[ERGS](http://www.ergs.sc.edu/index.html) at the University of South
+Carolina.
+
+During my time at Continuum (over two years if you count a summer internship),
+I primarily worked on the
+[Anaconda distribution](https://www.continuum.io/downloads) and its open
+source package manager, [conda](http://conda.pydata.org/).  I learned a lot of
+lessons in that time, and I'd like to share some of them here.
+
+In no particular order:
+
 - Left to their own devices, people will make the minimal possible solution to
   packaging. They won't try to architect something. The result will be
   over-engineered, specific to their use-case, and lack reproducibility.
