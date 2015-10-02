@@ -104,7 +104,8 @@ In no particular order:
   to solve common case problems. [^*]
 
 - Some of the smartest people I know, who otherwise make very rational and
-  intelligent decisions, refuse to update to Python 3.
+  intelligent decisions,
+  [refuse to update to Python 3](https://asmeurer.github.io/python3-presentation/slides.html).
 
 - As an introvert, the option of working from home is great for maintaining
   sanity.
