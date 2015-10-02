@@ -55,7 +55,8 @@ In no particular order:
 
 - Avoid over-engineering things.
 
-- Far fewer people than I would have thought understand how hard links work.[^**]
+- Far fewer people than I would have thought understand the difference between
+  hard links and soft links.[^**]
 
 - Changelogs are useful.
 
