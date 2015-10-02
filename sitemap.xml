@@ -6,7 +6,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://asmeurer.github.io/blog/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-07-17</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/2014/</loc>
@@ -22,7 +22,7 @@
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/archive.html</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-01</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/categories/</loc>
@@ -38,7 +38,7 @@
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/dont-rebase/</loc>
-  <lastmod>2015-07-13</lastmod>
+  <lastmod>2015-07-22</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</loc>
