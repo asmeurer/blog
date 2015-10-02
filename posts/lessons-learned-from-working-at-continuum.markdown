@@ -75,6 +75,8 @@ In no particular order:
 
 - Don't feed the trolls.[^fn1]
 
+- People constantly misspell the name of
+  [Apple's desktop operating system](https://twitter.com/asmeurer/status/618595687958122496).
 
 - People always assume you have way more automation than you really do.
 
