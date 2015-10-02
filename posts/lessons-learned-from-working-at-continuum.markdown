@@ -43,10 +43,10 @@ In no particular order:
   separation and open issues in the wrong repo.
 
 - Avoid object oriented programming when procedural programming will do just
-  fine.[^*]
+  fine.[^fn1]
 
 - Open source is more about the open than the source. Develop things in the
-  open, and you will create a community that respects you.[^*]
+  open, and you will create a community that respects you.[^fn1]
 
 - Academics (often) don't know good software practices, nor good licensing
   practices.
@@ -56,7 +56,7 @@ In no particular order:
 - Avoid over-engineering things.
 
 - Far fewer people than I would have thought understand the difference between
-  hard links and soft links.[^**]
+  hard links and soft links.[^fn2]
 
 - Changelogs are useful.
 
@@ -73,7 +73,7 @@ In no particular order:
   smallest proprietary components, fear monger, and overgeneralize unrelated
   issues into FUD. These people should generally be ignored.
 
-- Don't feed the trolls.[^*]
+- Don't feed the trolls.[^fn1]
 
 
 - People always assume you have way more automation than you really do.
@@ -83,7 +83,7 @@ In no particular order:
   them. `shutil.rmtree` on Windows is one example of this.
 
 - Linux is strictly backwards compatible. Windows is strictly forwards
-  compatible. [^***]
+  compatible. [^fn3]
 
 - On Linux, things tend to be very simple. On Windows, things tend to be very
   complicated.
@@ -102,7 +102,7 @@ In no particular order:
   unsolvable when they are is hard.
 
 - SAT solvers solve NP-complete problems in general, but they can be very fast
-  to solve common case problems. [^*]
+  to solve common case problems. [^fn1]
 
 - Some of the smartest people I know, who otherwise make very rational and
   intelligent decisions,
@@ -131,12 +131,12 @@ In no particular order:
 
 ### Footnotes
 
-[^*]: These are things that I already knew, but were reiterated.
+[^fn1]: These are things that I already knew, but were reiterated.
 
-[^**]: If you are one of those people, I have a small presentation that
+[^fn2]: If you are one of those people, I have a small presentation that
        explains the difference [here](https://speakerdeck.com/asmeurer/hard-links-and-soft-links)
 
-[^***]: These terms can be confusing, and I admit I got this backwards the
+[^fn3]: These terms can be confusing, and I admit I got this backwards the
         first time I wrote this. According to Wikipedia,
         [forwards compatible](https://en.wikipedia.org/wiki/Forward_compatibility)
         means a system can accept input intended for a later version of itself
