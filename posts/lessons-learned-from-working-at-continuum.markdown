@@ -81,8 +81,8 @@ In no particular order:
   completely broken, and if you need to rely on them, you'll have to rewrite
   them. `shutil.rmtree` on Windows is one example of this.
 
-- Linux is strictly forwards compatible. Windows is strictly backwards
-  compatible.
+- Linux is strictly backwards compatible. Windows is strictly forwards
+  compatible. [^***]
 
 - On Linux, things tend to be very simple. On Windows, things tend to be very
   complicated.
@@ -134,3 +134,25 @@ In no particular order:
 
 [^**]: If you are one of those people, I have a small presentation that
        explains the difference [here](https://speakerdeck.com/asmeurer/hard-links-and-soft-links)
+
+[^***]: These terms can be confusing, and I admit I got this backwards the
+        first time I wrote this. According to Wikipedia,
+        [forwards compatible](https://en.wikipedia.org/wiki/Forward_compatibility)
+        means a system can accept input intended for a later version of itself
+        and
+        [backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility)
+        means a system can accept input intended for an earlier version of
+        itself.
+
+    What I specifically mean here is that in terms of building packages
+    for Linux or Windows, for Linux, you should build a package on the
+    oldest version that you wish to support. That package will work on
+    newer versions of Linux, but not anything older (generally due to the
+    version of libc you are linked against).
+
+    On the other hand, on Windows, you can can compile things on the
+    newest version (I used Windows 8 on my main Windows build VM), and it
+    will work on older versions of Windows like XP (as long as you ship
+    the right runtime DLLs). This is also somewhat confusing because
+    Windows tends to be both forwards compatible *and* backwards
+    compatible.
