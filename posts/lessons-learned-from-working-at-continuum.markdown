@@ -27,8 +27,7 @@ In no particular order:
   requires extreme stability, be cautious of contributions from those outside
   the development team.
 
-- Hostility towards Windows and Windows users doesn't help anyone. >50% of
-  Anaconda downloads are on Windows.
+- Hostility towards Windows and Windows users doesn't help anyone.
 
 - [https://twitter.com/asmeurer/status/593170976981913600](https://twitter.com/asmeurer/status/593170976981913600)
 
