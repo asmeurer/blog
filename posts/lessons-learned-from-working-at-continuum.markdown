@@ -30,6 +30,8 @@ In no particular order:
 - Hostility towards Windows and Windows users doesn't help anyone. >50% of
   Anaconda downloads are on Windows.
 
+- [https://twitter.com/asmeurer/status/593170976981913600](https://twitter.com/asmeurer/status/593170976981913600)
+
 - For a software updater, stability is the number one priority. If the updater
   breaks, how can a fix be deployed?
 
