@@ -31,7 +31,7 @@ In no particular order:
   Anaconda downloads are on Windows.
 
 - For a software updater, stability is the number one priority. If the updater
-  breaks, will a fix be deployed?
+  breaks, how can a fix be deployed?
 
 - Even if you configure your program to update itself every time it runs you
   will still get bug reports with arbitrarily old versions.
@@ -42,6 +42,9 @@ In no particular order:
 - Everyone who isn't an active developer on the project will ignore this
   separation and open issues in the wrong repo.
 
+- Open source is more about the open than the source. Develop things in the
+  open, and you will create a community that respects you.[^*]
+
 - Academics (often) don't know good software practices, nor good licensing
   practices.
 
@@ -49,7 +52,7 @@ In no particular order:
 
 - Avoid over-engineering things.
 
-- Far fewer people than I would have thought understand how hard links work.
+- Far fewer people than I would have thought understand how hard links work.[^**]
 
 - Changelogs are useful.
 
@@ -117,9 +120,6 @@ In no particular order:
 
 And some things that I already knew, but were reiterated:
 
-- Open source is more about the open than the source. Develop things in the
-  open, and you will create a community that respects you.
-
 - Don't feed the trolls.
 
 - Avoid object oriented programming when procedural programming will do just
@@ -127,3 +127,8 @@ And some things that I already knew, but were reiterated:
 
 - SAT solvers solve NP-complete problems in general, but they can be very fast
   to solve common case problems.
+
+[^*]: These are things that I already knew, but were reiterated.
+
+[^**]: If you are one of those people, I have a small presentation that
+       explains the difference [here](https://speakerdeck.com/asmeurer/hard-links-and-soft-links)
