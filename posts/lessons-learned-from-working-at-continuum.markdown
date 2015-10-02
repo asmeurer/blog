@@ -42,6 +42,9 @@ In no particular order:
 - Everyone who isn't an active developer on the project will ignore this
   separation and open issues in the wrong repo.
 
+- Avoid object oriented programming when procedural programming will do just
+  fine.[^*]
+
 - Open source is more about the open than the source. Develop things in the
   open, and you will create a community that respects you.[^*]
 
@@ -69,6 +72,9 @@ In no particular order:
   smallest proprietary components, fear monger, and overgeneralize unrelated
   issues into FUD. These people should generally be ignored.
 
+- Don't feed the trolls.[^*]
+
+
 - People always assume you have way more automation than you really do.
 
 - The Python standard library is not a Zen garden. Some parts of it are
@@ -94,6 +100,9 @@ In no particular order:
   relatively easy. Writing heuristics to tell users why those rules are
   unsolvable when they are is hard.
 
+- SAT solvers solve NP-complete problems in general, but they can be very fast
+  to solve common case problems. [^*]
+
 - Some of the smartest people I know, who otherwise make very rational and
   intelligent decisions, refuse to update to Python 3.
 
@@ -111,22 +120,14 @@ In no particular order:
   [John Cook](https://twitter.com/JohnDCook) and
   [Bret Victor](https://twitter.com/worrydream).
 
-- One of the best ways to make heavily shared content is to make it on git
+- One of the best ways to make heavily shared content is to make it about git
   (at least if you're an expert).
 
 - A good optimization algorithm avoids getting caught in local maxima by
   trying different parts of the search space that initially appear to be
   worse. The same approach should be taken in life.
 
-And some things that I already knew, but were reiterated:
-
-- Don't feed the trolls.
-
-- Avoid object oriented programming when procedural programming will do just
-  fine.
-
-- SAT solvers solve NP-complete problems in general, but they can be very fast
-  to solve common case problems.
+### Footnotes
 
 [^*]: These are things that I already knew, but were reiterated.
 
