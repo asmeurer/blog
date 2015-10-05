@@ -4,10 +4,8 @@
 <img
 src="https://www.gravatar.com/avatar/0383e4cae325f65a1bbd906be4be2276?s=256">
 
-I am Aaron Meurer. I work at [Continuum Analytics](http://continuum.io/), primarily on
-[conda](https://github.com/conda/conda) and
-[Anaconda](http://continuum.io/downloads).  I am also the lead developer for
-[SymPy](http://sympy.org/).
+I am Aaron Meurer. I am also the lead developer for
+[SymPy](http://sympy.org/). I used to work at [Continuum Analytics](http://continuum.io/).
 
 Here are my various social sites:
 

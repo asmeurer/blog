@@ -22,12 +22,12 @@ and most of my open source work is on my
   If you are interested in SymPy or have any questions about it, please email
   the [SymPy mailing list](https://groups.google.com/forum/#!forum/sympy).
 
-- [Conda](http://conda.pydata.org/docs/), a package manager. I work primarily
-  on conda for my day job at
+- [Conda](http://conda.pydata.org/docs/), a package manager. I worked
+  primarily on conda when I was at
   [Continuum Analytics](http://continuum.io/). Conda is the package manager
   included with [Anaconda](http://continuum.io/downloads), a free collection
-  of open source packages for doing science, math, engineering, data
-  analysis in Python.
+  of open source packages for doing science, math, engineering, data analysis
+  in Python.
 
   I gave a talk about conda at SciPy 2014. <iframe width="560" height="315"
   src="https://www.youtube.com/embed/UaIvrDWrIWM" frameborder="0"
