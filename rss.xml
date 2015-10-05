@@ -1,5 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="http://asmeurer.github.io/blog/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 02 Oct 2015 00:22:09 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python Trickery</title><link>http://asmeurer.github.io/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" href="http://asmeurer.github.io/blog/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 05 Oct 2015 22:36:46 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Lessons learned from working at Continuum</title><link>http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
+time at the company, and wish success to it, but the time has come for me to
+move on. Starting later this year, I will start working with
+&lt;a href="https://twitter.com/scopatz"&gt;Anthony Scopatz&lt;/a&gt; at his new lab
+&lt;a href="http://www.ergs.sc.edu/index.html"&gt;ERGS&lt;/a&gt; at the University of South
+Carolina.&lt;/p&gt;
+&lt;p&gt;During my time at Continuum (over two years if you count a summer internship),
+I primarily worked on the
+&lt;a href="https://www.continuum.io/downloads"&gt;Anaconda distribution&lt;/a&gt; and its open
+source package manager, &lt;a href="http://conda.pydata.org/"&gt;conda&lt;/a&gt;.  I learned a lot of
+lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
+&lt;p&gt;In no particular order:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Left to their own devices, people will make the minimal possible solution to
+  packaging. They won't try to architect something. The result will be
+  over-engineered, specific to their use-case, and lack reproducibility.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The best way to ensure that some software has no bugs is for it to have many
+  users.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Be wary of the "software would be great if it weren't for all the users"
+  mentality (cf. the previous point).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Most people don't code defensively. If you are working on a project that
+  requires extreme stability, be cautious of contributions from those outside
+  the development team.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Hostility towards Windows and Windows users doesn't help anyone.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://twitter.com/asmeurer/status/593170976981913600"&gt;https://twitter.com/asmeurer/status/593170976981913600&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For a software updater, stability is the number one priority. If the updater
+  breaks, how can a fix be deployed?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Even if you configure your program to update itself every time it runs you
+  will still get bug reports with arbitrarily old versions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Separating components into separate git repositories leads to a
+  philosophical separation of concerns among the components.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Everyone who isn't an active developer on the project will ignore this
+  separation and open issues in the wrong repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Avoid object oriented programming when procedural programming will do just
+  fine.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open source is more about the open than the source. Develop things in the
+  open, and you will create a community that respects you.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Academics (often) don't know good software practices, nor good licensing
+  practices.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Neither do some large corporations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Avoid over-engineering things.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Far fewer people than I would have thought understand the difference between
+  hard links and soft links.&lt;sup id="fnref:fn2"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn2" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Changelogs are useful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Semantic versioning is over-hyped.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you make something and release it, the first version should be 1.0 (not
+  0.1 or 0.0.1).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Getting a difficult package to compile is like hacking a computer. All it
+  takes is time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It doesn't matter how open source friendly your business is, there will
+  always be people who will be skeptical and point their fingers at the
+  smallest proprietary components, fear monger, and overgeneralize unrelated
+  issues into FUD. These people should generally be ignored.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;People constantly misspell the name of
+  &lt;a href="https://twitter.com/asmeurer/status/618595687958122496"&gt;Apple's desktop operating system&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;People always assume you have way more automation than you really do.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The Python standard library is not a Zen garden. Some parts of it are
+  completely broken, and if you need to rely on them, you'll have to rewrite
+  them. &lt;code&gt;shutil.rmtree&lt;/code&gt; on Windows is one example of this.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux is strictly backwards compatible. Windows is strictly forwards
+  compatible. &lt;sup id="fnref:fn3"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn3" rel="footnote"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On Linux, things tend to be very simple. On Windows, things tend to be very
+  complicated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I can't decide about OS X. It lies somewhere in between.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nobody uses 32-bit Linux. Why do we even support that?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;People oversimplify the problem of solving for package dependencies in their
+  heads.  No one realizes that it's meaningless to say something like "the
+  dependencies of NumPy" (every build of every version of NumPy has its own
+  set of dependencies, which may or may not be the same).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Writing a set of rules and a solver to solve against those rules is
+  relatively easy. Writing heuristics to tell users why those rules are
+  unsolvable when they are is hard.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SAT solvers solve NP-complete problems in general, but they can be very fast
+  to solve common case problems. &lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some of the smartest people I know, who otherwise make very rational and
+  intelligent decisions,
+  &lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;refuse to update to Python 3&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;As an introvert, the option of working from home is great for maintaining
+  sanity.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://blog.codinghorror.com/a-developers-second-most-important-asset/"&gt;Aeron chairs are awesome&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If living in Austin doesn't turn you into a foodie you will at least gain a
+  respect for them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Twitter, if used correctly, is a great way to interact with your users.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Twitter is also a great place to learn new things. Follow
+  &lt;a href="https://twitter.com/JohnDCook"&gt;John Cook&lt;/a&gt; and
+  &lt;a href="https://twitter.com/worrydream"&gt;Bret Victor&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;One of the best ways to make heavily shared content is to make it about git
+  (at least if you're an expert).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A good optimization algorithm avoids getting caught in local maxima by
+  trying different parts of the search space that initially appear to be
+  worse. The same approach should be taken in life.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Footnotes&lt;/h4&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:fn1"&gt;
+&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:fn2"&gt;
+&lt;p&gt;If you are one of those people, I have a small presentation that
+   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:fn3"&gt;
+&lt;p&gt;These terms can be confusing, and I admit I got this backwards the
+    first time I wrote this. According to Wikipedia,
+    &lt;a href="https://en.wikipedia.org/wiki/Forward_compatibility"&gt;forwards compatible&lt;/a&gt;
+    means a system can accept input intended for a later version of itself
+    and
+    &lt;a href="https://en.wikipedia.org/wiki/Backward_compatibility"&gt;backwards compatible&lt;/a&gt;
+    means a system can accept input intended for an earlier version of
+    itself.&lt;/p&gt;
+&lt;p&gt;What I specifically mean here is that in terms of building packages
+for Linux or Windows, for Linux, you should build a package on the
+oldest version that you wish to support. That package will work on
+newer versions of Linux, but not anything older (generally due to the
+version of libc you are linked against).&lt;/p&gt;
+&lt;p&gt;On the other hand, on Windows, you can can compile things on the
+newest version (I used Windows 8 on my main Windows build VM), and it
+will work on older versions of Windows like XP (as long as you ship
+the right runtime DLLs). This is also somewhat confusing because
+Windows tends to be both forwards compatible &lt;em&gt;and&lt;/em&gt; backwards
+compatible. &lt;a class="footnote-backref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn3" rev="footnote" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item><item><title>Python Trickery</title><link>http://asmeurer.github.io/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
 following is invalid syntax.  See if you can figure out why&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;

@@ -4,10 +4,10 @@
 <img
 src="https://www.gravatar.com/avatar/0383e4cae325f65a1bbd906be4be2276?s=256">
 
-I am Aaron Meurer. I work at [Continuum Analytics](http://continuum.io/), primarily on
-[conda](https://github.com/conda/conda) and
-[Anaconda](http://continuum.io/downloads).  I am also the lead developer for
-[SymPy](http://sympy.org/).
+I am Aaron Meurer. I work with [Anthony Scopatz](https://twitter.com/scopatz)
+at [ERGS](http://www.ergs.sc.edu/). I am also the lead developer for
+[SymPy](http://sympy.org/). I used to work at
+[Continuum Analytics](http://continuum.io/).
 
 Here are my various social sites:
 
@@ -21,9 +21,6 @@ Homepage: You're looking at it.
 
 Personal Email: <a href="mailto:asmeurer@gmail.com" target="_top">
   asmeurer@gmail.com</a>
-
-Work Email (use this for queries about Conda or Anaconda): <a href="mailto:aaron.meurer@continuum.io" target="_top">
-  aaron.meurer@continuum.io</a>
 
 [My old blog](https://asmeurersympy.wordpress.com/)
 

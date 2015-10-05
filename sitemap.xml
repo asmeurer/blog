@@ -6,58 +6,58 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://asmeurer.github.io/blog/</loc>
-  <lastmod>2015-07-17</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/2014/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/2015/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/about/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/archive.html</loc>
-  <lastmod>2015-10-01</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/categories/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/categories/mathjax/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/galleries/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
-  <loc>http://asmeurer.github.io/blog/posts/dont-rebase/</loc>
-  <lastmod>2015-07-22</lastmod>
+  <loc>http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</loc>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/python-trickery/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/scipy-2014/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/work/</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </url>
 </urlset>

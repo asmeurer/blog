@@ -6,18 +6,18 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
   <loc>http://asmeurer.github.io/blog/categories/mathjax.xml</loc>
-  <lastmod>2015-07-14</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </sitemap>
  <sitemap>
   <loc>http://asmeurer.github.io/blog/galleries/rss.xml</loc>
-  <lastmod>2015-10-01</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </sitemap>
  <sitemap>
   <loc>http://asmeurer.github.io/blog/rss.xml</loc>
-  <lastmod>2015-10-01</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </sitemap>
  <sitemap>
   <loc>http://asmeurer.github.io/blog/sitemap.xml</loc>
-  <lastmod>2015-10-01</lastmod>
+  <lastmod>2015-10-05</lastmod>
  </sitemap>
 </sitemapindex>
