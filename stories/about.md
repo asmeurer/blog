@@ -20,9 +20,6 @@ Homepage: You're looking at it.
 Personal Email: <a href="mailto:asmeurer@gmail.com" target="_top">
   asmeurer@gmail.com</a>
 
-Work Email (use this for queries about Conda or Anaconda): <a href="mailto:aaron.meurer@continuum.io" target="_top">
-  aaron.meurer@continuum.io</a>
-
 [My old blog](https://asmeurersympy.wordpress.com/)
 
 [StackOverflow](http://stackoverflow.com/users/161801/asmeurer)
