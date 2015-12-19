@@ -127,3 +127,51 @@ only with finite sets, but the SymPy functions that operate on infinite sets
 are exactly the same as the ones that operate on finite sets). In all, I don't
 have much to say about this chapter other than that I was presently surprised
 to see it included.
+
+Chapter 6 shows how to draw geometric shapes and fractals with matplotlib. I
+again won't say much on this, as I am no matplotlib expert. The ability to
+draw leaf fractals and Sierpiński triangles with Python does look
+entertaining, and should keep readers enthralled.
+
+Chapter 7, "Solving Calculus Problems" goes into more depth with SymPy. In
+particular, assumptions, limits, derivatives, and integrals.  The chapter
+alternates between symbolic formulations using SymPy and numeric
+calculations (using `evalf`). The numeric calculations are done both for
+simple examples and more advanced things (like implementing gradient descent).
+
+
+I like Saha's approach of first showing unevaluated forms (`Limit`,
+`Derivative`, `Integral`), and then evaluating them with `doit()`. This puts
+users in the mindset of a mathematical expression being a formula which may or
+may not later be "calculated". The opposite approach, using the function
+forms, `limit`, `diff`, and `integrate`, which evaluate if they can and return
+an unevaluated object if they can't, can be confusing to new users in my
+experience. A common new SymPy user question is (some form of) "how do I
+evaluate an expression?" (the answer is `doit()`).
+
+I also like that this chapter explains the gotcha of `math.sin(Symbol('x'))`,
+although I personally would have included this earlier in the text.
+
+(Side note: now that I look, these are both areas in which the official
+tutorial could be improved).
+
+
+## Summary
+
+This book is a good introduction to doing math with Python, and, for the
+chapters that use it, a good basic introduction to SymPy. I would recommend it
+to anyone wishing to learn SymPy, but especially to anyone whose knowledge of
+mathematics may preclude them from getting the most out of the official SymPy
+tutorial.
+
+I imagine this book would work well as a pedagogical tool, either for math
+teachers or for self-learners. The exercises in this book should push the
+motivated to learn more.
+
+I have a few minor gripes, but no major issues.
+
+You can purchase this book from the
+[No Starch Press](https://www.nostarch.com/doingmathwithpython) website, both
+as a print book an an ebook. The website also includes a sample chapter
+([chapter 1](https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf)),
+code samples from the book, and exercise solutions.
