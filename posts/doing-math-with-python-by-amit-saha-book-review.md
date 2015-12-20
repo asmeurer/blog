@@ -7,33 +7,33 @@ SymPy.**
 [*Doing Math with Python*](https://www.nostarch.com/doingmathwithpython) by
 Amit Saha is a new book published by No Starch Press. The book shows how to
 use Python to do high school-level mathematics. It makes heavy use of SymPy in
-most chapters, and this review will focus mainly on those parts, as that is
+many chapters, and this review will focus mainly on those parts, as that is
 the area I have expertise in.
 
 The book assumes a basic understanding of programming in Python 3, as well as
-the the mathematics (although advanced topics are explained). No prior
+the mathematics used (although advanced topics are explained). No prior
 background in the libraries used, SymPy and matplotlib, is assumed. For this
-reason, this book can serve as an introduction to SymPy. Each chapter ends
-with some programming exercises, which range from easy exercises to more
-advanced ones.
+reason, this book can serve as an introduction them. Each chapter ends with
+some programming exercises, which range from easy exercises to more advanced
+ones.
 
 The book has seven chapters. In the first chapter, "Working with numbers",
 basic mathematics using pure Python is introduced (no SymPy yet). It should be
 noted that Python 3 (not Python 2) is required for this book. One of the
 earliest examples in the book (`3/2 == 1.5`) will not work correctly without
-it. I applaud this choice, although I might have added a warning to wary
-users. (As a side note, in the Appendix, it is recommended to install Python
-via [Anaconda](https://www.continuum.io/downloads), which I also
-applaud). This chapter also introduces the `fractions` module, which seems odd
-since `sympy.Rational` will be used for rational numbers later in the text (to
-little harm, however, since SymPy automatically converts `fractions.Fraction`
-instances to `sympy.Rational`).
+it. I applaud this choice, although I might have added a more prominent
+warning to wary users. (As a side note, in the appendix, it is recommended to
+install Python via [Anaconda](https://www.continuum.io/downloads), which I
+also applaud). This chapter also introduces the `fractions` module, which
+seems odd since `sympy.Rational` will be implicitly used for rational numbers
+later in the text (to little harm, however, since SymPy automatically converts
+`fractions.Fraction` instances to `sympy.Rational`).
 
 In all, this chapter is a good introduction to the basics of the mathematics
 of Python. There is also an introduction to variables and strings. However, as
 I noted above, one should really have some background with basic Python before
 reading this book, as concepts like flow control and function definition are
-assumed.
+assumed (note: there is an appendix that goes over this).
 
 Chapters 2 and 3 cover plotting with matplotlib and basic statistics,
 respectively. I will not say much about the matplotlib chapter, since I know
@@ -52,7 +52,7 @@ Note that the functions in this chapter assume that the data is the entire
 population, not a sample. This is mentioned at the beginning of the chapter,
 but not elaborated on. For example, this leads to a different definition of
 variance than what might be seen elsewhere (the `calculate_variance` used in
-this chapter is `pvariance` in the standard library `statistics` module).
+this chapter is `statistics.pvariance`, not `statistics.variance`).
 
 It is good to see that a numerically stable definition of variance is used
 here (see [PEP 450](https://www.python.org/dev/peps/pep-0450/) for more
@@ -80,7 +80,7 @@ standpoint of high school mathematics.
 
 My only gripes with this chapter, which, in total, are minor, relate to printing.
 
-1. The typesetting of the pretty printing is inconsistent and in some cases,
+1. The typesetting of the pretty printing is inconsistent and, in some cases,
    incorrect. Powers are printed in the book using superscript numbers, like
 
        x²
@@ -109,12 +109,12 @@ My only gripes with this chapter, which, in total, are minor, relate to printing
     Again, this is a minor point, but at the very least the correct printing
     looks better than the fake printing used here.
 
-2. Inline with the previous point, I would recommend telling the user to start
-   with `init_printing()`. The function is used once to change the order of
-   printing to rev-lex (for series printing). There is a link to the
+2. In line with the previous point, I would recommend telling the user to
+   start with `init_printing()`. The function is used once to change the order
+   of printing to rev-lex (for series printing). There is a link to the
    [tutorial page on printing](http://docs.sympy.org/latest/tutorial/printing.html). That
    page goes into more depth than is necessary for the book, but I would
-   recommend at least mentioning to always call `init_printing()`, as 2D
+   recommend at least mentioning to always call `init_printing()`, as 2-D
    printing can make a huge difference over the default `str` printing, and it
    obviates the need to call `pprint`.
 
@@ -125,7 +125,7 @@ but quite powerful. We do not yet have an introduction to the sets module in
 the SymPy tutorial. This chapter serves as a good introduction to it (albeit
 only with finite sets, but the SymPy functions that operate on infinite sets
 are exactly the same as the ones that operate on finite sets). In all, I don't
-have much to say about this chapter other than that I was presently surprised
+have much to say about this chapter other than that I was pleasantly surprised
 to see it included.
 
 Chapter 6 shows how to draw geometric shapes and fractals with matplotlib. I
@@ -198,6 +198,6 @@ I have a few minor gripes, but no major issues.
 
 You can purchase this book from the
 [No Starch Press](https://www.nostarch.com/doingmathwithpython) website, both
-as a print book an an ebook. The website also includes a sample chapter
+as a print book or an ebook. The website also includes a sample chapter
 ([chapter 1](https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf)),
 code samples from the book, and exercise solutions.
