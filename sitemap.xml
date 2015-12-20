@@ -1,71 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://asmeurer.github.io/blog/</loc>
-  <lastmod>2015-12-03</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/2014/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:01:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/2015/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:01:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/about/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/archive.html</loc>
-  <lastmod>2015-12-03</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/categories/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/categories/mathjax/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/galleries/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:01:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/index-1.html</loc>
-  <lastmod>2015-12-03</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
-  <loc>http://asmeurer.github.io/blog/index-2.html</loc>
-  <lastmod>2015-12-03</lastmod>
+  <loc>http://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</loc>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/python-trickery/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/posts/scipy-2014/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>http://asmeurer.github.io/blog/work/</loc>
-  <lastmod>2015-10-05</lastmod>
+  <lastmod>2015-12-20T19:02:00Z</lastmod>
  </url>
 </urlset>

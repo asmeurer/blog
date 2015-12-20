@@ -1,2 +1,4 @@
 Sitemap: http://asmeurer.github.io/blog/sitemapindex.xml
 
+User-Agent: *
+Host: asmeurer.github.io
