@@ -1,5 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" href="http://asmeurer.github.io/blog/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 05 Oct 2015 22:36:46 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Lessons learned from working at Continuum</title><link>http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" href="http://asmeurer.github.io/blog/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 20 Dec 2015 18:54:20 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>"Doing Math with Python" by Amit Saha: Book Review</title><link>http://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Note: No Starch Press has sent me a copy of this book for review purposes.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SHORT VERSION: &lt;em&gt;Doing Math with Python&lt;/em&gt; is well written and introduces
+topics in a nice, mathematical way. I would recommend it for new users of
+SymPy.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;&lt;em&gt;Doing Math with Python&lt;/em&gt;&lt;/a&gt; by
+Amit Saha is a new book published by No Starch Press. The book shows how to
+use Python to do high school-level mathematics. It makes heavy use of SymPy in
+many chapters, and this review will focus mainly on those parts, as that is
+the area I have expertise in.&lt;/p&gt;
+&lt;p&gt;The book assumes a basic understanding of programming in Python 3, as well as
+the mathematics used (although advanced topics are explained). No prior
+background in the libraries used, SymPy and matplotlib, is assumed. For this
+reason, this book can serve as an introduction them. Each chapter ends with
+some programming exercises, which range from easy exercises to more advanced
+ones.&lt;/p&gt;
+&lt;p&gt;The book has seven chapters. In the first chapter, "Working with numbers",
+basic mathematics using pure Python is introduced (no SymPy yet). It should be
+noted that Python 3 (not Python 2) is required for this book. One of the
+earliest examples in the book (&lt;code&gt;3/2 == 1.5&lt;/code&gt;) will not work correctly without
+it. I applaud this choice, although I might have added a more prominent
+warning to wary users. (As a side note, in the appendix, it is recommended to
+install Python via &lt;a href="https://www.continuum.io/downloads"&gt;Anaconda&lt;/a&gt;, which I
+also applaud). This chapter also introduces the &lt;code&gt;fractions&lt;/code&gt; module, which
+seems odd since &lt;code&gt;sympy.Rational&lt;/code&gt; will be implicitly used for rational numbers
+later in the text (to little harm, however, since SymPy automatically converts
+&lt;code&gt;fractions.Fraction&lt;/code&gt; instances to &lt;code&gt;sympy.Rational&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;In all, this chapter is a good introduction to the basics of the mathematics
+of Python. There is also an introduction to variables and strings. However, as
+I noted above, one should really have some background with basic Python before
+reading this book, as concepts like flow control and function definition are
+assumed (note: there is an appendix that goes over this).&lt;/p&gt;
+&lt;p&gt;Chapters 2 and 3 cover plotting with matplotlib and basic statistics,
+respectively. I will not say much about the matplotlib chapter, since I know
+only basic matplotlib myself. I will note that the chapter covers matplotlib
+from a (high school) mathematics point of view, starting with a definition of
+the Cartesian plane, which seems a fitting choice for the book.&lt;/p&gt;
+&lt;p&gt;Chapter 3 shows how to do basic statistics (mean, median, standard deviation,
+etc.) using pure Python. This chapter is clearly meant for pedagogical
+purposes for basic statistics, since the basic functions &lt;code&gt;mean&lt;/code&gt;, &lt;code&gt;median&lt;/code&gt;,
+etc. are implemented from scratch (as opposed to using &lt;code&gt;numpy.mean&lt;/code&gt; or the
+standard library &lt;code&gt;statistics.mean&lt;/code&gt;). This serves as a good introduction to
+more Python concepts (like &lt;code&gt;collections.Counter&lt;/code&gt;) and statistics.&lt;/p&gt;
+&lt;p&gt;Note that the functions in this chapter assume that the data is the entire
+population, not a sample. This is mentioned at the beginning of the chapter,
+but not elaborated on. For example, this leads to a different definition of
+variance than what might be seen elsewhere (the &lt;code&gt;calculate_variance&lt;/code&gt; used in
+this chapter is &lt;code&gt;statistics.pvariance&lt;/code&gt;, not &lt;code&gt;statistics.variance&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;It is good to see that a numerically stable definition of variance is used
+here (see &lt;a href="https://www.python.org/dev/peps/pep-0450/"&gt;PEP 450&lt;/a&gt; for more
+discussion on this). These numerical issues show why it is important to use a
+real statistics library rather than a home grown one. In other words, use this
+chapter to learn more about statistics and Python, but if you ever need to do
+statistics on real data, use a statistics library like &lt;code&gt;statistics&lt;/code&gt; or
+&lt;code&gt;numpy&lt;/code&gt;. Finally, I should note that this book appears to be written against
+Python 3.3, whereas &lt;code&gt;statistics&lt;/code&gt; was added to the Python standard library in
+Python 3.4. Perhaps it will get a mention in future editions.&lt;/p&gt;
+&lt;p&gt;Chapter 4, "Algebra and Symbolic Math with SymPy" starts the introduction to
+SymPy. The chapter starts similar to the
+&lt;a href="http://docs.sympy.org/latest/tutorial/index.html"&gt;official SymPy tutorial&lt;/a&gt; in
+describing what symbolics is, and guiding the reader away from common
+misconceptions and gotchas. The chapter does a good job of explaining common
+gotchas and avoiding antipatterns.&lt;/p&gt;
+&lt;p&gt;This chapter may serve as an alternative to the official tutorial. Unlike the
+official tutorial, which jumps into
+&lt;a href="http://docs.sympy.org/latest/tutorial/simplification.html#powers"&gt;higher-level mathematics&lt;/a&gt;
+and &lt;a href="http://docs.sympy.org/latest/tutorial/matrices.html"&gt;broader use-cases&lt;/a&gt;,
+this chapter may be better suited to those wishing to use SymPy from the
+standpoint of high school mathematics.&lt;/p&gt;
+&lt;p&gt;My only gripes with this chapter, which, in total, are minor, relate to printing.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The typesetting of the pretty printing is inconsistent and, in some cases,
+incorrect. Powers are printed in the book using superscript numbers, like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x²
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, SymPy prints powers like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 2
+x
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;even when Unicode pretty printing is enabled. This is a minor point, but it
+may confuse users. Also, the output appears to use ASCII pretty printing
+(mixed with superscript powers), for example&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    x²   x³   x⁴   x⁵
+x + -- + -- + -- + --
+    2    3    4    5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Most users will either get MathJax printing (if they are using the Jupyter
+notebook), or Unicode printing, like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;     2    3    4    5
+    x    x    x    x
+x + ── + ── + ── + ──
+    2    3    4    5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again, this is a minor point, but at the very least the correct printing
+looks better than the fake printing used here.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;In line with the previous point, I would recommend telling the user to
+start with &lt;code&gt;init_printing()&lt;/code&gt;. The function is used once to change the order
+of printing to rev-lex (for series printing). There is a link to the
+&lt;a href="http://docs.sympy.org/latest/tutorial/printing.html"&gt;tutorial page on printing&lt;/a&gt;. That
+page goes into more depth than is necessary for the book, but I would
+recommend at least mentioning to always call &lt;code&gt;init_printing()&lt;/code&gt;, as 2-D
+printing can make a huge difference over the default &lt;code&gt;str&lt;/code&gt; printing, and it
+obviates the need to call &lt;code&gt;pprint&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Chapter 5, "Playing with Sets and Probability" covers SymPy's set objects
+(particularly &lt;code&gt;FiniteSet&lt;/code&gt;) to do some basic set theory and probability. I'm
+excited to see this in the book. The sets module in SymPy is relatively new,
+but quite powerful. We do not yet have an introduction to the sets module in
+the SymPy tutorial. This chapter serves as a good introduction to it (albeit
+only with finite sets, but the SymPy functions that operate on infinite sets
+are exactly the same as the ones that operate on finite sets). In all, I don't
+have much to say about this chapter other than that I was pleasantly surprised
+to see it included.&lt;/p&gt;
+&lt;p&gt;Chapter 6 shows how to draw geometric shapes and fractals with matplotlib. I
+again won't say much on this, as I am no matplotlib expert. The ability to
+draw leaf fractals and Sierpiński triangles with Python does look
+entertaining, and should keep readers enthralled.&lt;/p&gt;
+&lt;p&gt;Chapter 7, "Solving Calculus Problems" goes into more depth with SymPy. In
+particular, assumptions, limits, derivatives, and integrals.  The chapter
+alternates between symbolic formulations using SymPy and numeric
+calculations (using &lt;code&gt;evalf&lt;/code&gt;). The numeric calculations are done both for
+simple examples and more advanced things (like implementing gradient descent).&lt;/p&gt;
+&lt;p&gt;One small gripe here. The book shows that&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from sympy import Symbol
+x = Symbol('x')
+if (x + 5) &amp;gt; 0:
+    print('Do Something')
+else:
+    print('Do Something else')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;raises &lt;code&gt;TypeError&lt;/code&gt; at the evaluation of &lt;code&gt;(x + 5) &amp;gt; 0&lt;/code&gt; because its truth value
+cannot be determined. The solution to this issue is given as&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x = Symbol('x', positive=True)
+if (x + 5) &amp;gt; 0:
+    print('Do Something')
+else:
+    print('Do Something else')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Setting &lt;code&gt;x&lt;/code&gt; to be positive via &lt;code&gt;Symbol('x', positive=True)&lt;/code&gt; is correct, but
+even in this case, evaluating an inequality may still raise a &lt;code&gt;TypeError&lt;/code&gt; (for
+example, &lt;code&gt;if (x - 5) &amp;gt; 0&lt;/code&gt;). The better way to do this is to use &lt;code&gt;(x + 5).is_positive&lt;/code&gt;. This would require a bit more discussion, especially since
+SymPy uses a three-valued logic for assumptions, but I do consider "if
+&amp;lt;symbolic inequality&amp;gt;" to be a SymPy antipattern.&lt;/p&gt;
+&lt;p&gt;I like Saha's approach in this chapter of first showing unevaluated forms
+(&lt;code&gt;Limit&lt;/code&gt;, &lt;code&gt;Derivative&lt;/code&gt;, &lt;code&gt;Integral&lt;/code&gt;), and then evaluating them with
+&lt;code&gt;doit()&lt;/code&gt;. This puts users in the mindset of a mathematical expression being a
+formula which may or may not later be "calculated". The opposite approach,
+using the function forms, &lt;code&gt;limit&lt;/code&gt;, &lt;code&gt;diff&lt;/code&gt;, and &lt;code&gt;integrate&lt;/code&gt;, which evaluate if
+they can and return an unevaluated object if they can't, can be confusing to
+new users in my experience. A common new SymPy user question is (some form of)
+"how do I evaluate an expression?" (the answer is &lt;code&gt;doit()&lt;/code&gt;). Saha's approach
+avoids this question by showing &lt;code&gt;doit()&lt;/code&gt; from the outset.&lt;/p&gt;
+&lt;p&gt;I also like that this chapter explains the gotcha of &lt;code&gt;math.sin(Symbol('x'))&lt;/code&gt;,
+although I personally would have included this earlier in the text.&lt;/p&gt;
+&lt;p&gt;(Side note: now that I look, these are both areas in which the official
+tutorial could be improved).&lt;/p&gt;
+&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;p&gt;This book is a good introduction to doing math with Python, and, for the
+chapters that use it, a good basic introduction to SymPy. I would recommend it
+to anyone wishing to learn SymPy, but especially to anyone whose knowledge of
+mathematics may preclude them from getting the most out of the official SymPy
+tutorial.&lt;/p&gt;
+&lt;p&gt;I imagine this book would work well as a pedagogical tool, either for math
+teachers or for self-learners. The exercises in this book should push the
+motivated to learn more.&lt;/p&gt;
+&lt;p&gt;I have a few minor gripes, but no major issues.&lt;/p&gt;
+&lt;p&gt;You can purchase this book from the
+&lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;No Starch Press&lt;/a&gt; website, both
+as a print book or an ebook. The website also includes a sample chapter
+(&lt;a href="https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf"&gt;chapter 1&lt;/a&gt;),
+code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item><item><title>Lessons learned from working at Continuum</title><link>http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
 time at the company, and wish success to it, but the time has come for me to
 move on. Starting later this year, I will start working with
 &lt;a href="https://twitter.com/scopatz"&gt;Anthony Scopatz&lt;/a&gt; at his new lab
