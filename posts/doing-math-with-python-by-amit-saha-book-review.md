@@ -140,14 +140,40 @@ calculations (using `evalf`). The numeric calculations are done both for
 simple examples and more advanced things (like implementing gradient descent).
 
 
-I like Saha's approach of first showing unevaluated forms (`Limit`,
-`Derivative`, `Integral`), and then evaluating them with `doit()`. This puts
-users in the mindset of a mathematical expression being a formula which may or
-may not later be "calculated". The opposite approach, using the function
-forms, `limit`, `diff`, and `integrate`, which evaluate if they can and return
-an unevaluated object if they can't, can be confusing to new users in my
-experience. A common new SymPy user question is (some form of) "how do I
-evaluate an expression?" (the answer is `doit()`).
+One small gripe here. The book shows that
+
+    from sympy import Symbol
+    x = Symbol('x')
+    if (x + 5) > 0:
+        print('Do Something')
+    else:
+        print('Do Something else')
+
+raises `TypeError` at the evaluation of `(x + 5) > 0` because its truth value
+cannot be determined. The solution to this issue is given as
+
+    x = Symbol('x', positive=True)
+    if (x + 5) > 0:
+        print('Do Something')
+    else:
+        print('Do Something else')
+
+Setting `x` to be positive via `Symbol('x', positive=True)` is correct, but
+even in this case, evaluating an inequality may still raise a `TypeError` (for
+example, `if (x - 5) > 0`). The better way to do this is to use `(x +
+5).is_positive`. This would require a bit more discussion, especially since
+SymPy uses a three-valued logic for assumptions, but I do consider "if
+\<symbolic inequality\>" to be a SymPy antipattern.
+
+I like Saha's approach in this chapter of first showing unevaluated forms
+(`Limit`, `Derivative`, `Integral`), and then evaluating them with
+`doit()`. This puts users in the mindset of a mathematical expression being a
+formula which may or may not later be "calculated". The opposite approach,
+using the function forms, `limit`, `diff`, and `integrate`, which evaluate if
+they can and return an unevaluated object if they can't, can be confusing to
+new users in my experience. A common new SymPy user question is (some form of)
+"how do I evaluate an expression?" (the answer is `doit()`). Saha's approach
+avoids this question by showing `doit()` from the outset.
 
 I also like that this chapter explains the gotcha of `math.sin(Symbol('x'))`,
 although I personally would have included this earlier in the text.
