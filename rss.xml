@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>http://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="http://asmeurer.github.io/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 20 Dec 2015 19:03:44 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>"Doing Math with Python" by Amit Saha: Book Review</title><link>http://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Note: No Starch Press has sent me a copy of this book for review purposes.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link type="application/rss+xml" href="https://asmeurer.github.io/blog/rss.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 20 Dec 2015 19:09:15 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>"Doing Math with Python" by Amit Saha: Book Review</title><link>https://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Note: No Starch Press has sent me a copy of this book for review purposes.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SHORT VERSION: &lt;em&gt;Doing Math with Python&lt;/em&gt; is well written and introduces
 topics in a nice, mathematical way. I would recommend it for new users of
 SymPy.&lt;/strong&gt;&lt;/p&gt;
@@ -168,7 +168,7 @@ motivated to learn more.&lt;/p&gt;
 &lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;No Starch Press&lt;/a&gt; website, both
 as a print book or an ebook. The website also includes a sample chapter
 (&lt;a href="https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf"&gt;chapter 1&lt;/a&gt;),
-code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item><item><title>Lessons learned from working at Continuum</title><link>http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
+code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item><item><title>Lessons learned from working at Continuum</title><link>https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
 time at the company, and wish success to it, but the time has come for me to
 move on. Starting later this year, I will start working with
 &lt;a href="https://twitter.com/scopatz"&gt;Anthony Scopatz&lt;/a&gt; at his new lab
@@ -223,11 +223,11 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Avoid object oriented programming when procedural programming will do just
-  fine.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  fine.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Open source is more about the open than the source. Develop things in the
-  open, and you will create a community that respects you.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  open, and you will create a community that respects you.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Academics (often) don't know good software practices, nor good licensing
@@ -241,7 +241,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Far fewer people than I would have thought understand the difference between
-  hard links and soft links.&lt;sup id="fnref:fn2"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn2" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  hard links and soft links.&lt;sup id="fnref:fn2"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn2" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Changelogs are useful.&lt;/p&gt;
@@ -264,7 +264,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
   issues into FUD. These people should generally be ignored.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;People constantly misspell the name of
@@ -280,7 +280,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Linux is strictly backwards compatible. Windows is strictly forwards
-  compatible. &lt;sup id="fnref:fn3"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn3" rel="footnote"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  compatible. &lt;sup id="fnref:fn3"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn3" rel="footnote"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;On Linux, things tend to be very simple. On Windows, things tend to be very
@@ -305,7 +305,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;SAT solvers solve NP-complete problems in general, but they can be very fast
-  to solve common case problems. &lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  to solve common case problems. &lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Some of the smartest people I know, who otherwise make very rational and
@@ -346,11 +346,11 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id="fn:fn1"&gt;
-&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:fn2"&gt;
 &lt;p&gt;If you are one of those people, I have a small presentation that
-   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:fn3"&gt;
 &lt;p&gt;These terms can be confusing, and I admit I got this backwards the
@@ -371,10 +371,10 @@ newest version (I used Windows 8 on my main Windows build VM), and it
 will work on older versions of Windows like XP (as long as you ship
 the right runtime DLLs). This is also somewhat confusing because
 Windows tends to be both forwards compatible &lt;em&gt;and&lt;/em&gt; backwards
-compatible. &lt;a class="footnote-backref" href="http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn3" rev="footnote" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+compatible. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn3" rev="footnote" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item><item><title>Python Trickery</title><link>http://asmeurer.github.io/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
+&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item><item><title>Python Trickery</title><link>https://asmeurer.github.io/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
 following is invalid syntax.  See if you can figure out why&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -388,7 +388,7 @@ following is invalid syntax.  See if you can figure out why&lt;/p&gt;
 i for i in range(10)
 if i % 2),
 x=3,)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/python-trickery/</guid><pubDate>Mon, 04 May 2015 19:11:46 GMT</pubDate></item><item><title>Playing with Swift and SpriteKit</title><link>http://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/python-trickery/</guid><pubDate>Mon, 04 May 2015 19:11:46 GMT</pubDate></item><item><title>Playing with Swift and SpriteKit</title><link>https://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
 long as either has existed.  However, the barrier of entry has always been too
 high, given that I only ever had time to play with them as a hobby.  The
 Objective-C programming language is a bit complicated to learn, especially
@@ -656,7 +656,7 @@ sprite in the main view. If you forget this line, none of the sprites will
 show up.&lt;/p&gt;
 &lt;p&gt;If you run this, you will only see the yellow box, because you put them all on
 top of one another in the center of the view.&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://asmeurer.github.io/blog/galleries/swift-game-1.png" width="500"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/galleries/swift-game-1.png" width="500"&gt;&lt;/p&gt;
 &lt;h2&gt;Adding Basic Physics&lt;/h2&gt;
 &lt;p&gt;We could change the positions so that they do not overlap, but the option I
 went with was to play around with the physics a little. &lt;code&gt;SpriteKit&lt;/code&gt; has a nice
@@ -690,7 +690,7 @@ space.&lt;/p&gt;
 &lt;p&gt;Now &lt;code&gt;SceneKit&lt;/code&gt; will prevent the squares from overlapping with one another, even
 if we put them on top of each other as we have done.&lt;/p&gt;
 &lt;p&gt;So now when we start the simulator, we see&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://asmeurer.github.io/blog/galleries/swift-game-2.png" width="500"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/galleries/swift-game-2.png" width="500"&gt;&lt;/p&gt;
 &lt;h2&gt;Making the squares movable&lt;/h2&gt;
 &lt;p&gt;Now, let's make it so that we can move these squares around.  The correct way
 to do this took me some time to figure out.  I finally got some hints from
@@ -785,13 +785,13 @@ changes.&lt;/p&gt;
 &lt;p&gt;Here is an example of the movement. You can see it works even with
 multitouch.  You can also see the collision physics cause the other squares to
 move out of the way when another square hits them.&lt;/p&gt;
-&lt;video src="http://asmeurer.github.io/blog/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
+&lt;video src="https://asmeurer.github.io/blog/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;
 &lt;p&gt;Here you can see the movement lag caused by using &lt;code&gt;SKAction.moveTo&lt;/code&gt; with
 &lt;code&gt;duration: 0.1&lt;/code&gt; (note that the mouse itself jumps a bit at the beginning, but
 this is due to lag in the recording).&lt;/p&gt;
-&lt;video src="http://asmeurer.github.io/blog/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
+&lt;video src="https://asmeurer.github.io/blog/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;
 &lt;p&gt;I have uploaded the full code to
@@ -823,7 +823,7 @@ about, which mostly involve making shapes and moving them around the screen.&lt;
 &lt;!--  LocalWords:  frictioney SKAction.moveTo node.runAction autoplay
  --&gt;
 &lt;!--  LocalWords:  SKAction.repeatAction
- --&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item><item><title>SciPy 2014</title><link>http://asmeurer.github.io/blog/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
+ --&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item><item><title>SciPy 2014</title><link>https://asmeurer.github.io/blog/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
 week-long conference in Austin, TX for scientific computing with Python.&lt;/p&gt;
 &lt;p&gt;This is my third SciPy (I have been to
 &lt;a href="https://asmeurersympy.wordpress.com/2011/07/17/the-scipy-2011-conference/"&gt;2011&lt;/a&gt;
@@ -960,7 +960,7 @@ people started using it.&lt;/p&gt;
 the general feel from people I talked to who are using Conda is that it has.&lt;/p&gt;
 &lt;p&gt;I think this slide from my presentation summarizes why Conda solves the
 packaging problem.&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://asmeurer.github.io/blog/galleries/conda_scipy2014_slide.png" width="500"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/galleries/conda_scipy2014_slide.png" width="500"&gt;&lt;/p&gt;
 &lt;p&gt;One of the most amazing things about the scientific Python community, and one
 of the things that I think really sets it apart from other Python communities,
 is the use of Python alongside other languages, such as C, C++, Fortran, R, or
@@ -1039,7 +1039,7 @@ just insomuch as there were more people at all.&lt;/p&gt;
 &lt;!-- LocalWords:  Gede Obinna Nwanna iframe src frameborder allowfullscreen -
 --&gt;
 &lt;!--  LocalWords:  - VanderPlas 's PyDy 's img Ahmadia
- --&gt;&lt;/div&gt;</description><guid>http://asmeurer.github.io/blog/posts/scipy-2014/</guid><pubDate>Sun, 13 Jul 2014 16:52:27 GMT</pubDate></item><item><title>Moving to GitHub pages with Nikola</title><link>http://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;So I've finally decided to move my blog from Wordpress to GitHub pages.  I
+ --&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/scipy-2014/</guid><pubDate>Sun, 13 Jul 2014 16:52:27 GMT</pubDate></item><item><title>Moving to GitHub pages with Nikola</title><link>https://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;So I've finally decided to move my blog from Wordpress to GitHub pages.  I
 highly recommend it if you are technically skilled enough to do it. I was
 getting pretty annoyed at Wordpress. It forces you to write your posts in
 html (or else using their WYSIWYG editor), the wordpress.com is locked down,
@@ -1176,4 +1176,4 @@ the Disqus url for the imported comments to the old Wordpress url (look at the
 Disqus section of one of the built pages).&lt;/p&gt;
 &lt;p&gt;I don't know how to automatically backlink from Wordpress back to
 Nikola. Maybe I should just automatically generate some links and paste them
-in manually.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>http://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</guid><pubDate>Sun, 09 Feb 2014 23:19:18 GMT</pubDate></item></channel></rss>
+in manually.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</guid><pubDate>Sun, 09 Feb 2014 23:19:18 GMT</pubDate></item></channel></rss>
