@@ -1,11 +1,10 @@
 *This post is based off a Jupyter notebook I made in 2013. You can download
-the original [here](https://gist.github.com/asmeurer/6046766).*
-
-This post is based off a
+the original [here](https://gist.github.com/asmeurer/6046766). That notebook
+was based off a
 [wiki page](https://github.com/sympy/sympy/wiki/What-happens-when-you-mess-with-hashing)
 on the SymPy wiki, which in turn was based on
 [a message](https://groups.google.com/forum/#!msg/sympy/pJ2jg2csKgU/0nn21xqZEmwJ)
-to the SymPy mailing list.
+to the SymPy mailing list.*
 
 # What is hashing?
 
@@ -30,11 +29,11 @@ To summarize, a hash function *must* satisfy the property:
 
 Additionally, a *good* hash function should satisfy the property:
 
-- **If two objects have the same hash, then they are not likely to be the same
+- **If two objects have the same hash, then they are likely to be the same
   object.**
 
-Note that, as noted, since there are generally more possible objects than hash
-values, two objects may hash to the same value. This is called a
+Since there are generally more possible objects than hash values, two objects
+may hash to the same value. This is called a
 [hash collision](http://en.wikipedia.org/wiki/Hash_collision), and anything
 that deals with hashes should be able to deal with them.
 
@@ -46,12 +45,12 @@ function should satisfy to be useful is this:
 # What is it used for?
 
 If we have a hash function that satisfies the above properties, then we can
-use it to create from a set of object something called a *hash table*.
+use it to create from a collection of objects something called a *hash table*.
 Suppose we have a collection of objects, and given any object, we want to be
-able to compute very quickly if that object belongs to our set. We could store
-these objects in an ordered array, but then to determine if it is in the set,
-we would have to search potentially through every element of the array (in
-other words, an \\(O(n)\\)) algorithm.
+able to compute very quickly if that object belongs to our collection. We
+could store these objects in an ordered array, but then to determine if it is
+in the array, we would have to search potentially through every element of the
+array (in other words, an \\(O(n)\\)) algorithm.
 
 With hashing, we can do better. We create what is known as a
 [*hash table*](http://en.wikipedia.org/wiki/Hash_table). Instead of storing
@@ -63,14 +62,21 @@ simple as taking the modulus with respect to the number of buckets, `% n`).
 
 This image from
 [Wikipedia](http://en.wikipedia.org/wiki/File:Hash_table_3_1_1_0_1_0_0_SP.svg)
-shows an example
+shows an example.
 
 ![img](http://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg)
 
 To determine if an object is in a hash table, we only have to hash the object,
-and look in the bucket corresponding to that hash. This is an $O(1)$
+and look in the bucket corresponding to that hash. This is an \\(O(1)\\)
 algorithm, assuming we have a good hash function, because each bucket will
 generally hold very few objects, possibly even none.
+
+*Note: there are some additional things that need to be done to handle hash
+collisions, but the basic idea is the same, and as long as there aren't too
+many hash collisions, which should happen if hash values are evenly
+distributed and the size of the hash table is large compared to the number of
+objects stored in it, the average time to determine if an object is in the
+hash table is still \\(O(1)\\).*
 
 # Hashing in Python
 
@@ -123,8 +129,8 @@ associative array is a hash table where each element of the hash table points
 to another object. The other object itself is not hashed.
 
 Think of an associative array as a generalization of a regular array (like a
-`list`). In a `list`, the objects are associated to nonnegative integer
-indices, like
+`list`). In a `list`, objects are associated to nonnegative integer indices,
+like
 
 
 ```py
@@ -150,7 +156,7 @@ long as the key is hashable.
 
 
 Note that only the keys need to be hashable. The values can be anything, even
-unhashable objects like `list`.
+unhashable objects like lists.
 
 The uses for associative arrays are boundless. `dict` is one of the most
 useful data types in the Python language. Some example uses are
@@ -161,7 +167,8 @@ useful data types in the Python language. Some example uses are
 
 - Representation of a mathematical function with a finite domain.
 
-- A poor-man's database.
+- A poor-man's database (the Wikipedia image above is an associative array
+  mapping names to telephone numbers).
 
 - Implementing a [Pythonic version](http://stackoverflow.com/q/60208/161801)
   of the switch-case statement.
@@ -190,7 +197,7 @@ c}`. Otherwise, use `set([a, b, c])`.
 
 
 A final note: `set` and `dict` are themselves mutable, and hence not hashable!
-There is an immutable version of set called `frozenset`. There are no
+There is an immutable version of `set` called `frozenset`. There are no
 immutable dictionaries.
 
 
@@ -283,13 +290,12 @@ Finally, to override the equality operator `==`, define `__eq__`.
 True
 ```
 
-One of the key points that I hope you will take away from this notebook is
-that if you override `__eq__`, you **must** also override `__hash__` to
-agree. Note that Python 3 will actually require this: in Python 3, you cannot
-override `__eq__` and not override `__hash__`. But that's as far as Python
-goes in enforcing these rules, as we will see below. In particular, Python
-will never actually check that your `__hash__` actually agrees with your
-`__eq__`.
+One of the key points that I hope you will take away from this post is that if
+you override `__eq__`, you **must** also override `__hash__` to agree. Note
+that Python 3 will actually require this: in Python 3, you cannot override
+`__eq__` and not override `__hash__`. But that's as far as Python goes in
+enforcing these rules, as we will see below. In particular, Python will never
+actually check that your `__hash__` actually agrees with your `__eq__`.
 
 # Messing with hashing
 
@@ -336,20 +342,23 @@ Here, we implicitly changed the hash of `b` by mutating the attribute of `b`
 that is used to compute the hash. As a result, the object is no longer found
 in a dictionary, which uses the hash to find the object.
 
-The object is still there, I just can't access it any more.
+The object is still there, we just can't access it any more.
 
 ```py
 >>> d
 {<__main__.Bad object at 0x1047e7438>: 42}
 ```
 
-Note that Python doesn't prevent me from doing this. I could make it if I
-want, by making `__setattr__` raise `AttributeError`, but even then I could
-forcibly change it by modifying the object's `__dict__`. I could try some more
-fancy things using descriptors, metaclasses, and/or `__getattribute__`, but
-even then, if I knew what was happening, I could probably find a way to change
-it. This is what is meant when we say that Python is a "consenting adults"
-language.
+Note that Python doesn't prevent me from doing this. We could make it if we
+want (e.g., by making `__setattr__` raise `AttributeError`), but even then we
+could forcibly change it by modifying the object's `__dict__`. We could try
+some more fancy things using descriptors, metaclasses, and/or
+`__getattribute__`, but even then, if we knew what was happening, we could
+probably find a way to change it.
+
+This is what is meant when people say that Python is a "consenting adults"
+language. You are expected to not try to break things, but generally aren't
+prevented from doing so if you try.
 
 ## Example 2: More mutation
 
@@ -475,16 +484,21 @@ at the `AE1` and `AE2` objects we created above.
 270498197
 >>> hash(AE1) == hash(AE2)
 False
+>>> AE1 == AE2
+True
 >>> {AE1, AE2}
 {<__main__.AlwaysEqual at 0x101f79950>,
  <__main__.AlwaysEqual at 0x101f79ad0>}
  ```
 
 We can already see that we have broken one of the key properties of a `set`,
-which is that it does not contain the same object twice.  This can lead to
-subtle issues. For example, suppose we had a list and we wanted to remove all
-the duplicate items from it. An easy way to do this is to convert the list to
-a set and then convert it back to a list.
+which is that it does not contain the same object twice (remember that `AE1`
+and `AE2` should be considered the "same object" because `AE1 == AE2` is
+`True`).
+
+This can lead to subtle issues. For example, suppose we had a list and we
+wanted to remove all the duplicate items from it. An easy way to do this is to
+convert the list to a set and then convert it back to a list.
 
 ```py
 >>> l = ['a', 'a', 'c', 'a', 'c', 'b']
@@ -532,9 +546,10 @@ list if they aren't already there.
 This time, we used `in`, which uses `==`, so we got only one unique element of
 the list of `AlwaysEqual` objects.
 
-But there is an issue with this algorithm. Checking if something is in a list
-is \\(O(n)\\), but we have an object that allows checking in \\(O(1)\\) time,
-namely, a set. So a more efficient version might be:
+But there is an issue with this algorithm as well. Checking if something is in
+a list is \\(O(n)\\), but we have an object that allows checking in \\(O(1)\\)
+time, namely, a `set`. So a more efficient version might be to create a set
+alongside the new list for containment checking purposes.
 
 
 ```py
@@ -555,8 +570,8 @@ namely, a set. So a more efficient version might be:
  <__main__.AlwaysEqual at 0x101f79950>]
 ```
 
-Bah! But now, since we used a set, we compared by hashing, not equality, so we
-are left with three objects again. Notice the extremely subtle difference
+Bah! Since we used a set, we compared by hashing, not equality, so we are left
+with three objects again. Notice the extremely subtle difference
 here. Basically, it is this:
 
 ```py
@@ -641,7 +656,7 @@ tuple, an object whose hash that is relatively expensive to compute.
 
 ```py
 >>> a = ()
->>> for i in xrange(1000):
+>>> for i in range(1000):
 ...     a = (a,)
 ...
 >>> A = HashCache(a)
@@ -666,12 +681,12 @@ False
 True
 ```
 
-But what happens if we mutate HashCache. This is different from examples 1 and
-2 above, because we will be mutating what happens with equality testing, but
-not the hash (because of the cache).
+But what happens if we mutate a `HashCache`. This is different from examples 1
+and 2 above, because we will be mutating what happens with equality testing,
+but not the hash (because of the cache).
 
-(In the below example, recall that small integers hash to themselves, so
-`hash(1) == 1` and `hash(2) == 2`.)
+*In the below example, recall that small integers hash to themselves, so
+`hash(1) == 1` and `hash(2) == 2`.*
 
 
 ```py
@@ -719,25 +734,25 @@ Once we mutate `b` so that it compares equal to `a`, we start to have the same s
 >>> a = HashCache(1)
 >>> b = HashCache(2)
 >>> b.arg = 1
->>> print a == b
+>>> print(a == b)
 True
->>> print hash(a) == hash(b)
+>>> print(hash(a) == hash(b))
 True
->>> print {a, b}
+>>> print({a, b})
 set([<__main__.HashCache object at 0x102c32a10>])
->>> print uniq([a, b])
+>>> print(uniq([a, b]))
 [<__main__.HashCache object at 0x102c32a50>]
->>> print uniq2([a, b])
+>>> print(uniq2([a, b]))
 [<__main__.HashCache object at 0x102c32a50>]
 ```
 
 
 Wait a minute, this time it's different! Comparing it to above, it's pretty
-easy to see what was different this time. I left out the part where I showed
-the hash of `a` and `b`. When I did that the first time, it cached the hash of
-`b`, making it forever be `2`, but when I didn't do it the second time, the
-hash had not been cached yet, so the first time it is computed (in the `print
-hash(a) == hash(b)` line), `b.arg` has already been changed to `1`.
+easy to see what was different this time. We left out the part where we showed
+the hash of `a` and `b`. When we did that the first time, it cached the hash
+of `b`, making it forever be `2`, but when we didn't do it the second time,
+the hash had not been cached yet, so the first time it is computed (in the
+`print(hash(a) == hash(b))` line), `b.arg` has already been changed to `1`.
 
 And herein lies the extreme subtlety: if you mutate an object with that hashes
 its cache like this, you will run into issues **only if** you had already
@@ -752,15 +767,15 @@ them in a set, but `uniq` does not:
 >>> b = HashCache(2)
 >>> uniq2([a, b])
 >>> b.arg = 1
->>> print a == b
+>>> print(a == b)
 True
->>> print hash(a) == hash(b)
+>>> print(hash(a) == hash(b))
 False
->>> print {a, b}
+>>> print({a, b})
 set([<__main__.HashCache object at 0x102c32c50>, <__main__.HashCache object at 0x102c32c10>])
->>> print uniq([a, b])
+>>> print(uniq([a, b]))
 [<__main__.HashCache object at 0x102c32c50>]
->>> print uniq2([a, b])
+>>> print(uniq2([a, b]))
 [<__main__.HashCache object at 0x102c32c50>, <__main__.HashCache object at 0x102c32c10>]
 ```
 
@@ -769,15 +784,15 @@ set([<__main__.HashCache object at 0x102c32c50>, <__main__.HashCache object at 0
 >>> b = HashCache(2)
 >>> uniq([a, b])
 >>> b.arg = 1
->>> print a == b
+>>> print(a == b)
 True
->>> print hash(a) == hash(b)
+>>> print(hash(a) == hash(b))
 True
->>> print {a, b}
+>>> print({a, b})
 set([<__main__.HashCache object at 0x102c32c90>])
->>> print uniq([a, b])
+>>> print(uniq([a, b]))
 [<__main__.HashCache object at 0x102c32bd0>]
->>> print uniq2([a, b])
+>>> print(uniq2([a, b]))
 [<__main__.HashCache object at 0x102c32bd0>]
 ```
 
@@ -809,6 +824,17 @@ internal state that doesn't inherently change the object. Both `__eq__` and
 `__hash__` should remain unchanged by changes to this state. You may also want
 to make sure you use proper getters and setters to prevent modification of
 internal state that equality testing and hashing does depend on.
+
+If you choose this second option, however, be aware that Python considers it
+fair game to swap out two identical immutable (i.e., hashable) objects at any
+time. If `a == b` and `a` is hashable, Python (and Python libraries) are free
+to replace `a` with `b` anywhere. For example, Python uses an optimization on
+strings called *interning*, where common strings are stored only once in
+memory. A similar optimization is used in CPython for small integers. If store
+something on `a` but not `b` and make `a`'s hash ignore that data, you may
+find that some function that should return `a` may actually return `b`. For
+this reason, I generally don't recommend this second option unless you know
+what you are doing.
 
 Finally, to keep invariant 2, here are some tips:
 
@@ -903,6 +929,6 @@ Finally, to keep invariant 2, here are some tips:
      ```
 
      ```py
-     >>> print(hash('a')
+     >>> print(hash('a'))
      8897161376854729812
       ```
