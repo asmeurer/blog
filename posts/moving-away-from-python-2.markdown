@@ -105,7 +105,7 @@ and it just works, everywhere, ought to be a big deal. If you don't deal with
 strings, or do but don't care about those silly foreigners with weird accents
 in their names, there are other major carrots. For SymPy, the fact that 1/2
 gives 0 in Python 2 has historically been a major source of frustration for
-new users. Imagine writing out `1/2*x + x**(1/2)*y*z + z**2` and wondering why
+new users. Imagine writing out `1/2*x + x**(1/2)*y*z - 3*z**2` and wondering why
 half of what you wrote just "disappeared" (granted, this was worse before we
 [fixed the printers](https://asmeurersympy.wordpress.com/2011/08/18/sqrtx-now-prints-as-sqrtx/)).
 While `integer/integer` not giving a rational number is a major
