@@ -9,7 +9,7 @@ to the SymPy mailing list.*
 # What is hashing?
 
 Before we start, let's have a brief introduction to hashing. A
-[*hash function*](http://en.wikipedia.org/wiki/Hash_function) is a function
+[*hash function*](https://en.wikipedia.org/wiki/Hash_function) is a function
 that maps a set of objects to a set of integers. There are many kinds of hash
 functions, which satisfy many different properties, but the most important
 property that must be satisfied by any hash function is that it be a function
@@ -34,7 +34,7 @@ Additionally, a *good* hash function should satisfy the property:
 
 Since there are generally more possible objects than hash values, two objects
 may hash to the same value. This is called a
-[hash collision](http://en.wikipedia.org/wiki/Hash_collision), and anything
+[hash collision](https://en.wikipedia.org/wiki/Hash_collision), and anything
 that deals with hashes should be able to deal with them.
 
 This won't be discussed here, but an additional property that a good hash
@@ -53,7 +53,7 @@ in the array, we would have to search potentially through every element of the
 array (in other words, an \\(O(n)\\)) algorithm.
 
 With hashing, we can do better. We create what is known as a
-[*hash table*](http://en.wikipedia.org/wiki/Hash_table). Instead of storing
+[*hash table*](https://en.wikipedia.org/wiki/Hash_table). Instead of storing
 the objects in an ordered array, we create an array of buckets, each
 corresponding to some hash values. We then hash each object, and store it into
 the array corresponding to its hash value (if there are more hash values than
@@ -61,10 +61,10 @@ buckets, we distribute them using a second hash function, which can be as
 simple as taking the modulus with respect to the number of buckets, `% n`).
 
 This image from
-[Wikipedia](http://en.wikipedia.org/wiki/File:Hash_table_3_1_1_0_1_0_0_SP.svg)
+[Wikipedia](https://en.wikipedia.org/wiki/File:Hash_table_3_1_1_0_1_0_0_SP.svg)
 shows an example.
 
-![img](http://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg)
+![img](https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg)
 
 To determine if an object is in a hash table, we only have to hash the object,
 and look in the bucket corresponding to that hash. This is an \\(O(1)\\)
@@ -124,7 +124,7 @@ hash table, at least not in the Python implementation.
 
 In Python, there are two objects that correspond to hash tables, `dict` and
 `set`. A `dict` is a special kind of hash table called an
-[*associative array*](http://en.wikipedia.org/wiki/Associative_array). An
+[*associative array*](https://en.wikipedia.org/wiki/Associative_array). An
 associative array is a hash table where each element of the hash table points
 to another object. The other object itself is not hashed.
 
@@ -170,14 +170,14 @@ useful data types in the Python language. Some example uses are
 - A poor-man's database (the Wikipedia image above is an associative array
   mapping names to telephone numbers).
 
-- Implementing a [Pythonic version](http://stackoverflow.com/q/60208/161801)
+- Implementing a [Pythonic version](https://stackoverflow.com/q/60208/161801)
   of the switch-case statement.
 
 The other type of hash table, `set`, more closely matches the definition I
 gave above for a hash table. A `set` is just a container of hashable
 objects. `set`s are unordered, and can only contain one of each object (this
 is why they are called "sets," because this matches the mathematical
-definition of a [set](http://en.wikipedia.org/wiki/Set_(mathematics))).
+definition of a [set](https://en.wikipedia.org/wiki/Set_(mathematics))).
 
 In Python 2.7 or later, you can create a set with `{` and `}`, like `{a, b,
 c}`. Otherwise, use `set([a, b, c])`.
