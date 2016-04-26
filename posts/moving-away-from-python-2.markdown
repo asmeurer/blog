@@ -10,10 +10,15 @@ extended in 2014, due to the extraordinary difficulty of moving to a newer
 version). "End-of-life" means absolutely no more support from the core Python
 team, even for security updates.
 
-I'm writing this post as a library developer. I'm the lead developer of
-[SymPy](http://www.sympy.org/), and I have sympathies for developers of other
-libraries.[^fn1] I say this because my idea may seem a bit in tension with
-"users" (even though I hate the "developer/user" distinction).
+I'm writing this post because I want to clarify why I think this should be
+done, and to clear up some misconceptions, the primary one being that this
+represents library developers being antagonistic against those who want or
+have to use Python 2.
+
+I'm writing this from my perspective as a library developer. I'm the lead
+developer of [SymPy](http://www.sympy.org/), and I have sympathies for
+developers of other libraries.[^fn1] I say this because my idea may seem a bit
+in tension with "users" (even though I hate the "developer/user" distinction).
 
 ## Python 2
 
