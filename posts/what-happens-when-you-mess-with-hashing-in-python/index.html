@@ -79,7 +79,7 @@ on the SymPy wiki, which in turn was based on
 to the SymPy mailing list.</em></p>
 <h2>What is hashing?</h2>
 <p>Before we start, let's have a brief introduction to hashing. A
-<a href="http://en.wikipedia.org/wiki/Hash_function"><em>hash function</em></a> is a function
+<a href="https://en.wikipedia.org/wiki/Hash_function"><em>hash function</em></a> is a function
 that maps a set of objects to a set of integers. There are many kinds of hash
 functions, which satisfy many different properties, but the most important
 property that must be satisfied by any hash function is that it be a function
@@ -102,7 +102,7 @@ object.</strong></li>
 </ul>
 <p>Since there are generally more possible objects than hash values, two objects
 may hash to the same value. This is called a
-<a href="http://en.wikipedia.org/wiki/Hash_collision">hash collision</a>, and anything
+<a href="https://en.wikipedia.org/wiki/Hash_collision">hash collision</a>, and anything
 that deals with hashes should be able to deal with them.</p>
 <p>This won't be discussed here, but an additional property that a good hash
 function should satisfy to be useful is this:</p>
@@ -118,16 +118,16 @@ could store these objects in an ordered array, but then to determine if it is
 in the array, we would have to search potentially through every element of the
 array (in other words, an \(O(n)\)) algorithm.</p>
 <p>With hashing, we can do better. We create what is known as a
-<a href="http://en.wikipedia.org/wiki/Hash_table"><em>hash table</em></a>. Instead of storing
+<a href="https://en.wikipedia.org/wiki/Hash_table"><em>hash table</em></a>. Instead of storing
 the objects in an ordered array, we create an array of buckets, each
 corresponding to some hash values. We then hash each object, and store it into
 the array corresponding to its hash value (if there are more hash values than
 buckets, we distribute them using a second hash function, which can be as
 simple as taking the modulus with respect to the number of buckets, <code>% n</code>).</p>
 <p>This image from
-<a href="http://en.wikipedia.org/wiki/File:Hash_table_3_1_1_0_1_0_0_SP.svg">Wikipedia</a>
+<a href="https://en.wikipedia.org/wiki/File:Hash_table_3_1_1_0_1_0_0_SP.svg">Wikipedia</a>
 shows an example.</p>
-<p><img src="http://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="img"></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="img"></p>
 <p>To determine if an object is in a hash table, we only have to hash the object,
 and look in the bucket corresponding to that hash. This is an \(O(1)\)
 algorithm, assuming we have a good hash function, because each bucket will
@@ -172,7 +172,7 @@ that this happened; the object itself doesn't know that it is sitting in a
 hash table, at least not in the Python implementation.</p>
 <p>In Python, there are two objects that correspond to hash tables, <code>dict</code> and
 <code>set</code>. A <code>dict</code> is a special kind of hash table called an
-<a href="http://en.wikipedia.org/wiki/Associative_array"><em>associative array</em></a>. An
+<a href="https://en.wikipedia.org/wiki/Associative_array"><em>associative array</em></a>. An
 associative array is a hash table where each element of the hash table points
 to another object. The other object itself is not hashed.</p>
 <p>Think of an associative array as a generalization of a regular array (like a
@@ -203,14 +203,14 @@ the key <code>1</code> removed.</p></li>
 <li><p>Representation of a mathematical function with a finite domain.</p></li>
 <li><p>A poor-man's database (the Wikipedia image above is an associative array
 mapping names to telephone numbers).</p></li>
-<li><p>Implementing a <a href="http://stackoverflow.com/q/60208/161801">Pythonic version</a>
+<li><p>Implementing a <a href="https://stackoverflow.com/q/60208/161801">Pythonic version</a>
 of the switch-case statement.</p></li>
 </ul>
 <p>The other type of hash table, <code>set</code>, more closely matches the definition I
 gave above for a hash table. A <code>set</code> is just a container of hashable
 objects. <code>set</code>s are unordered, and can only contain one of each object (this
 is why they are called "sets," because this matches the mathematical
-definition of a <a href="http://en.wikipedia.org/wiki/Set_(mathematics)">set</a>).</p>
+definition of a <a href="https://en.wikipedia.org/wiki/Set_(mathematics)">set</a>).</p>
 <p>In Python 2.7 or later, you can create a set with <code>{</code> and <code>}</code>, like <code>{a, b, c}</code>. Otherwise, use <code>set([a, b, c])</code>.</p>
 <pre><code class="language-py">&gt;&gt;&gt; s = {0, (), '2'}
 &gt;&gt;&gt; s
