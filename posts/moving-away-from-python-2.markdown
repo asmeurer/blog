@@ -154,6 +154,17 @@ will be supported for these until 2020. Those without resources probably won't
 (keep in mind that you're using open source libraries without paying for
 them—the developers literally owe you nothing).
 
+I get that some people have to use Python 2, for whatever reasons. But using
+outdated software comes at a cost. Libraries have borne this technical debt
+for the most part thus far, but they shouldn't be expected to bear it forever.
+The debt will only increase, especially as the technical opportunity cost, if
+you will, of not being able to use newer and shinier versions of Python 3
+grows. They burden will have to shift at some point. Those with the financial
+resources may choose to offload this debt to others,[^fn4] say by backporting
+features or bugfixes to older library versions that support Python 2 (or by
+helping to move code to Python 3).
+
+
 ### Footnotes
 
 [^fn1]: With that being said, the opinions here are entirely my own, and are
@@ -170,3 +181,7 @@ them—the developers literally owe you nothing).
 [^fn3]: In Swift, Apple's new language for iOS and OS X, function parameter
         names are effectively "keyword only"
         [by default](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html).
+
+[^fn4]: If that legitimately interests you, I
+        [hear Continuum](https://twitter.com/pwang/status/712780279211884546)
+        may be able to help you.
