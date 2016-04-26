@@ -1,0 +1,167 @@
+About a month ago I tweeted this:
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thought: get the maintainers of a bunch of big Python libraries to sign something saying that they WILL drop Python 2.7 support in 2020.</p>&mdash; Aaron Meurer (@asmeurer) <a href="https://twitter.com/asmeurer/status/712304912428875776">March 22, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+For those of you who don't know, Python 2.7 is
+[slated](https://docs.python.org/devguide/#status-of-python-branches) to reach
+end-of-life in 2020 (originally, it was slated to end in 2015, but it was
+extended in 2014, due to the extraordinary difficulty of moving to a newer
+version). "End-of-life" means absolutely no more support from the core Python
+team, even for security updates.
+
+I'm writing this post as a library developer. I'm the lead developer of
+[SymPy](http://www.sympy.org/), and I have sympathies for developers of other
+libraries.[^fn1] I say this because my idea may seem a bit in tension with
+"users" (even though I hate that distinction).
+
+## Python 2
+
+There are a few reasons why I think libraries should drop (and announce that
+they will drop) Python 2 support by 2020 (actually earlier, say 2018 or 2019,
+depending on how core the library is).
+
+First, library developers have to be the leaders here. This is apparent from
+the move to Python 3 in the first place. Consider the three (not necessarily
+disjoint) classes of people: core developers, library developers, and users.
+The core developers were the first to move to Python 3, since they were the
+ones who wrote it. They were also the ones who provided the messaging around
+Python 3, which has varied over time. In my opinion, it should have been and
+should be more forceful.[^fn2] Then you have the library developers and the
+users. A chief difference here is that users are probably going to be using
+only one version of Python. In order for them to switch that version to Python
+3, all the libraries that they use need to support it. This took some time,
+since library developers saw little impetus to support Python 3 when no one
+was using it (Catch 22), and to worsen the situation, versions of Python older
+than 2.6 made
+[single codebase compatibility](https://asmeurersympy.wordpress.com/2013/08/22/python-3-single-codebase-vs-2to3/)
+almost impossible.
+
+Today, though, [almost all libraries](http://py3readiness.org/) support Python
+3, and we're reaching a point where those that don't have
+[forks that do](https://pypi.python.org/pypi/Fabric3/1.10.2).
+
+But it only happened *after* the library developers transitioned. I believe
+libraries need to be the leaders in moving away from Python 2 as well. It's
+important to do this for a few reasons:
+
+- Python 2.7 support ends in 2020. That means all updates, including security
+  updates. For all intents and purposes, Python 2.7 becomes an insecure
+  language to use at that point in time.
+
+- Supporting two major versions of Python is technical debt for every project
+  that does it. While writing cross compatible code is
+  [easier than ever](http://python-future.org/), it still remains true that
+  you have to remember to add `__future__` imports to the top of every file,
+  to import all relevant builtins from your compatibility file or library, to
+  run all your tests in both Python 2 and 3. Supporting both versions is a
+  major cognitive burden to library developers, as they always have to be
+  aware of important differences in the two languages. Developers on any
+  library that does anything with strings will need to understand how things
+  work in both Python 2 and 3, and the often obscure workarounds required for
+  things to work in both (pop quiz: how do you write Unicode characters to a
+  file in a Python 2/3 compatible way?).
+
+- Some of Python 3's
+  [new syntax features](https://asmeurer.github.io/python3-presentation/slides.html)
+  (i.e., features that are impossible to use in Python 2) only matter for
+  library developers. A great example of this is
+  [keyword only arguments](https://www.python.org/dev/peps/pep-3102/). From an
+  API standpoint, almost every instance of keyword arguments should be
+  implemented as keyword only arguments. This avoids mistakes that come from
+  the antipattern of passing keyword arguments without naming the keyword, and
+  allows the argspec of the function to be expanded in the future without
+  breaking API[^fn3].
+
+The second reason is completely selfish. A response that I heard on that tweet
+(as well as elsewhere), was that libraries should provide carrots, not sticks.
+In other words, instead of forcing people off of Python 2, we should make them
+want to come to Python 3. There are some issues with this argument. First,
+Python 3 already has
+[tons of carrots](https://asmeurer.github.io/python3-presentation/slides.html).
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.
+The fact that you can write
+
+``` python
+composers = [
+    "Ludwig van Beethoven",
+    "Wolfgang Amadeus Mozart",
+    "Johann Sebastian Bach",
+    "Frédéric Chopin",
+    "Antonín Dvořák",
+    "Franz Schubert",
+    ]
+with open("favorite-composers", 'w') as f:
+    for composer in composers:
+        f.write(composer + "\n")
+```
+
+and it just works, everywhere, ought to be a big deal. If you don't deal with
+strings, or do but don't care about those silly foreigners with weird accents
+in their names, there are other major carrots. For SymPy, the fact that 1/2
+gives 0 in Python 2 has historically been a major source of frustration for
+new users. Imagine writing out `1/2*x + x**(1/2)*y*z + z**2` and wondering why
+half of what you wrote just "disappeared" (granted, this was worse before we
+[fixed the printers](https://asmeurersympy.wordpress.com/2011/08/18/sqrtx-now-prints-as-sqrtx/)).
+While `integer/integer` not giving a rational number is a major
+[gotcha](http://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and)
+for SymPy, giving a float is infinitely better than giving what is effectively
+the wrong answer. Don't use strings or integers?
+[I've got more](https://asmeurer.github.io/python3-presentation/slides.html#40).
+
+Frankly, if these "carrots" haven't convinced you yet, then I'll wager you're
+not really the sort of person who is persuaded by carrots.
+
+Second, some "carrots" are impossible unless they are implemented in
+libraries. While some features can be implemented in 2/3 compatible code and
+only work in Python 3 (such as `@` matrix multiplication), others, such as
+keyword only arguments, can only be implemented in code that supports
+Python 3. Supporting them in Python 2 would be a net deficit of technical debt
+(one can imagine, for instance, trying to support keyword only arguments
+manually using `**kwargs`, or by using some monstrous meta-programming).
+
+Third, as I said, I'm selfish. Python 3 *does* have carrots, and I want them.
+As long as I have to support Python 2 in my code, I can't use keyword only
+arguments, or extended argument unpacking, or async/await, or any of the
+dozens of features that can't be used in cross compatible code.
+
+Another argument might be that instead of blocking users of existing
+libraries, developers should create new libraries which are Python 3 only that
+make use of new exciting features of Python 3. I agree we should do that, but
+existing libraries are good too. I don't see why a developer should throw out
+all of a well developed library just so he can use some Python features that
+he is excited about.
+
+## Legacy Python
+
+A lot of people have taken to calling Python 2
+"[legacy Python](https://twitter.com/RipLegacyPython)". This phrase is often
+used condescendingly and
+[angers a lot of people](https://twitter.com/stephtdouglas/status/713433933040340993)
+(and indeed, this blog post is the first time I've used it myself).  However,
+I think Python 2 really should be seen this way, as a "legacy" system. If you
+want to use it, for whatever your reasons, that's fine, but just as you
+shouldn't expect to get any of the newest features of Python, you shouldn't
+expect to be able to use the newest versions of any of your libraries. Those
+libraries that have a lot of development resources may choose to support older
+Python 2-compatible versions with bug and/or security fixes. Python 2 itself
+will be supported for these until 2020. Those without resources probably won't
+(keep in mind that you're using open source libraries without paying for
+them—the developers literally owe you nothing).
+
+### Footnotes
+
+[^fn1]: With that being said, the opinions here are entirely my own, and are
+        don't necessarily represent those of other people, nor do they
+        represent official SymPy policy (no decisions have been made by the
+        community about this at this time).
+
+[^fn2]: It often feels like core Python itself doesn't really want people to
+        use Python 3. It's little things, like
+        [docs links](https://docs.python.org/library/) that redirect to Python
+        2, or [PEP 394](https://www.python.org/dev/peps/pep-0394/), which
+        still says that the `python` should always point to Python 2.
+
+[^fn3]: In Swift, Apple's new language for iOS and OS X, function parameter
+        names are effectively "keyword only"
+        [by default](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html).
