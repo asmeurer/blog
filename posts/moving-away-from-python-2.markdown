@@ -13,7 +13,7 @@ team, even for security updates.
 I'm writing this post as a library developer. I'm the lead developer of
 [SymPy](http://www.sympy.org/), and I have sympathies for developers of other
 libraries.[^fn1] I say this because my idea may seem a bit in tension with
-"users" (even though I hate that distinction).
+"users" (even though I hate the "developer/user" distinction).
 
 ## Python 2
 
