@@ -112,7 +112,7 @@ While `integer/integer` not giving a rational number is a major
 [gotcha](http://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and)
 for SymPy, giving a float is infinitely better than giving what is effectively
 the wrong answer. Don't use strings or integers?
-[I've got more](https://asmeurer.github.io/python3-presentation/slides.html#40).
+[I've got more](https://asmeurer.github.io/python3-presentation/slides.html).
 
 Frankly, if these "carrots" haven't convinced you yet, then I'll wager you're
 not really the sort of person who is persuaded by carrots.
