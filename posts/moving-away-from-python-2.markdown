@@ -76,7 +76,7 @@ important to do this for a few reasons:
   implemented as keyword-only arguments. This avoids mistakes that come from
   the antipattern of passing keyword arguments without naming the keyword, and
   allows the argspec of the function to be expanded in the future without
-  breaking API[^fn3].
+  breaking API.[^fn3]
 
 The second reason is completely selfish. A response that I heard on that tweet
 (as well as elsewhere), was that libraries should provide carrots, not sticks.
