@@ -71,9 +71,9 @@ important to do this for a few reasons:
   [new syntax features](https://asmeurer.github.io/python3-presentation/slides.html)
   (i.e., features that are impossible to use in Python 2) only matter for
   library developers. A great example of this is
-  [keyword only arguments](https://www.python.org/dev/peps/pep-3102/). From an
+  [keyword-only arguments](https://www.python.org/dev/peps/pep-3102/). From an
   API standpoint, almost every instance of keyword arguments should be
-  implemented as keyword only arguments. This avoids mistakes that come from
+  implemented as keyword-only arguments. This avoids mistakes that come from
   the antipattern of passing keyword arguments without naming the keyword, and
   allows the argspec of the function to be expanded in the future without
   breaking API[^fn3].
@@ -120,13 +120,13 @@ not really the sort of person who is persuaded by carrots.
 Second, some "carrots" are impossible unless they are implemented in
 libraries. While some features can be implemented in 2/3 compatible code and
 only work in Python 3 (such as `@` matrix multiplication), others, such as
-keyword only arguments, can only be implemented in code that supports
+keyword-only arguments, can only be implemented in code that supports
 Python 3. Supporting them in Python 2 would be a net deficit of technical debt
-(one can imagine, for instance, trying to support keyword only arguments
+(one can imagine, for instance, trying to support keyword-only arguments
 manually using `**kwargs`, or by using some monstrous meta-programming).
 
 Third, as I said, I'm selfish. Python 3 *does* have carrots, and I want them.
-As long as I have to support Python 2 in my code, I can't use keyword only
+As long as I have to support Python 2 in my code, I can't use keyword-only
 arguments, or extended argument unpacking, or async/await, or any of the
 dozens of features that can't be used in cross compatible code.
 
@@ -179,7 +179,7 @@ helping to move code to Python 3).
         still says that the `python` should always point to Python 2.
 
 [^fn3]: In Swift, Apple's new language for iOS and OS X, function parameter
-        names are effectively "keyword only"
+        names are effectively "keyword-only"
         [by default](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html).
 
 [^fn4]: If that legitimately interests you, I
