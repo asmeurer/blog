@@ -166,7 +166,6 @@ resources may choose to offload this debt to others,[^fn4] say, by backporting
 features or bugfixes to older library versions that support Python 2 (or by
 helping to move code to Python 3).
 
-
 ### Footnotes
 
 [^fn1]: With that being said, the opinions here are entirely my own, and are
