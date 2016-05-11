@@ -44,7 +44,7 @@ almost impossible.
 
 Today, though, [almost all libraries](http://py3readiness.org/) support Python
 3, and we're reaching a point where those that don't have
-forks that do
+forks that do.
 
 But it only happened *after* the library developers transitioned. I believe
 libraries need to be the leaders in moving away from Python 2 as well. It's
