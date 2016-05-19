@@ -86,29 +86,13 @@ want to come to Python 3. There are some issues with this argument. First,
 Python 3 already has
 [tons of carrots](https://asmeurer.github.io/python3-presentation/slides.html).
 Honestly, not being terrible at Unicode ought to be a carrot in its own right.
-The fact that you can write
 
-``` python
-composers = [
-    "Ludwig van Beethoven",
-    "Wolfgang Amadeus Mozart",
-    "Johann Sebastian Bach",
-    "Frédéric Chopin",
-    "Antonín Dvořák",
-    "Franz Schubert",
-    ]
-with open("favorite-composers", 'w') as f:
-    for composer in composers:
-        f.write(composer + "\n")
-```
-
-and it just works, everywhere, ought to be a big deal. If you don't deal with
-strings, or do but don't care about those silly foreigners with weird accents
-in their names, there are other major carrots as well. For SymPy, the fact
-that 1/2 gives 0 in Python 2 has historically been a major source of
-frustration for new users. Imagine writing out `1/2*x + x**(1/2)*y*z - 3*z**2`
-and wondering why half of what you wrote just "disappeared" (granted, this was
-worse before we
+If you don't deal with strings, or do but don't care about those silly
+foreigners with weird accents in their names, there are other major carrots as
+well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
+major source of frustration for new users. Imagine writing out `1/2*x +
+x**(1/2)*y*z - 3*z**2` and wondering why half of what you wrote just
+"disappeared" (granted, this was worse before we
 [fixed the printers](https://asmeurersympy.wordpress.com/2011/08/18/sqrtx-now-prints-as-sqrtx/)).
 While `integer/integer` not giving a rational number is a major
 [gotcha](http://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and)
