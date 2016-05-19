@@ -150,6 +150,18 @@ resources may choose to offload this debt to others,[^fn4] say, by backporting
 features or bugfixes to older library versions that support Python 2 (or by
 helping to move code to Python 3).
 
+I want to end by pointing out that if you are, for whatever reason, still
+using Python 2, you may be worried that if libraries become Python 3-only and
+start using Python 3 features, won't that break your code? The answer is no.
+Assuming package maintainers mark the metadata on their packages correctly,
+tools like pip and conda will not install non-Python 2 compatible versions
+into Python 2.
+
+If you haven't transitioned yet, and want to know more, a good place to start
+is the [official docs](https://docs.python.org/3/howto/pyporting.html). I also
+highly recommend using [conda](http://conda.pydata.org/docs/) environments, as
+it will make it easy to separate your Python 2 code from your Python 3 code.
+
 ### Footnotes
 
 [^fn1]: With that being said, the opinions here are entirely my own, and are
