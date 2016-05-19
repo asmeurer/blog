@@ -17,7 +17,7 @@ have to use Python 2.
 
 I'm writing this from my perspective as a library developer. I'm the lead
 developer of [SymPy](http://www.sympy.org/), and I have sympathies for
-developers of other libraries.[^fn1] I say this because my idea may seem a bit
+developers of other libraries.[^sympy] I say this because my idea may seem a bit
 in tension with "users" (even though I hate the "developer/user" distinction).
 
 ## Python 2
@@ -32,7 +32,7 @@ necessarily disjoint) classes of people: CPython core developers, library
 developers, and users. The core developers were the first to move to Python 3,
 since they were the ones who wrote it. They were also the ones who provided
 the messaging around Python 3, which has varied over time. In my opinion, it
-should have been and should be more forceful.[^fn2] Then you have the library
+should have been and should be more forceful.[^core] Then you have the library
 developers and the users. A chief difference here is that users are probably
 going to be using only one version of Python. In order for them to switch that
 version to Python 3, all the libraries that they use need to support it. This
@@ -76,7 +76,7 @@ important to do this for a few reasons:
   implemented as keyword-only arguments. This avoids mistakes that come from
   the antipattern of passing keyword arguments without naming the keyword, and
   allows the argspec of the function to be expanded in the future without
-  breaking API.[^fn3]
+  breaking API.[^swift]
 
 The second reason I think library developers should agree to drop Python 2
 support by 2020 is completely selfish. A response that I heard on that tweet
@@ -85,7 +85,7 @@ In other words, instead of forcing people off of Python 2, we should make them
 want to come to Python 3. There are some issues with this argument. First,
 Python 3 already has
 [tons of carrots](https://asmeurer.github.io/python3-presentation/slides.html).
-Honestly, not being terrible at Unicode ought to be a carrot in its own right.
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.[^unicode]
 
 If you don't deal with strings, or do but don't care about those silly
 foreigners with weird accents in their names, there are other major carrots as
@@ -146,9 +146,9 @@ for the most part thus far, but they shouldn't be expected to bear it forever.
 The debt will only increase, especially as the technical opportunity cost, if
 you will, of not being able to use newer and shinier versions of Python 3
 grows. The burden will have to shift at some point. Those with the financial
-resources may choose to offload this debt to others,[^fn4] say, by backporting
-features or bugfixes to older library versions that support Python 2 (or by
-helping to move code to Python 3).
+resources may choose to offload this debt to others,[^continuum] say, by
+backporting features or bugfixes to older library versions that support Python
+2 (or by helping to move code to Python 3).
 
 I want to end by pointing out that if you are, for whatever reason, still
 using Python 2, you may be worried that if libraries become Python 3-only and
@@ -164,21 +164,44 @@ it will make it easy to separate your Python 2 code from your Python 3 code.
 
 ### Footnotes
 
-[^fn1]: With that being said, the opinions here are entirely my own, and are
+[^sympy]: With that being said, the opinions here are entirely my own, and are
         don't necessarily represent those of other people, nor do they
         represent official SymPy policy (no decisions have been made by the
         community about this at this time).
 
-[^fn2]: It often feels like core Python itself doesn't really want people to
+[^core]: It often feels like core Python itself doesn't really want people to
         use Python 3. It's little things, like
         [docs links](https://docs.python.org/library/) that redirect to Python
         2, or [PEP 394](https://www.python.org/dev/peps/pep-0394/), which
         still says that the `python` should always point to Python 2.
 
-[^fn3]: In Swift, Apple's new language for iOS and OS X, function parameter
+
+[^swift]: In Swift, Apple's new language for iOS and OS X, function parameter
         names are effectively "keyword-only"
         [by default](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html).
 
-[^fn4]: If that legitimately interests you, I
+[^unicode]: As an example of this, in conda, if you use Python 2 in the root
+        environment, then installing into a path with non-ASCII characters is
+        unsupported. This is common on Windows, because Windows by default
+        uses the user's full name as the username, and the default conda
+        install path is in the user directory.
+
+    This is unsupported except in Python 3, because to fix the issue,
+    every single place in conda where a string appears would have to be
+    changed to use a `unicode` string in Python 2. The basic issue is that
+    things like `'π' + u'i'` raise `UnicodeDecodeError` in Python 2 (even
+    though `'π' + 'i'`, `u'π' + 'i'`, and `u'π' + u'i'` all work fine).
+    You can read a more in-depth description of the problem
+    [here](https://github.com/sympy/sympy/pull/9692#issuecomment-126162173).
+    Incidentally, this is also why you should never use `from __future__
+    import unicode_literals` in Python 2, in my opinion.
+
+    Even though I no longer work on conda, as far as I know, the
+    [issue](https://github.com/conda/conda/issues/1180) remains unfixed.
+    Of course, this whole thing works just fine if conda is run in Python
+    3.
+
+
+[^continuum]: If that legitimately interests you, I
         [hear Continuum](https://twitter.com/pwang/status/712780279211884546)
         may be able to help you.
