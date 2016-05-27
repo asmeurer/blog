@@ -199,7 +199,7 @@ it will make it easy to separate your Python 2 code from your Python 3 code.
     Incidentally, this is also why you should never use `from __future__
     import unicode_literals` in Python 2, in my opinion.
 
-    Even though I no longer work on conda, as far as I know, the
+    I no longer work on conda, but as far as I know, the
     [issue](https://github.com/conda/conda/issues/1180) remains unfixed.
     Of course, this whole thing works just fine if conda is run in Python
     3.
