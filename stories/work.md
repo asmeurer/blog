@@ -94,7 +94,7 @@ Stuff I've done on my own. In no particular order.
 
 - Some interesting [spam](https://github.com/asmeurer/spam) I've received. The
   [deaththreat](https://github.com/asmeurer/spam/blob/master/deaththreat) one
-  is pretty funny.
+  is pretty funny (slightly NSFW).
 
 ## Not so good stuff
 
