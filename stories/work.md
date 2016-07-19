@@ -84,7 +84,9 @@ Stuff I've done on my own. In no particular order.
 
 - This [blog](https://github.com/asmeurer/blog).
 
-- My [old blog](https://asmeurersympy.wordpress.com/).
+- My [old blog](https://asmeurersympy.wordpress.com/). Contains posts from
+  when I was a Google Summer of Code student, posts about when I moved to
+  emacs, and other interesting things about Python and mathematics.
 
 - A
   [presentation](https://asmeurer.github.io/python3-presentation/slides.html)
