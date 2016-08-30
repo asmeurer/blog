@@ -80,6 +80,10 @@ Stuff I've done on my own. In no particular order.
 
 ## Good stuff
 
+- [Doctr](https://drdoctr.github.io/doctr/). A tool for automatically
+  deploying docs from Travis CI to GitHub pages
+  ([Gil Forsyth](https://github.com/gforsyth/) also works on this).
+
 - [catimg](https://github.com/asmeurer/catimg/). Shows an random image of a
   cat from Imgur inline in the iTerm2 terminal.
 
