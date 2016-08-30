@@ -19,6 +19,16 @@ and most of my open source work is on my
   project), and the
   [tutorial](http://docs.sympy.org/latest/tutorial/index.html).
 
+  These days, I am working at the [ERGS](http://www.ergs.sc.edu/) research
+  group at the University of South Carolina under
+  [Anthony Scopatz](http://www.ergs.sc.edu/people/scopatz.html). I am working
+  primarily on improving SymPy's code generation capabilities. I gave a talk
+  at SciPy 2016 about SymPy code generation:
+
+  <iframe width="560" height="315"
+  src="https://www.youtube.com/embed/nmI-cDAUjdE" frameborder="0"
+  allowfullscreen></iframe>
+
   If you are interested in SymPy or have any questions about it, please email
   the [SymPy mailing list](https://groups.google.com/forum/#!forum/sympy).
 
@@ -29,7 +39,9 @@ and most of my open source work is on my
   of open source packages for doing science, math, engineering, data analysis
   in Python.
 
-  I gave a talk about conda at SciPy 2014. <iframe width="560" height="315"
+  I gave a talk about conda at SciPy 2014:
+
+  <iframe width="560" height="315"
   src="https://www.youtube.com/embed/UaIvrDWrIWM" frameborder="0"
   allowfullscreen></iframe>.
 
