@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" type="application/rss+xml" href="https://asmeurer.github.io/blog/rss.xml"></atom:link><language>en</language><lastBuildDate>Thu, 22 Sep 2016 04:36:30 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="https://asmeurer.github.io/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 22 Sep 2016 04:38:45 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
@@ -121,7 +121,7 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This last one I find to be very important. You could arguably use a list for
-the first four of Alan Downey's points&lt;sup id="fnref:assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn:assign" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
+the first four of Allen Downey's points&lt;sup id="fnref:assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn:assign" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
 is
 &lt;a href="https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/"&gt;impossible&lt;/a&gt;
 to meaningfully hash a mutable data structure in Python, and hashability is a

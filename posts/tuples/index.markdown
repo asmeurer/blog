@@ -115,7 +115,7 @@ tuple can be used, but this is still a tuple, or at least it looks like one ;)
         {(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}
 
 This last one I find to be very important. You could arguably use a list for
-the first four of Alan Downey's points[^assign] (or Python could have, if it wanted to). But it
+the first four of Allen Downey's points[^assign] (or Python could have, if it wanted to). But it
 is
 [impossible](https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/)
 to meaningfully hash a mutable data structure in Python, and hashability is a
