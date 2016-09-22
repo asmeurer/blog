@@ -15,7 +15,7 @@ the [first tweet](https://twitter.com/dabeaz/status/7786342053958451200) above).
 
 Now to start off, I want to say that I respect the hell out of David Beazley.
 The guy literally [wrote the book](http://www.dabeaz.com/cookbook.html) on
-Python, and he knows way more about Python than I ever well. He's also one of
+Python, and he knows way more about Python than I ever will. He's also one of
 the most entertaining Python people you can
 [follow on Twitter](https://twitter.com/dabeaz). But hey, that doesn't mean I
 can't disagree sometimes.
@@ -148,10 +148,11 @@ object in Python should be `list`. `tuples` are only to be used as "records",
 or if you suspect *might* want to use it as a dictionary key. First off, you
 never know when you'll want something to be hashable. Both dictionary keys and
 `sets` require hashability. Suppose you want to de-duplicate a collection of
-your objects. If you used `list`, you'll either have to write a custom loop that
-checks for duplicates, or manually convert them to `tuple` and throw them in a
-`set`. If you start with `tuple`, you don't have to worry about it (again,
-assuming the entries of the tuples are all hashable as well).
+sequences. If you represent the sequences with `list`, you'll either have to
+write a custom loop that checks for duplicates, or manually convert them to
+`tuple` and throw them in a `set`. If you start with `tuple`, you don't have
+to worry about it (again, assuming the entries of the tuples are all hashable
+as well).
 
 Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
@@ -197,7 +198,7 @@ having appeared to be quite distant from the actual source).
 # A Better "Default"
 
 I propose that Python code in general would be vastly improved if people used
-`tuple` as the default unordered collection, and only switched to `list` if
+`tuple` as the default ordered collection, and only switched to `list` if
 mutation was necessary (it's less necessary than you think; you can always
 copy a tuple instead of mutating it). I agree with David Beazley that you
 don't "sometimes need a read only list". Rather, you "sometimes need a
