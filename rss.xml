@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="https://asmeurer.github.io/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 22 Sep 2016 04:38:45 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" href="https://asmeurer.github.io/blog/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 22 Sep 2016 17:11:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
@@ -17,7 +17,7 @@ others (and from yours truly). I recommend reading the the thread (click on
 the &lt;a href="https://twitter.com/dabeaz/status/7786342053958451200"&gt;first tweet&lt;/a&gt; above).&lt;/p&gt;
 &lt;p&gt;Now to start off, I want to say that I respect the hell out of David Beazley.
 The guy literally &lt;a href="http://www.dabeaz.com/cookbook.html"&gt;wrote the book&lt;/a&gt; on
-Python, and he knows way more about Python than I ever well. He's also one of
+Python, and he knows way more about Python than I ever will. He's also one of
 the most entertaining Python people you can
 &lt;a href="https://twitter.com/dabeaz"&gt;follow on Twitter&lt;/a&gt;. But hey, that doesn't mean I
 can't disagree sometimes.&lt;/p&gt;
@@ -150,10 +150,11 @@ object in Python should be &lt;code&gt;list&lt;/code&gt;. &lt;code&gt;tuples&lt;
 or if you suspect &lt;em&gt;might&lt;/em&gt; want to use it as a dictionary key. First off, you
 never know when you'll want something to be hashable. Both dictionary keys and
 &lt;code&gt;sets&lt;/code&gt; require hashability. Suppose you want to de-duplicate a collection of
-your objects. If you used &lt;code&gt;list&lt;/code&gt;, you'll either have to write a custom loop that
-checks for duplicates, or manually convert them to &lt;code&gt;tuple&lt;/code&gt; and throw them in a
-&lt;code&gt;set&lt;/code&gt;. If you start with &lt;code&gt;tuple&lt;/code&gt;, you don't have to worry about it (again,
-assuming the entries of the tuples are all hashable as well).&lt;/p&gt;
+sequences. If you represent the sequences with &lt;code&gt;list&lt;/code&gt;, you'll either have to
+write a custom loop that checks for duplicates, or manually convert them to
+&lt;code&gt;tuple&lt;/code&gt; and throw them in a &lt;code&gt;set&lt;/code&gt;. If you start with &lt;code&gt;tuple&lt;/code&gt;, you don't have
+to worry about it (again, assuming the entries of the tuples are all hashable
+as well).&lt;/p&gt;
 &lt;p&gt;Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent &lt;code&gt;1 - 2*(-3 + 4)&lt;/code&gt; as&lt;/p&gt;
@@ -191,7 +192,7 @@ another blog post to discover the source of my problems (the problems I was
 having appeared to be quite distant from the actual source).&lt;/p&gt;
 &lt;h2&gt;A Better "Default"&lt;/h2&gt;
 &lt;p&gt;I propose that Python code in general would be vastly improved if people used
-&lt;code&gt;tuple&lt;/code&gt; as the default unordered collection, and only switched to &lt;code&gt;list&lt;/code&gt; if
+&lt;code&gt;tuple&lt;/code&gt; as the default ordered collection, and only switched to &lt;code&gt;list&lt;/code&gt; if
 mutation was necessary (it's less necessary than you think; you can always
 copy a tuple instead of mutating it). I agree with David Beazley that you
 don't "sometimes need a read only list". Rather, you "sometimes need a

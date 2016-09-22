@@ -82,7 +82,7 @@ others (and from yours truly). I recommend reading the the thread (click on
 the <a href="https://twitter.com/dabeaz/status/7786342053958451200">first tweet</a> above).</p>
 <p>Now to start off, I want to say that I respect the hell out of David Beazley.
 The guy literally <a href="http://www.dabeaz.com/cookbook.html">wrote the book</a> on
-Python, and he knows way more about Python than I ever well. He's also one of
+Python, and he knows way more about Python than I ever will. He's also one of
 the most entertaining Python people you can
 <a href="https://twitter.com/dabeaz">follow on Twitter</a>. But hey, that doesn't mean I
 can't disagree sometimes.</p>
@@ -215,10 +215,11 @@ object in Python should be <code>list</code>. <code>tuples</code> are only to be
 or if you suspect <em>might</em> want to use it as a dictionary key. First off, you
 never know when you'll want something to be hashable. Both dictionary keys and
 <code>sets</code> require hashability. Suppose you want to de-duplicate a collection of
-your objects. If you used <code>list</code>, you'll either have to write a custom loop that
-checks for duplicates, or manually convert them to <code>tuple</code> and throw them in a
-<code>set</code>. If you start with <code>tuple</code>, you don't have to worry about it (again,
-assuming the entries of the tuples are all hashable as well).</p>
+sequences. If you represent the sequences with <code>list</code>, you'll either have to
+write a custom loop that checks for duplicates, or manually convert them to
+<code>tuple</code> and throw them in a <code>set</code>. If you start with <code>tuple</code>, you don't have
+to worry about it (again, assuming the entries of the tuples are all hashable
+as well).</p>
 <p>Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent <code>1 - 2*(-3 + 4)</code> as</p>
@@ -256,7 +257,7 @@ another blog post to discover the source of my problems (the problems I was
 having appeared to be quite distant from the actual source).</p>
 <h2>A Better "Default"</h2>
 <p>I propose that Python code in general would be vastly improved if people used
-<code>tuple</code> as the default unordered collection, and only switched to <code>list</code> if
+<code>tuple</code> as the default ordered collection, and only switched to <code>list</code> if
 mutation was necessary (it's less necessary than you think; you can always
 copy a tuple instead of mutating it). I agree with David Beazley that you
 don't "sometimes need a read only list". Rather, you "sometimes need a
