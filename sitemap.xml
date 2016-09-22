@@ -27,7 +27,7 @@
  </url>
  <url>
   <loc>https://asmeurer.github.io/blog/archive.html</loc>
-  <lastmod>2016-06-14T18:52:00Z</lastmod>
+  <lastmod>2016-09-22T04:36:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.github.io/blog/categories/</loc>
@@ -47,7 +47,7 @@
  </url>
  <url>
   <loc>https://asmeurer.github.io/blog/index-2.html</loc>
-  <lastmod>2016-06-14T18:52:00Z</lastmod>
+  <lastmod>2016-09-22T04:36:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</loc>
@@ -76,6 +76,10 @@
  <url>
   <loc>https://asmeurer.github.io/blog/posts/scipy-2014/</loc>
   <lastmod>2016-06-14T18:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://asmeurer.github.io/blog/posts/tuples/</loc>
+  <lastmod>2016-09-22T02:51:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</loc>
