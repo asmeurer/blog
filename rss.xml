@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" href="https://asmeurer.github.io/blog/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 22 Sep 2016 17:11:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link type="application/rss+xml" rel="self" href="https://asmeurer.github.io/blog/rss.xml"></atom:link><language>en</language><lastBuildDate>Fri, 23 Sep 2016 04:32:26 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
@@ -127,7 +127,7 @@ is
 to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.&lt;/p&gt;
 &lt;p&gt;However, be careful. Not all tuples are hashable. Tuples can contain
-anything, but only tuples of immutable values are hashable. Consider&lt;/p&gt;
+anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref:TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn:TypeError" rel="footnote"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
@@ -232,6 +232,23 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 {document.getElementById('spoiler')
 .style.display=''}else{document.getElementById('spoiler')
 .style.display='none'}"&gt;Show/hide answer&lt;/button&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref:mutate" rev="footnote" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;li id="fn:TypeError"&gt;
+&lt;p&gt;One of the tweets from the conversation:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/asmeurer"&gt;@asmeurer&lt;/a&gt; &lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; As yes:&lt;br&gt;&lt;br&gt;t = (1,2, [3, 4])&lt;br&gt;t[2] += [5,6]&lt;br&gt;&lt;br&gt;;-)&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778697399975813120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;p&gt;This is similar to this example. But
+it turns out this one doesn't work:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; t = (1,2, [3, 4])
+&amp;gt;&amp;gt;&amp;gt; t[2] += [5,6]
+Traceback (most recent call last):
+  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
+TypeError: 'tuple' object does not support item assignment
+&lt;/pre&gt;
+
+
+&lt;p&gt;I have no idea why. It seems to me that it should work. &lt;code&gt;t[2]&lt;/code&gt; is a list
+and &lt;code&gt;list&lt;/code&gt; has &lt;code&gt;__iadd__&lt;/code&gt; defined. It seems that Python gets kind of weird
+about things on the left-hand side of an assignment. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref:TypeError" rev="footnote" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.github.io/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;

@@ -122,7 +122,7 @@ to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.
 
 However, be careful. Not all tuples are hashable. Tuples can contain
-anything, but only tuples of immutable values are hashable. Consider
+anything, but only tuples of immutable values are hashable. Consider[^TypeError]
 
 ``` python
 >>> t = (1, 2, [3, 4])
@@ -235,3 +235,21 @@ onclick="if(document.getElementById('spoiler') .style.display=='none')
 {document.getElementById('spoiler')
 .style.display=''}else{document.getElementById('spoiler')
 .style.display='none'}">Show/hide answer</button>
+
+
+[^TypeError]: One of the tweets from the conversation:
+
+    <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/asmeurer">@asmeurer</a> <a href="https://twitter.com/AllenDowney">@AllenDowney</a> As yes:<br><br>t = (1,2, [3, 4])<br>t[2] += [5,6]<br><br>;-)</p>&mdash; David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778697399975813120">September 21, 2016</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    This is similar to this example. But
+    it turns out this one doesn't work:
+
+        >>> t = (1,2, [3, 4])
+        >>> t[2] += [5,6]
+        Traceback (most recent call last):
+          File "<stdin>", line 1, in <module>
+        TypeError: 'tuple' object does not support item assignment
+
+    I have no idea why. It seems to me that it should work. `t[2]` is a list
+    and `list` has `__iadd__` defined. It seems that Python gets kind of weird
+    about things on the left-hand side of an assignment.
