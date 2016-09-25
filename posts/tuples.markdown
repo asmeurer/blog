@@ -252,4 +252,5 @@ onclick="if(document.getElementById('spoiler') .style.display=='none')
 
     I have no idea why. It seems to me that it should work. `t[2]` is a list
     and `list` has `__iadd__` defined. It seems that Python gets kind of weird
-    about things on the left-hand side of an assignment.
+    about things on the left-hand side of an assignment. **EDIT:
+    [Here's](http://stackoverflow.com/a/29747466/161801) why.**
