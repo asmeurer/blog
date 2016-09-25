@@ -302,7 +302,8 @@ TypeError: 'tuple' object does not support item assignment
 
 <p>I have no idea why. It seems to me that it should work. <code>t[2]</code> is a list
 and <code>list</code> has <code>__iadd__</code> defined. It seems that Python gets kind of weird
-about things on the left-hand side of an assignment. <a class="footnote-backref" href="posts/tuples/#fnref:TypeError" rev="footnote" title="Jump back to footnote 4 in the text">↩</a></p>
+about things on the left-hand side of an assignment. <strong>EDIT:
+<a href="http://stackoverflow.com/a/29747466/161801">Here's</a> why.</strong> <a class="footnote-backref" href="posts/tuples/#fnref:TypeError" rev="footnote" title="Jump back to footnote 4 in the text">↩</a></p>
 </li>
 </ol>
 </div>
