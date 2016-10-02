@@ -11,7 +11,7 @@ charset="utf-8"></script>
 
 There are quite a few good responses to these tweets, both from David and from
 others (and from yours truly). I recommend reading the the thread (click on
-the [first tweet](https://twitter.com/dabeaz/status/7786342053958451200) above).
+the [first tweet](https://twitter.com/dabeaz/status/778634205395845120) above).
 
 Now to start off, I want to say that I respect the hell out of David Beazley.
 The guy literally [wrote the book](http://www.dabeaz.com/cookbook.html) on
