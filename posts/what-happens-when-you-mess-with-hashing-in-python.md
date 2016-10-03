@@ -135,7 +135,7 @@ like
 
 ```py
 >>> l = ['a', 'b', 7]
->> l[0]
+>>> l[0]
 'a'
 >>> l[2]
 7
@@ -282,7 +282,7 @@ Finally, to override the equality operator `==`, define `__eq__`.
 ...     def __eq__(self, other):
 ...         if isinstance(other, AlwaysEqual):
 ...             return True
-...        return False
+...         return False
 ...
 >>> AE1 = AlwaysEqual()
 >>> AE2 = AlwaysEqual()
@@ -487,9 +487,10 @@ False
 >>> AE1 == AE2
 True
 >>> {AE1, AE2}
-{<__main__.AlwaysEqual at 0x101f79950>,
- <__main__.AlwaysEqual at 0x101f79ad0>}
- ```
+{<__main__.AlwaysEqualHashable at 0x101f79950>,
+ <__main__.AlwaysEqualHashable at 0x101f79ad0>}
+
+```
 
 We can already see that we have broken one of the key properties of a `set`,
 which is that it does not contain the same object twice (remember that `AE1`
@@ -503,7 +504,7 @@ convert the list to a set and then convert it back to a list.
 ```py
 >>> l = ['a', 'a', 'c', 'a', 'c', 'b']
 >>> list(set(l))
-['a', 'c', 'b']
+['a', 'b', 'c']
 ```
 
 Now, this method is obviously not going to work for a list of `AlwaysEqual` objects.
@@ -739,7 +740,7 @@ True
 >>> print(hash(a) == hash(b))
 True
 >>> print({a, b})
-set([<__main__.HashCache object at 0x102c32a10>])
+{<__main__.HashCache object at 0x102c32a10>}
 >>> print(uniq([a, b]))
 [<__main__.HashCache object at 0x102c32a50>]
 >>> print(uniq2([a, b]))
@@ -772,7 +773,7 @@ True
 >>> print(hash(a) == hash(b))
 False
 >>> print({a, b})
-set([<__main__.HashCache object at 0x102c32c50>, <__main__.HashCache object at 0x102c32c10>])
+{<__main__.HashCache object at 0x102c32c50>, <__main__.HashCache object at 0x102c32c10>}
 >>> print(uniq([a, b]))
 [<__main__.HashCache object at 0x102c32c50>]
 >>> print(uniq2([a, b]))
@@ -789,7 +790,7 @@ True
 >>> print(hash(a) == hash(b))
 True
 >>> print({a, b})
-set([<__main__.HashCache object at 0x102c32c90>])
+{<__main__.HashCache object at 0x102c32c90>}
 >>> print(uniq([a, b]))
 [<__main__.HashCache object at 0x102c32bd0>]
 >>> print(uniq2([a, b]))
