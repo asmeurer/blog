@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="https://asmeurer.github.io/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 02 Oct 2016 21:11:56 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="https://asmeurer.github.io/blog/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 03 Oct 2016 20:58:35 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
@@ -561,7 +561,7 @@ to another object. The other object itself is not hashed.&lt;/p&gt;
 &lt;code&gt;list&lt;/code&gt;). In a &lt;code&gt;list&lt;/code&gt;, objects are associated to nonnegative integer indices,
 like&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; l = ['a', 'b', 7]
-&amp;gt;&amp;gt; l[0]
+&amp;gt;&amp;gt;&amp;gt; l[0]
 'a'
 &amp;gt;&amp;gt;&amp;gt; l[2]
 7
@@ -664,7 +664,7 @@ TypeError: unhashable type: 'NotHashable'
 ...     def __eq__(self, other):
 ...         if isinstance(other, AlwaysEqual):
 ...             return True
-...        return False
+...         return False
 ...
 &amp;gt;&amp;gt;&amp;gt; AE1 = AlwaysEqual()
 &amp;gt;&amp;gt;&amp;gt; AE2 = AlwaysEqual()
@@ -672,11 +672,13 @@ TypeError: unhashable type: 'NotHashable'
 True
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;One of the key points that I hope you will take away from this post is that if
-you override &lt;code&gt;__eq__&lt;/code&gt;, you &lt;strong&gt;must&lt;/strong&gt; also override &lt;code&gt;__hash__&lt;/code&gt; to agree. Note
-that Python 3 will actually require this: in Python 3, you cannot override
-&lt;code&gt;__eq__&lt;/code&gt; and not override &lt;code&gt;__hash__&lt;/code&gt;. But that's as far as Python goes in
-enforcing these rules, as we will see below. In particular, Python will never
-actually check that your &lt;code&gt;__hash__&lt;/code&gt; actually agrees with your &lt;code&gt;__eq__&lt;/code&gt;.&lt;/p&gt;
+you override &lt;code&gt;__eq__&lt;/code&gt; and you want a hashable object, you &lt;strong&gt;must&lt;/strong&gt; also
+override &lt;code&gt;__hash__&lt;/code&gt; to agree. Note that Python 3 will actually require this:
+in Python 3, if you override &lt;code&gt;__eq__&lt;/code&gt;, it automatically sets &lt;code&gt;__hash__&lt;/code&gt; to
+&lt;code&gt;None&lt;/code&gt;, making the object unhashable. You need to manually override &lt;code&gt;__hash__&lt;/code&gt;
+to make it hashable again. But that's as far as Python goes in enforcing these
+rules, as we will see below. In particular, Python will never actually check
+that your &lt;code&gt;__hash__&lt;/code&gt; actually agrees with your &lt;code&gt;__eq__&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;Messing with hashing&lt;/h2&gt;
 &lt;p&gt;Now to the fun stuff. What happens if we break some of the invariants that
 Python expects of hashing. Python expects two key invariants to hold&lt;/p&gt;
@@ -805,11 +807,22 @@ that the bucket structure is different right away and returns &lt;code&gt;False&
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;Example 3: When &lt;code&gt;a == b&lt;/code&gt; does not imply &lt;code&gt;hash(a) == hash(b)&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;Now let's look at point 2. What happens if we create an object with &lt;code&gt;__eq__&lt;/code&gt;
-that disagrees with &lt;code&gt;__hash__&lt;/code&gt;. We actually already have made a class like
+that disagrees with &lt;code&gt;__hash__&lt;/code&gt;. For Python 2, we already have made a class like
 this, the &lt;code&gt;AlwaysEqual&lt;/code&gt; object above. Instances of &lt;code&gt;AlwaysEqual&lt;/code&gt; will always
 compare equal to one another, but they will not have the same hash, because
-they will use &lt;code&gt;object&lt;/code&gt;'s default &lt;code&gt;__hash__&lt;/code&gt; of &lt;code&gt;id&lt;/code&gt;. Let's take a closer look
-at the &lt;code&gt;AE1&lt;/code&gt; and &lt;code&gt;AE2&lt;/code&gt; objects we created above.&lt;/p&gt;
+they will use &lt;code&gt;object&lt;/code&gt;'s default &lt;code&gt;__hash__&lt;/code&gt; of &lt;code&gt;id&lt;/code&gt;. For Python 3, however,
+&lt;code&gt;AlwaysEqual&lt;/code&gt; is automatically set as unhashable because we overrode &lt;code&gt;__eq__&lt;/code&gt;
+without also overriding &lt;code&gt;__hash__&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This blog post originally used the &lt;code&gt;AE1&lt;/code&gt; and &lt;code&gt;AE2&lt;/code&gt; objects we created above
+for the next example, but to make it work in both Python 2 and 3, let's create
+a custom &lt;code&gt;AlwaysEqual&lt;/code&gt; subclass that is hashable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;&amp;gt;&amp;gt;&amp;gt; class AlwaysEqualHashable(AlwaysEqual):
+...     def __hash__(self):
+...         return id(self)
+...
+&amp;gt;&amp;gt;&amp;gt; AE1 = AlwaysEqualHashable()
+&amp;gt;&amp;gt;&amp;gt; AE2 = AlwaysEqualHashable()
+&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(AE1)
 270498221
 &amp;gt;&amp;gt;&amp;gt; hash(AE2)
@@ -819,8 +832,8 @@ False
 &amp;gt;&amp;gt;&amp;gt; AE1 == AE2
 True
 &amp;gt;&amp;gt;&amp;gt; {AE1, AE2}
-{&amp;lt;__main__.AlwaysEqual at 0x101f79950&amp;gt;,
- &amp;lt;__main__.AlwaysEqual at 0x101f79ad0&amp;gt;}
+{&amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can already see that we have broken one of the key properties of a &lt;code&gt;set&lt;/code&gt;,
 which is that it does not contain the same object twice (remember that &lt;code&gt;AE1&lt;/code&gt;
@@ -831,15 +844,15 @@ wanted to remove all the duplicate items from it. An easy way to do this is to
 convert the list to a set and then convert it back to a list.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; l = ['a', 'a', 'c', 'a', 'c', 'b']
 &amp;gt;&amp;gt;&amp;gt; list(set(l))
-['a', 'c', 'b']
+['a', 'b', 'c']
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, this method is obviously not going to work for a list of &lt;code&gt;AlwaysEqual&lt;/code&gt; objects.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; AE3 = AlwaysEqual()
+&lt;p&gt;Now, this method is obviously not going to work for a list of &lt;code&gt;AlwaysEqualHashable&lt;/code&gt; objects.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; AE3 = AlwaysEqualHashable()
 &amp;gt;&amp;gt;&amp;gt; l = [AE1, AE1, AE3, AE2, AE3]
 &amp;gt;&amp;gt;&amp;gt; list(set(l))
-[&amp;lt;__main__.AlwaysEqual at 0x102c1d590&amp;gt;,
- &amp;lt;__main__.AlwaysEqual at 0x101f79ad0&amp;gt;,
- &amp;lt;__main__.AlwaysEqual at 0x101f79950&amp;gt;]
+[&amp;lt;__main__.AlwaysEqualHashable at 0x102c1d590&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Actually, what happened here is that the equality that we defined on
 &lt;code&gt;AlwaysEqual&lt;/code&gt; was essentially ignored. We got a list of unique items by &lt;code&gt;id&lt;/code&gt;,
@@ -860,7 +873,7 @@ list if they aren't already there.&lt;/p&gt;
 &amp;gt;&amp;gt;&amp;gt; uniq(['a', 'a', 'c', 'a', 'c', 'b'])
 ['a', 'c', 'b']
 &amp;gt;&amp;gt;&amp;gt; uniq([AE1, AE1, AE3, AE2, AE3])
-[&amp;lt;__main__.AlwaysEqual at 0x101f79ad0&amp;gt;]
+[&amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This time, we used &lt;code&gt;in&lt;/code&gt;, which uses &lt;code&gt;==&lt;/code&gt;, so we got only one unique element of
 the list of &lt;code&gt;AlwaysEqual&lt;/code&gt; objects.&lt;/p&gt;
@@ -880,9 +893,9 @@ alongside the new list for containment checking purposes.&lt;/p&gt;
 &amp;gt;&amp;gt;&amp;gt; uniq2(['a', 'a', 'c', 'a', 'c', 'b'])
 ['a', 'c', 'b']
 &amp;gt;&amp;gt;&amp;gt; uniq2([AE1, AE1, AE3, AE2, AE3])
-[&amp;lt;__main__.AlwaysEqual at 0x101f79ad0&amp;gt;,
- &amp;lt;__main__.AlwaysEqual at 0x102c1d590&amp;gt;,
- &amp;lt;__main__.AlwaysEqual at 0x101f79950&amp;gt;]
+[&amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x102c1d590&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Bah! Since we used a set, we compared by hashing, not equality, so we are left
 with three objects again. Notice the extremely subtle difference
@@ -1000,7 +1013,7 @@ False
 &amp;gt;&amp;gt;&amp;gt; uniq2([a, b])
 [&amp;lt;__main__.HashCache at 0x102c32050&amp;gt;, &amp;lt;__main__.HashCache at 0x102c32450&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once we mutate &lt;code&gt;b&lt;/code&gt; so that it compares equal to &lt;code&gt;a&lt;/code&gt;, we start to have the same sort of issues that we had in example 3 with &lt;code&gt;AlwaysEqual&lt;/code&gt;. Let's look at an instant replay.&lt;/p&gt;
+&lt;p&gt;Once we mutate &lt;code&gt;b&lt;/code&gt; so that it compares equal to &lt;code&gt;a&lt;/code&gt;, we start to have the same sort of issues that we had in example 3 with &lt;code&gt;AlwaysEqualHashable&lt;/code&gt;. Let's look at an instant replay.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
 &amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
 &amp;gt;&amp;gt;&amp;gt; b.arg = 1
@@ -1009,7 +1022,7 @@ True
 &amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
 True
 &amp;gt;&amp;gt;&amp;gt; print({a, b})
-set([&amp;lt;__main__.HashCache object at 0x102c32a10&amp;gt;])
+{&amp;lt;__main__.HashCache object at 0x102c32a10&amp;gt;}
 &amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
 [&amp;lt;__main__.HashCache object at 0x102c32a50&amp;gt;]
 &amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))
@@ -1036,7 +1049,7 @@ True
 &amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
 False
 &amp;gt;&amp;gt;&amp;gt; print({a, b})
-set([&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;, &amp;lt;__main__.HashCache object at 0x102c32c10&amp;gt;])
+{&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;, &amp;lt;__main__.HashCache object at 0x102c32c10&amp;gt;}
 &amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
 [&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;]
 &amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))
@@ -1051,7 +1064,7 @@ True
 &amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
 True
 &amp;gt;&amp;gt;&amp;gt; print({a, b})
-set([&amp;lt;__main__.HashCache object at 0x102c32c90&amp;gt;])
+{&amp;lt;__main__.HashCache object at 0x102c32c90&amp;gt;}
 &amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
 [&amp;lt;__main__.HashCache object at 0x102c32bd0&amp;gt;]
 &amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))

@@ -180,7 +180,7 @@ to another object. The other object itself is not hashed.</p>
 <code>list</code>). In a <code>list</code>, objects are associated to nonnegative integer indices,
 like</p>
 <pre><code class="language-py">&gt;&gt;&gt; l = ['a', 'b', 7]
-&gt;&gt; l[0]
+&gt;&gt;&gt; l[0]
 'a'
 &gt;&gt;&gt; l[2]
 7
@@ -283,7 +283,7 @@ TypeError: unhashable type: 'NotHashable'
 ...     def __eq__(self, other):
 ...         if isinstance(other, AlwaysEqual):
 ...             return True
-...        return False
+...         return False
 ...
 &gt;&gt;&gt; AE1 = AlwaysEqual()
 &gt;&gt;&gt; AE2 = AlwaysEqual()
@@ -291,11 +291,13 @@ TypeError: unhashable type: 'NotHashable'
 True
 </code></pre>
 <p>One of the key points that I hope you will take away from this post is that if
-you override <code>__eq__</code>, you <strong>must</strong> also override <code>__hash__</code> to agree. Note
-that Python 3 will actually require this: in Python 3, you cannot override
-<code>__eq__</code> and not override <code>__hash__</code>. But that's as far as Python goes in
-enforcing these rules, as we will see below. In particular, Python will never
-actually check that your <code>__hash__</code> actually agrees with your <code>__eq__</code>.</p>
+you override <code>__eq__</code> and you want a hashable object, you <strong>must</strong> also
+override <code>__hash__</code> to agree. Note that Python 3 will actually require this:
+in Python 3, if you override <code>__eq__</code>, it automatically sets <code>__hash__</code> to
+<code>None</code>, making the object unhashable. You need to manually override <code>__hash__</code>
+to make it hashable again. But that's as far as Python goes in enforcing these
+rules, as we will see below. In particular, Python will never actually check
+that your <code>__hash__</code> actually agrees with your <code>__eq__</code>.</p>
 <h2>Messing with hashing</h2>
 <p>Now to the fun stuff. What happens if we break some of the invariants that
 Python expects of hashing. Python expects two key invariants to hold</p>
@@ -425,11 +427,22 @@ that the bucket structure is different right away and returns <code>False</code>
 <h3>Example 3: When <code>a == b</code> does not imply <code>hash(a) == hash(b)</code>
 </h3>
 <p>Now let's look at point 2. What happens if we create an object with <code>__eq__</code>
-that disagrees with <code>__hash__</code>. We actually already have made a class like
+that disagrees with <code>__hash__</code>. For Python 2, we already have made a class like
 this, the <code>AlwaysEqual</code> object above. Instances of <code>AlwaysEqual</code> will always
 compare equal to one another, but they will not have the same hash, because
-they will use <code>object</code>'s default <code>__hash__</code> of <code>id</code>. Let's take a closer look
-at the <code>AE1</code> and <code>AE2</code> objects we created above.</p>
+they will use <code>object</code>'s default <code>__hash__</code> of <code>id</code>. For Python 3, however,
+<code>AlwaysEqual</code> is automatically set as unhashable because we overrode <code>__eq__</code>
+without also overriding <code>__hash__</code>.</p>
+<p>This blog post originally used the <code>AE1</code> and <code>AE2</code> objects we created above
+for the next example, but to make it work in both Python 2 and 3, let's create
+a custom <code>AlwaysEqual</code> subclass that is hashable.</p>
+<pre><code class="language-python">&gt;&gt;&gt; class AlwaysEqualHashable(AlwaysEqual):
+...     def __hash__(self):
+...         return id(self)
+...
+&gt;&gt;&gt; AE1 = AlwaysEqualHashable()
+&gt;&gt;&gt; AE2 = AlwaysEqualHashable()
+</code></pre>
 <pre><code class="language-py">&gt;&gt;&gt; hash(AE1)
 270498221
 &gt;&gt;&gt; hash(AE2)
@@ -439,8 +452,8 @@ False
 &gt;&gt;&gt; AE1 == AE2
 True
 &gt;&gt;&gt; {AE1, AE2}
-{&lt;__main__.AlwaysEqual at 0x101f79950&gt;,
- &lt;__main__.AlwaysEqual at 0x101f79ad0&gt;}
+{&lt;__main__.AlwaysEqualHashable at 0x101f79950&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x101f79ad0&gt;}
 </code></pre>
 <p>We can already see that we have broken one of the key properties of a <code>set</code>,
 which is that it does not contain the same object twice (remember that <code>AE1</code>
@@ -451,15 +464,15 @@ wanted to remove all the duplicate items from it. An easy way to do this is to
 convert the list to a set and then convert it back to a list.</p>
 <pre><code class="language-py">&gt;&gt;&gt; l = ['a', 'a', 'c', 'a', 'c', 'b']
 &gt;&gt;&gt; list(set(l))
-['a', 'c', 'b']
+['a', 'b', 'c']
 </code></pre>
-<p>Now, this method is obviously not going to work for a list of <code>AlwaysEqual</code> objects.</p>
-<pre><code class="language-py">&gt;&gt;&gt; AE3 = AlwaysEqual()
+<p>Now, this method is obviously not going to work for a list of <code>AlwaysEqualHashable</code> objects.</p>
+<pre><code class="language-py">&gt;&gt;&gt; AE3 = AlwaysEqualHashable()
 &gt;&gt;&gt; l = [AE1, AE1, AE3, AE2, AE3]
 &gt;&gt;&gt; list(set(l))
-[&lt;__main__.AlwaysEqual at 0x102c1d590&gt;,
- &lt;__main__.AlwaysEqual at 0x101f79ad0&gt;,
- &lt;__main__.AlwaysEqual at 0x101f79950&gt;]
+[&lt;__main__.AlwaysEqualHashable at 0x102c1d590&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x101f79ad0&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x101f79950&gt;]
 </code></pre>
 <p>Actually, what happened here is that the equality that we defined on
 <code>AlwaysEqual</code> was essentially ignored. We got a list of unique items by <code>id</code>,
@@ -480,7 +493,7 @@ list if they aren't already there.</p>
 &gt;&gt;&gt; uniq(['a', 'a', 'c', 'a', 'c', 'b'])
 ['a', 'c', 'b']
 &gt;&gt;&gt; uniq([AE1, AE1, AE3, AE2, AE3])
-[&lt;__main__.AlwaysEqual at 0x101f79ad0&gt;]
+[&lt;__main__.AlwaysEqualHashable at 0x101f79ad0&gt;]
 </code></pre>
 <p>This time, we used <code>in</code>, which uses <code>==</code>, so we got only one unique element of
 the list of <code>AlwaysEqual</code> objects.</p>
@@ -500,9 +513,9 @@ alongside the new list for containment checking purposes.</p>
 &gt;&gt;&gt; uniq2(['a', 'a', 'c', 'a', 'c', 'b'])
 ['a', 'c', 'b']
 &gt;&gt;&gt; uniq2([AE1, AE1, AE3, AE2, AE3])
-[&lt;__main__.AlwaysEqual at 0x101f79ad0&gt;,
- &lt;__main__.AlwaysEqual at 0x102c1d590&gt;,
- &lt;__main__.AlwaysEqual at 0x101f79950&gt;]
+[&lt;__main__.AlwaysEqualHashable at 0x101f79ad0&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x102c1d590&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x101f79950&gt;]
 </code></pre>
 <p>Bah! Since we used a set, we compared by hashing, not equality, so we are left
 with three objects again. Notice the extremely subtle difference
@@ -620,7 +633,7 @@ False
 &gt;&gt;&gt; uniq2([a, b])
 [&lt;__main__.HashCache at 0x102c32050&gt;, &lt;__main__.HashCache at 0x102c32450&gt;]
 </code></pre>
-<p>Once we mutate <code>b</code> so that it compares equal to <code>a</code>, we start to have the same sort of issues that we had in example 3 with <code>AlwaysEqual</code>. Let's look at an instant replay.</p>
+<p>Once we mutate <code>b</code> so that it compares equal to <code>a</code>, we start to have the same sort of issues that we had in example 3 with <code>AlwaysEqualHashable</code>. Let's look at an instant replay.</p>
 <pre><code class="language-py">&gt;&gt;&gt; a = HashCache(1)
 &gt;&gt;&gt; b = HashCache(2)
 &gt;&gt;&gt; b.arg = 1
@@ -629,7 +642,7 @@ True
 &gt;&gt;&gt; print(hash(a) == hash(b))
 True
 &gt;&gt;&gt; print({a, b})
-set([&lt;__main__.HashCache object at 0x102c32a10&gt;])
+{&lt;__main__.HashCache object at 0x102c32a10&gt;}
 &gt;&gt;&gt; print(uniq([a, b]))
 [&lt;__main__.HashCache object at 0x102c32a50&gt;]
 &gt;&gt;&gt; print(uniq2([a, b]))
@@ -656,7 +669,7 @@ True
 &gt;&gt;&gt; print(hash(a) == hash(b))
 False
 &gt;&gt;&gt; print({a, b})
-set([&lt;__main__.HashCache object at 0x102c32c50&gt;, &lt;__main__.HashCache object at 0x102c32c10&gt;])
+{&lt;__main__.HashCache object at 0x102c32c50&gt;, &lt;__main__.HashCache object at 0x102c32c10&gt;}
 &gt;&gt;&gt; print(uniq([a, b]))
 [&lt;__main__.HashCache object at 0x102c32c50&gt;]
 &gt;&gt;&gt; print(uniq2([a, b]))
@@ -671,7 +684,7 @@ True
 &gt;&gt;&gt; print(hash(a) == hash(b))
 True
 &gt;&gt;&gt; print({a, b})
-set([&lt;__main__.HashCache object at 0x102c32c90&gt;])
+{&lt;__main__.HashCache object at 0x102c32c90&gt;}
 &gt;&gt;&gt; print(uniq([a, b]))
 [&lt;__main__.HashCache object at 0x102c32bd0&gt;]
 &gt;&gt;&gt; print(uniq2([a, b]))
