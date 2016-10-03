@@ -291,11 +291,13 @@ True
 ```
 
 One of the key points that I hope you will take away from this post is that if
-you override `__eq__`, you **must** also override `__hash__` to agree. Note
-that Python 3 will actually require this: in Python 3, you cannot override
-`__eq__` and not override `__hash__`. But that's as far as Python goes in
-enforcing these rules, as we will see below. In particular, Python will never
-actually check that your `__hash__` actually agrees with your `__eq__`.
+you override `__eq__` and you want a hashable object, you **must** also
+override `__hash__` to agree. Note that Python 3 will actually require this:
+in Python 3, if you override `__eq__`, it automatically sets `__hash__` to
+`None`, making the object unhashable. You need to manually override `__hash__`
+to make it hashable again. But that's as far as Python goes in enforcing these
+rules, as we will see below. In particular, Python will never actually check
+that your `__hash__` actually agrees with your `__eq__`.
 
 # Messing with hashing
 
@@ -470,12 +472,26 @@ By the way, what hash value are we up to these days?
 ## Example 3: When `a == b` does not imply `hash(a) == hash(b)`
 
 Now let's look at point 2. What happens if we create an object with `__eq__`
-that disagrees with `__hash__`. We actually already have made a class like
+that disagrees with `__hash__`. For Python 2, we already have made a class like
 this, the `AlwaysEqual` object above. Instances of `AlwaysEqual` will always
 compare equal to one another, but they will not have the same hash, because
-they will use `object`'s default `__hash__` of `id`. Let's take a closer look
-at the `AE1` and `AE2` objects we created above.
+they will use `object`'s default `__hash__` of `id`. For Python 3, however,
+`AlwaysEqual` is automatically set as unhashable because we overrode `__eq__`
+without also overriding `__hash__`.
 
+This blog post originally used the `AE1` and `AE2` objects we created above
+for the next example, but to make it work in both Python 2 and 3, let's create
+a custom `AlwaysEqual` subclass that is hashable.
+
+
+``` python
+>>> class AlwaysEqualHashable(AlwaysEqual):
+...     def __hash__(self):
+...         return id(self)
+...
+>>> AE1 = AlwaysEqualHashable()
+>>> AE2 = AlwaysEqualHashable()
+```
 
 ```py
 >>> hash(AE1)
@@ -506,15 +522,15 @@ convert the list to a set and then convert it back to a list.
 ['a', 'b', 'c']
 ```
 
-Now, this method is obviously not going to work for a list of `AlwaysEqual` objects.
+Now, this method is obviously not going to work for a list of `AlwaysEqualHashable` objects.
 
 ```py
->>> AE3 = AlwaysEqual()
+>>> AE3 = AlwaysEqualHashable()
 >>> l = [AE1, AE1, AE3, AE2, AE3]
 >>> list(set(l))
-[<__main__.AlwaysEqual at 0x102c1d590>,
- <__main__.AlwaysEqual at 0x101f79ad0>,
- <__main__.AlwaysEqual at 0x101f79950>]
+[<__main__.AlwaysEqualHashable at 0x102c1d590>,
+ <__main__.AlwaysEqualHashable at 0x101f79ad0>,
+ <__main__.AlwaysEqualHashable at 0x101f79950>]
 ```
 
 Actually, what happened here is that the equality that we defined on
@@ -540,7 +556,7 @@ list if they aren't already there.
 >>> uniq(['a', 'a', 'c', 'a', 'c', 'b'])
 ['a', 'c', 'b']
 >>> uniq([AE1, AE1, AE3, AE2, AE3])
-[<__main__.AlwaysEqual at 0x101f79ad0>]
+[<__main__.AlwaysEqualHashable at 0x101f79ad0>]
 ```
 
 This time, we used `in`, which uses `==`, so we got only one unique element of
@@ -565,9 +581,9 @@ alongside the new list for containment checking purposes.
 >>> uniq2(['a', 'a', 'c', 'a', 'c', 'b'])
 ['a', 'c', 'b']
 >>> uniq2([AE1, AE1, AE3, AE2, AE3])
-[<__main__.AlwaysEqual at 0x101f79ad0>,
- <__main__.AlwaysEqual at 0x102c1d590>,
- <__main__.AlwaysEqual at 0x101f79950>]
+[<__main__.AlwaysEqualHashable at 0x101f79ad0>,
+ <__main__.AlwaysEqualHashable at 0x102c1d590>,
+ <__main__.AlwaysEqualHashable at 0x101f79950>]
 ```
 
 Bah! Since we used a set, we compared by hashing, not equality, so we are left
@@ -727,7 +743,7 @@ False
 [<__main__.HashCache at 0x102c32050>, <__main__.HashCache at 0x102c32450>]
 ```
 
-Once we mutate `b` so that it compares equal to `a`, we start to have the same sort of issues that we had in example 3 with `AlwaysEqual`. Let's look at an instant replay.
+Once we mutate `b` so that it compares equal to `a`, we start to have the same sort of issues that we had in example 3 with `AlwaysEqualHashable`. Let's look at an instant replay.
 
 
 ```py
