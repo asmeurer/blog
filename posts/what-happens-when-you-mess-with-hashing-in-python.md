@@ -489,7 +489,6 @@ True
 >>> {AE1, AE2}
 {<__main__.AlwaysEqualHashable at 0x101f79950>,
  <__main__.AlwaysEqualHashable at 0x101f79ad0>}
-
 ```
 
 We can already see that we have broken one of the key properties of a `set`,
@@ -932,4 +931,4 @@ Finally, to keep invariant 2, here are some tips:
      ```py
      >>> print(hash('a'))
      8897161376854729812
-      ```
+     ```
