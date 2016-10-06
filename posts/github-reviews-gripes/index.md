@@ -35,7 +35,7 @@ Basically, at the bottom of a pull request, you now see this
 
 <img src="../../reviews1.png" width="788">
 
-clicking the "Add your review" button takes you to the diff page (first gripe:
+Clicking the "Add your review" button takes you to the diff page (first gripe:
 why does it move you to the diff page?), and opens this dialog
 
 <img src="../../reviews2.png" width="1020">
