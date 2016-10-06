@@ -33,12 +33,12 @@ didn't help here either).
 
 Basically, at the bottom of a pull request, you now see this
 
-![reviews1](../../reviews1.png)
+<img src="../../reviews1.png" width="788">
 
 clicking the "Add your review" button takes you to the diff page (first gripe:
 why does it move you to the diff page?), and opens this dialog
 
-![reviews2](../../reviews2.png)
+<img src="../../reviews2.png" width="1020">
 
 "OK", you might think, "this is simple enough. A review is just a special
 comment box where I can approve or reject a pull request." (This is basically
@@ -101,7 +101,7 @@ this means two things
 Point 1 is really easy to see. In the pull request list, there is a nice green
 checkmark if Travis passed and a red X if it failed.
 
-![prlist](../../prlist.png)
+<img src="../../prlist.png" width="608">
 
 The second point is a disaster. Unfortunately, there's no simple way to do
 this. You might suggest adding a special label, like "Needs changes", to pull
@@ -145,7 +145,7 @@ green checkmark or red X to indicate the type of review. Also, add buttons
 OK, so that's a minor UI annoyance, but it gets worse. Next on the docket, **you
 can't review your own pull requests.** It's not allowed for some reason.
 
-![reviews3](../../reviews3.png)
+<img src="../../reviews3.png" width="411">
 
 Now why would you want to review your own pull request, you might ask? Aren't
 you always going to "approve" your own PR? Well, first off, no. There is such
