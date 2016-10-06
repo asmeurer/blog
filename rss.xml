@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link type="application/rss+xml" href="https://asmeurer.github.io/blog/rss.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 06 Oct 2016 02:22:57 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link type="application/rss+xml" rel="self" href="https://asmeurer.github.io/blog/rss.xml"></atom:link><language>en</language><lastBuildDate>Thu, 06 Oct 2016 02:32:49 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub
 &lt;a href="https://github.com/blog/2256-a-whole-new-github-universe-announcing-new-tools-forums-and-features"&gt;recently&lt;/a&gt; rolled
 out a new feature on their pull requests called "Reviews". The feature is (in
 theory), something that I've
@@ -28,10 +28,10 @@ poor
 &lt;a href="https://twitter.com/asmeurer/status/776125249712717824"&gt;release date docs&lt;/a&gt;
 didn't help here either).&lt;/p&gt;
 &lt;p&gt;Basically, at the bottom of a pull request, you now see this&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews1.png" alt="reviews1"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews1.png" width="788"&gt;&lt;/p&gt;
 &lt;p&gt;clicking the "Add your review" button takes you to the diff page (first gripe:
 why does it move you to the diff page?), and opens this dialog&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews2.png" alt="reviews2"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews2.png" width="1020"&gt;&lt;/p&gt;
 &lt;p&gt;"OK", you might think, "this is simple enough. A review is just a special
 comment box where I can approve or reject a pull request." (This is basically
 the feature that I've been wanting, the ability to approve or reject pull
@@ -86,7 +86,7 @@ still need to be made by the PR author.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Point 1 is really easy to see. In the pull request list, there is a nice green
 checkmark if Travis passed and a red X if it failed.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/prlist.png" alt="prlist"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/prlist.png" width="608"&gt;&lt;/p&gt;
 &lt;p&gt;The second point is a disaster. Unfortunately, there's no simple way to do
 this. You might suggest adding a special label, like "Needs changes", to pull
 requests that have been reviewed. The problem with this is that the label
@@ -122,7 +122,7 @@ green checkmark or red X to indicate the type of review. Also, add buttons
 (&lt;strong&gt;buttons&lt;/strong&gt;, not just buried advanced search options) to filter by reviews.&lt;/p&gt;
 &lt;p&gt;OK, so that's a minor UI annoyance, but it gets worse. Next on the docket, &lt;strong&gt;you
 can't review your own pull requests.&lt;/strong&gt; It's not allowed for some reason.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews3.png" alt="reviews3"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews3.png" width="411"&gt;&lt;/p&gt;
 &lt;p&gt;Now why would you want to review your own pull request, you might ask? Aren't
 you always going to "approve" your own PR? Well, first off, no. There is such
 a thing as
