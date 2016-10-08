@@ -8,7 +8,7 @@ and most of my open source work is on my
 - [SymPy](http://www.sympy.org/en/index.html), a
   [computer algebra system](https://en.wikipedia.org/wiki/Computer_algebra_system)
   in Python. My first foray into open source was with
-  [Google Summer of Code](https://www.google-melange.com/) with SymPy in 2009.
+  [Google Summer of Code](https://summerofcode.withgoogle.com/) with SymPy in 2009.
   I've been an active contributor ever since, and am now the lead developer.
 
   I've touched most parts of SymPy, but the parts that I'm most proud of are
