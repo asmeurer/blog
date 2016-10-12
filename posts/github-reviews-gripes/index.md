@@ -1,3 +1,10 @@
+*Update: I want to keep the original post intact, but I'll post any feature
+updates that GitHub makes here as they are released.*
+
+- *You can now [dismiss a review](https://github.com/blog/2265-dismissing-reviews-on-pull-requests).*
+
+---
+
 GitHub
 [recently](https://github.com/blog/2256-a-whole-new-github-universe-announcing-new-tools-forums-and-features) rolled
 out a new feature on their pull requests called "Reviews". The feature is (in
