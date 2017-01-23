@@ -1,7 +1,13 @@
-*Update: I want to keep the original post intact, but I'll post any feature
+Update: I want to keep the original post intact, but I'll post any feature
 updates that GitHub makes here as they are released.*
 
 - *You can now [dismiss a review](https://github.com/blog/2265-dismissing-reviews-on-pull-requests).*
+
+- *You can
+now
+[filter the pull request list by review](https://github.com/blog/2306-filter-pull-request-reviews-and-review-requests).
+The review status of a PR also appears in the pull request list (albeit in
+very tiny and easy to miss text).*
 
 ---
 
