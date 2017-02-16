@@ -95,7 +95,7 @@ Stuff I've done on my own. In no particular order.
   configuration.
 
 - A walkthrough of the
-  [GitHub workflow](https://github.com/asmeurer/git-workflow) for contributing
+  [GitHub workflow](http://asmeurer.com/git-workflow) for contributing
   to open source projects.
 
 - This [blog](https://github.com/asmeurer/blog).
