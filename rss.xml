@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link type="application/rss+xml" href="https://asmeurer.github.io/blog/rss.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jan 2017 20:46:19 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" href="https://asmeurer.github.io/blog/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 03 Apr 2017 22:49:59 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
 updates that GitHub makes here as they are released.&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;em&gt;You can now &lt;a href="https://github.com/blog/2265-dismissing-reviews-on-pull-requests"&gt;dismiss a review&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
@@ -8,6 +8,9 @@ now
 &lt;a href="https://github.com/blog/2306-filter-pull-request-reviews-and-review-requests"&gt;filter the pull request list by review&lt;/a&gt;.
 The review status of a PR also appears in the pull request list (albeit in
 very tiny and easy to miss text).&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;You can
+now
+&lt;a href="https://github.com/blog/2330-restrict-review-dismissals-with-protected-branches"&gt;restrict review dismissals&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;GitHub

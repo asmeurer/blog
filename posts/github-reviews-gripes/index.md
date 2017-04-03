@@ -9,6 +9,10 @@ now
 The review status of a PR also appears in the pull request list (albeit in
 very tiny and easy to miss text).*
 
+- *You can
+now
+[restrict review dismissals](https://github.com/blog/2330-restrict-review-dismissals-with-protected-branches).*
+
 ---
 
 GitHub
