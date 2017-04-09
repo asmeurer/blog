@@ -84,6 +84,9 @@ Stuff I've done on my own. In no particular order.
   deploying docs from Travis CI to GitHub pages
   ([Gil Forsyth](https://github.com/gforsyth/) also works on this).
 
+- [mypython](https://github.com/asmeurer/mypython). I wrote my own Python
+  REPL.
+
 - [catimg](https://github.com/asmeurer/catimg/). Shows an random image of a
   cat from Imgur inline in the iTerm2 terminal.
 
