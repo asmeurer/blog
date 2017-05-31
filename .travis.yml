@@ -15,4 +15,4 @@ script:
   - set -e
   - nikola build
   - pip install doctr
-  - doctr deploy --no-sync --command 'nikola deploy'
+  - doctr deploy --no-sync --command 'nikola github_deploy'
