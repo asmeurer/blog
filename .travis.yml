@@ -14,4 +14,4 @@ install:
 script:
   - set -e
   - nikola build
-  - doctr deploy --no-sync --command 'nikola github_deploy'
+  - doctr deploy --no-sync --command 'nikola github_deploy' .
