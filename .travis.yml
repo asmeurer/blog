@@ -1,6 +1,10 @@
 sudo: false
 language: python
 
+env:
+  global:
+    - secure: "CXYvdycxFbjbe5D2GZc9XBBWCwxWsO8KfHs9nj8emYxfw15G4Bg9JMafi07OKbQFg90aafSGJWtpGj1qVxF8z34h/F5EYtv8ZamZd5wXrOovItfgDvoNetpOM+j5cBxcSQBzWqynQWXErgxBwXQUfSpKnQ/LMtk7CfpZKRestog="
+
 python:
   - 3.6
 
@@ -8,4 +12,7 @@ install:
   - pip install "Nikola[extras]" commonmark
 
 script:
+  - set -e
   - nikola build
+  - pip install doctr
+  - doctr deploy --no-sync --command 'nikola deploy'
