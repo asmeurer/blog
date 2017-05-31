@@ -9,10 +9,9 @@ python:
   - 3.6
 
 install:
-  - pip install "Nikola[extras]" commonmark
+  - pip install "Nikola[extras]" commonmark doctr
 
 script:
   - set -e
   - nikola build
-  - pip install doctr
   - doctr deploy --no-sync --command 'nikola github_deploy'
