@@ -3,7 +3,7 @@ language: python
 
 env:
   global:
-    - secure: "T0QE8wb+Dl8zVOpT85cBEuooWPgt65aX5gNw0DZQPHSD7LvQyabfF1DKZjpUu8F0V1kmMEX4FxxiYmU/+NlPD003GHEwLYTh1m6ExK0ArShCAbM8WISkgK6siD3SnZYK4dAG4Nh1GiPn+MVtvBtIJgvgiFSvdRErqIaZu0L3bXo="
+    - secure: "H5eFGWu6s6XlG784rLnuJFQeNIyfo1H68XEHOAYVuEtkB7NujBfg/50E3lYJjP7in18lHU6ZESAqc14rFNjPak80K5xxinhBPw1nlLKkg+X/v4mffyCV3TzCsxVX4i4WxC97HTESMTSC06WKuzHmXLdFL6Ja0feFJWAzPrxPChU="
 
 python:
   - 3.6
