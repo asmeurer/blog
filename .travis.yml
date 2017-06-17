@@ -9,10 +9,7 @@ python:
   - 3.6
 
 install:
-  - pip install "Nikola[extras]" commonmark
-  - git clone git://github.com/drdoctr/doctr
-  - cd doctr
-  - python setup.py install
+  - pip install "Nikola[extras]" commonmark doctr
 
 script:
   - set -e
