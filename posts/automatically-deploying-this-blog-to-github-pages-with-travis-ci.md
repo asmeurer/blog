@@ -1,7 +1,9 @@
-This blog, as I've outlined in
-the [past](moving-to-github-pages-with-nikola/), is built with
-the [Nikola](https://getnikola.com/) static blogging engine. I really like
-Nikola because it uses Python, has lots of nice extensions, and is [sanely
+This blog is now [deployed to GitHub pages automatically](http://travis-ci.org/asmeurer/blog) from Travis CI.
+
+As I've outlined in the [past](moving-to-github-pages-with-nikola/),
+is built with the [Nikola](https://getnikola.com/) static blogging
+engine. I really like Nikola because it uses Python, has lots of nice
+extensions, and is [sanely
 licensed](https://github.com/getnikola/nikola/blob/master/LICENSE.txt).
 
 Most importantly, it is a static site generator, meaning I write my posts in
