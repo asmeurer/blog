@@ -13,7 +13,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="https://asmeurer.github.io/blog/">
 <link rel="next" href="index-3.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link rel="prefetch" href="posts/github-reviews-gripes/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link rel="prefetch" href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/" type="text/html">
 </head>
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -36,7 +36,213 @@
     
     
     </ul></nav></header><main id="content"><div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/github-reviews-gripes/" class="u-url">GitHub Reviews Gripes</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/" class="u-url">Automatically deploying this blog to GitHub Pages with Travis CI</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline"><a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/" rel="bookmark"><time class="published dt-published" datetime="2017-06-19T14:21:32-05:00" title="2017-06-19 14:21">2017-06-19 14:21</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/#disqus_thread" data-disqus-identifier="cache/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>This blog is now <a href="http://travis-ci.org/asmeurer/blog">deployed to GitHub pages automatically</a> from Travis CI.</p>
+<p>As I've outlined in the <a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/moving-to-github-pages-with-nikola/">past</a>,
+is built with the <a href="https://getnikola.com/">Nikola</a> static blogging
+engine. I really like Nikola because it uses Python, has lots of nice
+extensions, and is <a href="https://github.com/getnikola/nikola/blob/master/LICENSE.txt">sanely
+licensed</a>.</p>
+<p>Most importantly, it is a static site generator, meaning I write my posts in
+Markdown, and Nikola generates the site as static web content ("static" means no web server
+is required to run the site). This means that the site can be hosted for free
+on <a href="https://pages.github.com/">GitHub pages</a>. This is how this site has been
+hosted since I started it. I have
+a <a href="http://github.com/asmeurer/blog">GitHub repo</a> for the site, and the content
+itself is deployed to
+the <a href="https://github.com/asmeurer/blog/tree/gh-pages">gh-pages</a> branch of the
+repo. But until now, the deployment has happened only manually with the
+<code>nikola github_deploy</code> command.</p>
+<p>A much better way is to deploy automatically using Travis CI. That way, I do
+not need to run any software on my computer to deploy the blog.</p>
+<p>The steps outlined here will work for any static site generator. They assume
+you already have one set up and hosted on GitHub.</p>
+<h3>Step 1: Create a .travis.yml file</h3>
+<p><strong>Create a <code>.travis.yml</code> file like the one below</strong></p>
+<pre><code class="language-yaml">sudo: false
+language: python
+
+python:
+  - 3.6
+
+install:
+  - pip install "Nikola[extras]" doctr
+
+script:
+  - set -e
+  - nikola build
+  - doctr deploy . --built-docs output/
+</code></pre>
+<ul>
+<li>If you use a different static site generator, replace <code>nikola</code> with that
+site generator's command.</li>
+<li>If you have Nikola configured to output to a different directory, or use a
+different static site generator, replace <code>--built-docs output/</code> with the
+directory where the site is built.</li>
+<li>Add any extra packages you need to build your site to the <code>pip install</code>
+command. For instance, I use the <code>commonmark</code> extension for Nikola, so I
+need to install <code>commonmark</code>.</li>
+<li>The <code>set -e</code> line is important. It will prevent the blog from being deployed
+if the build fails.</li>
+</ul>
+<p><strong>Then go to <a href="http://www.asmeurer.com/blog/">https://travis-ci.org/profile/</a> and enable Travis for your blog
+repo.</strong></p>
+<h3>Step 2: Run doctr</h3>
+<p>The key here is <a href="https://drdoctr.github.io/doctr/">doctr</a>, a tool I wrote with
+<a href="https://github.com/gforsyth">Gil Forsyth</a> that makes deploying anything from
+Travis CI to GitHub Pages a breeze. It automatically handles creating and
+encrypting a deploy SSH key for GitHub, and the syncing of files to the
+<code>gh-pages</code> branch.</p>
+<p><strong>First install doctr.</strong> <code>doctr</code> requires
+Python 3.5+, so you'll need that. You can install it with conda:</p>
+<pre><code class="language-bash">conda install -c conda-forge doctr
+</code></pre>
+<p>or if you don't use conda, with pip</p>
+<pre><code class="language-bash">pip install doctr
+</code></pre>
+<p><strong>Then run this command in your blog repo:</strong></p>
+<pre><code class="language-bash">doctr configure
+</code></pre>
+<p>This will ask you for your GitHub username and password,
+and for the name of the repo you are deploying from and to (for instance, for
+my blog, I entered <code>asmeurer/blog</code>). The output will look something like this:</p>
+<!-- http seems to give the least amount of highlighting. text is -->
+<!-- supposed to work, but doesn't render correctly. -->
+<pre><code class="language-http">$ doctr configure
+What is your GitHub username? asmeurer
+Enter the GitHub password for asmeurer:
+A two-factor authentication code is required: app
+Authentication code: 911451
+What repo do you want to build the docs for (org/reponame, like 'drdoctr/doctr')? asmeurer/blog
+What repo do you want to deploy the docs to? [asmeurer/blog] asmeurer/blog
+Generating public/private rsa key pair.
+Your identification has been saved in github_deploy_key.
+Your public key has been saved in github_deploy_key.pub.
+The key fingerprint is:
+SHA256:4cscEfJCy9DTUb3DnPNfvbBHod2bqH7LEqz4BvBEkqc doctr deploy key for asmeurer/blog
+The key's randomart image is:
++---[RSA 4096]----+
+|    ..+.oo..     |
+|     *o*..  .    |
+|      O.+  o o   |
+|     E + o  B  . |
+|      + S .  +o +|
+|       = o o o.o+|
+|        * . . =.=|
+|       . o ..+ =.|
+|        o..o+oo  |
++----[SHA256]-----+
+
+The deploy key has been added for asmeurer/blog.
+
+You can go to https://github.com/asmeurer/blog/settings/keys to revoke the deploy key.
+
+================== You should now do the following ==================
+
+1. Commit the file github_deploy_key.enc.
+
+2. Add
+
+    script:
+      - set -e
+      - # Command to build your docs
+      - pip install doctr
+      - doctr deploy &lt;deploy_directory&gt;
+
+to the docs build of your .travis.yml.  The 'set -e' prevents doctr from
+running when the docs build fails. Use the 'script' section so that if
+doctr fails it causes the build to fail.
+
+3. Put
+
+    env:
+      global:
+        - secure: "Kf8DlqFuQz9ekJXpd3Q9sW5cs+CvaHpsXPSz0QmSZ01HlA4iOtdWVvUttDNb6VGyR6DcAkXlADRf/KzvAJvaqUVotETJ1LD2SegnPzgdz4t8zK21DhKt29PtqndeUocTBA6B3x6KnACdBx4enmZMTafTNRX82RMppwqxSMqO8mA="
+
+in your .travis.yml.
+</code></pre>
+<p>Follow the steps at the end of the command:</p>
+<ol>
+<li><strong>Commit the file <code>github_deploy_key.enc</code>.</strong></li>
+<li>You already have <code>doctr deploy</code> in your <code>.travis.yml</code> from step 1 above.</li>
+<li>
+<strong>Add the <code>env</code> block to your <code>.travis.yml</code>.</strong> This will let Travis CI decrypt
+the SSH key used to deploy to <code>gh-pages</code>.</li>
+</ol>
+<h3>That's it</h3>
+<p>Doctr will now deploy your blog automatically. You may want to look at the
+Travis build to make sure everything works. Note that <code>doctr</code> only deploys
+from <code>master</code> by default (see below). You may also want to look at the
+other
+<a href="https://drdoctr.github.io/doctr/commandline.html#doctr-deploy">command line flags</a> for
+<code>doctr deploy</code>, which let you do things such as to deploy to <code>gh-pages</code> for a
+different repo than the one your blog is hosted on.</p>
+<p>I recommend these steps over the ones in
+the
+<a href="https://getnikola.com/blog/automating-nikola-rebuilds-with-travis-ci.html">Nikola manual</a> because
+doctr handles the SSH key generation for you, making things more secure. I
+also found that the <code>nikola github_deploy</code> command
+was <a href="https://github.com/getnikola/nikola/issues/2847">doing too much</a>, and
+<code>doctr</code> handles syncing the built pages already anyway. Using <code>doctr</code> is much
+simpler.</p>
+<h3>Extra stuff</h3>
+<h4>Reverting a build</h4>
+<p>If a build goes wrong and you need to revert it, you'll need to use git to
+revert the commit on your <code>gh-pages</code> branch. Unfortunately, GitHub doesn't
+seem to have a way to revert commits in their web interface, so it has to be
+done from the command line.</p>
+<h4>Revoking the deploy key</h4>
+<p>To revoke the deploy key generated by doctr, go your repo in GitHub, click on
+"settings" and then "deploy keys". Do this if you decide to stop using this,
+or if you feel the key may have been compromised. If you do this, the
+deployment will stop until you run step 2 again to create a new key.</p>
+<h4>Building the blog from branches</h4>
+<p>You can also build your blog from branches, e.g., if you want to test things
+out without deploying to the final repo.</p>
+<p>We will use the steps
+outlined
+<a href="https://drdoctr.github.io/doctr/recipes.html#deploy-docs-from-any-branch">here</a>.</p>
+<p>Replace the line</p>
+<pre><code class="language-yaml">  - doctr deploy . --built-docs output/
+</code></pre>
+<p>in your <code>.travis.yml</code> with something like</p>
+<pre><code class="language-yaml">  - if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
+      doctr deploy . --built-docs output/;
+    else
+      doctr deploy "branch-$TRAVIS_BRANCH" --built-docs output/ --no-require-master;
+    fi
+</code></pre>
+<p>This will deploy your blog as normal from <code>master</code>, but from a branch it will
+deploy to the <code>branch-&lt;branchname&gt;</code> subdir. For instance, my blog is at
+<a href="http://www.asmeurer.com/blog/">http://www.asmeurer.com/blog/</a>, and if I had a branch called <code>test</code>, it would
+deploy it to <a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/">http://www.asmeurer.com/blog/branch-test/</a>.</p>
+<p>Note that it will not delete old branches for you from <code>gh-pages</code>. You'll need
+to do that manually once they are merged.</p>
+<p>This only works for branches in the same repo. It is not possible to deploy
+from a branch from pull request from a fork, for security purposes.</p>
+<h4>Enable build cancellation in Travis</h4>
+<p>If you go the Travis page for your blog and choose "settings" from the
+hamburger menu, you can enable auto cancellation for branch builds. This will
+make it so that if you push many changes in succession, only the most recent
+one will get built. This makes the changes get built faster, and lets you
+revert mistakes or typos without them ever actually being deployed.</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/github-reviews-gripes/" class="u-url">GitHub Reviews Gripes</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
@@ -584,224 +790,6 @@ TypeError: 'tuple' object does not support item assignment
 and <code>list</code> has <code>__iadd__</code> defined. It seems that Python gets kind of weird
 about things on the left-hand side of an assignment. <strong>EDIT:
 <a href="http://stackoverflow.com/a/29747466/161801">Here's</a> why.</strong> <a class="footnote-backref" href="posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text">↩</a></p>
-</li>
-</ol>
-</div>
-</div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/moving-away-from-python-2/" class="u-url">Moving Away from Python 2</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Aaron Meurer
-            </span></p>
-            <p class="dateline"><a href="posts/moving-away-from-python-2/" rel="bookmark"><time class="published dt-published" datetime="2016-05-19T14:00:00-04:00" title="2016-05-19 14:00">2016-05-19 14:00</time></a></p>
-                <p class="commentline">
-        
-    <a href="posts/moving-away-from-python-2/#disqus_thread" data-disqus-identifier="cache/posts/moving-away-from-python-2.html">Comments</a>
-
-
-        </p>
-</div>
-    </header><div class="e-content entry-content">
-    <div>
-<p>About a month ago I tweeted this:</p>
-<blockquote class="twitter-tweet" data-lang="en">
-<p lang="en" dir="ltr">Thought: get the maintainers of a bunch of big Python libraries to sign something saying that they WILL drop Python 2.7 support in 2020.</p>— Aaron Meurer (@asmeurer) <a href="https://twitter.com/asmeurer/status/712304912428875776">March 22, 2016</a>
-</blockquote>
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p><strong>EDIT: Some people have started working on making this happen. See
-<a href="https://python3statement.github.io/">https://python3statement.github.io/</a>.</strong></p>
-<p>For those of you who don't know, Python 2.7 is
-<a href="https://docs.python.org/devguide/#status-of-python-branches">slated</a> to reach
-end-of-life in 2020 (originally, it was slated to end in 2015, but it was
-extended in 2014, due to the extraordinary difficulty of moving to a newer
-version). "End-of-life" means absolutely no more support from the core Python
-team, even for security updates.</p>
-<p>I'm writing this post because I want to clarify why I think this should be
-done, and to clear up some misconceptions, the primary one being that this
-represents library developers being antagonistic against those who want or
-have to use Python 2.</p>
-<p>I'm writing this from my perspective as a library developer. I'm the lead
-developer of <a href="http://www.sympy.org/">SymPy</a>, and I have sympathies for
-developers of other libraries.<sup id="fnref-sympy"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-sympy">1</a></sup> I say this because my idea may seem a bit
-in tension with "users" (even though I hate the "developer/user" distinction).</p>
-<h3>Python 2</h3>
-<p>There are a few reasons why I think libraries should drop (and announce that
-they will drop) Python 2 support by 2020 (actually earlier, say 2018 or 2019,
-depending on how core the library is).</p>
-<p>First, library developers have to be the leaders here. This is apparent from
-the historical move to Python 3 up to this point. Consider the three (not
-necessarily disjoint) classes of people: CPython core developers, library
-developers, and users. The core developers were the first to move to Python 3,
-since they were the ones who wrote it. They were also the ones who provided
-the messaging around Python 3, which has varied over time. In my opinion, it
-should have been and should be more forceful.<sup id="fnref-core"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-core">2</a></sup> Then you have the library
-developers and the users. A chief difference here is that users are probably
-going to be using only one version of Python. In order for them to switch that
-version to Python 3, all the libraries that they use need to support it. This
-took some time, since library developers saw little impetus to support Python
-3 when no one was using it (Catch 22), and to worsen the situation, versions
-of Python older than 2.6 made
-<a href="https://asmeurersympy.wordpress.com/2013/08/22/python-3-single-codebase-vs-2to3/">single codebase compatibility</a>
-almost impossible.</p>
-<p>Today, though, <a href="http://py3readiness.org/">almost all libraries</a> support Python
-3, and we're reaching a point where those that don't have
-forks that do.</p>
-<p>But it only happened <em>after</em> the library developers transitioned. I believe
-libraries need to be the leaders in moving away from Python 2 as well. It's
-important to do this for a few reasons:</p>
-<ul>
-<li>
-<p>Python 2.7 support ends in 2020. That means all updates, including security
-  updates. For all intents and purposes, Python 2.7 becomes an insecure
-  language to use at that point in time.</p>
-</li>
-<li>
-<p>Supporting two major versions of Python is technical debt for every project
-  that does it. While writing cross compatible code is
-  <a href="http://python-future.org/">easier than ever</a>, it still remains true that
-  you have to remember to add <code>__future__</code> imports to the top of every file,
-  to import all relevant builtins from your compatibility file or library, and
-  to run all your tests in both Python 2 and 3. Supporting both versions is a
-  major cognitive burden to library developers, as they always have to be
-  aware of important differences in the two languages. Developers on any
-  library that does anything with strings will need to understand how things
-  work in both Python 2 and 3, and the often obscure workarounds required for
-  things to work in both (pop quiz: how do you write Unicode characters to a
-  file in a Python 2/3 compatible way?).</p>
-</li>
-<li>
-<p>Some of Python 3's
-  <a href="https://asmeurer.github.io/python3-presentation/slides.html">new syntax features</a>
-  (i.e., features that are impossible to use in Python 2) only matter for
-  library developers. A great example of this is
-  <a href="https://www.python.org/dev/peps/pep-3102/">keyword-only arguments</a>. From an
-  API standpoint, almost every instance of keyword arguments should be
-  implemented as keyword-only arguments. This avoids mistakes that come from
-  the antipattern of passing keyword arguments without naming the keyword, and
-  allows the argspec of the function to be expanded in the future without
-  breaking API.<sup id="fnref-swift"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-swift">3</a></sup></p>
-</li>
-</ul>
-<p>The second reason I think library developers should agree to drop Python 2
-support by 2020 is completely selfish. A response that I heard on that tweet
-(as well as elsewhere), was that libraries should provide carrots, not sticks.
-In other words, instead of forcing people off of Python 2, we should make them
-want to come to Python 3. There are some issues with this argument. First,
-Python 3 already has
-<a href="https://asmeurer.github.io/python3-presentation/slides.html">tons of carrots</a>.
-Honestly, not being terrible at Unicode ought to be a carrot in its own right.<sup id="fnref-unicode"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-unicode">4</a></sup></p>
-<p>If you don't deal with strings, or do but don't care about those silly
-foreigners with weird accents in their names, there are other major carrots as
-well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
-major source of frustration for new users. Imagine writing out <code>1/2*x +
-x**(1/2)*y*z - 3*z**2</code> and wondering why half of what you wrote just
-"disappeared" (granted, this was worse before we
-<a href="https://asmeurersympy.wordpress.com/2011/08/18/sqrtx-now-prints-as-sqrtx/">fixed the printers</a>).
-While <code>integer/integer</code> not giving a rational number is a major
-<a href="http://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and">gotcha</a>
-for SymPy, giving a float is infinitely better than giving what is effectively
-the wrong answer. Don't use strings or integers?
-<a href="https://asmeurer.github.io/python3-presentation/slides.html">I've got more</a>.</p>
-<p>Frankly, if these "carrots" haven't convinced you yet, then I'll wager you're
-not really the sort of person who is persuaded by carrots.</p>
-<p>Second, some "carrots" are impossible unless they are implemented in
-libraries. While some features can be implemented in 2/3 compatible code and
-only work in Python 3 (such as <code>@</code> matrix multiplication), others, such as
-keyword-only arguments, can only be implemented in code that does not support
-Python 2. Supporting them in Python 2 would be a net deficit of technical debt
-(one can imagine, for instance, trying to support keyword-only arguments
-manually using <code>**kwargs</code>, or by using some monstrous meta-programming).</p>
-<p>Third, as I said, I'm selfish. Python 3 <em>does</em> have carrots, and I want them.
-As long as I have to support Python 2 in my code, I can't use keyword-only
-arguments, or extended argument unpacking, or async/await, or any of the
-dozens of features that can't be used in cross compatible code.</p>
-<p>A counterargument might be that instead of blocking users of existing
-libraries, developers should create new libraries which are Python 3-only and
-make use of new exciting features of Python 3 there. I agree we should do
-that, but existing libraries are good too. I don't see why developers should
-throw out all of a well-developed library just so they can use some Python
-features that they are excited about.</p>
-<h3>Legacy Python</h3>
-<p>A lot of people have taken to calling Python 2
-"<a href="https://twitter.com/RipLegacyPython">legacy Python</a>". This phrase is often
-used condescendingly and
-<a href="https://twitter.com/stephtdouglas/status/713433933040340993">angers a lot of people</a>
-(and indeed, this blog post is the first time I've used it myself). However, I
-think Python 2 really should be seen this way, as a "legacy" system. If you
-want to use it, for whatever your reasons, that's fine, but just as you
-shouldn't expect to get any of the newest features of Python, you shouldn't
-expect to be able to use the newest versions of your libraries. Those
-libraries that have a lot of development resources may choose to support older
-Python 2-compatible versions with bug and/or security fixes. Python 2 itself
-will be supported for these until 2020. Those without resources probably won't
-(keep in mind that you're using open source libraries without paying money for
-them).</p>
-<p>I get that some people have to use Python 2, for whatever reasons. But using
-outdated software comes at a cost. Libraries have borne this technical debt
-for the most part thus far, but they shouldn't be expected to bear it forever.
-The debt will only increase, especially as the technical opportunity cost, if
-you will, of not being able to use newer and shinier versions of Python 3
-grows. The burden will have to shift at some point. Those with the financial
-resources may choose to offload this debt to others,<sup id="fnref-continuum"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-continuum">5</a></sup> say, by
-backporting features or bugfixes to older library versions that support Python
-2 (or by helping to move code to Python 3).</p>
-<p>I want to end by pointing out that if you are, for whatever reason, still
-using Python 2, you may be worried that if libraries become Python 3-only and
-start using Python 3 features, won't that break your code? The answer is no.
-Assuming package maintainers mark the metadata on their packages correctly,
-tools like pip and conda will not install non-Python 2 compatible versions
-into Python 2.</p>
-<p>If you haven't transitioned yet, and want to know more, a good place to start
-is the <a href="https://docs.python.org/3/howto/pyporting.html">official docs</a>. I also
-highly recommend using <a href="http://conda.pydata.org/docs/">conda</a> environments, as
-it will make it easy to separate your Python 2 code from your Python 3 code.</p>
-<h4>Footnotes</h4>
-<div class="footnote">
-<hr>
-<ol>
-<li id="fn-sympy">
-<p>With that being said, the opinions here are entirely my own, and are
-    don't necessarily represent those of other people, nor do they
-    represent official SymPy policy (no decisions have been made by the
-    community about this at this time). <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-sympy" title="Jump back to footnote 1 in the text">↩</a></p>
-</li>
-<li id="fn-core">
-<p>It often feels like core Python itself doesn't really want people to
-    use Python 3. It's little things, like
-    <a href="https://docs.python.org/library/">docs links</a> that redirect to Python
-    2, or <a href="https://www.python.org/dev/peps/pep-0394/">PEP 394</a>, which
-    still says that the <code>python</code> should always point to Python 2. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-core" title="Jump back to footnote 2 in the text">↩</a></p>
-</li>
-<li id="fn-swift">
-<p>In Swift, Apple's new language for iOS and OS X, function parameter
-    names are effectively "keyword-only"
-    <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html">by default</a>. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-swift" title="Jump back to footnote 3 in the text">↩</a></p>
-</li>
-<li id="fn-unicode">
-<p>As an example of this, in conda, if you use Python 2 in the root
-    environment, then installing into a path with non-ASCII characters is
-    unsupported. This is common on Windows, because Windows by default
-    uses the user's full name as the username, and the default conda
-    install path is in the user directory.</p>
-<p>This is unsupported except in Python 3, because to fix the issue,
-every single place in conda where a string appears would have to be
-changed to use a <code>unicode</code> string in Python 2. The basic issue is that
-things like <code>'π' + u'i'</code> raise <code>UnicodeDecodeError</code> in Python 2 (even
-though <code>'π' + 'i'</code>, <code>u'π' + 'i'</code>, and <code>u'π' + u'i'</code> all work fine).
-You can read a more in-depth description of the problem
-<a href="https://github.com/sympy/sympy/pull/9692#issuecomment-126162173">here</a>.
-Incidentally, this is also why you should never use <code>from __future__
-import unicode_literals</code> in Python 2, in my opinion.</p>
-<p>I no longer work on conda, but as far as I know, the
-<a href="https://github.com/conda/conda/issues/1180">issue</a> remains unfixed.
-Of course, this whole thing works just fine if conda is run in Python
-3. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-unicode" title="Jump back to footnote 4 in the text">↩</a></p>
-</li>
-<li id="fn-continuum">
-<p>If that legitimately interests you, I
-    <a href="https://twitter.com/pwang/status/712780279211884546">hear Continuum</a>
-    may be able to help you. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-continuum" title="Jump back to footnote 5 in the text">↩</a></p>
 </li>
 </ol>
 </div>

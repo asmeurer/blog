@@ -85,6 +85,7 @@
 ./2014/index.html
 ./2015/index.html
 ./2016/index.html
+./2017/index.html
 ./SpriteKit-Example-2.mov
 ./SpriteKit-Example-2.mp4
 ./SpriteKit-Example.mov
@@ -129,6 +130,8 @@
 ./index-2.html
 ./index-3.html
 ./index.html
+./posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/index.html
+./posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/index.md
 ./posts/doing-math-with-python-by-amit-saha-book-review/index.html
 ./posts/doing-math-with-python-by-amit-saha-book-review/index.md
 ./posts/github-reviews-gripes/index.html

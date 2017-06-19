@@ -1,5 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="https://asmeurer.github.io/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 19 Jun 2017 18:52:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="https://asmeurer.github.io/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 19 Jun 2017 20:52:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automatically deploying this blog to GitHub Pages with Travis CI</title><link>https://asmeurer.github.io/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;This blog is now &lt;a href="http://travis-ci.org/asmeurer/blog"&gt;deployed to GitHub pages automatically&lt;/a&gt; from Travis CI.&lt;/p&gt;
+&lt;p&gt;As I've outlined in the &lt;a href="https://asmeurer.github.io/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/moving-to-github-pages-with-nikola/"&gt;past&lt;/a&gt;,
+is built with the &lt;a href="https://getnikola.com/"&gt;Nikola&lt;/a&gt; static blogging
+engine. I really like Nikola because it uses Python, has lots of nice
+extensions, and is &lt;a href="https://github.com/getnikola/nikola/blob/master/LICENSE.txt"&gt;sanely
+licensed&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Most importantly, it is a static site generator, meaning I write my posts in
+Markdown, and Nikola generates the site as static web content ("static" means no web server
+is required to run the site). This means that the site can be hosted for free
+on &lt;a href="https://pages.github.com/"&gt;GitHub pages&lt;/a&gt;. This is how this site has been
+hosted since I started it. I have
+a &lt;a href="http://github.com/asmeurer/blog"&gt;GitHub repo&lt;/a&gt; for the site, and the content
+itself is deployed to
+the &lt;a href="https://github.com/asmeurer/blog/tree/gh-pages"&gt;gh-pages&lt;/a&gt; branch of the
+repo. But until now, the deployment has happened only manually with the
+&lt;code&gt;nikola github_deploy&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;A much better way is to deploy automatically using Travis CI. That way, I do
+not need to run any software on my computer to deploy the blog.&lt;/p&gt;
+&lt;p&gt;The steps outlined here will work for any static site generator. They assume
+you already have one set up and hosted on GitHub.&lt;/p&gt;
+&lt;h3&gt;Step 1: Create a .travis.yml file&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Create a &lt;code&gt;.travis.yml&lt;/code&gt; file like the one below&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-yaml"&gt;sudo: false
+language: python
+
+python:
+  - 3.6
+
+install:
+  - pip install "Nikola[extras]" doctr
+
+script:
+  - set -e
+  - nikola build
+  - doctr deploy . --built-docs output/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;If you use a different static site generator, replace &lt;code&gt;nikola&lt;/code&gt; with that
+site generator's command.&lt;/li&gt;
+&lt;li&gt;If you have Nikola configured to output to a different directory, or use a
+different static site generator, replace &lt;code&gt;--built-docs output/&lt;/code&gt; with the
+directory where the site is built.&lt;/li&gt;
+&lt;li&gt;Add any extra packages you need to build your site to the &lt;code&gt;pip install&lt;/code&gt;
+command. For instance, I use the &lt;code&gt;commonmark&lt;/code&gt; extension for Nikola, so I
+need to install &lt;code&gt;commonmark&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;set -e&lt;/code&gt; line is important. It will prevent the blog from being deployed
+if the build fails.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Then go to &lt;a href="http://www.asmeurer.com/blog/"&gt;https://travis-ci.org/profile/&lt;/a&gt; and enable Travis for your blog
+repo.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;Step 2: Run doctr&lt;/h3&gt;
+&lt;p&gt;The key here is &lt;a href="https://drdoctr.github.io/doctr/"&gt;doctr&lt;/a&gt;, a tool I wrote with
+&lt;a href="https://github.com/gforsyth"&gt;Gil Forsyth&lt;/a&gt; that makes deploying anything from
+Travis CI to GitHub Pages a breeze. It automatically handles creating and
+encrypting a deploy SSH key for GitHub, and the syncing of files to the
+&lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First install doctr.&lt;/strong&gt; &lt;code&gt;doctr&lt;/code&gt; requires
+Python 3.5+, so you'll need that. You can install it with conda:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;conda install -c conda-forge doctr
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or if you don't use conda, with pip&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;pip install doctr
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Then run this command in your blog repo:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;doctr configure
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will ask you for your GitHub username and password,
+and for the name of the repo you are deploying from and to (for instance, for
+my blog, I entered &lt;code&gt;asmeurer/blog&lt;/code&gt;). The output will look something like this:&lt;/p&gt;
+&lt;!-- http seems to give the least amount of highlighting. text is --&gt;
+&lt;!-- supposed to work, but doesn't render correctly. --&gt;
+&lt;pre&gt;&lt;code class="language-http"&gt;$ doctr configure
+What is your GitHub username? asmeurer
+Enter the GitHub password for asmeurer:
+A two-factor authentication code is required: app
+Authentication code: 911451
+What repo do you want to build the docs for (org/reponame, like 'drdoctr/doctr')? asmeurer/blog
+What repo do you want to deploy the docs to? [asmeurer/blog] asmeurer/blog
+Generating public/private rsa key pair.
+Your identification has been saved in github_deploy_key.
+Your public key has been saved in github_deploy_key.pub.
+The key fingerprint is:
+SHA256:4cscEfJCy9DTUb3DnPNfvbBHod2bqH7LEqz4BvBEkqc doctr deploy key for asmeurer/blog
+The key's randomart image is:
++---[RSA 4096]----+
+|    ..+.oo..     |
+|     *o*..  .    |
+|      O.+  o o   |
+|     E + o  B  . |
+|      + S .  +o +|
+|       = o o o.o+|
+|        * . . =.=|
+|       . o ..+ =.|
+|        o..o+oo  |
++----[SHA256]-----+
+
+The deploy key has been added for asmeurer/blog.
+
+You can go to https://github.com/asmeurer/blog/settings/keys to revoke the deploy key.
+
+================== You should now do the following ==================
+
+1. Commit the file github_deploy_key.enc.
+
+2. Add
+
+    script:
+      - set -e
+      - # Command to build your docs
+      - pip install doctr
+      - doctr deploy &amp;lt;deploy_directory&amp;gt;
+
+to the docs build of your .travis.yml.  The 'set -e' prevents doctr from
+running when the docs build fails. Use the 'script' section so that if
+doctr fails it causes the build to fail.
+
+3. Put
+
+    env:
+      global:
+        - secure: "Kf8DlqFuQz9ekJXpd3Q9sW5cs+CvaHpsXPSz0QmSZ01HlA4iOtdWVvUttDNb6VGyR6DcAkXlADRf/KzvAJvaqUVotETJ1LD2SegnPzgdz4t8zK21DhKt29PtqndeUocTBA6B3x6KnACdBx4enmZMTafTNRX82RMppwqxSMqO8mA="
+
+in your .travis.yml.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Follow the steps at the end of the command:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Commit the file &lt;code&gt;github_deploy_key.enc&lt;/code&gt;.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;You already have &lt;code&gt;doctr deploy&lt;/code&gt; in your &lt;code&gt;.travis.yml&lt;/code&gt; from step 1 above.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Add the &lt;code&gt;env&lt;/code&gt; block to your &lt;code&gt;.travis.yml&lt;/code&gt;.&lt;/strong&gt; This will let Travis CI decrypt
+the SSH key used to deploy to &lt;code&gt;gh-pages&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;That's it&lt;/h3&gt;
+&lt;p&gt;Doctr will now deploy your blog automatically. You may want to look at the
+Travis build to make sure everything works. Note that &lt;code&gt;doctr&lt;/code&gt; only deploys
+from &lt;code&gt;master&lt;/code&gt; by default (see below). You may also want to look at the
+other
+&lt;a href="https://drdoctr.github.io/doctr/commandline.html#doctr-deploy"&gt;command line flags&lt;/a&gt; for
+&lt;code&gt;doctr deploy&lt;/code&gt;, which let you do things such as to deploy to &lt;code&gt;gh-pages&lt;/code&gt; for a
+different repo than the one your blog is hosted on.&lt;/p&gt;
+&lt;p&gt;I recommend these steps over the ones in
+the
+&lt;a href="https://getnikola.com/blog/automating-nikola-rebuilds-with-travis-ci.html"&gt;Nikola manual&lt;/a&gt; because
+doctr handles the SSH key generation for you, making things more secure. I
+also found that the &lt;code&gt;nikola github_deploy&lt;/code&gt; command
+was &lt;a href="https://github.com/getnikola/nikola/issues/2847"&gt;doing too much&lt;/a&gt;, and
+&lt;code&gt;doctr&lt;/code&gt; handles syncing the built pages already anyway. Using &lt;code&gt;doctr&lt;/code&gt; is much
+simpler.&lt;/p&gt;
+&lt;h3&gt;Extra stuff&lt;/h3&gt;
+&lt;h4&gt;Reverting a build&lt;/h4&gt;
+&lt;p&gt;If a build goes wrong and you need to revert it, you'll need to use git to
+revert the commit on your &lt;code&gt;gh-pages&lt;/code&gt; branch. Unfortunately, GitHub doesn't
+seem to have a way to revert commits in their web interface, so it has to be
+done from the command line.&lt;/p&gt;
+&lt;h4&gt;Revoking the deploy key&lt;/h4&gt;
+&lt;p&gt;To revoke the deploy key generated by doctr, go your repo in GitHub, click on
+"settings" and then "deploy keys". Do this if you decide to stop using this,
+or if you feel the key may have been compromised. If you do this, the
+deployment will stop until you run step 2 again to create a new key.&lt;/p&gt;
+&lt;h4&gt;Building the blog from branches&lt;/h4&gt;
+&lt;p&gt;You can also build your blog from branches, e.g., if you want to test things
+out without deploying to the final repo.&lt;/p&gt;
+&lt;p&gt;We will use the steps
+outlined
+&lt;a href="https://drdoctr.github.io/doctr/recipes.html#deploy-docs-from-any-branch"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Replace the line&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-yaml"&gt;  - doctr deploy . --built-docs output/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in your &lt;code&gt;.travis.yml&lt;/code&gt; with something like&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-yaml"&gt;  - if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
+      doctr deploy . --built-docs output/;
+    else
+      doctr deploy "branch-$TRAVIS_BRANCH" --built-docs output/ --no-require-master;
+    fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will deploy your blog as normal from &lt;code&gt;master&lt;/code&gt;, but from a branch it will
+deploy to the &lt;code&gt;branch-&amp;lt;branchname&amp;gt;&lt;/code&gt; subdir. For instance, my blog is at
+&lt;a href="http://www.asmeurer.com/blog/"&gt;http://www.asmeurer.com/blog/&lt;/a&gt;, and if I had a branch called &lt;code&gt;test&lt;/code&gt;, it would
+deploy it to &lt;a href="https://asmeurer.github.io/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/"&gt;http://www.asmeurer.com/blog/branch-test/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Note that it will not delete old branches for you from &lt;code&gt;gh-pages&lt;/code&gt;. You'll need
+to do that manually once they are merged.&lt;/p&gt;
+&lt;p&gt;This only works for branches in the same repo. It is not possible to deploy
+from a branch from pull request from a fork, for security purposes.&lt;/p&gt;
+&lt;h4&gt;Enable build cancellation in Travis&lt;/h4&gt;
+&lt;p&gt;If you go the Travis page for your blog and choose "settings" from the
+hamburger menu, you can enable auto cancellation for branch builds. This will
+make it so that if you push many changes in succession, only the most recent
+one will get built. This makes the changes get built faster, and lets you
+revert mistakes or typos without them ever actually being deployed.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</guid><pubDate>Mon, 19 Jun 2017 19:21:32 GMT</pubDate></item><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
 updates that GitHub makes here as they are released.&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -2547,147 +2734,4 @@ just insomuch as there were more people at all.&lt;/p&gt;
 &lt;!-- LocalWords:  Gede Obinna Nwanna iframe src frameborder allowfullscreen -
 --&gt;
 &lt;!--  LocalWords:  - VanderPlas 's PyDy 's img Ahmadia
- --&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/scipy-2014/</guid><pubDate>Sun, 13 Jul 2014 16:52:27 GMT</pubDate></item><item><title>Moving to GitHub pages with Nikola</title><link>https://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;So I've finally decided to move my blog from Wordpress to GitHub pages.  I
-highly recommend it if you are technically skilled enough to do it. I was
-getting pretty annoyed at Wordpress. It forces you to write your posts in
-html (or else using their WYSIWYG editor), the wordpress.com is locked down,
-so you can't add any Javascript, their math is stuck in the past rendering png
-instead of using MathJax. The list goes on.&lt;/p&gt;
-&lt;p&gt;With GitHub pages, I can write my posts in Markdown, and I have full control
-over everything. And there is no lock in. If I decide I don't like the
-software that is generating the posts, I can easily move to something else,
-since the post content itself is all Markdown (or the occasional rst or
-IPython notebook if I want to do something that Markdown doesn't support). I
-can use MathJax for math (like \( e^{i\pi} + 1 = 0 \)). Wordpress.com
-doesn't let you install abtirary Javascript on your blog, so you can't do
-things like install MathJax or enable some cool sidebar thing (like a Twitter
-feed).&lt;/p&gt;
-&lt;h2&gt;Setting up GitHub Pages&lt;/h2&gt;
-&lt;p&gt;First, you need to set up GitHub pages. This is a bit confusing, because there
-are actually two kinds of GitHub pages, user pages and project pages. User
-pages are if you have a repo named &lt;code&gt;username.github.io&lt;/code&gt; (or &lt;code&gt;.com&lt;/code&gt;). The pages
-are served from the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
-&lt;p&gt;For project pages, you add a &lt;code&gt;gh-pages&lt;/code&gt; branch to any one of your projects,
-and GitHub hosts the content automatically at
-&lt;code&gt;username.github.io/projectname&lt;/code&gt;. I originally had my blog content at
-&lt;code&gt;asmeurer.github.io&lt;/code&gt;, but I didn't like that I had to do everything in master,
-both the generated and original content. So instead I created a repo called
-&lt;code&gt;blog&lt;/code&gt;. I have my content in the &lt;code&gt;master&lt;/code&gt; branch and the generated pages in
-the &lt;code&gt;gh-pages&lt;/code&gt; branch (more on this later). At my
-&lt;a href="https://github.com/asmeurer/asmeurer.github.com"&gt;&lt;code&gt;asmeurer.github.com&lt;/code&gt;&lt;/a&gt; repo,
-I just have for now a basic redirect to the blog. In the future, I may want to
-put additional, non-blog content on the website, and it would go there (or in
-a separate project repo with its own &lt;code&gt;gh-pages&lt;/code&gt; branch).&lt;/p&gt;
-&lt;h2&gt;Nikola&lt;/h2&gt;
-&lt;p&gt;I had initially planned on using
-&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. However, I got stalled on the
-Wordpress import. I like that Pelican is written in Python, but I was not too
-keen on their abrasive
-&lt;a href="https://github.com/getpelican/pelican/blob/master/LICENSE"&gt;license&lt;/a&gt;. Frankly,
-I shouldn't say too many bad things about Pelican because I never really tried
-that hard with it.&lt;/p&gt;
-&lt;p&gt;I have decided to try &lt;a href="http://getnikola.com/"&gt;Nikola&lt;/a&gt; instead. It's also
-written in Python. It has a very nice
-&lt;a href="https://github.com/getnikola/nikola/blob/master/LICENSE.txt"&gt;license&lt;/a&gt;. I like
-the philosophy of the &lt;a href="http://getnikola.com/handbook.html"&gt;manual&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;DON'T READ THIS MANUAL. IF YOU NEED TO READ IT I FAILED, JUST USE THE THING.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I've also discovered that the
-&lt;a href="https://groups.google.com/forum/#%21forum/nikola-discuss"&gt;Nikola community&lt;/a&gt; is
-&lt;em&gt;very&lt;/em&gt; nice. And of course, even if Nikola ends up not being for me, it will
-be easy to switch, because my actual content is just some Markdown files that
-I own.&lt;/p&gt;
-&lt;h3&gt;Getting started&lt;/h3&gt;
-&lt;p&gt;Getting started with Nikola is pretty easy. First, you need to install it. It
-has a &lt;em&gt;ton&lt;/em&gt; of dependencies (fortunately all Python, so it won't be that
-hard). In addition to the ones in the requirements.txt, you should also
-install &lt;code&gt;markdown&lt;/code&gt; and &lt;code&gt;webassets&lt;/code&gt;. While using &lt;code&gt;nikola&lt;/code&gt;, it will tell you if
-you don't have something installed that you should, so if you see that, just
-install what it tells you to.  If you use &lt;code&gt;conda&lt;/code&gt; and Mac OS X, I have
-uploaded all the dependencies to my &lt;a href="https://binstar.org/asmeurer/"&gt;Binstar&lt;/a&gt;,
-so you can just &lt;code&gt;conda install -c asmeurer nikola&lt;/code&gt;. Oh and don't worry, Nikola
-and its dependencies fully support Python 3 (I wouldn't be using it if they
-didn't).&lt;/p&gt;
-&lt;p&gt;Then you just run the commands from
-http://getnikola.com/handbook.html#all-you-need-to-know.&lt;/p&gt;
-&lt;p&gt;One thing that doesn't tell you is that after you init the site, you should
-walk through &lt;code&gt;conf.py&lt;/code&gt; and change the settings to your liking.&lt;/p&gt;
-&lt;p&gt;Another trick not there is that you can add&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-bash"&gt;eval "`nikola tabcompletion`"
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;to your Bash profile to get tab completion.&lt;/p&gt;
-&lt;h3&gt;Tricks&lt;/h3&gt;
-&lt;p&gt;Here are some useful tricks:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;To enable MathJax, you have to type &lt;code&gt;mathjax&lt;/code&gt; in a line by itself in the
-metadata file. There are some bugs right now, but ideally you could do inline
-math with &lt;code&gt;$math$&lt;/code&gt; and display math with &lt;code&gt;$$math$$&lt;/code&gt;. &lt;code&gt;$math$&lt;/code&gt; doesn't work
-currently, but you can do &lt;code&gt;\\(math\\)&lt;/code&gt; (both &lt;code&gt;\&lt;/code&gt;s are required, although this
-is likely a bug). You can do &lt;code&gt;\\[math\\]&lt;/code&gt; for display math.  Here are some
-examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 .$$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Your one-stop command when blogging is &lt;code&gt;nikola auto&lt;/code&gt;. This requires
-&lt;code&gt;livereload&lt;/code&gt;. This will serve the blog on localhost, and automatically
-rebuild it when any change is made (and I really mean &lt;em&gt;any&lt;/em&gt; change: it can
-even detect when you change Nikola itself).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;I have the following in my conf.py to deploy:&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code class="language-python"&gt;DEPLOY_COMMANDS = [
-    "git checkout gh-pages",
-    "rsync -rPv --delete-after --exclude old_blog --exclude .git --exclude .gitignore --exclude cache/ --exclude .doit.db.db output/ .",
-    "git add -A",
-    "git commit -a -m 'Updating blog content'",
-    "git push",
-    "git checkout master",
-]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;WARNING: These commands are dangerous. If you don't properly exclude things
-like &lt;code&gt;.git&lt;/code&gt;, you will wipe your entire git history. I &lt;em&gt;highly&lt;/em&gt; recommend
-committing everything and pushing to GitHub before deploying.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Use&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;_site/
-*.pyc
-.DS_Store
-.doit.db.db
-cache/
-output/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;for your &lt;code&gt;.gitignore&lt;/code&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Despite what it says on the Nikola page, be sure to read the docs, because
-there are a lot of cool features you won't know about unless you read about
-them. Also be sure to read through &lt;code&gt;conf.py&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Wordpress import&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;This is something that I am still figuring out. You can see the progress at
-&lt;a href="http://asmeurer.github.io/blog/old_blog"&gt;http://asmeurer.github.io/blog/old_blog&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Importing from Wordpress is pretty easy actually (at least in theory). First
-you need to go to the Wordpress site dashboard and go to "Export" from the
-"Tools" menu. From here you can download an XML file with all your
-content. Then just do&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;nikola import_wordpress export_file.xml
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that the current version of Nikola as of this writing (6.3.0) doesn't do
-this right, so you'll need to use the
-&lt;a href="https://github.com/getnikola/nikola"&gt;git master&lt;/a&gt;. There are some issues with
-the import, since Wordpress has its own markup that it doesn't know everything
-about, so you may need to go in and fix things. Or report them as bugs to
-Nikola and reimport when they are fixed.&lt;/p&gt;
-&lt;p&gt;You'll need to go through the posts and make sure that they are rendered
-correctly (this is one reason I haven't finished doing it yet).&lt;/p&gt;
-&lt;p&gt;For comments, you first need to create a Disqus account, and enable it in your
-conf.py. You should then upload the xml file that you exported from Wordpress
-to Disqus. At this point, the comments should just work, because Nikola sets
-the Disqus url for the imported comments to the old Wordpress url (look at the
-Disqus section of one of the built pages).&lt;/p&gt;
-&lt;p&gt;I don't know how to automatically backlink from Wordpress back to
-Nikola. Maybe I should just automatically generate some links and paste them
-in manually.&lt;/p&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</guid><pubDate>Sun, 09 Feb 2014 23:19:18 GMT</pubDate></item></channel></rss>
+ --&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/scipy-2014/</guid><pubDate>Sun, 13 Jul 2014 16:52:27 GMT</pubDate></item></channel></rss>
