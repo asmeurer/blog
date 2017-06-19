@@ -49,6 +49,8 @@ script:
 - Add any extra packages you need to build your site to the `pip install`
   command. For instance, I use the `commonmark` extension for Nikola, so I
   need to install `commonmark`.
+- The `set -e` line is important. It will prevent the blog from being deployed
+  if the build fails.
 
 Then go to [https://travis-ci.org/profile/](http://www.asmeurer.com/blog/) and enable Travis for your blog
 repo.
