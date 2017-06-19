@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link rel="self" href="https://asmeurer.github.io/blog/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 03 Apr 2017 22:49:59 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="https://asmeurer.github.io/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 19 Jun 2017 18:52:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
 updates that GitHub makes here as they are released.&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;You can now &lt;a href="https://github.com/blog/2265-dismissing-reviews-on-pull-requests"&gt;dismiss a review&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;You can
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;You can now &lt;a href="https://github.com/blog/2265-dismissing-reviews-on-pull-requests"&gt;dismiss a review&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;You can
 now
 &lt;a href="https://github.com/blog/2306-filter-pull-request-reviews-and-review-requests"&gt;filter the pull request list by review&lt;/a&gt;.
 The review status of a PR also appears in the pull request list (albeit in
-very tiny and easy to miss text).&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;You can
+very tiny and easy to miss text).&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;You can
 now
-&lt;a href="https://github.com/blog/2330-restrict-review-dismissals-with-protected-branches"&gt;restrict review dismissals&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;a href="https://github.com/blog/2330-restrict-review-dismissals-with-protected-branches"&gt;restrict review dismissals&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;GitHub
@@ -42,10 +48,10 @@ poor
 &lt;a href="https://twitter.com/asmeurer/status/776125249712717824"&gt;release date docs&lt;/a&gt;
 didn't help here either).&lt;/p&gt;
 &lt;p&gt;Basically, at the bottom of a pull request, you now see this&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews1.png" width="788"&gt;&lt;/p&gt;
+&lt;img src="https://asmeurer.github.io/blog/reviews1.png" width="788"&gt;
 &lt;p&gt;Clicking the "Add your review" button takes you to the diff page (first gripe:
 why does it move you to the diff page?), and opens this dialog&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews2.png" width="1020"&gt;&lt;/p&gt;
+&lt;img src="https://asmeurer.github.io/blog/reviews2.png" width="1020"&gt;
 &lt;p&gt;"OK", you might think, "this is simple enough. A review is just a special
 comment box where I can approve or reject a pull request." (This is basically
 the feature that I've been wanting, the ability to approve or reject pull
@@ -94,13 +100,17 @@ point of view is the new ones. When I look through the list of pull requests,
 I want to be able to know, at a glance, which ones are "reviewable". For me,
 this means two things&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;The tests pass.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;No other reviewer (myself included) has already requested changes, which
-still need to be made by the PR author.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The tests pass.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;No other reviewer (myself included) has already requested changes, which
+still need to be made by the PR author.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Point 1 is really easy to see. In the pull request list, there is a nice green
 checkmark if Travis passed and a red X if it failed.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/prlist.png" width="608"&gt;&lt;/p&gt;
+&lt;img src="https://asmeurer.github.io/blog/prlist.png" width="608"&gt;
 &lt;p&gt;The second point is a disaster. Unfortunately, there's no simple way to do
 this. You might suggest adding a special label, like "Needs changes", to pull
 requests that have been reviewed. The problem with this is that the label
@@ -136,7 +146,7 @@ green checkmark or red X to indicate the type of review. Also, add buttons
 (&lt;strong&gt;buttons&lt;/strong&gt;, not just buried advanced search options) to filter by reviews.&lt;/p&gt;
 &lt;p&gt;OK, so that's a minor UI annoyance, but it gets worse. Next on the docket, &lt;strong&gt;you
 can't review your own pull requests.&lt;/strong&gt; It's not allowed for some reason.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/reviews3.png" width="411"&gt;&lt;/p&gt;
+&lt;img src="https://asmeurer.github.io/blog/reviews3.png" width="411"&gt;
 &lt;p&gt;Now why would you want to review your own pull request, you might ask? Aren't
 you always going to "approve" your own PR? Well, first off, no. There is such
 a thing as
@@ -217,20 +227,34 @@ feature implemented that does all the things that you don't want.&lt;/p&gt;
 the problems with the "Reviews" feature. I don't know how to fix these
 problems (I'm not a UI/UX guy. GitHub supposedly hires them, though).&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;There are now two distinct ways to comment on a PR (delayed and non-delayed).
-There should be one (say, with a checkbox to delay commenting).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;If you insist on keeping delayed commenting, let me turn it off by default
-(default = the Cmd-Enter keyboard shortcut).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The reviews button is buried on the diff page. I would put it under the
-main PR comment box, and just reuse the same comment box.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Reviews should show up in the pull request list. They should be filterable
-with a nice UI.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Let me review my own pull requests. These can be excluded from required
+&lt;li&gt;
+&lt;p&gt;There are now two distinct ways to comment on a PR (delayed and non-delayed).
+There should be one (say, with a checkbox to delay commenting).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you insist on keeping delayed commenting, let me turn it off by default
+(default = the Cmd-Enter keyboard shortcut).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The reviews button is buried on the diff page. I would put it under the
+main PR comment box, and just reuse the same comment box.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Reviews should show up in the pull request list. They should be filterable
+with a nice UI.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Let me review my own pull requests. These can be excluded from required
 reviews (that makes sense to me). Beyond that, there's no reason this
-shouldn't be allowed.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Don't require a positive review for required reviews, only zero negative
-reviews. Merging a PR is implicitly positively reviewing it.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Allow reviews to reset when new commits are pushed.&lt;/p&gt;&lt;/li&gt;
+shouldn't be allowed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't require a positive review for required reviews, only zero negative
+reviews. Merging a PR is implicitly positively reviewing it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Allow reviews to reset when new commits are pushed.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I get that the last point may not be what everyone wants. But GitHub needs to
 think about UI, and defaults here. Right now, the UI looks like reviews are
@@ -264,7 +288,7 @@ the most entertaining Python people you can
 can't disagree sometimes.&lt;/p&gt;
 &lt;h2&gt;List vs. Tuple. Fight!&lt;/h2&gt;
 &lt;p&gt;As you probably know, there are two "array" datatypes in Python, &lt;code&gt;list&lt;/code&gt; and
-&lt;code&gt;tuple&lt;/code&gt;.&lt;sup id="fnref:list"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn:list" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt; The primary difference between the two is that lists are &lt;em&gt;mutable&lt;/em&gt;,
+&lt;code&gt;tuple&lt;/code&gt;.&lt;sup id="fnref-list"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn-list"&gt;1&lt;/a&gt;&lt;/sup&gt; The primary difference between the two is that lists are &lt;em&gt;mutable&lt;/em&gt;,
 that is you can change their entries and length after they are created, with
 methods like &lt;code&gt;.append&lt;/code&gt; or &lt;code&gt;+=&lt;/code&gt;. Tuples, on the other hand, are &lt;em&gt;immutable&lt;/em&gt;.
 Once you create one, you cannot change it. This makes the implementation
@@ -283,10 +307,10 @@ fixed shape, the positions in a tuple can be "fixed" values, and by convention�
 Python programmer sees parentheses instead of square brackets, he is more
 likely to see the object as "record-like". The &lt;code&gt;namedtuple&lt;/code&gt; object in the standard library
 takes the record idea further by letting you actually name the fields:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Person'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'name, age'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Person'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'name, age'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;
 
 
@@ -301,7 +325,7 @@ Allen Downey:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Multiple assignments:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2
 &lt;/pre&gt;
 
 
@@ -316,7 +340,7 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;*args&lt;/code&gt;:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):
 ...     print(type(args), args)
 ...
 &amp;gt;&amp;gt;&amp;gt; f(1, 2, 3)
@@ -328,7 +352,7 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Return value from builtins &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;enumerate&lt;/code&gt;, etc.:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; for i in zip(range(3), 'abc'):
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; for i in zip(range(3), 'abc'):
 ...     print(i)
 ...
 (0, 'a')
@@ -349,7 +373,7 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Dictionary keys:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; {
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; {
 ...     (0, 0): '.',
 ...     (0, 1): ' ',
 ...     (1, 0): '.',
@@ -362,14 +386,14 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This last one I find to be very important. You could arguably use a list for
-the first four of Allen Downey's points&lt;sup id="fnref:assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn:assign" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
+the first four of Allen Downey's points&lt;sup id="fnref-assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn-assign"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
 is
 &lt;a href="https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/"&gt;impossible&lt;/a&gt;
 to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.&lt;/p&gt;
 &lt;p&gt;However, be careful. Not all tuples are hashable. Tuples can contain
-anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref:TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn:TypeError" rel="footnote"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref-TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn-TypeError"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
@@ -377,11 +401,11 @@ anything, but only tuples of immutable values are hashable. Consider&lt;sup id="
 
 
 &lt;p&gt;Such tuples are not hashable, and cannot be used as dictionary keys.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;"&amp;lt;ipython-input-39-36822ba665ca&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;ipython-input-39-36822ba665ca&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;unhashable&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;'list'&lt;/span&gt;
+&lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;unhashable&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'list'&lt;/span&gt;
 &lt;/pre&gt;
 
 
@@ -399,7 +423,7 @@ as well).&lt;/p&gt;
 &lt;p&gt;Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent &lt;code&gt;1 - 2*(-3 + 4)&lt;/code&gt; as&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'*'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'+'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'*'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'+'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;
 
 
@@ -421,7 +445,7 @@ See how long it takes you to write that function correctly.&lt;/p&gt;
 &lt;h2&gt;Mutability is Bad&lt;/h2&gt;
 &lt;p&gt;More to the point, however, mutability is bad. I counted 12 distinct methods
 on &lt;code&gt;list&lt;/code&gt; that mutate it (how many can you remember off the top of your
-head?&lt;sup id="fnref:mutate"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn:mutate" rel="footnote"&gt;3&lt;/a&gt;&lt;/sup&gt;). &lt;em&gt;Any&lt;/em&gt; function that gets access to a list can mutate it,
+head?&lt;sup id="fnref-mutate"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn-mutate"&gt;3&lt;/a&gt;&lt;/sup&gt;). &lt;em&gt;Any&lt;/em&gt; function that gets access to a list can mutate it,
 using any one of these methods. All it takes is for someone to forget that
 &lt;code&gt;+=&lt;/code&gt; mutates a list (and that they should copy it first) for code completely
 distant from the origin definition to cause issues. The hardest bug I ever
@@ -449,22 +473,22 @@ structures are immutable.&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id="fn:list"&gt;
+&lt;li id="fn-list"&gt;
 &lt;p&gt;I want to avoid saying "a tuple is an immutable list", since "list"
 can be interpreted in two ways, as an English word meaning "ordered
 collection" (in
 which case, the statement is true), or as the Python type &lt;code&gt;list&lt;/code&gt; (in which
-case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass of &lt;code&gt;list&lt;/code&gt;). &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref:list" rev="footnote" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass of &lt;code&gt;list&lt;/code&gt;). &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref-list" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:assign"&gt;
+&lt;li id="fn-assign"&gt;
 &lt;p&gt;Yes,&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2
 &lt;/pre&gt;
 
 
-&lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref:assign" rev="footnote" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref-assign" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:mutate"&gt;
+&lt;li id="fn-mutate"&gt;
 &lt;p&gt;&lt;/p&gt;&lt;div id="spoiler" style="display:none"&gt;
 &lt;code&gt;__delitem__&lt;/code&gt;, &lt;code&gt;__iadd__&lt;/code&gt;, &lt;code&gt;__imul__&lt;/code&gt;, &lt;code&gt;__setitem__&lt;/code&gt;, &lt;code&gt;append&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;extend&lt;/code&gt;, &lt;code&gt;insert&lt;/code&gt;,
 &lt;code&gt;pop&lt;/code&gt;, &lt;code&gt;remove&lt;/code&gt;, &lt;code&gt;reverse&lt;/code&gt;, and &lt;code&gt;sort&lt;/code&gt;.
@@ -472,14 +496,14 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none')
 {document.getElementById('spoiler')
 .style.display=''}else{document.getElementById('spoiler')
-.style.display='none'}"&gt;Show/hide answer&lt;/button&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref:mutate" rev="footnote" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;
+.style.display='none'}"&gt;Show/hide answer&lt;/button&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref-mutate" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;
 &lt;/li&gt;
-&lt;li id="fn:TypeError"&gt;
+&lt;li id="fn-TypeError"&gt;
 &lt;p&gt;One of the tweets from the conversation:&lt;/p&gt;
 &lt;p&gt;&lt;/p&gt;&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/asmeurer"&gt;@asmeurer&lt;/a&gt; &lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; As yes:&lt;br&gt;&lt;br&gt;t = (1,2, [3, 4])&lt;br&gt;t[2] += [5,6]&lt;br&gt;&lt;br&gt;;-)&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778697399975813120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 &lt;p&gt;This is similar to this example. But
 it turns out this one doesn't work:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; t = (1,2, [3, 4])
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; t = (1,2, [3, 4])
 &amp;gt;&amp;gt;&amp;gt; t[2] += [5,6]
 Traceback (most recent call last):
   File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
@@ -490,7 +514,7 @@ TypeError: 'tuple' object does not support item assignment
 &lt;p&gt;I have no idea why. It seems to me that it should work. &lt;code&gt;t[2]&lt;/code&gt; is a list
 and &lt;code&gt;list&lt;/code&gt; has &lt;code&gt;__iadd__&lt;/code&gt; defined. It seems that Python gets kind of weird
 about things on the left-hand side of an assignment. &lt;strong&gt;EDIT:
-&lt;a href="http://stackoverflow.com/a/29747466/161801"&gt;Here's&lt;/a&gt; why.&lt;/strong&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref:TypeError" rev="footnote" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;a href="http://stackoverflow.com/a/29747466/161801"&gt;Here's&lt;/a&gt; why.&lt;/strong&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.github.io/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;
@@ -512,7 +536,7 @@ represents library developers being antagonistic against those who want or
 have to use Python 2.&lt;/p&gt;
 &lt;p&gt;I'm writing this from my perspective as a library developer. I'm the lead
 developer of &lt;a href="http://www.sympy.org/"&gt;SymPy&lt;/a&gt;, and I have sympathies for
-developers of other libraries.&lt;sup id="fnref:sympy"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn:sympy" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt; I say this because my idea may seem a bit
+developers of other libraries.&lt;sup id="fnref-sympy"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-sympy"&gt;1&lt;/a&gt;&lt;/sup&gt; I say this because my idea may seem a bit
 in tension with "users" (even though I hate the "developer/user" distinction).&lt;/p&gt;
 &lt;h3&gt;Python 2&lt;/h3&gt;
 &lt;p&gt;There are a few reasons why I think libraries should drop (and announce that
@@ -524,7 +548,7 @@ necessarily disjoint) classes of people: CPython core developers, library
 developers, and users. The core developers were the first to move to Python 3,
 since they were the ones who wrote it. They were also the ones who provided
 the messaging around Python 3, which has varied over time. In my opinion, it
-should have been and should be more forceful.&lt;sup id="fnref:core"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn:core" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt; Then you have the library
+should have been and should be more forceful.&lt;sup id="fnref-core"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-core"&gt;2&lt;/a&gt;&lt;/sup&gt; Then you have the library
 developers and the users. A chief difference here is that users are probably
 going to be using only one version of Python. In order for them to switch that
 version to Python 3, all the libraries that they use need to support it. This
@@ -569,7 +593,7 @@ important to do this for a few reasons:&lt;/p&gt;
   implemented as keyword-only arguments. This avoids mistakes that come from
   the antipattern of passing keyword arguments without naming the keyword, and
   allows the argspec of the function to be expanded in the future without
-  breaking API.&lt;sup id="fnref:swift"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn:swift" rel="footnote"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  breaking API.&lt;sup id="fnref-swift"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-swift"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The second reason I think library developers should agree to drop Python 2
@@ -579,7 +603,7 @@ In other words, instead of forcing people off of Python 2, we should make them
 want to come to Python 3. There are some issues with this argument. First,
 Python 3 already has
 &lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;tons of carrots&lt;/a&gt;.
-Honestly, not being terrible at Unicode ought to be a carrot in its own right.&lt;sup id="fnref:unicode"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn:unicode" rel="footnote"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.&lt;sup id="fnref-unicode"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-unicode"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;If you don't deal with strings, or do but don't care about those silly
 foreigners with weird accents in their names, there are other major carrots as
 well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
@@ -632,7 +656,7 @@ for the most part thus far, but they shouldn't be expected to bear it forever.
 The debt will only increase, especially as the technical opportunity cost, if
 you will, of not being able to use newer and shinier versions of Python 3
 grows. The burden will have to shift at some point. Those with the financial
-resources may choose to offload this debt to others,&lt;sup id="fnref:continuum"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn:continuum" rel="footnote"&gt;5&lt;/a&gt;&lt;/sup&gt; say, by
+resources may choose to offload this debt to others,&lt;sup id="fnref-continuum"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-continuum"&gt;5&lt;/a&gt;&lt;/sup&gt; say, by
 backporting features or bugfixes to older library versions that support Python
 2 (or by helping to move code to Python 3).&lt;/p&gt;
 &lt;p&gt;I want to end by pointing out that if you are, for whatever reason, still
@@ -649,25 +673,25 @@ it will make it easy to separate your Python 2 code from your Python 3 code.&lt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id="fn:sympy"&gt;
+&lt;li id="fn-sympy"&gt;
 &lt;p&gt;With that being said, the opinions here are entirely my own, and are
     don't necessarily represent those of other people, nor do they
     represent official SymPy policy (no decisions have been made by the
-    community about this at this time). &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref:sympy" rev="footnote" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    community about this at this time). &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-sympy" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:core"&gt;
+&lt;li id="fn-core"&gt;
 &lt;p&gt;It often feels like core Python itself doesn't really want people to
     use Python 3. It's little things, like
     &lt;a href="https://docs.python.org/library/"&gt;docs links&lt;/a&gt; that redirect to Python
     2, or &lt;a href="https://www.python.org/dev/peps/pep-0394/"&gt;PEP 394&lt;/a&gt;, which
-    still says that the &lt;code&gt;python&lt;/code&gt; should always point to Python 2. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref:core" rev="footnote" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    still says that the &lt;code&gt;python&lt;/code&gt; should always point to Python 2. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-core" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:swift"&gt;
+&lt;li id="fn-swift"&gt;
 &lt;p&gt;In Swift, Apple's new language for iOS and OS X, function parameter
     names are effectively "keyword-only"
-    &lt;a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html"&gt;by default&lt;/a&gt;. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref:swift" rev="footnote" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    &lt;a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html"&gt;by default&lt;/a&gt;. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-swift" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:unicode"&gt;
+&lt;li id="fn-unicode"&gt;
 &lt;p&gt;As an example of this, in conda, if you use Python 2 in the root
     environment, then installing into a path with non-ASCII characters is
     unsupported. This is common on Windows, because Windows by default
@@ -685,12 +709,12 @@ import unicode_literals&lt;/code&gt; in Python 2, in my opinion.&lt;/p&gt;
 &lt;p&gt;I no longer work on conda, but as far as I know, the
 &lt;a href="https://github.com/conda/conda/issues/1180"&gt;issue&lt;/a&gt; remains unfixed.
 Of course, this whole thing works just fine if conda is run in Python
-3. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref:unicode" rev="footnote" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+3. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-unicode" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:continuum"&gt;
+&lt;li id="fn-continuum"&gt;
 &lt;p&gt;If that legitimately interests you, I
     &lt;a href="https://twitter.com/pwang/status/712780279211884546"&gt;hear Continuum&lt;/a&gt;
-    may be able to help you. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref:continuum" rev="footnote" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    may be able to help you. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-continuum" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item><item><title>What happens when you mess with hashing in Python</title><link>https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post is based off a Jupyter notebook I made in 2013. You can download
@@ -820,14 +844,22 @@ unhashable objects like lists.&lt;/p&gt;
 &lt;p&gt;The uses for associative arrays are boundless. &lt;code&gt;dict&lt;/code&gt; is one of the most
 useful data types in the Python language. Some example uses are&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Extension of &lt;code&gt;list&lt;/code&gt; with "missing values". For example, &lt;code&gt;{0: 'a', 2: 7}&lt;/code&gt;
+&lt;li&gt;
+&lt;p&gt;Extension of &lt;code&gt;list&lt;/code&gt; with "missing values". For example, &lt;code&gt;{0: 'a', 2: 7}&lt;/code&gt;
 would correspond to the above list &lt;code&gt;l&lt;/code&gt; with the value &lt;code&gt;'b'&lt;/code&gt; corresponding to
-the key &lt;code&gt;1&lt;/code&gt; removed.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Representation of a mathematical function with a finite domain.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A poor-man's database (the Wikipedia image above is an associative array
-mapping names to telephone numbers).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Implementing a &lt;a href="https://stackoverflow.com/q/60208/161801"&gt;Pythonic version&lt;/a&gt;
-of the switch-case statement.&lt;/p&gt;&lt;/li&gt;
+the key &lt;code&gt;1&lt;/code&gt; removed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Representation of a mathematical function with a finite domain.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A poor-man's database (the Wikipedia image above is an associative array
+mapping names to telephone numbers).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Implementing a &lt;a href="https://stackoverflow.com/q/60208/161801"&gt;Pythonic version&lt;/a&gt;
+of the switch-case statement.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The other type of hash table, &lt;code&gt;set&lt;/code&gt;, more closely matches the definition I
 gave above for a hash table. A &lt;code&gt;set&lt;/code&gt; is just a container of hashable
@@ -924,10 +956,14 @@ that your &lt;code&gt;__hash__&lt;/code&gt; actually agrees with your &lt;code&g
 &lt;p&gt;Now to the fun stuff. What happens if we break some of the invariants that
 Python expects of hashing. Python expects two key invariants to hold&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;The hash of an object does not change across the object's lifetime (in
-other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
-hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The hash of an object does not change across the object's lifetime (in
+other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
+hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;As we shall see, Python expects, but does not enforce either of these.&lt;/p&gt;
 &lt;h3&gt;Example 1: Mutating a hash&lt;/h3&gt;
@@ -1317,10 +1353,14 @@ that something had better be immutable.&lt;/p&gt;
 &lt;p&gt;The conclusion is this: don't mess with hashing. The two invariants above are
 important. Let's restate them here,&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;The hash of an object must not change across the object's lifetime (in
-other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
-hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The hash of an object must not change across the object's lifetime (in
+other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
+hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;If you don't follow these rules, you will run into very subtle issues, because
 very basic Python operations expect these invariants.&lt;/p&gt;
@@ -1346,26 +1386,35 @@ this reason, I generally don't recommend this second option unless you know
 what you are doing.&lt;/p&gt;
 &lt;p&gt;Finally, to keep invariant 2, here are some tips:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Make sure that the parts of the object that you use to compare equality are
+&lt;li&gt;
+&lt;p&gt;Make sure that the parts of the object that you use to compare equality are
 not themselves mutable. If they are, then your object cannot itself be
 immutable. This means that if &lt;code&gt;a == b&lt;/code&gt; depends on &lt;code&gt;a.attr == b.attr&lt;/code&gt;, and
 &lt;code&gt;a.attr&lt;/code&gt; is a list, then you will need to use a tuple instead (if you want
-&lt;code&gt;a&lt;/code&gt; to be hashable).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;You don't have to invent a hash function. If you find yourself doing
+&lt;code&gt;a&lt;/code&gt; to be hashable).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You don't have to invent a hash function. If you find yourself doing
 bitshifts and XORs, you're doing it wrong. Reuse Python's builtin hashable
 objects. If the hash of your object should depend on the hash of &lt;code&gt;a&lt;/code&gt; and
 &lt;code&gt;b&lt;/code&gt;, define &lt;code&gt;__hash__&lt;/code&gt; to return &lt;code&gt;hash((a, b))&lt;/code&gt;. If the order of &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt;
-does not matter, use &lt;code&gt;hash(frozenset([a, b]))&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Don't cache something unless you know that the entire cached state will not
+does not matter, use &lt;code&gt;hash(frozenset([a, b]))&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't cache something unless you know that the entire cached state will not
 be changed over the lifetime of the cache. Hashable objects are actually
 great for caches. If they properly satisfy invariant 1, and all the state
 that should be cached is part of the hash, then you will not need to
-worry. And the best part is that you can just use &lt;code&gt;dict&lt;/code&gt; for your cache.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Unless you really need the performance or memory gains, don't make your
+worry. And the best part is that you can just use &lt;code&gt;dict&lt;/code&gt; for your cache.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unless you really need the performance or memory gains, don't make your
 objects mutable. This makes programs much harder to reason about. Some
 functional programming languages take this idea so far that they don't allow
-any mutable objects.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Don't worry about the situation where &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; but &lt;code&gt;a != b&lt;/code&gt;. This is a hash collision. Unlike the issues we looked at here, hash
+any mutable objects.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't worry about the situation where &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; but &lt;code&gt;a != b&lt;/code&gt;. This is a hash collision. Unlike the issues we looked at here, hash
 collisions are expected and checked for in Python. For example, our
 &lt;code&gt;HashToOne&lt;/code&gt; object from the beginning will always hash to 1, but different
 instances will compare unequal. We can see that the right thing is done in
@@ -1384,8 +1433,10 @@ True
 [&amp;lt;__main__.HashToOne at 0x102c32cd0&amp;gt;, &amp;lt;__main__.HashToOne at 0x102c32a10&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The only concern with hash collisions is that too many of them can remove
-the performance gains of &lt;code&gt;dict&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Conversely, if you are writing something that uses an object's hash, remember
+the performance gains of &lt;code&gt;dict&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Conversely, if you are writing something that uses an object's hash, remember
 that hash collisions are possible and unavoidable.&lt;/p&gt;
 &lt;p&gt;A classic example of a hash collision is &lt;code&gt;-1&lt;/code&gt; and &lt;code&gt;-2&lt;/code&gt;. Remember I
 mentioned above that small integers hash to themselves:&lt;/p&gt;
@@ -1405,8 +1456,10 @@ the Python developers picked the next closest thing.&lt;/p&gt;
 &lt;p&gt;If you want to check if something handles hash collisions correctly, this is
 a simple example.  I should also note that the fact that integers hash to
 themselves is an implementation detail of CPython that may not be true in
-alternate Python implementations.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Finally, we didn't discuss this much here, but don't assume that the hash of
+alternate Python implementations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally, we didn't discuss this much here, but don't assume that the hash of
 your object will be the same across Python sessions. In Python 3.3 and up,
 hash values of strings are randomized from a value that is seeded when
 Python starts up. This also affects any object whose hash is computed
@@ -1418,7 +1471,8 @@ Python sessions.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; print(hash('a'))
 8897161376854729812
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</guid><pubDate>Tue, 26 Jan 2016 04:13:53 GMT</pubDate></item><item><title>"Doing Math with Python" by Amit Saha: Book Review</title><link>https://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Note: No Starch Press has sent me a copy of this book for review purposes.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SHORT VERSION: &lt;em&gt;Doing Math with Python&lt;/em&gt; is well written and introduces
 topics in a nice, mathematical way. I would recommend it for new users of
@@ -1489,7 +1543,8 @@ this chapter may be better suited to those wishing to use SymPy from the
 standpoint of high school mathematics.&lt;/p&gt;
 &lt;p&gt;My only gripes with this chapter, which, in total, are minor, relate to printing.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;The typesetting of the pretty printing is inconsistent and, in some cases,
+&lt;li&gt;
+&lt;p&gt;The typesetting of the pretty printing is inconsistent and, in some cases,
 incorrect. Powers are printed in the book using superscript numbers, like&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;x²
 &lt;/code&gt;&lt;/pre&gt;
@@ -1512,15 +1567,18 @@ x + ── + ── + ── + ──
     2    3    4    5
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Again, this is a minor point, but at the very least the correct printing
-looks better than the fake printing used here.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;In line with the previous point, I would recommend telling the user to
+looks better than the fake printing used here.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In line with the previous point, I would recommend telling the user to
 start with &lt;code&gt;init_printing()&lt;/code&gt;. The function is used once to change the order
 of printing to rev-lex (for series printing). There is a link to the
 &lt;a href="http://docs.sympy.org/latest/tutorial/printing.html"&gt;tutorial page on printing&lt;/a&gt;. That
 page goes into more depth than is necessary for the book, but I would
 recommend at least mentioning to always call &lt;code&gt;init_printing()&lt;/code&gt;, as 2-D
 printing can make a huge difference over the default &lt;code&gt;str&lt;/code&gt; printing, and it
-obviates the need to call &lt;code&gt;pprint&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+obviates the need to call &lt;code&gt;pprint&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Chapter 5, "Playing with Sets and Probability" covers SymPy's set objects
 (particularly &lt;code&gt;FiniteSet&lt;/code&gt;) to do some basic set theory and probability. I'm
@@ -1643,11 +1701,11 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Avoid object oriented programming when procedural programming will do just
-  fine.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  fine.&lt;sup id="fnref4-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Open source is more about the open than the source. Develop things in the
-  open, and you will create a community that respects you.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  open, and you will create a community that respects you.&lt;sup id="fnref3-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Academics (often) don't know good software practices, nor good licensing
@@ -1661,7 +1719,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Far fewer people than I would have thought understand the difference between
-  hard links and soft links.&lt;sup id="fnref:fn2"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn2" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  hard links and soft links.&lt;sup id="fnref-fn2"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Changelogs are useful.&lt;/p&gt;
@@ -1684,7 +1742,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
   issues into FUD. These people should generally be ignored.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref2-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;People constantly misspell the name of
@@ -1700,7 +1758,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Linux is strictly backwards compatible. Windows is strictly forwards
-  compatible. &lt;sup id="fnref:fn3"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn3" rel="footnote"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  compatible. &lt;sup id="fnref-fn3"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn3"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;On Linux, things tend to be very simple. On Windows, things tend to be very
@@ -1725,7 +1783,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;SAT solvers solve NP-complete problems in general, but they can be very fast
-  to solve common case problems. &lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn:fn1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  to solve common case problems. &lt;sup id="fnref-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Some of the smartest people I know, who otherwise make very rational and
@@ -1765,14 +1823,14 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id="fn:fn1"&gt;
-&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;li id="fn-fn1"&gt;
+&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref2-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref3-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref4-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:fn2"&gt;
+&lt;li id="fn-fn2"&gt;
 &lt;p&gt;If you are one of those people, I have a small presentation that
-   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn2" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:fn3"&gt;
+&lt;li id="fn-fn3"&gt;
 &lt;p&gt;These terms can be confusing, and I admit I got this backwards the
     first time I wrote this. According to Wikipedia,
     &lt;a href="https://en.wikipedia.org/wiki/Forward_compatibility"&gt;forwards compatible&lt;/a&gt;
@@ -1791,7 +1849,7 @@ newest version (I used Windows 8 on my main Windows build VM), and it
 will work on older versions of Windows like XP (as long as you ship
 the right runtime DLLs). This is also somewhat confusing because
 Windows tends to be both forwards compatible &lt;em&gt;and&lt;/em&gt; backwards
-compatible. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref:fn3" rev="footnote" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+compatible. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn3" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item><item><title>Python Trickery</title><link>https://asmeurer.github.io/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
@@ -1841,18 +1899,23 @@ language.&lt;/p&gt;
 &lt;p&gt;The Swift language is actually quite easy to learn, especially if you already
 know a high-level language like Python.  A few important things:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;var&lt;/code&gt; and &lt;code&gt;let&lt;/code&gt; seem a bit confusing.  The difference is actually quite
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;var&lt;/code&gt; and &lt;code&gt;let&lt;/code&gt; seem a bit confusing.  The difference is actually quite
 simple: &lt;code&gt;var&lt;/code&gt; denotes a variable that can change and &lt;code&gt;let&lt;/code&gt; denotes a
 variable that cannot.  You could in theory just use &lt;code&gt;var&lt;/code&gt; for everything,
 but &lt;code&gt;let&lt;/code&gt; lets the compiler spot mistakes for you, and it also probably lets
 it make your code faster.  If you intend to never change the value of a
-variable, use &lt;code&gt;let&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Swift uses type inference, meaning that you usually don't need to specify
+variable, use &lt;code&gt;let&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Swift uses type inference, meaning that you usually don't need to specify
 types. But when you do, you do so by putting a &lt;code&gt;:&lt;/code&gt; after the variable name,
 like &lt;code&gt;var a: Int = 2&lt;/code&gt; or &lt;code&gt;func f(a: Int)&lt;/code&gt;.  The exception is the return type
 of a function, which uses the arrow &lt;code&gt;-&amp;gt;&lt;/code&gt; (if you are familiar with Python 3
-type annotations, the syntax is exactly the same), &lt;code&gt;func f(a: Int) -&amp;gt; Int&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Swift uses &lt;code&gt;?&lt;/code&gt; after a type name to indicate that a variable could be its
+type annotations, the syntax is exactly the same), &lt;code&gt;func f(a: Int) -&amp;gt; Int&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Swift uses &lt;code&gt;?&lt;/code&gt; after a type name to indicate that a variable could be its
 given type, or &lt;code&gt;nil&lt;/code&gt;. If you are familiar with Haskell, this is like the
 Maybe monad.  I know very little Haskell, so I don't know if Swift's
 implementation of &lt;code&gt;?&lt;/code&gt; is truly a Monad.&lt;/p&gt;
@@ -1868,14 +1931,17 @@ type of &lt;code&gt;a[b]&lt;/code&gt; is &lt;code&gt;Int?&lt;/code&gt;.&lt;/p&gt
 compiler to compile code that doesn't check for that case.&lt;/p&gt;
 &lt;p&gt;For the most part, you can ignore this as well, at least when you
 start. Just write code as you would, let XCode add in the types for you, and
-only worry about types if the compiler tells you something is wrong.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Swift functions often require the parameters be named, for instance, you
+only worry about types if the compiler tells you something is wrong.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Swift functions often require the parameters be named, for instance, you
 have to write &lt;code&gt;CGSize(width: 1, height: 2)&lt;/code&gt; instead of just &lt;code&gt;CGSize(1, 2)&lt;/code&gt;. This is both for clarity (the former is much easier to read if you
 aren't familiar with the API for &lt;code&gt;CGSize&lt;/code&gt;), and because Swift allows
 polymorphism, i.e., you can define different initializers for the same class
 with different type signatures. For example, &lt;code&gt;CGRect&lt;/code&gt; can be initialized as
 &lt;code&gt;CGRect(origin: CGPoint, size: CGSize)&lt;/code&gt; or &lt;code&gt;CGRect(x: Int, y: Int, width: Int, height: Int)&lt;/code&gt;. This can lead to ambiguities in some cases unless you
-explicitly tell the compiler which version to use.&lt;/p&gt;&lt;/li&gt;
+explicitly tell the compiler which version to use.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I've found Swift to be a very strict language. I don't mean this in the sense
 described by
@@ -1938,33 +2004,43 @@ reduce the complexity significantly as you get started.  Once you are
 comfortable, you can move to another editor.&lt;/p&gt;
 &lt;p&gt;Some things that XCode will do for you:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Autocompletion&lt;/strong&gt;: The best way to figure out the Cocoa APIs is to use the
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Autocompletion&lt;/strong&gt;: The best way to figure out the Cocoa APIs is to use the
 autocompletion. This pops up when you want to override a method in a
 subclass, create an object from an existing class, access an attribute of a
 class, or instantiate a class or call a function (remember that Swift is
 polymorphic, so it's useful to know all the possible ways to instantiate a
-class or call a function).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Compiler errors and warnings&lt;/strong&gt;: Swift, being a strictly typed language,
+class or call a function).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Compiler errors and warnings&lt;/strong&gt;: Swift, being a strictly typed language,
 will give you a lot of useful compiler errors. It's pretty hard to write a
 program incorrectly from a type point of view, and have it even compile.
 XCode integrates this nicely, and it even offers suggestions on how to fix
 things every once in a while (so that you can just click the button and have
-it fixed inline).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Direct interaction with the iOS Simulator&lt;/strong&gt;: One button will compile your code
+it fixed inline).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Direct interaction with the iOS Simulator&lt;/strong&gt;: One button will compile your code
 and start the simulator. If your target is Mac OS X, it will open the
-application.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Debugger&lt;/strong&gt;: Clicking to the left of a line will set a breakpoint in the
+application.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Debugger&lt;/strong&gt;: Clicking to the left of a line will set a breakpoint in the
 debugger.  The Swift debugger seems pretty limited right now. I wasn't able
 to get any useful information out of the variables view when I used it.  But
 in my experience using XCode in the past to debug C, its graphical debugger
-is one of the best.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Configuration settings&lt;/strong&gt;: If you click on the XCode project in the files
+is one of the best.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Configuration settings&lt;/strong&gt;: If you click on the XCode project in the files
 view (the root node of all the files), you get a view with all the different
 settings for your project. Most of these you probably won't want to change,
 but a few are important, like what devices and orientations you want to
 allow, what operating system versions you want to support, and the name and
 version of your project.  Editing these outside of XCode requires editing an
-XML file, which is no fun.&lt;/p&gt;&lt;/li&gt;
+XML file, which is no fun.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Of course, any editor can potentially do these things, and I'm really looking
 forward to the point where I can just use Emacs to edit Swift code, as the
@@ -1990,21 +2066,29 @@ the only issue is that there are limits to how you can simulate a touch screen
 on a computer with a mouse.&lt;/p&gt;
 &lt;p&gt;A few things to note about the simulator:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;There are several things you can do with the "hardware" from the hardware
-menu, such as rotating the device or pressing the home button.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;It's worth remembering the keyboard shortcut for pressing the home button,
+&lt;li&gt;
+&lt;p&gt;There are several things you can do with the "hardware" from the hardware
+menu, such as rotating the device or pressing the home button.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It's worth remembering the keyboard shortcut for pressing the home button,
 ⇧⌘H, as you can press it twice in quick succession just like on a real
 device to open the task manger. You can then drag your app up to completely
-reset it, without having to restart the simulator.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The retina iPad is taller than your display, even if you have a 15" retina
+reset it, without having to restart the simulator.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The retina iPad is taller than your display, even if you have a 15" retina
 display. So be aware that you will need to scroll up and down to see it
 all. Alternately, you can use a smaller device, like an iPhone, or rotate it
-to landscape, where it all fits.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The only way to do multitouch is to hold down the Option key. This will
+to landscape, where it all fits.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The only way to do multitouch is to hold down the Option key. This will
 create two fingers.  However, it's quite limited as the two fingers are
 always centered around the center of the screen. Therefore if you want to
 test multitouching two objects, you'll have to position them symmetrically so
-that you can grab them both.&lt;/p&gt;&lt;/li&gt;
+that you can grab them both.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Getting started with a project&lt;/h2&gt;
 &lt;p&gt;The best way to start is to start a template project with XCode. I personally
@@ -2076,7 +2160,7 @@ sprite in the main view. If you forget this line, none of the sprites will
 show up.&lt;/p&gt;
 &lt;p&gt;If you run this, you will only see the yellow box, because you put them all on
 top of one another in the center of the view.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/galleries/swift-game-1.png" width="500"&gt;&lt;/p&gt;
+&lt;img src="https://asmeurer.github.io/blog/galleries/swift-game-1.png" width="500"&gt;
 &lt;h2&gt;Adding Basic Physics&lt;/h2&gt;
 &lt;p&gt;We could change the positions so that they do not overlap, but the option I
 went with was to play around with the physics a little. &lt;code&gt;SpriteKit&lt;/code&gt; has a nice
@@ -2110,7 +2194,7 @@ space.&lt;/p&gt;
 &lt;p&gt;Now &lt;code&gt;SceneKit&lt;/code&gt; will prevent the squares from overlapping with one another, even
 if we put them on top of each other as we have done.&lt;/p&gt;
 &lt;p&gt;So now when we start the simulator, we see&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/galleries/swift-game-2.png" width="500"&gt;&lt;/p&gt;
+&lt;img src="https://asmeurer.github.io/blog/galleries/swift-game-2.png" width="500"&gt;
 &lt;h2&gt;Making the squares movable&lt;/h2&gt;
 &lt;p&gt;Now, let's make it so that we can move these squares around.  The correct way
 to do this took me some time to figure out.  I finally got some hints from
@@ -2205,15 +2289,15 @@ changes.&lt;/p&gt;
 &lt;p&gt;Here is an example of the movement. You can see it works even with
 multitouch.  You can also see the collision physics cause the other squares to
 move out of the way when another square hits them.&lt;/p&gt;
-&lt;video src="https://asmeurer.github.io/blog/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
-  Your browser does not support the video tag.
-&lt;/video&gt;
+&lt;p&gt;&lt;video src="https://asmeurer.github.io/blog/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;&lt;/p&gt;
 &lt;p&gt;Here you can see the movement lag caused by using &lt;code&gt;SKAction.moveTo&lt;/code&gt; with
 &lt;code&gt;duration: 0.1&lt;/code&gt; (note that the mouse itself jumps a bit at the beginning, but
 this is due to lag in the recording).&lt;/p&gt;
-&lt;video src="https://asmeurer.github.io/blog/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
-  Your browser does not support the video tag.
-&lt;/video&gt;
+&lt;p&gt;&lt;video src="https://asmeurer.github.io/blog/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;&lt;/p&gt;
 &lt;p&gt;I have uploaded the full code to
 &lt;a href="https://github.com/asmeurer/GameTest/blob/blog/GameTest/GameScene.swift"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;This isn't exactly a "game", but it does lay down the foundations for what you
@@ -2291,14 +2375,15 @@ any talk that looks interesting.&lt;/p&gt;
 particular stood out to me as the best.&lt;/p&gt;
 &lt;p&gt;First is Greg Wilson's Thursday keynote, which is among the best talks I've
 ever seen from any conference.&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/1e26rp6qPbA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
+&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/1e26rp6qPbA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
 &lt;p&gt;Greg mentions a lot of ideas, quite a few of which are controversial, which I
 think always makes for an interesting talk (it also means that I don't agree
 with everything he said, although I do agree with most of it). Most of the
 talk is about pedagogy, especially regarding his experiences at
 &lt;a href="http://software-carpentry.org/"&gt;Software Carpentry&lt;/a&gt;. Some things he posited:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;There is actually good research about what methods work and don't work in
+&lt;li&gt;
+&lt;p&gt;There is actually good research about what methods work and don't work in
 teaching. He referenced
 &lt;a href="http://www.slideshare.net/richardcookau/john-hattie-effect-sizes-on-achievement"&gt;this presentation&lt;/a&gt;,
 which lists just about every possible pedagogical method, and the net
@@ -2314,8 +2399,10 @@ school, you have to tell me what to take out."  People like to go on that
 schools need to teach more of this or more of that, and computing and
 programming tends to be high on that list these days, but anyone who does
 not discuss what things should be removed from the curriculum, which is
-already quite full, is not being honest about the discussion.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The other big point Greg made is that we need more incremental massive
+already quite full, is not being honest about the discussion.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The other big point Greg made is that we need more incremental massive
 collaboration in teaching. This is the same model that has built open source
 and Wikipedia, but is mostly absent from teaching. Incremental change is
 important here, as well. It is more useful for someone to contribute fixes
@@ -2334,12 +2421,13 @@ fix is "correct". If I fix an incorrect fact on Wikipedia, it is less
 easy, but I can still cite and check references to make sure it is
 correct.  But for teaching, it is very difficult to know what methods work
 and what don't, and as Greg pointed out at the beginning of his talk, the
-effects of different methods can be very counterintuitive.&lt;/p&gt;&lt;/li&gt;
+effects of different methods can be very counterintuitive.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The second talk that I recommend is
 &lt;a href="http://jakevdp.github.io/"&gt;Jake VanderPlas&lt;/a&gt;'s talk about Frequentism and
 Bayesianism.&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/KhAUfqhLakw" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
+&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/KhAUfqhLakw" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
 &lt;p&gt;I won't summarize this talk, as Jake has done a much better job in his blog
 (parts
 &lt;a href="http://jakevdp.github.io/blog/2014/03/11/frequentism-and-bayesianism-a-practical-intro/"&gt;one&lt;/a&gt;,
@@ -2375,12 +2463,12 @@ basically solved the packaging problem, the ubiquitous problem in Python since
 people started using it.&lt;/p&gt;
 &lt;h3&gt;Conda: The Packaging Problem Solved&lt;/h3&gt;
 &lt;p&gt;Here is the talk I gave on Conda:&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/UaIvrDWrIWM" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
+&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/UaIvrDWrIWM" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
 &lt;p&gt;I made the claim in my talk that Conda has solved the packaging problem, and
 the general feel from people I talked to who are using Conda is that it has.&lt;/p&gt;
 &lt;p&gt;I think this slide from my presentation summarizes why Conda solves the
 packaging problem.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://asmeurer.github.io/blog/galleries/conda_scipy2014_slide.png" width="500"&gt;&lt;/p&gt;
+&lt;img src="https://asmeurer.github.io/blog/galleries/conda_scipy2014_slide.png" width="500"&gt;
 &lt;p&gt;One of the most amazing things about the scientific Python community, and one
 of the things that I think really sets it apart from other Python communities,
 is the use of Python alongside other languages, such as C, C++, Fortran, R, or
@@ -2429,7 +2517,7 @@ framework that makes it easy to have completely reproducible builds by hashing
 all the information that was used to compile a package, and recompiling when
 any of that information changes. You can learn more about HashDist by watching
 Aron's talk from the conference:&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/wviHkzk0AkY" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
+&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/wviHkzk0AkY" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
 &lt;p&gt;I am now convinced that HashDist is a good solution for people who still want
 the control of compiling their own packages. Once HashDist is able to produce
 Conda packages, then you can gain the benefits of both worlds: Conda's
@@ -2455,7 +2543,7 @@ a big deal if you miss the beginning.&lt;/p&gt;
 shows. There were noticeably more women at the conference this year, and not
 just insomuch as there were more people at all.&lt;/p&gt;
 &lt;p&gt;Finally, I leave you with the greatest lightening talk. Ever.&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/ln4nE_EVDCg?start=3254" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
+&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/ln4nE_EVDCg?start=3254" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
 &lt;!-- LocalWords:  Gede Obinna Nwanna iframe src frameborder allowfullscreen -
 --&gt;
 &lt;!--  LocalWords:  - VanderPlas 's PyDy 's img Ahmadia
@@ -2532,17 +2620,23 @@ walk through &lt;code&gt;conf.py&lt;/code&gt; and change the settings to your li
 &lt;h3&gt;Tricks&lt;/h3&gt;
 &lt;p&gt;Here are some useful tricks:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;To enable MathJax, you have to type &lt;code&gt;mathjax&lt;/code&gt; in a line by itself in the
+&lt;li&gt;
+&lt;p&gt;To enable MathJax, you have to type &lt;code&gt;mathjax&lt;/code&gt; in a line by itself in the
 metadata file. There are some bugs right now, but ideally you could do inline
 math with &lt;code&gt;$math$&lt;/code&gt; and display math with &lt;code&gt;$$math$$&lt;/code&gt;. &lt;code&gt;$math$&lt;/code&gt; doesn't work
 currently, but you can do &lt;code&gt;\\(math\\)&lt;/code&gt; (both &lt;code&gt;\&lt;/code&gt;s are required, although this
 is likely a bug). You can do &lt;code&gt;\\[math\\]&lt;/code&gt; for display math.  Here are some
-examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 .$$&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Your one-stop command when blogging is &lt;code&gt;nikola auto&lt;/code&gt;. This requires
+examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 .$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Your one-stop command when blogging is &lt;code&gt;nikola auto&lt;/code&gt;. This requires
 &lt;code&gt;livereload&lt;/code&gt;. This will serve the blog on localhost, and automatically
 rebuild it when any change is made (and I really mean &lt;em&gt;any&lt;/em&gt; change: it can
-even detect when you change Nikola itself).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;I have the following in my conf.py to deploy:&lt;/p&gt;&lt;/li&gt;
+even detect when you change Nikola itself).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I have the following in my conf.py to deploy:&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;DEPLOY_COMMANDS = [
     "git checkout gh-pages",

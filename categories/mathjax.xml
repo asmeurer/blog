@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Aaron Meurer's Blog (mathjax)</title><link>https://asmeurer.github.io/blog/</link><description></description><atom:link href="https://asmeurer.github.io/blog/categories/mathjax.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 03 Oct 2016 20:58:35 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What happens when you mess with hashing in Python</title><link>https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post is based off a Jupyter notebook I made in 2013. You can download
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog (Posts about mathjax)</title><link>https://asmeurer.github.io/blog/</link><description></description><atom:link href="https://asmeurer.github.io/blog/categories/mathjax.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 19 Jun 2017 18:52:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What happens when you mess with hashing in Python</title><link>https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post is based off a Jupyter notebook I made in 2013. You can download
 the original &lt;a href="https://gist.github.com/asmeurer/6046766"&gt;here&lt;/a&gt;. That notebook
 was based off a
 &lt;a href="https://github.com/sympy/sympy/wiki/What-happens-when-you-mess-with-hashing"&gt;wiki page&lt;/a&gt;
@@ -126,14 +126,22 @@ unhashable objects like lists.&lt;/p&gt;
 &lt;p&gt;The uses for associative arrays are boundless. &lt;code&gt;dict&lt;/code&gt; is one of the most
 useful data types in the Python language. Some example uses are&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Extension of &lt;code&gt;list&lt;/code&gt; with "missing values". For example, &lt;code&gt;{0: 'a', 2: 7}&lt;/code&gt;
+&lt;li&gt;
+&lt;p&gt;Extension of &lt;code&gt;list&lt;/code&gt; with "missing values". For example, &lt;code&gt;{0: 'a', 2: 7}&lt;/code&gt;
 would correspond to the above list &lt;code&gt;l&lt;/code&gt; with the value &lt;code&gt;'b'&lt;/code&gt; corresponding to
-the key &lt;code&gt;1&lt;/code&gt; removed.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Representation of a mathematical function with a finite domain.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A poor-man's database (the Wikipedia image above is an associative array
-mapping names to telephone numbers).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Implementing a &lt;a href="https://stackoverflow.com/q/60208/161801"&gt;Pythonic version&lt;/a&gt;
-of the switch-case statement.&lt;/p&gt;&lt;/li&gt;
+the key &lt;code&gt;1&lt;/code&gt; removed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Representation of a mathematical function with a finite domain.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A poor-man's database (the Wikipedia image above is an associative array
+mapping names to telephone numbers).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Implementing a &lt;a href="https://stackoverflow.com/q/60208/161801"&gt;Pythonic version&lt;/a&gt;
+of the switch-case statement.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The other type of hash table, &lt;code&gt;set&lt;/code&gt;, more closely matches the definition I
 gave above for a hash table. A &lt;code&gt;set&lt;/code&gt; is just a container of hashable
@@ -230,10 +238,14 @@ that your &lt;code&gt;__hash__&lt;/code&gt; actually agrees with your &lt;code&g
 &lt;p&gt;Now to the fun stuff. What happens if we break some of the invariants that
 Python expects of hashing. Python expects two key invariants to hold&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;The hash of an object does not change across the object's lifetime (in
-other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
-hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The hash of an object does not change across the object's lifetime (in
+other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
+hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;As we shall see, Python expects, but does not enforce either of these.&lt;/p&gt;
 &lt;h3&gt;Example 1: Mutating a hash&lt;/h3&gt;
@@ -623,10 +635,14 @@ that something had better be immutable.&lt;/p&gt;
 &lt;p&gt;The conclusion is this: don't mess with hashing. The two invariants above are
 important. Let's restate them here,&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;The hash of an object must not change across the object's lifetime (in
-other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
-hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The hash of an object must not change across the object's lifetime (in
+other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
+hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;If you don't follow these rules, you will run into very subtle issues, because
 very basic Python operations expect these invariants.&lt;/p&gt;
@@ -652,26 +668,35 @@ this reason, I generally don't recommend this second option unless you know
 what you are doing.&lt;/p&gt;
 &lt;p&gt;Finally, to keep invariant 2, here are some tips:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Make sure that the parts of the object that you use to compare equality are
+&lt;li&gt;
+&lt;p&gt;Make sure that the parts of the object that you use to compare equality are
 not themselves mutable. If they are, then your object cannot itself be
 immutable. This means that if &lt;code&gt;a == b&lt;/code&gt; depends on &lt;code&gt;a.attr == b.attr&lt;/code&gt;, and
 &lt;code&gt;a.attr&lt;/code&gt; is a list, then you will need to use a tuple instead (if you want
-&lt;code&gt;a&lt;/code&gt; to be hashable).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;You don't have to invent a hash function. If you find yourself doing
+&lt;code&gt;a&lt;/code&gt; to be hashable).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You don't have to invent a hash function. If you find yourself doing
 bitshifts and XORs, you're doing it wrong. Reuse Python's builtin hashable
 objects. If the hash of your object should depend on the hash of &lt;code&gt;a&lt;/code&gt; and
 &lt;code&gt;b&lt;/code&gt;, define &lt;code&gt;__hash__&lt;/code&gt; to return &lt;code&gt;hash((a, b))&lt;/code&gt;. If the order of &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt;
-does not matter, use &lt;code&gt;hash(frozenset([a, b]))&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Don't cache something unless you know that the entire cached state will not
+does not matter, use &lt;code&gt;hash(frozenset([a, b]))&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't cache something unless you know that the entire cached state will not
 be changed over the lifetime of the cache. Hashable objects are actually
 great for caches. If they properly satisfy invariant 1, and all the state
 that should be cached is part of the hash, then you will not need to
-worry. And the best part is that you can just use &lt;code&gt;dict&lt;/code&gt; for your cache.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Unless you really need the performance or memory gains, don't make your
+worry. And the best part is that you can just use &lt;code&gt;dict&lt;/code&gt; for your cache.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unless you really need the performance or memory gains, don't make your
 objects mutable. This makes programs much harder to reason about. Some
 functional programming languages take this idea so far that they don't allow
-any mutable objects.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Don't worry about the situation where &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; but &lt;code&gt;a != b&lt;/code&gt;. This is a hash collision. Unlike the issues we looked at here, hash
+any mutable objects.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't worry about the situation where &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; but &lt;code&gt;a != b&lt;/code&gt;. This is a hash collision. Unlike the issues we looked at here, hash
 collisions are expected and checked for in Python. For example, our
 &lt;code&gt;HashToOne&lt;/code&gt; object from the beginning will always hash to 1, but different
 instances will compare unequal. We can see that the right thing is done in
@@ -690,8 +715,10 @@ True
 [&amp;lt;__main__.HashToOne at 0x102c32cd0&amp;gt;, &amp;lt;__main__.HashToOne at 0x102c32a10&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The only concern with hash collisions is that too many of them can remove
-the performance gains of &lt;code&gt;dict&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Conversely, if you are writing something that uses an object's hash, remember
+the performance gains of &lt;code&gt;dict&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Conversely, if you are writing something that uses an object's hash, remember
 that hash collisions are possible and unavoidable.&lt;/p&gt;
 &lt;p&gt;A classic example of a hash collision is &lt;code&gt;-1&lt;/code&gt; and &lt;code&gt;-2&lt;/code&gt;. Remember I
 mentioned above that small integers hash to themselves:&lt;/p&gt;
@@ -711,8 +738,10 @@ the Python developers picked the next closest thing.&lt;/p&gt;
 &lt;p&gt;If you want to check if something handles hash collisions correctly, this is
 a simple example.  I should also note that the fact that integers hash to
 themselves is an implementation detail of CPython that may not be true in
-alternate Python implementations.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Finally, we didn't discuss this much here, but don't assume that the hash of
+alternate Python implementations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally, we didn't discuss this much here, but don't assume that the hash of
 your object will be the same across Python sessions. In Python 3.3 and up,
 hash values of strings are randomized from a value that is seeded when
 Python starts up. This also affects any object whose hash is computed
@@ -724,7 +753,8 @@ Python sessions.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; print(hash('a'))
 8897161376854729812
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;</description><category>mathjax</category><guid>https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</guid><pubDate>Tue, 26 Jan 2016 04:13:53 GMT</pubDate></item><item><title>Moving to GitHub pages with Nikola</title><link>https://asmeurer.github.io/blog/posts/moving-to-github-pages-with-nikola/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;So I've finally decided to move my blog from Wordpress to GitHub pages.  I
 highly recommend it if you are technically skilled enough to do it. I was
 getting pretty annoyed at Wordpress. It forces you to write your posts in
@@ -798,17 +828,23 @@ walk through &lt;code&gt;conf.py&lt;/code&gt; and change the settings to your li
 &lt;h3&gt;Tricks&lt;/h3&gt;
 &lt;p&gt;Here are some useful tricks:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;To enable MathJax, you have to type &lt;code&gt;mathjax&lt;/code&gt; in a line by itself in the
+&lt;li&gt;
+&lt;p&gt;To enable MathJax, you have to type &lt;code&gt;mathjax&lt;/code&gt; in a line by itself in the
 metadata file. There are some bugs right now, but ideally you could do inline
 math with &lt;code&gt;$math$&lt;/code&gt; and display math with &lt;code&gt;$$math$$&lt;/code&gt;. &lt;code&gt;$math$&lt;/code&gt; doesn't work
 currently, but you can do &lt;code&gt;\\(math\\)&lt;/code&gt; (both &lt;code&gt;\&lt;/code&gt;s are required, although this
 is likely a bug). You can do &lt;code&gt;\\[math\\]&lt;/code&gt; for display math.  Here are some
-examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 .$$&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Your one-stop command when blogging is &lt;code&gt;nikola auto&lt;/code&gt;. This requires
+examples. Inline: \( \sin ^2{x} + \cos^2{x} = 1\). Display: $$ e^{i\pi} + 1 = 0 .$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Your one-stop command when blogging is &lt;code&gt;nikola auto&lt;/code&gt;. This requires
 &lt;code&gt;livereload&lt;/code&gt;. This will serve the blog on localhost, and automatically
 rebuild it when any change is made (and I really mean &lt;em&gt;any&lt;/em&gt; change: it can
-even detect when you change Nikola itself).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;I have the following in my conf.py to deploy:&lt;/p&gt;&lt;/li&gt;
+even detect when you change Nikola itself).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I have the following in my conf.py to deploy:&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;DEPLOY_COMMANDS = [
     "git checkout gh-pages",

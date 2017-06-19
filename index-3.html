@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<html prefix="            og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
-<base href="https://asmeurer.github.io/blog/index-3.html">
 <meta name="description" content="My blog">
 <meta name="viewport" content="width=device-width">
 <title>Aaron Meurer's Blog (old posts, page 3) | Aaron Meurer's Blog</title>
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
-<meta content="#5670d4" name="theme-color">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="https://asmeurer.github.io/blog/index-3.html">
 <link rel="prev" href="." type="text/html">
 <link rel="next" href="index-2.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]-->
 </head>
 <body>
-<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
     <div id="container">
          
     <header id="header"><h1 id="brand"><a href="https://asmeurer.github.io/blog/" title="Aaron Meurer's Blog" rel="home">
@@ -39,7 +39,7 @@
     </ul></nav></header><main id="content"><div class="postindex">
     <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/what-happens-when-you-mess-with-hashing-in-python/" class="u-url">What happens when you mess with hashing in Python</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
             </span></p>
             <p class="dateline"><a href="posts/what-happens-when-you-mess-with-hashing-in-python/" rel="bookmark"><time class="published dt-published" datetime="2016-01-25T22:13:53-06:00" title="2016-01-25 22:13">2016-01-25 22:13</time></a></p>
@@ -179,14 +179,22 @@ unhashable objects like lists.</p>
 <p>The uses for associative arrays are boundless. <code>dict</code> is one of the most
 useful data types in the Python language. Some example uses are</p>
 <ul>
-<li><p>Extension of <code>list</code> with "missing values". For example, <code>{0: 'a', 2: 7}</code>
+<li>
+<p>Extension of <code>list</code> with "missing values". For example, <code>{0: 'a', 2: 7}</code>
 would correspond to the above list <code>l</code> with the value <code>'b'</code> corresponding to
-the key <code>1</code> removed.</p></li>
-<li><p>Representation of a mathematical function with a finite domain.</p></li>
-<li><p>A poor-man's database (the Wikipedia image above is an associative array
-mapping names to telephone numbers).</p></li>
-<li><p>Implementing a <a href="https://stackoverflow.com/q/60208/161801">Pythonic version</a>
-of the switch-case statement.</p></li>
+the key <code>1</code> removed.</p>
+</li>
+<li>
+<p>Representation of a mathematical function with a finite domain.</p>
+</li>
+<li>
+<p>A poor-man's database (the Wikipedia image above is an associative array
+mapping names to telephone numbers).</p>
+</li>
+<li>
+<p>Implementing a <a href="https://stackoverflow.com/q/60208/161801">Pythonic version</a>
+of the switch-case statement.</p>
+</li>
 </ul>
 <p>The other type of hash table, <code>set</code>, more closely matches the definition I
 gave above for a hash table. A <code>set</code> is just a container of hashable
@@ -283,10 +291,14 @@ that your <code>__hash__</code> actually agrees with your <code>__eq__</code>.</
 <p>Now to the fun stuff. What happens if we break some of the invariants that
 Python expects of hashing. Python expects two key invariants to hold</p>
 <ol>
-<li><p><strong>The hash of an object does not change across the object's lifetime (in
-other words, a hashable object should be immutable).</strong></p></li>
-<li><p><strong><code>a == b</code> implies <code>hash(a) == hash(b)</code> (note that the reverse might not
-hold in the case of a hash collision).</strong></p></li>
+<li>
+<p><strong>The hash of an object does not change across the object's lifetime (in
+other words, a hashable object should be immutable).</strong></p>
+</li>
+<li>
+<p><strong><code>a == b</code> implies <code>hash(a) == hash(b)</code> (note that the reverse might not
+hold in the case of a hash collision).</strong></p>
+</li>
 </ol>
 <p>As we shall see, Python expects, but does not enforce either of these.</p>
 <h3>Example 1: Mutating a hash</h3>
@@ -677,10 +689,14 @@ that something had better be immutable.</p>
 <p>The conclusion is this: don't mess with hashing. The two invariants above are
 important. Let's restate them here,</p>
 <ol>
-<li><p><strong>The hash of an object must not change across the object's lifetime (in
-other words, a hashable object should be immutable).</strong></p></li>
-<li><p><strong><code>a == b</code> implies <code>hash(a) == hash(b)</code> (note that the reverse might not
-hold in the case of a hash collision).</strong></p></li>
+<li>
+<p><strong>The hash of an object must not change across the object's lifetime (in
+other words, a hashable object should be immutable).</strong></p>
+</li>
+<li>
+<p><strong><code>a == b</code> implies <code>hash(a) == hash(b)</code> (note that the reverse might not
+hold in the case of a hash collision).</strong></p>
+</li>
 </ol>
 <p>If you don't follow these rules, you will run into very subtle issues, because
 very basic Python operations expect these invariants.</p>
@@ -706,25 +722,33 @@ this reason, I generally don't recommend this second option unless you know
 what you are doing.</p>
 <p>Finally, to keep invariant 2, here are some tips:</p>
 <ul>
-<li><p>Make sure that the parts of the object that you use to compare equality are
+<li>
+<p>Make sure that the parts of the object that you use to compare equality are
 not themselves mutable. If they are, then your object cannot itself be
 immutable. This means that if <code>a == b</code> depends on <code>a.attr == b.attr</code>, and
 <code>a.attr</code> is a list, then you will need to use a tuple instead (if you want
-<code>a</code> to be hashable).</p></li>
-<li><p>You don't have to invent a hash function. If you find yourself doing
+<code>a</code> to be hashable).</p>
+</li>
+<li>
+<p>You don't have to invent a hash function. If you find yourself doing
 bitshifts and XORs, you're doing it wrong. Reuse Python's builtin hashable
 objects. If the hash of your object should depend on the hash of <code>a</code> and
 <code>b</code>, define <code>__hash__</code> to return <code>hash((a, b))</code>. If the order of <code>a</code> and <code>b</code>
-does not matter, use <code>hash(frozenset([a, b]))</code>.</p></li>
-<li><p>Don't cache something unless you know that the entire cached state will not
+does not matter, use <code>hash(frozenset([a, b]))</code>.</p>
+</li>
+<li>
+<p>Don't cache something unless you know that the entire cached state will not
 be changed over the lifetime of the cache. Hashable objects are actually
 great for caches. If they properly satisfy invariant 1, and all the state
 that should be cached is part of the hash, then you will not need to
-worry. And the best part is that you can just use <code>dict</code> for your cache.</p></li>
-<li><p>Unless you really need the performance or memory gains, don't make your
+worry. And the best part is that you can just use <code>dict</code> for your cache.</p>
+</li>
+<li>
+<p>Unless you really need the performance or memory gains, don't make your
 objects mutable. This makes programs much harder to reason about. Some
 functional programming languages take this idea so far that they don't allow
-any mutable objects.</p></li>
+any mutable objects.</p>
+</li>
 <li>
 <p>Don't worry about the situation where <code>hash(a) == hash(b)</code> but <code>a != b</code>. This is a hash collision. Unlike the issues we looked at here, hash
 collisions are expected and checked for in Python. For example, our
@@ -798,9 +822,9 @@ Python sessions.</p>
             <li class="next">
                 <a href="index-2.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
-            MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-            </script></main><footer id="footer"><p>Contents © 2017         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </ul></nav><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-yYfngbEKv4RENfGDvNUqJTqGFcKf31NJEe9OTnnMH3Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></main><footer id="footer"><p>Contents © 2017         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 </p>
 <p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
@@ -821,9 +845,10 @@ Python sessions.</p>
 </div>
 
 
-    
-    
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+        <script src="assets/js/baguetteBox.min.js"></script><script>baguetteBox.run('a.reference', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
