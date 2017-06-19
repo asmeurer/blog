@@ -23,7 +23,7 @@ you already have one set up and hosted on GitHub.
 
 ## Step 1: Create a .travis.yml file
 
-Create a `.travis.yml` file like the one below
+**Create a `.travis.yml` file like the one below**
 
 ``` yaml
 sudo: false
@@ -52,8 +52,8 @@ script:
 - The `set -e` line is important. It will prevent the blog from being deployed
   if the build fails.
 
-Then go to [https://travis-ci.org/profile/](http://www.asmeurer.com/blog/) and enable Travis for your blog
-repo.
+**Then go to [https://travis-ci.org/profile/](http://www.asmeurer.com/blog/) and enable Travis for your blog
+repo.**
 
 ## Step 2: Run doctr
 
@@ -63,7 +63,7 @@ Travis CI to GitHub Pages a breeze. It automatically handles creating and
 encrypting a deploy SSH key for GitHub, and the syncing of files to the
 `gh-pages` branch.
 
-First install doctr. `doctr` requires
+**First install doctr.** `doctr` requires
 Python 3.5+, so you'll need that. You can install it with conda:
 
 ```bash
@@ -76,13 +76,13 @@ or if you don't use conda, with pip
 pip install doctr
 ```
 
-Then run
+**Then run this command in your blog repo:**
 
 ```bash
 doctr configure
 ```
 
-in your blog repo.  This will ask you for your GitHub username and password,
+This will ask you for your GitHub username and password,
 and for the name of the repo you are deploying from and to (for instance, for
 my blog, I entered `asmeurer/blog`). The output will look something like this:
 
@@ -145,9 +145,9 @@ in your .travis.yml.
 
 Follow the steps at the end of the command:
 
-1. Commit the file `github_deploy_key.enc`.
+1. **Commit the file `github_deploy_key.enc`.**
 2. You already have `doctr deploy` in your `.travis.yml` from step 1 above.
-3. Add the `env` block to your `.travis.yml`. This will let Travis CI decrypt
+3. **Add the `env` block to your `.travis.yml`.** This will let Travis CI decrypt
 the SSH key used to deploy to `gh-pages`.
 
 
