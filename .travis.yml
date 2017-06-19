@@ -14,4 +14,4 @@ install:
 script:
   - set -e
   - nikola build
-  - doctr deploy . --built-docs output/ --no-require-master
+  - doctr deploy . --built-docs output/
