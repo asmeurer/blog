@@ -74,6 +74,10 @@ and most of my open source work is on my
   [line_profiler](https://pypi.python.org/pypi/line_profiler) are also good
   (and serve different purposes).
 
+- [Prompt Toolkit](https://github.com/jonathanslenders/python-prompt-toolkit),
+  a library for building interactive prompt-based terminal applications, such
+  as shells and REPLs. I use this heavily in mypython (see below).
+
 # Side stuff
 
 Stuff I've done on my own. In no particular order.

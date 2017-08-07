@@ -95,6 +95,7 @@
 ./archive.html
 ./assets/css/all-nocdn.css
 ./assets/css/all.css
+./assets/css/baguetteBox.css
 ./assets/css/baguetteBox.min.css
 ./assets/css/code.css
 ./assets/css/html4css1.css
@@ -103,6 +104,7 @@
 ./assets/css/nikola_rst.css
 ./assets/css/rst.css
 ./assets/css/theme.css
+./assets/js/baguetteBox.js
 ./assets/js/baguetteBox.min.js
 ./assets/js/fancydates.js
 ./assets/js/flowr.js
