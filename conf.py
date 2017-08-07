@@ -19,6 +19,9 @@ SITE_URL = "https://asmeurer.github.io/blog/"
 BLOG_EMAIL = "asmeurer@gmail.com"
 BLOG_DESCRIPTION = "My blog"
 
+# https://github.com/getnikola/nikola/issues/2847
+GITHUB_COMMIT_SOURCE = False
+
 # Nikola is multilingual!
 #
 # Currently supported languages are:
