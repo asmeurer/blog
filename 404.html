@@ -12,25 +12,37 @@
   color: rgba(255, 0, 0, 1);
   font-size: 404px;
 }
+.go-home {
+  position: relative;
+  top: 70%;
+
+  text-align: center;
+}
 </style>
-  <body><span id="404-message" class="content">404</span>
+  <body><div id="404-message" class="content">404</div>
+    <div id="go-home" class="go-home"><a href="http://asmeurer.com">Go to asmeurer.com</a></div>
 <script>
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async function animate() {
-    var span = document.getElementById("404-message");
+    var number = document.getElementById("404-message");
     var max = 2000000;
     var min = 100000;
+    var go_home = document.getElementById("go-home")
+    var text = go_home.innerHTML;
+    go_home.innerHTML = "";
+
     var rate = Math.random()*(max - min) + min;
     //rate = 2000000;
     for (i=1; i <= 404; i++) {
       await sleep(i*i*i/rate);
-      span.style.fontSize = i + "px";
-      span.style.color = "rgba(" + Math.floor(255*i/404) + ", 0, 0, 1)";
-      span.innerHTML = i;
+      number.style.fontSize = i + "px";
+      number.style.color = "rgba(" + Math.floor(255*i/404) + ", 0, 0, 1)";
+      number.innerHTML = i;
     }
+    go_home.innerHTML = text;
   }
 
   animate();
