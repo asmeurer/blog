@@ -1,0 +1,39 @@
+<html>
+<style>
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
+
+  color: rgba(255, 0, 0, 1);
+  font-size: 404px;
+}
+</style>
+  <body><span id="404-message" class="content">404</span>
+<script>
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function animate() {
+    var span = document.getElementById("404-message");
+    var max = 2000000;
+    var min = 100000;
+    var rate = Math.random()*(max - min) + min;
+    //rate = 2000000;
+    for (i=1; i <= 404; i++) {
+      await sleep(i*i*i/rate);
+      span.style.fontSize = i + "px";
+      span.style.color = "rgba(" + Math.floor(255*i/404) + ", 0, 0, 1)";
+      span.innerHTML = i;
+    }
+  }
+
+  animate();
+</script>
+</body>
+</html>
