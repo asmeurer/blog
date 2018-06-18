@@ -49,6 +49,12 @@ Stuff I've done on my own. In no particular order.
   deploying docs from Travis CI to GitHub pages
   ([Gil Forsyth](https://github.com/gforsyth/) also works on this).
 
+- [Brown Water Python](https://www.asmeurer.com/brown-water-python/). Better
+  documentation for Python's
+  [tokenize](https://docs.python.org/3/library/tokenize.html) module (in the
+  spirit of Thomas Kluyver's [Green Tree
+  Snakes](https://greentreesnakes.readthedocs.io/en/latest/).
+
 - [mypython](https://github.com/asmeurer/mypython). I wrote my own Python
   REPL.
 
