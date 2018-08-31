@@ -231,10 +231,11 @@ create an object, it will be hashable.
 ```
 
 
-Implementation-wise, the hash is just the object's `id`, which corresponds to
-its position in memory. This satisfies the above conditions: it is (extremely)
-cheap to compute, and since by default objects in Python compare unequal to
-one another, objects with different hashes will be unequal.
+Implementation-wise, the hash is [based
+on](https://stackoverflow.com/a/33572401/161801) object's `id`, which
+corresponds to its position in memory. This satisfies the above conditions: it
+is (extremely) cheap to compute, and since by default objects in Python
+compare unequal to one another, objects with different hashes will be unequal.
 
 
 ```py
