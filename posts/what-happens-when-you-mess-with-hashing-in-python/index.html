@@ -256,10 +256,11 @@ create an object, it will be hashable.</p>
 &gt;&gt;&gt; hash(N)
 270498113
 </code></pre>
-<p>Implementation-wise, the hash is just the object's <code>id</code>, which corresponds to
-its position in memory. This satisfies the above conditions: it is (extremely)
-cheap to compute, and since by default objects in Python compare unequal to
-one another, objects with different hashes will be unequal.</p>
+<p>Implementation-wise, the hash is <a href="https://stackoverflow.com/a/33572401/161801">based
+on</a> object's <code>id</code>, which
+corresponds to its position in memory. This satisfies the above conditions: it
+is (extremely) cheap to compute, and since by default objects in Python
+compare unequal to one another, objects with different hashes will be unequal.</p>
 <pre><code class="language-py">&gt;&gt;&gt; M = Nothing()
 &gt;&gt;&gt; M == N
 False
