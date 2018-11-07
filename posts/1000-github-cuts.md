@@ -381,7 +381,7 @@ it). Very few complaints here, because for the most part, it "just works".
   to the GitHub release. We want people to download those, not snapshots of
   the repo.
 
-## Misc
+## Miscellaneous
 
 - **A more official way to request fixes to these cuts.** I often ask on
   Twitter, but get no response. Preferably something public so that others
