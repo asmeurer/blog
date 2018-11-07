@@ -18,3 +18,4 @@ function fancydates(fanciness, date_format) {
         dates[i].innerHTML = o;
     }
 }
+

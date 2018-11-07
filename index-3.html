@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="            og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
+<html prefix="        og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="My blog">
@@ -10,7 +10,7 @@
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="rss.xml">
 <link rel="canonical" href="https://asmeurer.github.io/blog/index-3.html">
 <link rel="prev" href="." type="text/html">
 <link rel="next" href="index-2.html" type="text/html">
@@ -34,15 +34,21 @@
                 <li><a href="work">Work</a></li>
                 <li><a href="archive.html">Archives</a></li>
                 <li><a href="rss.xml">RSS</a></li>
+
+    
+
     
     
     </ul></nav></header><main id="content"><div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/moving-away-from-python-2/" class="u-url">Moving Away from Python 2</a></h1>
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/moving-away-from-python-2/" class="u-url">Moving Away from Python 2</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
             </span></p>
-            <p class="dateline"><a href="posts/moving-away-from-python-2/" rel="bookmark"><time class="published dt-published" datetime="2016-05-19T14:00:00-04:00" title="2016-05-19 14:00">2016-05-19 14:00</time></a></p>
+            <p class="dateline">
+            <a href="posts/moving-away-from-python-2/" rel="bookmark">
+            <time class="published dt-published" datetime="2016-05-19T14:00:00-04:00" itemprop="datePublished" title="2016-05-19 14:00">2016-05-19 14:00</time></a>
+            </p>
                 <p class="commentline">
         
     <a href="posts/moving-away-from-python-2/#disqus_thread" data-disqus-identifier="cache/posts/moving-away-from-python-2.html">Comments</a>
@@ -255,12 +261,15 @@ Of course, this whole thing works just fine if conda is run in Python
 </div>
 </div>
     </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/what-happens-when-you-mess-with-hashing-in-python/" class="u-url">What happens when you mess with hashing in Python</a></h1>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/what-happens-when-you-mess-with-hashing-in-python/" class="u-url">What happens when you mess with hashing in Python</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
             </span></p>
-            <p class="dateline"><a href="posts/what-happens-when-you-mess-with-hashing-in-python/" rel="bookmark"><time class="published dt-published" datetime="2016-01-25T22:13:53-06:00" title="2016-01-25 22:13">2016-01-25 22:13</time></a></p>
+            <p class="dateline">
+            <a href="posts/what-happens-when-you-mess-with-hashing-in-python/" rel="bookmark">
+            <time class="published dt-published" datetime="2016-01-25T22:13:53-06:00" itemprop="datePublished" title="2016-01-25 22:13">2016-01-25 22:13</time></a>
+            </p>
                 <p class="commentline">
         
     <a href="posts/what-happens-when-you-mess-with-hashing-in-python/#disqus_thread" data-disqus-identifier="cache/posts/what-happens-when-you-mess-with-hashing-in-python.html">Comments</a>
@@ -1053,7 +1062,7 @@ Python sessions.</p>
         </footer>
 </div>
     
-    <div style="text-align:center">
+            <script src="assets/js/all-nocdn.js"></script><div style="text-align:center">
 <span class="st_twitterfollow_large" displaytext="Twitter Follow" st_username="asmeurer"></span>
 <span class="st_twitter_large" displaytext="Tweet"></span>
 <span class="st_googleplus_large" displaytext="Google +"></span>
@@ -1064,10 +1073,14 @@ Python sessions.</p>
 </div>
 
 
-        <script src="assets/js/baguetteBox.min.js"></script><script>baguetteBox.run('a.reference', {
+    
+    <script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
         captions: function(element) {
             return element.getElementsByTagName('img')[0].alt;
-    }});</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+    }});
+    </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

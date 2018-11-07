@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="            og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
+<html prefix="        og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="My blog">
@@ -10,7 +10,7 @@
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="rss.xml">
 <link rel="canonical" href="https://asmeurer.github.io/blog/archive.html">
 <!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]-->
 </head>
@@ -32,6 +32,9 @@
                 <li><a href="work">Work</a></li>
                 <li class="active"><a href="#">Archives<span class="sr-only"> (active)</span></a></li>
                 <li><a href="rss.xml">RSS</a></li>
+
+    
+
     
     
     </ul></nav></header><main id="content"><article class="listpage"><header><h1>Archive</h1>
@@ -79,7 +82,7 @@
         </footer>
 </div>
     
-    <div style="text-align:center">
+            <script src="assets/js/all-nocdn.js"></script><div style="text-align:center">
 <span class="st_twitterfollow_large" displaytext="Twitter Follow" st_username="asmeurer"></span>
 <span class="st_twitter_large" displaytext="Tweet"></span>
 <span class="st_googleplus_large" displaytext="Google +"></span>
@@ -90,10 +93,14 @@
 </div>
 
 
-        <script src="assets/js/baguetteBox.min.js"></script><script>baguetteBox.run('a.reference', {
+    
+    <script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
         captions: function(element) {
             return element.getElementsByTagName('img')[0].alt;
-    }});</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+    }});
+    </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
