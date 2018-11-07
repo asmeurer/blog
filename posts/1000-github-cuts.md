@@ -25,7 +25,9 @@ the open source ecosystem.
 
 But since GitHub did
 [ask](https://blog.github.com/2018-08-28-announcing-paper-cuts/) what sorts of
-changes they want to see, I'm providing a list.
+changes they want to see, I'm providing a list. In this post I'm trying to
+only ask about things that are small changes (though I realize many won't be
+as easy to fix as they may appear from the outside).
 
 These are just the things that have bothered me, personally. Other people use
 GitHub differently and no doubt have their own pain points. For instance, I
