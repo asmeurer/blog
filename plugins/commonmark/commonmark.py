@@ -30,7 +30,6 @@ from __future__ import unicode_literals
 
 import codecs
 import os
-import re
 
 try:
     import CommonMark
@@ -41,6 +40,7 @@ try:
 except ImportError:
     OrderedDict = dict  # NOQA
 
+from nikola import shortcodes as sc
 from nikola.plugin_categories import PageCompiler
 from nikola.utils import makedirs, req_missing, write_metadata
 
@@ -57,34 +57,40 @@ class CompileCommonMark(PageCompiler):
             self.parser = CommonMark.Parser()
             self.renderer = CommonMark.HtmlRenderer()
 
-    def compile_html(self, source, dest, is_two_file=True):
+    def compile_string(self, data, source_path=None, is_two_file=True, post=None, lang=None):
+        """Compile the source file into HTML strings (with shortcode support).
+
+        Returns a tuple of at least two elements: HTML string [0] and shortcode dependencies [last].
+        """
+        if CommonMark is None:
+            req_missing(['commonmark'], 'build this site (compile with CommonMark)')
+        if not is_two_file:
+            _, data = self.split_metadata(data, post, lang)
+        new_data, shortcodes = sc.extract_shortcodes(data)
+        output = self.renderer.render(self.parser.parse(new_data))
+        output, shortcode_deps = self.site.apply_shortcodes_uuid(output, shortcodes, filename=source_path, extra_context={'post': post})
+        return output, shortcode_deps
+
+    def compile(self, source, dest, is_two_file=True, post=None, lang=None):
+        """Compile the source file into HTML and save as dest."""
         if CommonMark is None:
             req_missing(['commonmark'], 'build this site (compile with CommonMark)')
         makedirs(os.path.dirname(dest))
-        try:
-            post = self.site.post_per_input_file[source]
-        except KeyError:
-            post = None
         with codecs.open(dest, "w+", "utf8") as out_file:
             with codecs.open(source, "r", "utf8") as in_file:
                 data = in_file.read()
-            if not is_two_file:
-                data = re.split('(\n\n|\r\n\r\n)', data, maxsplit=1)[-1]
-            output = self.renderer.render(self.parser.parse(data))
-            output, shortcode_deps = self.site.apply_shortcodes(output, filename=source, with_dependencies=True, extra_context=dict(post=post))
+            output, shortcode_deps = self.compile_string(data, source, is_two_file, post, lang)
             out_file.write(output)
         if post is None:
             if shortcode_deps:
                 self.logger.error(
-                    "Cannot save dependencies for post {0} due to unregistered source file name",
+                    "Cannot save dependencies for post {0} (post unknown)",
                     source)
         else:
             post._depfile[dest] += shortcode_deps
 
-    def create_post(self, path, **kw):
-        content = kw.pop('content', 'Write your post here.')
-        onefile = kw.pop('onefile', False)
-        kw.pop('is_page', False)
+    def create_post(self, path, content=None, onefile=False, is_page=False, **kw):
+        """Create post file with optional metadata."""
         metadata = OrderedDict()
         metadata.update(self.default_metadata)
         metadata.update(kw)
