@@ -318,12 +318,15 @@ My apologies if any of these actually work now: as I said,
     that is already there for Jupyter notebooks. Right now you have to view
     markdown and ReST files "raw" or edit the file to see their source.
 
+50. **Add a link to the pull request in the blame view.** Usually I want to
+    find the pull request that produced a change, not just the commit.
+
 ## Wiki
 
-50. **The wikis used to support LaTeX math with MathJax. It would be great if
+51. **The wikis used to support LaTeX math with MathJax. It would be great if
     this were re-added.**
 
-51. **The ability to set push permissions for the wiki separately from the
+52. **The ability to set push permissions for the wiki separately from the
     repo it is attached to, or otherwise create an oauth token that can only
     push to the wiki would be useful.** Context: for SymPy, we use a
     [bot](https://github.com/sympy/sympy-bot) that automatically updates our
@@ -333,7 +336,7 @@ My apologies if any of these actually work now: as I said,
 
 ## Notification emails
 
-52. **Don't clobber special emails/email headers.** GitHub adds special emails
+53. **Don't clobber special emails/email headers.** GitHub adds special emails
     like [author@noreply.github.com](mailto:author@noreply.github.com) and
     [mention@noreply.github.com](mailto:mention@noreply.github.com) to email
     notifications based on how the notification was triggered. This is useful,
@@ -349,19 +352,19 @@ My apologies if any of these actually work now: as I said,
     ability to read all of my notification emails). Ditto for the
     `X-GitHub-Reason` email headers.
 
-53. **Readd the "view issue" links in Gmail.** (I forgot what these are
+54. **Readd the "view issue" links in Gmail.** (I forgot what these are
     called). GitHub notification emails used to have these useful "view issue"
     buttons that showed up on the right in the email list in Gmail, but they
     were removed for some reason.
 
 ## API
 
-54. **Make the requests in the API docs actually return what they show in the
+55. **Make the requests in the API docs actually return what they show in the
     docs.** This means the [example
     repo](https://github.com/octocat/Hello-World/) should have actual example
     issues corresponding to what is shown in the docs.
 
-55. **Allow giving deploy key access to just one branch.** That way I can have
+56. **Allow giving deploy key access to just one branch.** That way I can have
     a deploy key for `gh-pages` and minimize the attack surface that the
     existence of that key produces. I think everyone would agree that more
     fine-grained permissions throughout the API would be nice, but this is one
@@ -375,12 +378,12 @@ is hosted on it. Very few complaints here, because for the most part, it "just
 works".
 
 
-56. [**Moar themes.**](https://twitter.com/asmeurer/status/831962312122761216)
+57. [**Moar themes.**](https://twitter.com/asmeurer/status/831962312122761216)
     Also it's awesome that you can use any GitHub repo as a theme now, but it
     turns out most random themes you find around GitHub don't actually work
     very well.
 
-57. **The steps to add HTTPS to an existing GitHub pages custom domain are a
+58. **The steps to add HTTPS to an existing GitHub pages custom domain are a
     bit confusing.**. This took us a while to figure out for
     [sympy.org](https://sympy.org). To get things to work, you have to trigger
     GitHub to issue a cert for the domain. But the UI to issue the cert is to
@@ -392,7 +395,7 @@ works".
 
 ## Settings
 
-58. **Automatically protected branches make the branch difficult to delete
+59. **Automatically protected branches make the branch difficult to delete
     when you are done with it.** My use-case is to create a branch for the
     release, which I want to protect, but I also want to delete the branch
     once it is merged. I can protect the branch automatically pretty easily,
@@ -401,29 +404,29 @@ works".
     could add a rule to allow protected branches to be deleted if they are
     up-to-date with default branch.
 
-59. **Add a way to disable the ability for non-admins to create new branches
+60. **Add a way to disable the ability for non-admins to create new branches
     on a repo.** We want all of our pull requests to come from forks. Branches
     in the repo just create confusion, for instance, they appear whenever
     someone clones the repository.
 
-60. **Related to the previous point, make pull request reverts come from
+61. **Related to the previous point, make pull request reverts come from
     forks.** Right now when someone uses the revert pull request button, it
     creates a new branch in the same repo, but it would be better if the
     branch were made in the person's fork.
 
-61. **Allow me to enable branch protection by default for new repos.**
+62. **Allow me to enable branch protection by default for new repos.**
 
-62. **Allow me to enable branch protection by default on new branches.** This
+63. **Allow me to enable branch protection by default on new branches.** This
     is more important than the previous one because of the feature that lets
     people push to your branch on a pull request (which is a great feature by
     the way).
 
-63. **Clicking a team name in the settings should default to the "members"
+64. **Clicking a team name in the settings should default to the "members"
     tab.** I don't understand why GitHub has a non-open "discussions" feature,
     but I find it to be completely useless, and generally see such things as
     harmful for open source.
 
-64. **Suggest people to add push access to.** I don't necessarily mean
+65. **Suggest people to add push access to.** I don't necessarily mean
     passively (though that could be interesting too), but I mean in the page
     to add someone, it would be nice if the popup suggested or indicated which
     people had contributed the project before, since just searching for a name
@@ -432,12 +435,12 @@ works".
 
 ## Profiles
 
-65. **Stop trying to make profile pages look "cute" with randomly highlighted
+66. **Stop trying to make profile pages look "cute" with randomly highlighted
     pull requests.** GitHub should have learned by now that profile pages
     matter a lot (whether people want them to or not), and there can be
     unintended consequences to the things that are put on them.
 
-66. **Explain what the axes actually mean in the new "activity overview".**
+67. **Explain what the axes actually mean in the new "activity overview".**
     I'm referring to
     [this](https://twitter.com/asmeurer/status/1033141923630874624) (it's
     still in beta and you have to manually enable it on your profile page).
@@ -447,31 +450,31 @@ works".
 
 ## Releases
 
-67. **Allow hiding the "source code (zip)" and "source code (tar.gz)" files in
+68. **Allow hiding the "source code (zip)" and "source code (tar.gz)" files in
     a release.** We upload our actual release files (generated by `setup.py`)
     to the GitHub release. We want people to download those, not snapshots of
     the repo.
 
 ## Miscellaneous
 
-68. **Provide a more official way to request fixes to these cuts.** I often
+69. **Provide a more official way to request fixes to these cuts.** I often
     ask on Twitter, but get no response. Preferably something public so that
     others could vote on them (but I understand if you don't want too much
     bikeshedding).
 
-69. **The repository search function doesn't support partial matches.** This
+70. **The repository search function doesn't support partial matches.** This
     is annoying for [conda-forge](https://github.com/conda-forge/). For
     instance, if I [search for
     "png"](https://github.com/conda-forge/?utf8=%E2%9C%93&q=png&type=&language=)
     it doesn't show the
     [libpng-feedstock](https://github.com/conda-forge/libpng-feedstock) repo.
 
-70. **Show commit history as a graph.** Like `git log --graph`. This would go
+71. **Show commit history as a graph.** Like `git log --graph`. This would go
     a *long* way to helping new users understand git. When I first started
     with git, understanding the history as a graph was a major part of me
     finally grokking how it worked.
 
-71. **Bring back the old "fork" UI.** The one that just had icons for all the
+72. **Bring back the old "fork" UI.** The one that just had icons for all the
     repos, and the icons didn't go away or become harder to find if you
     already had a fork. Some of us use the "fork" button to go to our
     pre-existing forks, not just to perform a fork action. This was recently
