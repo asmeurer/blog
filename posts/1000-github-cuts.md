@@ -174,6 +174,16 @@ In no particular order:
     if there are hundreds of symbols. I typically want to just jump to a
     specific file.
 
+27. **The status check on the favicon goes away when you switch to the diff
+    tab.** Kudos to Marius Gedminas for [pointing this
+    out](https://twitter.com/mgedmin/status/1058381090694553601).
+
+28. **[Apparently](https://github.com/sympy/sympy/pull/15280#issuecomment-426795606)
+    status checks that use the GitHub Apps API are forced to link into the
+    checks tab.** The checks tab is useless if no information is actually
+    published to it. It would be better if it could link straight to the
+    external site, like is done with oauth integrations.
+
 ## Reviews
 
 I wrote a [whole
@@ -188,14 +198,14 @@ See my blog post for full details on why I think the reviews feature is broken
 and actually makes things worse, not better than before. I've summarized a few
 things that could change below.
 
-27. **Make reviews non-deferred by default.** This is the biggest thing. If I
+29. **Make reviews non-deferred by default.** This is the biggest thing. If I
     had to pick only a single item on this page to be changed, it would be
     this. The issue is if I start a review and walk away from it, but forget
     to "finalize" it with a review status, the review is never actually seen
     by anyone. The simplest way to fix this would be to simply make partial
     reviews public.
 
-28. **Make Cmd-Enter default to immediate comment.** Barring the above change,
+30. **Make Cmd-Enter default to immediate comment.** Barring the above change,
     Cmd-Enter on a pull request line comment should default to immediate
     comment, not deferred (review) comment. The problem with the
     Cmd-Shift-Enter shortcut is that it is inconsistent: on a normal comment,
@@ -208,24 +218,24 @@ things that could change below.
     be a backwards incompatible change, it would be a regression fix;
     Cmd-Enter *used* to do the right thing).
 
-29. **Allow reviewing your own pull request.** There's no reason to disallow
+31. **Allow reviewing your own pull request.** There's no reason to disallow
     this, and it would often be quite useful to, for instance, mark a work in
     progress PR as such with a "request changes" review. Obviously
     self-reviews would be excluded from any required reviews.
 
-30. **Unhide the reviews box.** It should just be the same box as the comment
+32. **Unhide the reviews box.** It should just be the same box as the comment
     box, unstead of buried on the diff tab (see my [blog
     post](https://www.asmeurer.com/blog/posts/github-reviews-gripes/)).
 
-31. **Show review status in the pull request list as a red X or green check.**
+33. **Show review status in the pull request list as a red X or green check.**
     This would make it easier to see which pull requests have reviews.
 
-32. **Allow new commits to invalidate reviews.** That way they work the same
+34. **Allow new commits to invalidate reviews.** That way they work the same
     way as any other status check. (I see that this is now an option for
     required reviews, which is new since my original blog post, but it still
     doesn't affect the status as reported on the pull requests list).
 
-33. **Allow requiring zero negative reviews to merge (but not necessarily any
+35. **Allow requiring zero negative reviews to merge (but not necessarily any
     positive reviews)**. Requiring a positive review is pointless. The person
     merging can just add one real quick before they merge, but it is
     unnecessary extra work. On the other hand allowing people with push access
@@ -233,24 +243,24 @@ things that could change below.
 
 ## Web editor
 
-34. **The web editor seems to have a search function, but I can't get it to
+36. **The web editor seems to have a search function, but I can't get it to
     actually work.** Half the time Cmd-F pops open the browser search, which
     doesn't find text that isn't on screen. And when I press Cmd-G to actually
     do the search, it doesn't work (and there are no buttons to perform the
     search either).
 
-35. **Add basic syntax testing in the web editor for common languages to catch
+37. **Add basic syntax testing in the web editor for common languages to catch
     basic mistakes.**
 
 ## Mobile site
 
-36. **Please make the mobile site work with iOS 10.** I don't see any reason
+38. **Please make the mobile site work with iOS 10.** I don't see any reason
     why simple things like buttons (like the merge button or the comment
     button) shouldn't work on a slightly older browser. No, I am not a web
     developer, but I do use my phone a lot and I've noticed that literally
     every other website works just fine on it.
 
-37. **Add a way to disable the mobile site permanently.** For the most part,
+39. **Add a way to disable the mobile site permanently.** For the most part,
     the mobile site is useless (see below). If you aren't going to put full
     development effort into it, allow me to disable it permanently so that
     every time I visit [github.com](https://github.com) on my phone it goes to
@@ -266,27 +276,27 @@ want.
 My apologies if any of these actually work now: as I said,
 [github.com](https://github.com) doesn't actually work at all on my phone.
 
-38. **Cannot search issues on mobile.**
+40. **Cannot search issues on mobile.**
 
-39. **Cannot make a line comment that *isn't* a review on mobile.**
+41. **Cannot make a line comment that *isn't* a review on mobile.**
 
-40. **Cannot view lines beyond the default diff in pull requests on mobile.**
+42. **Cannot view lines beyond the default diff in pull requests on mobile.**
 
-41. **Show more than 2 lines of the README and 0 lines of the code by default
+43. **Show more than 2 lines of the README and 0 lines of the code by default
     on project pages.** Yes mobile screens are small but it's also not hard to
     scroll on them.
 
-42. **Support Jupyter notebook rendering on mobile.**
+44. **Support Jupyter notebook rendering on mobile.**
 
 ## Files view
 
-43. **GitHub needs a better default color theme for syntax highlighting.**
+45. **GitHub needs a better default color theme for syntax highlighting.**
     Most of the colors are very similar to one another and hard to
     differentiate. Also things like strings are black, even though one of the
     most useful aspects of syntax highlighting generally is to indicate
     whether something is in a string or not.
 
-44. **Add MathJax support to markdown files.** This would be amazingly useful
+46. **Add MathJax support to markdown files.** This would be amazingly useful
     for SymPy, as well as many scientific software projects. Right now if you
     want this you have to use a Jupyter notebook. MathJax support in
     issue/pull request comments would be awesome as well, though I'm not
@@ -294,10 +304,10 @@ My apologies if any of these actually work now: as I said,
 
 ## Wiki
 
-45. **The wikis used to support LaTeX math with MathJax. It would be great if
+47. **The wikis used to support LaTeX math with MathJax. It would be great if
     this were re-added.**
 
-46. **The ability to set push permissions for the wiki separately from the
+48. **The ability to set push permissions for the wiki separately from the
     repo it is attached to, or otherwise create an oauth token that can only
     push to the wiki would be useful.** Context: for SymPy, we use a
     [bot](https://github.com/sympy/sympy-bot) that automatically updates our
@@ -307,7 +317,7 @@ My apologies if any of these actually work now: as I said,
 
 ## Notification emails
 
-47. **Don't clobber special emails/email headers.** GitHub adds special emails
+49. **Don't clobber special emails/email headers.** GitHub adds special emails
     like [author@noreply.github.com](mailto:author@noreply.github.com) and
     [mention@noreply.github.com](mailto:mention@noreply.github.com) to email
     notifications based on how the notification was triggered. This is useful,
@@ -323,19 +333,19 @@ My apologies if any of these actually work now: as I said,
     ability to read all of my notification emails). Ditto for the
     `X-GitHub-Reason` email headers.
 
-48. **Readd the "view issue" links in Gmail.** (I forgot what these are
+50. **Readd the "view issue" links in Gmail.** (I forgot what these are
     called). GitHub notification emails used to have these useful "view issue"
     buttons that showed up on the right in the email list in Gmail, but they
     were removed for some reason.
 
 ## API
 
-49. **Make the requests in the API docs actually return what they show in the
+51. **Make the requests in the API docs actually return what they show in the
     docs.** This means the [example
     repo](https://github.com/octocat/Hello-World/) should have actual example
     issues corresponding to what is shown in the docs.
 
-50. **Allow giving deploy key access to just one branch.** That way I can have
+52. **Allow giving deploy key access to just one branch.** That way I can have
     a deploy key for `gh-pages` and minimize the attack surface that the
     existence of that key produces. I think everyone would agree that more
     fine-grained permissions throughout the API would be nice, but this is one
@@ -349,12 +359,12 @@ is hosted on it. Very few complaints here, because for the most part, it "just
 works".
 
 
-51. [**Moar themes.**](https://twitter.com/asmeurer/status/831962312122761216)
+53. [**Moar themes.**](https://twitter.com/asmeurer/status/831962312122761216)
     Also it's awesome that you can use any GitHub repo as a theme now, but it
     turns out most random themes you find around GitHub don't actually work
     very well.
 
-52. **The steps to add HTTPS to an existing GitHub pages custom domain are a
+54. **The steps to add HTTPS to an existing GitHub pages custom domain are a
     bit confusing.**. This took us a while to figure out for
     [sympy.org](https://sympy.org). To get things to work, you have to trigger
     GitHub to issue a cert for the domain. But the UI to issue the cert is to
@@ -366,7 +376,7 @@ works".
 
 ## Settings
 
-53. **Automatically protected branches make the branch difficult to delete
+55. **Automatically protected branches make the branch difficult to delete
     when you are done with it.** My use-case is to create a branch for the
     release, which I want to protect, but I also want to delete the branch
     once it is merged. I can protect the branch automatically pretty easily,
@@ -375,29 +385,29 @@ works".
     could add a rule to allow protected branches to be deleted if they are
     up-to-date with default branch.
 
-54. **Add a way to disable the ability for non-admins to create new branches
+56. **Add a way to disable the ability for non-admins to create new branches
     on a repo.** We want all of our pull requests to come from forks. Branches
     in the repo just create confusion, for instance, they appear whenever
     someone clones the repository.
 
-55. **Related to the previous point, make pull request reverts come from
+57. **Related to the previous point, make pull request reverts come from
     forks.** Right now when someone uses the revert pull request button, it
     creates a new branch in the same repo, but it would be better if the
     branch were made in the person's fork.
 
-56. **Allow me to enable branch protection by default for new repos.**
+58. **Allow me to enable branch protection by default for new repos.**
 
-57. **Allow me to enable branch protection by default on new branches.** This
+59. **Allow me to enable branch protection by default on new branches.** This
     is more important than the previous one because of the feature that lets
     people push to your branch on a pull request (which is a great feature by
     the way).
 
-58. **Clicking a team name in the settings should default to the "members"
+60. **Clicking a team name in the settings should default to the "members"
     tab.** I don't understand why GitHub has a non-open "discussions" feature,
     but I find it to be completely useless, and generally see such things as
     harmful for open source.
 
-59. **Suggest people to add push access to.** I don't necessarily mean
+61. **Suggest people to add push access to.** I don't necessarily mean
     passively (though that could be interesting too), but I mean in the page
     to add someone, it would be nice if the popup suggested or indicated which
     people had contributed the project before, since just searching for a name
@@ -406,12 +416,12 @@ works".
 
 ## Profiles
 
-60. **Stop trying to make profile pages look "cute" with randomly highlighted
+62. **Stop trying to make profile pages look "cute" with randomly highlighted
     pull requests.** GitHub should have learned by now that profile pages
     matter a lot (whether people want them to or not), and there can be
     unintended consequences to the things that are put on them.
 
-61. **Explain what the axes actually mean in the new "activity overview".**
+63. **Explain what the axes actually mean in the new "activity overview".**
     I'm referring to
     [this](https://twitter.com/asmeurer/status/1033141923630874624) (it's
     still in beta and you have to manually enable it on your profile page).
@@ -421,31 +431,31 @@ works".
 
 ## Releases
 
-62. **Allow hiding the "source code (zip)" and "source code (tar.gz)" files in
+64. **Allow hiding the "source code (zip)" and "source code (tar.gz)" files in
     a release.** We upload our actual release files (generated by `setup.py`)
     to the GitHub release. We want people to download those, not snapshots of
     the repo.
 
 ## Miscellaneous
 
-63. **Provide a more official way to request fixes to these cuts.** I often
+65. **Provide a more official way to request fixes to these cuts.** I often
     ask on Twitter, but get no response. Preferably something public so that
     others could vote on them (but I understand if you don't want too much
     bikeshedding).
 
-64. **The repository search function doesn't support partial matches.** This
+66. **The repository search function doesn't support partial matches.** This
     is annoying for [conda-forge](https://github.com/conda-forge/). For
     instance, if I [search for
     "png"](https://github.com/conda-forge/?utf8=%E2%9C%93&q=png&type=&language=)
     it doesn't show the
     [libpng-feedstock](https://github.com/conda-forge/libpng-feedstock) repo.
 
-65. **Show commit history as a graph.** Like `git log --graph`. This would go
+67. **Show commit history as a graph.** Like `git log --graph`. This would go
     a *long* way to helping new users understand git. When I first started
     with git, understanding the history as a graph was a major part of me
     finally grokking how it worked.
 
-66. **Bring back the old "fork" UI.** The one that just had icons for all the
+68. **Bring back the old "fork" UI.** The one that just had icons for all the
     repos, and the icons didn't go away or become harder to find if you
     already had a fork. Some of us use the "fork" button to go to our
     pre-existing forks, not just to perform a fork action. This was recently
