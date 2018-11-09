@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html prefix="        og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>GitHub Cuts | Aaron Meurer's Blog</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
+<link rel="canonical" href="https://asmeurer.com/blog/posts/github-cuts/">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Aaron Meurer">
+<link rel="prev" href="../automatically-deploying-this-blog-to-github-pages-with-travis-ci/" title="Automatically deploying this blog to GitHub Pages with Travis CI" type="text/html">
+<meta property="og:site_name" content="Aaron Meurer's Blog">
+<meta property="og:title" content="GitHub Cuts">
+<meta property="og:url" content="https://asmeurer.com/blog/posts/github-cuts/">
+<meta property="og:description" content="GitHub recently announced its paper cuts
+initiative to fix
+minor issues that make things more difficult for GitHub users. As someone who
+spends most of his day on github.com, this initiative is
+great,">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2018-11-06T16:54:21-06:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site:id" content="123456">
+<meta name="twitter:creator:id" content="654321">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="container">
+         
+    <header id="header"><h1 id="brand"><a href="https://asmeurer.com/blog/" title="Aaron Meurer's Blog" rel="home">
+
+        <span id="blog-title">Aaron Meurer's Blog</span>
+    </a></h1>
+
+        
+
+        
+    <nav id="menu"><ul>
+<li><a href="../../">Blog</a></li>
+                <li><a href="../../about">About</a></li>
+                <li><a href="../../work">Work</a></li>
+                <li><a href="../../archive.html">Archives</a></li>
+                <li><a href="../../rss.xml">RSS</a></li>
+
+    
+
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">GitHub Cuts</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                    Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2018-11-06T16:54:21-06:00" itemprop="datePublished" title="2018-11-06 16:54">2018-11-06 16:54</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/github-cuts.html">Comments</a>
+
+
+            
+        </p>
+<p class="sourceline"><a href="index.md" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>GitHub recently announced its <a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/">paper cuts
+initiative</a> to fix
+minor issues that make things more difficult for GitHub users. As someone who
+spends most of his day on <a href="https://github.com">github.com</a>, this initiative is
+great, as these small cuts can quickly add up to a painful experience.</p>
+<p>The initiative has already made some great fixes, such as <a href="https://blog.github.com/changelog/2018-07-31-unselectable-diff-markers/">making the diff
+markers
+unselectable</a>
+and
+<a href="https://blog.github.com/changelog/2018-10-08-issue-and-pull-request-hovercards/">hovercards</a>.
+Small changes like these are usually quite easy for GitHub to do, but they
+make a huge difference to those of use who use GitHub every day.</p>
+<p>I <a href="https://twitter.com/asmeurer/status/1034528642389266432">recently asked</a>
+how these cuts could be reported to GitHub for fixing, but got no response. So
+I am writing this blog post.</p>
+<p>To be very clear: I think that on the whole GitHub is great and they are doing
+a great job. And it's still better than the alternatives (to put things in
+perspective, I recently spent <a href="https://twitter.com/asmeurer/status/1029158262069899266">half an
+hour</a> trying to
+figure out how to change my password in BitBucket, and GitLab can't even keep
+me logged in between sessions). GitHub has and continues to revolutionize the
+open source ecosystem, and is still the best place to host an open source
+project.</p>
+<p>But since GitHub did
+<a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/">ask</a> what sorts of
+changes they want to see, I'm providing a list. In this post I'm trying to
+only ask about things that are small changes (though I realize many won't be
+as easy to fix as they may appear from the outside, and I readily admit that I
+am not a web developer).</p>
+<p>These are just the things that have bothered me, personally. Other people use
+GitHub differently and no doubt have their own pain points. For instance, I
+have no suggestions about the project boards feature of GitHub because I don't
+use it. If you are also a GitHub user and have your own pain points feel free
+to use the comment box below (though I have no idea if GitHub will actually
+see them).</p>
+<p>If you work for GitHub and have any questions, feel free to comment below, or
+<a href="mailto:asmeurer@gmail.com">email me</a>.</p>
+<p>In no particular order:</p>
+<h3>Issues</h3>
+<ol>
+<li>
+<p><strong>Allow anyone to add labels to issues.</strong> At the very least, allow the
+person who opened the issue to add labels).</p>
+</li>
+<li>
+<p>The new issue transfer ability is great, but please <strong>make it require only
+push access, not admin access.</strong></p>
+</li>
+<li>
+<p><strong>Remove the automatic hiding of comments when there are too many.</strong> I
+understand this is done for technical reasons, but it breaks
+Cmd-F/scrolling through the page to find comments. Often I go to an issue
+trying to find an old comment and can't because buried in the comments is a
+button I have to press to actually show the comment (it's even worse when
+you have to find and press the button multiple times).</p>
+</li>
+<li>
+<p><strong>Better indication for cross-referenced pull requests.</strong> I really don't
+know how to fix this, only that it is a problem. It happens all the time
+that a new contributor comes to a SymPy issue and asks if it has been
+worked on yet. They generally do not seem to notice the cross-referenced
+pull requests in the list.
+<a href="https://github.com/sympy/sympy/issues/14943">Here</a> is an example of what
+I'm talking about.</p>
+</li>
+<li>
+<p><strong>Indicate better if a cross-referenced pull request would close an
+issue.</strong> Preferably with text, not just an icon.</p>
+</li>
+<li>
+<p><strong>HTML pull request/issue templates.</strong> I don't know if this counts as a
+"cut", as it isn't a simple fix. Right now, many projects use pull
+requests/new issue templates, but it is not very user friendly. The problem
+is that the whole thing is done in plain text, often with the template text
+as an HTML comment to prevent it from appearing in the final issue text.
+Even for me, I often find this quite difficult to read through, but for new
+contributors, we often find that they don't read it at all. Sure there's no
+way to force people to read, but if we could instead create a very simple
+HTML form for people to fill out, it would be much more friendly, even to
+experienced people like myself.</p>
+</li>
+<li>
+<p><strong>Fix the back button in Chrome.</strong> I don't know if this is something that
+GitHub can fix, and I also do not know how things work in other browsers. I
+use Chrome on macOS. Often, when I click the "back" button and it takes me
+back to an issue page, the contents of the page are out-of-date (the newest
+comments or commits do not appear). It's often even more out-of-date than
+it was when I left the page. I have to reload the page to get the latest
+content.</p>
+</li>
+<li>
+<p><strong>Allow Markdown formatting in issue titles.</strong></p>
+</li>
+<li>
+<p><strong>Show people's names next to comments as "Real Name (@username)".</strong></p>
+</li>
+<li>
+<p><strong>Remember my selection for the "sort" setting in the issues list.</strong> I'd
+love to have issues/pull requests sort by "most recently updated" by
+default, so that I don't miss updates to old issues/pull requests.</p>
+</li>
+<li>
+<p><strong>Make advanced search filters more accessible.</strong> They should autofill,
+similar to how Gmail or even GitLab search works (yes, please still all
+the good ideas from GitLab; they already stole all their good ideas from
+you).</p>
+</li>
+<li>
+<p><strong>Tone down the reaction emojis.</strong> Maybe this ship has sailed, but
+reaction emojis are way too unprofessional for some projects.</p>
+</li>
+<li>
+<p><strong>Copy/paste text as Markdown.</strong> For example, copying "<strong>bold</strong>" and
+pasting it into the comment box would paste <code>**bold**</code>. Another idea that
+you can steal from GitLab.</p>
+</li>
+<li>
+<p><strong>Strike out #12345 issue links when the issue/PR is closed/merged</strong>
+(like <strike>#12345</strike>).</p>
+</li>
+</ol>
+<h3>Pull requests</h3>
+<ol start="15">
+<li>
+<p><strong>Add a button that automatically merges a pull request as soon as all the
+CI checks pass.</strong> Any additional commits pushed to the branch in the
+interim would cancel it, and it should also be cancellable by someone else
+with push access or the PR author.</p>
+</li>
+<li>
+<p><strong>Add some way to disable the automatic hiding of large diffs.</strong> This
+breaks Cmd-F on the page, and makes it harder to scroll through the pull
+request to find what you are looking for (typically the most important
+changes are the ones that are hidden!).</p>
+</li>
+<li>
+<p><strong>Include all issue/PR authors in the authors search on the pull request
+list page.</strong> Right now it only lists people with push access. But I
+generally can't remember people's GitHub usernames, and autofilling based
+on all authors would be very helpful.</p>
+</li>
+<li>
+<p><strong>Better contextual guesses for issue autofilling (after typing <code>#</code>).</strong>
+For instance, if an issue has already been referenced or cross-referenced,
+it should appear near the top of the list. We have almost <a href="https://github.com/sympy/sympy/issues">3000 open
+issues</a> in SymPy, and the current
+issue numbers are 5-digits long, so referencing an issue purely by number
+is very error prone.</p>
+</li>
+<li>
+<p><strong>Auto-update edited comments.</strong> Context: SymPy uses a
+<a href="https://github.com/sympy/sympy-bot">bot</a> that comments on every pull
+request, requiring a release notes entry to be added to the description.
+This works quite well, but to prevent the bot from spamming, we have it
+comment only once, and edit its comment on any further checks. However,
+these edits do not automatically update, so people have to manually reload
+the page to see them.</p>
+</li>
+<li>
+<p><strong>Don't hide full commit messages by default in the commits view.</strong> It
+would be better to encourage people to write good commit messages.</p>
+</li>
+<li>
+<p><strong>Make issue cross-references in pull request titles work.</strong> I'd rather
+people didn't put issue numbers in pull request titles but they do it
+anyway, so it would be nice if they actually worked as links.</p>
+</li>
+<li>
+<p><strong>Allow me to comment on lines that aren't visible by default.</strong> That is,
+lines that you have to click the "expand" icon above or below the line
+numbers to access. As an example, this can be useful to point out a line
+that should have been changed but wasn't.</p>
+</li>
+<li>
+<p><strong>Copying code from a diff that includes lines that aren't visible by
+default includes an extra space to the left for those lines.</strong> This is a
+straight up bug. Probably fixing the previous point would also fix this :)</p>
+</li>
+<li>
+<p><strong>Make searches include text from the pull request diff.</strong></p>
+</li>
+<li>
+<p><strong>When a diff indents a line color the whitespace to the left of the
+line.</strong> (see
+<a href="https://twitter.com/asmeurer/status/740611970714480640">this</a>)</p>
+</li>
+<li>
+<p><strong>Pull requests can show commits that are already in master.</strong> For
+example, if someone makes pull request B based off of pull request A and
+then A gets merged, B will still show the commits from A. This has been a
+bug forever.</p>
+</li>
+<li>
+<p><strong>Make the "jump to file or symbol" popdown collapsible.</strong> Specifically
+what I mean is I want to be able to show just the files, without any
+symbols. For large pull requests, it is very difficult to use this popdown
+if there are hundreds of symbols. I typically want to just jump to a
+specific file.</p>
+</li>
+<li>
+<p><strong>The status check on the favicon goes away when you switch to the diff
+tab.</strong> Kudos to Marius Gedminas for <a href="https://twitter.com/mgedmin/status/1058381090694553601">pointing this
+out</a>.</p>
+</li>
+<li>
+<p><strong><a href="https://github.com/sympy/sympy/pull/15280#issuecomment-426795606">Apparently</a>
+status checks that use the GitHub Apps API are forced to link into the
+checks tab.</strong> The checks tab is useless if no information is actually
+published to it. It would be better if it could link straight to the
+external site, like is done with oauth integrations.</p>
+</li>
+<li>
+<p><strong>Make it easier to copy someone's username from the pull request page.</strong>
+I generally do this to <code>git remote add</code> them (using
+<a href="https://github.com/github/hub">hub</a>). If I try to select their username
+from a comment, it's a link, which makes it hard to select. I generally
+copy it from the blue text at the top "<em>user</em> wants to merge <em>n</em> commits
+from <code>sympy:master</code> from <code>user:branch</code>. If it were easier to select "user"
+or "branch" from that box (say, by double clicking), that would be
+helpful.</p>
+</li>
+<li>
+<p><strong>Change the "resolve conversation" UI.</strong> I keep pressing it on accident
+because it's where I expect the "new comment" button to be.</p>
+</li>
+</ol>
+<h3>Reviews</h3>
+<p>I wrote a <a href="https://www.asmeurer.com/blog/posts/github-reviews-gripes/">whole
+post</a> about the
+reviews feature when it came out. Not much has changed since then (actually,
+it has gotten worse). In short, the feature doesn't work like I would like it
+too, and I find the default behavior of deferred comments to be extremely
+detrimental. If there were a way to completely disable reviews (for myself, I
+don't care about other people using the feature), I would.</p>
+<p>See my blog post for full details on why I think the reviews feature is broken
+and actually makes things worse, not better than before. I've summarized a few
+things that could change below.</p>
+<ol start="32">
+<li>
+<p><strong>Make reviews non-deferred by default.</strong> This is the biggest thing. If I
+had to pick only a single item on this page to be changed, it would be
+this. The issue is if I start a review and walk away from it, but forget
+to "finalize" it with a review status, the review is never actually seen
+by anyone. The simplest way to fix this would be to simply make partial
+reviews public.</p>
+</li>
+<li>
+<p><strong>Make Cmd-Enter default to immediate comment.</strong> Barring the above change,
+Cmd-Enter on a pull request line comment should default to immediate
+comment, not deferred (review) comment. The problem with the
+Cmd-Shift-Enter shortcut is that it is inconsistent: on a normal comment,
+it closes the pull request, and on a reply comment, it does nothing. I
+shouldn't have to check what "comment context" I am in to figure out what
+keyboard shortcut to use. The worst part is if you accidentally start a
+review, it's a pain in the ass to undo that and just post a normal
+comment. The simples way to fix this would be to swap the current meaning
+of Cmd-Enter and Cmd-Shift-Enter for line comments (and no, this wouldn't
+be a backwards incompatible change, it would be a regression fix;
+Cmd-Enter <em>used</em> to do the right thing).</p>
+</li>
+<li>
+<p><strong>Allow reviewing your own pull request.</strong> There's no reason to disallow
+this, and it would often be quite useful to, for instance, mark a work in
+progress PR as such with a "request changes" review. Obviously
+self-reviews would be excluded from any required reviews.</p>
+</li>
+<li>
+<p><strong>Unhide the reviews box.</strong> It should just be the same box as the comment
+box, unstead of buried on the diff tab (see my <a href="https://www.asmeurer.com/blog/posts/github-reviews-gripes/">blog
+post</a>).</p>
+</li>
+<li>
+<p><strong>Show review status in the pull request list as a red X or green check.</strong>
+This would make it easier to see which pull requests have reviews.</p>
+</li>
+<li>
+<p><strong>Allow new commits to invalidate reviews.</strong> That way they work the same
+way as any other status check. (I see that this is now an option for
+required reviews, which is new since my original blog post, but it still
+doesn't affect the status as reported on the pull requests list).</p>
+</li>
+<li>
+<p><strong>Allow requiring zero negative reviews to merge (but not necessarily any
+positive reviews)</strong>. Requiring a positive review is pointless. The person
+merging can just add one real quick before they merge, but it is
+unnecessary extra work. On the other hand allowing people with push access
+to block a merge with a negative review would be very useful.</p>
+</li>
+</ol>
+<h3>Web editor</h3>
+<ol start="39">
+<li>
+<p><strong>The web editor seems to have a search function, but I can't get it to
+actually work.</strong> Half the time Cmd-F pops open the browser search, which
+doesn't find text that isn't on screen. And when I press Cmd-G to actually
+do the search, it doesn't work (and there are no buttons to perform the
+search either).</p>
+</li>
+<li>
+<p><strong>Add basic syntax testing in the web editor for common languages to catch
+basic mistakes.</strong></p>
+</li>
+</ol>
+<h3>Mobile site</h3>
+<ol start="41">
+<li>
+<p><strong>Please make the mobile site work with iOS 10.</strong> I don't see any reason
+why simple things like buttons (like the merge button or the comment
+button) shouldn't work on a slightly older browser. No, I am not a web
+developer, but I do use my phone a lot and I've noticed that literally
+every other website works just fine on it.</p>
+</li>
+<li>
+<p><strong>Add a way to disable the mobile site permanently.</strong> For the most part,
+the mobile site is useless (see below). If you aren't going to put full
+development effort into it, allow me to disable it permanently so that
+every time I visit <a href="https://github.com">github.com</a> on my phone it goes to
+the desktop site.</p>
+</li>
+</ol>
+<p>Seeing as how the site (mobile or not) is almost completely unusable on every
+mobile device I own, it's hard to list other things here, but based on back
+when it actually worked, these are some of the things that annoyed me the
+most. Basically, I have found that virtually every time I go to GitHub to do
+anything on mobile, I have to switch to desktop mode to actually do what I
+want.</p>
+<p>My apologies if any of these actually work now: as I said,
+<a href="https://github.com">github.com</a> doesn't actually work at all on my phone.</p>
+<ol start="43">
+<li>
+<p><strong>Cannot search issues on mobile.</strong></p>
+</li>
+<li>
+<p><strong>Cannot make a line comment that <em>isn't</em> a review on mobile.</strong></p>
+</li>
+<li>
+<p><strong>Cannot view lines beyond the default diff in pull requests on mobile.</strong></p>
+</li>
+<li>
+<p><strong>Show more than 2 lines of the README and 0 lines of the code by default
+on project pages.</strong> Yes mobile screens are small but it's also not hard to
+scroll on them.</p>
+</li>
+<li>
+<p><strong>Support Jupyter notebook rendering on mobile.</strong></p>
+</li>
+</ol>
+<h3>Files view</h3>
+<ol start="48">
+<li>
+<p><strong>GitHub needs a better default color theme for syntax highlighting.</strong>
+Most of the colors are very similar to one another and hard to
+differentiate. Also things like strings are black, even though one of the
+most useful aspects of syntax highlighting generally is to indicate
+whether something is in a string or not.</p>
+</li>
+<li>
+<p><strong>Add MathJax support to markdown files.</strong> This would be amazingly useful
+for SymPy, as well as many scientific software projects. Right now if you
+want this you have to use a Jupyter notebook. MathJax support in
+issue/pull request comments would be awesome as well, though I'm not
+holding out for that.</p>
+</li>
+<li>
+<p><strong>Add "display source" button for markdown, ReST, etc.</strong> I mean the button
+that is already there for Jupyter notebooks. Right now you have to view
+markdown and ReST files "raw" or edit the file to see their source.</p>
+</li>
+<li>
+<p><strong>Add a link to the pull request in the blame view.</strong> Usually I want to
+find the pull request that produced a change, not just the commit.</p>
+</li>
+</ol>
+<h3>Wiki</h3>
+<ol start="52">
+<li>
+<p><strong>The wikis used to support LaTeX math with MathJax. It would be great if
+this were re-added.</strong></p>
+</li>
+<li>
+<p><strong>The ability to set push permissions for the wiki separately from the
+repo it is attached to, or otherwise create an oauth token that can only
+push to the wiki would be useful.</strong> Context: for SymPy, we use a
+<a href="https://github.com/sympy/sympy-bot">bot</a> that automatically updates our
+<a href="https://github.com/sympy/sympy/wiki/Release-Notes">release notes</a> on our
+wiki. It works quite well, but the only way it can push to the wiki is if
+we give it push access to the full repo.</p>
+</li>
+</ol>
+<h3>Notification emails</h3>
+<ol start="54">
+<li>
+<p><strong>Don't clobber special emails/email headers.</strong> GitHub adds special emails
+like <a href="mailto:author@noreply.github.com">author@noreply.github.com</a> and
+<a href="mailto:mention@noreply.github.com">mention@noreply.github.com</a> to email
+notifications based on how the notification was triggered. This is useful,
+as I can create an email filter for
+<a href="mailto:author@noreply.github.com">author@noreply.github.com</a> for
+notifications on issues and pull requests created by me. The bad news is,
+<a href="mailto:mention@noreply.github.com">mention@noreply.github.com</a>, which is
+added when I am @mentioned, clobbers
+<a href="mailto:author@noreply.github.com">author@noreply.github.com</a>, so that it
+doesn't appear anymore. In other words, as soon as someone @mentions me in
+one of my issues, I become <em>less</em> likely to see it, because it no longer
+gets my label (I get @mentioned on <em>a lot</em> of issues and don't have the
+ability to read all of my notification emails). Ditto for the
+<code>X-GitHub-Reason</code> email headers.</p>
+</li>
+<li>
+<p><strong>Readd the "view issue" links in Gmail.</strong> (I forgot what these are
+called). GitHub notification emails used to have these useful "view issue"
+buttons that showed up on the right in the email list in Gmail, but they
+were removed for some reason.</p>
+</li>
+</ol>
+<h3>API</h3>
+<ol start="56">
+<li>
+<p><strong>Make the requests in the API docs actually return what they show in the
+docs.</strong> This means the <a href="https://github.com/octocat/Hello-World/">example
+repo</a> should have actual example
+issues corresponding to what is shown in the docs.</p>
+</li>
+<li>
+<p><strong>Allow giving deploy key access to just one branch.</strong> That way I can have
+a deploy key for <code>gh-pages</code> and minimize the attack surface that the
+existence of that key produces. I think everyone would agree that more
+fine-grained permissions throughout the API would be nice, but this is one
+that would benefit me personally, specifically for my project
+<a href="https://drdoctr.github.io/">doctr</a>.</p>
+</li>
+</ol>
+<h3>GitHub Pages</h3>
+<p>GitHub pages is one of the best features of GitHub, and infact, this very blog
+is hosted on it. Very few complaints here, because for the most part, it "just
+works".</p>
+<ol start="58">
+<li>
+<p><a href="https://twitter.com/asmeurer/status/831962312122761216"><strong>Moar themes.</strong></a>
+Also it's awesome that you can use any GitHub repo as a theme now, but it
+turns out most random themes you find around GitHub don't actually work
+very well.</p>
+</li>
+<li>
+<p><strong>The steps to add HTTPS to an existing GitHub pages custom domain are a
+bit confusing.</strong>. This took us a while to figure out for
+<a href="https://sympy.org">sympy.org</a>. To get things to work, you have to trigger
+GitHub to issue a cert for the domain. But the UI to issue the cert is to
+paste the domain into the box. So if the domain is already there but it
+doesn't work, you have to re-enter it. Also if you want both www and the
+apex domain to be HTTPS you have to enter them both in the box to trigger
+GitHub to issue a cert. This is primarily a UX issue. See
+<a href="https://github.com/sympy/sympy.github.com/issues/105#issuecomment-415899934">https://github.com/sympy/sympy.github.com/issues/105#issuecomment-415899934</a>.</p>
+</li>
+</ol>
+<h3>Settings</h3>
+<ol start="60">
+<li>
+<p><strong>Automatically protected branches make the branch difficult to delete
+when you are done with it.</strong> My use-case is to create a branch for the
+release, which I want to protect, but I also want to delete the branch
+once it is merged. I can protect the branch automatically pretty easily,
+but then I have to go and delete the protection rule when it's merged to
+delete it. There are several ways this could be fixed. For instance, you
+could add a rule to allow protected branches to be deleted if they are
+up-to-date with default branch.</p>
+</li>
+<li>
+<p><strong>Add a way to disable the ability for non-admins to create new branches
+on a repo.</strong> We want all of our pull requests to come from forks. Branches
+in the repo just create confusion, for instance, they appear whenever
+someone clones the repository.</p>
+</li>
+<li>
+<p><strong>Related to the previous point, make pull request reverts come from
+forks.</strong> Right now when someone uses the revert pull request button, it
+creates a new branch in the same repo, but it would be better if the
+branch were made in the person's fork.</p>
+</li>
+<li>
+<p><strong>Allow me to enable branch protection by default for new repos.</strong></p>
+</li>
+<li>
+<p><strong>Allow me to enable branch protection by default on new branches.</strong> This
+is more important than the previous one because of the feature that lets
+people push to your branch on a pull request (which is a great feature by
+the way).</p>
+</li>
+<li>
+<p><strong>Clicking a team name in the settings should default to the "members"
+tab.</strong> I don't understand why GitHub has a non-open "discussions" feature,
+but I find it to be completely useless, and generally see such things as
+harmful for open source.</p>
+</li>
+<li>
+<p><strong>Suggest people to add push access to.</strong> I don't necessarily mean
+passively (though that could be interesting too), but I mean in the page
+to add someone, it would be nice if the popup suggested or indicated which
+people had contributed the project before, since just searching for a name
+searches all of GitHub, and I don't want to accidentally give access to
+the wrong person.</p>
+</li>
+</ol>
+<h3>Profiles</h3>
+<ol start="67">
+<li>
+<p><strong>Stop trying to make profile pages look "cute" with randomly highlighted
+pull requests.</strong> GitHub should have learned by now that profile pages
+matter a lot (whether people want them to or not), and there can be
+unintended consequences to the things that are put on them.</p>
+</li>
+<li>
+<p><strong>Explain what the axes actually mean in the new "activity overview".</strong>
+I'm referring to
+<a href="https://twitter.com/asmeurer/status/1033141923630874624">this</a> (it's
+still in beta and you have to manually enable it on your profile page).
+Personally I'm leaving the feature off because I don't like being
+metricized/gamified, but if you're going to have it, at least include some
+transparency.</p>
+</li>
+</ol>
+<h3>Releases</h3>
+<ol start="69">
+<li>
+<strong>Allow hiding the "source code (zip)" and "source code (tar.gz)" files in
+a release.</strong> We upload our actual release files (generated by <code>setup.py</code>)
+to the GitHub release. We want people to download those, not snapshots of
+the repo.</li>
+</ol>
+<h3>Miscellaneous</h3>
+<ol start="70">
+<li>
+<p><strong>Provide a more official way to request fixes to these cuts.</strong> I often
+ask on Twitter, but get no response. Preferably something public so that
+others could vote on them (but I understand if you don't want too much
+bikeshedding).</p>
+</li>
+<li>
+<p><strong>The repository search function doesn't support partial matches.</strong> This
+is annoying for <a href="https://github.com/conda-forge/">conda-forge</a>. For
+instance, if I <a href="https://github.com/conda-forge/?utf8=%E2%9C%93&amp;q=png&amp;type=&amp;language=">search for
+"png"</a>
+it doesn't show the
+<a href="https://github.com/conda-forge/libpng-feedstock">libpng-feedstock</a> repo.</p>
+</li>
+<li>
+<p><strong>Show commit history as a graph.</strong> Like <code>git log --graph</code>. This would go
+a <em>long</em> way to helping new users understand git. When I first started
+with git, understanding the history as a graph was a major part of me
+finally grokking how it worked.</p>
+</li>
+<li>
+<p><strong>Bring back the old "fork" UI.</strong> The one that just had icons for all the
+repos, and the icons didn't go away or become harder to find if you
+already had a fork. Some of us use the "fork" button to go to our
+pre-existing forks, not just to perform a fork action. This was recently
+changed and now it's better than it was, but I still don't see why
+existing forks need to be harder to find, visually, than nonexisting ones.</p>
+</li>
+</ol>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../automatically-deploying-this-blog-to-github-pages-with-travis-ci/" rel="prev" title="Automatically deploying this blog to GitHub Pages with Travis CI">Previous post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="asmeurer",
+            disqus_url="https://asmeurer.com/blog/posts/github-cuts/",
+        disqus_title="GitHub Cuts",
+        disqus_identifier="cache/posts/github-cuts.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></article><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer id="footer"><p>Contents © 2018         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+</p>
+<p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0"></a>
+</p>
+            
+        </footer>
+</div>
+    
+            <script src="../../assets/js/all-nocdn.js"></script><div style="text-align:center">
+<span class="st_twitterfollow_large" displaytext="Twitter Follow" st_username="asmeurer"></span>
+<span class="st_twitter_large" displaytext="Tweet"></span>
+<span class="st_googleplus_large" displaytext="Google +"></span>
+<span class="st_plusone_large" displaytext="Google +1"></span>
+
+<span class="st_email_large" displaytext="Email"></span>
+
+</div>
+
+
+    
+    <script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

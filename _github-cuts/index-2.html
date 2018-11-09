@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html prefix="        og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="My blog">
+<meta name="viewport" content="width=device-width">
+<title>Aaron Meurer's Blog (old posts, page 2) | Aaron Meurer's Blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="rss.xml">
+<link rel="canonical" href="https://asmeurer.com/blog/index-2.html">
+<link rel="prev" href="index-3.html" type="text/html">
+<link rel="next" href="index-1.html" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]-->
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="container">
+         
+    <header id="header"><h1 id="brand"><a href="https://asmeurer.com/blog/" title="Aaron Meurer's Blog" rel="home">
+
+        <span id="blog-title">Aaron Meurer's Blog</span>
+    </a></h1>
+
+        
+
+        
+    <nav id="menu"><ul>
+<li><a href=".">Blog</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="work">Work</a></li>
+                <li><a href="archive.html">Archives</a></li>
+                <li><a href="rss.xml">RSS</a></li>
+
+    
+
+    
+    
+    </ul></nav></header><main id="content"><div class="postindex">
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/doing-math-with-python-by-amit-saha-book-review/" class="u-url">"Doing Math with Python" by Amit Saha: Book Review</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="posts/doing-math-with-python-by-amit-saha-book-review/" rel="bookmark">
+            <time class="published dt-published" datetime="2015-12-19T15:01:21-06:00" itemprop="datePublished" title="2015-12-19 15:01">2015-12-19 15:01</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="posts/doing-math-with-python-by-amit-saha-book-review/#disqus_thread" data-disqus-identifier="cache/posts/doing-math-with-python-by-amit-saha-book-review.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p><em>Note: No Starch Press has sent me a copy of this book for review purposes.</em></p>
+<p><strong>SHORT VERSION: <em>Doing Math with Python</em> is well written and introduces
+topics in a nice, mathematical way. I would recommend it for new users of
+SymPy.</strong></p>
+<p><a href="https://www.nostarch.com/doingmathwithpython"><em>Doing Math with Python</em></a> by
+Amit Saha is a new book published by No Starch Press. The book shows how to
+use Python to do high school-level mathematics. It makes heavy use of SymPy in
+many chapters, and this review will focus mainly on those parts, as that is
+the area I have expertise in.</p>
+<p>The book assumes a basic understanding of programming in Python 3, as well as
+the mathematics used (although advanced topics are explained). No prior
+background in the libraries used, SymPy and matplotlib, is assumed. For this
+reason, this book can serve as an introduction them. Each chapter ends with
+some programming exercises, which range from easy exercises to more advanced
+ones.</p>
+<p>The book has seven chapters. In the first chapter, "Working with numbers",
+basic mathematics using pure Python is introduced (no SymPy yet). It should be
+noted that Python 3 (not Python 2) is required for this book. One of the
+earliest examples in the book (<code>3/2 == 1.5</code>) will not work correctly without
+it. I applaud this choice, although I might have added a more prominent
+warning to wary users. (As a side note, in the appendix, it is recommended to
+install Python via <a href="https://www.continuum.io/downloads">Anaconda</a>, which I
+also applaud). This chapter also introduces the <code>fractions</code> module, which
+seems odd since <code>sympy.Rational</code> will be implicitly used for rational numbers
+later in the text (to little harm, however, since SymPy automatically converts
+<code>fractions.Fraction</code> instances to <code>sympy.Rational</code>).</p>
+<p>In all, this chapter is a good introduction to the basics of the mathematics
+of Python. There is also an introduction to variables and strings. However, as
+I noted above, one should really have some background with basic Python before
+reading this book, as concepts like flow control and function definition are
+assumed (note: there is an appendix that goes over this).</p>
+<p>Chapters 2 and 3 cover plotting with matplotlib and basic statistics,
+respectively. I will not say much about the matplotlib chapter, since I know
+only basic matplotlib myself. I will note that the chapter covers matplotlib
+from a (high school) mathematics point of view, starting with a definition of
+the Cartesian plane, which seems a fitting choice for the book.</p>
+<p>Chapter 3 shows how to do basic statistics (mean, median, standard deviation,
+etc.) using pure Python. This chapter is clearly meant for pedagogical
+purposes for basic statistics, since the basic functions <code>mean</code>, <code>median</code>,
+etc. are implemented from scratch (as opposed to using <code>numpy.mean</code> or the
+standard library <code>statistics.mean</code>). This serves as a good introduction to
+more Python concepts (like <code>collections.Counter</code>) and statistics.</p>
+<p>Note that the functions in this chapter assume that the data is the entire
+population, not a sample. This is mentioned at the beginning of the chapter,
+but not elaborated on. For example, this leads to a different definition of
+variance than what might be seen elsewhere (the <code>calculate_variance</code> used in
+this chapter is <code>statistics.pvariance</code>, not <code>statistics.variance</code>).</p>
+<p>It is good to see that a numerically stable definition of variance is used
+here (see <a href="https://www.python.org/dev/peps/pep-0450/">PEP 450</a> for more
+discussion on this). These numerical issues show why it is important to use a
+real statistics library rather than a home grown one. In other words, use this
+chapter to learn more about statistics and Python, but if you ever need to do
+statistics on real data, use a statistics library like <code>statistics</code> or
+<code>numpy</code>. Finally, I should note that this book appears to be written against
+Python 3.3, whereas <code>statistics</code> was added to the Python standard library in
+Python 3.4. Perhaps it will get a mention in future editions.</p>
+<p>Chapter 4, "Algebra and Symbolic Math with SymPy" starts the introduction to
+SymPy. The chapter starts similar to the
+<a href="http://docs.sympy.org/latest/tutorial/index.html">official SymPy tutorial</a> in
+describing what symbolics is, and guiding the reader away from common
+misconceptions and gotchas. The chapter does a good job of explaining common
+gotchas and avoiding antipatterns.</p>
+<p>This chapter may serve as an alternative to the official tutorial. Unlike the
+official tutorial, which jumps into
+<a href="http://docs.sympy.org/latest/tutorial/simplification.html#powers">higher-level mathematics</a>
+and <a href="http://docs.sympy.org/latest/tutorial/matrices.html">broader use-cases</a>,
+this chapter may be better suited to those wishing to use SymPy from the
+standpoint of high school mathematics.</p>
+<p>My only gripes with this chapter, which, in total, are minor, relate to printing.</p>
+<ol>
+<li>
+<p>The typesetting of the pretty printing is inconsistent and, in some cases,
+incorrect. Powers are printed in the book using superscript numbers, like</p>
+<pre><code>x²
+</code></pre>
+<p>However, SymPy prints powers like</p>
+<pre><code> 2
+x
+</code></pre>
+<p>even when Unicode pretty printing is enabled. This is a minor point, but it
+may confuse users. Also, the output appears to use ASCII pretty printing
+(mixed with superscript powers), for example</p>
+<pre><code>    x²   x³   x⁴   x⁵
+x + -- + -- + -- + --
+    2    3    4    5
+</code></pre>
+<p>Most users will either get MathJax printing (if they are using the Jupyter
+notebook), or Unicode printing, like</p>
+<pre><code>     2    3    4    5
+    x    x    x    x
+x + ── + ── + ── + ──
+    2    3    4    5
+</code></pre>
+<p>Again, this is a minor point, but at the very least the correct printing
+looks better than the fake printing used here.</p>
+</li>
+<li>
+<p>In line with the previous point, I would recommend telling the user to
+start with <code>init_printing()</code>. The function is used once to change the order
+of printing to rev-lex (for series printing). There is a link to the
+<a href="http://docs.sympy.org/latest/tutorial/printing.html">tutorial page on printing</a>. That
+page goes into more depth than is necessary for the book, but I would
+recommend at least mentioning to always call <code>init_printing()</code>, as 2-D
+printing can make a huge difference over the default <code>str</code> printing, and it
+obviates the need to call <code>pprint</code>.</p>
+</li>
+</ol>
+<p>Chapter 5, "Playing with Sets and Probability" covers SymPy's set objects
+(particularly <code>FiniteSet</code>) to do some basic set theory and probability. I'm
+excited to see this in the book. The sets module in SymPy is relatively new,
+but quite powerful. We do not yet have an introduction to the sets module in
+the SymPy tutorial. This chapter serves as a good introduction to it (albeit
+only with finite sets, but the SymPy functions that operate on infinite sets
+are exactly the same as the ones that operate on finite sets). In all, I don't
+have much to say about this chapter other than that I was pleasantly surprised
+to see it included.</p>
+<p>Chapter 6 shows how to draw geometric shapes and fractals with matplotlib. I
+again won't say much on this, as I am no matplotlib expert. The ability to
+draw leaf fractals and Sierpiński triangles with Python does look
+entertaining, and should keep readers enthralled.</p>
+<p>Chapter 7, "Solving Calculus Problems" goes into more depth with SymPy. In
+particular, assumptions, limits, derivatives, and integrals.  The chapter
+alternates between symbolic formulations using SymPy and numeric
+calculations (using <code>evalf</code>). The numeric calculations are done both for
+simple examples and more advanced things (like implementing gradient descent).</p>
+<p>One small gripe here. The book shows that</p>
+<pre><code>from sympy import Symbol
+x = Symbol('x')
+if (x + 5) &gt; 0:
+    print('Do Something')
+else:
+    print('Do Something else')
+</code></pre>
+<p>raises <code>TypeError</code> at the evaluation of <code>(x + 5) &gt; 0</code> because its truth value
+cannot be determined. The solution to this issue is given as</p>
+<pre><code>x = Symbol('x', positive=True)
+if (x + 5) &gt; 0:
+    print('Do Something')
+else:
+    print('Do Something else')
+</code></pre>
+<p>Setting <code>x</code> to be positive via <code>Symbol('x', positive=True)</code> is correct, but
+even in this case, evaluating an inequality may still raise a <code>TypeError</code> (for
+example, <code>if (x - 5) &gt; 0</code>). The better way to do this is to use <code>(x + 5).is_positive</code>. This would require a bit more discussion, especially since
+SymPy uses a three-valued logic for assumptions, but I do consider "if
+&lt;symbolic inequality&gt;" to be a SymPy antipattern.</p>
+<p>I like Saha's approach in this chapter of first showing unevaluated forms
+(<code>Limit</code>, <code>Derivative</code>, <code>Integral</code>), and then evaluating them with
+<code>doit()</code>. This puts users in the mindset of a mathematical expression being a
+formula which may or may not later be "calculated". The opposite approach,
+using the function forms, <code>limit</code>, <code>diff</code>, and <code>integrate</code>, which evaluate if
+they can and return an unevaluated object if they can't, can be confusing to
+new users in my experience. A common new SymPy user question is (some form of)
+"how do I evaluate an expression?" (the answer is <code>doit()</code>). Saha's approach
+avoids this question by showing <code>doit()</code> from the outset.</p>
+<p>I also like that this chapter explains the gotcha of <code>math.sin(Symbol('x'))</code>,
+although I personally would have included this earlier in the text.</p>
+<p>(Side note: now that I look, these are both areas in which the official
+tutorial could be improved).</p>
+<h3>Summary</h3>
+<p>This book is a good introduction to doing math with Python, and, for the
+chapters that use it, a good basic introduction to SymPy. I would recommend it
+to anyone wishing to learn SymPy, but especially to anyone whose knowledge of
+mathematics may preclude them from getting the most out of the official SymPy
+tutorial.</p>
+<p>I imagine this book would work well as a pedagogical tool, either for math
+teachers or for self-learners. The exercises in this book should push the
+motivated to learn more.</p>
+<p>I have a few minor gripes, but no major issues.</p>
+<p>You can purchase this book from the
+<a href="https://www.nostarch.com/doingmathwithpython">No Starch Press</a> website, both
+as a print book or an ebook. The website also includes a sample chapter
+(<a href="https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf">chapter 1</a>),
+code samples from the book, and exercise solutions.</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/lessons-learned-from-working-at-continuum/" class="u-url">Lessons learned from working at Continuum</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="posts/lessons-learned-from-working-at-continuum/" rel="bookmark">
+            <time class="published dt-published" datetime="2015-10-05T17:29:03-05:00" itemprop="datePublished" title="2015-10-05 17:29">2015-10-05 17:29</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="posts/lessons-learned-from-working-at-continuum/#disqus_thread" data-disqus-identifier="cache/posts/lessons-learned-from-working-at-continuum.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>Last Friday was my last day working at Continuum Analytics. I enjoyed my
+time at the company, and wish success to it, but the time has come for me to
+move on. Starting later this year, I will start working with
+<a href="https://twitter.com/scopatz">Anthony Scopatz</a> at his new lab
+<a href="http://www.ergs.sc.edu/index.html">ERGS</a> at the University of South
+Carolina.</p>
+<p>During my time at Continuum (over two years if you count a summer internship),
+I primarily worked on the
+<a href="https://www.continuum.io/downloads">Anaconda distribution</a> and its open
+source package manager, <a href="http://conda.pydata.org/">conda</a>.  I learned a lot of
+lessons in that time, and I'd like to share some of them here.</p>
+<p>In no particular order:</p>
+<ul>
+<li>
+<p>Left to their own devices, people will make the minimal possible solution to
+  packaging. They won't try to architect something. The result will be
+  over-engineered, specific to their use-case, and lack reproducibility.</p>
+</li>
+<li>
+<p>The best way to ensure that some software has no bugs is for it to have many
+  users.</p>
+</li>
+<li>
+<p>Be wary of the "software would be great if it weren't for all the users"
+  mentality (cf. the previous point).</p>
+</li>
+<li>
+<p>Most people don't code defensively. If you are working on a project that
+  requires extreme stability, be cautious of contributions from those outside
+  the development team.</p>
+</li>
+<li>
+<p>Hostility towards Windows and Windows users doesn't help anyone.</p>
+</li>
+<li>
+<p><a href="https://twitter.com/asmeurer/status/593170976981913600">https://twitter.com/asmeurer/status/593170976981913600</a></p>
+</li>
+<li>
+<p>For a software updater, stability is the number one priority. If the updater
+  breaks, how can a fix be deployed?</p>
+</li>
+<li>
+<p>Even if you configure your program to update itself every time it runs you
+  will still get bug reports with arbitrarily old versions.</p>
+</li>
+<li>
+<p>Separating components into separate git repositories leads to a
+  philosophical separation of concerns among the components.</p>
+</li>
+<li>
+<p>Everyone who isn't an active developer on the project will ignore this
+  separation and open issues in the wrong repo.</p>
+</li>
+<li>
+<p>Avoid object oriented programming when procedural programming will do just
+  fine.<sup id="fnref4-fn1"><a class="footnote-ref" href="posts/lessons-learned-from-working-at-continuum/#fn-fn1">1</a></sup></p>
+</li>
+<li>
+<p>Open source is more about the open than the source. Develop things in the
+  open, and you will create a community that respects you.<sup id="fnref3-fn1"><a class="footnote-ref" href="posts/lessons-learned-from-working-at-continuum/#fn-fn1">1</a></sup></p>
+</li>
+<li>
+<p>Academics (often) don't know good software practices, nor good licensing
+  practices.</p>
+</li>
+<li>
+<p>Neither do some large corporations.</p>
+</li>
+<li>
+<p>Avoid over-engineering things.</p>
+</li>
+<li>
+<p>Far fewer people than I would have thought understand the difference between
+  hard links and soft links.<sup id="fnref-fn2"><a class="footnote-ref" href="posts/lessons-learned-from-working-at-continuum/#fn-fn2">2</a></sup></p>
+</li>
+<li>
+<p>Changelogs are useful.</p>
+</li>
+<li>
+<p>Semantic versioning is over-hyped.</p>
+</li>
+<li>
+<p>If you make something and release it, the first version should be 1.0 (not
+  0.1 or 0.0.1).</p>
+</li>
+<li>
+<p>Getting a difficult package to compile is like hacking a computer. All it
+  takes is time.</p>
+</li>
+<li>
+<p>It doesn't matter how open source friendly your business is, there will
+  always be people who will be skeptical and point their fingers at the
+  smallest proprietary components, fear monger, and overgeneralize unrelated
+  issues into FUD. These people should generally be ignored.</p>
+</li>
+<li>
+<p>Don't feed the trolls.<sup id="fnref2-fn1"><a class="footnote-ref" href="posts/lessons-learned-from-working-at-continuum/#fn-fn1">1</a></sup></p>
+</li>
+<li>
+<p>People constantly misspell the name of
+  <a href="https://twitter.com/asmeurer/status/618595687958122496">Apple's desktop operating system</a>.</p>
+</li>
+<li>
+<p>People always assume you have way more automation than you really do.</p>
+</li>
+<li>
+<p>The Python standard library is not a Zen garden. Some parts of it are
+  completely broken, and if you need to rely on them, you'll have to rewrite
+  them. <code>shutil.rmtree</code> on Windows is one example of this.</p>
+</li>
+<li>
+<p>Linux is strictly backwards compatible. Windows is strictly forwards
+  compatible. <sup id="fnref-fn3"><a class="footnote-ref" href="posts/lessons-learned-from-working-at-continuum/#fn-fn3">3</a></sup></p>
+</li>
+<li>
+<p>On Linux, things tend to be very simple. On Windows, things tend to be very
+  complicated.</p>
+</li>
+<li>
+<p>I can't decide about OS X. It lies somewhere in between.</p>
+</li>
+<li>
+<p>Nobody uses 32-bit Linux. Why do we even support that?</p>
+</li>
+<li>
+<p>People oversimplify the problem of solving for package dependencies in their
+  heads.  No one realizes that it's meaningless to say something like "the
+  dependencies of NumPy" (every build of every version of NumPy has its own
+  set of dependencies, which may or may not be the same).</p>
+</li>
+<li>
+<p>Writing a set of rules and a solver to solve against those rules is
+  relatively easy. Writing heuristics to tell users why those rules are
+  unsolvable when they are is hard.</p>
+</li>
+<li>
+<p>SAT solvers solve NP-complete problems in general, but they can be very fast
+  to solve common case problems. <sup id="fnref-fn1"><a class="footnote-ref" href="posts/lessons-learned-from-working-at-continuum/#fn-fn1">1</a></sup></p>
+</li>
+<li>
+<p>Some of the smartest people I know, who otherwise make very rational and
+  intelligent decisions,
+  <a href="https://asmeurer.github.io/python3-presentation/slides.html">refuse to update to Python 3</a>.</p>
+</li>
+<li>
+<p>As an introvert, the option of working from home is great for maintaining
+  sanity.</p>
+</li>
+<li>
+<p><a href="http://blog.codinghorror.com/a-developers-second-most-important-asset/">Aeron chairs are awesome</a>.</p>
+</li>
+<li>
+<p>If living in Austin doesn't turn you into a foodie you will at least gain a
+  respect for them.</p>
+</li>
+<li>
+<p>Twitter, if used correctly, is a great way to interact with your users.</p>
+</li>
+<li>
+<p>Twitter is also a great place to learn new things. Follow
+  <a href="https://twitter.com/JohnDCook">John Cook</a> and
+  <a href="https://twitter.com/worrydream">Bret Victor</a>.</p>
+</li>
+<li>
+<p>One of the best ways to make heavily shared content is to make it about git
+  (at least if you're an expert).</p>
+</li>
+<li>
+<p>A good optimization algorithm avoids getting caught in local maxima by
+  trying different parts of the search space that initially appear to be
+  worse. The same approach should be taken in life.</p>
+</li>
+</ul>
+<h4>Footnotes</h4>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn-fn1">
+<p>These are things that I already knew, but were reiterated. <a class="footnote-backref" href="posts/lessons-learned-from-working-at-continuum/#fnref-fn1" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="posts/lessons-learned-from-working-at-continuum/#fnref2-fn1" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="posts/lessons-learned-from-working-at-continuum/#fnref3-fn1" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="posts/lessons-learned-from-working-at-continuum/#fnref4-fn1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn-fn2">
+<p>If you are one of those people, I have a small presentation that
+   explains the difference <a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links">here</a> <a class="footnote-backref" href="posts/lessons-learned-from-working-at-continuum/#fnref-fn2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn-fn3">
+<p>These terms can be confusing, and I admit I got this backwards the
+    first time I wrote this. According to Wikipedia,
+    <a href="https://en.wikipedia.org/wiki/Forward_compatibility">forwards compatible</a>
+    means a system can accept input intended for a later version of itself
+    and
+    <a href="https://en.wikipedia.org/wiki/Backward_compatibility">backwards compatible</a>
+    means a system can accept input intended for an earlier version of
+    itself.</p>
+<p>What I specifically mean here is that in terms of building packages
+for Linux or Windows, for Linux, you should build a package on the
+oldest version that you wish to support. That package will work on
+newer versions of Linux, but not anything older (generally due to the
+version of libc you are linked against).</p>
+<p>On the other hand, on Windows, you can can compile things on the
+newest version (I used Windows 8 on my main Windows build VM), and it
+will work on older versions of Windows like XP (as long as you ship
+the right runtime DLLs). This is also somewhat confusing because
+Windows tends to be both forwards compatible <em>and</em> backwards
+compatible. <a class="footnote-backref" href="posts/lessons-learned-from-working-at-continuum/#fnref-fn3" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/python-trickery/" class="u-url">Python Trickery</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="posts/python-trickery/" rel="bookmark">
+            <time class="published dt-published" datetime="2015-05-04T14:11:46-05:00" itemprop="datePublished" title="2015-05-04 14:11">2015-05-04 14:11</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="posts/python-trickery/#disqus_thread" data-disqus-identifier="cache/posts/python-trickery.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>Here are some bits of Python trickery that I have come across. Each of the
+following is invalid syntax.  See if you can figure out why</p>
+<ol><li>
+</li></ol>
+<pre><code class="language-py">1 + not(2)
+</code></pre>
+<ol start="2"><li>
+</li></ol>
+<pre><code class="language-py">f(*(
+i for i in range(10)
+if i % 2),
+x=3,)
+</code></pre>
+</div>
+    </div>
+    </article>
+</div>
+
+        <nav class="postindexpager"><ul class="pager">
+<li class="previous">
+                <a href="index-3.html" rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-1.html" rel="next">Older posts</a>
+            </li>
+        </ul></nav><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer id="footer"><p>Contents © 2018         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+</p>
+<p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0"></a>
+</p>
+            
+        </footer>
+</div>
+    
+            <script src="assets/js/all-nocdn.js"></script><div style="text-align:center">
+<span class="st_twitterfollow_large" displaytext="Twitter Follow" st_username="asmeurer"></span>
+<span class="st_twitter_large" displaytext="Tweet"></span>
+<span class="st_googleplus_large" displaytext="Google +"></span>
+<span class="st_plusone_large" displaytext="Google +1"></span>
+
+<span class="st_email_large" displaytext="Email"></span>
+
+</div>
+
+
+    
+    <script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
