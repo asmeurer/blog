@@ -3,8 +3,6 @@
 from __future__ import unicode_literals
 import time
 
-import nikola
-
 # Configuration, please edit
 
 # Data about this site
