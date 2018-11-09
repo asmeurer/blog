@@ -15,7 +15,7 @@ script:
   - set -e
   - nikola build
   - if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
-    doctr deploy . --built-docs output/;
-  else
-    doctr deploy --no-require-master "_$TRAVIS_BRANCH" . output/;
-  fi
+      doctr deploy . --built-docs output/;
+    else
+      doctr deploy --no-require-master "_$TRAVIS_BRANCH" . output/;
+    fi
