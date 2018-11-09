@@ -460,26 +460,26 @@ works".
 
 ## Miscellaneous
 
-70. **Provide a more official way to request fixes to these cuts.** I often
-    ask on Twitter, but get no response. Preferably something public so that
-    others could vote on them (but I understand if you don't want too much
-    bikeshedding).
-
-71. **The repository search function doesn't support partial matches.** This
+70. **The repository search function doesn't support partial matches.** This
     is annoying for [conda-forge](https://github.com/conda-forge/). For
     instance, if I [search for
     "png"](https://github.com/conda-forge/?utf8=%E2%9C%93&q=png&type=&language=)
     it doesn't show the
     [libpng-feedstock](https://github.com/conda-forge/libpng-feedstock) repo.
 
-72. **Show commit history as a graph.** Like `git log --graph`. This would go
+71. **Show commit history as a graph.** Like `git log --graph`. This would go
     a *long* way to helping new users understand git. When I first started
     with git, understanding the history as a graph was a major part of me
     finally grokking how it worked.
 
-73. **Bring back the old "fork" UI.** The one that just had icons for all the
+72. **Bring back the old "fork" UI.** The one that just had icons for all the
     repos, and the icons didn't go away or become harder to find if you
     already had a fork. Some of us use the "fork" button to go to our
     pre-existing forks, not just to perform a fork action. This was recently
     changed and now it's better than it was, but I still don't see why
     existing forks need to be harder to find, visually, than nonexisting ones.
+
+73. **Provide a more official way to request fixes to these cuts.** I often
+    ask on Twitter, but get no response. Preferably something public so that
+    others could vote on them (but I understand if you don't want too much
+    bikeshedding).
