@@ -17,5 +17,5 @@ script:
   - if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
       doctr deploy . --built-docs output/;
     else
-      doctr deploy . --no-require-master "_$TRAVIS_BRANCH" --built-docs output/;
+      doctr deploy --no-require-master "_$TRAVIS_BRANCH" --built-docs output/;
     fi
