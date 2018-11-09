@@ -1,6 +1,564 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.github.io/blog/</link><description>My blog</description><atom:link href="https://asmeurer.github.io/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 07 Nov 2018 21:34:12 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automatically deploying this blog to GitHub Pages with Travis CI</title><link>https://asmeurer.github.io/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;This blog is now &lt;a href="http://travis-ci.org/asmeurer/blog"&gt;deployed to GitHub pages automatically&lt;/a&gt; from Travis CI.&lt;/p&gt;
-&lt;p&gt;As I've outlined in the &lt;a href="https://asmeurer.github.io/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/moving-to-github-pages-with-nikola/"&gt;past&lt;/a&gt;, this
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 09 Nov 2018 20:45:00 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
+initiative&lt;/a&gt; to fix
+minor issues that make things more difficult for GitHub users. As someone who
+spends most of his day on &lt;a href="https://github.com"&gt;github.com&lt;/a&gt;, this initiative is
+great, as these small cuts can quickly add up to a painful experience.&lt;/p&gt;
+&lt;p&gt;The initiative has already made some great fixes, such as &lt;a href="https://blog.github.com/changelog/2018-07-31-unselectable-diff-markers/"&gt;making the diff
+markers
+unselectable&lt;/a&gt;
+and
+&lt;a href="https://blog.github.com/changelog/2018-10-08-issue-and-pull-request-hovercards/"&gt;hovercards&lt;/a&gt;.
+Small changes like these are usually quite easy for GitHub to do, but they
+make a huge difference to those of use who use GitHub every day.&lt;/p&gt;
+&lt;p&gt;I &lt;a href="https://twitter.com/asmeurer/status/1034528642389266432"&gt;recently asked&lt;/a&gt;
+how these cuts could be reported to GitHub for fixing, but got no response. So
+I am writing this blog post.&lt;/p&gt;
+&lt;p&gt;To be very clear: I think that on the whole GitHub is great and they are doing
+a great job. And it's still better than the alternatives (to put things in
+perspective, I recently spent &lt;a href="https://twitter.com/asmeurer/status/1029158262069899266"&gt;half an
+hour&lt;/a&gt; trying to
+figure out how to change my password in BitBucket, and GitLab can't even keep
+me logged in between sessions). GitHub has and continues to revolutionize the
+open source ecosystem, and is still the best place to host an open source
+project.&lt;/p&gt;
+&lt;p&gt;But since GitHub did
+&lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;ask&lt;/a&gt; what sorts of
+changes they want to see, I'm providing a list. In this post I'm trying to
+only ask about things that are small changes (though I realize many won't be
+as easy to fix as they may appear from the outside, and I readily admit that I
+am not a web developer).&lt;/p&gt;
+&lt;p&gt;These are just the things that have bothered me, personally. Other people use
+GitHub differently and no doubt have their own pain points. For instance, I
+have no suggestions about the project boards feature of GitHub because I don't
+use it. If you are also a GitHub user and have your own pain points feel free
+to use the comment box below (though I have no idea if GitHub will actually
+see them).&lt;/p&gt;
+&lt;p&gt;If you work for GitHub and have any questions, feel free to comment below, or
+&lt;a href="mailto:asmeurer@gmail.com"&gt;email me&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In no particular order:&lt;/p&gt;
+&lt;h3&gt;Issues&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow anyone to add labels to issues.&lt;/strong&gt; At the very least, allow the
+person who opened the issue to add labels).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The new issue transfer ability is great, but please &lt;strong&gt;make it require only
+push access, not admin access.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Remove the automatic hiding of comments when there are too many.&lt;/strong&gt; I
+understand this is done for technical reasons, but it breaks
+Cmd-F/scrolling through the page to find comments. Often I go to an issue
+trying to find an old comment and can't because buried in the comments is a
+button I have to press to actually show the comment (it's even worse when
+you have to find and press the button multiple times).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Better indication for cross-referenced pull requests.&lt;/strong&gt; I really don't
+know how to fix this, only that it is a problem. It happens all the time
+that a new contributor comes to a SymPy issue and asks if it has been
+worked on yet. They generally do not seem to notice the cross-referenced
+pull requests in the list.
+&lt;a href="https://github.com/sympy/sympy/issues/14943"&gt;Here&lt;/a&gt; is an example of what
+I'm talking about.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Indicate better if a cross-referenced pull request would close an
+issue.&lt;/strong&gt; Preferably with text, not just an icon.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTML pull request/issue templates.&lt;/strong&gt; I don't know if this counts as a
+"cut", as it isn't a simple fix. Right now, many projects use pull
+requests/new issue templates, but it is not very user friendly. The problem
+is that the whole thing is done in plain text, often with the template text
+as an HTML comment to prevent it from appearing in the final issue text.
+Even for me, I often find this quite difficult to read through, but for new
+contributors, we often find that they don't read it at all. Sure there's no
+way to force people to read, but if we could instead create a very simple
+HTML form for people to fill out, it would be much more friendly, even to
+experienced people like myself.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Fix the back button in Chrome.&lt;/strong&gt; I don't know if this is something that
+GitHub can fix, and I also do not know how things work in other browsers. I
+use Chrome on macOS. Often, when I click the "back" button and it takes me
+back to an issue page, the contents of the page are out-of-date (the newest
+comments or commits do not appear). It's often even more out-of-date than
+it was when I left the page. I have to reload the page to get the latest
+content.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow Markdown formatting in issue titles.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Show people's names next to comments as "Real Name (@username)".&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Remember my selection for the "sort" setting in the issues list.&lt;/strong&gt; I'd
+love to have issues/pull requests sort by "most recently updated" by
+default, so that I don't miss updates to old issues/pull requests.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make advanced search filters more accessible.&lt;/strong&gt; They should autofill,
+similar to how Gmail or even GitLab search works (yes, please still all
+the good ideas from GitLab; they already stole all their good ideas from
+you).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tone down the reaction emojis.&lt;/strong&gt; Maybe this ship has sailed, but
+reaction emojis are way too unprofessional for some projects.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Copy/paste text as Markdown.&lt;/strong&gt; For example, copying "&lt;strong&gt;bold&lt;/strong&gt;" and
+pasting it into the comment box would paste &lt;code&gt;**bold**&lt;/code&gt;. Another idea that
+you can steal from GitLab.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Strike out #12345 issue links when the issue/PR is closed/merged&lt;/strong&gt;
+(like &lt;strike&gt;#12345&lt;/strike&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Pull requests&lt;/h3&gt;
+&lt;ol start="15"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a button that automatically merges a pull request as soon as all the
+CI checks pass.&lt;/strong&gt; Any additional commits pushed to the branch in the
+interim would cancel it, and it should also be cancellable by someone else
+with push access or the PR author.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add some way to disable the automatic hiding of large diffs.&lt;/strong&gt; This
+breaks Cmd-F on the page, and makes it harder to scroll through the pull
+request to find what you are looking for (typically the most important
+changes are the ones that are hidden!).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Include all issue/PR authors in the authors search on the pull request
+list page.&lt;/strong&gt; Right now it only lists people with push access. But I
+generally can't remember people's GitHub usernames, and autofilling based
+on all authors would be very helpful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Better contextual guesses for issue autofilling (after typing &lt;code&gt;#&lt;/code&gt;).&lt;/strong&gt;
+For instance, if an issue has already been referenced or cross-referenced,
+it should appear near the top of the list. We have almost &lt;a href="https://github.com/sympy/sympy/issues"&gt;3000 open
+issues&lt;/a&gt; in SymPy, and the current
+issue numbers are 5-digits long, so referencing an issue purely by number
+is very error prone.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Auto-update edited comments.&lt;/strong&gt; Context: SymPy uses a
+&lt;a href="https://github.com/sympy/sympy-bot"&gt;bot&lt;/a&gt; that comments on every pull
+request, requiring a release notes entry to be added to the description.
+This works quite well, but to prevent the bot from spamming, we have it
+comment only once, and edit its comment on any further checks. However,
+these edits do not automatically update, so people have to manually reload
+the page to see them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Don't hide full commit messages by default in the commits view.&lt;/strong&gt; It
+would be better to encourage people to write good commit messages.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make issue cross-references in pull request titles work.&lt;/strong&gt; I'd rather
+people didn't put issue numbers in pull request titles but they do it
+anyway, so it would be nice if they actually worked as links.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow me to comment on lines that aren't visible by default.&lt;/strong&gt; That is,
+lines that you have to click the "expand" icon above or below the line
+numbers to access. As an example, this can be useful to point out a line
+that should have been changed but wasn't.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Copying code from a diff that includes lines that aren't visible by
+default includes an extra space to the left for those lines.&lt;/strong&gt; This is a
+straight up bug. Probably fixing the previous point would also fix this :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make searches include text from the pull request diff.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;When a diff indents a line color the whitespace to the left of the
+line.&lt;/strong&gt; (see
+&lt;a href="https://twitter.com/asmeurer/status/740611970714480640"&gt;this&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Pull requests can show commits that are already in master.&lt;/strong&gt; For
+example, if someone makes pull request B based off of pull request A and
+then A gets merged, B will still show the commits from A. This has been a
+bug forever.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make the "jump to file or symbol" popdown collapsible.&lt;/strong&gt; Specifically
+what I mean is I want to be able to show just the files, without any
+symbols. For large pull requests, it is very difficult to use this popdown
+if there are hundreds of symbols. I typically want to just jump to a
+specific file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The status check on the favicon goes away when you switch to the diff
+tab.&lt;/strong&gt; Kudos to Marius Gedminas for &lt;a href="https://twitter.com/mgedmin/status/1058381090694553601"&gt;pointing this
+out&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/sympy/sympy/pull/15280#issuecomment-426795606"&gt;Apparently&lt;/a&gt;
+status checks that use the GitHub Apps API are forced to link into the
+checks tab.&lt;/strong&gt; The checks tab is useless if no information is actually
+published to it. It would be better if it could link straight to the
+external site, like is done with oauth integrations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make it easier to copy someone's username from the pull request page.&lt;/strong&gt;
+I generally do this to &lt;code&gt;git remote add&lt;/code&gt; them (using
+&lt;a href="https://github.com/github/hub"&gt;hub&lt;/a&gt;). If I try to select their username
+from a comment, it's a link, which makes it hard to select. I generally
+copy it from the blue text at the top "&lt;em&gt;user&lt;/em&gt; wants to merge &lt;em&gt;n&lt;/em&gt; commits
+from &lt;code&gt;sympy:master&lt;/code&gt; from &lt;code&gt;user:branch&lt;/code&gt;. If it were easier to select "user"
+or "branch" from that box (say, by double clicking), that would be
+helpful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Change the "resolve conversation" UI.&lt;/strong&gt; I keep pressing it on accident
+because it's where I expect the "new comment" button to be.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Reviews&lt;/h3&gt;
+&lt;p&gt;I wrote a &lt;a href="https://www.asmeurer.com/blog/posts/github-reviews-gripes/"&gt;whole
+post&lt;/a&gt; about the
+reviews feature when it came out. Not much has changed since then (actually,
+it has gotten worse). In short, the feature doesn't work like I would like it
+too, and I find the default behavior of deferred comments to be extremely
+detrimental. If there were a way to completely disable reviews (for myself, I
+don't care about other people using the feature), I would.&lt;/p&gt;
+&lt;p&gt;See my blog post for full details on why I think the reviews feature is broken
+and actually makes things worse, not better than before. I've summarized a few
+things that could change below.&lt;/p&gt;
+&lt;ol start="32"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make reviews non-deferred by default.&lt;/strong&gt; This is the biggest thing. If I
+had to pick only a single item on this page to be changed, it would be
+this. The issue is if I start a review and walk away from it, but forget
+to "finalize" it with a review status, the review is never actually seen
+by anyone. The simplest way to fix this would be to simply make partial
+reviews public.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make Cmd-Enter default to immediate comment.&lt;/strong&gt; Barring the above change,
+Cmd-Enter on a pull request line comment should default to immediate
+comment, not deferred (review) comment. The problem with the
+Cmd-Shift-Enter shortcut is that it is inconsistent: on a normal comment,
+it closes the pull request, and on a reply comment, it does nothing. I
+shouldn't have to check what "comment context" I am in to figure out what
+keyboard shortcut to use. The worst part is if you accidentally start a
+review, it's a pain in the ass to undo that and just post a normal
+comment. The simples way to fix this would be to swap the current meaning
+of Cmd-Enter and Cmd-Shift-Enter for line comments (and no, this wouldn't
+be a backwards incompatible change, it would be a regression fix;
+Cmd-Enter &lt;em&gt;used&lt;/em&gt; to do the right thing).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow reviewing your own pull request.&lt;/strong&gt; There's no reason to disallow
+this, and it would often be quite useful to, for instance, mark a work in
+progress PR as such with a "request changes" review. Obviously
+self-reviews would be excluded from any required reviews.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Unhide the reviews box.&lt;/strong&gt; It should just be the same box as the comment
+box, unstead of buried on the diff tab (see my &lt;a href="https://www.asmeurer.com/blog/posts/github-reviews-gripes/"&gt;blog
+post&lt;/a&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Show review status in the pull request list as a red X or green check.&lt;/strong&gt;
+This would make it easier to see which pull requests have reviews.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow new commits to invalidate reviews.&lt;/strong&gt; That way they work the same
+way as any other status check. (I see that this is now an option for
+required reviews, which is new since my original blog post, but it still
+doesn't affect the status as reported on the pull requests list).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow requiring zero negative reviews to merge (but not necessarily any
+positive reviews)&lt;/strong&gt;. Requiring a positive review is pointless. The person
+merging can just add one real quick before they merge, but it is
+unnecessary extra work. On the other hand allowing people with push access
+to block a merge with a negative review would be very useful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Web editor&lt;/h3&gt;
+&lt;ol start="39"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The web editor seems to have a search function, but I can't get it to
+actually work.&lt;/strong&gt; Half the time Cmd-F pops open the browser search, which
+doesn't find text that isn't on screen. And when I press Cmd-G to actually
+do the search, it doesn't work (and there are no buttons to perform the
+search either).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add basic syntax testing in the web editor for common languages to catch
+basic mistakes.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Mobile site&lt;/h3&gt;
+&lt;ol start="41"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Please make the mobile site work with iOS 10.&lt;/strong&gt; I don't see any reason
+why simple things like buttons (like the merge button or the comment
+button) shouldn't work on a slightly older browser. No, I am not a web
+developer, but I do use my phone a lot and I've noticed that literally
+every other website works just fine on it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a way to disable the mobile site permanently.&lt;/strong&gt; For the most part,
+the mobile site is useless (see below). If you aren't going to put full
+development effort into it, allow me to disable it permanently so that
+every time I visit &lt;a href="https://github.com"&gt;github.com&lt;/a&gt; on my phone it goes to
+the desktop site.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Seeing as how the site (mobile or not) is almost completely unusable on every
+mobile device I own, it's hard to list other things here, but based on back
+when it actually worked, these are some of the things that annoyed me the
+most. Basically, I have found that virtually every time I go to GitHub to do
+anything on mobile, I have to switch to desktop mode to actually do what I
+want.&lt;/p&gt;
+&lt;p&gt;My apologies if any of these actually work now: as I said,
+&lt;a href="https://github.com"&gt;github.com&lt;/a&gt; doesn't actually work at all on my phone.&lt;/p&gt;
+&lt;ol start="43"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cannot search issues on mobile.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cannot make a line comment that &lt;em&gt;isn't&lt;/em&gt; a review on mobile.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cannot view lines beyond the default diff in pull requests on mobile.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Show more than 2 lines of the README and 0 lines of the code by default
+on project pages.&lt;/strong&gt; Yes mobile screens are small but it's also not hard to
+scroll on them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Support Jupyter notebook rendering on mobile.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Files view&lt;/h3&gt;
+&lt;ol start="48"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;GitHub needs a better default color theme for syntax highlighting.&lt;/strong&gt;
+Most of the colors are very similar to one another and hard to
+differentiate. Also things like strings are black, even though one of the
+most useful aspects of syntax highlighting generally is to indicate
+whether something is in a string or not.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add MathJax support to markdown files.&lt;/strong&gt; This would be amazingly useful
+for SymPy, as well as many scientific software projects. Right now if you
+want this you have to use a Jupyter notebook. MathJax support in
+issue/pull request comments would be awesome as well, though I'm not
+holding out for that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add "display source" button for markdown, ReST, etc.&lt;/strong&gt; I mean the button
+that is already there for Jupyter notebooks. Right now you have to view
+markdown and ReST files "raw" or edit the file to see their source.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a link to the pull request in the blame view.&lt;/strong&gt; Usually I want to
+find the pull request that produced a change, not just the commit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Wiki&lt;/h3&gt;
+&lt;ol start="52"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The wikis used to support LaTeX math with MathJax. It would be great if
+this were re-added.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The ability to set push permissions for the wiki separately from the
+repo it is attached to, or otherwise create an oauth token that can only
+push to the wiki would be useful.&lt;/strong&gt; Context: for SymPy, we use a
+&lt;a href="https://github.com/sympy/sympy-bot"&gt;bot&lt;/a&gt; that automatically updates our
+&lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes"&gt;release notes&lt;/a&gt; on our
+wiki. It works quite well, but the only way it can push to the wiki is if
+we give it push access to the full repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Notification emails&lt;/h3&gt;
+&lt;ol start="54"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Don't clobber special emails/email headers.&lt;/strong&gt; GitHub adds special emails
+like &lt;a href="mailto:author@noreply.github.com"&gt;author@noreply.github.com&lt;/a&gt; and
+&lt;a href="mailto:mention@noreply.github.com"&gt;mention@noreply.github.com&lt;/a&gt; to email
+notifications based on how the notification was triggered. This is useful,
+as I can create an email filter for
+&lt;a href="mailto:author@noreply.github.com"&gt;author@noreply.github.com&lt;/a&gt; for
+notifications on issues and pull requests created by me. The bad news is,
+&lt;a href="mailto:mention@noreply.github.com"&gt;mention@noreply.github.com&lt;/a&gt;, which is
+added when I am @mentioned, clobbers
+&lt;a href="mailto:author@noreply.github.com"&gt;author@noreply.github.com&lt;/a&gt;, so that it
+doesn't appear anymore. In other words, as soon as someone @mentions me in
+one of my issues, I become &lt;em&gt;less&lt;/em&gt; likely to see it, because it no longer
+gets my label (I get @mentioned on &lt;em&gt;a lot&lt;/em&gt; of issues and don't have the
+ability to read all of my notification emails). Ditto for the
+&lt;code&gt;X-GitHub-Reason&lt;/code&gt; email headers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Readd the "view issue" links in Gmail.&lt;/strong&gt; (I forgot what these are
+called). GitHub notification emails used to have these useful "view issue"
+buttons that showed up on the right in the email list in Gmail, but they
+were removed for some reason.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;API&lt;/h3&gt;
+&lt;ol start="56"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make the requests in the API docs actually return what they show in the
+docs.&lt;/strong&gt; This means the &lt;a href="https://github.com/octocat/Hello-World/"&gt;example
+repo&lt;/a&gt; should have actual example
+issues corresponding to what is shown in the docs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow giving deploy key access to just one branch.&lt;/strong&gt; That way I can have
+a deploy key for &lt;code&gt;gh-pages&lt;/code&gt; and minimize the attack surface that the
+existence of that key produces. I think everyone would agree that more
+fine-grained permissions throughout the API would be nice, but this is one
+that would benefit me personally, specifically for my project
+&lt;a href="https://drdoctr.github.io/"&gt;doctr&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;GitHub Pages&lt;/h3&gt;
+&lt;p&gt;GitHub pages is one of the best features of GitHub, and infact, this very blog
+is hosted on it. Very few complaints here, because for the most part, it "just
+works".&lt;/p&gt;
+&lt;ol start="58"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://twitter.com/asmeurer/status/831962312122761216"&gt;&lt;strong&gt;Moar themes.&lt;/strong&gt;&lt;/a&gt;
+Also it's awesome that you can use any GitHub repo as a theme now, but it
+turns out most random themes you find around GitHub don't actually work
+very well.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The steps to add HTTPS to an existing GitHub pages custom domain are a
+bit confusing.&lt;/strong&gt;. This took us a while to figure out for
+&lt;a href="https://sympy.org"&gt;sympy.org&lt;/a&gt;. To get things to work, you have to trigger
+GitHub to issue a cert for the domain. But the UI to issue the cert is to
+paste the domain into the box. So if the domain is already there but it
+doesn't work, you have to re-enter it. Also if you want both www and the
+apex domain to be HTTPS you have to enter them both in the box to trigger
+GitHub to issue a cert. This is primarily a UX issue. See
+&lt;a href="https://github.com/sympy/sympy.github.com/issues/105#issuecomment-415899934"&gt;https://github.com/sympy/sympy.github.com/issues/105#issuecomment-415899934&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Settings&lt;/h3&gt;
+&lt;ol start="60"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Automatically protected branches make the branch difficult to delete
+when you are done with it.&lt;/strong&gt; My use-case is to create a branch for the
+release, which I want to protect, but I also want to delete the branch
+once it is merged. I can protect the branch automatically pretty easily,
+but then I have to go and delete the protection rule when it's merged to
+delete it. There are several ways this could be fixed. For instance, you
+could add a rule to allow protected branches to be deleted if they are
+up-to-date with default branch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a way to disable the ability for non-admins to create new branches
+on a repo.&lt;/strong&gt; We want all of our pull requests to come from forks. Branches
+in the repo just create confusion, for instance, they appear whenever
+someone clones the repository.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Related to the previous point, make pull request reverts come from
+forks.&lt;/strong&gt; Right now when someone uses the revert pull request button, it
+creates a new branch in the same repo, but it would be better if the
+branch were made in the person's fork.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow me to enable branch protection by default for new repos.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow me to enable branch protection by default on new branches.&lt;/strong&gt; This
+is more important than the previous one because of the feature that lets
+people push to your branch on a pull request (which is a great feature by
+the way).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Clicking a team name in the settings should default to the "members"
+tab.&lt;/strong&gt; I don't understand why GitHub has a non-open "discussions" feature,
+but I find it to be completely useless, and generally see such things as
+harmful for open source.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Suggest people to add push access to.&lt;/strong&gt; I don't necessarily mean
+passively (though that could be interesting too), but I mean in the page
+to add someone, it would be nice if the popup suggested or indicated which
+people had contributed the project before, since just searching for a name
+searches all of GitHub, and I don't want to accidentally give access to
+the wrong person.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Profiles&lt;/h3&gt;
+&lt;ol start="67"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Stop trying to make profile pages look "cute" with randomly highlighted
+pull requests.&lt;/strong&gt; GitHub should have learned by now that profile pages
+matter a lot (whether people want them to or not), and there can be
+unintended consequences to the things that are put on them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Explain what the axes actually mean in the new "activity overview".&lt;/strong&gt;
+I'm referring to
+&lt;a href="https://twitter.com/asmeurer/status/1033141923630874624"&gt;this&lt;/a&gt; (it's
+still in beta and you have to manually enable it on your profile page).
+Personally I'm leaving the feature off because I don't like being
+metricized/gamified, but if you're going to have it, at least include some
+transparency.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Releases&lt;/h3&gt;
+&lt;ol start="69"&gt;
+&lt;li&gt;&lt;strong&gt;Allow hiding the "source code (zip)" and "source code (tar.gz)" files in
+a release.&lt;/strong&gt; We upload our actual release files (generated by &lt;code&gt;setup.py&lt;/code&gt;)
+to the GitHub release. We want people to download those, not snapshots of
+the repo.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Miscellaneous&lt;/h3&gt;
+&lt;ol start="70"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The repository search function doesn't support partial matches.&lt;/strong&gt; This
+is annoying for &lt;a href="https://github.com/conda-forge/"&gt;conda-forge&lt;/a&gt;. For
+instance, if I &lt;a href="https://github.com/conda-forge/?utf8=%E2%9C%93&amp;amp;q=png&amp;amp;type=&amp;amp;language="&gt;search for
+"png"&lt;/a&gt;
+it doesn't show the
+&lt;a href="https://github.com/conda-forge/libpng-feedstock"&gt;libpng-feedstock&lt;/a&gt; repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Show commit history as a graph.&lt;/strong&gt; Like &lt;code&gt;git log --graph&lt;/code&gt;. This would go
+a &lt;em&gt;long&lt;/em&gt; way to helping new users understand git. When I first started
+with git, understanding the history as a graph was a major part of me
+finally grokking how it worked.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Bring back the old "fork" UI.&lt;/strong&gt; The one that just had icons for all the
+repos, and the icons didn't go away or become harder to find if you
+already had a fork. Some of us use the "fork" button to go to our
+pre-existing forks, not just to perform a fork action. This was recently
+changed and now it's better than it was, but I still don't see why
+existing forks need to be harder to find, visually, than nonexisting ones.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Provide a more official way to request fixes to these cuts.&lt;/strong&gt; I often
+ask on Twitter, but get no response. Preferably something public so that
+others could vote on them (but I understand if you don't want too much
+bikeshedding).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/github-cuts/</guid><pubDate>Tue, 06 Nov 2018 22:54:21 GMT</pubDate></item><item><title>Automatically deploying this blog to GitHub Pages with Travis CI</title><link>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;This blog is now &lt;a href="http://travis-ci.org/asmeurer/blog"&gt;deployed to GitHub pages automatically&lt;/a&gt; from Travis CI.&lt;/p&gt;
+&lt;p&gt;As I've outlined in the &lt;a href="https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/moving-to-github-pages-with-nikola/"&gt;past&lt;/a&gt;, this
 website is built with the &lt;a href="https://getnikola.com/"&gt;Nikola&lt;/a&gt; static blogging
 engine. I really like Nikola because it uses Python, has lots of nice
 extensions, and
@@ -177,7 +735,7 @@ outlined
 &lt;p&gt;This will deploy your blog as normal from &lt;code&gt;master&lt;/code&gt;, but from a branch it will
 deploy to the &lt;code&gt;branch-&amp;lt;branchname&amp;gt;&lt;/code&gt; subdir. For instance, my blog is at
 &lt;a href="http://www.asmeurer.com/blog/"&gt;http://www.asmeurer.com/blog/&lt;/a&gt;, and if I had a branch called &lt;code&gt;test&lt;/code&gt;, it would
-deploy it to &lt;a href="https://asmeurer.github.io/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/"&gt;http://www.asmeurer.com/blog/branch-test/&lt;/a&gt;.&lt;/p&gt;
+deploy it to &lt;a href="https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/"&gt;http://www.asmeurer.com/blog/branch-test/&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Note that it will not delete old branches for you from &lt;code&gt;gh-pages&lt;/code&gt;. You'll need
 to do that manually once they are merged.&lt;/p&gt;
 &lt;p&gt;This only works for branches in the same repo. It is not possible to deploy
@@ -187,7 +745,7 @@ from a branch from pull request from a fork, for security purposes.&lt;/p&gt;
 hamburger menu, you can enable auto cancellation for branch builds. This will
 make it so that if you push many changes in succession, only the most recent
 one will get built. This makes the changes get built faster, and lets you
-revert mistakes or typos without them ever actually being deployed.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</guid><pubDate>Mon, 19 Jun 2017 19:21:32 GMT</pubDate></item><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
+revert mistakes or typos without them ever actually being deployed.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</guid><pubDate>Mon, 19 Jun 2017 19:21:32 GMT</pubDate></item><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.com/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
 updates that GitHub makes here as they are released.&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -236,10 +794,10 @@ poor
 &lt;a href="https://twitter.com/asmeurer/status/776125249712717824"&gt;release date docs&lt;/a&gt;
 didn't help here either).&lt;/p&gt;
 &lt;p&gt;Basically, at the bottom of a pull request, you now see this&lt;/p&gt;
-&lt;img src="https://asmeurer.github.io/blog/reviews1.png" width="788"&gt;
+&lt;img src="https://asmeurer.com/blog/reviews1.png" width="788"&gt;
 &lt;p&gt;Clicking the "Add your review" button takes you to the diff page (first gripe:
 why does it move you to the diff page?), and opens this dialog&lt;/p&gt;
-&lt;img src="https://asmeurer.github.io/blog/reviews2.png" width="1020"&gt;
+&lt;img src="https://asmeurer.com/blog/reviews2.png" width="1020"&gt;
 &lt;p&gt;"OK", you might think, "this is simple enough. A review is just a special
 comment box where I can approve or reject a pull request." (This is basically
 the feature that I've been wanting, the ability to approve or reject pull
@@ -298,7 +856,7 @@ still need to be made by the PR author.&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;Point 1 is really easy to see. In the pull request list, there is a nice green
 checkmark if Travis passed and a red X if it failed.&lt;/p&gt;
-&lt;img src="https://asmeurer.github.io/blog/prlist.png" width="608"&gt;
+&lt;img src="https://asmeurer.com/blog/prlist.png" width="608"&gt;
 &lt;p&gt;The second point is a disaster. Unfortunately, there's no simple way to do
 this. You might suggest adding a special label, like "Needs changes", to pull
 requests that have been reviewed. The problem with this is that the label
@@ -334,7 +892,7 @@ green checkmark or red X to indicate the type of review. Also, add buttons
 (&lt;strong&gt;buttons&lt;/strong&gt;, not just buried advanced search options) to filter by reviews.&lt;/p&gt;
 &lt;p&gt;OK, so that's a minor UI annoyance, but it gets worse. Next on the docket, &lt;strong&gt;you
 can't review your own pull requests.&lt;/strong&gt; It's not allowed for some reason.&lt;/p&gt;
-&lt;img src="https://asmeurer.github.io/blog/reviews3.png" width="411"&gt;
+&lt;img src="https://asmeurer.com/blog/reviews3.png" width="411"&gt;
 &lt;p&gt;Now why would you want to review your own pull request, you might ask? Aren't
 you always going to "approve" your own PR? Well, first off, no. There is such
 a thing as
@@ -452,7 +1010,7 @@ trip up sometimes. I'm not yet calling "doom" on GitHub. Everyone has
 their &lt;a href="https://en.wikipedia.org/wiki/Apple_USB_Mouse"&gt;hockey puck mice&lt;/a&gt;. I'm
 actually hopeful that they can fix these issues, and implement a feature that
 makes real headway into helping me solve one of my biggest problems on GitHub
-right now, the reviewing of pull requests.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/github-reviews-gripes/</guid><pubDate>Thu, 06 Oct 2016 00:12:16 GMT</pubDate></item><item><title>Tuples</title><link>https://asmeurer.github.io/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
+right now, the reviewing of pull requests.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/github-reviews-gripes/</guid><pubDate>Thu, 06 Oct 2016 00:12:16 GMT</pubDate></item><item><title>Tuples</title><link>https://asmeurer.com/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
@@ -476,7 +1034,7 @@ the most entertaining Python people you can
 can't disagree sometimes.&lt;/p&gt;
 &lt;h2&gt;List vs. Tuple. Fight!&lt;/h2&gt;
 &lt;p&gt;As you probably know, there are two "array" datatypes in Python, &lt;code&gt;list&lt;/code&gt; and
-&lt;code&gt;tuple&lt;/code&gt;.&lt;sup id="fnref-list"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn-list"&gt;1&lt;/a&gt;&lt;/sup&gt; The primary difference between the two is that lists are &lt;em&gt;mutable&lt;/em&gt;,
+&lt;code&gt;tuple&lt;/code&gt;.&lt;sup id="fnref-list"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-list"&gt;1&lt;/a&gt;&lt;/sup&gt; The primary difference between the two is that lists are &lt;em&gt;mutable&lt;/em&gt;,
 that is you can change their entries and length after they are created, with
 methods like &lt;code&gt;.append&lt;/code&gt; or &lt;code&gt;+=&lt;/code&gt;. Tuples, on the other hand, are &lt;em&gt;immutable&lt;/em&gt;.
 Once you create one, you cannot change it. This makes the implementation
@@ -574,13 +1132,13 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This last one I find to be very important. You could arguably use a list for
-the first four of Allen Downey's points&lt;sup id="fnref-assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn-assign"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
+the first four of Allen Downey's points&lt;sup id="fnref-assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-assign"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
 is
 &lt;a href="https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/"&gt;impossible&lt;/a&gt;
 to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.&lt;/p&gt;
 &lt;p&gt;However, be careful. Not all tuples are hashable. Tuples can contain
-anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref-TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn-TypeError"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref-TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-TypeError"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
@@ -633,7 +1191,7 @@ See how long it takes you to write that function correctly.&lt;/p&gt;
 &lt;h2&gt;Mutability is Bad&lt;/h2&gt;
 &lt;p&gt;More to the point, however, mutability is bad. I counted 12 distinct methods
 on &lt;code&gt;list&lt;/code&gt; that mutate it (how many can you remember off the top of your
-head?&lt;sup id="fnref-mutate"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/tuples/#fn-mutate"&gt;3&lt;/a&gt;&lt;/sup&gt;). &lt;em&gt;Any&lt;/em&gt; function that gets access to a list can mutate it,
+head?&lt;sup id="fnref-mutate"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-mutate"&gt;3&lt;/a&gt;&lt;/sup&gt;). &lt;em&gt;Any&lt;/em&gt; function that gets access to a list can mutate it,
 using any one of these methods. All it takes is for someone to forget that
 &lt;code&gt;+=&lt;/code&gt; mutates a list (and that they should copy it first) for code completely
 distant from the origin definition to cause issues. The hardest bug I ever
@@ -666,7 +1224,7 @@ structures are immutable.&lt;/p&gt;
 can be interpreted in two ways, as an English word meaning "ordered
 collection" (in
 which case, the statement is true), or as the Python type &lt;code&gt;list&lt;/code&gt; (in which
-case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass of &lt;code&gt;list&lt;/code&gt;). &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref-list" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass of &lt;code&gt;list&lt;/code&gt;). &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-list" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-assign"&gt;
 &lt;p&gt;Yes,&lt;/p&gt;
@@ -674,7 +1232,7 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;/pre&gt;
 
 
-&lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref-assign" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-assign" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-mutate"&gt;
 &lt;p&gt;&lt;/p&gt;&lt;div id="spoiler" style="display:none"&gt;
@@ -684,7 +1242,7 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none')
 {document.getElementById('spoiler')
 .style.display=''}else{document.getElementById('spoiler')
-.style.display='none'}"&gt;Show/hide answer&lt;/button&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref-mutate" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;
+.style.display='none'}"&gt;Show/hide answer&lt;/button&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-mutate" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;
 &lt;/li&gt;
 &lt;li id="fn-TypeError"&gt;
 &lt;p&gt;One of the tweets from the conversation:&lt;/p&gt;
@@ -702,10 +1260,10 @@ TypeError: 'tuple' object does not support item assignment
 &lt;p&gt;I have no idea why. It seems to me that it should work. &lt;code&gt;t[2]&lt;/code&gt; is a list
 and &lt;code&gt;list&lt;/code&gt; has &lt;code&gt;__iadd__&lt;/code&gt; defined. It seems that Python gets kind of weird
 about things on the left-hand side of an assignment. &lt;strong&gt;EDIT:
-&lt;a href="http://stackoverflow.com/a/29747466/161801"&gt;Here's&lt;/a&gt; why.&lt;/strong&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;a href="http://stackoverflow.com/a/29747466/161801"&gt;Here's&lt;/a&gt; why.&lt;/strong&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.github.io/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.com/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Thought: get the maintainers of a bunch of big Python libraries to sign something saying that they WILL drop Python 2.7 support in 2020.&lt;/p&gt;— Aaron Meurer (@asmeurer) &lt;a href="https://twitter.com/asmeurer/status/712304912428875776"&gt;March 22, 2016&lt;/a&gt;&lt;/blockquote&gt;
 
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
@@ -724,7 +1282,7 @@ represents library developers being antagonistic against those who want or
 have to use Python 2.&lt;/p&gt;
 &lt;p&gt;I'm writing this from my perspective as a library developer. I'm the lead
 developer of &lt;a href="http://www.sympy.org/"&gt;SymPy&lt;/a&gt;, and I have sympathies for
-developers of other libraries.&lt;sup id="fnref-sympy"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-sympy"&gt;1&lt;/a&gt;&lt;/sup&gt; I say this because my idea may seem a bit
+developers of other libraries.&lt;sup id="fnref-sympy"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-sympy"&gt;1&lt;/a&gt;&lt;/sup&gt; I say this because my idea may seem a bit
 in tension with "users" (even though I hate the "developer/user" distinction).&lt;/p&gt;
 &lt;h3&gt;Python 2&lt;/h3&gt;
 &lt;p&gt;There are a few reasons why I think libraries should drop (and announce that
@@ -736,7 +1294,7 @@ necessarily disjoint) classes of people: CPython core developers, library
 developers, and users. The core developers were the first to move to Python 3,
 since they were the ones who wrote it. They were also the ones who provided
 the messaging around Python 3, which has varied over time. In my opinion, it
-should have been and should be more forceful.&lt;sup id="fnref-core"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-core"&gt;2&lt;/a&gt;&lt;/sup&gt; Then you have the library
+should have been and should be more forceful.&lt;sup id="fnref-core"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-core"&gt;2&lt;/a&gt;&lt;/sup&gt; Then you have the library
 developers and the users. A chief difference here is that users are probably
 going to be using only one version of Python. In order for them to switch that
 version to Python 3, all the libraries that they use need to support it. This
@@ -781,7 +1339,7 @@ important to do this for a few reasons:&lt;/p&gt;
   implemented as keyword-only arguments. This avoids mistakes that come from
   the antipattern of passing keyword arguments without naming the keyword, and
   allows the argspec of the function to be expanded in the future without
-  breaking API.&lt;sup id="fnref-swift"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-swift"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  breaking API.&lt;sup id="fnref-swift"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-swift"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The second reason I think library developers should agree to drop Python 2
@@ -791,7 +1349,7 @@ In other words, instead of forcing people off of Python 2, we should make them
 want to come to Python 3. There are some issues with this argument. First,
 Python 3 already has
 &lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;tons of carrots&lt;/a&gt;.
-Honestly, not being terrible at Unicode ought to be a carrot in its own right.&lt;sup id="fnref-unicode"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-unicode"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.&lt;sup id="fnref-unicode"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-unicode"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;If you don't deal with strings, or do but don't care about those silly
 foreigners with weird accents in their names, there are other major carrots as
 well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
@@ -844,7 +1402,7 @@ for the most part thus far, but they shouldn't be expected to bear it forever.
 The debt will only increase, especially as the technical opportunity cost, if
 you will, of not being able to use newer and shinier versions of Python 3
 grows. The burden will have to shift at some point. Those with the financial
-resources may choose to offload this debt to others,&lt;sup id="fnref-continuum"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fn-continuum"&gt;5&lt;/a&gt;&lt;/sup&gt; say, by
+resources may choose to offload this debt to others,&lt;sup id="fnref-continuum"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-continuum"&gt;5&lt;/a&gt;&lt;/sup&gt; say, by
 backporting features or bugfixes to older library versions that support Python
 2 (or by helping to move code to Python 3).&lt;/p&gt;
 &lt;p&gt;I want to end by pointing out that if you are, for whatever reason, still
@@ -865,19 +1423,19 @@ it will make it easy to separate your Python 2 code from your Python 3 code.&lt;
 &lt;p&gt;With that being said, the opinions here are entirely my own, and are
     don't necessarily represent those of other people, nor do they
     represent official SymPy policy (no decisions have been made by the
-    community about this at this time). &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-sympy" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    community about this at this time). &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-sympy" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-core"&gt;
 &lt;p&gt;It often feels like core Python itself doesn't really want people to
     use Python 3. It's little things, like
     &lt;a href="https://docs.python.org/library/"&gt;docs links&lt;/a&gt; that redirect to Python
     2, or &lt;a href="https://www.python.org/dev/peps/pep-0394/"&gt;PEP 394&lt;/a&gt;, which
-    still says that the &lt;code&gt;python&lt;/code&gt; should always point to Python 2. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-core" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    still says that the &lt;code&gt;python&lt;/code&gt; should always point to Python 2. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-core" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-swift"&gt;
 &lt;p&gt;In Swift, Apple's new language for iOS and OS X, function parameter
     names are effectively "keyword-only"
-    &lt;a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html"&gt;by default&lt;/a&gt;. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-swift" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    &lt;a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html"&gt;by default&lt;/a&gt;. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-swift" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-unicode"&gt;
 &lt;p&gt;As an example of this, in conda, if you use Python 2 in the root
@@ -897,15 +1455,15 @@ import unicode_literals&lt;/code&gt; in Python 2, in my opinion.&lt;/p&gt;
 &lt;p&gt;I no longer work on conda, but as far as I know, the
 &lt;a href="https://github.com/conda/conda/issues/1180"&gt;issue&lt;/a&gt; remains unfixed.
 Of course, this whole thing works just fine if conda is run in Python
-3. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-unicode" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+3. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-unicode" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-continuum"&gt;
 &lt;p&gt;If that legitimately interests you, I
     &lt;a href="https://twitter.com/pwang/status/712780279211884546"&gt;hear Continuum&lt;/a&gt;
-    may be able to help you. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/moving-away-from-python-2/#fnref-continuum" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    may be able to help you. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-continuum" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item><item><title>What happens when you mess with hashing in Python</title><link>https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post is based off a Jupyter notebook I made in 2013. You can download
+&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item><item><title>What happens when you mess with hashing in Python</title><link>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post is based off a Jupyter notebook I made in 2013. You can download
 the original &lt;a href="https://gist.github.com/asmeurer/6046766"&gt;here&lt;/a&gt;. That notebook
 was based off a
 &lt;a href="https://github.com/sympy/sympy/wiki/What-happens-when-you-mess-with-hashing"&gt;wiki page&lt;/a&gt;
@@ -1662,7 +2220,7 @@ Python sessions.&lt;/p&gt;
 8897161376854729812
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</guid><pubDate>Tue, 26 Jan 2016 04:13:53 GMT</pubDate></item><item><title>"Doing Math with Python" by Amit Saha: Book Review</title><link>https://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Note: No Starch Press has sent me a copy of this book for review purposes.&lt;/em&gt;&lt;/p&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</guid><pubDate>Tue, 26 Jan 2016 04:13:53 GMT</pubDate></item><item><title>"Doing Math with Python" by Amit Saha: Book Review</title><link>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Note: No Starch Press has sent me a copy of this book for review purposes.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SHORT VERSION: &lt;em&gt;Doing Math with Python&lt;/em&gt; is well written and introduces
 topics in a nice, mathematical way. I would recommend it for new users of
 SymPy.&lt;/strong&gt;&lt;/p&gt;
@@ -1835,7 +2393,7 @@ motivated to learn more.&lt;/p&gt;
 &lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;No Starch Press&lt;/a&gt; website, both
 as a print book or an ebook. The website also includes a sample chapter
 (&lt;a href="https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf"&gt;chapter 1&lt;/a&gt;),
-code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item><item><title>Lessons learned from working at Continuum</title><link>https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
+code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item><item><title>Lessons learned from working at Continuum</title><link>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
 time at the company, and wish success to it, but the time has come for me to
 move on. Starting later this year, I will start working with
 &lt;a href="https://twitter.com/scopatz"&gt;Anthony Scopatz&lt;/a&gt; at his new lab
@@ -1890,11 +2448,11 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Avoid object oriented programming when procedural programming will do just
-  fine.&lt;sup id="fnref4-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  fine.&lt;sup id="fnref4-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Open source is more about the open than the source. Develop things in the
-  open, and you will create a community that respects you.&lt;sup id="fnref3-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  open, and you will create a community that respects you.&lt;sup id="fnref3-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Academics (often) don't know good software practices, nor good licensing
@@ -1908,7 +2466,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Far fewer people than I would have thought understand the difference between
-  hard links and soft links.&lt;sup id="fnref-fn2"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  hard links and soft links.&lt;sup id="fnref-fn2"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Changelogs are useful.&lt;/p&gt;
@@ -1931,7 +2489,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
   issues into FUD. These people should generally be ignored.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref2-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref2-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;People constantly misspell the name of
@@ -1947,7 +2505,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Linux is strictly backwards compatible. Windows is strictly forwards
-  compatible. &lt;sup id="fnref-fn3"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn3"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  compatible. &lt;sup id="fnref-fn3"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn3"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;On Linux, things tend to be very simple. On Windows, things tend to be very
@@ -1972,7 +2530,7 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;SAT solvers solve NP-complete problems in general, but they can be very fast
-  to solve common case problems. &lt;sup id="fnref-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  to solve common case problems. &lt;sup id="fnref-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Some of the smartest people I know, who otherwise make very rational and
@@ -2013,11 +2571,11 @@ lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id="fn-fn1"&gt;
-&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref2-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref3-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref4-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref2-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref3-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref4-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-fn2"&gt;
 &lt;p&gt;If you are one of those people, I have a small presentation that
-   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn2" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn2" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn-fn3"&gt;
 &lt;p&gt;These terms can be confusing, and I admit I got this backwards the
@@ -2038,10 +2596,10 @@ newest version (I used Windows 8 on my main Windows build VM), and it
 will work on older versions of Windows like XP (as long as you ship
 the right runtime DLLs). This is also somewhat confusing because
 Windows tends to be both forwards compatible &lt;em&gt;and&lt;/em&gt; backwards
-compatible. &lt;a class="footnote-backref" href="https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn3" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+compatible. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn3" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item><item><title>Python Trickery</title><link>https://asmeurer.github.io/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
+&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item><item><title>Python Trickery</title><link>https://asmeurer.com/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
 following is invalid syntax.  See if you can figure out why&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -2055,7 +2613,7 @@ following is invalid syntax.  See if you can figure out why&lt;/p&gt;
 i for i in range(10)
 if i % 2),
 x=3,)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/python-trickery/</guid><pubDate>Mon, 04 May 2015 19:11:46 GMT</pubDate></item><item><title>Playing with Swift and SpriteKit</title><link>https://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/python-trickery/</guid><pubDate>Mon, 04 May 2015 19:11:46 GMT</pubDate></item><item><title>Playing with Swift and SpriteKit</title><link>https://asmeurer.com/blog/posts/playing-with-swift-and-spritekit/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've always wanted to learn how to write native apps for iOS and the Mac as
 long as either has existed.  However, the barrier of entry has always been too
 high, given that I only ever had time to play with them as a hobby.  The
 Objective-C programming language is a bit complicated to learn, especially
@@ -2349,7 +2907,7 @@ sprite in the main view. If you forget this line, none of the sprites will
 show up.&lt;/p&gt;
 &lt;p&gt;If you run this, you will only see the yellow box, because you put them all on
 top of one another in the center of the view.&lt;/p&gt;
-&lt;img src="https://asmeurer.github.io/blog/galleries/swift-game-1.png" width="500"&gt;
+&lt;img src="https://asmeurer.com/blog/galleries/swift-game-1.png" width="500"&gt;
 &lt;h2&gt;Adding Basic Physics&lt;/h2&gt;
 &lt;p&gt;We could change the positions so that they do not overlap, but the option I
 went with was to play around with the physics a little. &lt;code&gt;SpriteKit&lt;/code&gt; has a nice
@@ -2383,7 +2941,7 @@ space.&lt;/p&gt;
 &lt;p&gt;Now &lt;code&gt;SceneKit&lt;/code&gt; will prevent the squares from overlapping with one another, even
 if we put them on top of each other as we have done.&lt;/p&gt;
 &lt;p&gt;So now when we start the simulator, we see&lt;/p&gt;
-&lt;img src="https://asmeurer.github.io/blog/galleries/swift-game-2.png" width="500"&gt;
+&lt;img src="https://asmeurer.com/blog/galleries/swift-game-2.png" width="500"&gt;
 &lt;h2&gt;Making the squares movable&lt;/h2&gt;
 &lt;p&gt;Now, let's make it so that we can move these squares around.  The correct way
 to do this took me some time to figure out.  I finally got some hints from
@@ -2478,13 +3036,13 @@ changes.&lt;/p&gt;
 &lt;p&gt;Here is an example of the movement. You can see it works even with
 multitouch.  You can also see the collision physics cause the other squares to
 move out of the way when another square hits them.&lt;/p&gt;
-&lt;p&gt;&lt;video src="https://asmeurer.github.io/blog/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
+&lt;p&gt;&lt;video src="https://asmeurer.com/blog/SpriteKit-Example.mp4" autoplay width="500" loop&gt;
 Your browser does not support the video tag.
 &lt;/video&gt;&lt;/p&gt;
 &lt;p&gt;Here you can see the movement lag caused by using &lt;code&gt;SKAction.moveTo&lt;/code&gt; with
 &lt;code&gt;duration: 0.1&lt;/code&gt; (note that the mouse itself jumps a bit at the beginning, but
 this is due to lag in the recording).&lt;/p&gt;
-&lt;p&gt;&lt;video src="https://asmeurer.github.io/blog/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
+&lt;p&gt;&lt;video src="https://asmeurer.com/blog/SpriteKit-Example-2.mp4" autoplay width="500" loop&gt;
 Your browser does not support the video tag.
 &lt;/video&gt;&lt;/p&gt;
 &lt;p&gt;I have uploaded the full code to
@@ -2516,224 +3074,4 @@ about, which mostly involve making shapes and moving them around the screen.&lt;
 &lt;!--  LocalWords:  frictioney SKAction.moveTo node.runAction autoplay
  --&gt;
 &lt;!--  LocalWords:  SKAction.repeatAction
- --&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item><item><title>SciPy 2014</title><link>https://asmeurer.github.io/blog/posts/scipy-2014/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I just finished &lt;a href="https://conference.scipy.org/scipy2014/"&gt;SciPy 2014&lt;/a&gt;, a
-week-long conference in Austin, TX for scientific computing with Python.&lt;/p&gt;
-&lt;p&gt;This is my third SciPy (I have been to
-&lt;a href="https://asmeurersympy.wordpress.com/2011/07/17/the-scipy-2011-conference/"&gt;2011&lt;/a&gt;
-and &lt;a href="https://asmeurersympy.wordpress.com/2013/07/02/scipy-2013/"&gt;2013&lt;/a&gt;). This
-year, the conference was noticeably larger. Last year there were
-&lt;a href="http://andy.terrel.us/blog/2013/07/05/scipy2013-recap/"&gt;~350 people&lt;/a&gt;, this
-year, there were
-&lt;a href="https://twitter.com/scopatz/status/488370261150818304"&gt;~450 people&lt;/a&gt;.  Aside
-from there being a lot more people, and the main keynotes taking place in a
-larger room, the most noticeable consequence of this is that there were three
-days of talks this year, and three concurrent tracks of talks all three days
-(last year there were two of each). The conference consisted of two days of
-tutorials, three days of talks, and two days of sprints, running from July 5
-to July 12.&lt;/p&gt;
-&lt;h2&gt;Tutorials&lt;/h2&gt;
-&lt;p&gt;The conference started on Sunday with tutorials. I gave a tutorial on SymPy
-with &lt;a href="http://matthewrocklin.com/blog/"&gt;Matthew Rocklin&lt;/a&gt; and
-&lt;a href="http://www.moorepants.info/blog/"&gt;Jason Moore&lt;/a&gt;. The videos are on YouTube
-(parts &lt;a href="https://www.youtube.com/watch?v=Lgp442bibDM"&gt;one&lt;/a&gt;,
-&lt;a href="https://www.youtube.com/watch?v=_PTe10whFKo"&gt;two&lt;/a&gt;,
-&lt;a href="https://www.youtube.com/watch?v=qleGSnrnxgc"&gt;three&lt;/a&gt;, and
-&lt;a href="https://www.youtube.com/watch?v=04AGOl1P2U4"&gt;four&lt;/a&gt;).  I gave tutorials for
-SymPy the previous two times I was at SciPy, although with different people
-(with Mateusz Paprocki in 2011 and
-&lt;a href="http://ondrejcertik.blogspot.com/"&gt;Ondřej Čertík&lt;/a&gt; in 2013). I really enjoy
-seeing new people learn about SymPy, and working with Matthew Rocklin, who is
-a very good speaker and teacher.&lt;/p&gt;
-&lt;p&gt;I also attended the tutorial on PyDy by Jason Moore, Gilbert Gede, and
-Obinna Nwanna (parts &lt;a href="https://www.youtube.com/watch?v=lWbeuDwYVto"&gt;one&lt;/a&gt;
-and &lt;a href="https://www.youtube.com/watch?v=1-KqRvNX0po"&gt;two&lt;/a&gt;).  This tutorial was
-also well done, and I highly recommend it if you are interested in Newtonian
-mechanics.&lt;/p&gt;
-&lt;p&gt;I unfortunately was unable to attend any of the other tutorials, but I heard
-good things about them, especially the
-&lt;a href="https://www.youtube.com/watch?v=vWkgEddb4-A"&gt;Julia tutorial&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Talks&lt;/h2&gt;
-&lt;p&gt;From Tuesday to Thursday were talks. The quality of talks this year was very
-high. The SciPy talks have always been high quality talks, but this year I
-felt that they were particularly good. I don't think I saw a bad talk.&lt;/p&gt;
-&lt;p&gt;Thus, I can't really recommend the good talks that I saw without recommending
-all of them. You should go to YouTube and the
-&lt;a href="https://conference.scipy.org/scipy2014/schedule/"&gt;SciPy schedule&lt;/a&gt; and watch
-any talk that looks interesting.&lt;/p&gt;
-&lt;p&gt;I therefore am going to recommend here the very best talks.  Two talks in
-particular stood out to me as the best.&lt;/p&gt;
-&lt;p&gt;First is Greg Wilson's Thursday keynote, which is among the best talks I've
-ever seen from any conference.&lt;/p&gt;
-&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/1e26rp6qPbA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
-&lt;p&gt;Greg mentions a lot of ideas, quite a few of which are controversial, which I
-think always makes for an interesting talk (it also means that I don't agree
-with everything he said, although I do agree with most of it). Most of the
-talk is about pedagogy, especially regarding his experiences at
-&lt;a href="http://software-carpentry.org/"&gt;Software Carpentry&lt;/a&gt;. Some things he posited:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;There is actually good research about what methods work and don't work in
-teaching. He referenced
-&lt;a href="http://www.slideshare.net/richardcookau/john-hattie-effect-sizes-on-achievement"&gt;this presentation&lt;/a&gt;,
-which lists just about every possible pedagogical method, and the net
-difference that it has on students, based on over 50,000 studies. For
-example, individualized instruction has a very small positive effect,
-whereas teacher feedback has a very large positive effect. Since each takes
-time and resources, we should focus on those effects that have the highest
-impact. Greg pointed out that web-based learning has very little positive
-effect, and hence is a waste of time and money. The most effective change is
-removing disruptive students.&lt;/p&gt;
-&lt;p&gt;In particular, I liked the quote, "if you want more computing in high
-school, you have to tell me what to take out."  People like to go on that
-schools need to teach more of this or more of that, and computing and
-programming tends to be high on that list these days, but anyone who does
-not discuss what things should be removed from the curriculum, which is
-already quite full, is not being honest about the discussion.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The other big point Greg made is that we need more incremental massive
-collaboration in teaching. This is the same model that has built open source
-and Wikipedia, but is mostly absent from teaching. Incremental change is
-important here, as well. It is more useful for someone to contribute fixes
-to existing lesson plans, so that they become better for the students, but
-in his experience, people are much more willing to add new lessons.  Greg
-calls for a "culture of patching". If incremental change could be adopted in
-teaching, teachers could aggregate methods and lesson plans, removing the
-massive duplication, and most importantly, making teaching materials that
-actually work for students to learn. Greg Wilson asks why open source and
-Wikipedia are able to thrive on massive &lt;em&gt;incremental&lt;/em&gt; change, but teaching
-is not, a question he hasn't found the answer to.&lt;/p&gt;
-&lt;p&gt;My thought on the matter is that unlike writing software or collecting and
-presenting facts, pedagogy is very difficult. If I contribute a patch to
-an open source project that fixes a bug, I can run the tests to see if my
-fix is "correct". If I fix an incorrect fact on Wikipedia, it is less
-easy, but I can still cite and check references to make sure it is
-correct.  But for teaching, it is very difficult to know what methods work
-and what don't, and as Greg pointed out at the beginning of his talk, the
-effects of different methods can be very counterintuitive.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The second talk that I recommend is
-&lt;a href="http://jakevdp.github.io/"&gt;Jake VanderPlas&lt;/a&gt;'s talk about Frequentism and
-Bayesianism.&lt;/p&gt;
-&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/KhAUfqhLakw" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
-&lt;p&gt;I won't summarize this talk, as Jake has done a much better job in his blog
-(parts
-&lt;a href="http://jakevdp.github.io/blog/2014/03/11/frequentism-and-bayesianism-a-practical-intro/"&gt;one&lt;/a&gt;,
-&lt;a href="http://jakevdp.github.io/blog/2014/06/06/frequentism-and-bayesianism-2-when-results-differ/"&gt;two&lt;/a&gt;,
-&lt;a href="http://jakevdp.github.io/blog/2014/06/12/frequentism-and-bayesianism-3-confidence-credibility/"&gt;three&lt;/a&gt;,
-and
-&lt;a href="http://jakevdp.github.io/blog/2014/06/14/frequentism-and-bayesianism-4-bayesian-in-python/"&gt;four&lt;/a&gt;). The
-best thing is to just watch the talk.  I will just point out that before the
-talk, I did not really understand the difference, not being a statistician or
-someone who works with statistics regularly, and having seen the talk, I now
-feel that I do.  It's a controversial topic, and if you care about the matter,
-you should know that Jake is a strong Bayesian, although I felt that he gave
-both sides a fair exposition.&lt;/p&gt;
-&lt;p&gt;Again, all talks I saw at the conference were good. But those two I felt were
-the best. I should also mention here that I myself gave a talk on Conda (more
-on that later).&lt;/p&gt;
-&lt;h2&gt;The Conference&lt;/h2&gt;
-&lt;p&gt;Of course, the talks are only a part of any conference. The best part of SciPy
-is the gathering of the community. Each year I meet more new people, as well
-as talk with people I already know, but don't get to see outside of SciPy.&lt;/p&gt;
-&lt;p&gt;For me, the biggest part of the interactions this year were on Conda and
-packaging.  The background is that I have been working full time for Continuum
-since January, and I had interned last summer, working primarily on the Conda
-package manager and Anaconda, the Python distribution.  This year, some of the
-biggest buzz at the conference was about Conda. I'm obviously selection
-biased, because people came to me specifically to talk about Conda, but I also
-overheard it in other people's conversations, in several of the presentations,
-and frankly, the people who did talk to me about Conda were &lt;em&gt;very&lt;/em&gt; excited
-about it.  Just like everyone was talking about the IPython Notebook last year
-and how it has solved the fundamental problems of sharing and presenting data
-analysis, this year, everyone thanked me for my work on Conda and how it has
-basically solved the packaging problem, the ubiquitous problem in Python since
-people started using it.&lt;/p&gt;
-&lt;h3&gt;Conda: The Packaging Problem Solved&lt;/h3&gt;
-&lt;p&gt;Here is the talk I gave on Conda:&lt;/p&gt;
-&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/UaIvrDWrIWM" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
-&lt;p&gt;I made the claim in my talk that Conda has solved the packaging problem, and
-the general feel from people I talked to who are using Conda is that it has.&lt;/p&gt;
-&lt;p&gt;I think this slide from my presentation summarizes why Conda solves the
-packaging problem.&lt;/p&gt;
-&lt;img src="https://asmeurer.github.io/blog/galleries/conda_scipy2014_slide.png" width="500"&gt;
-&lt;p&gt;One of the most amazing things about the scientific Python community, and one
-of the things that I think really sets it apart from other Python communities,
-is the use of Python alongside other languages, such as C, C++, Fortran, R, or
-Julia.  No one language is enough to get the job done for serious scientific
-work.  The fundamental brokenness of Python packaging has been that it has
-focused too much on Python specific tools and processes.  The
-distutils/setuptools/pip/virtualenv stack works great if your code begins and
-ends with Python.  Where it falls over is when you want to link against a C
-library, compile some Fortran or Cython code, and communicate with other
-languages like R and Julia.  By being a system level package manager, which is
-fundamentally Python agnostic, Conda is able to deal with all packages
-equally, whether that package be a Python package, a C extension which other
-packages link against, or Python itself.&lt;/p&gt;
-&lt;p&gt;By being truly cross-platform and user installable, Conda is able to reach the
-maximal number of users, especially those who have historically been hit by
-the packaging problem the hardest:  those who are on Windows or those who do
-not have admin rights to install necessary tools to install the packages they
-need.&lt;/p&gt;
-&lt;p&gt;Finally, Conda installs binaries, not source packages, and its metadata is
-entirely static (you do not need to execute arbitrary Python code to capture
-the metadata of a package).  These two things remove two of the largest
-sources of issues with the existing Python packaging tools, such as compiler
-errors, and nonuniformity in metadata standards (there seem to be as many
-different ways of writing &lt;code&gt;setup.py&lt;/code&gt; as there are packages on PyPI), by
-removing arbitrary code execution from package installation.&lt;/p&gt;
-&lt;p&gt;Conda opens up its ecosystem to anybody by making it easy for people to build
-their own Conda packages using reproducible Conda recipes.  And
-&lt;a href="https://binstar.org/"&gt;Binstar&lt;/a&gt; makes it easy to share those packages.  I'm
-very excited about Binstar, as I think it does for packaging what GitHub has
-done for open source, i.e., distributes and democratizes it. There are
-challenges on how to deal with this, of course. As with any distributed
-democratized system, Binstar can be a wild west of packages.  Continuum is
-thinking about ways to manage this complexity, while still reaping the
-benefits it provides. If you have any thoughts on things that can be done, let
-me know in the comments section below.&lt;/p&gt;
-&lt;p&gt;Of course, solving the packaging problem and removing it are different
-things.  Conda does not make it easier to compile difficult packages.  It only
-makes it so that fewer people have to do it.  And there is still work to be
-done before Conda really takes over the world.&lt;/p&gt;
-&lt;h2&gt;Sprints&lt;/h2&gt;
-&lt;p&gt;The conference ended with two days of sprints. I mainly helped people with
-Conda packaging.  One key thing that happened is that I worked with Aron
-Ahmadia so that HashDist can generate Conda
-packages. &lt;a href="http://hashdist.github.io/"&gt;HashDist&lt;/a&gt; is a package compiling
-framework that makes it easy to have completely reproducible builds by hashing
-all the information that was used to compile a package, and recompiling when
-any of that information changes. You can learn more about HashDist by watching
-Aron's talk from the conference:&lt;/p&gt;
-&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/wviHkzk0AkY" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
-&lt;p&gt;I am now convinced that HashDist is a good solution for people who still want
-the control of compiling their own packages. Once HashDist is able to produce
-Conda packages, then you can gain the benefits of both worlds: Conda's
-powerful package management and environment notion, with HashDist's modular
-and reproducible package building framework.&lt;/p&gt;
-&lt;h2&gt;Other thoughts&lt;/h2&gt;
-&lt;p&gt;The organizers of SciPy did an excellent job this year.  The video crew did
-something which I have not seen before, which is that they uploaded the videos
-of the talks on the same day that the talks were held. My talk, which was held
-right before lunch, was uploaded before the last talk of the day.  Something
-that I saw come out of this is that people not attending the conference were
-able to watch the talks and take part of the conversation with the conference
-attendees, via Twitter and other social media, or by joining the sprints after
-the conference.&lt;/p&gt;
-&lt;p&gt;The extended three days of talks really took their toll on me. The conference
-starts early enough in the morning and the social events after go so late in
-the evening that each day of the conference I become a little more sleep
-deprived. Usually by two days of tutorials and two days of talks I have hit my
-limit, and this year, I really had a hard time making it through that fifth
-day. Fortunately for the sprints I was able sleep in a little bit, as it's not
-a big deal if you miss the beginning.&lt;/p&gt;
-&lt;p&gt;This year the conference organizers made a push for diversity, and it
-shows. There were noticeably more women at the conference this year, and not
-just insomuch as there were more people at all.&lt;/p&gt;
-&lt;p&gt;Finally, I leave you with the greatest lightening talk. Ever.&lt;/p&gt;
-&lt;center&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/ln4nE_EVDCg?start=3254" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
-&lt;!-- LocalWords:  Gede Obinna Nwanna iframe src frameborder allowfullscreen -
---&gt;
-&lt;!--  LocalWords:  - VanderPlas 's PyDy 's img Ahmadia
- --&gt;&lt;/div&gt;</description><guid>https://asmeurer.github.io/blog/posts/scipy-2014/</guid><pubDate>Sun, 13 Jul 2014 16:52:27 GMT</pubDate></item></channel></rss>
+ --&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/playing-with-swift-and-spritekit/</guid><pubDate>Sun, 17 Aug 2014 16:31:11 GMT</pubDate></item></channel></rss>

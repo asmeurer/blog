@@ -11,15 +11,15 @@
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="rss.xml">
-<link rel="canonical" href="https://asmeurer.github.io/blog/">
+<link rel="canonical" href="https://asmeurer.com/blog/">
 <link rel="next" href="index-3.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link rel="prefetch" href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link rel="prefetch" href="posts/github-cuts/" type="text/html">
 </head>
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
     <div id="container">
          
-    <header id="header"><h1 id="brand"><a href="https://asmeurer.github.io/blog/" title="Aaron Meurer's Blog" rel="home">
+    <header id="header"><h1 id="brand"><a href="https://asmeurer.com/blog/" title="Aaron Meurer's Blog" rel="home">
 
         <span id="blog-title">Aaron Meurer's Blog</span>
     </a></h1>
@@ -39,7 +39,587 @@
     
     
     </ul></nav></header><main id="content"><div class="postindex">
-    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/" class="u-url">Automatically deploying this blog to GitHub Pages with Travis CI</a></h1>
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/github-cuts/" class="u-url">GitHub Cuts</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="posts/github-cuts/" rel="bookmark">
+            <time class="published dt-published" datetime="2018-11-06T16:54:21-06:00" itemprop="datePublished" title="2018-11-06 16:54">2018-11-06 16:54</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="posts/github-cuts/#disqus_thread" data-disqus-identifier="cache/posts/github-cuts.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>GitHub recently announced its <a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/">paper cuts
+initiative</a> to fix
+minor issues that make things more difficult for GitHub users. As someone who
+spends most of his day on <a href="https://github.com">github.com</a>, this initiative is
+great, as these small cuts can quickly add up to a painful experience.</p>
+<p>The initiative has already made some great fixes, such as <a href="https://blog.github.com/changelog/2018-07-31-unselectable-diff-markers/">making the diff
+markers
+unselectable</a>
+and
+<a href="https://blog.github.com/changelog/2018-10-08-issue-and-pull-request-hovercards/">hovercards</a>.
+Small changes like these are usually quite easy for GitHub to do, but they
+make a huge difference to those of use who use GitHub every day.</p>
+<p>I <a href="https://twitter.com/asmeurer/status/1034528642389266432">recently asked</a>
+how these cuts could be reported to GitHub for fixing, but got no response. So
+I am writing this blog post.</p>
+<p>To be very clear: I think that on the whole GitHub is great and they are doing
+a great job. And it's still better than the alternatives (to put things in
+perspective, I recently spent <a href="https://twitter.com/asmeurer/status/1029158262069899266">half an
+hour</a> trying to
+figure out how to change my password in BitBucket, and GitLab can't even keep
+me logged in between sessions). GitHub has and continues to revolutionize the
+open source ecosystem, and is still the best place to host an open source
+project.</p>
+<p>But since GitHub did
+<a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/">ask</a> what sorts of
+changes they want to see, I'm providing a list. In this post I'm trying to
+only ask about things that are small changes (though I realize many won't be
+as easy to fix as they may appear from the outside, and I readily admit that I
+am not a web developer).</p>
+<p>These are just the things that have bothered me, personally. Other people use
+GitHub differently and no doubt have their own pain points. For instance, I
+have no suggestions about the project boards feature of GitHub because I don't
+use it. If you are also a GitHub user and have your own pain points feel free
+to use the comment box below (though I have no idea if GitHub will actually
+see them).</p>
+<p>If you work for GitHub and have any questions, feel free to comment below, or
+<a href="mailto:asmeurer@gmail.com">email me</a>.</p>
+<p>In no particular order:</p>
+<h3>Issues</h3>
+<ol>
+<li>
+<p><strong>Allow anyone to add labels to issues.</strong> At the very least, allow the
+person who opened the issue to add labels).</p>
+</li>
+<li>
+<p>The new issue transfer ability is great, but please <strong>make it require only
+push access, not admin access.</strong></p>
+</li>
+<li>
+<p><strong>Remove the automatic hiding of comments when there are too many.</strong> I
+understand this is done for technical reasons, but it breaks
+Cmd-F/scrolling through the page to find comments. Often I go to an issue
+trying to find an old comment and can't because buried in the comments is a
+button I have to press to actually show the comment (it's even worse when
+you have to find and press the button multiple times).</p>
+</li>
+<li>
+<p><strong>Better indication for cross-referenced pull requests.</strong> I really don't
+know how to fix this, only that it is a problem. It happens all the time
+that a new contributor comes to a SymPy issue and asks if it has been
+worked on yet. They generally do not seem to notice the cross-referenced
+pull requests in the list.
+<a href="https://github.com/sympy/sympy/issues/14943">Here</a> is an example of what
+I'm talking about.</p>
+</li>
+<li>
+<p><strong>Indicate better if a cross-referenced pull request would close an
+issue.</strong> Preferably with text, not just an icon.</p>
+</li>
+<li>
+<p><strong>HTML pull request/issue templates.</strong> I don't know if this counts as a
+"cut", as it isn't a simple fix. Right now, many projects use pull
+requests/new issue templates, but it is not very user friendly. The problem
+is that the whole thing is done in plain text, often with the template text
+as an HTML comment to prevent it from appearing in the final issue text.
+Even for me, I often find this quite difficult to read through, but for new
+contributors, we often find that they don't read it at all. Sure there's no
+way to force people to read, but if we could instead create a very simple
+HTML form for people to fill out, it would be much more friendly, even to
+experienced people like myself.</p>
+</li>
+<li>
+<p><strong>Fix the back button in Chrome.</strong> I don't know if this is something that
+GitHub can fix, and I also do not know how things work in other browsers. I
+use Chrome on macOS. Often, when I click the "back" button and it takes me
+back to an issue page, the contents of the page are out-of-date (the newest
+comments or commits do not appear). It's often even more out-of-date than
+it was when I left the page. I have to reload the page to get the latest
+content.</p>
+</li>
+<li>
+<p><strong>Allow Markdown formatting in issue titles.</strong></p>
+</li>
+<li>
+<p><strong>Show people's names next to comments as "Real Name (@username)".</strong></p>
+</li>
+<li>
+<p><strong>Remember my selection for the "sort" setting in the issues list.</strong> I'd
+love to have issues/pull requests sort by "most recently updated" by
+default, so that I don't miss updates to old issues/pull requests.</p>
+</li>
+<li>
+<p><strong>Make advanced search filters more accessible.</strong> They should autofill,
+similar to how Gmail or even GitLab search works (yes, please still all
+the good ideas from GitLab; they already stole all their good ideas from
+you).</p>
+</li>
+<li>
+<p><strong>Tone down the reaction emojis.</strong> Maybe this ship has sailed, but
+reaction emojis are way too unprofessional for some projects.</p>
+</li>
+<li>
+<p><strong>Copy/paste text as Markdown.</strong> For example, copying "<strong>bold</strong>" and
+pasting it into the comment box would paste <code>**bold**</code>. Another idea that
+you can steal from GitLab.</p>
+</li>
+<li>
+<p><strong>Strike out #12345 issue links when the issue/PR is closed/merged</strong>
+(like <strike>#12345</strike>).</p>
+</li>
+</ol>
+<h3>Pull requests</h3>
+<ol start="15">
+<li>
+<p><strong>Add a button that automatically merges a pull request as soon as all the
+CI checks pass.</strong> Any additional commits pushed to the branch in the
+interim would cancel it, and it should also be cancellable by someone else
+with push access or the PR author.</p>
+</li>
+<li>
+<p><strong>Add some way to disable the automatic hiding of large diffs.</strong> This
+breaks Cmd-F on the page, and makes it harder to scroll through the pull
+request to find what you are looking for (typically the most important
+changes are the ones that are hidden!).</p>
+</li>
+<li>
+<p><strong>Include all issue/PR authors in the authors search on the pull request
+list page.</strong> Right now it only lists people with push access. But I
+generally can't remember people's GitHub usernames, and autofilling based
+on all authors would be very helpful.</p>
+</li>
+<li>
+<p><strong>Better contextual guesses for issue autofilling (after typing <code>#</code>).</strong>
+For instance, if an issue has already been referenced or cross-referenced,
+it should appear near the top of the list. We have almost <a href="https://github.com/sympy/sympy/issues">3000 open
+issues</a> in SymPy, and the current
+issue numbers are 5-digits long, so referencing an issue purely by number
+is very error prone.</p>
+</li>
+<li>
+<p><strong>Auto-update edited comments.</strong> Context: SymPy uses a
+<a href="https://github.com/sympy/sympy-bot">bot</a> that comments on every pull
+request, requiring a release notes entry to be added to the description.
+This works quite well, but to prevent the bot from spamming, we have it
+comment only once, and edit its comment on any further checks. However,
+these edits do not automatically update, so people have to manually reload
+the page to see them.</p>
+</li>
+<li>
+<p><strong>Don't hide full commit messages by default in the commits view.</strong> It
+would be better to encourage people to write good commit messages.</p>
+</li>
+<li>
+<p><strong>Make issue cross-references in pull request titles work.</strong> I'd rather
+people didn't put issue numbers in pull request titles but they do it
+anyway, so it would be nice if they actually worked as links.</p>
+</li>
+<li>
+<p><strong>Allow me to comment on lines that aren't visible by default.</strong> That is,
+lines that you have to click the "expand" icon above or below the line
+numbers to access. As an example, this can be useful to point out a line
+that should have been changed but wasn't.</p>
+</li>
+<li>
+<p><strong>Copying code from a diff that includes lines that aren't visible by
+default includes an extra space to the left for those lines.</strong> This is a
+straight up bug. Probably fixing the previous point would also fix this :)</p>
+</li>
+<li>
+<p><strong>Make searches include text from the pull request diff.</strong></p>
+</li>
+<li>
+<p><strong>When a diff indents a line color the whitespace to the left of the
+line.</strong> (see
+<a href="https://twitter.com/asmeurer/status/740611970714480640">this</a>)</p>
+</li>
+<li>
+<p><strong>Pull requests can show commits that are already in master.</strong> For
+example, if someone makes pull request B based off of pull request A and
+then A gets merged, B will still show the commits from A. This has been a
+bug forever.</p>
+</li>
+<li>
+<p><strong>Make the "jump to file or symbol" popdown collapsible.</strong> Specifically
+what I mean is I want to be able to show just the files, without any
+symbols. For large pull requests, it is very difficult to use this popdown
+if there are hundreds of symbols. I typically want to just jump to a
+specific file.</p>
+</li>
+<li>
+<p><strong>The status check on the favicon goes away when you switch to the diff
+tab.</strong> Kudos to Marius Gedminas for <a href="https://twitter.com/mgedmin/status/1058381090694553601">pointing this
+out</a>.</p>
+</li>
+<li>
+<p><strong><a href="https://github.com/sympy/sympy/pull/15280#issuecomment-426795606">Apparently</a>
+status checks that use the GitHub Apps API are forced to link into the
+checks tab.</strong> The checks tab is useless if no information is actually
+published to it. It would be better if it could link straight to the
+external site, like is done with oauth integrations.</p>
+</li>
+<li>
+<p><strong>Make it easier to copy someone's username from the pull request page.</strong>
+I generally do this to <code>git remote add</code> them (using
+<a href="https://github.com/github/hub">hub</a>). If I try to select their username
+from a comment, it's a link, which makes it hard to select. I generally
+copy it from the blue text at the top "<em>user</em> wants to merge <em>n</em> commits
+from <code>sympy:master</code> from <code>user:branch</code>. If it were easier to select "user"
+or "branch" from that box (say, by double clicking), that would be
+helpful.</p>
+</li>
+<li>
+<p><strong>Change the "resolve conversation" UI.</strong> I keep pressing it on accident
+because it's where I expect the "new comment" button to be.</p>
+</li>
+</ol>
+<h3>Reviews</h3>
+<p>I wrote a <a href="https://www.asmeurer.com/blog/posts/github-reviews-gripes/">whole
+post</a> about the
+reviews feature when it came out. Not much has changed since then (actually,
+it has gotten worse). In short, the feature doesn't work like I would like it
+too, and I find the default behavior of deferred comments to be extremely
+detrimental. If there were a way to completely disable reviews (for myself, I
+don't care about other people using the feature), I would.</p>
+<p>See my blog post for full details on why I think the reviews feature is broken
+and actually makes things worse, not better than before. I've summarized a few
+things that could change below.</p>
+<ol start="32">
+<li>
+<p><strong>Make reviews non-deferred by default.</strong> This is the biggest thing. If I
+had to pick only a single item on this page to be changed, it would be
+this. The issue is if I start a review and walk away from it, but forget
+to "finalize" it with a review status, the review is never actually seen
+by anyone. The simplest way to fix this would be to simply make partial
+reviews public.</p>
+</li>
+<li>
+<p><strong>Make Cmd-Enter default to immediate comment.</strong> Barring the above change,
+Cmd-Enter on a pull request line comment should default to immediate
+comment, not deferred (review) comment. The problem with the
+Cmd-Shift-Enter shortcut is that it is inconsistent: on a normal comment,
+it closes the pull request, and on a reply comment, it does nothing. I
+shouldn't have to check what "comment context" I am in to figure out what
+keyboard shortcut to use. The worst part is if you accidentally start a
+review, it's a pain in the ass to undo that and just post a normal
+comment. The simples way to fix this would be to swap the current meaning
+of Cmd-Enter and Cmd-Shift-Enter for line comments (and no, this wouldn't
+be a backwards incompatible change, it would be a regression fix;
+Cmd-Enter <em>used</em> to do the right thing).</p>
+</li>
+<li>
+<p><strong>Allow reviewing your own pull request.</strong> There's no reason to disallow
+this, and it would often be quite useful to, for instance, mark a work in
+progress PR as such with a "request changes" review. Obviously
+self-reviews would be excluded from any required reviews.</p>
+</li>
+<li>
+<p><strong>Unhide the reviews box.</strong> It should just be the same box as the comment
+box, unstead of buried on the diff tab (see my <a href="https://www.asmeurer.com/blog/posts/github-reviews-gripes/">blog
+post</a>).</p>
+</li>
+<li>
+<p><strong>Show review status in the pull request list as a red X or green check.</strong>
+This would make it easier to see which pull requests have reviews.</p>
+</li>
+<li>
+<p><strong>Allow new commits to invalidate reviews.</strong> That way they work the same
+way as any other status check. (I see that this is now an option for
+required reviews, which is new since my original blog post, but it still
+doesn't affect the status as reported on the pull requests list).</p>
+</li>
+<li>
+<p><strong>Allow requiring zero negative reviews to merge (but not necessarily any
+positive reviews)</strong>. Requiring a positive review is pointless. The person
+merging can just add one real quick before they merge, but it is
+unnecessary extra work. On the other hand allowing people with push access
+to block a merge with a negative review would be very useful.</p>
+</li>
+</ol>
+<h3>Web editor</h3>
+<ol start="39">
+<li>
+<p><strong>The web editor seems to have a search function, but I can't get it to
+actually work.</strong> Half the time Cmd-F pops open the browser search, which
+doesn't find text that isn't on screen. And when I press Cmd-G to actually
+do the search, it doesn't work (and there are no buttons to perform the
+search either).</p>
+</li>
+<li>
+<p><strong>Add basic syntax testing in the web editor for common languages to catch
+basic mistakes.</strong></p>
+</li>
+</ol>
+<h3>Mobile site</h3>
+<ol start="41">
+<li>
+<p><strong>Please make the mobile site work with iOS 10.</strong> I don't see any reason
+why simple things like buttons (like the merge button or the comment
+button) shouldn't work on a slightly older browser. No, I am not a web
+developer, but I do use my phone a lot and I've noticed that literally
+every other website works just fine on it.</p>
+</li>
+<li>
+<p><strong>Add a way to disable the mobile site permanently.</strong> For the most part,
+the mobile site is useless (see below). If you aren't going to put full
+development effort into it, allow me to disable it permanently so that
+every time I visit <a href="https://github.com">github.com</a> on my phone it goes to
+the desktop site.</p>
+</li>
+</ol>
+<p>Seeing as how the site (mobile or not) is almost completely unusable on every
+mobile device I own, it's hard to list other things here, but based on back
+when it actually worked, these are some of the things that annoyed me the
+most. Basically, I have found that virtually every time I go to GitHub to do
+anything on mobile, I have to switch to desktop mode to actually do what I
+want.</p>
+<p>My apologies if any of these actually work now: as I said,
+<a href="https://github.com">github.com</a> doesn't actually work at all on my phone.</p>
+<ol start="43">
+<li>
+<p><strong>Cannot search issues on mobile.</strong></p>
+</li>
+<li>
+<p><strong>Cannot make a line comment that <em>isn't</em> a review on mobile.</strong></p>
+</li>
+<li>
+<p><strong>Cannot view lines beyond the default diff in pull requests on mobile.</strong></p>
+</li>
+<li>
+<p><strong>Show more than 2 lines of the README and 0 lines of the code by default
+on project pages.</strong> Yes mobile screens are small but it's also not hard to
+scroll on them.</p>
+</li>
+<li>
+<p><strong>Support Jupyter notebook rendering on mobile.</strong></p>
+</li>
+</ol>
+<h3>Files view</h3>
+<ol start="48">
+<li>
+<p><strong>GitHub needs a better default color theme for syntax highlighting.</strong>
+Most of the colors are very similar to one another and hard to
+differentiate. Also things like strings are black, even though one of the
+most useful aspects of syntax highlighting generally is to indicate
+whether something is in a string or not.</p>
+</li>
+<li>
+<p><strong>Add MathJax support to markdown files.</strong> This would be amazingly useful
+for SymPy, as well as many scientific software projects. Right now if you
+want this you have to use a Jupyter notebook. MathJax support in
+issue/pull request comments would be awesome as well, though I'm not
+holding out for that.</p>
+</li>
+<li>
+<p><strong>Add "display source" button for markdown, ReST, etc.</strong> I mean the button
+that is already there for Jupyter notebooks. Right now you have to view
+markdown and ReST files "raw" or edit the file to see their source.</p>
+</li>
+<li>
+<p><strong>Add a link to the pull request in the blame view.</strong> Usually I want to
+find the pull request that produced a change, not just the commit.</p>
+</li>
+</ol>
+<h3>Wiki</h3>
+<ol start="52">
+<li>
+<p><strong>The wikis used to support LaTeX math with MathJax. It would be great if
+this were re-added.</strong></p>
+</li>
+<li>
+<p><strong>The ability to set push permissions for the wiki separately from the
+repo it is attached to, or otherwise create an oauth token that can only
+push to the wiki would be useful.</strong> Context: for SymPy, we use a
+<a href="https://github.com/sympy/sympy-bot">bot</a> that automatically updates our
+<a href="https://github.com/sympy/sympy/wiki/Release-Notes">release notes</a> on our
+wiki. It works quite well, but the only way it can push to the wiki is if
+we give it push access to the full repo.</p>
+</li>
+</ol>
+<h3>Notification emails</h3>
+<ol start="54">
+<li>
+<p><strong>Don't clobber special emails/email headers.</strong> GitHub adds special emails
+like <a href="mailto:author@noreply.github.com">author@noreply.github.com</a> and
+<a href="mailto:mention@noreply.github.com">mention@noreply.github.com</a> to email
+notifications based on how the notification was triggered. This is useful,
+as I can create an email filter for
+<a href="mailto:author@noreply.github.com">author@noreply.github.com</a> for
+notifications on issues and pull requests created by me. The bad news is,
+<a href="mailto:mention@noreply.github.com">mention@noreply.github.com</a>, which is
+added when I am @mentioned, clobbers
+<a href="mailto:author@noreply.github.com">author@noreply.github.com</a>, so that it
+doesn't appear anymore. In other words, as soon as someone @mentions me in
+one of my issues, I become <em>less</em> likely to see it, because it no longer
+gets my label (I get @mentioned on <em>a lot</em> of issues and don't have the
+ability to read all of my notification emails). Ditto for the
+<code>X-GitHub-Reason</code> email headers.</p>
+</li>
+<li>
+<p><strong>Readd the "view issue" links in Gmail.</strong> (I forgot what these are
+called). GitHub notification emails used to have these useful "view issue"
+buttons that showed up on the right in the email list in Gmail, but they
+were removed for some reason.</p>
+</li>
+</ol>
+<h3>API</h3>
+<ol start="56">
+<li>
+<p><strong>Make the requests in the API docs actually return what they show in the
+docs.</strong> This means the <a href="https://github.com/octocat/Hello-World/">example
+repo</a> should have actual example
+issues corresponding to what is shown in the docs.</p>
+</li>
+<li>
+<p><strong>Allow giving deploy key access to just one branch.</strong> That way I can have
+a deploy key for <code>gh-pages</code> and minimize the attack surface that the
+existence of that key produces. I think everyone would agree that more
+fine-grained permissions throughout the API would be nice, but this is one
+that would benefit me personally, specifically for my project
+<a href="https://drdoctr.github.io/">doctr</a>.</p>
+</li>
+</ol>
+<h3>GitHub Pages</h3>
+<p>GitHub pages is one of the best features of GitHub, and infact, this very blog
+is hosted on it. Very few complaints here, because for the most part, it "just
+works".</p>
+<ol start="58">
+<li>
+<p><a href="https://twitter.com/asmeurer/status/831962312122761216"><strong>Moar themes.</strong></a>
+Also it's awesome that you can use any GitHub repo as a theme now, but it
+turns out most random themes you find around GitHub don't actually work
+very well.</p>
+</li>
+<li>
+<p><strong>The steps to add HTTPS to an existing GitHub pages custom domain are a
+bit confusing.</strong>. This took us a while to figure out for
+<a href="https://sympy.org">sympy.org</a>. To get things to work, you have to trigger
+GitHub to issue a cert for the domain. But the UI to issue the cert is to
+paste the domain into the box. So if the domain is already there but it
+doesn't work, you have to re-enter it. Also if you want both www and the
+apex domain to be HTTPS you have to enter them both in the box to trigger
+GitHub to issue a cert. This is primarily a UX issue. See
+<a href="https://github.com/sympy/sympy.github.com/issues/105#issuecomment-415899934">https://github.com/sympy/sympy.github.com/issues/105#issuecomment-415899934</a>.</p>
+</li>
+</ol>
+<h3>Settings</h3>
+<ol start="60">
+<li>
+<p><strong>Automatically protected branches make the branch difficult to delete
+when you are done with it.</strong> My use-case is to create a branch for the
+release, which I want to protect, but I also want to delete the branch
+once it is merged. I can protect the branch automatically pretty easily,
+but then I have to go and delete the protection rule when it's merged to
+delete it. There are several ways this could be fixed. For instance, you
+could add a rule to allow protected branches to be deleted if they are
+up-to-date with default branch.</p>
+</li>
+<li>
+<p><strong>Add a way to disable the ability for non-admins to create new branches
+on a repo.</strong> We want all of our pull requests to come from forks. Branches
+in the repo just create confusion, for instance, they appear whenever
+someone clones the repository.</p>
+</li>
+<li>
+<p><strong>Related to the previous point, make pull request reverts come from
+forks.</strong> Right now when someone uses the revert pull request button, it
+creates a new branch in the same repo, but it would be better if the
+branch were made in the person's fork.</p>
+</li>
+<li>
+<p><strong>Allow me to enable branch protection by default for new repos.</strong></p>
+</li>
+<li>
+<p><strong>Allow me to enable branch protection by default on new branches.</strong> This
+is more important than the previous one because of the feature that lets
+people push to your branch on a pull request (which is a great feature by
+the way).</p>
+</li>
+<li>
+<p><strong>Clicking a team name in the settings should default to the "members"
+tab.</strong> I don't understand why GitHub has a non-open "discussions" feature,
+but I find it to be completely useless, and generally see such things as
+harmful for open source.</p>
+</li>
+<li>
+<p><strong>Suggest people to add push access to.</strong> I don't necessarily mean
+passively (though that could be interesting too), but I mean in the page
+to add someone, it would be nice if the popup suggested or indicated which
+people had contributed the project before, since just searching for a name
+searches all of GitHub, and I don't want to accidentally give access to
+the wrong person.</p>
+</li>
+</ol>
+<h3>Profiles</h3>
+<ol start="67">
+<li>
+<p><strong>Stop trying to make profile pages look "cute" with randomly highlighted
+pull requests.</strong> GitHub should have learned by now that profile pages
+matter a lot (whether people want them to or not), and there can be
+unintended consequences to the things that are put on them.</p>
+</li>
+<li>
+<p><strong>Explain what the axes actually mean in the new "activity overview".</strong>
+I'm referring to
+<a href="https://twitter.com/asmeurer/status/1033141923630874624">this</a> (it's
+still in beta and you have to manually enable it on your profile page).
+Personally I'm leaving the feature off because I don't like being
+metricized/gamified, but if you're going to have it, at least include some
+transparency.</p>
+</li>
+</ol>
+<h3>Releases</h3>
+<ol start="69">
+<li>
+<strong>Allow hiding the "source code (zip)" and "source code (tar.gz)" files in
+a release.</strong> We upload our actual release files (generated by <code>setup.py</code>)
+to the GitHub release. We want people to download those, not snapshots of
+the repo.</li>
+</ol>
+<h3>Miscellaneous</h3>
+<ol start="70">
+<li>
+<p><strong>The repository search function doesn't support partial matches.</strong> This
+is annoying for <a href="https://github.com/conda-forge/">conda-forge</a>. For
+instance, if I <a href="https://github.com/conda-forge/?utf8=%E2%9C%93&amp;q=png&amp;type=&amp;language=">search for
+"png"</a>
+it doesn't show the
+<a href="https://github.com/conda-forge/libpng-feedstock">libpng-feedstock</a> repo.</p>
+</li>
+<li>
+<p><strong>Show commit history as a graph.</strong> Like <code>git log --graph</code>. This would go
+a <em>long</em> way to helping new users understand git. When I first started
+with git, understanding the history as a graph was a major part of me
+finally grokking how it worked.</p>
+</li>
+<li>
+<p><strong>Bring back the old "fork" UI.</strong> The one that just had icons for all the
+repos, and the icons didn't go away or become harder to find if you
+already had a fork. Some of us use the "fork" button to go to our
+pre-existing forks, not just to perform a fork action. This was recently
+changed and now it's better than it was, but I still don't see why
+existing forks need to be harder to find, visually, than nonexisting ones.</p>
+</li>
+<li>
+<p><strong>Provide a more official way to request fixes to these cuts.</strong> I often
+ask on Twitter, but get no response. Preferably something public so that
+others could vote on them (but I understand if you don't want too much
+bikeshedding).</p>
+</li>
+</ol>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/" class="u-url">Automatically deploying this blog to GitHub Pages with Travis CI</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
@@ -529,283 +1109,6 @@ their <a href="https://en.wikipedia.org/wiki/Apple_USB_Mouse">hockey puck mice</
 actually hopeful that they can fix these issues, and implement a feature that
 makes real headway into helping me solve one of my biggest problems on GitHub
 right now, the reviewing of pull requests.</p>
-</div>
-    </div>
-    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/tuples/" class="u-url">Tuples</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Aaron Meurer
-            </span></p>
-            <p class="dateline">
-            <a href="posts/tuples/" rel="bookmark">
-            <time class="published dt-published" datetime="2016-09-21T21:33:14-05:00" itemprop="datePublished" title="2016-09-21 21:33">2016-09-21 21:33</time></a>
-            </p>
-                <p class="commentline">
-        
-    <a href="posts/tuples/#disqus_thread" data-disqus-identifier="cache/posts/tuples.html">Comments</a>
-
-
-        </p>
-</div>
-    </header><div class="e-content entry-content">
-    <div>
-<p>Today, David Beazley made some tweets:</p>
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
-<p lang="en" dir="ltr">At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778634205395845120">September 21, 2016</a>
-</blockquote>
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
-<p lang="en" dir="ltr">Usually there's a sentence nearby "sometimes you need a read only list." No. No, I haven't. Not in 20 years. Not even once. Sorry.</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778635637457088512">September 21, 2016</a>
-</blockquote>
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
-<p lang="en" dir="ltr">My main objection is that "read only list" is a lazy description lacking thought. A red flag for every other topic that might be covered.</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778639979052498944">September 21, 2016</a>
-</blockquote>
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>There are quite a few good responses to these tweets, both from David and from
-others (and from yours truly). I recommend reading the the thread (click on
-the <a href="https://twitter.com/dabeaz/status/778634205395845120">first tweet</a> above).</p>
-<p>Now to start off, I want to say that I respect the hell out of David Beazley.
-The guy literally <a href="http://www.dabeaz.com/cookbook.html">wrote the book</a> on
-Python, and he knows way more about Python than I ever will. He's also one of
-the most entertaining Python people you can
-<a href="https://twitter.com/dabeaz">follow on Twitter</a>. But hey, that doesn't mean I
-can't disagree sometimes.</p>
-<h2>List vs. Tuple. Fight!</h2>
-<p>As you probably know, there are two "array" datatypes in Python, <code>list</code> and
-<code>tuple</code>.<sup id="fnref-list"><a class="footnote-ref" href="posts/tuples/#fn-list">1</a></sup> The primary difference between the two is that lists are <em>mutable</em>,
-that is you can change their entries and length after they are created, with
-methods like <code>.append</code> or <code>+=</code>. Tuples, on the other hand, are <em>immutable</em>.
-Once you create one, you cannot change it. This makes the implementation
-simpler (and hence faster, although don't let anyone tell you you should use a
-tuple just because it's faster). This, as
-<a href="http://nedbatchelder.com/blog/201608/lists_vs_tuples.html">Ned Batchelder</a>
-points out, is the only technical difference between the two.</p>
-<p>The the idea that particularly bugs me here is that tuples are primarily
-useful as "record" datatypes.</p>
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
-<p lang="en" dir="ltr"><a href="https://twitter.com/AllenDowney">@AllenDowney</a> Better than "read-only-list." ;-).   Mainly looking for the tuple-as-record description. That's often what's missing.</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778685294593716224">September 21, 2016</a>
-</blockquote>
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>Tuples are awesome for records. This is both by design—since they have a
-fixed shape, the positions in a tuple can be "fixed" values, and by convention—if a
-Python programmer sees parentheses instead of square brackets, he is more
-likely to see the object as "record-like". The <code>namedtuple</code> object in the standard library
-takes the record idea further by letting you actually name the fields:</p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Person'</span><span class="p">,</span> <span class="s1">'name, age'</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
-<span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
-</pre>
-
-
-<p>But is that really the <em>only</em> place you'd want to use a tuple over a list?</p>
-<p>Consider five other places you might encounter a tuple in Python, courtesy of
-Allen Downey:</p>
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
-<p lang="en" dir="ltr"><a href="https://twitter.com/dabeaz">@dabeaz</a> (1) tuple assignment (2) multiple return values (3) *args (4) output from zip, enumerate, etc (5) key in dictionary</p>— Allen Downey (@AllenDowney) <a href="https://twitter.com/AllenDowney/status/778691102094176257">September 21, 2016</a>
-</blockquote>
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>In code these look like:</p>
-<ol>
-<li>
-<p><strong>Multiple assignments:</strong></p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; (a, b) = 1, 2
-</pre>
-
-
-<p>(yes, the parentheses are optional here, as they are in many places where a
-tuple can be used, but this is still a tuple, or at least it looks like one ;)</p>
-</li>
-<li>
-<p><strong>Multiple return values:</strong></p>
-<p>For example,
-<a href="https://docs.python.org/3/library/os.html#os.walk"><code>os.walk</code></a>. This is
-for the most part a special case of using tuples as records.</p>
-</li>
-<li>
-<p><strong><code>*args</code>:</strong></p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; def f(*args):
-...     print(type(args), args)
-...
-&gt;&gt;&gt; f(1, 2, 3)
-&lt;class 'tuple'&gt; (1, 2, 3)
-</pre>
-
-
-<p>Arbitrary positional function arguments are always stored as a <code>tuple</code>.</p>
-</li>
-<li>
-<p><strong>Return value from builtins <code>zip</code>, <code>enumerate</code>, etc.:</strong></p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; for i in zip(range(3), 'abc'):
-...     print(i)
-...
-(0, 'a')
-(1, 'b')
-(2, 'c')
-&gt;&gt;&gt; for i in enumerate('abc'):
-...     print(i)
-...
-(0, 'a')
-(1, 'b')
-(2, 'c')
-</pre>
-
-
-<p>This also applies to the combinatoric generators in
-<a href="https://docs.python.org/3.6/library/itertools.html">itertools</a> (like
-<code>product</code>, <code>combinations</code>, etc.)</p>
-</li>
-<li>
-<p><strong>Dictionary keys:</strong></p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; {
-...     (0, 0): '.',
-...     (0, 1): ' ',
-...     (1, 0): '.',
-...     (1, 1): ' ',
-... }
-{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}
-</pre>
-
-
-</li>
-</ol>
-<p>This last one I find to be very important. You could arguably use a list for
-the first four of Allen Downey's points<sup id="fnref-assign"><a class="footnote-ref" href="posts/tuples/#fn-assign">2</a></sup> (or Python could have, if it wanted to). But it
-is
-<a href="https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/">impossible</a>
-to meaningfully hash a mutable data structure in Python, and hashability is a
-requirement for dictionary keys.</p>
-<p>However, be careful. Not all tuples are hashable. Tuples can contain
-anything, but only tuples of immutable values are hashable. Consider<sup id="fnref-TypeError"><a class="footnote-ref" href="posts/tuples/#fn-TypeError">4</a></sup></p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span>
-<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-</pre>
-
-
-<p>Such tuples are not hashable, and cannot be used as dictionary keys.</p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">"&lt;ipython-input-39-36822ba665ca&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-    <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="ne">TypeError</span><span class="p">:</span> <span class="n">unhashable</span> <span class="nb">type</span><span class="p">:</span> <span class="s1">'list'</span>
-</pre>
-
-
-<h2>Why is <code>list</code> the Default?</h2>
-<p>My second gripe here is this notion that your default ordered collection
-object in Python should be <code>list</code>. <code>tuples</code> are only to be used as "records",
-or if you suspect <em>might</em> want to use it as a dictionary key. First off, you
-never know when you'll want something to be hashable. Both dictionary keys and
-<code>sets</code> require hashability. Suppose you want to de-duplicate a collection of
-sequences. If you represent the sequences with <code>list</code>, you'll either have to
-write a custom loop that checks for duplicates, or manually convert them to
-<code>tuple</code> and throw them in a <code>set</code>. If you start with <code>tuple</code>, you don't have
-to worry about it (again, assuming the entries of the tuples are all hashable
-as well).</p>
-<p>Consider another usage of tuples, which I consider to be
-important, namely tree structures. Say you wanted a simple representation of a
-Python syntax tree. You might represent <code>1 - 2*(-3 + 4)</code> as</p>
-<pre class="code literal-block"><span></span><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
-</pre>
-
-
-<p>This isn't really a record. The meaning of the entries in the tuples is
-determined by the first value of the tuple, not position. In this example, the length
-of the tuple also signifies meaning (binary vs. unary <code>-</code>).</p>
-<p>If this looks familiar to you, it's because this is how the language Lisp
-represents all programs. This is a common pattern.
-<a href="http://dask.pydata.org/en/latest/graphs.html">Dask graphs</a> use tuples and
-dictionaries to represent computations.
-<a href="http://docs.sympy.org/latest/tutorial/manipulation.html">SymPy expression trees</a>
-use tuples and Python classes to represent symbolic mathematical expressions.</p>
-<p>But why use tuples over lists here? Suppose you had an object like the one
-above, but using lists: <code>['-', 1, ['*', 2, ['+', ['-', 3], 4]]]</code>. If you
-discover you need to use this as a dictionary key, or want to put it in a
-<code>set</code>, you would need to convert this to a hashable object. To do this you
-need to write a function that recursively converts each <code>list</code> to a <code>tuple</code>.
-See how long it takes you to write that function correctly.</p>
-<h2>Mutability is Bad</h2>
-<p>More to the point, however, mutability is bad. I counted 12 distinct methods
-on <code>list</code> that mutate it (how many can you remember off the top of your
-head?<sup id="fnref-mutate"><a class="footnote-ref" href="posts/tuples/#fn-mutate">3</a></sup>). <em>Any</em> function that gets access to a list can mutate it,
-using any one of these methods. All it takes is for someone to forget that
-<code>+=</code> mutates a list (and that they should copy it first) for code completely
-distant from the origin definition to cause issues. The hardest bug I ever
-debugged had a three character
-<a href="https://github.com/inducer/pudb/commit/b979fc5909c8d731eb907fc25f4e97904fb7cbbd">fix</a>,
-adding <code>[:]</code> to copy a global list that I was (accidentally) mutating. It took
-me a several hour airplane ride and some deep dark magic that I'll leave for
-another blog post to discover the source of my problems (the problems I was
-having appeared to be quite distant from the actual source).</p>
-<h2>A Better "Default"</h2>
-<p>I propose that Python code in general would be vastly improved if people used
-<code>tuple</code> as the default ordered collection, and only switched to <code>list</code> if
-mutation was necessary (it's less necessary than you think; you can always
-copy a tuple instead of mutating it). I agree with David Beazley that you
-don't "sometimes need a read only list". Rather, you "sometimes need a
-writable tuple".</p>
-<p>This makes more sense than defaulting to <code>list</code>, and only switching to <code>tuple</code>
-when hashability is needed, or when some weird "rule of thumb" applies that
-says that you should use <code>tuple</code> if you have a "record". Maybe there's a good
-reason that <code>*args</code> and almost all builtin and standard library functions
-return tuples instead of lists. It's harder to accidentally break someone
-else's code, or have someone else accidentally break your code, when your data
-structures are immutable.</p>
-<h2>Footnotes</h2>
-<div class="footnote">
-<hr>
-<ol>
-<li id="fn-list">
-<p>I want to avoid saying "a tuple is an immutable list", since "list"
-can be interpreted in two ways, as an English word meaning "ordered
-collection" (in
-which case, the statement is true), or as the Python type <code>list</code> (in which
-case, the statement is false—<code>tuple</code> is not a subclass of <code>list</code>). <a class="footnote-backref" href="posts/tuples/#fnref-list" title="Jump back to footnote 1 in the text">↩</a></p>
-</li>
-<li id="fn-assign">
-<p>Yes,</p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; [a, b] = 1, 2
-</pre>
-
-
-<p>works. <a class="footnote-backref" href="posts/tuples/#fnref-assign" title="Jump back to footnote 2 in the text">↩</a></p>
-</li>
-<li id="fn-mutate">
-<p></p>
-<div id="spoiler" style="display:none">
-<code>__delitem__</code>, <code>__iadd__</code>, <code>__imul__</code>, <code>__setitem__</code>, <code>append</code>, <code>clear</code>, <code>extend</code>, <code>insert</code>,
-<code>pop</code>, <code>remove</code>, <code>reverse</code>, and <code>sort</code>.
-</div>
-<button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none')
-{document.getElementById('spoiler')
-.style.display=''}else{document.getElementById('spoiler')
-.style.display='none'}">Show/hide answer</button> <a class="footnote-backref" href="posts/tuples/#fnref-mutate" title="Jump back to footnote 3 in the text">↩</a>
-</li>
-<li id="fn-TypeError">
-<p>One of the tweets from the conversation:</p>
-<p></p>
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
-<p lang="en" dir="ltr"><a href="https://twitter.com/asmeurer">@asmeurer</a> <a href="https://twitter.com/AllenDowney">@AllenDowney</a> As yes:<br><br>t = (1,2, [3, 4])<br>t[2] += [5,6]<br><br>;-)</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778697399975813120">September 21, 2016</a>
-</blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>This is similar to this example. But
-it turns out this one doesn't work:</p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; t = (1,2, [3, 4])
-&gt;&gt;&gt; t[2] += [5,6]
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-TypeError: 'tuple' object does not support item assignment
-</pre>
-
-
-<p>I have no idea why. It seems to me that it should work. <code>t[2]</code> is a list
-and <code>list</code> has <code>__iadd__</code> defined. It seems that Python gets kind of weird
-about things on the left-hand side of an assignment. <strong>EDIT:
-<a href="http://stackoverflow.com/a/29747466/161801">Here's</a> why.</strong> <a class="footnote-backref" href="posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text">↩</a></p>
-</li>
-</ol>
-</div>
 </div>
     </div>
     </article>

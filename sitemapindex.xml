@@ -6,15 +6,15 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
-  <loc>https://asmeurer.github.io/blog/galleries/rss.xml</loc>
-  <lastmod>2018-11-07T21:34:00Z</lastmod>
+  <loc>https://asmeurer.com/blog/galleries/rss.xml</loc>
+  <lastmod>2018-11-09T20:44:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://asmeurer.github.io/blog/rss.xml</loc>
-  <lastmod>2018-11-07T21:34:00Z</lastmod>
+  <loc>https://asmeurer.com/blog/rss.xml</loc>
+  <lastmod>2018-11-09T20:45:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://asmeurer.github.io/blog/sitemap.xml</loc>
-  <lastmod>2018-11-07T21:34:00Z</lastmod>
+  <loc>https://asmeurer.com/blog/sitemap.xml</loc>
+  <lastmod>2018-11-09T20:45:00Z</lastmod>
  </sitemap>
 </sitemapindex>
