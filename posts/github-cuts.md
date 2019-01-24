@@ -194,8 +194,8 @@ In no particular order:
     [hub](https://github.com/github/hub)). If I try to select their username
     from a comment, it's a link, which makes it hard to select. I generally
     copy it from the blue text at the top "*user* wants to merge *n* commits
-    from `sympy:master` from `user:branch`. If it were easier to select "user"
-    or "branch" from that box (say, by double clicking), that would be
+    from `sympy:master` from `user:branch`". If it were easier to select
+    "user" or "branch" from that box (say, by double clicking), that would be
     helpful.
 
 31. **Change the "resolve conversation" UI.** I keep pressing it on accident
