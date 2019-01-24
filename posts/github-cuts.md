@@ -47,7 +47,7 @@ In no particular order:
 ## Issues
 
 1. **Allow anyone to add labels to issues.** At the very least, allow the
-   person who opened the issue to add labels).
+   person who opened the issue to add labels.
 
 2. The new issue transfer ability is great, but please **make it require only
    push access, not admin access.**
