@@ -378,9 +378,9 @@ My apologies if any of these actually work now: as I said,
 
 ## GitHub Pages
 
-GitHub pages is one of the best features of GitHub, and infact, this very blog
-is hosted on it. Very few complaints here, because for the most part, it "just
-works".
+GitHub pages is one of the best features of GitHub, and in fact, this very
+blog is hosted on it. Very few complaints here, because for the most part, it
+"just works".
 
 
 58. [**Moar themes.**](https://twitter.com/asmeurer/status/831962312122761216)

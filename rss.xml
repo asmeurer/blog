@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 24 Jan 2019 23:41:37 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 24 Jan 2019 23:48:18 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
 initiative&lt;/a&gt; to fix
 minor issues that make things more difficult for GitHub users. As someone who
 spends most of his day on &lt;a href="https://github.com"&gt;github.com&lt;/a&gt;, this initiative is
@@ -434,9 +434,9 @@ that would benefit me personally, specifically for my project
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3&gt;GitHub Pages&lt;/h3&gt;
-&lt;p&gt;GitHub pages is one of the best features of GitHub, and infact, this very blog
-is hosted on it. Very few complaints here, because for the most part, it "just
-works".&lt;/p&gt;
+&lt;p&gt;GitHub pages is one of the best features of GitHub, and in fact, this very
+blog is hosted on it. Very few complaints here, because for the most part, it
+"just works".&lt;/p&gt;
 &lt;ol start="58"&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href="https://twitter.com/asmeurer/status/831962312122761216"&gt;&lt;strong&gt;Moar themes.&lt;/strong&gt;&lt;/a&gt;
