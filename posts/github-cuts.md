@@ -401,7 +401,7 @@ blog is hosted on it. Very few complaints here, because for the most part, it
 ## Settings
 
 60. **Automatically protected branches make the branch difficult to delete
-    when you are done with it.** My use-case is to create a branch for the
+    when you are done with it.** My use-case is to create a branch for a
     release, which I want to protect, but I also want to delete the branch
     once it is merged. I can protect the branch automatically pretty easily,
     but then I have to go and delete the protection rule when it's merged to
