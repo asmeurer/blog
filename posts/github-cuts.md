@@ -98,7 +98,7 @@ In no particular order:
     default, so that I don't miss updates to old issues/pull requests.
 
 11. **Make advanced search filters more accessible.** They should autofill,
-    similar to how Gmail or even GitLab search works (yes, please still all
+    similar to how Gmail or even GitLab search works (yes, please steal all
     the good ideas from GitLab; they already stole all their good ideas from
     you).
 
