@@ -91,7 +91,9 @@ In no particular order:
 
 8. **Allow Markdown formatting in issue titles.**
 
-9. **Show people's names next to comments as "Real Name (@username)".**
+9. **Show people's names next to comments as "Real Name (@username)".** In
+   general, GitHub should be emphasizing people's display names rather than
+   their usernames.
 
 10. **Remember my selection for the "sort" setting in the issues list.** I'd
     love to have issues/pull requests sort by "most recently updated" by
