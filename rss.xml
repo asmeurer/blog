@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 24 Jan 2019 23:34:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 24 Jan 2019 23:39:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
 initiative&lt;/a&gt; to fix
 minor issues that make things more difficult for GitHub users. As someone who
 spends most of his day on &lt;a href="https://github.com"&gt;github.com&lt;/a&gt;, this initiative is
@@ -218,8 +218,8 @@ I generally do this to &lt;code&gt;git remote add&lt;/code&gt; them (using
 &lt;a href="https://github.com/github/hub"&gt;hub&lt;/a&gt;). If I try to select their username
 from a comment, it's a link, which makes it hard to select. I generally
 copy it from the blue text at the top "&lt;em&gt;user&lt;/em&gt; wants to merge &lt;em&gt;n&lt;/em&gt; commits
-from &lt;code&gt;sympy:master&lt;/code&gt; from &lt;code&gt;user:branch&lt;/code&gt;. If it were easier to select "user"
-or "branch" from that box (say, by double clicking), that would be
+from &lt;code&gt;sympy:master&lt;/code&gt; from &lt;code&gt;user:branch&lt;/code&gt;". If it were easier to select
+"user" or "branch" from that box (say, by double clicking), that would be
 helpful.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
