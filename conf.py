@@ -343,7 +343,11 @@ WRITE_TAG_CLOUD = False
                              # the main (the newest) index page (index.html)
 
 # Name of the theme to use.
-THEME = "base"
+THEME = "custom-theme"
+
+THEME_CONFIG = {
+    'github_repo': 'https://github.com/asmeurer/blog',
+}
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.
