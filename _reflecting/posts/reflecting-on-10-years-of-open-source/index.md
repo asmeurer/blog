@@ -1,5 +1,7 @@
 Today marks a very special day for me. Ten years ago today, March 20, 2009, my
-first patch to an open source project ever was merged.
+[first
+patch](https://github.com/sympy/sympy/commit/ccedb6d5677c5dabf187e241d0aa97b134b152df)
+to an open source project ever was merged.
 
 Fall 2008 was my freshman year in college. As a computer science/math double
 major (at the time), I wanted to learn about as many programming laguages as I
@@ -17,4 +19,4 @@ My freshman intro to CS course was taught with Java, which I soon learned was
 one of the worst programming languages ever made, due to the obscene amount of
 biolerplate required to do even the simplest tasks, and the fact that it
 forced everything into an object oriented paradigm. However, one of the people
-in the university IT deparement 
+in the university IT deparement
