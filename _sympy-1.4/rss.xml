@@ -1,0 +1,2676 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 19 Apr 2019 20:28:17 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://asmeurer.com/blog/posts/whats-new-in-sympy-14/..."&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;SymPy 1.4 was released on April 9, 2019. In this post, I'd like to go over
+some of the highlights for this release. The full release notes for the
+release can be found on the &lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4"&gt;SymPy
+wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To update to SymPy 1.4, use&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;conda install sympy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or if you prefer to use pip&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;pip install -U sympy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The SymPy 1.4 release contains over 500 changes from 38 different submodules,
+so I will not be going over every change, but only a few of the main
+highlights. A &lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4#authors"&gt;total of 104
+people&lt;/a&gt;
+contributed to this release, including 66 people contributed for the first
+time for this release.&lt;/p&gt;
+&lt;h2&gt;Automatic LaTeX rendering in the Jupyter notebook&lt;/h2&gt;
+&lt;p&gt;Prior to SymPy 1.4, SymPy expressions in the notebook rendered with their
+default string representation, unless &lt;code&gt;init_printing()&lt;/code&gt; was called, after
+which they rendered with LaTeX:&lt;/p&gt;
+&lt;img src="https://asmeurer.com/blog/sympy-1.3-notebook.png" alt="SymPy 1.3 rendering in the Jupyter lab notebook"&gt;
+&lt;p&gt;In SymPy 1.4, SymPy expressions now automatically render as LaTeX in the notebook:&lt;/p&gt;
+&lt;img src="https://asmeurer.com/blog/sympy-1.4-notebook.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook"&gt;
+&lt;p&gt;However, this only applies automatically if the type of an object is a SymPy
+expression. For built-in types such as lists or ints, &lt;code&gt;init_printing()&lt;/code&gt; is
+still required to get LaTeX printing. For example, &lt;code&gt;solve()&lt;/code&gt; returns a list,
+so does not render as LaTeX unless &lt;code&gt;init_printing()&lt;/code&gt; is called:&lt;/p&gt;
+&lt;img src="https://asmeurer.com/blog/sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"&gt;
+&lt;h2&gt;Improved simplification&lt;/h2&gt;
+&lt;p&gt;simplification of relational and piecewise expressions has been improved:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; x, y, z, w = symbols('x y z w')
+&amp;gt;&amp;gt;&amp;gt; init_printing()
+&amp;gt;&amp;gt;&amp;gt; And(Eq(x,y), x &amp;gt;= y, w &amp;lt; y, y &amp;gt;= z, z &amp;lt; y)
+x = y ∧ x ≥ y ∧ y ≥ z ∧ w &amp;lt; y ∧ z &amp;lt; y
+&amp;gt;&amp;gt;&amp;gt; simplify(And(Eq(x,y), x &amp;gt;= y, w &amp;lt; y, y &amp;gt;= z, z &amp;lt; y))
+x = y ∧ y &amp;gt; Max(w, z)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; Piecewise((x*y, And(x &amp;gt;= y, Eq(y, 0))), (x - 1, Eq(x, 1)), (0, True))
+⎧ x⋅y   for y = 0 ∧ x ≥ y
+⎪
+⎨x - 1      for x = 1
+⎪
+⎩  0        otherwise
+&amp;gt;&amp;gt;&amp;gt; simplify(Piecewise((x*y, And(x &amp;gt;= y, Eq(y, 0))), (x - 1, Eq(x, 1)), (0, True)))
+0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Improved MathML printing&lt;/h2&gt;
+&lt;p&gt;The MathML content and presentation printers have been greatly improved,
+putting them on par with the existing Unicode and LaTeX pretty printers.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; mathml(Integral(exp(-x**2), (x, -oo, oo)), 'presentation')
+&amp;lt;mrow&amp;gt;&amp;lt;msubsup&amp;gt;&amp;lt;mo&amp;gt;&amp;amp;#x222B;&amp;lt;/mo&amp;gt;&amp;lt;mrow&amp;gt;&amp;lt;mo&amp;gt;-&amp;lt;/mo&amp;gt;&amp;lt;mi&amp;gt;&amp;amp;#x221E;&amp;lt;/mi&amp;gt;&amp;lt;/mrow&amp;gt;&amp;lt;mi&amp;gt;&amp;amp;#x221E;&amp;lt;/mi&amp;gt;&amp;lt;/msubsup&amp;gt;&amp;lt;msup&amp;gt;&amp;lt;mi&amp;gt;&amp;amp;ExponentialE;&amp;lt;/mi&amp;gt;&amp;lt;mrow&amp;gt;&amp;lt;mo&amp;gt;-&amp;lt;/mo&amp;gt;&amp;lt;msup&amp;gt;&amp;lt;mi&amp;gt;x&amp;lt;/mi&amp;gt;&amp;lt;mn&amp;gt;2&amp;lt;/mn&amp;gt;&amp;lt;/msup&amp;gt;&amp;lt;/mrow&amp;gt;&amp;lt;/msup&amp;gt;&amp;lt;mo&amp;gt;&amp;amp;dd;&amp;lt;/mo&amp;gt;&amp;lt;mi&amp;gt;x&amp;lt;/mi&amp;gt;&amp;lt;/mrow&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; mathml(Integral(exp(-x**2), (x, -oo, oo)), 'content')
+&amp;lt;apply&amp;gt;&amp;lt;int/&amp;gt;&amp;lt;bvar&amp;gt;&amp;lt;ci&amp;gt;x&amp;lt;/ci&amp;gt;&amp;lt;/bvar&amp;gt;&amp;lt;lowlimit&amp;gt;&amp;lt;apply&amp;gt;&amp;lt;minus/&amp;gt;&amp;lt;infinity/&amp;gt;&amp;lt;/apply&amp;gt;&amp;lt;/lowlimit&amp;gt;&amp;lt;uplimit&amp;gt;&amp;lt;infinity/&amp;gt;&amp;lt;/uplimit&amp;gt;&amp;lt;apply&amp;gt;&amp;lt;exp/&amp;gt;&amp;lt;apply&amp;gt;&amp;lt;minus/&amp;gt;&amp;lt;apply&amp;gt;&amp;lt;power/&amp;gt;&amp;lt;ci&amp;gt;x&amp;lt;/ci&amp;gt;&amp;lt;cn&amp;gt;2&amp;lt;/cn&amp;gt;&amp;lt;/apply&amp;gt;&amp;lt;/apply&amp;gt;&amp;lt;/apply&amp;gt;&amp;lt;/apply&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If your &lt;a href="https://caniuse.com/#feat=mathml"&gt;browser supports MathML&lt;/a&gt; (at the
+time of writing, only Firefox and Safari), you should see the above
+presentation form for &lt;code&gt;Integral(exp(-x**2), (x, -oo, oo))&lt;/code&gt; below:&lt;/p&gt;
+&lt;p&gt;&lt;math style="display: block;"&gt;&lt;mrow&gt;&lt;msubsup&gt;&lt;mo&gt;∫&lt;/mo&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;mi&gt;∞&lt;/mi&gt;&lt;/mrow&gt;&lt;mi&gt;∞&lt;/mi&gt;&lt;/msubsup&gt;&lt;msup&gt;&lt;mi&gt;ⅇ&lt;/mi&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;mo&gt;ⅆ&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/mrow&gt;&lt;/math&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</guid><pubDate>Fri, 19 Apr 2019 17:41:57 GMT</pubDate></item><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
+initiative&lt;/a&gt; to fix
+minor issues that make things more difficult for GitHub users. As someone who
+spends most of his day on &lt;a href="https://github.com"&gt;github.com&lt;/a&gt;, this initiative is
+great, as these small cuts can quickly add up to a painful experience.&lt;/p&gt;
+&lt;p&gt;The initiative has already made some great fixes, such as &lt;a href="https://blog.github.com/changelog/2018-07-31-unselectable-diff-markers/"&gt;making the diff
+markers
+unselectable&lt;/a&gt;
+and
+&lt;a href="https://blog.github.com/changelog/2018-10-08-issue-and-pull-request-hovercards/"&gt;hovercards&lt;/a&gt;.
+Small changes like these are usually quite easy for GitHub to do, but they
+make a huge difference to those of use who use GitHub every day.&lt;/p&gt;
+&lt;p&gt;I &lt;a href="https://twitter.com/asmeurer/status/1034528642389266432"&gt;recently asked&lt;/a&gt;
+how these cuts could be reported to GitHub for fixing, but got no response. So
+I am writing this blog post.&lt;/p&gt;
+&lt;p&gt;To be very clear: I think that on the whole GitHub is great and they are doing
+a great job. And it's still better than the alternatives (to put things in
+perspective, I recently spent &lt;a href="https://twitter.com/asmeurer/status/1029158262069899266"&gt;half an
+hour&lt;/a&gt; trying to
+figure out how to change my password in BitBucket, and GitLab can't even keep
+me logged in between sessions). GitHub has and continues to revolutionize the
+open source ecosystem, and is still the best place to host an open source
+project.&lt;/p&gt;
+&lt;p&gt;But since GitHub did
+&lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;ask&lt;/a&gt; what sorts of
+changes they want to see, I'm providing a list. In this post I'm trying to
+only ask about things that are small changes (though I realize many won't be
+as easy to fix as they may appear from the outside, and I readily admit that I
+am not a web developer).&lt;/p&gt;
+&lt;p&gt;These are just the things that have bothered me, personally. Other people use
+GitHub differently and no doubt have their own pain points. For instance, I
+have no suggestions about the project boards feature of GitHub because I don't
+use it. If you are also a GitHub user and have your own pain points feel free
+to use the comment box below (though I have no idea if GitHub will actually
+see them).&lt;/p&gt;
+&lt;p&gt;If you work for GitHub and have any questions, feel free to comment below, or
+&lt;a href="mailto:asmeurer@gmail.com"&gt;email me&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In no particular order:&lt;/p&gt;
+&lt;h3&gt;Issues&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow anyone to add labels to issues.&lt;/strong&gt; At the very least, allow the
+person who opened the issue to add labels.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The new issue transfer ability is great, but please &lt;strong&gt;make it require only
+push access, not admin access.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Remove the automatic hiding of comments when there are too many.&lt;/strong&gt; I
+understand this is done for technical reasons, but it breaks
+Cmd-F/scrolling through the page to find comments. Often I go to an issue
+trying to find an old comment and can't because buried in the comments is a
+button I have to press to actually show the comment (it's even worse when
+you have to find and press the button multiple times).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Better indication for cross-referenced pull requests.&lt;/strong&gt; I really don't
+know how to fix this, only that it is a problem. It happens all the time
+that a new contributor comes to a SymPy issue and asks if it has been
+worked on yet. They generally do not seem to notice the cross-referenced
+pull requests in the list.
+&lt;a href="https://github.com/sympy/sympy/issues/14943"&gt;Here&lt;/a&gt; is an example of what
+I'm talking about.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Indicate better if a cross-referenced pull request would close an
+issue.&lt;/strong&gt; Preferably with text, not just an icon.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTML pull request/issue templates.&lt;/strong&gt; I don't know if this counts as a
+"cut", as it isn't a simple fix. Right now, many projects use pull
+requests/new issue templates, but it is not very user friendly. The problem
+is that the whole thing is done in plain text, often with the template text
+as an HTML comment to prevent it from appearing in the final issue text.
+Even for me, I often find this quite difficult to read through, but for new
+contributors, we often find that they don't read it at all. Sure there's no
+way to force people to read, but if we could instead create a very simple
+HTML form for people to fill out, it would be much more friendly, even to
+experienced people like myself.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Fix the back button in Chrome.&lt;/strong&gt; I don't know if this is something that
+GitHub can fix, and I also do not know how things work in other browsers. I
+use Chrome on macOS. Often, when I click the "back" button and it takes me
+back to an issue page, the contents of the page are out-of-date (the newest
+comments or commits do not appear). It's often even more out-of-date than
+it was when I left the page. I have to reload the page to get the latest
+content.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow Markdown formatting in issue titles.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Show people's names next to comments as "Real Name (@username)".&lt;/strong&gt; In
+general, GitHub should be emphasizing people's display names rather than
+their usernames.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Remember my selection for the "sort" setting in the issues list.&lt;/strong&gt; I'd
+love to have issues/pull requests sort by "most recently updated" by
+default, so that I don't miss updates to old issues/pull requests.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make advanced search filters more accessible.&lt;/strong&gt; They should autofill,
+similar to how Gmail or even GitLab search works (yes, please steal all
+the good ideas from GitLab; they already stole all their good ideas from
+you).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tone down the reaction emojis.&lt;/strong&gt; Maybe this ship has sailed, but
+reaction emojis are way too unprofessional for some projects.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Copy/paste text as Markdown.&lt;/strong&gt; For example, copying "&lt;strong&gt;bold&lt;/strong&gt;" and
+pasting it into the comment box would paste &lt;code&gt;**bold**&lt;/code&gt;. Another idea that
+you can steal from GitLab.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Strike out #12345 issue links when the issue/PR is closed/merged&lt;/strong&gt;
+(like &lt;strike&gt;#12345&lt;/strike&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Pull requests&lt;/h3&gt;
+&lt;ol start="15"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a button that automatically merges a pull request as soon as all the
+CI checks pass.&lt;/strong&gt; Any additional commits pushed to the branch in the
+interim would cancel it, and it should also be cancellable by someone else
+with push access or the PR author.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add some way to disable the automatic hiding of large diffs.&lt;/strong&gt; This
+breaks Cmd-F on the page, and makes it harder to scroll through the pull
+request to find what you are looking for (typically the most important
+changes are the ones that are hidden!).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Include all issue/PR authors in the authors search on the pull request
+list page.&lt;/strong&gt; Right now it only lists people with push access. But I
+generally can't remember people's GitHub usernames, and autofilling based
+on all authors would be very helpful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Better contextual guesses for issue autofilling (after typing &lt;code&gt;#&lt;/code&gt;).&lt;/strong&gt;
+For instance, if an issue has already been referenced or cross-referenced,
+it should appear near the top of the list. We have almost &lt;a href="https://github.com/sympy/sympy/issues"&gt;3000 open
+issues&lt;/a&gt; in SymPy, and the current
+issue numbers are 5-digits long, so referencing an issue purely by number
+is very error prone.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Auto-update edited comments.&lt;/strong&gt; Context: SymPy uses a
+&lt;a href="https://github.com/sympy/sympy-bot"&gt;bot&lt;/a&gt; that comments on every pull
+request, requiring a release notes entry to be added to the description.
+This works quite well, but to prevent the bot from spamming, we have it
+comment only once, and edit its comment on any further checks. However,
+these edits do not automatically update, so people have to manually reload
+the page to see them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Don't hide full commit messages by default in the commits view.&lt;/strong&gt; It
+would be better to encourage people to write good commit messages.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make issue cross-references in pull request titles work.&lt;/strong&gt; I'd rather
+people didn't put issue numbers in pull request titles but they do it
+anyway, so it would be nice if they actually worked as links.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow me to comment on lines that aren't visible by default.&lt;/strong&gt; That is,
+lines that you have to click the "expand" icon above or below the line
+numbers to access. As an example, this can be useful to point out a line
+that should have been changed but wasn't.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Copying code from a diff that includes lines that aren't visible by
+default includes an extra space to the left for those lines.&lt;/strong&gt; This is a
+straight up bug. Probably fixing the previous point would also fix this :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make searches include text from the pull request diff.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;When a diff indents a line color the whitespace to the left of the
+line.&lt;/strong&gt; (see
+&lt;a href="https://twitter.com/asmeurer/status/740611970714480640"&gt;this&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Pull requests can show commits that are already in master.&lt;/strong&gt; For
+example, if someone makes pull request B based off of pull request A and
+then A gets merged, B will still show the commits from A. This has been a
+bug forever.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make the "jump to file or symbol" popdown collapsible.&lt;/strong&gt; Specifically
+what I mean is I want to be able to show just the files, without any
+symbols. For large pull requests, it is very difficult to use this popdown
+if there are hundreds of symbols. I typically want to just jump to a
+specific file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The status check on the favicon goes away when you switch to the diff
+tab.&lt;/strong&gt; Kudos to Marius Gedminas for &lt;a href="https://twitter.com/mgedmin/status/1058381090694553601"&gt;pointing this
+out&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/sympy/sympy/pull/15280#issuecomment-426795606"&gt;Apparently&lt;/a&gt;
+status checks that use the GitHub Apps API are forced to link into the
+checks tab.&lt;/strong&gt; The checks tab is useless if no information is actually
+published to it. It would be better if it could link straight to the
+external site, like is done with oauth integrations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make it easier to copy someone's username from the pull request page.&lt;/strong&gt;
+I generally do this to &lt;code&gt;git remote add&lt;/code&gt; them (using
+&lt;a href="https://github.com/github/hub"&gt;hub&lt;/a&gt;). If I try to select their username
+from a comment, it's a link, which makes it hard to select. I generally
+copy it from the blue text at the top "&lt;em&gt;user&lt;/em&gt; wants to merge &lt;em&gt;n&lt;/em&gt; commits
+from &lt;code&gt;sympy:master&lt;/code&gt; from &lt;code&gt;user:branch&lt;/code&gt;". If it were easier to select
+"user" or "branch" from that box (say, by double clicking), that would be
+helpful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Change the "resolve conversation" UI.&lt;/strong&gt; I keep pressing it on accident
+because it's where I expect the "new comment" button to be.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Reviews&lt;/h3&gt;
+&lt;p&gt;I wrote a &lt;a href="https://www.asmeurer.com/blog/posts/github-reviews-gripes/"&gt;whole
+post&lt;/a&gt; about the
+reviews feature when it came out. Not much has changed since then (actually,
+it has gotten worse). In short, the feature doesn't work like I would like it
+too, and I find the default behavior of deferred comments to be extremely
+detrimental. If there were a way to completely disable reviews (for myself, I
+don't care about other people using the feature), I would.&lt;/p&gt;
+&lt;p&gt;See my blog post for full details on why I think the reviews feature is broken
+and actually makes things worse, not better than before. I've summarized a few
+things that could change below.&lt;/p&gt;
+&lt;ol start="32"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make reviews non-deferred by default.&lt;/strong&gt; This is the biggest thing. If I
+had to pick only a single item on this page to be changed, it would be
+this. The issue is if I start a review and walk away from it, but forget
+to "finalize" it with a review status, the review is never actually seen
+by anyone. The simplest way to fix this would be to simply make partial
+reviews public.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make Cmd-Enter default to immediate comment.&lt;/strong&gt; Barring the above change,
+Cmd-Enter on a pull request line comment should default to immediate
+comment, not deferred (review) comment. The problem with the
+Cmd-Shift-Enter shortcut is that it is inconsistent: on a normal comment,
+it closes the pull request, and on a reply comment, it does nothing. I
+shouldn't have to check what "comment context" I am in to figure out what
+keyboard shortcut to use. The worst part is if you accidentally start a
+review, it's a pain in the ass to undo that and just post a normal
+comment. The simplest way to fix this would be to swap the current meaning
+of Cmd-Enter and Cmd-Shift-Enter for line comments (and no, this wouldn't
+be a backwards incompatible change, it would be a regression fix;
+Cmd-Enter &lt;em&gt;used&lt;/em&gt; to do the right thing).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow reviewing your own pull request.&lt;/strong&gt; There's no reason to disallow
+this, and it would often be quite useful to, for instance, mark a work in
+progress PR as such with a "request changes" review. Obviously
+self-reviews would be excluded from any required reviews.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Unhide the reviews box.&lt;/strong&gt; It should just be the same box as the comment
+box, unstead of buried on the diff tab (see my &lt;a href="https://www.asmeurer.com/blog/posts/github-reviews-gripes/"&gt;blog
+post&lt;/a&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Show review status in the pull request list as a red X or green check.&lt;/strong&gt;
+This would make it easier to see which pull requests have reviews.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow new commits to invalidate reviews.&lt;/strong&gt; That way they work the same
+way as any other status check. (I see that this is now an option for
+required reviews, which is new since my original blog post, but it still
+doesn't affect the status as reported on the pull requests list).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow requiring zero negative reviews to merge (but not necessarily any
+positive reviews)&lt;/strong&gt;. Requiring a positive review is pointless. The person
+merging can just add one real quick before they merge, but it is
+unnecessary extra work. On the other hand allowing people with push access
+to block a merge with a negative review would be very useful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Web editor&lt;/h3&gt;
+&lt;ol start="39"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The web editor seems to have a search function, but I can't get it to
+actually work.&lt;/strong&gt; Half the time Cmd-F pops open the browser search, which
+doesn't find text that isn't on screen. And when I press Cmd-G to actually
+do the search, it doesn't work (and there are no buttons to perform the
+search either).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add basic syntax testing in the web editor for common languages to catch
+basic mistakes.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Mobile site&lt;/h3&gt;
+&lt;ol start="41"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Please make the mobile site work with iOS 10.&lt;/strong&gt; I don't see any reason
+why simple things like buttons (like the merge button or the comment
+button) shouldn't work on a slightly older browser. No, I am not a web
+developer, but I do use my phone a lot and I've noticed that literally
+every other website works just fine on it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a way to disable the mobile site permanently.&lt;/strong&gt; For the most part,
+the mobile site is useless (see below). If you aren't going to put full
+development effort into it, allow me to disable it permanently so that
+every time I visit &lt;a href="https://github.com"&gt;github.com&lt;/a&gt; on my phone it goes to
+the desktop site.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Seeing as how the site (mobile or not) is almost completely unusable on every
+mobile device I own, it's hard to list other things here, but based on back
+when it actually worked, these are some of the things that annoyed me the
+most. Basically, I have found that virtually every time I go to GitHub to do
+anything on mobile, I have to switch to desktop mode to actually do what I
+want.&lt;/p&gt;
+&lt;p&gt;My apologies if any of these actually work now: as I said,
+&lt;a href="https://github.com"&gt;github.com&lt;/a&gt; doesn't actually work at all on my phone.&lt;/p&gt;
+&lt;ol start="43"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cannot search issues on mobile.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cannot make a line comment that &lt;em&gt;isn't&lt;/em&gt; a review on mobile.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cannot view lines beyond the default diff in pull requests on mobile.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Show more than 2 lines of the README and 0 lines of the code by default
+on project pages.&lt;/strong&gt; Yes mobile screens are small but it's also not hard to
+scroll on them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Support Jupyter notebook rendering on mobile.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Files view&lt;/h3&gt;
+&lt;ol start="48"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;GitHub needs a better default color theme for syntax highlighting.&lt;/strong&gt;
+Most of the colors are very similar to one another and hard to
+differentiate. Also things like strings are black, even though one of the
+most useful aspects of syntax highlighting generally is to indicate
+whether something is in a string or not.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add MathJax support to markdown files.&lt;/strong&gt; This would be amazingly useful
+for SymPy, as well as many scientific software projects. Right now if you
+want this you have to use a Jupyter notebook. MathJax support in
+issue/pull request comments would be awesome as well, though I'm not
+holding out for that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add "display source" button for markdown, ReST, etc.&lt;/strong&gt; I mean the button
+that is already there for Jupyter notebooks. Right now you have to view
+markdown and ReST files "raw" or edit the file to see their source.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a link to the pull request in the blame view.&lt;/strong&gt; Usually I want to
+find the pull request that produced a change, not just the commit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Wiki&lt;/h3&gt;
+&lt;ol start="52"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The wikis used to support LaTeX math with MathJax. It would be great if
+this were re-added.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The ability to set push permissions for the wiki separately from the
+repo it is attached to, or otherwise create an oauth token that can only
+push to the wiki would be useful.&lt;/strong&gt; Context: for SymPy, we use a
+&lt;a href="https://github.com/sympy/sympy-bot"&gt;bot&lt;/a&gt; that automatically updates our
+&lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes"&gt;release notes&lt;/a&gt; on our
+wiki. It works quite well, but the only way it can push to the wiki is if
+we give it push access to the full repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Notification emails&lt;/h3&gt;
+&lt;ol start="54"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Don't clobber special emails/email headers.&lt;/strong&gt; GitHub adds special emails
+like &lt;a href="mailto:author@noreply.github.com"&gt;author@noreply.github.com&lt;/a&gt; and
+&lt;a href="mailto:mention@noreply.github.com"&gt;mention@noreply.github.com&lt;/a&gt; to email
+notifications based on how the notification was triggered. This is useful,
+as I can create an email filter for
+&lt;a href="mailto:author@noreply.github.com"&gt;author@noreply.github.com&lt;/a&gt; for
+notifications on issues and pull requests created by me. The bad news is,
+&lt;a href="mailto:mention@noreply.github.com"&gt;mention@noreply.github.com&lt;/a&gt;, which is
+added when I am @mentioned, clobbers
+&lt;a href="mailto:author@noreply.github.com"&gt;author@noreply.github.com&lt;/a&gt;, so that it
+doesn't appear anymore. In other words, as soon as someone @mentions me in
+one of my issues, I become &lt;em&gt;less&lt;/em&gt; likely to see it, because it no longer
+gets my label (I get @mentioned on &lt;em&gt;a lot&lt;/em&gt; of issues and don't have the
+ability to read all of my notification emails). Ditto for the
+&lt;code&gt;X-GitHub-Reason&lt;/code&gt; email headers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Readd the "view issue" links in Gmail.&lt;/strong&gt; (I forgot what these are
+called). GitHub notification emails used to have these useful "view issue"
+buttons that showed up on the right in the email list in Gmail, but they
+were removed for some reason.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;API&lt;/h3&gt;
+&lt;ol start="56"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Make the requests in the API docs actually return what they show in the
+docs.&lt;/strong&gt; This means the &lt;a href="https://github.com/octocat/Hello-World/"&gt;example
+repo&lt;/a&gt; should have actual example
+issues corresponding to what is shown in the docs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow giving deploy key access to just one branch.&lt;/strong&gt; That way I can have
+a deploy key for &lt;code&gt;gh-pages&lt;/code&gt; and minimize the attack surface that the
+existence of that key produces. I think everyone would agree that more
+fine-grained permissions throughout the API would be nice, but this is one
+that would benefit me personally, specifically for my project
+&lt;a href="https://drdoctr.github.io/"&gt;doctr&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;GitHub Pages&lt;/h3&gt;
+&lt;p&gt;GitHub pages is one of the best features of GitHub, and in fact, this very
+blog is hosted on it. Very few complaints here, because for the most part, it
+"just works".&lt;/p&gt;
+&lt;ol start="58"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://twitter.com/asmeurer/status/831962312122761216"&gt;&lt;strong&gt;Moar themes.&lt;/strong&gt;&lt;/a&gt;
+Also it's awesome that you can use any GitHub repo as a theme now, but it
+turns out most random themes you find around GitHub don't actually work
+very well.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The steps to add HTTPS to an existing GitHub pages custom domain are a
+bit confusing.&lt;/strong&gt;. This took us a while to figure out for
+&lt;a href="https://sympy.org"&gt;sympy.org&lt;/a&gt;. To get things to work, you have to trigger
+GitHub to issue a cert for the domain. But the UI to issue the cert is to
+paste the domain into the box. So if the domain is already there but it
+doesn't work, you have to re-enter it. Also if you want both www and the
+apex domain to be HTTPS you have to enter them both in the box to trigger
+GitHub to issue a cert. This is primarily a UX issue. See
+&lt;a href="https://github.com/sympy/sympy.github.com/issues/105#issuecomment-415899934"&gt;https://github.com/sympy/sympy.github.com/issues/105#issuecomment-415899934&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Settings&lt;/h3&gt;
+&lt;ol start="60"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Automatically protected branches make the branch difficult to delete
+when you are done with it.&lt;/strong&gt; My use-case is to create a branch for a
+release, which I want to protect, but I also want to delete the branch
+once it is merged. I can protect the branch automatically pretty easily,
+but then I have to go and delete the protection rule when it's merged to
+delete it. There are several ways this could be fixed. For instance, you
+could add a rule to allow protected branches to be deleted if they are
+up-to-date with default branch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a way to disable the ability for non-admins to create new branches
+on a repo.&lt;/strong&gt; We want all of our pull requests to come from forks. Branches
+in the repo just create confusion, for instance, they appear whenever
+someone clones the repository.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Related to the previous point, make pull request reverts come from
+forks.&lt;/strong&gt; Right now when someone uses the revert pull request button, it
+creates a new branch in the same repo, but it would be better if the
+branch were made in the person's fork.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow me to enable branch protection by default for new repos.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Allow me to enable branch protection by default on new branches.&lt;/strong&gt; This
+is more important than the previous one because of the feature that lets
+people push to your branch on a pull request (which is a great feature by
+the way).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Clicking a team name in the settings should default to the "members"
+tab.&lt;/strong&gt; I don't understand why GitHub has a non-open "discussions" feature,
+but I find it to be completely useless, and generally see such things as
+harmful for open source.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Suggest people to add push access to.&lt;/strong&gt; I don't necessarily mean
+passively (though that could be interesting too), but I mean in the page
+to add someone, it would be nice if the popup suggested or indicated which
+people had contributed the project before, since just searching for a name
+searches all of GitHub, and I don't want to accidentally give access to
+the wrong person.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Profiles&lt;/h3&gt;
+&lt;ol start="67"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Stop trying to make profile pages look "cute" with randomly highlighted
+pull requests.&lt;/strong&gt; GitHub should have learned by now that profile pages
+matter a lot (whether people want them to or not), and there can be
+unintended consequences to the things that are put on them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Explain what the axes actually mean in the new "activity overview".&lt;/strong&gt;
+I'm referring to
+&lt;a href="https://twitter.com/asmeurer/status/1033141923630874624"&gt;this&lt;/a&gt; (it's
+still in beta and you have to manually enable it on your profile page).
+Personally I'm leaving the feature off because I don't like being
+metricized/gamified, but if you're going to have it, at least include some
+transparency.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Releases&lt;/h3&gt;
+&lt;ol start="69"&gt;
+&lt;li&gt;&lt;strong&gt;Allow hiding the "source code (zip)" and "source code (tar.gz)" files in
+a release.&lt;/strong&gt; We upload our actual release files (generated by &lt;code&gt;setup.py&lt;/code&gt;)
+to the GitHub release. We want people to download those, not snapshots of
+the repo.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Miscellaneous&lt;/h3&gt;
+&lt;ol start="70"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The repository search function doesn't support partial matches.&lt;/strong&gt; This
+is annoying for &lt;a href="https://github.com/conda-forge/"&gt;conda-forge&lt;/a&gt;. For
+instance, if I &lt;a href="https://github.com/conda-forge/?utf8=%E2%9C%93&amp;amp;q=png&amp;amp;type=&amp;amp;language="&gt;search for
+"png"&lt;/a&gt;
+it doesn't show the
+&lt;a href="https://github.com/conda-forge/libpng-feedstock"&gt;libpng-feedstock&lt;/a&gt; repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Show commit history as a graph.&lt;/strong&gt; Like &lt;code&gt;git log --graph&lt;/code&gt;. This would go
+a &lt;em&gt;long&lt;/em&gt; way to helping new users understand git. When I first started
+with git, understanding the history as a graph was a major part of me
+finally grokking how it worked.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Bring back the old "fork" UI.&lt;/strong&gt; The one that just had icons for all the
+repos, and the icons didn't go away or become harder to find if you
+already had a fork. Some of us use the "fork" button to go to our
+pre-existing forks, not just to perform a fork action. This was recently
+changed and now it's better than it was, but I still don't see why
+existing forks need to be harder to find, visually, than nonexisting ones.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Provide a more official way to request fixes to these cuts.&lt;/strong&gt; I often
+ask on Twitter, but get no response. Preferably something public so that
+others could vote on them (but I understand if you don't want too much
+bikeshedding).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/github-cuts/</guid><pubDate>Tue, 06 Nov 2018 22:54:21 GMT</pubDate></item><item><title>Automatically deploying this blog to GitHub Pages with Travis CI</title><link>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;This blog is now &lt;a href="http://travis-ci.org/asmeurer/blog"&gt;deployed to GitHub pages automatically&lt;/a&gt; from Travis CI.&lt;/p&gt;
+&lt;p&gt;As I've outlined in the &lt;a href="https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/moving-to-github-pages-with-nikola/"&gt;past&lt;/a&gt;, this
+website is built with the &lt;a href="https://getnikola.com/"&gt;Nikola&lt;/a&gt; static blogging
+engine. I really like Nikola because it uses Python, has lots of nice
+extensions, and
+is
+&lt;a href="https://github.com/getnikola/nikola/blob/master/LICENSE.txt"&gt;sanely licensed&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Most importantly, it is a static site generator, meaning I write my posts in
+Markdown, and Nikola generates the site as static web content ("static" means no web server
+is required to run the site). This means that the site can be hosted for free
+on &lt;a href="https://pages.github.com/"&gt;GitHub pages&lt;/a&gt;. This is how this site has been
+hosted since I started it. I have
+a &lt;a href="http://github.com/asmeurer/blog"&gt;GitHub repo&lt;/a&gt; for the site, and the content
+itself is deployed to
+the &lt;a href="https://github.com/asmeurer/blog/tree/gh-pages"&gt;gh-pages&lt;/a&gt; branch of the
+repo. But until now, the deployment has happened only manually with the
+&lt;code&gt;nikola github_deploy&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;A much better way is to deploy automatically using Travis CI. That way, I do
+not need to run any software on my computer to deploy the blog.&lt;/p&gt;
+&lt;p&gt;The steps outlined here will work for any static site generator. They assume
+you already have one set up and hosted on GitHub.&lt;/p&gt;
+&lt;h3&gt;Step 1: Create a .travis.yml file&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Create a &lt;code&gt;.travis.yml&lt;/code&gt; file like the one below&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-yaml"&gt;sudo: false
+language: python
+
+python:
+  - 3.6
+
+install:
+  - pip install "Nikola[extras]" doctr
+
+script:
+  - set -e
+  - nikola build
+  - doctr deploy . --built-docs output/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;If you use a different static site generator, replace &lt;code&gt;nikola&lt;/code&gt; with that
+site generator's command.&lt;/li&gt;
+&lt;li&gt;If you have Nikola configured to output to a different directory, or use a
+different static site generator, replace &lt;code&gt;--built-docs output/&lt;/code&gt; with the
+directory where the site is built.&lt;/li&gt;
+&lt;li&gt;Add any extra packages you need to build your site to the &lt;code&gt;pip install&lt;/code&gt;
+command. For instance, I use the &lt;code&gt;commonmark&lt;/code&gt; extension for Nikola, so I
+need to install &lt;code&gt;commonmark&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;set -e&lt;/code&gt; line is important. It will prevent the blog from being deployed
+if the build fails.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Then go to &lt;a href="http://www.asmeurer.com/blog/"&gt;https://travis-ci.org/profile/&lt;/a&gt; and enable Travis for your blog
+repo.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;Step 2: Run doctr&lt;/h3&gt;
+&lt;p&gt;The key here is &lt;a href="https://drdoctr.github.io/doctr/"&gt;doctr&lt;/a&gt;, a tool I wrote with
+&lt;a href="https://github.com/gforsyth"&gt;Gil Forsyth&lt;/a&gt; that makes deploying anything from
+Travis CI to GitHub Pages a breeze. It automatically handles creating and
+encrypting a deploy SSH key for GitHub, and the syncing of files to the
+&lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First install doctr.&lt;/strong&gt; &lt;code&gt;doctr&lt;/code&gt; requires
+Python 3.5+, so you'll need that. You can install it with conda:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;conda install -c conda-forge doctr
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or if you don't use conda, with pip&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;pip install doctr
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Then run this command in your blog repo:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;doctr configure
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will ask you for your GitHub username and password,
+and for the name of the repo you are deploying from and to (for instance, for
+my blog, I entered &lt;code&gt;asmeurer/blog&lt;/code&gt;). The output will look something like this:&lt;/p&gt;
+&lt;!-- http seems to give the least amount of highlighting. text is --&gt;
+&lt;!-- supposed to work, but doesn't render correctly. --&gt;
+&lt;pre&gt;&lt;code class="language-http"&gt;$ doctr configure
+What is your GitHub username? asmeurer
+Enter the GitHub password for asmeurer:
+A two-factor authentication code is required: app
+Authentication code: 911451
+What repo do you want to build the docs for (org/reponame, like 'drdoctr/doctr')? asmeurer/blog
+What repo do you want to deploy the docs to? [asmeurer/blog] asmeurer/blog
+Generating public/private rsa key pair.
+Your identification has been saved in github_deploy_key.
+Your public key has been saved in github_deploy_key.pub.
+The key fingerprint is:
+SHA256:4cscEfJCy9DTUb3DnPNfvbBHod2bqH7LEqz4BvBEkqc doctr deploy key for asmeurer/blog
+The key's randomart image is:
++---[RSA 4096]----+
+|    ..+.oo..     |
+|     *o*..  .    |
+|      O.+  o o   |
+|     E + o  B  . |
+|      + S .  +o +|
+|       = o o o.o+|
+|        * . . =.=|
+|       . o ..+ =.|
+|        o..o+oo  |
++----[SHA256]-----+
+
+The deploy key has been added for asmeurer/blog.
+
+You can go to https://github.com/asmeurer/blog/settings/keys to revoke the deploy key.
+
+================== You should now do the following ==================
+
+1. Commit the file github_deploy_key.enc.
+
+2. Add
+
+    script:
+      - set -e
+      - # Command to build your docs
+      - pip install doctr
+      - doctr deploy &amp;lt;deploy_directory&amp;gt;
+
+to the docs build of your .travis.yml.  The 'set -e' prevents doctr from
+running when the docs build fails. Use the 'script' section so that if
+doctr fails it causes the build to fail.
+
+3. Put
+
+    env:
+      global:
+        - secure: "Kf8DlqFuQz9ekJXpd3Q9sW5cs+CvaHpsXPSz0QmSZ01HlA4iOtdWVvUttDNb6VGyR6DcAkXlADRf/KzvAJvaqUVotETJ1LD2SegnPzgdz4t8zK21DhKt29PtqndeUocTBA6B3x6KnACdBx4enmZMTafTNRX82RMppwqxSMqO8mA="
+
+in your .travis.yml.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Follow the steps at the end of the command:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Commit the file &lt;code&gt;github_deploy_key.enc&lt;/code&gt;.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;You already have &lt;code&gt;doctr deploy&lt;/code&gt; in your &lt;code&gt;.travis.yml&lt;/code&gt; from step 1 above.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Add the &lt;code&gt;env&lt;/code&gt; block to your &lt;code&gt;.travis.yml&lt;/code&gt;.&lt;/strong&gt; This will let Travis CI decrypt
+the SSH key used to deploy to &lt;code&gt;gh-pages&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;That's it&lt;/h3&gt;
+&lt;p&gt;Doctr will now deploy your blog automatically. You may want to look at the
+Travis build to make sure everything works. Note that &lt;code&gt;doctr&lt;/code&gt; only deploys
+from &lt;code&gt;master&lt;/code&gt; by default (see below). You may also want to look at the
+other
+&lt;a href="https://drdoctr.github.io/doctr/commandline.html#doctr-deploy"&gt;command line flags&lt;/a&gt; for
+&lt;code&gt;doctr deploy&lt;/code&gt;, which let you do things such as to deploy to &lt;code&gt;gh-pages&lt;/code&gt; for a
+different repo than the one your blog is hosted on.&lt;/p&gt;
+&lt;p&gt;I recommend these steps over the ones in
+the
+&lt;a href="https://getnikola.com/blog/automating-nikola-rebuilds-with-travis-ci.html"&gt;Nikola manual&lt;/a&gt; because
+doctr handles the SSH key generation for you, making things more secure. I
+also found that the &lt;code&gt;nikola github_deploy&lt;/code&gt; command
+was &lt;a href="https://github.com/getnikola/nikola/issues/2847"&gt;doing too much&lt;/a&gt;, and
+&lt;code&gt;doctr&lt;/code&gt; handles syncing the built pages already anyway. Using &lt;code&gt;doctr&lt;/code&gt; is much
+simpler.&lt;/p&gt;
+&lt;h3&gt;Extra stuff&lt;/h3&gt;
+&lt;h4&gt;Reverting a build&lt;/h4&gt;
+&lt;p&gt;If a build goes wrong and you need to revert it, you'll need to use git to
+revert the commit on your &lt;code&gt;gh-pages&lt;/code&gt; branch. Unfortunately, GitHub doesn't
+seem to have a way to revert commits in their web interface, so it has to be
+done from the command line.&lt;/p&gt;
+&lt;h4&gt;Revoking the deploy key&lt;/h4&gt;
+&lt;p&gt;To revoke the deploy key generated by doctr, go your repo in GitHub, click on
+"settings" and then "deploy keys". Do this if you decide to stop using this,
+or if you feel the key may have been compromised. If you do this, the
+deployment will stop until you run step 2 again to create a new key.&lt;/p&gt;
+&lt;h4&gt;Building the blog from branches&lt;/h4&gt;
+&lt;p&gt;You can also build your blog from branches, e.g., if you want to test things
+out without deploying to the final repo.&lt;/p&gt;
+&lt;p&gt;We will use the steps
+outlined
+&lt;a href="https://drdoctr.github.io/doctr/recipes.html#deploy-docs-from-any-branch"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Replace the line&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-yaml"&gt;  - doctr deploy . --built-docs output/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in your &lt;code&gt;.travis.yml&lt;/code&gt; with something like&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-yaml"&gt;  - if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
+      doctr deploy . --built-docs output/;
+    else
+      doctr deploy "branch-$TRAVIS_BRANCH" --built-docs output/ --no-require-master;
+    fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will deploy your blog as normal from &lt;code&gt;master&lt;/code&gt;, but from a branch it will
+deploy to the &lt;code&gt;branch-&amp;lt;branchname&amp;gt;&lt;/code&gt; subdir. For instance, my blog is at
+&lt;a href="http://www.asmeurer.com/blog/"&gt;http://www.asmeurer.com/blog/&lt;/a&gt;, and if I had a branch called &lt;code&gt;test&lt;/code&gt;, it would
+deploy it to &lt;a href="https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/"&gt;http://www.asmeurer.com/blog/branch-test/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Note that it will not delete old branches for you from &lt;code&gt;gh-pages&lt;/code&gt;. You'll need
+to do that manually once they are merged.&lt;/p&gt;
+&lt;p&gt;This only works for branches in the same repo. It is not possible to deploy
+from a branch from pull request from a fork, for security purposes.&lt;/p&gt;
+&lt;h4&gt;Enable build cancellation in Travis&lt;/h4&gt;
+&lt;p&gt;If you go the Travis page for your blog and choose "settings" from the
+hamburger menu, you can enable auto cancellation for branch builds. This will
+make it so that if you push many changes in succession, only the most recent
+one will get built. This makes the changes get built faster, and lets you
+revert mistakes or typos without them ever actually being deployed.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</guid><pubDate>Mon, 19 Jun 2017 19:21:32 GMT</pubDate></item><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.com/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
+updates that GitHub makes here as they are released.&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;You can now &lt;a href="https://github.com/blog/2265-dismissing-reviews-on-pull-requests"&gt;dismiss a review&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;You can
+now
+&lt;a href="https://github.com/blog/2306-filter-pull-request-reviews-and-review-requests"&gt;filter the pull request list by review&lt;/a&gt;.
+The review status of a PR also appears in the pull request list (albeit in
+very tiny and easy to miss text).&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;You can
+now
+&lt;a href="https://github.com/blog/2330-restrict-review-dismissals-with-protected-branches"&gt;restrict review dismissals&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;GitHub
+&lt;a href="https://github.com/blog/2256-a-whole-new-github-universe-announcing-new-tools-forums-and-features"&gt;recently&lt;/a&gt; rolled
+out a new feature on their pull requests called "Reviews". The feature is (in
+theory), something that I've
+been
+&lt;a href="https://groups.google.com/d/msg/sympy/KJwDwT_P6Lw/27ha6ipuBwAJ"&gt;asking for&lt;/a&gt;.
+However, it really falls short in a big way, and I wanted to write down my
+gripes with it, in the hopes that it spurs someone at GitHub to fix it.&lt;/p&gt;
+&lt;p&gt;If you don't know, GitHub has had, for some time, a feature called "pull
+requests" ("PRs"), which lets you quite nicely show the diff and commit
+differences between two branches before merging them. People can comment on
+pull requests, or on individual lines in the diff. Once an administrator feels
+that the pull request is "ready", they can click a button and have the branch
+automatically merged.&lt;/p&gt;
+&lt;p&gt;The concept seems super simple
+in &lt;a href="https://en.wikipedia.org/wiki/Hindsight_bias"&gt;retrospect&lt;/a&gt;, but this
+feature completely revolutionized open source software development. It really
+is the bread and butter of GitHub. I would argue that this one single feature
+has made GitHub the (&lt;em&gt;the&lt;/em&gt;) primary hosting site for open source software.&lt;/p&gt;
+&lt;p&gt;Aside from being an awesome idea, GitHub's trademark with pull requests, along
+with their other features, has been absolute simplicity in implementation.
+GitHub Reviews marks, by my estimation, the first major feature released by
+GitHub that completely and utterly lacks in this execution of simplicity.&lt;/p&gt;
+&lt;p&gt;Let's look at what Reviews is. When the feature first came out, I had a hard
+time figuring out how it even worked (the
+poor
+&lt;a href="https://twitter.com/asmeurer/status/776125249712717824"&gt;release date docs&lt;/a&gt;
+didn't help here either).&lt;/p&gt;
+&lt;p&gt;Basically, at the bottom of a pull request, you now see this&lt;/p&gt;
+&lt;img src="https://asmeurer.com/blog/reviews1.png" width="788"&gt;
+&lt;p&gt;Clicking the "Add your review" button takes you to the diff page (first gripe:
+why does it move you to the diff page?), and opens this dialog&lt;/p&gt;
+&lt;img src="https://asmeurer.com/blog/reviews2.png" width="1020"&gt;
+&lt;p&gt;"OK", you might think, "this is simple enough. A review is just a special
+comment box where I can approve or reject a pull request." (This is basically
+the feature that I've been wanting, the ability to approve or reject pull
+requests.) And if you thought that, you'd be wrong.&lt;/p&gt;
+&lt;p&gt;The simplest way I can describe a review, having played with it, is that it is
+a distinct method of commenting on pull requests and on lines of diffs of pull
+requests. Distinct, that is, from the methods that &lt;strong&gt;already exist&lt;/strong&gt; in the
+GitHub pull requests feature. That's right. There are now two ways to comment
+on a pull request (or on a line in a pull request). There's the old way, which
+involves typing text into the box at the bottom of the main pull request page
+(or on a line, and then pressing "Add a single comment"), and the new way,
+which involves clicking a special button at the top of the diff view (and the
+diff view only) (or by clicking a line in the diff and
+clicking "Start a review").&lt;/p&gt;
+&lt;p&gt;How do these two ways of the extremely simple task of commenting differ from
+one another? Two ways. One, with the old way, when you comment on a PR (or
+line), the comment is made immediately. It's saved instantly to the GitHub
+database, and a notification email is sent to everyone subscribed to the PR.
+With the new way, the comment is &lt;strong&gt;not&lt;/strong&gt; made immediately.  Instead, you start
+a "review", which postpones all comments from being published until you scroll
+to the top and press a button ("Review changes"). &lt;strong&gt;Did you forget to scroll
+to the top and press that button? Oh well, your comments never got sent to
+anyone.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now, I've been told by some people that delayed commenting is a feature that
+they like. I can see how fewer total emails could be nice. &lt;strong&gt;But if you just
+want a way to delay comments, why do you need distinct commenting UIs?&lt;/strong&gt;
+Couldn't the same thing be achieved via a user setting (I highly suspect that
+any given person will either like or dislike delayed commenting universally)?
+Or with a checkbox next to the comment button, like "delay notifications for
+this comment"? You can probably guess by now which of the two commenting
+systems I prefer. But guess what happens when I press the "Cmd-Enter" keyboard
+shortcut that's been hard-wired into my brain to submit a comment? I'll give
+you a hint: the
+result
+&lt;a href="https://twitter.com/asmeurer/status/781949163562999808"&gt;does not make me happy&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The second distinction between normal, old-fashioned commenting and the
+new-fangled reviews system is that when you finalize a review, you can elect
+to "approve" or "reject" the pull request. This approval or rejection gets set
+as a special status on the pull request. This status, for me personally, is
+the only feature here that I've been wanting. It turns out, however, that it's
+completely broken, and useless.&lt;/p&gt;
+&lt;p&gt;Here's my problem. We have, at the time of
+writing, &lt;a href="https://github.com/sympy/sympy/pulls"&gt;382 open pull requests&lt;/a&gt; in
+SymPy. A lot of these are old, and need to be triaged. But the problem from my
+point of view is the new ones. When I look through the list of pull requests,
+I want to be able to know, at a glance, which ones are "reviewable". For me,
+this means two things&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The tests pass.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;No other reviewer (myself included) has already requested changes, which
+still need to be made by the PR author.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Point 1 is really easy to see. In the pull request list, there is a nice green
+checkmark if Travis passed and a red X if it failed.&lt;/p&gt;
+&lt;img src="https://asmeurer.com/blog/prlist.png" width="608"&gt;
+&lt;p&gt;The second point is a disaster. Unfortunately, there's no simple way to do
+this. You might suggest adding a special label, like "Needs changes", to pull
+requests that have been reviewed. The problem with this is that the label
+won't go away when the changes have been made. And to worsen things, people
+who don't have push access (in the list above, only two PR authors have push
+access, and one of them is me), cannot add or remove labels on pull requests.&lt;/p&gt;
+&lt;p&gt;Another thing
+that
+&lt;a href="https://twitter.com/asmeurer/status/771393023389339649"&gt;has been suggested to me&lt;/a&gt; is
+an external "review" service that sets a status for a review. The problem with
+this (aside from the fact that I couldn't find one that actually did the very
+simple thing that I wanted), is that you now have to teach all your pull
+request reviewers to use this service. You might as well forget about it.&lt;/p&gt;
+&lt;p&gt;Having a first-class way in GitHub for reviewers to say "I approve these
+changes" or "I don't approve these changes" would be a huge boon, because then
+everyone would use it.&lt;/p&gt;
+&lt;p&gt;So great right, this new Reviews feature is exactly what you want, you say.
+You can now approve or reject pull requests.&lt;/p&gt;
+&lt;p&gt;Well no, because GitHub managed to overengineer this feature to the point of
+making it useless. This completely simple feature. All they had to do was
+extend the status UI and add a simple "I approve/I reject" button. If they did
+that, it would have worked perfectly.&lt;/p&gt;
+&lt;p&gt;Here are the problems. First, the pull request list has no indication of
+review status. Guess which pull requests in the above screenshot have reviews
+(and which are positive and which are negative). You can't tell (for example,
+the last one in the list has a negative review). If they were actually treated
+like statuses, like the UI suggests that they would, you would at least see an
+X on the ones that have negative reviews (positive reviews I'm much less
+worried about; most people who review PRs have merge access, so if they like
+the PR they can just merge it). I would suggest to GitHub to add, next to the
+status checkbox, a picture of everyone who's made a review on the PR, with a
+green checkmark or red X to indicate the type of review. Also, add buttons
+(&lt;strong&gt;buttons&lt;/strong&gt;, not just buried advanced search options) to filter by reviews.&lt;/p&gt;
+&lt;p&gt;OK, so that's a minor UI annoyance, but it gets worse. Next on the docket, &lt;strong&gt;you
+can't review your own pull requests.&lt;/strong&gt; It's not allowed for some reason.&lt;/p&gt;
+&lt;img src="https://asmeurer.com/blog/reviews3.png" width="411"&gt;
+&lt;p&gt;Now why would you want to review your own pull request, you might ask? Aren't
+you always going to "approve" your own PR? Well, first off, no. There is such
+a thing as
+a &lt;a href="http://ben.balter.com/2015/12/08/types-of-pull-requests/"&gt;WIP PR&lt;/a&gt;. The
+author setting a negative review on his own PR would be a great way to
+indicate WIP status (especially given the way reviews work, see my next
+gripe). Secondly, the "author" of a pull request is just the person who
+clicked the "New pull request" button. That's not necessarily the only person
+who has changes in the pull request. Thanks to the magic of how git works,
+it's quite easy to have a pull request with commits from many people. Multiple
+people pushing to a shared branch, with a matching pull request for discussion
+(and easy viewing of new commits and diff) is a valid and useful workflow
+(it's the only one I know of that works for writing collaborative prose). For
+the &lt;a href="https://github.com/sympy/sympy-paper"&gt;SymPy paper&lt;/a&gt;, I wanted to use
+GitHub Reviews to sign off on a common branch, but since I'm the one who
+started the pull request, I couldn't do it.&lt;/p&gt;
+&lt;p&gt;Next gripe, and this, I want to stress, makes the whole feature completely
+useless for my needs: &lt;strong&gt;reviews do not reset when new commits are pushed&lt;/strong&gt;.
+Now, I just outlined above two use-cases where you might want to do a review
+that doesn't reset (marking WIP, and marking approval, although the second is
+debatable), but both of those can easily be done by other means, like editing
+the title of the PR, or old-fashioned commenting. The whole point of Reviews
+(especially negative reviews), you'd think, would be to indicate to people
+that the pull request, as it currently stands, needs new changes. A negative
+review is like failing your "human" test suite.&lt;/p&gt;
+&lt;p&gt;But unlike your automated test suite, which reset and get a new go every time
+you push a change (because hey, who knows, maybe the change ACTUALLY FIXED THE
+ISSUE), reviews do not reset, unless the original reviewers explicitly change
+them. So my dream of being able to glance at the pull request list and see
+which PRs need changes has officially
+been &lt;a href="https://en.wiktionary.org/wiki/pipe_dream"&gt;piped&lt;/a&gt;. Even if the list
+actually showed what PRs have been reviewed, it would be a lie, because as
+soon as the PR author pushes a change, the review status becomes potentially
+outdated.&lt;/p&gt;
+&lt;p&gt;Now, given the rocky start that this whole feature has had, I figured that
+this was probably just a simple bug. But after I reported it to GitHub,
+they've informed me that this is in fact &lt;em&gt;intended behavior&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;To make things worse, GitHub has another feature with Reviews,
+called
+&lt;a href="https://help.github.com/articles/approving-a-pull-request-with-required-reviews/"&gt;required reviews&lt;/a&gt;.
+You can make it so that every pull request must receive at least one positive
+review and zero negative reviews before it can be merged (go to the branch
+settings for your repository). This works similar to required status checks,
+which make it so that your tests must pass before a PR can be merged. In
+practice, this means you need zero negative reviews, since anyone with push
+access could just do a positive review before merging (although annoyingly,
+you have to actually manually do it; IMHO, just requiring zero negative
+reviews should be sufficient, since merging is implicitly a positive review).&lt;/p&gt;
+&lt;p&gt;Now, you can see that the above "feature" of reviews not resetting breaks the
+whole thing. If someone negative reviews a PR, that one person has to go in
+and change their review before it can be merged. And even if the author pushes
+new changes to fix the issues outlined in the review, the PR cannot be merged
+until the reviewer resets it. So this actually makes the reviewing situation
+&lt;em&gt;worse&lt;/em&gt;, because now anyone who reviews a pull request at any point in time
+has to go through with it all the way to the merge. I can't go to a PR that
+someone requested changes for, which were later made by the author, and merge
+it. I have to ping the reviewer and get them to change their review first.
+Needless to say, we do not have this feature enabled for SymPy's repo.&lt;/p&gt;
+&lt;p&gt;I think I maybe see the intended use-case here. You want to make it so that
+people's reviews are not forgotten or ignored. But that's completely foreign
+to my own problems. I trust the SymPy community, and the people who have push
+access to do due diligence before merging a pull request. And if a bad change
+gets in, we can revert it. Maybe this feature matters more for projects that
+continuously deploy. Likely most of the code internal at GitHub works like
+that. But guess what GitHub, most of the code &lt;em&gt;on&lt;/em&gt; GitHub does &lt;em&gt;not&lt;/em&gt; work like
+that. You need to rethink this feature to support more than just your
+use-cases.&lt;/p&gt;
+&lt;p&gt;I think starting simple, say, just a simple "approve/reject" button on each
+PR, which just adds an icon, and that's it, would have been a better approach.
+Then they could have listened to the feedback on what sorts of things people
+wanted it to be able to do (like setting a status, or showing up in the search
+list, or "delayed commenting" if that's really what people want). This is how
+GitHub used to do things. It's frustrating to see a feature implemented that
+doesn't (yet) do quite what you want, but it's even more frustrating to see a
+feature implemented that does all the things that you don't want.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Yes, I'm a little mad here. I hope you enjoyed my rant. Here are what I see as
+the problems with the "Reviews" feature. I don't know how to fix these
+problems (I'm not a UI/UX guy. GitHub supposedly hires them, though).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;There are now two distinct ways to comment on a PR (delayed and non-delayed).
+There should be one (say, with a checkbox to delay commenting).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you insist on keeping delayed commenting, let me turn it off by default
+(default = the Cmd-Enter keyboard shortcut).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The reviews button is buried on the diff page. I would put it under the
+main PR comment box, and just reuse the same comment box.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Reviews should show up in the pull request list. They should be filterable
+with a nice UI.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Let me review my own pull requests. These can be excluded from required
+reviews (that makes sense to me). Beyond that, there's no reason this
+shouldn't be allowed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't require a positive review for required reviews, only zero negative
+reviews. Merging a PR is implicitly positively reviewing it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Allow reviews to reset when new commits are pushed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I get that the last point may not be what everyone wants. But GitHub needs to
+think about UI, and defaults here. Right now, the UI looks like reviews are
+like statuses, but they actually aren't because of this.&lt;/p&gt;
+&lt;p&gt;I am dispirited to see GitHub release such a broken feature, but even the best
+trip up sometimes. I'm not yet calling "doom" on GitHub. Everyone has
+their &lt;a href="https://en.wikipedia.org/wiki/Apple_USB_Mouse"&gt;hockey puck mice&lt;/a&gt;. I'm
+actually hopeful that they can fix these issues, and implement a feature that
+makes real headway into helping me solve one of my biggest problems on GitHub
+right now, the reviewing of pull requests.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/github-reviews-gripes/</guid><pubDate>Thu, 06 Oct 2016 00:12:16 GMT</pubDate></item><item><title>Tuples</title><link>https://asmeurer.com/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
+&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Usually there's a sentence nearby "sometimes you need a read only list." No. No, I haven't. Not in 20 years. Not even once. Sorry.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778635637457088512"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;My main objection is that "read only list" is a lazy description lacking thought. A red flag for every other topic that might be covered.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778639979052498944"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;p&gt;There are quite a few good responses to these tweets, both from David and from
+others (and from yours truly). I recommend reading the the thread (click on
+the &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;first tweet&lt;/a&gt; above).&lt;/p&gt;
+&lt;p&gt;Now to start off, I want to say that I respect the hell out of David Beazley.
+The guy literally &lt;a href="http://www.dabeaz.com/cookbook.html"&gt;wrote the book&lt;/a&gt; on
+Python, and he knows way more about Python than I ever will. He's also one of
+the most entertaining Python people you can
+&lt;a href="https://twitter.com/dabeaz"&gt;follow on Twitter&lt;/a&gt;. But hey, that doesn't mean I
+can't disagree sometimes.&lt;/p&gt;
+&lt;h2&gt;List vs. Tuple. Fight!&lt;/h2&gt;
+&lt;p&gt;As you probably know, there are two "array" datatypes in Python, &lt;code&gt;list&lt;/code&gt; and
+&lt;code&gt;tuple&lt;/code&gt;.&lt;sup id="fnref-list"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-list"&gt;1&lt;/a&gt;&lt;/sup&gt; The primary difference between the two is that lists are &lt;em&gt;mutable&lt;/em&gt;,
+that is you can change their entries and length after they are created, with
+methods like &lt;code&gt;.append&lt;/code&gt; or &lt;code&gt;+=&lt;/code&gt;. Tuples, on the other hand, are &lt;em&gt;immutable&lt;/em&gt;.
+Once you create one, you cannot change it. This makes the implementation
+simpler (and hence faster, although don't let anyone tell you you should use a
+tuple just because it's faster). This, as
+&lt;a href="http://nedbatchelder.com/blog/201608/lists_vs_tuples.html"&gt;Ned Batchelder&lt;/a&gt;
+points out, is the only technical difference between the two.&lt;/p&gt;
+&lt;p&gt;The the idea that particularly bugs me here is that tuples are primarily
+useful as "record" datatypes.&lt;/p&gt;
+&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; Better than "read-only-list." ;-).   Mainly looking for the tuple-as-record description. That's often what's missing.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778685294593716224"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;p&gt;Tuples are awesome for records. This is both by design—since they have a
+fixed shape, the positions in a tuple can be "fixed" values, and by convention—if a
+Python programmer sees parentheses instead of square brackets, he is more
+likely to see the object as "record-like". The &lt;code&gt;namedtuple&lt;/code&gt; object in the standard library
+takes the record idea further by letting you actually name the fields:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Person'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'name, age'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;But is that really the &lt;em&gt;only&lt;/em&gt; place you'd want to use a tuple over a list?&lt;/p&gt;
+&lt;p&gt;Consider five other places you might encounter a tuple in Python, courtesy of
+Allen Downey:&lt;/p&gt;
+&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/dabeaz"&gt;@dabeaz&lt;/a&gt; (1) tuple assignment (2) multiple return values (3) *args (4) output from zip, enumerate, etc (5) key in dictionary&lt;/p&gt;— Allen Downey (@AllenDowney) &lt;a href="https://twitter.com/AllenDowney/status/778691102094176257"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;p&gt;In code these look like:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Multiple assignments:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2
+&lt;/pre&gt;
+
+
+&lt;p&gt;(yes, the parentheses are optional here, as they are in many places where a
+tuple can be used, but this is still a tuple, or at least it looks like one ;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Multiple return values:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For example,
+&lt;a href="https://docs.python.org/3/library/os.html#os.walk"&gt;&lt;code&gt;os.walk&lt;/code&gt;&lt;/a&gt;. This is
+for the most part a special case of using tuples as records.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;*args&lt;/code&gt;:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):
+...     print(type(args), args)
+...
+&amp;gt;&amp;gt;&amp;gt; f(1, 2, 3)
+&amp;lt;class 'tuple'&amp;gt; (1, 2, 3)
+&lt;/pre&gt;
+
+
+&lt;p&gt;Arbitrary positional function arguments are always stored as a &lt;code&gt;tuple&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Return value from builtins &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;enumerate&lt;/code&gt;, etc.:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; for i in zip(range(3), 'abc'):
+...     print(i)
+...
+(0, 'a')
+(1, 'b')
+(2, 'c')
+&amp;gt;&amp;gt;&amp;gt; for i in enumerate('abc'):
+...     print(i)
+...
+(0, 'a')
+(1, 'b')
+(2, 'c')
+&lt;/pre&gt;
+
+
+&lt;p&gt;This also applies to the combinatoric generators in
+&lt;a href="https://docs.python.org/3.6/library/itertools.html"&gt;itertools&lt;/a&gt; (like
+&lt;code&gt;product&lt;/code&gt;, &lt;code&gt;combinations&lt;/code&gt;, etc.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Dictionary keys:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; {
+...     (0, 0): '.',
+...     (0, 1): ' ',
+...     (1, 0): '.',
+...     (1, 1): ' ',
+... }
+{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}
+&lt;/pre&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This last one I find to be very important. You could arguably use a list for
+the first four of Allen Downey's points&lt;sup id="fnref-assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-assign"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
+is
+&lt;a href="https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/"&gt;impossible&lt;/a&gt;
+to meaningfully hash a mutable data structure in Python, and hashability is a
+requirement for dictionary keys.&lt;/p&gt;
+&lt;p&gt;However, be careful. Not all tuples are hashable. Tuples can contain
+anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref-TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-TypeError"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;Such tuples are not hashable, and cannot be used as dictionary keys.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;ipython-input-39-36822ba665ca&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;unhashable&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'list'&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;h2&gt;Why is &lt;code&gt;list&lt;/code&gt; the Default?&lt;/h2&gt;
+&lt;p&gt;My second gripe here is this notion that your default ordered collection
+object in Python should be &lt;code&gt;list&lt;/code&gt;. &lt;code&gt;tuples&lt;/code&gt; are only to be used as "records",
+or if you suspect &lt;em&gt;might&lt;/em&gt; want to use it as a dictionary key. First off, you
+never know when you'll want something to be hashable. Both dictionary keys and
+&lt;code&gt;sets&lt;/code&gt; require hashability. Suppose you want to de-duplicate a collection of
+sequences. If you represent the sequences with &lt;code&gt;list&lt;/code&gt;, you'll either have to
+write a custom loop that checks for duplicates, or manually convert them to
+&lt;code&gt;tuple&lt;/code&gt; and throw them in a &lt;code&gt;set&lt;/code&gt;. If you start with &lt;code&gt;tuple&lt;/code&gt;, you don't have
+to worry about it (again, assuming the entries of the tuples are all hashable
+as well).&lt;/p&gt;
+&lt;p&gt;Consider another usage of tuples, which I consider to be
+important, namely tree structures. Say you wanted a simple representation of a
+Python syntax tree. You might represent &lt;code&gt;1 - 2*(-3 + 4)&lt;/code&gt; as&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'*'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'+'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;This isn't really a record. The meaning of the entries in the tuples is
+determined by the first value of the tuple, not position. In this example, the length
+of the tuple also signifies meaning (binary vs. unary &lt;code&gt;-&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;If this looks familiar to you, it's because this is how the language Lisp
+represents all programs. This is a common pattern.
+&lt;a href="http://dask.pydata.org/en/latest/graphs.html"&gt;Dask graphs&lt;/a&gt; use tuples and
+dictionaries to represent computations.
+&lt;a href="http://docs.sympy.org/latest/tutorial/manipulation.html"&gt;SymPy expression trees&lt;/a&gt;
+use tuples and Python classes to represent symbolic mathematical expressions.&lt;/p&gt;
+&lt;p&gt;But why use tuples over lists here? Suppose you had an object like the one
+above, but using lists: &lt;code&gt;['-', 1, ['*', 2, ['+', ['-', 3], 4]]]&lt;/code&gt;. If you
+discover you need to use this as a dictionary key, or want to put it in a
+&lt;code&gt;set&lt;/code&gt;, you would need to convert this to a hashable object. To do this you
+need to write a function that recursively converts each &lt;code&gt;list&lt;/code&gt; to a &lt;code&gt;tuple&lt;/code&gt;.
+See how long it takes you to write that function correctly.&lt;/p&gt;
+&lt;h2&gt;Mutability is Bad&lt;/h2&gt;
+&lt;p&gt;More to the point, however, mutability is bad. I counted 12 distinct methods
+on &lt;code&gt;list&lt;/code&gt; that mutate it (how many can you remember off the top of your
+head?&lt;sup id="fnref-mutate"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-mutate"&gt;3&lt;/a&gt;&lt;/sup&gt;). &lt;em&gt;Any&lt;/em&gt; function that gets access to a list can mutate it,
+using any one of these methods. All it takes is for someone to forget that
+&lt;code&gt;+=&lt;/code&gt; mutates a list (and that they should copy it first) for code completely
+distant from the origin definition to cause issues. The hardest bug I ever
+debugged had a three character
+&lt;a href="https://github.com/inducer/pudb/commit/b979fc5909c8d731eb907fc25f4e97904fb7cbbd"&gt;fix&lt;/a&gt;,
+adding &lt;code&gt;[:]&lt;/code&gt; to copy a global list that I was (accidentally) mutating. It took
+me a several hour airplane ride and some deep dark magic that I'll leave for
+another blog post to discover the source of my problems (the problems I was
+having appeared to be quite distant from the actual source).&lt;/p&gt;
+&lt;h2&gt;A Better "Default"&lt;/h2&gt;
+&lt;p&gt;I propose that Python code in general would be vastly improved if people used
+&lt;code&gt;tuple&lt;/code&gt; as the default ordered collection, and only switched to &lt;code&gt;list&lt;/code&gt; if
+mutation was necessary (it's less necessary than you think; you can always
+copy a tuple instead of mutating it). I agree with David Beazley that you
+don't "sometimes need a read only list". Rather, you "sometimes need a
+writable tuple".&lt;/p&gt;
+&lt;p&gt;This makes more sense than defaulting to &lt;code&gt;list&lt;/code&gt;, and only switching to &lt;code&gt;tuple&lt;/code&gt;
+when hashability is needed, or when some weird "rule of thumb" applies that
+says that you should use &lt;code&gt;tuple&lt;/code&gt; if you have a "record". Maybe there's a good
+reason that &lt;code&gt;*args&lt;/code&gt; and almost all builtin and standard library functions
+return tuples instead of lists. It's harder to accidentally break someone
+else's code, or have someone else accidentally break your code, when your data
+structures are immutable.&lt;/p&gt;
+&lt;h2&gt;Footnotes&lt;/h2&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn-list"&gt;
+&lt;p&gt;I want to avoid saying "a tuple is an immutable list", since "list"
+can be interpreted in two ways, as an English word meaning "ordered
+collection" (in
+which case, the statement is true), or as the Python type &lt;code&gt;list&lt;/code&gt; (in which
+case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass of &lt;code&gt;list&lt;/code&gt;). &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-list" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn-assign"&gt;
+&lt;p&gt;Yes,&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2
+&lt;/pre&gt;
+
+
+&lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-assign" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn-mutate"&gt;
+&lt;p&gt;&lt;/p&gt;&lt;div id="spoiler" style="display:none"&gt;
+&lt;code&gt;__delitem__&lt;/code&gt;, &lt;code&gt;__iadd__&lt;/code&gt;, &lt;code&gt;__imul__&lt;/code&gt;, &lt;code&gt;__setitem__&lt;/code&gt;, &lt;code&gt;append&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;extend&lt;/code&gt;, &lt;code&gt;insert&lt;/code&gt;,
+&lt;code&gt;pop&lt;/code&gt;, &lt;code&gt;remove&lt;/code&gt;, &lt;code&gt;reverse&lt;/code&gt;, and &lt;code&gt;sort&lt;/code&gt;.
+&lt;/div&gt;
+&lt;button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none')
+{document.getElementById('spoiler')
+.style.display=''}else{document.getElementById('spoiler')
+.style.display='none'}"&gt;Show/hide answer&lt;/button&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-mutate" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;li id="fn-TypeError"&gt;
+&lt;p&gt;One of the tweets from the conversation:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/asmeurer"&gt;@asmeurer&lt;/a&gt; &lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; As yes:&lt;br&gt;&lt;br&gt;t = (1,2, [3, 4])&lt;br&gt;t[2] += [5,6]&lt;br&gt;&lt;br&gt;;-)&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778697399975813120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;p&gt;This is similar to this example. But
+it turns out this one doesn't work:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; t = (1,2, [3, 4])
+&amp;gt;&amp;gt;&amp;gt; t[2] += [5,6]
+Traceback (most recent call last):
+  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
+TypeError: 'tuple' object does not support item assignment
+&lt;/pre&gt;
+
+
+&lt;p&gt;I have no idea why. It seems to me that it should work. &lt;code&gt;t[2]&lt;/code&gt; is a list
+and &lt;code&gt;list&lt;/code&gt; has &lt;code&gt;__iadd__&lt;/code&gt; defined. It seems that Python gets kind of weird
+about things on the left-hand side of an assignment. &lt;strong&gt;EDIT:
+&lt;a href="http://stackoverflow.com/a/29747466/161801"&gt;Here's&lt;/a&gt; why.&lt;/strong&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.com/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;
+&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Thought: get the maintainers of a bunch of big Python libraries to sign something saying that they WILL drop Python 2.7 support in 2020.&lt;/p&gt;— Aaron Meurer (@asmeurer) &lt;a href="https://twitter.com/asmeurer/status/712304912428875776"&gt;March 22, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;EDIT: Some people have started working on making this happen. See
+&lt;a href="https://python3statement.github.io/"&gt;https://python3statement.github.io/&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For those of you who don't know, Python 2.7 is
+&lt;a href="https://docs.python.org/devguide/#status-of-python-branches"&gt;slated&lt;/a&gt; to reach
+end-of-life in 2020 (originally, it was slated to end in 2015, but it was
+extended in 2014, due to the extraordinary difficulty of moving to a newer
+version). "End-of-life" means absolutely no more support from the core Python
+team, even for security updates.&lt;/p&gt;
+&lt;p&gt;I'm writing this post because I want to clarify why I think this should be
+done, and to clear up some misconceptions, the primary one being that this
+represents library developers being antagonistic against those who want or
+have to use Python 2.&lt;/p&gt;
+&lt;p&gt;I'm writing this from my perspective as a library developer. I'm the lead
+developer of &lt;a href="http://www.sympy.org/"&gt;SymPy&lt;/a&gt;, and I have sympathies for
+developers of other libraries.&lt;sup id="fnref-sympy"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-sympy"&gt;1&lt;/a&gt;&lt;/sup&gt; I say this because my idea may seem a bit
+in tension with "users" (even though I hate the "developer/user" distinction).&lt;/p&gt;
+&lt;h3&gt;Python 2&lt;/h3&gt;
+&lt;p&gt;There are a few reasons why I think libraries should drop (and announce that
+they will drop) Python 2 support by 2020 (actually earlier, say 2018 or 2019,
+depending on how core the library is).&lt;/p&gt;
+&lt;p&gt;First, library developers have to be the leaders here. This is apparent from
+the historical move to Python 3 up to this point. Consider the three (not
+necessarily disjoint) classes of people: CPython core developers, library
+developers, and users. The core developers were the first to move to Python 3,
+since they were the ones who wrote it. They were also the ones who provided
+the messaging around Python 3, which has varied over time. In my opinion, it
+should have been and should be more forceful.&lt;sup id="fnref-core"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-core"&gt;2&lt;/a&gt;&lt;/sup&gt; Then you have the library
+developers and the users. A chief difference here is that users are probably
+going to be using only one version of Python. In order for them to switch that
+version to Python 3, all the libraries that they use need to support it. This
+took some time, since library developers saw little impetus to support Python
+3 when no one was using it (Catch 22), and to worsen the situation, versions
+of Python older than 2.6 made
+&lt;a href="https://asmeurersympy.wordpress.com/2013/08/22/python-3-single-codebase-vs-2to3/"&gt;single codebase compatibility&lt;/a&gt;
+almost impossible.&lt;/p&gt;
+&lt;p&gt;Today, though, &lt;a href="http://py3readiness.org/"&gt;almost all libraries&lt;/a&gt; support Python
+3, and we're reaching a point where those that don't have
+forks that do.&lt;/p&gt;
+&lt;p&gt;But it only happened &lt;em&gt;after&lt;/em&gt; the library developers transitioned. I believe
+libraries need to be the leaders in moving away from Python 2 as well. It's
+important to do this for a few reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Python 2.7 support ends in 2020. That means all updates, including security
+  updates. For all intents and purposes, Python 2.7 becomes an insecure
+  language to use at that point in time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Supporting two major versions of Python is technical debt for every project
+  that does it. While writing cross compatible code is
+  &lt;a href="http://python-future.org/"&gt;easier than ever&lt;/a&gt;, it still remains true that
+  you have to remember to add &lt;code&gt;__future__&lt;/code&gt; imports to the top of every file,
+  to import all relevant builtins from your compatibility file or library, and
+  to run all your tests in both Python 2 and 3. Supporting both versions is a
+  major cognitive burden to library developers, as they always have to be
+  aware of important differences in the two languages. Developers on any
+  library that does anything with strings will need to understand how things
+  work in both Python 2 and 3, and the often obscure workarounds required for
+  things to work in both (pop quiz: how do you write Unicode characters to a
+  file in a Python 2/3 compatible way?).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some of Python 3's
+  &lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;new syntax features&lt;/a&gt;
+  (i.e., features that are impossible to use in Python 2) only matter for
+  library developers. A great example of this is
+  &lt;a href="https://www.python.org/dev/peps/pep-3102/"&gt;keyword-only arguments&lt;/a&gt;. From an
+  API standpoint, almost every instance of keyword arguments should be
+  implemented as keyword-only arguments. This avoids mistakes that come from
+  the antipattern of passing keyword arguments without naming the keyword, and
+  allows the argspec of the function to be expanded in the future without
+  breaking API.&lt;sup id="fnref-swift"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-swift"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The second reason I think library developers should agree to drop Python 2
+support by 2020 is completely selfish. A response that I heard on that tweet
+(as well as elsewhere), was that libraries should provide carrots, not sticks.
+In other words, instead of forcing people off of Python 2, we should make them
+want to come to Python 3. There are some issues with this argument. First,
+Python 3 already has
+&lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;tons of carrots&lt;/a&gt;.
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.&lt;sup id="fnref-unicode"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-unicode"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;If you don't deal with strings, or do but don't care about those silly
+foreigners with weird accents in their names, there are other major carrots as
+well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
+major source of frustration for new users. Imagine writing out &lt;code&gt;1/2*x +
+x**(1/2)*y*z - 3*z**2&lt;/code&gt; and wondering why half of what you wrote just
+"disappeared" (granted, this was worse before we
+&lt;a href="https://asmeurersympy.wordpress.com/2011/08/18/sqrtx-now-prints-as-sqrtx/"&gt;fixed the printers&lt;/a&gt;).
+While &lt;code&gt;integer/integer&lt;/code&gt; not giving a rational number is a major
+&lt;a href="http://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and"&gt;gotcha&lt;/a&gt;
+for SymPy, giving a float is infinitely better than giving what is effectively
+the wrong answer. Don't use strings or integers?
+&lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;I've got more&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Frankly, if these "carrots" haven't convinced you yet, then I'll wager you're
+not really the sort of person who is persuaded by carrots.&lt;/p&gt;
+&lt;p&gt;Second, some "carrots" are impossible unless they are implemented in
+libraries. While some features can be implemented in 2/3 compatible code and
+only work in Python 3 (such as &lt;code&gt;@&lt;/code&gt; matrix multiplication), others, such as
+keyword-only arguments, can only be implemented in code that does not support
+Python 2. Supporting them in Python 2 would be a net deficit of technical debt
+(one can imagine, for instance, trying to support keyword-only arguments
+manually using &lt;code&gt;**kwargs&lt;/code&gt;, or by using some monstrous meta-programming).&lt;/p&gt;
+&lt;p&gt;Third, as I said, I'm selfish. Python 3 &lt;em&gt;does&lt;/em&gt; have carrots, and I want them.
+As long as I have to support Python 2 in my code, I can't use keyword-only
+arguments, or extended argument unpacking, or async/await, or any of the
+dozens of features that can't be used in cross compatible code.&lt;/p&gt;
+&lt;p&gt;A counterargument might be that instead of blocking users of existing
+libraries, developers should create new libraries which are Python 3-only and
+make use of new exciting features of Python 3 there. I agree we should do
+that, but existing libraries are good too. I don't see why developers should
+throw out all of a well-developed library just so they can use some Python
+features that they are excited about.&lt;/p&gt;
+&lt;h3&gt;Legacy Python&lt;/h3&gt;
+&lt;p&gt;A lot of people have taken to calling Python 2
+"&lt;a href="https://twitter.com/RipLegacyPython"&gt;legacy Python&lt;/a&gt;". This phrase is often
+used condescendingly and
+&lt;a href="https://twitter.com/stephtdouglas/status/713433933040340993"&gt;angers a lot of people&lt;/a&gt;
+(and indeed, this blog post is the first time I've used it myself). However, I
+think Python 2 really should be seen this way, as a "legacy" system. If you
+want to use it, for whatever your reasons, that's fine, but just as you
+shouldn't expect to get any of the newest features of Python, you shouldn't
+expect to be able to use the newest versions of your libraries. Those
+libraries that have a lot of development resources may choose to support older
+Python 2-compatible versions with bug and/or security fixes. Python 2 itself
+will be supported for these until 2020. Those without resources probably won't
+(keep in mind that you're using open source libraries without paying money for
+them).&lt;/p&gt;
+&lt;p&gt;I get that some people have to use Python 2, for whatever reasons. But using
+outdated software comes at a cost. Libraries have borne this technical debt
+for the most part thus far, but they shouldn't be expected to bear it forever.
+The debt will only increase, especially as the technical opportunity cost, if
+you will, of not being able to use newer and shinier versions of Python 3
+grows. The burden will have to shift at some point. Those with the financial
+resources may choose to offload this debt to others,&lt;sup id="fnref-continuum"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-continuum"&gt;5&lt;/a&gt;&lt;/sup&gt; say, by
+backporting features or bugfixes to older library versions that support Python
+2 (or by helping to move code to Python 3).&lt;/p&gt;
+&lt;p&gt;I want to end by pointing out that if you are, for whatever reason, still
+using Python 2, you may be worried that if libraries become Python 3-only and
+start using Python 3 features, won't that break your code? The answer is no.
+Assuming package maintainers mark the metadata on their packages correctly,
+tools like pip and conda will not install non-Python 2 compatible versions
+into Python 2.&lt;/p&gt;
+&lt;p&gt;If you haven't transitioned yet, and want to know more, a good place to start
+is the &lt;a href="https://docs.python.org/3/howto/pyporting.html"&gt;official docs&lt;/a&gt;. I also
+highly recommend using &lt;a href="http://conda.pydata.org/docs/"&gt;conda&lt;/a&gt; environments, as
+it will make it easy to separate your Python 2 code from your Python 3 code.&lt;/p&gt;
+&lt;h4&gt;Footnotes&lt;/h4&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn-sympy"&gt;
+&lt;p&gt;With that being said, the opinions here are entirely my own, and are
+    don't necessarily represent those of other people, nor do they
+    represent official SymPy policy (no decisions have been made by the
+    community about this at this time). &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-sympy" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn-core"&gt;
+&lt;p&gt;It often feels like core Python itself doesn't really want people to
+    use Python 3. It's little things, like
+    &lt;a href="https://docs.python.org/library/"&gt;docs links&lt;/a&gt; that redirect to Python
+    2, or &lt;a href="https://www.python.org/dev/peps/pep-0394/"&gt;PEP 394&lt;/a&gt;, which
+    still says that the &lt;code&gt;python&lt;/code&gt; should always point to Python 2. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-core" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn-swift"&gt;
+&lt;p&gt;In Swift, Apple's new language for iOS and OS X, function parameter
+    names are effectively "keyword-only"
+    &lt;a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html"&gt;by default&lt;/a&gt;. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-swift" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn-unicode"&gt;
+&lt;p&gt;As an example of this, in conda, if you use Python 2 in the root
+    environment, then installing into a path with non-ASCII characters is
+    unsupported. This is common on Windows, because Windows by default
+    uses the user's full name as the username, and the default conda
+    install path is in the user directory.&lt;/p&gt;
+&lt;p&gt;This is unsupported except in Python 3, because to fix the issue,
+every single place in conda where a string appears would have to be
+changed to use a &lt;code&gt;unicode&lt;/code&gt; string in Python 2. The basic issue is that
+things like &lt;code&gt;'π' + u'i'&lt;/code&gt; raise &lt;code&gt;UnicodeDecodeError&lt;/code&gt; in Python 2 (even
+though &lt;code&gt;'π' + 'i'&lt;/code&gt;, &lt;code&gt;u'π' + 'i'&lt;/code&gt;, and &lt;code&gt;u'π' + u'i'&lt;/code&gt; all work fine).
+You can read a more in-depth description of the problem
+&lt;a href="https://github.com/sympy/sympy/pull/9692#issuecomment-126162173"&gt;here&lt;/a&gt;.
+Incidentally, this is also why you should never use &lt;code&gt;from __future__
+import unicode_literals&lt;/code&gt; in Python 2, in my opinion.&lt;/p&gt;
+&lt;p&gt;I no longer work on conda, but as far as I know, the
+&lt;a href="https://github.com/conda/conda/issues/1180"&gt;issue&lt;/a&gt; remains unfixed.
+Of course, this whole thing works just fine if conda is run in Python
+3. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-unicode" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn-continuum"&gt;
+&lt;p&gt;If that legitimately interests you, I
+    &lt;a href="https://twitter.com/pwang/status/712780279211884546"&gt;hear Continuum&lt;/a&gt;
+    may be able to help you. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-continuum" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item><item><title>What happens when you mess with hashing in Python</title><link>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post is based off a Jupyter notebook I made in 2013. You can download
+the original &lt;a href="https://gist.github.com/asmeurer/6046766"&gt;here&lt;/a&gt;. That notebook
+was based off a
+&lt;a href="https://github.com/sympy/sympy/wiki/What-happens-when-you-mess-with-hashing"&gt;wiki page&lt;/a&gt;
+on the SymPy wiki, which in turn was based on
+&lt;a href="https://groups.google.com/forum/#%21msg/sympy/pJ2jg2csKgU/0nn21xqZEmwJ"&gt;a message&lt;/a&gt;
+to the SymPy mailing list.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;What is hashing?&lt;/h2&gt;
+&lt;p&gt;Before we start, let's have a brief introduction to hashing. A
+&lt;a href="https://en.wikipedia.org/wiki/Hash_function"&gt;&lt;em&gt;hash function&lt;/em&gt;&lt;/a&gt; is a function
+that maps a set of objects to a set of integers. There are many kinds of hash
+functions, which satisfy many different properties, but the most important
+property that must be satisfied by any hash function is that it be a function
+(in the mathematical sense), that is, if two objects are equal, then their
+hash should also be equal.&lt;/p&gt;
+&lt;p&gt;Usually, the set of integers that the hash function maps to is much smaller
+than the set of objects, so that there will be multiple objects that hash to
+the same value. However, generally for a hash function to be useful, the set
+of integers should be large enough, and the hash function well distributed
+enough that if two objects hash to the same value, then they are very likely
+to be equal.&lt;/p&gt;
+&lt;p&gt;To summarize, a hash function &lt;em&gt;must&lt;/em&gt; satisfy the property:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;If two objects are equal, then their hashes should be equal.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, a &lt;em&gt;good&lt;/em&gt; hash function should satisfy the property:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;If two objects have the same hash, then they are likely to be the same
+object.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since there are generally more possible objects than hash values, two objects
+may hash to the same value. This is called a
+&lt;a href="https://en.wikipedia.org/wiki/Hash_collision"&gt;hash collision&lt;/a&gt;, and anything
+that deals with hashes should be able to deal with them.&lt;/p&gt;
+&lt;p&gt;This won't be discussed here, but an additional property that a good hash
+function should satisfy to be useful is this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;The hash of an object should be cheap to compute.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;What is it used for?&lt;/h2&gt;
+&lt;p&gt;If we have a hash function that satisfies the above properties, then we can
+use it to create from a collection of objects something called a &lt;em&gt;hash table&lt;/em&gt;.
+Suppose we have a collection of objects, and given any object, we want to be
+able to compute very quickly if that object belongs to our collection. We
+could store these objects in an ordered array, but then to determine if it is
+in the array, we would have to search potentially through every element of the
+array (in other words, an \(O(n)\)) algorithm.&lt;/p&gt;
+&lt;p&gt;With hashing, we can do better. We create what is known as a
+&lt;a href="https://en.wikipedia.org/wiki/Hash_table"&gt;&lt;em&gt;hash table&lt;/em&gt;&lt;/a&gt;. Instead of storing
+the objects in an ordered array, we create an array of buckets, each
+corresponding to some hash values. We then hash each object, and store it into
+the array corresponding to its hash value (if there are more hash values than
+buckets, we distribute them using a second hash function, which can be as
+simple as taking the modulus with respect to the number of buckets, &lt;code&gt;% n&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;This image from
+&lt;a href="https://en.wikipedia.org/wiki/File:Hash_table_3_1_1_0_1_0_0_SP.svg"&gt;Wikipedia&lt;/a&gt;
+shows an example.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="img"&gt;&lt;/p&gt;
+&lt;p&gt;To determine if an object is in a hash table, we only have to hash the object,
+and look in the bucket corresponding to that hash. This is an \(O(1)\)
+algorithm, assuming we have a good hash function, because each bucket will
+generally hold very few objects, possibly even none.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: there are some additional things that need to be done to handle hash
+collisions, but the basic idea is the same, and as long as there aren't too
+many hash collisions, which should happen if hash values are evenly
+distributed and the size of the hash table is large compared to the number of
+objects stored in it, the average time to determine if an object is in the
+hash table is still \(O(1)\).&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Hashing in Python&lt;/h2&gt;
+&lt;p&gt;Python has a built in function that performs a hash called &lt;code&gt;hash()&lt;/code&gt;.  For many
+objects, the hash is not very surprising.  Note, the hashes you see below may
+not be the same ones you see if you run the examples, because Python hashing
+depends on the architecture of the machine you are running on, and, in newer
+versions of Python, hashes are randomized for security purposes.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(10)
+10
+&amp;gt;&amp;gt;&amp;gt; hash(()) # An empty tuple
+3527539
+&amp;gt;&amp;gt;&amp;gt; hash('a')
+12416037344
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In Python, not all objects are hashable. For example&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash([]) # An empty list
+Traceback (most recent call last):
+  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
+TypeError: unhashable type: 'list'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is because Python has an additional restriction on hashing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;In order for an object to be hashable, it must be immutable.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is important basically because we want the hash of an object to remain
+the same across the object's lifetime. But if we have a mutable object, then
+that object itself can change over its lifetime. But then according to our
+first bullet point above, that object's hash has to change too.&lt;/p&gt;
+&lt;p&gt;This restriction simplifies hash tables. If we allowed an object's hash to
+change while it is in a hash table, we would have to move it to a different
+bucket. Not only is this costly, but the hash table would have to &lt;em&gt;notice&lt;/em&gt;
+that this happened; the object itself doesn't know that it is sitting in a
+hash table, at least not in the Python implementation.&lt;/p&gt;
+&lt;p&gt;In Python, there are two objects that correspond to hash tables, &lt;code&gt;dict&lt;/code&gt; and
+&lt;code&gt;set&lt;/code&gt;. A &lt;code&gt;dict&lt;/code&gt; is a special kind of hash table called an
+&lt;a href="https://en.wikipedia.org/wiki/Associative_array"&gt;&lt;em&gt;associative array&lt;/em&gt;&lt;/a&gt;. An
+associative array is a hash table where each element of the hash table points
+to another object. The other object itself is not hashed.&lt;/p&gt;
+&lt;p&gt;Think of an associative array as a generalization of a regular array (like a
+&lt;code&gt;list&lt;/code&gt;). In a &lt;code&gt;list&lt;/code&gt;, objects are associated to nonnegative integer indices,
+like&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; l = ['a', 'b', 7]
+&amp;gt;&amp;gt;&amp;gt; l[0]
+'a'
+&amp;gt;&amp;gt;&amp;gt; l[2]
+7
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In an associative array (i.e., a &lt;code&gt;dict&lt;/code&gt;) we can index objects by anything, so
+long as the key is hashable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; d = {0: 'a', 'hello': ['world']}
+&amp;gt;&amp;gt;&amp;gt; d[0]
+'a'
+&amp;gt;&amp;gt;&amp;gt; d['hello']
+['world']
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that only the keys need to be hashable. The values can be anything, even
+unhashable objects like lists.&lt;/p&gt;
+&lt;p&gt;The uses for associative arrays are boundless. &lt;code&gt;dict&lt;/code&gt; is one of the most
+useful data types in the Python language. Some example uses are&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Extension of &lt;code&gt;list&lt;/code&gt; with "missing values". For example, &lt;code&gt;{0: 'a', 2: 7}&lt;/code&gt;
+would correspond to the above list &lt;code&gt;l&lt;/code&gt; with the value &lt;code&gt;'b'&lt;/code&gt; corresponding to
+the key &lt;code&gt;1&lt;/code&gt; removed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Representation of a mathematical function with a finite domain.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A poor-man's database (the Wikipedia image above is an associative array
+mapping names to telephone numbers).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Implementing a &lt;a href="https://stackoverflow.com/q/60208/161801"&gt;Pythonic version&lt;/a&gt;
+of the switch-case statement.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The other type of hash table, &lt;code&gt;set&lt;/code&gt;, more closely matches the definition I
+gave above for a hash table. A &lt;code&gt;set&lt;/code&gt; is just a container of hashable
+objects. &lt;code&gt;set&lt;/code&gt;s are unordered, and can only contain one of each object (this
+is why they are called "sets," because this matches the mathematical
+definition of a &lt;a href="https://en.wikipedia.org/wiki/Set_(mathematics)"&gt;set&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;In Python 2.7 or later, you can create a set with &lt;code&gt;{&lt;/code&gt; and &lt;code&gt;}&lt;/code&gt;, like &lt;code&gt;{a, b, c}&lt;/code&gt;. Otherwise, use &lt;code&gt;set([a, b, c])&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; s = {0, (), '2'}
+&amp;gt;&amp;gt;&amp;gt; s
+{0, '2', ()}
+&amp;gt;&amp;gt;&amp;gt; s.add(1)
+&amp;gt;&amp;gt;&amp;gt; s
+{0, 1, '2', ()}
+&amp;gt;&amp;gt;&amp;gt; s.add(0)
+&amp;gt;&amp;gt;&amp;gt; s
+{0, 1, '2', ()}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A final note: &lt;code&gt;set&lt;/code&gt; and &lt;code&gt;dict&lt;/code&gt; are themselves mutable, and hence not hashable!
+There is an immutable version of &lt;code&gt;set&lt;/code&gt; called &lt;code&gt;frozenset&lt;/code&gt;. There are no
+immutable dictionaries.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; f = frozenset([0, (), '2'])
+&amp;gt;&amp;gt;&amp;gt; f
+frozenset({0, '2', ()})
+&amp;gt;&amp;gt;&amp;gt; hash(f)
+-7776452922777075760
+&amp;gt;&amp;gt;&amp;gt; # A frozenset, unlike a set, can be used as a dictionary key
+&amp;gt;&amp;gt;&amp;gt; d[f] = 'a set'
+&amp;gt;&amp;gt;&amp;gt; d
+{0: 'a', frozenset({0, '2', ()}): 'a set', 'hello': ['world']}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Creating your own hashable objects&lt;/h2&gt;
+&lt;p&gt;Before we move on, there is one final thing we need to know about hashing in
+Python, which is how to create hashes for custom objects. By default, if we
+create an object, it will be hashable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class Nothing(object):
+...     pass
+...
+&amp;gt;&amp;gt;&amp;gt; N = Nothing()
+&amp;gt;&amp;gt;&amp;gt; hash(N)
+270498113
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Implementation-wise, the hash is &lt;a href="https://stackoverflow.com/a/33572401/161801"&gt;based
+on&lt;/a&gt; object's &lt;code&gt;id&lt;/code&gt;, which
+corresponds to its position in memory. This satisfies the above conditions: it
+is (extremely) cheap to compute, and since by default objects in Python
+compare unequal to one another, objects with different hashes will be unequal.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; M = Nothing()
+&amp;gt;&amp;gt;&amp;gt; M == N
+False
+&amp;gt;&amp;gt;&amp;gt; hash(M)
+270498117
+&amp;gt;&amp;gt;&amp;gt; hash(M) == hash(N)
+False
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To define a hash function for an object, define the &lt;code&gt;__hash__&lt;/code&gt; method.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class HashToOne(object):
+...     def __hash__(self):
+...         return 1
+...
+&amp;gt;&amp;gt;&amp;gt; HTO = HashToOne()
+&amp;gt;&amp;gt;&amp;gt; hash(HTO)
+1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To set an object as not hashable, set &lt;code&gt;__hash__&lt;/code&gt; to &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class NotHashable(object):
+...     __hash__ = None
+...
+&amp;gt;&amp;gt;&amp;gt; NH = NotHashable()
+&amp;gt;&amp;gt;&amp;gt; hash(NH)
+Traceback (most recent call last):
+  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
+TypeError: unhashable type: 'NotHashable'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, to override the equality operator &lt;code&gt;==&lt;/code&gt;, define &lt;code&gt;__eq__&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class AlwaysEqual(object):
+...     def __eq__(self, other):
+...         if isinstance(other, AlwaysEqual):
+...             return True
+...         return False
+...
+&amp;gt;&amp;gt;&amp;gt; AE1 = AlwaysEqual()
+&amp;gt;&amp;gt;&amp;gt; AE2 = AlwaysEqual()
+&amp;gt;&amp;gt;&amp;gt; AE1 == AE2
+True
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;One of the key points that I hope you will take away from this post is that if
+you override &lt;code&gt;__eq__&lt;/code&gt; and you want a hashable object, you &lt;strong&gt;must&lt;/strong&gt; also
+override &lt;code&gt;__hash__&lt;/code&gt; to agree. Note that Python 3 will actually require this:
+in Python 3, if you override &lt;code&gt;__eq__&lt;/code&gt;, it automatically sets &lt;code&gt;__hash__&lt;/code&gt; to
+&lt;code&gt;None&lt;/code&gt;, making the object unhashable. You need to manually override &lt;code&gt;__hash__&lt;/code&gt;
+to make it hashable again. But that's as far as Python goes in enforcing these
+rules, as we will see below. In particular, Python will never actually check
+that your &lt;code&gt;__hash__&lt;/code&gt; actually agrees with your &lt;code&gt;__eq__&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Messing with hashing&lt;/h2&gt;
+&lt;p&gt;Now to the fun stuff. What happens if we break some of the invariants that
+Python expects of hashing. Python expects two key invariants to hold&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The hash of an object does not change across the object's lifetime (in
+other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
+hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As we shall see, Python expects, but does not enforce either of these.&lt;/p&gt;
+&lt;h3&gt;Example 1: Mutating a hash&lt;/h3&gt;
+&lt;p&gt;Let's break rule 1 first. Let's create an object with a hash, and then change
+that object's hash over its lifetime, and see what sorts of things can happen.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class Bad(object):
+...     def __init__(self, hash): # The object's hash will be hash
+...         self.hash = hash
+...     def __hash__(self):
+...         return self.hash
+...
+&amp;gt;&amp;gt;&amp;gt; b = Bad(1)
+&amp;gt;&amp;gt;&amp;gt; hash(b)
+1
+&amp;gt;&amp;gt;&amp;gt; d = {b:42}
+&amp;gt;&amp;gt;&amp;gt; d[b]
+42
+&amp;gt;&amp;gt;&amp;gt; b.hash = 2
+&amp;gt;&amp;gt;&amp;gt; hash(b)
+2
+&amp;gt;&amp;gt;&amp;gt; d[b]
+Traceback (most recent call last):
+  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
+KeyError: &amp;lt;__main__.Bad object at 0x1047e7438&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here, we implicitly changed the hash of &lt;code&gt;b&lt;/code&gt; by mutating the attribute of &lt;code&gt;b&lt;/code&gt;
+that is used to compute the hash. As a result, the object is no longer found
+in a dictionary, which uses the hash to find the object.&lt;/p&gt;
+&lt;p&gt;The object is still there, we just can't access it any more.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; d
+{&amp;lt;__main__.Bad object at 0x1047e7438&amp;gt;: 42}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that Python doesn't prevent me from doing this. We could make it if we
+want (e.g., by making &lt;code&gt;__setattr__&lt;/code&gt; raise &lt;code&gt;AttributeError&lt;/code&gt;), but even then we
+could forcibly change it by modifying the object's &lt;code&gt;__dict__&lt;/code&gt;. We could try
+some more fancy things using descriptors, metaclasses, and/or
+&lt;code&gt;__getattribute__&lt;/code&gt;, but even then, if we knew what was happening, we could
+probably find a way to change it.&lt;/p&gt;
+&lt;p&gt;This is what is meant when people say that Python is a "consenting adults"
+language. You are expected to not try to break things, but generally aren't
+prevented from doing so if you try.&lt;/p&gt;
+&lt;h3&gt;Example 2: More mutation&lt;/h3&gt;
+&lt;p&gt;Let's try something even more crazy. Let's make an object that hashes to a
+different value each time we look at the hash.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class DifferentHash(object):
+...     def __init__(self):
+...         self.hashcounter = 0
+...     def __hash__(self):
+...         self.hashcounter += 1
+...         return self.hashcounter
+...
+&amp;gt;&amp;gt;&amp;gt; DH = DifferentHash()
+&amp;gt;&amp;gt;&amp;gt; hash(DH)
+1
+&amp;gt;&amp;gt;&amp;gt; hash(DH)
+2
+&amp;gt;&amp;gt;&amp;gt; hash(DH)
+3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Obviously, if we use &lt;code&gt;DH&lt;/code&gt; as a key to a dictionary, then it will not work,
+because we will run into the same issue we had with &lt;code&gt;Bad&lt;/code&gt;. But what about
+putting &lt;code&gt;DH&lt;/code&gt; in a &lt;code&gt;set&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; DHset = {DH, DH, DH}
+&amp;gt;&amp;gt;&amp;gt; DHset
+{&amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
+ &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
+ &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Woah! We put the exact same object in a &lt;code&gt;set&lt;/code&gt; three times, and it appeared all
+three times. This is not what is supposed to happen with a set.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; {1, 1, 1}
+{1}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What happens when we do stuff with &lt;code&gt;DHset&lt;/code&gt;?&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; DHset.remove(DH)
+Traceback (most recent call last):
+  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
+KeyError: &amp;lt;__main__.DifferentHash object at 0x1047e75f8&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That didn't work, because &lt;code&gt;set.remove&lt;/code&gt; searches for an object by its hash,
+which is different by this point.&lt;/p&gt;
+&lt;p&gt;Now let's make a copy of &lt;code&gt;DHset&lt;/code&gt;. The &lt;code&gt;set.copy&lt;/code&gt; method will create a shallow
+copy (meaning that the set container itself will be different, according to
+&lt;code&gt;is&lt;/code&gt; comparison, but the objects themselves will the same, according to &lt;code&gt;is&lt;/code&gt;
+comparison).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; DHset2 = DHset.copy()
+&amp;gt;&amp;gt;&amp;gt; DHset2 == DHset
+True
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Everything is fine so far. This object is only going to cause trouble if
+something recomputes its hash. But remember that the whole reason that we had
+trouble with something like &lt;code&gt;Bad&lt;/code&gt; above is that Python &lt;em&gt;doesn't&lt;/em&gt; recompute
+that hash of an object, unless it has to. So let's do something that will
+force it to do so: let's pop an object from one of the sets and add it back
+in.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; D = DHset.pop()
+&amp;gt;&amp;gt;&amp;gt; DHset.add(D)
+&amp;gt;&amp;gt;&amp;gt; DHset
+{&amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
+ &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
+ &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;}
+&amp;gt;&amp;gt;&amp;gt; DHset2
+{&amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
+ &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
+ &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;}
+&amp;gt;&amp;gt;&amp;gt; DHset == DHset2
+False
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There we go. By removing it from the set, we made the set forget about its
+hash, so it had to be recomputed when we added it again. This version of
+&lt;code&gt;DHset&lt;/code&gt; now has a &lt;code&gt;DH&lt;/code&gt; with a different hash than it had before. Thinking back
+to &lt;code&gt;set&lt;/code&gt; being a hash table, in this &lt;code&gt;DHset&lt;/code&gt;, the three &lt;code&gt;DH&lt;/code&gt; objects are in
+different "buckets" than they were in before. &lt;code&gt;DHset.__eq__(DHset2)&lt;/code&gt; notices
+that the bucket structure is different right away and returns &lt;code&gt;False&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;By the way, what hash value are we up to these days?&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(DH)
+9
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Example 3: When &lt;code&gt;a == b&lt;/code&gt; does not imply &lt;code&gt;hash(a) == hash(b)&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Now let's look at point 2. What happens if we create an object with &lt;code&gt;__eq__&lt;/code&gt;
+that disagrees with &lt;code&gt;__hash__&lt;/code&gt;. For Python 2, we already have made a class like
+this, the &lt;code&gt;AlwaysEqual&lt;/code&gt; object above. Instances of &lt;code&gt;AlwaysEqual&lt;/code&gt; will always
+compare equal to one another, but they will not have the same hash, because
+they will use &lt;code&gt;object&lt;/code&gt;'s default &lt;code&gt;__hash__&lt;/code&gt; of &lt;code&gt;id&lt;/code&gt;. For Python 3, however,
+&lt;code&gt;AlwaysEqual&lt;/code&gt; is automatically set as unhashable because we overrode &lt;code&gt;__eq__&lt;/code&gt;
+without also overriding &lt;code&gt;__hash__&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This blog post originally used the &lt;code&gt;AE1&lt;/code&gt; and &lt;code&gt;AE2&lt;/code&gt; objects we created above
+for the next example, but to make it work in both Python 2 and 3, let's create
+a custom &lt;code&gt;AlwaysEqual&lt;/code&gt; subclass that is hashable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;&amp;gt;&amp;gt;&amp;gt; class AlwaysEqualHashable(AlwaysEqual):
+...     def __hash__(self):
+...         return id(self)
+...
+&amp;gt;&amp;gt;&amp;gt; AE1 = AlwaysEqualHashable()
+&amp;gt;&amp;gt;&amp;gt; AE2 = AlwaysEqualHashable()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(AE1)
+270498221
+&amp;gt;&amp;gt;&amp;gt; hash(AE2)
+270498197
+&amp;gt;&amp;gt;&amp;gt; hash(AE1) == hash(AE2)
+False
+&amp;gt;&amp;gt;&amp;gt; AE1 == AE2
+True
+&amp;gt;&amp;gt;&amp;gt; {AE1, AE2}
+{&amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can already see that we have broken one of the key properties of a &lt;code&gt;set&lt;/code&gt;,
+which is that it does not contain the same object twice (remember that &lt;code&gt;AE1&lt;/code&gt;
+and &lt;code&gt;AE2&lt;/code&gt; should be considered the "same object" because &lt;code&gt;AE1 == AE2&lt;/code&gt; is
+&lt;code&gt;True&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;This can lead to subtle issues. For example, suppose we had a list and we
+wanted to remove all the duplicate items from it. An easy way to do this is to
+convert the list to a set and then convert it back to a list.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; l = ['a', 'a', 'c', 'a', 'c', 'b']
+&amp;gt;&amp;gt;&amp;gt; list(set(l))
+['a', 'b', 'c']
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, this method is obviously not going to work for a list of &lt;code&gt;AlwaysEqualHashable&lt;/code&gt; objects.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; AE3 = AlwaysEqualHashable()
+&amp;gt;&amp;gt;&amp;gt; l = [AE1, AE1, AE3, AE2, AE3]
+&amp;gt;&amp;gt;&amp;gt; list(set(l))
+[&amp;lt;__main__.AlwaysEqualHashable at 0x102c1d590&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Actually, what happened here is that the equality that we defined on
+&lt;code&gt;AlwaysEqual&lt;/code&gt; was essentially ignored. We got a list of unique items by &lt;code&gt;id&lt;/code&gt;,
+instead of by &lt;code&gt;__eq__&lt;/code&gt;. You can imagine that if &lt;code&gt;__eq__&lt;/code&gt; were something a
+little less trivial, where some, but not all, objects are considered equal,
+that this could lead to very subtle issues.&lt;/p&gt;
+&lt;p&gt;But there is an issue with the above algorithm. It isn't stable, that is, it
+removes the ordering that we had on the list. We could do this better by
+making a new list, and looping through the old one, adding elements to the new
+list if they aren't already there.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def uniq(l):
+...     newl = []
+...     for i in l:
+...         if i not in newl:
+...             newl.append(i)
+...     return newl
+...
+&amp;gt;&amp;gt;&amp;gt; uniq(['a', 'a', 'c', 'a', 'c', 'b'])
+['a', 'c', 'b']
+&amp;gt;&amp;gt;&amp;gt; uniq([AE1, AE1, AE3, AE2, AE3])
+[&amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This time, we used &lt;code&gt;in&lt;/code&gt;, which uses &lt;code&gt;==&lt;/code&gt;, so we got only one unique element of
+the list of &lt;code&gt;AlwaysEqual&lt;/code&gt; objects.&lt;/p&gt;
+&lt;p&gt;But there is an issue with this algorithm as well. Checking if something is in
+a list is \(O(n)\), but we have an object that allows checking in \(O(1)\)
+time, namely, a &lt;code&gt;set&lt;/code&gt;. So a more efficient version might be to create a set
+alongside the new list for containment checking purposes.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def uniq2(l):
+...     newl = []
+...     newlset = set()
+...     for i in l:
+...         if i not in newlset:
+...             newl.append(i)
+...             newlset.add(i)
+...     return newl
+...
+&amp;gt;&amp;gt;&amp;gt; uniq2(['a', 'a', 'c', 'a', 'c', 'b'])
+['a', 'c', 'b']
+&amp;gt;&amp;gt;&amp;gt; uniq2([AE1, AE1, AE3, AE2, AE3])
+[&amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x102c1d590&amp;gt;,
+ &amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Bah! Since we used a set, we compared by hashing, not equality, so we are left
+with three objects again. Notice the extremely subtle difference
+here. Basically, it is this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; AE1 in {AE2}
+False
+&amp;gt;&amp;gt;&amp;gt; AE1 in [AE2]
+True
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Set containment uses hashing; list containment uses equality. If the two don't
+agree, then the result of your algorithm will depend on which one you use!&lt;/p&gt;
+&lt;p&gt;By the way, as you might expect, dictionary containment also uses hashing, and
+tuple containment uses equality:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; AE1 in {AE2: 42}
+False
+&amp;gt;&amp;gt;&amp;gt; AE1 in (AE2,)
+True
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Example 4: Caching hashing&lt;/h3&gt;
+&lt;p&gt;If you ever want to add subtle bizarreness to a system, add some sort of
+caching, and then do it wrong.&lt;/p&gt;
+&lt;p&gt;As we noted in the beginning, one important property of a hash function is
+that it is quick to compute. A nice way to achieve this for heavily cached
+objects is to cache the value of the cache on the object, so that it only
+needs to be computed once. The pattern (which is modeled after SymPy's
+&lt;code&gt;Basic&lt;/code&gt;) is something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class HashCache(object):
+...     def __init__(self, arg):
+...         self.arg = arg
+...         self.hash_cache = None
+...     def __hash__(self):
+...         if self.hash_cache is None:
+...             self.hash_cache = hash(self.arg)
+...         return self.hash_cache
+...     def __eq__(self, other):
+...         if not isinstance(other, HashCache):
+...             return False
+...         return self.arg == other.arg
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;HashCache&lt;/code&gt; is nothing more than a small wrapper around a hashable argument,
+which caches its hash.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash('a')
+12416037344
+&amp;gt;&amp;gt;&amp;gt; a = HashCache('a')
+&amp;gt;&amp;gt;&amp;gt; hash(a)
+12416037344
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For ordinary Python builtins, simply recomputing the hash will be faster than
+the attribute lookup used by &lt;code&gt;HashCache&lt;/code&gt;. &lt;em&gt;Note: This uses the &lt;code&gt;%timeit&lt;/code&gt; magic
+from IPython. &lt;code&gt;%timeit&lt;/code&gt; only works when run in IPython or Jupyter.&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; %timeit hash('a')
+10000000 loops, best of 3: 69.9 ns per loop
+&amp;gt;&amp;gt;&amp;gt; %timeit hash(a)
+1000000 loops, best of 3: 328 ns per loop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But for a custom object, computing the hash may be more computationally
+expensive. As hashing is supposed to agree with equality (as I hope you've
+realized by now!), if computing equality is expensive, computing a hash
+function that agrees with it might be expensive as well.&lt;/p&gt;
+&lt;p&gt;As a simple example of where this might be useful, consider a highly nested
+tuple, an object whose hash that is relatively expensive to compute.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = ()
+&amp;gt;&amp;gt;&amp;gt; for i in range(1000):
+...     a = (a,)
+...
+&amp;gt;&amp;gt;&amp;gt; A = HashCache(a)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; %timeit hash(a)
+100000 loops, best of 3: 9.61 µs per loop
+&amp;gt;&amp;gt;&amp;gt; %timeit hash(A)
+1000000 loops, best of 3: 325 ns per loop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So far, we haven't done anything wrong. &lt;code&gt;HashCache&lt;/code&gt;, as you may have noticed,
+has &lt;code&gt;__eq__&lt;/code&gt; defined correctly:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; HashCache(1) == HashCache(2)
+False
+&amp;gt;&amp;gt;&amp;gt; HashCache(1) == HashCache(1)
+True
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But what happens if we mutate a &lt;code&gt;HashCache&lt;/code&gt;. This is different from examples 1
+and 2 above, because we will be mutating what happens with equality testing,
+but not the hash (because of the cache).&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;In the below example, recall that small integers hash to themselves, so
+&lt;code&gt;hash(1) == 1&lt;/code&gt; and &lt;code&gt;hash(2) == 2&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
+&amp;gt;&amp;gt;&amp;gt; d = {a: 42}
+&amp;gt;&amp;gt;&amp;gt; a.arg = 2
+&amp;gt;&amp;gt;&amp;gt; hash(a)
+1
+&amp;gt;&amp;gt;&amp;gt; d[a]
+42
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because we cached the hash of &lt;code&gt;a&lt;/code&gt;, which was computed as soon as we created
+the dictionary &lt;code&gt;d&lt;/code&gt;, it remained unchanged when modified the arg to be
+&lt;code&gt;2&lt;/code&gt;. Thus, we can still find the key of the dictionary. But since we have
+mutated &lt;code&gt;a&lt;/code&gt;, the equality testing on it has changed. This means that, as with
+the previous example, we are going to have issues with dicts and sets keeping
+unique keys and entries (respectively).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
+&amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
+&amp;gt;&amp;gt;&amp;gt; hash(a)
+1
+&amp;gt;&amp;gt;&amp;gt; hash(b)
+2
+&amp;gt;&amp;gt;&amp;gt; b.arg = 1
+&amp;gt;&amp;gt;&amp;gt; a == b
+True
+&amp;gt;&amp;gt;&amp;gt; hash(a) == hash(b)
+False
+&amp;gt;&amp;gt;&amp;gt; {a, b}
+{&amp;lt;__main__.HashCache at 0x102c32050&amp;gt;, &amp;lt;__main__.HashCache at 0x102c32450&amp;gt;}
+&amp;gt;&amp;gt;&amp;gt; uniq([a, b])
+[&amp;lt;__main__.HashCache at 0x102c32050&amp;gt;]
+&amp;gt;&amp;gt;&amp;gt; uniq2([a, b])
+[&amp;lt;__main__.HashCache at 0x102c32050&amp;gt;, &amp;lt;__main__.HashCache at 0x102c32450&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once we mutate &lt;code&gt;b&lt;/code&gt; so that it compares equal to &lt;code&gt;a&lt;/code&gt;, we start to have the same sort of issues that we had in example 3 with &lt;code&gt;AlwaysEqualHashable&lt;/code&gt;. Let's look at an instant replay.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
+&amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
+&amp;gt;&amp;gt;&amp;gt; b.arg = 1
+&amp;gt;&amp;gt;&amp;gt; print(a == b)
+True
+&amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
+True
+&amp;gt;&amp;gt;&amp;gt; print({a, b})
+{&amp;lt;__main__.HashCache object at 0x102c32a10&amp;gt;}
+&amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
+[&amp;lt;__main__.HashCache object at 0x102c32a50&amp;gt;]
+&amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))
+[&amp;lt;__main__.HashCache object at 0x102c32a50&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Wait a minute, this time it's different! Comparing it to above, it's pretty
+easy to see what was different this time. We left out the part where we showed
+the hash of &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt;. When we did that the first time, it cached the hash
+of &lt;code&gt;b&lt;/code&gt;, making it forever be &lt;code&gt;2&lt;/code&gt;, but when we didn't do it the second time,
+the hash had not been cached yet, so the first time it is computed (in the
+&lt;code&gt;print(hash(a) == hash(b))&lt;/code&gt; line), &lt;code&gt;b.arg&lt;/code&gt; has already been changed to &lt;code&gt;1&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;And herein lies the extreme subtlety: if you mutate an object with that hashes
+its cache like this, you will run into issues &lt;strong&gt;only if&lt;/strong&gt; you had already
+called some function that hashed the object somewhere. Now just about anything
+might compute the hash of an object. Or it might not. For example, our &lt;code&gt;uniq2&lt;/code&gt;
+function computes the hash of the objects in its input list, because it stores
+them in a set, but &lt;code&gt;uniq&lt;/code&gt; does not:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
+&amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
+&amp;gt;&amp;gt;&amp;gt; uniq2([a, b])
+&amp;gt;&amp;gt;&amp;gt; b.arg = 1
+&amp;gt;&amp;gt;&amp;gt; print(a == b)
+True
+&amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
+False
+&amp;gt;&amp;gt;&amp;gt; print({a, b})
+{&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;, &amp;lt;__main__.HashCache object at 0x102c32c10&amp;gt;}
+&amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
+[&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;]
+&amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))
+[&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;, &amp;lt;__main__.HashCache object at 0x102c32c10&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
+&amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
+&amp;gt;&amp;gt;&amp;gt; uniq([a, b])
+&amp;gt;&amp;gt;&amp;gt; b.arg = 1
+&amp;gt;&amp;gt;&amp;gt; print(a == b)
+True
+&amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
+True
+&amp;gt;&amp;gt;&amp;gt; print({a, b})
+{&amp;lt;__main__.HashCache object at 0x102c32c90&amp;gt;}
+&amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
+[&amp;lt;__main__.HashCache object at 0x102c32bd0&amp;gt;]
+&amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))
+[&amp;lt;__main__.HashCache object at 0x102c32bd0&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The moral of this final example is that if you are going to cache something,
+that something had better be immutable.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The conclusion is this: don't mess with hashing. The two invariants above are
+important. Let's restate them here,&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The hash of an object must not change across the object's lifetime (in
+other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
+hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you don't follow these rules, you will run into very subtle issues, because
+very basic Python operations expect these invariants.&lt;/p&gt;
+&lt;p&gt;If you want to be able to mutate an object's properties, you have two
+options. First, make the object unhashable (set &lt;code&gt;__hash__ = None&lt;/code&gt;). You won't
+be able to use it in sets or as keys to a dictionary, but you will be free to
+change the object in-place however you want.&lt;/p&gt;
+&lt;p&gt;A second option is to make all mutable properties non-dependent on hashing or
+equality testing. This option works well if you just want to cache some
+internal state that doesn't inherently change the object. Both &lt;code&gt;__eq__&lt;/code&gt; and
+&lt;code&gt;__hash__&lt;/code&gt; should remain unchanged by changes to this state. You may also want
+to make sure you use proper getters and setters to prevent modification of
+internal state that equality testing and hashing does depend on.&lt;/p&gt;
+&lt;p&gt;If you choose this second option, however, be aware that Python considers it
+fair game to swap out two identical immutable (i.e., hashable) objects at any
+time. If &lt;code&gt;a == b&lt;/code&gt; and &lt;code&gt;a&lt;/code&gt; is hashable, Python (and Python libraries) are free
+to replace &lt;code&gt;a&lt;/code&gt; with &lt;code&gt;b&lt;/code&gt; anywhere. For example, Python uses an optimization on
+strings called &lt;em&gt;interning&lt;/em&gt;, where common strings are stored only once in
+memory. A similar optimization is used in CPython for small integers. If store
+something on &lt;code&gt;a&lt;/code&gt; but not &lt;code&gt;b&lt;/code&gt; and make &lt;code&gt;a&lt;/code&gt;'s hash ignore that data, you may
+find that some function that should return &lt;code&gt;a&lt;/code&gt; may actually return &lt;code&gt;b&lt;/code&gt;. For
+this reason, I generally don't recommend this second option unless you know
+what you are doing.&lt;/p&gt;
+&lt;p&gt;Finally, to keep invariant 2, here are some tips:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure that the parts of the object that you use to compare equality are
+not themselves mutable. If they are, then your object cannot itself be
+immutable. This means that if &lt;code&gt;a == b&lt;/code&gt; depends on &lt;code&gt;a.attr == b.attr&lt;/code&gt;, and
+&lt;code&gt;a.attr&lt;/code&gt; is a list, then you will need to use a tuple instead (if you want
+&lt;code&gt;a&lt;/code&gt; to be hashable).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You don't have to invent a hash function. If you find yourself doing
+bitshifts and XORs, you're doing it wrong. Reuse Python's builtin hashable
+objects. If the hash of your object should depend on the hash of &lt;code&gt;a&lt;/code&gt; and
+&lt;code&gt;b&lt;/code&gt;, define &lt;code&gt;__hash__&lt;/code&gt; to return &lt;code&gt;hash((a, b))&lt;/code&gt;. If the order of &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt;
+does not matter, use &lt;code&gt;hash(frozenset([a, b]))&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't cache something unless you know that the entire cached state will not
+be changed over the lifetime of the cache. Hashable objects are actually
+great for caches. If they properly satisfy invariant 1, and all the state
+that should be cached is part of the hash, then you will not need to
+worry. And the best part is that you can just use &lt;code&gt;dict&lt;/code&gt; for your cache.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unless you really need the performance or memory gains, don't make your
+objects mutable. This makes programs much harder to reason about. Some
+functional programming languages take this idea so far that they don't allow
+any mutable objects.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't worry about the situation where &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; but &lt;code&gt;a != b&lt;/code&gt;. This is a hash collision. Unlike the issues we looked at here, hash
+collisions are expected and checked for in Python. For example, our
+&lt;code&gt;HashToOne&lt;/code&gt; object from the beginning will always hash to 1, but different
+instances will compare unequal. We can see that the right thing is done in
+every case with them.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashToOne()
+&amp;gt;&amp;gt;&amp;gt; b = HashToOne()
+&amp;gt;&amp;gt;&amp;gt; a == b
+False
+&amp;gt;&amp;gt;&amp;gt; hash(a) == hash(b)
+True
+&amp;gt;&amp;gt;&amp;gt; {a, b}
+{&amp;lt;__main__.HashToOne at 0x102c32a10&amp;gt;, &amp;lt;__main__.HashToOne at 0x102c32cd0&amp;gt;}
+&amp;gt;&amp;gt;&amp;gt; uniq([a, b])
+[&amp;lt;__main__.HashToOne at 0x102c32cd0&amp;gt;, &amp;lt;__main__.HashToOne at 0x102c32a10&amp;gt;]
+&amp;gt;&amp;gt;&amp;gt; uniq2([a, b])
+[&amp;lt;__main__.HashToOne at 0x102c32cd0&amp;gt;, &amp;lt;__main__.HashToOne at 0x102c32a10&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The only concern with hash collisions is that too many of them can remove
+the performance gains of &lt;code&gt;dict&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Conversely, if you are writing something that uses an object's hash, remember
+that hash collisions are possible and unavoidable.&lt;/p&gt;
+&lt;p&gt;A classic example of a hash collision is &lt;code&gt;-1&lt;/code&gt; and &lt;code&gt;-2&lt;/code&gt;. Remember I
+mentioned above that small integers hash to themselves:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(1)
+1
+&amp;gt;&amp;gt;&amp;gt; hash(-3)
+-3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The exception to this is &lt;code&gt;-1&lt;/code&gt;. The CPython interpreter uses &lt;code&gt;-1&lt;/code&gt; as an error
+state, so -1 is not a valid hash value. Hence, &lt;code&gt;hash(-1)&lt;/code&gt; can't be &lt;code&gt;-1&lt;/code&gt;. So
+the Python developers picked the next closest thing.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(-1)
+-2
+&amp;gt;&amp;gt;&amp;gt; hash(-2)
+-2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to check if something handles hash collisions correctly, this is
+a simple example.  I should also note that the fact that integers hash to
+themselves is an implementation detail of CPython that may not be true in
+alternate Python implementations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally, we didn't discuss this much here, but don't assume that the hash of
+your object will be the same across Python sessions. In Python 3.3 and up,
+hash values of strings are randomized from a value that is seeded when
+Python starts up. This also affects any object whose hash is computed
+from the hash of strings. In Python 2.7, you can enable hash randomization
+with the &lt;code&gt;-R&lt;/code&gt; flag to the interpreter. The following are two different
+Python sessions.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; print(hash('a'))
+-7750608935454338104
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; print(hash('a'))
+8897161376854729812
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</guid><pubDate>Tue, 26 Jan 2016 04:13:53 GMT</pubDate></item><item><title>"Doing Math with Python" by Amit Saha: Book Review</title><link>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Note: No Starch Press has sent me a copy of this book for review purposes.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SHORT VERSION: &lt;em&gt;Doing Math with Python&lt;/em&gt; is well written and introduces
+topics in a nice, mathematical way. I would recommend it for new users of
+SymPy.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;&lt;em&gt;Doing Math with Python&lt;/em&gt;&lt;/a&gt; by
+Amit Saha is a new book published by No Starch Press. The book shows how to
+use Python to do high school-level mathematics. It makes heavy use of SymPy in
+many chapters, and this review will focus mainly on those parts, as that is
+the area I have expertise in.&lt;/p&gt;
+&lt;p&gt;The book assumes a basic understanding of programming in Python 3, as well as
+the mathematics used (although advanced topics are explained). No prior
+background in the libraries used, SymPy and matplotlib, is assumed. For this
+reason, this book can serve as an introduction them. Each chapter ends with
+some programming exercises, which range from easy exercises to more advanced
+ones.&lt;/p&gt;
+&lt;p&gt;The book has seven chapters. In the first chapter, "Working with numbers",
+basic mathematics using pure Python is introduced (no SymPy yet). It should be
+noted that Python 3 (not Python 2) is required for this book. One of the
+earliest examples in the book (&lt;code&gt;3/2 == 1.5&lt;/code&gt;) will not work correctly without
+it. I applaud this choice, although I might have added a more prominent
+warning to wary users. (As a side note, in the appendix, it is recommended to
+install Python via &lt;a href="https://www.continuum.io/downloads"&gt;Anaconda&lt;/a&gt;, which I
+also applaud). This chapter also introduces the &lt;code&gt;fractions&lt;/code&gt; module, which
+seems odd since &lt;code&gt;sympy.Rational&lt;/code&gt; will be implicitly used for rational numbers
+later in the text (to little harm, however, since SymPy automatically converts
+&lt;code&gt;fractions.Fraction&lt;/code&gt; instances to &lt;code&gt;sympy.Rational&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;In all, this chapter is a good introduction to the basics of the mathematics
+of Python. There is also an introduction to variables and strings. However, as
+I noted above, one should really have some background with basic Python before
+reading this book, as concepts like flow control and function definition are
+assumed (note: there is an appendix that goes over this).&lt;/p&gt;
+&lt;p&gt;Chapters 2 and 3 cover plotting with matplotlib and basic statistics,
+respectively. I will not say much about the matplotlib chapter, since I know
+only basic matplotlib myself. I will note that the chapter covers matplotlib
+from a (high school) mathematics point of view, starting with a definition of
+the Cartesian plane, which seems a fitting choice for the book.&lt;/p&gt;
+&lt;p&gt;Chapter 3 shows how to do basic statistics (mean, median, standard deviation,
+etc.) using pure Python. This chapter is clearly meant for pedagogical
+purposes for basic statistics, since the basic functions &lt;code&gt;mean&lt;/code&gt;, &lt;code&gt;median&lt;/code&gt;,
+etc. are implemented from scratch (as opposed to using &lt;code&gt;numpy.mean&lt;/code&gt; or the
+standard library &lt;code&gt;statistics.mean&lt;/code&gt;). This serves as a good introduction to
+more Python concepts (like &lt;code&gt;collections.Counter&lt;/code&gt;) and statistics.&lt;/p&gt;
+&lt;p&gt;Note that the functions in this chapter assume that the data is the entire
+population, not a sample. This is mentioned at the beginning of the chapter,
+but not elaborated on. For example, this leads to a different definition of
+variance than what might be seen elsewhere (the &lt;code&gt;calculate_variance&lt;/code&gt; used in
+this chapter is &lt;code&gt;statistics.pvariance&lt;/code&gt;, not &lt;code&gt;statistics.variance&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;It is good to see that a numerically stable definition of variance is used
+here (see &lt;a href="https://www.python.org/dev/peps/pep-0450/"&gt;PEP 450&lt;/a&gt; for more
+discussion on this). These numerical issues show why it is important to use a
+real statistics library rather than a home grown one. In other words, use this
+chapter to learn more about statistics and Python, but if you ever need to do
+statistics on real data, use a statistics library like &lt;code&gt;statistics&lt;/code&gt; or
+&lt;code&gt;numpy&lt;/code&gt;. Finally, I should note that this book appears to be written against
+Python 3.3, whereas &lt;code&gt;statistics&lt;/code&gt; was added to the Python standard library in
+Python 3.4. Perhaps it will get a mention in future editions.&lt;/p&gt;
+&lt;p&gt;Chapter 4, "Algebra and Symbolic Math with SymPy" starts the introduction to
+SymPy. The chapter starts similar to the
+&lt;a href="http://docs.sympy.org/latest/tutorial/index.html"&gt;official SymPy tutorial&lt;/a&gt; in
+describing what symbolics is, and guiding the reader away from common
+misconceptions and gotchas. The chapter does a good job of explaining common
+gotchas and avoiding antipatterns.&lt;/p&gt;
+&lt;p&gt;This chapter may serve as an alternative to the official tutorial. Unlike the
+official tutorial, which jumps into
+&lt;a href="http://docs.sympy.org/latest/tutorial/simplification.html#powers"&gt;higher-level mathematics&lt;/a&gt;
+and &lt;a href="http://docs.sympy.org/latest/tutorial/matrices.html"&gt;broader use-cases&lt;/a&gt;,
+this chapter may be better suited to those wishing to use SymPy from the
+standpoint of high school mathematics.&lt;/p&gt;
+&lt;p&gt;My only gripes with this chapter, which, in total, are minor, relate to printing.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The typesetting of the pretty printing is inconsistent and, in some cases,
+incorrect. Powers are printed in the book using superscript numbers, like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x²
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, SymPy prints powers like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 2
+x
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;even when Unicode pretty printing is enabled. This is a minor point, but it
+may confuse users. Also, the output appears to use ASCII pretty printing
+(mixed with superscript powers), for example&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    x²   x³   x⁴   x⁵
+x + -- + -- + -- + --
+    2    3    4    5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Most users will either get MathJax printing (if they are using the Jupyter
+notebook), or Unicode printing, like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;     2    3    4    5
+    x    x    x    x
+x + ── + ── + ── + ──
+    2    3    4    5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again, this is a minor point, but at the very least the correct printing
+looks better than the fake printing used here.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In line with the previous point, I would recommend telling the user to
+start with &lt;code&gt;init_printing()&lt;/code&gt;. The function is used once to change the order
+of printing to rev-lex (for series printing). There is a link to the
+&lt;a href="http://docs.sympy.org/latest/tutorial/printing.html"&gt;tutorial page on printing&lt;/a&gt;. That
+page goes into more depth than is necessary for the book, but I would
+recommend at least mentioning to always call &lt;code&gt;init_printing()&lt;/code&gt;, as 2-D
+printing can make a huge difference over the default &lt;code&gt;str&lt;/code&gt; printing, and it
+obviates the need to call &lt;code&gt;pprint&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Chapter 5, "Playing with Sets and Probability" covers SymPy's set objects
+(particularly &lt;code&gt;FiniteSet&lt;/code&gt;) to do some basic set theory and probability. I'm
+excited to see this in the book. The sets module in SymPy is relatively new,
+but quite powerful. We do not yet have an introduction to the sets module in
+the SymPy tutorial. This chapter serves as a good introduction to it (albeit
+only with finite sets, but the SymPy functions that operate on infinite sets
+are exactly the same as the ones that operate on finite sets). In all, I don't
+have much to say about this chapter other than that I was pleasantly surprised
+to see it included.&lt;/p&gt;
+&lt;p&gt;Chapter 6 shows how to draw geometric shapes and fractals with matplotlib. I
+again won't say much on this, as I am no matplotlib expert. The ability to
+draw leaf fractals and Sierpiński triangles with Python does look
+entertaining, and should keep readers enthralled.&lt;/p&gt;
+&lt;p&gt;Chapter 7, "Solving Calculus Problems" goes into more depth with SymPy. In
+particular, assumptions, limits, derivatives, and integrals.  The chapter
+alternates between symbolic formulations using SymPy and numeric
+calculations (using &lt;code&gt;evalf&lt;/code&gt;). The numeric calculations are done both for
+simple examples and more advanced things (like implementing gradient descent).&lt;/p&gt;
+&lt;p&gt;One small gripe here. The book shows that&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from sympy import Symbol
+x = Symbol('x')
+if (x + 5) &amp;gt; 0:
+    print('Do Something')
+else:
+    print('Do Something else')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;raises &lt;code&gt;TypeError&lt;/code&gt; at the evaluation of &lt;code&gt;(x + 5) &amp;gt; 0&lt;/code&gt; because its truth value
+cannot be determined. The solution to this issue is given as&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x = Symbol('x', positive=True)
+if (x + 5) &amp;gt; 0:
+    print('Do Something')
+else:
+    print('Do Something else')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Setting &lt;code&gt;x&lt;/code&gt; to be positive via &lt;code&gt;Symbol('x', positive=True)&lt;/code&gt; is correct, but
+even in this case, evaluating an inequality may still raise a &lt;code&gt;TypeError&lt;/code&gt; (for
+example, &lt;code&gt;if (x - 5) &amp;gt; 0&lt;/code&gt;). The better way to do this is to use &lt;code&gt;(x + 5).is_positive&lt;/code&gt;. This would require a bit more discussion, especially since
+SymPy uses a three-valued logic for assumptions, but I do consider "if
+&amp;lt;symbolic inequality&amp;gt;" to be a SymPy antipattern.&lt;/p&gt;
+&lt;p&gt;I like Saha's approach in this chapter of first showing unevaluated forms
+(&lt;code&gt;Limit&lt;/code&gt;, &lt;code&gt;Derivative&lt;/code&gt;, &lt;code&gt;Integral&lt;/code&gt;), and then evaluating them with
+&lt;code&gt;doit()&lt;/code&gt;. This puts users in the mindset of a mathematical expression being a
+formula which may or may not later be "calculated". The opposite approach,
+using the function forms, &lt;code&gt;limit&lt;/code&gt;, &lt;code&gt;diff&lt;/code&gt;, and &lt;code&gt;integrate&lt;/code&gt;, which evaluate if
+they can and return an unevaluated object if they can't, can be confusing to
+new users in my experience. A common new SymPy user question is (some form of)
+"how do I evaluate an expression?" (the answer is &lt;code&gt;doit()&lt;/code&gt;). Saha's approach
+avoids this question by showing &lt;code&gt;doit()&lt;/code&gt; from the outset.&lt;/p&gt;
+&lt;p&gt;I also like that this chapter explains the gotcha of &lt;code&gt;math.sin(Symbol('x'))&lt;/code&gt;,
+although I personally would have included this earlier in the text.&lt;/p&gt;
+&lt;p&gt;(Side note: now that I look, these are both areas in which the official
+tutorial could be improved).&lt;/p&gt;
+&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;p&gt;This book is a good introduction to doing math with Python, and, for the
+chapters that use it, a good basic introduction to SymPy. I would recommend it
+to anyone wishing to learn SymPy, but especially to anyone whose knowledge of
+mathematics may preclude them from getting the most out of the official SymPy
+tutorial.&lt;/p&gt;
+&lt;p&gt;I imagine this book would work well as a pedagogical tool, either for math
+teachers or for self-learners. The exercises in this book should push the
+motivated to learn more.&lt;/p&gt;
+&lt;p&gt;I have a few minor gripes, but no major issues.&lt;/p&gt;
+&lt;p&gt;You can purchase this book from the
+&lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;No Starch Press&lt;/a&gt; website, both
+as a print book or an ebook. The website also includes a sample chapter
+(&lt;a href="https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf"&gt;chapter 1&lt;/a&gt;),
+code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item><item><title>Lessons learned from working at Continuum</title><link>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
+time at the company, and wish success to it, but the time has come for me to
+move on. Starting later this year, I will start working with
+&lt;a href="https://twitter.com/scopatz"&gt;Anthony Scopatz&lt;/a&gt; at his new lab
+&lt;a href="http://www.ergs.sc.edu/index.html"&gt;ERGS&lt;/a&gt; at the University of South
+Carolina.&lt;/p&gt;
+&lt;p&gt;During my time at Continuum (over two years if you count a summer internship),
+I primarily worked on the
+&lt;a href="https://www.continuum.io/downloads"&gt;Anaconda distribution&lt;/a&gt; and its open
+source package manager, &lt;a href="http://conda.pydata.org/"&gt;conda&lt;/a&gt;.  I learned a lot of
+lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
+&lt;p&gt;In no particular order:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Left to their own devices, people will make the minimal possible solution to
+  packaging. They won't try to architect something. The result will be
+  over-engineered, specific to their use-case, and lack reproducibility.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The best way to ensure that some software has no bugs is for it to have many
+  users.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Be wary of the "software would be great if it weren't for all the users"
+  mentality (cf. the previous point).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Most people don't code defensively. If you are working on a project that
+  requires extreme stability, be cautious of contributions from those outside
+  the development team.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Hostility towards Windows and Windows users doesn't help anyone.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://twitter.com/asmeurer/status/593170976981913600"&gt;https://twitter.com/asmeurer/status/593170976981913600&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For a software updater, stability is the number one priority. If the updater
+  breaks, how can a fix be deployed?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Even if you configure your program to update itself every time it runs you
+  will still get bug reports with arbitrarily old versions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Separating components into separate git repositories leads to a
+  philosophical separation of concerns among the components.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Everyone who isn't an active developer on the project will ignore this
+  separation and open issues in the wrong repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Avoid object oriented programming when procedural programming will do just
+  fine.&lt;sup id="fnref4-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open source is more about the open than the source. Develop things in the
+  open, and you will create a community that respects you.&lt;sup id="fnref3-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Academics (often) don't know good software practices, nor good licensing
+  practices.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Neither do some large corporations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Avoid over-engineering things.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Far fewer people than I would have thought understand the difference between
+  hard links and soft links.&lt;sup id="fnref-fn2"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Changelogs are useful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Semantic versioning is over-hyped.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you make something and release it, the first version should be 1.0 (not
+  0.1 or 0.0.1).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Getting a difficult package to compile is like hacking a computer. All it
+  takes is time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It doesn't matter how open source friendly your business is, there will
+  always be people who will be skeptical and point their fingers at the
+  smallest proprietary components, fear monger, and overgeneralize unrelated
+  issues into FUD. These people should generally be ignored.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref2-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;People constantly misspell the name of
+  &lt;a href="https://twitter.com/asmeurer/status/618595687958122496"&gt;Apple's desktop operating system&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;People always assume you have way more automation than you really do.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The Python standard library is not a Zen garden. Some parts of it are
+  completely broken, and if you need to rely on them, you'll have to rewrite
+  them. &lt;code&gt;shutil.rmtree&lt;/code&gt; on Windows is one example of this.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux is strictly backwards compatible. Windows is strictly forwards
+  compatible. &lt;sup id="fnref-fn3"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn3"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On Linux, things tend to be very simple. On Windows, things tend to be very
+  complicated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I can't decide about OS X. It lies somewhere in between.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nobody uses 32-bit Linux. Why do we even support that?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;People oversimplify the problem of solving for package dependencies in their
+  heads.  No one realizes that it's meaningless to say something like "the
+  dependencies of NumPy" (every build of every version of NumPy has its own
+  set of dependencies, which may or may not be the same).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Writing a set of rules and a solver to solve against those rules is
+  relatively easy. Writing heuristics to tell users why those rules are
+  unsolvable when they are is hard.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SAT solvers solve NP-complete problems in general, but they can be very fast
+  to solve common case problems. &lt;sup id="fnref-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some of the smartest people I know, who otherwise make very rational and
+  intelligent decisions,
+  &lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;refuse to update to Python 3&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;As an introvert, the option of working from home is great for maintaining
+  sanity.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://blog.codinghorror.com/a-developers-second-most-important-asset/"&gt;Aeron chairs are awesome&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If living in Austin doesn't turn you into a foodie you will at least gain a
+  respect for them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Twitter, if used correctly, is a great way to interact with your users.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Twitter is also a great place to learn new things. Follow
+  &lt;a href="https://twitter.com/JohnDCook"&gt;John Cook&lt;/a&gt; and
+  &lt;a href="https://twitter.com/worrydream"&gt;Bret Victor&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;One of the best ways to make heavily shared content is to make it about git
+  (at least if you're an expert).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A good optimization algorithm avoids getting caught in local maxima by
+  trying different parts of the search space that initially appear to be
+  worse. The same approach should be taken in life.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Footnotes&lt;/h4&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn-fn1"&gt;
+&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref2-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref3-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref4-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn-fn2"&gt;
+&lt;p&gt;If you are one of those people, I have a small presentation that
+   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn2" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn-fn3"&gt;
+&lt;p&gt;These terms can be confusing, and I admit I got this backwards the
+    first time I wrote this. According to Wikipedia,
+    &lt;a href="https://en.wikipedia.org/wiki/Forward_compatibility"&gt;forwards compatible&lt;/a&gt;
+    means a system can accept input intended for a later version of itself
+    and
+    &lt;a href="https://en.wikipedia.org/wiki/Backward_compatibility"&gt;backwards compatible&lt;/a&gt;
+    means a system can accept input intended for an earlier version of
+    itself.&lt;/p&gt;
+&lt;p&gt;What I specifically mean here is that in terms of building packages
+for Linux or Windows, for Linux, you should build a package on the
+oldest version that you wish to support. That package will work on
+newer versions of Linux, but not anything older (generally due to the
+version of libc you are linked against).&lt;/p&gt;
+&lt;p&gt;On the other hand, on Windows, you can can compile things on the
+newest version (I used Windows 8 on my main Windows build VM), and it
+will work on older versions of Windows like XP (as long as you ship
+the right runtime DLLs). This is also somewhat confusing because
+Windows tends to be both forwards compatible &lt;em&gt;and&lt;/em&gt; backwards
+compatible. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn3" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item><item><title>Python Trickery</title><link>https://asmeurer.com/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
+following is invalid syntax.  See if you can figure out why&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;/li&gt;&lt;/ol&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;1 + not(2)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;
+&lt;/li&gt;&lt;/ol&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;f(*(
+i for i in range(10)
+if i % 2),
+x=3,)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/python-trickery/</guid><pubDate>Mon, 04 May 2015 19:11:46 GMT</pubDate></item></channel></rss>
