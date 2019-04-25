@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 19 Apr 2019 20:28:17 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://asmeurer.com/blog/posts/whats-new-in-sympy-14/..."&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 25 Apr 2019 22:18:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://asmeurer.com/blog/posts/whats-new-in-sympy-14/..."&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;SymPy 1.4 was released on April 9, 2019. In this post, I'd like to go over
 some of the highlights for this release. The full release notes for the
 release can be found on the &lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4"&gt;SymPy
@@ -28,7 +28,7 @@ expression. For built-in types such as lists or ints, &lt;code&gt;init_printing(
 still required to get LaTeX printing. For example, &lt;code&gt;solve()&lt;/code&gt; returns a list,
 so does not render as LaTeX unless &lt;code&gt;init_printing()&lt;/code&gt; is called:&lt;/p&gt;
 &lt;img src="https://asmeurer.com/blog/sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"&gt;
-&lt;h2&gt;Improved simplification&lt;/h2&gt;
+&lt;h2&gt;Improved simplification of relational expressions&lt;/h2&gt;
 &lt;p&gt;simplification of relational and piecewise expressions has been improved:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; x, y, z, w = symbols('x y z w')
 &amp;gt;&amp;gt;&amp;gt; init_printing()
@@ -47,17 +47,62 @@ x = y ∧ y &amp;gt; Max(w, z)
 0
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;Improved MathML printing&lt;/h2&gt;
-&lt;p&gt;The MathML content and presentation printers have been greatly improved,
-putting them on par with the existing Unicode and LaTeX pretty printers.&lt;/p&gt;
+&lt;p&gt;The MathML presentation printer has been greatly improved, putting it on par
+with the existing Unicode and LaTeX pretty printers.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; mathml(Integral(exp(-x**2), (x, -oo, oo)), 'presentation')
 &amp;lt;mrow&amp;gt;&amp;lt;msubsup&amp;gt;&amp;lt;mo&amp;gt;&amp;amp;#x222B;&amp;lt;/mo&amp;gt;&amp;lt;mrow&amp;gt;&amp;lt;mo&amp;gt;-&amp;lt;/mo&amp;gt;&amp;lt;mi&amp;gt;&amp;amp;#x221E;&amp;lt;/mi&amp;gt;&amp;lt;/mrow&amp;gt;&amp;lt;mi&amp;gt;&amp;amp;#x221E;&amp;lt;/mi&amp;gt;&amp;lt;/msubsup&amp;gt;&amp;lt;msup&amp;gt;&amp;lt;mi&amp;gt;&amp;amp;ExponentialE;&amp;lt;/mi&amp;gt;&amp;lt;mrow&amp;gt;&amp;lt;mo&amp;gt;-&amp;lt;/mo&amp;gt;&amp;lt;msup&amp;gt;&amp;lt;mi&amp;gt;x&amp;lt;/mi&amp;gt;&amp;lt;mn&amp;gt;2&amp;lt;/mn&amp;gt;&amp;lt;/msup&amp;gt;&amp;lt;/mrow&amp;gt;&amp;lt;/msup&amp;gt;&amp;lt;mo&amp;gt;&amp;amp;dd;&amp;lt;/mo&amp;gt;&amp;lt;mi&amp;gt;x&amp;lt;/mi&amp;gt;&amp;lt;/mrow&amp;gt;
-&amp;gt;&amp;gt;&amp;gt; mathml(Integral(exp(-x**2), (x, -oo, oo)), 'content')
-&amp;lt;apply&amp;gt;&amp;lt;int/&amp;gt;&amp;lt;bvar&amp;gt;&amp;lt;ci&amp;gt;x&amp;lt;/ci&amp;gt;&amp;lt;/bvar&amp;gt;&amp;lt;lowlimit&amp;gt;&amp;lt;apply&amp;gt;&amp;lt;minus/&amp;gt;&amp;lt;infinity/&amp;gt;&amp;lt;/apply&amp;gt;&amp;lt;/lowlimit&amp;gt;&amp;lt;uplimit&amp;gt;&amp;lt;infinity/&amp;gt;&amp;lt;/uplimit&amp;gt;&amp;lt;apply&amp;gt;&amp;lt;exp/&amp;gt;&amp;lt;apply&amp;gt;&amp;lt;minus/&amp;gt;&amp;lt;apply&amp;gt;&amp;lt;power/&amp;gt;&amp;lt;ci&amp;gt;x&amp;lt;/ci&amp;gt;&amp;lt;cn&amp;gt;2&amp;lt;/cn&amp;gt;&amp;lt;/apply&amp;gt;&amp;lt;/apply&amp;gt;&amp;lt;/apply&amp;gt;&amp;lt;/apply&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If your &lt;a href="https://caniuse.com/#feat=mathml"&gt;browser supports MathML&lt;/a&gt; (at the
 time of writing, only Firefox and Safari), you should see the above
 presentation form for &lt;code&gt;Integral(exp(-x**2), (x, -oo, oo))&lt;/code&gt; below:&lt;/p&gt;
-&lt;p&gt;&lt;math style="display: block;"&gt;&lt;mrow&gt;&lt;msubsup&gt;&lt;mo&gt;∫&lt;/mo&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;mi&gt;∞&lt;/mi&gt;&lt;/mrow&gt;&lt;mi&gt;∞&lt;/mi&gt;&lt;/msubsup&gt;&lt;msup&gt;&lt;mi&gt;ⅇ&lt;/mi&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;mo&gt;ⅆ&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/mrow&gt;&lt;/math&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</guid><pubDate>Fri, 19 Apr 2019 17:41:57 GMT</pubDate></item><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
+&lt;p&gt;&lt;math style="display: block;"&gt;&lt;mrow&gt;&lt;msubsup&gt;&lt;mo&gt;∫&lt;/mo&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;mi&gt;∞&lt;/mi&gt;&lt;/mrow&gt;&lt;mi&gt;∞&lt;/mi&gt;&lt;/msubsup&gt;&lt;msup&gt;&lt;mi&gt;ⅇ&lt;/mi&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;mo&gt;ⅆ&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/mrow&gt;&lt;/math&gt;&lt;/p&gt;
+&lt;h2&gt;Dropping Python 3.4 support&lt;/h2&gt;
+&lt;p&gt;This is the last release of SymPy to support Python 3.4. SymPy 1.4 supports
+Python 2.7, 3.4, 3.5, 3.6, 3.7, and PyPy. What's perhaps more exciting is that
+the next release of SymPy, 1.5, which will be released later this year, will
+be the last version to support Python 2.7.&lt;/p&gt;
+&lt;p&gt;Our
+&lt;a href="https://github.com/sympy/sympy/wiki/Python-version-support-policy"&gt;policy&lt;/a&gt; is
+to drop support for major Python versions when they reach their &lt;a href="https://devguide.python.org/#status-of-python-branches"&gt;End of
+Life&lt;/a&gt;. In other words,
+they receive no further support from the CPython team. Python 3.4 reached its
+end of life on May 19 of this year, and Python 2.7 will reach its end of life
+on January 1, 2020.&lt;/p&gt;
+&lt;p&gt;I have &lt;a href="https://www.asmeurer.com/blog/posts/moving-away-from-python-2/"&gt;blogged in the
+past&lt;/a&gt; on why I
+believe it is important for library authors to be proactive in dropping Python
+2 support, and since then &lt;a href="https://python3statement.org"&gt;a large number of Python
+libraries&lt;/a&gt; have either dropped support or
+announced their plans to by 2020.&lt;/p&gt;
+&lt;p&gt;Having Python 2 support removed will not only allow us to remove a &lt;a href="https://github.com/sympy/sympy/blob/sympy-1.4/sympy/core/compatibility.py"&gt;large
+amount of compatibility
+cruft&lt;/a&gt;
+from our codebase, it will also allow us to use some Python 3-only features
+that will allow us to clean up our API, such as &lt;a href="https://python-3-for-scientists.readthedocs.io/en/latest/python3_advanced.html#keyword-only-arguments"&gt;keyword-only
+arguments&lt;/a&gt;,
+&lt;a href="https://python-3-for-scientists.readthedocs.io/en/latest/python3_features.html#function-annotations"&gt;type
+hints&lt;/a&gt;,
+and &lt;a href="https://python-3-for-scientists.readthedocs.io/en/latest/python3_features.html#unicode-variable-names"&gt;Unicode variable
+names&lt;/a&gt;.
+It will also enable &lt;a href="https://github.com/sympy/sympy/issues?q=is%3Aissue+is%3Aopen+label%3A%22Dropping+Python+2%22"&gt;several internal
+changes&lt;/a&gt;
+that will not be visible to end-users, but which will result in a much cleaner
+codebase.&lt;/p&gt;
+&lt;p&gt;If you are still using Python 2, I strongly recommend switching to Python 3,
+as otherwise the entire ecosystem of Python libraries is soon going to stop
+improving for you. Python 3 is already highly recommended for SymPy usage due
+to several key improvements. In particular, in Python 3 division of two
+integers like &lt;code&gt;1/2&lt;/code&gt; produces the float &lt;code&gt;0.5&lt;/code&gt; instead of doing integer division
+(which produces &lt;code&gt;0&lt;/code&gt;). The Python 2 integer division behavior can lead to very
+surprising results when using SymPy (imagine writing &lt;code&gt;x**2 + 1/2*x + 2&lt;/code&gt; and
+having the &lt;code&gt;x&lt;/code&gt; term "disappear"). When using SymPy, we recommend &lt;a href="https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and"&gt;avoiding
+writing
+&lt;code&gt;int/int&lt;/code&gt;&lt;/a&gt;
+and instead using rational numbers (like &lt;code&gt;Rational(1, 2)&lt;/code&gt;), but the Python 3
+behavior will at least maintain a mathematically correct result if you do not
+do this. SymPy is also already faster in Python 3 due to things like
+&lt;code&gt;math.gcd&lt;/code&gt; and &lt;code&gt;functools.lru_cache&lt;/code&gt; being written in C, and general
+performance improvements in the interpreter itself.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</guid><pubDate>Fri, 19 Apr 2019 17:41:57 GMT</pubDate></item><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
 initiative&lt;/a&gt; to fix
 minor issues that make things more difficult for GitHub users. As someone who
 spends most of his day on &lt;a href="https://github.com"&gt;github.com&lt;/a&gt;, this initiative is

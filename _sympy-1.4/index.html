@@ -83,7 +83,7 @@ which they rendered with LaTeX:</p>
 expression. For built-in types such as lists or ints, <code>init_printing()</code> is
 still required to get LaTeX printing. For example, <code>solve()</code> returns a list,
 so does not render as LaTeX unless <code>init_printing()</code> is called:</p>
-<img src="sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"><h2>Improved simplification</h2>
+<img src="sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"><h2>Improved simplification of relational expressions</h2>
 <p>simplification of relational and piecewise expressions has been improved:</p>
 <pre><code class="language-py">&gt;&gt;&gt; x, y, z, w = symbols('x y z w')
 &gt;&gt;&gt; init_printing()
@@ -102,17 +102,62 @@ x = y ∧ y &gt; Max(w, z)
 0
 </code></pre>
 <h2>Improved MathML printing</h2>
-<p>The MathML content and presentation printers have been greatly improved,
-putting them on par with the existing Unicode and LaTeX pretty printers.</p>
+<p>The MathML presentation printer has been greatly improved, putting it on par
+with the existing Unicode and LaTeX pretty printers.</p>
 <pre><code class="language-py">&gt;&gt;&gt; mathml(Integral(exp(-x**2), (x, -oo, oo)), 'presentation')
 &lt;mrow&gt;&lt;msubsup&gt;&lt;mo&gt;&amp;#x222B;&lt;/mo&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;mi&gt;&amp;#x221E;&lt;/mi&gt;&lt;/mrow&gt;&lt;mi&gt;&amp;#x221E;&lt;/mi&gt;&lt;/msubsup&gt;&lt;msup&gt;&lt;mi&gt;&amp;ExponentialE;&lt;/mi&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;mo&gt;&amp;dd;&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/mrow&gt;
-&gt;&gt;&gt; mathml(Integral(exp(-x**2), (x, -oo, oo)), 'content')
-&lt;apply&gt;&lt;int/&gt;&lt;bvar&gt;&lt;ci&gt;x&lt;/ci&gt;&lt;/bvar&gt;&lt;lowlimit&gt;&lt;apply&gt;&lt;minus/&gt;&lt;infinity/&gt;&lt;/apply&gt;&lt;/lowlimit&gt;&lt;uplimit&gt;&lt;infinity/&gt;&lt;/uplimit&gt;&lt;apply&gt;&lt;exp/&gt;&lt;apply&gt;&lt;minus/&gt;&lt;apply&gt;&lt;power/&gt;&lt;ci&gt;x&lt;/ci&gt;&lt;cn&gt;2&lt;/cn&gt;&lt;/apply&gt;&lt;/apply&gt;&lt;/apply&gt;&lt;/apply&gt;
 </code></pre>
 <p>If your <a href="https://caniuse.com/#feat=mathml">browser supports MathML</a> (at the
 time of writing, only Firefox and Safari), you should see the above
 presentation form for <code>Integral(exp(-x**2), (x, -oo, oo))</code> below:</p>
 <p><math style="display: block;"><mrow><msubsup><mo>∫</mo><mrow><mo>-</mo><mi>∞</mi></mrow><mi>∞</mi></msubsup><msup><mi>ⅇ</mi><mrow><mo>-</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mo>ⅆ</mo><mi>x</mi></mrow></math></p>
+<h2>Dropping Python 3.4 support</h2>
+<p>This is the last release of SymPy to support Python 3.4. SymPy 1.4 supports
+Python 2.7, 3.4, 3.5, 3.6, 3.7, and PyPy. What's perhaps more exciting is that
+the next release of SymPy, 1.5, which will be released later this year, will
+be the last version to support Python 2.7.</p>
+<p>Our
+<a href="https://github.com/sympy/sympy/wiki/Python-version-support-policy">policy</a> is
+to drop support for major Python versions when they reach their <a href="https://devguide.python.org/#status-of-python-branches">End of
+Life</a>. In other words,
+they receive no further support from the CPython team. Python 3.4 reached its
+end of life on May 19 of this year, and Python 2.7 will reach its end of life
+on January 1, 2020.</p>
+<p>I have <a href="https://www.asmeurer.com/blog/posts/moving-away-from-python-2/">blogged in the
+past</a> on why I
+believe it is important for library authors to be proactive in dropping Python
+2 support, and since then <a href="https://python3statement.org">a large number of Python
+libraries</a> have either dropped support or
+announced their plans to by 2020.</p>
+<p>Having Python 2 support removed will not only allow us to remove a <a href="https://github.com/sympy/sympy/blob/sympy-1.4/sympy/core/compatibility.py">large
+amount of compatibility
+cruft</a>
+from our codebase, it will also allow us to use some Python 3-only features
+that will allow us to clean up our API, such as <a href="https://python-3-for-scientists.readthedocs.io/en/latest/python3_advanced.html#keyword-only-arguments">keyword-only
+arguments</a>,
+<a href="https://python-3-for-scientists.readthedocs.io/en/latest/python3_features.html#function-annotations">type
+hints</a>,
+and <a href="https://python-3-for-scientists.readthedocs.io/en/latest/python3_features.html#unicode-variable-names">Unicode variable
+names</a>.
+It will also enable <a href="https://github.com/sympy/sympy/issues?q=is%3Aissue+is%3Aopen+label%3A%22Dropping+Python+2%22">several internal
+changes</a>
+that will not be visible to end-users, but which will result in a much cleaner
+codebase.</p>
+<p>If you are still using Python 2, I strongly recommend switching to Python 3,
+as otherwise the entire ecosystem of Python libraries is soon going to stop
+improving for you. Python 3 is already highly recommended for SymPy usage due
+to several key improvements. In particular, in Python 3 division of two
+integers like <code>1/2</code> produces the float <code>0.5</code> instead of doing integer division
+(which produces <code>0</code>). The Python 2 integer division behavior can lead to very
+surprising results when using SymPy (imagine writing <code>x**2 + 1/2*x + 2</code> and
+having the <code>x</code> term "disappear"). When using SymPy, we recommend <a href="https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and">avoiding
+writing
+<code>int/int</code></a>
+and instead using rational numbers (like <code>Rational(1, 2)</code>), but the Python 3
+behavior will at least maintain a mathematically correct result if you do not
+do this. SymPy is also already faster in Python 3 due to things like
+<code>math.gcd</code> and <code>functools.lru_cache</code> being written in C, and general
+performance improvements in the interpreter itself.</p>
 </div>
     </div>
     </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/github-cuts/" class="u-url">GitHub Cuts</a></h1>
