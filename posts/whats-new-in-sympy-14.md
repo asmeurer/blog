@@ -186,3 +186,15 @@ behavior will at least maintain a mathematically correct result if you do not
 do this. SymPy is also already faster in Python 3 due to things like
 `math.gcd` and `functools.lru_cache` being written in C, and general
 performance improvements in the interpreter itself.
+
+# And much more
+
+These are only a few of the highlights of the hundreds of changes in this
+release. The full release notes can be found on [our
+wiki](https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4). The wiki
+also has the in progress changes for our next release, [SymPy
+1.5](https://github.com/sympy/sympy/wiki/Release-Notes-for-1.5), which will be
+released later this year. Our [bot](https://github.com/sympy/sympy-bot)
+automatically collects release notes from every pull request, meaning SymPy
+releases have very comprehensive and readable release notes pages. If you see
+any mistakes on either page, feel free to edit the wiki and fix them.
