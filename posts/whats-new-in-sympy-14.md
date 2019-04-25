@@ -70,8 +70,8 @@ x = y ∧ y > Max(w, z)
 
 # Improved MathML printing
 
-The MathML presentation printer has been greatly improved,
-putting them on par with the existing Unicode and LaTeX pretty printers.
+The MathML presentation printer has been greatly improved, putting it on par
+with the existing Unicode and LaTeX pretty printers.
 
 ```py
 >>> mathml(Integral(exp(-x**2), (x, -oo, oo)), 'presentation')
@@ -95,7 +95,7 @@ Our
 [policy](https://github.com/sympy/sympy/wiki/Python-version-support-policy) is
 to drop support for major Python versions when they reach their [End of
 Life](https://devguide.python.org/#status-of-python-branches). In other words,
-the receive no further support from the CPython team. Python 3.4 reached its
+they receive no further support from the CPython team. Python 3.4 reached its
 end of life on May 19 of this year, and Python 2.7 will reach its end of life
 on January 1, 2020.
 
