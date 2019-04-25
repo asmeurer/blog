@@ -84,7 +84,7 @@ expression. For built-in types such as lists or ints, <code>init_printing()</cod
 still required to get LaTeX printing. For example, <code>solve()</code> returns a list,
 so does not render as LaTeX unless <code>init_printing()</code> is called:</p>
 <img src="sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"><h2>Improved simplification of relational expressions</h2>
-<p>simplification of relational and piecewise expressions has been improved:</p>
+<p>Simplification of relational and piecewise expressions has been improved:</p>
 <pre><code class="language-py">&gt;&gt;&gt; x, y, z, w = symbols('x y z w')
 &gt;&gt;&gt; init_printing()
 &gt;&gt;&gt; And(Eq(x,y), x &gt;= y, w &lt; y, y &gt;= z, z &lt; y)
@@ -111,6 +111,45 @@ with the existing Unicode and LaTeX pretty printers.</p>
 time of writing, only Firefox and Safari), you should see the above
 presentation form for <code>Integral(exp(-x**2), (x, -oo, oo))</code> below:</p>
 <p><math style="display: block;"><mrow><msubsup><mo>∫</mo><mrow><mo>-</mo><mi>∞</mi></mrow><mi>∞</mi></msubsup><msup><mi>ⅇ</mi><mrow><mo>-</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mo>ⅆ</mo><mi>x</mi></mrow></math></p>
+<h2>Improvements to solvers</h2>
+<p>Several improvements have been made to the solvers.</p>
+<pre><code class="language-py">&gt;&gt;&gt; eq = Eq((x**2 - 7*x + 11)**(x**2 - 13*x + 42), 1)
+&gt;&gt;&gt; eq
+                2
+               x  - 13⋅x + 42
+⎛ 2           ⎞
+⎝x  - 7⋅x + 11⎠               = 1
+&gt;&gt;&gt; solve(eq, x) # In SymPy 1.3, this gave the partial solution [2, 5, 6, 7]
+[2, 3, 4, 5, 6, 7]
+</code></pre>
+<p>The ODE solver, <code>dsolve</code> has also seen some improvements. Two new hints have
+been added.</p>
+<p><code>'nth_algebraic'</code> solves ODEs using <code>solve</code> by inverting the derivatives
+algebraically:</p>
+<pre><code class="language-py">&gt;&gt;&gt; f = Function('f')
+&gt;&gt;&gt; eq = Eq(f(x) * (f(x).diff(x)**2 - 1), 0)
+&gt;&gt;&gt; eq
+⎛          2    ⎞
+⎜⎛d       ⎞     ⎟
+⎜⎜──(f(x))⎟  - 1⎟⋅f(x) = 0
+⎝⎝dx      ⎠     ⎠
+&gt;&gt;&gt; dsolve(eq, f(x)) # In SymPy 1.3, this only gave the solution f(x) = C1 - x
+[f(x) = 0, f(x) = C₁ - x, f(x) = C₁ + x]
+</code></pre>
+<p><code>'nth_order_reducible'</code> solves ODEs that only involve derivatives of <code>f(x)</code> by
+substituting $g(x)=f^{(n)}(x)$.</p>
+<pre><code class="language-py">&gt;&gt;&gt; eq = Eq(Derivative(f(x), (x, 2)) + x*Derivative(f(x), x), x)
+&gt;&gt;&gt; eq
+               2
+  d           d
+x⋅──(f(x)) + ───(f(x)) = x
+  dx           2
+             dx
+&gt;&gt;&gt; dsolve(eq, f(x))
+                  ⎛√2⋅x⎞
+f(x) = C₁ + C₂⋅erf⎜────⎟ + x
+                  ⎝ 2  ⎠
+</code></pre>
 <h2>Dropping Python 3.4 support</h2>
 <p>This is the last release of SymPy to support Python 3.4. SymPy 1.4 supports
 Python 2.7, 3.4, 3.5, 3.6, 3.7, and PyPy. What's perhaps more exciting is that
@@ -150,14 +189,23 @@ to several key improvements. In particular, in Python 3 division of two
 integers like <code>1/2</code> produces the float <code>0.5</code> instead of doing integer division
 (which produces <code>0</code>). The Python 2 integer division behavior can lead to very
 surprising results when using SymPy (imagine writing <code>x**2 + 1/2*x + 2</code> and
-having the <code>x</code> term "disappear"). When using SymPy, we recommend <a href="https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and">avoiding
-writing
-<code>int/int</code></a>
-and instead using rational numbers (like <code>Rational(1, 2)</code>), but the Python 3
-behavior will at least maintain a mathematically correct result if you do not
-do this. SymPy is also already faster in Python 3 due to things like
-<code>math.gcd</code> and <code>functools.lru_cache</code> being written in C, and general
+having the <code>x</code> term "disappear"). When using SymPy, we
+<a href="https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and">recommend</a>
+using rational numbers (like <code>Rational(1, 2)</code>) and avoiding <code>int/int</code>, but the
+Python 3 behavior will at least maintain a mathematically correct result if
+you do not do this. SymPy is also already faster in Python 3 due to things
+like <code>math.gcd</code> and <code>functools.lru_cache</code> being written in C, and general
 performance improvements in the interpreter itself.</p>
+<h2>And much more</h2>
+<p>These are only a few of the highlights of the hundreds of changes in this
+release. The full release notes can be found on <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4">our
+wiki</a>. The wiki
+also has the in progress changes for our next release, <a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-1.5">SymPy
+1.5</a>, which will be
+released later this year. Our <a href="https://github.com/sympy/sympy-bot">bot</a>
+automatically collects release notes from every pull request, meaning SymPy
+releases have very comprehensive and readable release notes pages. If you see
+any mistakes on either page, feel free to edit the wiki and fix them.</p>
 </div>
     </div>
     </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/github-cuts/" class="u-url">GitHub Cuts</a></h1>
@@ -959,7 +1007,18 @@ revert mistakes or typos without them ever actually being deployed.</p>
 <li class="next">
                 <a href="index-4.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer id="footer"><p>Contents © 2019         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </ul></nav><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'center', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script></main><footer id="footer"><p>Contents © 2019         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 </p>
 <p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">

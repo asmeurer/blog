@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 25 Apr 2019 22:18:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://asmeurer.com/blog/posts/whats-new-in-sympy-14/..."&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 25 Apr 2019 23:47:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://asmeurer.com/blog/posts/whats-new-in-sympy-14/..."&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;SymPy 1.4 was released on April 9, 2019. In this post, I'd like to go over
 some of the highlights for this release. The full release notes for the
 release can be found on the &lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4"&gt;SymPy
@@ -29,7 +29,7 @@ still required to get LaTeX printing. For example, &lt;code&gt;solve()&lt;/code&
 so does not render as LaTeX unless &lt;code&gt;init_printing()&lt;/code&gt; is called:&lt;/p&gt;
 &lt;img src="https://asmeurer.com/blog/sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"&gt;
 &lt;h2&gt;Improved simplification of relational expressions&lt;/h2&gt;
-&lt;p&gt;simplification of relational and piecewise expressions has been improved:&lt;/p&gt;
+&lt;p&gt;Simplification of relational and piecewise expressions has been improved:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; x, y, z, w = symbols('x y z w')
 &amp;gt;&amp;gt;&amp;gt; init_printing()
 &amp;gt;&amp;gt;&amp;gt; And(Eq(x,y), x &amp;gt;= y, w &amp;lt; y, y &amp;gt;= z, z &amp;lt; y)
@@ -56,6 +56,45 @@ with the existing Unicode and LaTeX pretty printers.&lt;/p&gt;
 time of writing, only Firefox and Safari), you should see the above
 presentation form for &lt;code&gt;Integral(exp(-x**2), (x, -oo, oo))&lt;/code&gt; below:&lt;/p&gt;
 &lt;p&gt;&lt;math style="display: block;"&gt;&lt;mrow&gt;&lt;msubsup&gt;&lt;mo&gt;∫&lt;/mo&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;mi&gt;∞&lt;/mi&gt;&lt;/mrow&gt;&lt;mi&gt;∞&lt;/mi&gt;&lt;/msubsup&gt;&lt;msup&gt;&lt;mi&gt;ⅇ&lt;/mi&gt;&lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;mo&gt;ⅆ&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/mrow&gt;&lt;/math&gt;&lt;/p&gt;
+&lt;h2&gt;Improvements to solvers&lt;/h2&gt;
+&lt;p&gt;Several improvements have been made to the solvers.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; eq = Eq((x**2 - 7*x + 11)**(x**2 - 13*x + 42), 1)
+&amp;gt;&amp;gt;&amp;gt; eq
+                2
+               x  - 13⋅x + 42
+⎛ 2           ⎞
+⎝x  - 7⋅x + 11⎠               = 1
+&amp;gt;&amp;gt;&amp;gt; solve(eq, x) # In SymPy 1.3, this gave the partial solution [2, 5, 6, 7]
+[2, 3, 4, 5, 6, 7]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The ODE solver, &lt;code&gt;dsolve&lt;/code&gt; has also seen some improvements. Two new hints have
+been added.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;'nth_algebraic'&lt;/code&gt; solves ODEs using &lt;code&gt;solve&lt;/code&gt; by inverting the derivatives
+algebraically:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; f = Function('f')
+&amp;gt;&amp;gt;&amp;gt; eq = Eq(f(x) * (f(x).diff(x)**2 - 1), 0)
+&amp;gt;&amp;gt;&amp;gt; eq
+⎛          2    ⎞
+⎜⎛d       ⎞     ⎟
+⎜⎜──(f(x))⎟  - 1⎟⋅f(x) = 0
+⎝⎝dx      ⎠     ⎠
+&amp;gt;&amp;gt;&amp;gt; dsolve(eq, f(x)) # In SymPy 1.3, this only gave the solution f(x) = C1 - x
+[f(x) = 0, f(x) = C₁ - x, f(x) = C₁ + x]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;'nth_order_reducible'&lt;/code&gt; solves ODEs that only involve derivatives of &lt;code&gt;f(x)&lt;/code&gt; by
+substituting $g(x)=f^{(n)}(x)$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; eq = Eq(Derivative(f(x), (x, 2)) + x*Derivative(f(x), x), x)
+&amp;gt;&amp;gt;&amp;gt; eq
+               2
+  d           d
+x⋅──(f(x)) + ───(f(x)) = x
+  dx           2
+             dx
+&amp;gt;&amp;gt;&amp;gt; dsolve(eq, f(x))
+                  ⎛√2⋅x⎞
+f(x) = C₁ + C₂⋅erf⎜────⎟ + x
+                  ⎝ 2  ⎠
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;Dropping Python 3.4 support&lt;/h2&gt;
 &lt;p&gt;This is the last release of SymPy to support Python 3.4. SymPy 1.4 supports
 Python 2.7, 3.4, 3.5, 3.6, 3.7, and PyPy. What's perhaps more exciting is that
@@ -95,14 +134,23 @@ to several key improvements. In particular, in Python 3 division of two
 integers like &lt;code&gt;1/2&lt;/code&gt; produces the float &lt;code&gt;0.5&lt;/code&gt; instead of doing integer division
 (which produces &lt;code&gt;0&lt;/code&gt;). The Python 2 integer division behavior can lead to very
 surprising results when using SymPy (imagine writing &lt;code&gt;x**2 + 1/2*x + 2&lt;/code&gt; and
-having the &lt;code&gt;x&lt;/code&gt; term "disappear"). When using SymPy, we recommend &lt;a href="https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and"&gt;avoiding
-writing
-&lt;code&gt;int/int&lt;/code&gt;&lt;/a&gt;
-and instead using rational numbers (like &lt;code&gt;Rational(1, 2)&lt;/code&gt;), but the Python 3
-behavior will at least maintain a mathematically correct result if you do not
-do this. SymPy is also already faster in Python 3 due to things like
-&lt;code&gt;math.gcd&lt;/code&gt; and &lt;code&gt;functools.lru_cache&lt;/code&gt; being written in C, and general
-performance improvements in the interpreter itself.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</guid><pubDate>Fri, 19 Apr 2019 17:41:57 GMT</pubDate></item><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
+having the &lt;code&gt;x&lt;/code&gt; term "disappear"). When using SymPy, we
+&lt;a href="https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and"&gt;recommend&lt;/a&gt;
+using rational numbers (like &lt;code&gt;Rational(1, 2)&lt;/code&gt;) and avoiding &lt;code&gt;int/int&lt;/code&gt;, but the
+Python 3 behavior will at least maintain a mathematically correct result if
+you do not do this. SymPy is also already faster in Python 3 due to things
+like &lt;code&gt;math.gcd&lt;/code&gt; and &lt;code&gt;functools.lru_cache&lt;/code&gt; being written in C, and general
+performance improvements in the interpreter itself.&lt;/p&gt;
+&lt;h2&gt;And much more&lt;/h2&gt;
+&lt;p&gt;These are only a few of the highlights of the hundreds of changes in this
+release. The full release notes can be found on &lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4"&gt;our
+wiki&lt;/a&gt;. The wiki
+also has the in progress changes for our next release, &lt;a href="https://github.com/sympy/sympy/wiki/Release-Notes-for-1.5"&gt;SymPy
+1.5&lt;/a&gt;, which will be
+released later this year. Our &lt;a href="https://github.com/sympy/sympy-bot"&gt;bot&lt;/a&gt;
+automatically collects release notes from every pull request, meaning SymPy
+releases have very comprehensive and readable release notes pages. If you see
+any mistakes on either page, feel free to edit the wiki and fix them.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</guid><pubDate>Fri, 19 Apr 2019 17:41:57 GMT</pubDate></item><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
 initiative&lt;/a&gt; to fix
 minor issues that make things more difficult for GitHub users. As someone who
 spends most of his day on &lt;a href="https://github.com"&gt;github.com&lt;/a&gt;, this initiative is
