@@ -178,13 +178,12 @@ to several key improvements. In particular, in Python 3 division of two
 integers like `1/2` produces the float `0.5` instead of doing integer division
 (which produces `0`). The Python 2 integer division behavior can lead to very
 surprising results when using SymPy (imagine writing `x**2 + 1/2*x + 2` and
-having the `x` term "disappear"). When using SymPy, we recommend [avoiding
-writing
-`int/int`](https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and)
-and instead using rational numbers (like `Rational(1, 2)`), but the Python 3
-behavior will at least maintain a mathematically correct result if you do not
-do this. SymPy is also already faster in Python 3 due to things like
-`math.gcd` and `functools.lru_cache` being written in C, and general
+having the `x` term "disappear"). When using SymPy, we
+[recommend](https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and)
+using rational numbers (like `Rational(1, 2)`) and avoiding `int/int`, but the
+Python 3 behavior will at least maintain a mathematically correct result if
+you do not do this. SymPy is also already faster in Python 3 due to things
+like `math.gcd` and `functools.lru_cache` being written in C, and general
 performance improvements in the interpreter itself.
 
 # And much more
