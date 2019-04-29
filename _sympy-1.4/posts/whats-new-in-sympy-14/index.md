@@ -1,5 +1,14 @@
 *This post has been cross-posted on the [Quansight Blog](...).*
 
+As of November, 2018, I have been working at
+[Quansight](https://www.quansight.com/). Quansight is a new startup founded by
+the same people who started Anaconda, which .... I work under the heading of
+[Quansight Labs](https://www.quansight.com/labs), which is .... As a part of
+this, I am able to spend a fraction of my time working on SymPy.
+[SymPy](https://www.sympy.org/en/index.html), for those who do not know, is a
+symbolic mathematics library written in pure Python. I am the lead maintainer
+of SymPy.
+
 SymPy 1.4 was released on April 9, 2019. In this post, I'd like to go over
 some of the highlights for this release. The full release notes for the
 release can be found on the [SymPy
@@ -17,18 +26,22 @@ or if you prefer to use pip
 pip install -U sympy
 ```
 
-The SymPy 1.4 release contains over 500 changes from 38 different submodules,
+The SymPy 1.4 release contains over [500 changes from 38 different
+submodules](https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4#authors),
 so I will not be going over every change, but only a few of the main
 highlights. A [total of 104
 people](https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4#authors)
-contributed to this release, including 66 people contributed for the first
-time for this release.
+contributed to this release, of whom 66 contributed for the first time for
+this release.
+
+While I did not personally work on any of the changes listed below (my work
+for this release tended to be more invisible, behind the scenes fixes), I did
+do the release itself.
 
 # Automatic LaTeX rendering in the Jupyter notebook
 
-Prior to SymPy 1.4, SymPy expressions in the notebook rendered with their
-default string representation, unless `init_printing()` was called, after
-which they rendered with LaTeX:
+Prior to SymPy 1.4, SymPy expressions in the notebook rendered by default with their
+ string representation. To get `LaTeX` output, you had to call `init_printing()`:
 
 <img src="../../sympy-1.3-notebook.png" alt="SymPy 1.3 rendering in the Jupyter lab notebook">
 
@@ -51,20 +64,22 @@ Simplification of relational and piecewise expressions has been improved:
 ```py
 >>> x, y, z, w = symbols('x y z w')
 >>> init_printing()
->>> And(Eq(x,y), x >= y, w < y, y >= z, z < y)
+>>> expr = And(Eq(x,y), x >= y, w < y, y >= z, z < y)
+>>> expr
 x = y ∧ x ≥ y ∧ y ≥ z ∧ w < y ∧ z < y
->>> simplify(And(Eq(x,y), x >= y, w < y, y >= z, z < y))
+>>> simplify(expr)
 x = y ∧ y > Max(w, z)
 ```
 
 ```py
->>> Piecewise((x*y, And(x >= y, Eq(y, 0))), (x - 1, Eq(x, 1)), (0, True))
+>>> expr = Piecewise((x*y, And(x >= y, Eq(y, 0))), (x - 1, Eq(x, 1)), (0, True))
+>>> expr
 ⎧ x⋅y   for y = 0 ∧ x ≥ y
 ⎪
 ⎨x - 1      for x = 1
 ⎪
 ⎩  0        otherwise
->>> simplify(Piecewise((x*y, And(x >= y, Eq(y, 0))), (x - 1, Eq(x, 1)), (0, True)))
+>>> simplify(expr)
 0
 ```
 
@@ -95,11 +110,11 @@ Several improvements have been made to the solvers.
                x  - 13⋅x + 42
 ⎛ 2           ⎞
 ⎝x  - 7⋅x + 11⎠               = 1
->>> solve(eq, x) # In SymPy 1.3, this gave the partial solution [2, 5, 6, 7]
+>>> solve(eq, x) # In SymPy 1.3, this only gave the partial solution [2, 5, 6, 7]
 [2, 3, 4, 5, 6, 7]
 ```
 
-The ODE solver, `dsolve` has also seen some improvements. Two new hints have
+The ODE solver, `dsolve`, has also seen some improvements. Two new hints have
 been added.
 
 `'nth_algebraic'` solves ODEs using `solve` by inverting the derivatives
@@ -117,8 +132,8 @@ algebraically:
 [f(x) = 0, f(x) = C₁ - x, f(x) = C₁ + x]
 ```
 
-`'nth_order_reducible'` solves ODEs that only involve derivatives of `f(x)` by
-substituting $g(x)=f^{(n)}(x)$.
+`'nth_order_reducible'` solves ODEs that only involve derivatives of `f(x)`,
+via the substitution $g(x)=f^{(n)}(x)$.
 
 ```py
 >>> eq = Eq(Derivative(f(x), (x, 2)) + x*Derivative(f(x), x), x)
@@ -145,9 +160,9 @@ Our
 [policy](https://github.com/sympy/sympy/wiki/Python-version-support-policy) is
 to drop support for major Python versions when they reach their [End of
 Life](https://devguide.python.org/#status-of-python-branches). In other words,
-they receive no further support from the CPython team. Python 3.4 reached its
-end of life on May 19 of this year, and Python 2.7 will reach its end of life
-on January 1, 2020.
+they receive no further support from the core Python team. Python 3.4 reached
+its end of life on May 19 of this year, and Python 2.7 will reach its end of
+life on January 1, 2020.
 
 I have [blogged in the
 past](https://www.asmeurer.com/blog/posts/moving-away-from-python-2/) on why I
@@ -160,7 +175,7 @@ Having Python 2 support removed will not only allow us to remove a [large
 amount of compatibility
 cruft](https://github.com/sympy/sympy/blob/sympy-1.4/sympy/core/compatibility.py)
 from our codebase, it will also allow us to use some Python 3-only features
-that will allow us to clean up our API, such as [keyword-only
+that will clean up our API, such as [keyword-only
 arguments](https://python-3-for-scientists.readthedocs.io/en/latest/python3_advanced.html#keyword-only-arguments),
 [type
 hints](https://python-3-for-scientists.readthedocs.io/en/latest/python3_features.html#function-annotations),
@@ -169,22 +184,23 @@ names](https://python-3-for-scientists.readthedocs.io/en/latest/python3_features
 It will also enable [several internal
 changes](https://github.com/sympy/sympy/issues?q=is%3Aissue+is%3Aopen+label%3A"Dropping+Python+2")
 that will not be visible to end-users, but which will result in a much cleaner
-codebase.
+and more maintainable codebase.
 
 If you are still using Python 2, I strongly recommend switching to Python 3,
 as otherwise the entire ecosystem of Python libraries is soon going to stop
 improving for you. Python 3 is already highly recommended for SymPy usage due
-to several key improvements. In particular, in Python 3 division of two
-integers like `1/2` produces the float `0.5` instead of doing integer division
-(which produces `0`). The Python 2 integer division behavior can lead to very
-surprising results when using SymPy (imagine writing `x**2 + 1/2*x + 2` and
-having the `x` term "disappear"). When using SymPy, we
+to several key improvements. In particular, in Python 3, division of two
+Python `int`s like `1/2` produces the float `0.5`. In Python 2, it does
+integer division (producing `1/2 == 0`). The Python 2 integer division
+behavior can lead to very surprising results when using SymPy (imagine writing
+`x**2 + 1/2*x + 2` and having the `x` term "disappear"). When using SymPy, we
 [recommend](https://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and)
 using rational numbers (like `Rational(1, 2)`) and avoiding `int/int`, but the
 Python 3 behavior will at least maintain a mathematically correct result if
-you do not do this. SymPy is also already faster in Python 3 due to things
-like `math.gcd` and `functools.lru_cache` being written in C, and general
-performance improvements in the interpreter itself.
+you do not do this. SymPy is also [already faster in Python
+3](https://speed.python.org/comparison/?exe=12%2BL%2Bmaster%2C12%2BL%2B3.5%2C12%2BL%2B3.6%2C12%2BL%2B2.7&ben=666%2C667%2C669%2C668&env=1%2C2&hor=false&bas=none&chart=normal+bars)
+due to things like `math.gcd` and `functools.lru_cache` being written in C,
+and general performance improvements in the interpreter itself.
 
 # And much more
 
