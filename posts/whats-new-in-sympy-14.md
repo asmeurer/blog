@@ -1,5 +1,14 @@
 *This post has been cross-posted on the [Quansight Blog](...).*
 
+As of November, 2018, I have been working at
+[Quansight](https://www.quansight.com/). Quansight is a new startup founded by
+the same people who started Anaconda, which .... I work under the heading of
+[Quansight Labs](https://www.quansight.com/labs), which is .... As a part of
+this, I am able to spend a fraction of my time working on SymPy.
+[SymPy](https://www.sympy.org/en/index.html), for those who do not know, is a
+symbolic mathematics library written in pure Python. I am the lead maintainer
+of SymPy.
+
 SymPy 1.4 was released on April 9, 2019. In this post, I'd like to go over
 some of the highlights for this release. The full release notes for the
 release can be found on the [SymPy
@@ -25,6 +34,9 @@ people](https://github.com/sympy/sympy/wiki/Release-Notes-for-1.4#authors)
 contributed to this release, of whom 66 contributed for the first time for
 this release.
 
+While I did not personally work on any of the changes listed below (my work
+for this release tended to be more invisible, behind the scenes fixes), I did
+do the release itself.
 
 # Automatic LaTeX rendering in the Jupyter notebook
 
