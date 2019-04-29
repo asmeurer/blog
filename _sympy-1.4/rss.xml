@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 29 Apr 2019 19:48:41 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://asmeurer.com/blog/posts/whats-new-in-sympy-14/..."&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 29 Apr 2019 20:22:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://asmeurer.com/blog/posts/whats-new-in-sympy-14/..."&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
-the same people who started Anaconda, which .... I work under the heading of
-&lt;a href="https://www.quansight.com/labs"&gt;Quansight Labs&lt;/a&gt;, which is .... As a part of
-this, I am able to spend a fraction of my time working on SymPy.
+the same people who started Anaconda, which aims to connect companies and open
+source communities, and offers consulting, training, support and mentoring
+services. I work under the heading of &lt;a href="https://www.quansight.com/labs"&gt;Quansight
+Labs&lt;/a&gt;. Quansight Labs is a public-benefit
+division of Quansight. It provides a home for a "PyData Core Team" which
+consists of developers, community managers, designers, and documentation
+writers who build open-source technology and grow open-source communities
+around all aspects of the AI and Data Science workflow. As a part of this, I
+am able to spend a fraction of my time working on SymPy.
 &lt;a href="https://www.sympy.org/en/index.html"&gt;SymPy&lt;/a&gt;, for those who do not know, is a
 symbolic mathematics library written in pure Python. I am the lead maintainer
 of SymPy.&lt;/p&gt;
