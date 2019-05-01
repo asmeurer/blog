@@ -116,7 +116,10 @@ string representation. To get <code>LaTeX</code> output, you had to call <code>i
 expression. For built-in types such as lists or ints, <code>init_printing()</code> is
 still required to get LaTeX printing. For example, <code>solve()</code> returns a list,
 so does not render as LaTeX unless <code>init_printing()</code> is called:</p>
-<img src="../../sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"><h2>Improved simplification of relational expressions</h2>
+<img src="../../sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"><p><code>init_printing()</code> is also still needed if you want to change any of the
+printing settings, for instance, passing flags to the <code>latex()</code> printer or
+selecting a different printer.</p>
+<h2>Improved simplification of relational expressions</h2>
 <p>Simplification of relational and piecewise expressions has been improved:</p>
 <pre><code class="language-py">&gt;&gt;&gt; x, y, z, w = symbols('x y z w')
 &gt;&gt;&gt; init_printing()
