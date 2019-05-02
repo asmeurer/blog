@@ -13,8 +13,6 @@ Here are my various social sites:
 
 [Twitter (@asmeurer)](https://twitter.com/asmeurer)
 
-[Google+](https://plus.google.com/+AaronMeurer/) (I don't really use)
-
 Homepage: [You're looking at it](http://www.asmeurer.com).
 
 Personal Email: <a href="mailto:asmeurer@gmail.com" target="_top">
