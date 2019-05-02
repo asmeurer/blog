@@ -129,6 +129,7 @@
 ./index-1.html
 ./index-2.html
 ./index-3.html
+./index-4.html
 ./index.html
 ./posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/index.html
 ./posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/index.md
@@ -154,6 +155,8 @@
 ./posts/tuples/index.markdown
 ./posts/what-happens-when-you-mess-with-hashing-in-python/index.html
 ./posts/what-happens-when-you-mess-with-hashing-in-python/index.md
+./posts/whats-new-in-sympy-14/index.html
+./posts/whats-new-in-sympy-14/index.md
 ./prlist.png
 ./reviews1.png
 ./reviews2.png
@@ -162,5 +165,8 @@
 ./rss.xml
 ./sitemap.xml
 ./sitemapindex.xml
+./sympy-1.3-notebook.png
+./sympy-1.4-notebook-2.png
+./sympy-1.4-notebook.png
 ./work/index.html
 ./work/index.md

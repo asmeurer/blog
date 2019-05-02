@@ -7,86 +7,94 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://asmeurer.com/blog/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/about/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/archive.html</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/categories/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/galleries/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/index-1.html</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/index-2.html</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/index-3.html</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://asmeurer.com/blog/index-4.html</loc>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/github-cuts/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/github-reviews-gripes/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/moving-away-from-python-2/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/moving-to-github-pages-with-nikola/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/playing-with-swift-and-spritekit/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/python-trickery/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/scipy-2014/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/tuples/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</loc>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://asmeurer.com/blog/work/</loc>
-  <lastmod>2019-01-25T03:35:00Z</lastmod>
+  <lastmod>2019-05-02T17:39:00Z</lastmod>
  </url>
 </urlset>
