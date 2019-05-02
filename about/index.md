@@ -18,6 +18,9 @@ Homepage: [You're looking at it](http://www.asmeurer.com).
 Personal Email: <a href="mailto:asmeurer@gmail.com" target="_top">
   asmeurer@gmail.com</a>
 
+Work Email (please use this for anything related to Quansight): <a href="mailto:asmeurer@quansight.com" target="_top">
+  asmeurer@quansight.com</a>
+
 [My old blog](https://asmeurersympy.wordpress.com/)
 
 [StackOverflow](http://stackoverflow.com/users/161801/asmeurer)
