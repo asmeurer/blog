@@ -119,6 +119,8 @@ so does not render as LaTeX unless <code>init_printing()</code> is called:</p>
 <img src="../../sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"><p><code>init_printing()</code> is also still needed if you want to change any of the
 printing settings, for instance, passing flags to the <code>latex()</code> printer or
 selecting a different printer.</p>
+<p>If you want the string form of an expression for copy-pasting, you can use
+<code>print</code>.</p>
 <h2>Improved simplification of relational expressions</h2>
 <p>Simplification of relational and piecewise expressions has been improved:</p>
 <pre><code class="language-py">&gt;&gt;&gt; x, y, z, w = symbols('x y z w')
