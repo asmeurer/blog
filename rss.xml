@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 03 May 2019 17:28:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sat, 17 Aug 2019 06:57:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
 the same people who started Anaconda, which aims to connect companies and open
@@ -1249,7 +1249,7 @@ Allen Downey:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Multiple assignments:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
 &lt;/pre&gt;
 
 
@@ -1264,11 +1264,11 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;*args&lt;/code&gt;:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):
-...     print(type(args), args)
-...
-&amp;gt;&amp;gt;&amp;gt; f(1, 2, 3)
-&amp;lt;class 'tuple'&amp;gt; (1, 2, 3)
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="s1"&gt;'tuple'&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;
 
 
@@ -1276,18 +1276,18 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Return value from builtins &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;enumerate&lt;/code&gt;, etc.:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; for i in zip(range(3), 'abc'):
-...     print(i)
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;zip&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;range&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;abc&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+...     &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 ...
-(0, 'a')
-(1, 'b')
-(2, 'c')
-&amp;gt;&amp;gt;&amp;gt; for i in enumerate('abc'):
-...     print(i)
+&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;a&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;c&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;enumerate&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;abc&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+...     &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 ...
-(0, 'a')
-(1, 'b')
-(2, 'c')
+&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;a&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;c&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 &lt;/pre&gt;
 
 
@@ -1297,13 +1297,13 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Dictionary keys:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; {
-...     (0, 0): '.',
-...     (0, 1): ' ',
-...     (1, 0): '.',
-...     (1, 1): ' ',
-... }
-{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;
 &lt;/pre&gt;
 
 
@@ -1406,7 +1406,7 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;/li&gt;
 &lt;li id="fn-assign"&gt;
 &lt;p&gt;Yes,&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
 &lt;/pre&gt;
 
 
@@ -1427,11 +1427,11 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;p&gt;&lt;/p&gt;&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/asmeurer"&gt;@asmeurer&lt;/a&gt; &lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; As yes:&lt;br&gt;&lt;br&gt;t = (1,2, [3, 4])&lt;br&gt;t[2] += [5,6]&lt;br&gt;&lt;br&gt;;-)&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778697399975813120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 &lt;p&gt;This is similar to this example. But
 it turns out this one doesn't work:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; t = (1,2, [3, 4])
-&amp;gt;&amp;gt;&amp;gt; t[2] += [5,6]
-Traceback (most recent call last):
-  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
-TypeError: 'tuple' object does not support item assignment
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="k"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="ss"&gt;"&amp;lt;stdin&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'tuple'&lt;/span&gt; &lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="n"&gt;does&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;support&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="k"&gt;assignment&lt;/span&gt;
 &lt;/pre&gt;
 
 

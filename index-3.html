@@ -119,7 +119,7 @@ Allen Downey:</p>
 <ol>
 <li>
 <p><strong>Multiple assignments:</strong></p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; (a, b) = 1, 2
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
 </pre>
 
 
@@ -134,11 +134,11 @@ for the most part a special case of using tuples as records.</p>
 </li>
 <li>
 <p><strong><code>*args</code>:</strong></p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; def f(*args):
-...     print(type(args), args)
-...
-&gt;&gt;&gt; f(1, 2, 3)
-&lt;class 'tuple'&gt; (1, 2, 3)
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">def</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="p">...</span>     <span class="n">print</span><span class="p">(</span><span class="k">type</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="s1">'tuple'</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </pre>
 
 
@@ -146,18 +146,18 @@ for the most part a special case of using tuples as records.</p>
 </li>
 <li>
 <p><strong>Return value from builtins <code>zip</code>, <code>enumerate</code>, etc.:</strong></p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; for i in zip(range(3), 'abc'):
-...     print(i)
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> <span class="nv">zip</span><span class="ss">(</span><span class="nv">range</span><span class="ss">(</span><span class="mi">3</span><span class="ss">)</span>, <span class="s1">'</span><span class="s">abc</span><span class="s1">'</span><span class="ss">)</span>:
+...     <span class="nv">print</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
 ...
-(0, 'a')
-(1, 'b')
-(2, 'c')
-&gt;&gt;&gt; for i in enumerate('abc'):
-...     print(i)
+<span class="ss">(</span><span class="mi">0</span>, <span class="s1">'</span><span class="s">a</span><span class="s1">'</span><span class="ss">)</span>
+<span class="ss">(</span><span class="mi">1</span>, <span class="s1">'</span><span class="s">b</span><span class="s1">'</span><span class="ss">)</span>
+<span class="ss">(</span><span class="mi">2</span>, <span class="s1">'</span><span class="s">c</span><span class="s1">'</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="s1">'</span><span class="s">abc</span><span class="s1">'</span><span class="ss">)</span>:
+...     <span class="nv">print</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
 ...
-(0, 'a')
-(1, 'b')
-(2, 'c')
+<span class="ss">(</span><span class="mi">0</span>, <span class="s1">'</span><span class="s">a</span><span class="s1">'</span><span class="ss">)</span>
+<span class="ss">(</span><span class="mi">1</span>, <span class="s1">'</span><span class="s">b</span><span class="s1">'</span><span class="ss">)</span>
+<span class="ss">(</span><span class="mi">2</span>, <span class="s1">'</span><span class="s">c</span><span class="s1">'</span><span class="ss">)</span>
 </pre>
 
 
@@ -167,13 +167,13 @@ for the most part a special case of using tuples as records.</p>
 </li>
 <li>
 <p><strong>Dictionary keys:</strong></p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; {
-...     (0, 0): '.',
-...     (0, 1): ' ',
-...     (1, 0): '.',
-...     (1, 1): ' ',
-... }
-{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="err">{</span>
+<span class="p">...</span>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span>
+<span class="p">...</span>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span>
+<span class="p">...</span>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span>
+<span class="p">...</span>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span>
+<span class="p">...</span> <span class="err">}</span>
+<span class="err">{</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="err">}</span>
 </pre>
 
 
@@ -276,7 +276,7 @@ case, the statement is false—<code>tuple</code> is not a subclass of <code>lis
 </li>
 <li id="fn-assign">
 <p>Yes,</p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; [a, b] = 1, 2
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
 </pre>
 
 
@@ -300,11 +300,11 @@ case, the statement is false—<code>tuple</code> is not a subclass of <code>lis
 <p lang="en" dir="ltr"><a href="https://twitter.com/asmeurer">@asmeurer</a> <a href="https://twitter.com/AllenDowney">@AllenDowney</a> As yes:<br><br>t = (1,2, [3, 4])<br>t[2] += [5,6]<br><br>;-)</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778697399975813120">September 21, 2016</a>
 </blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>This is similar to this example. But
 it turns out this one doesn't work:</p>
-<pre class="code literal-block"><span></span>&gt;&gt;&gt; t = (1,2, [3, 4])
-&gt;&gt;&gt; t[2] += [5,6]
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-TypeError: 'tuple' object does not support item assignment
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="k">call</span> <span class="k">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="ss">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="k">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">TypeError</span><span class="p">:</span> <span class="s1">'tuple'</span> <span class="k">object</span> <span class="n">does</span> <span class="k">not</span> <span class="n">support</span> <span class="n">item</span> <span class="k">assignment</span>
 </pre>
 
 

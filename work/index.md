@@ -49,6 +49,9 @@ Stuff I've done on my own. In no particular order.
   deploying docs from Travis CI to GitHub pages
   ([Gil Forsyth](https://github.com/gforsyth/) also works on this).
 
+- [removestar](https://www.asmeurer.com/removestar/). A tool to automatically
+  replace `import *` with explicit imports in Python files.
+
 - [Brown Water Python](https://www.asmeurer.com/brown-water-python/). Better
   documentation for Python's
   [tokenize](https://docs.python.org/3/library/tokenize.html) module (in the
