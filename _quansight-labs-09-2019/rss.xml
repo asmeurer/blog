@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Tue, 17 Sep 2019 21:55:14 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Tue, 17 Sep 2019 22:04:21 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
 the same people who started Anaconda, which aims to connect companies and open
@@ -277,7 +277,19 @@ with pip or conda:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then enable it in your &lt;code&gt;conf.py&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;extensions = ['sphinx_math_dollar', 'sphinx.ext.mathjax']
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</guid><pubDate>Tue, 17 Sep 2019 21:11:26 GMT</pubDate></item><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Google Season of Docs&lt;/h3&gt;
+&lt;p&gt;The above work on sphinx-math-dollar is part of work I have been doing to
+improve the tooling around SymPy's documentation. This has been to assist our
+technical writer Lauren Glattly, who is working with SymPy for the next three
+months as part of the new &lt;a href="https://developers.google.com/season-of-docs/"&gt;Google Season of
+Docs&lt;/a&gt; program to improve the
+consistency of our docstrings. Lauren has already identified many key ways our
+docstring documentation can be improved, and is currently working on a style
+guide for writing docstrings. Some of the issues require improved tooling
+around the way the HTML documentation is built, so I and some other SymPy
+developers have been working on improving this, so that Lauren can focus on
+the technical writing aspects of our documentation.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</guid><pubDate>Tue, 17 Sep 2019 21:11:26 GMT</pubDate></item><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
 the same people who started Anaconda, which aims to connect companies and open

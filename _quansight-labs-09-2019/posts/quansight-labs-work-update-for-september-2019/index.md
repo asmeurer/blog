@@ -340,3 +340,17 @@ Then enable it in your `conf.py`:
 ```py
 extensions = ['sphinx_math_dollar', 'sphinx.ext.mathjax']
 ```
+
+## Google Season of Docs
+
+The above work on sphinx-math-dollar is part of work I have been doing to
+improve the tooling around SymPy's documentation. This has been to assist our
+technical writer Lauren Glattly, who is working with SymPy for the next three
+months as part of the new [Google Season of
+Docs](https://developers.google.com/season-of-docs/) program to improve the
+consistency of our docstrings. Lauren has already identified many key ways our
+docstring documentation can be improved, and is currently working on a style
+guide for writing docstrings. Some of the issues require improved tooling
+around the way the HTML documentation is built, so I and some other SymPy
+developers have been working on improving this, so that Lauren can focus on
+the technical writing aspects of our documentation.
