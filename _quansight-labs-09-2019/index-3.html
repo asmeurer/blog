@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html prefix="        og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="My blog">
+<meta name="viewport" content="width=device-width">
+<title>Aaron Meurer's Blog (old posts, page 3) | Aaron Meurer's Blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="rss.xml">
+<link rel="canonical" href="https://asmeurer.com/blog/index-3.html">
+<link rel="prev" href="index-4.html" type="text/html">
+<link rel="next" href="index-2.html" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]-->
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="container">
+         
+    <header id="header"><h1 id="brand"><a href="https://asmeurer.com/blog/" title="Aaron Meurer's Blog" rel="home">
+
+        <span id="blog-title">Aaron Meurer's Blog</span>
+    </a></h1>
+
+        
+
+        
+    <nav id="menu"><ul>
+<li><a href=".">Blog</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="work">Work</a></li>
+                <li><a href="archive.html">Archives</a></li>
+                <li><a href="rss.xml">RSS</a></li>
+
+    
+
+    
+    
+    </ul></nav></header><main id="content"><div class="postindex">
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/tuples/" class="u-url">Tuples</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="posts/tuples/" rel="bookmark">
+            <time class="published dt-published" datetime="2016-09-21T21:33:14-05:00" itemprop="datePublished" title="2016-09-21 21:33">2016-09-21 21:33</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="posts/tuples/#disqus_thread" data-disqus-identifier="cache/posts/tuples.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>Today, David Beazley made some tweets:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778634205395845120">September 21, 2016</a>
+</blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">Usually there's a sentence nearby "sometimes you need a read only list." No. No, I haven't. Not in 20 years. Not even once. Sorry.</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778635637457088512">September 21, 2016</a>
+</blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">My main objection is that "read only list" is a lazy description lacking thought. A red flag for every other topic that might be covered.</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778639979052498944">September 21, 2016</a>
+</blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>There are quite a few good responses to these tweets, both from David and from
+others (and from yours truly). I recommend reading the the thread (click on
+the <a href="https://twitter.com/dabeaz/status/778634205395845120">first tweet</a> above).</p>
+<p>Now to start off, I want to say that I respect the hell out of David Beazley.
+The guy literally <a href="http://www.dabeaz.com/cookbook.html">wrote the book</a> on
+Python, and he knows way more about Python than I ever will. He's also one of
+the most entertaining Python people you can
+<a href="https://twitter.com/dabeaz">follow on Twitter</a>. But hey, that doesn't mean I
+can't disagree sometimes.</p>
+<h2>List vs. Tuple. Fight!</h2>
+<p>As you probably know, there are two "array" datatypes in Python, <code>list</code> and
+<code>tuple</code>.<sup id="fnref-list"><a class="footnote-ref" href="posts/tuples/#fn-list">1</a></sup> The primary difference between the two is that lists are <em>mutable</em>,
+that is you can change their entries and length after they are created, with
+methods like <code>.append</code> or <code>+=</code>. Tuples, on the other hand, are <em>immutable</em>.
+Once you create one, you cannot change it. This makes the implementation
+simpler (and hence faster, although don't let anyone tell you you should use a
+tuple just because it's faster). This, as
+<a href="http://nedbatchelder.com/blog/201608/lists_vs_tuples.html">Ned Batchelder</a>
+points out, is the only technical difference between the two.</p>
+<p>The the idea that particularly bugs me here is that tuples are primarily
+useful as "record" datatypes.</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr"><a href="https://twitter.com/AllenDowney">@AllenDowney</a> Better than "read-only-list." ;-).   Mainly looking for the tuple-as-record description. That's often what's missing.</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778685294593716224">September 21, 2016</a>
+</blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>Tuples are awesome for records. This is both by design—since they have a
+fixed shape, the positions in a tuple can be "fixed" values, and by convention—if a
+Python programmer sees parentheses instead of square brackets, he is more
+likely to see the object as "record-like". The <code>namedtuple</code> object in the standard library
+takes the record idea further by letting you actually name the fields:</p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Person'</span><span class="p">,</span> <span class="s1">'name, age'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
+<span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
+</pre>
+
+
+<p>But is that really the <em>only</em> place you'd want to use a tuple over a list?</p>
+<p>Consider five other places you might encounter a tuple in Python, courtesy of
+Allen Downey:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr"><a href="https://twitter.com/dabeaz">@dabeaz</a> (1) tuple assignment (2) multiple return values (3) *args (4) output from zip, enumerate, etc (5) key in dictionary</p>— Allen Downey (@AllenDowney) <a href="https://twitter.com/AllenDowney/status/778691102094176257">September 21, 2016</a>
+</blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>In code these look like:</p>
+<ol>
+<li>
+<p><strong>Multiple assignments:</strong></p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+</pre>
+
+
+<p>(yes, the parentheses are optional here, as they are in many places where a
+tuple can be used, but this is still a tuple, or at least it looks like one ;)</p>
+</li>
+<li>
+<p><strong>Multiple return values:</strong></p>
+<p>For example,
+<a href="https://docs.python.org/3/library/os.html#os.walk"><code>os.walk</code></a>. This is
+for the most part a special case of using tuples as records.</p>
+</li>
+<li>
+<p><strong><code>*args</code>:</strong></p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">def</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="p">...</span>     <span class="n">print</span><span class="p">(</span><span class="k">type</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="s1">'tuple'</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre>
+
+
+<p>Arbitrary positional function arguments are always stored as a <code>tuple</code>.</p>
+</li>
+<li>
+<p><strong>Return value from builtins <code>zip</code>, <code>enumerate</code>, etc.:</strong></p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> <span class="nv">zip</span><span class="ss">(</span><span class="nv">range</span><span class="ss">(</span><span class="mi">3</span><span class="ss">)</span>, <span class="s1">'</span><span class="s">abc</span><span class="s1">'</span><span class="ss">)</span>:
+...     <span class="nv">print</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
+...
+<span class="ss">(</span><span class="mi">0</span>, <span class="s1">'</span><span class="s">a</span><span class="s1">'</span><span class="ss">)</span>
+<span class="ss">(</span><span class="mi">1</span>, <span class="s1">'</span><span class="s">b</span><span class="s1">'</span><span class="ss">)</span>
+<span class="ss">(</span><span class="mi">2</span>, <span class="s1">'</span><span class="s">c</span><span class="s1">'</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="s1">'</span><span class="s">abc</span><span class="s1">'</span><span class="ss">)</span>:
+...     <span class="nv">print</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
+...
+<span class="ss">(</span><span class="mi">0</span>, <span class="s1">'</span><span class="s">a</span><span class="s1">'</span><span class="ss">)</span>
+<span class="ss">(</span><span class="mi">1</span>, <span class="s1">'</span><span class="s">b</span><span class="s1">'</span><span class="ss">)</span>
+<span class="ss">(</span><span class="mi">2</span>, <span class="s1">'</span><span class="s">c</span><span class="s1">'</span><span class="ss">)</span>
+</pre>
+
+
+<p>This also applies to the combinatoric generators in
+<a href="https://docs.python.org/3.6/library/itertools.html">itertools</a> (like
+<code>product</code>, <code>combinations</code>, etc.)</p>
+</li>
+<li>
+<p><strong>Dictionary keys:</strong></p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="err">{</span>
+<span class="p">...</span>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span>
+<span class="p">...</span>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span>
+<span class="p">...</span>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span>
+<span class="p">...</span>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span>
+<span class="p">...</span> <span class="err">}</span>
+<span class="err">{</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="err">}</span>
+</pre>
+
+
+</li>
+</ol>
+<p>This last one I find to be very important. You could arguably use a list for
+the first four of Allen Downey's points<sup id="fnref-assign"><a class="footnote-ref" href="posts/tuples/#fn-assign">2</a></sup> (or Python could have, if it wanted to). But it
+is
+<a href="https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/">impossible</a>
+to meaningfully hash a mutable data structure in Python, and hashability is a
+requirement for dictionary keys.</p>
+<p>However, be careful. Not all tuples are hashable. Tuples can contain
+anything, but only tuples of immutable values are hashable. Consider<sup id="fnref-TypeError"><a class="footnote-ref" href="posts/tuples/#fn-TypeError">4</a></sup></p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</pre>
+
+
+<p>Such tuples are not hashable, and cannot be used as dictionary keys.</p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">"&lt;ipython-input-39-36822ba665ca&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">unhashable</span> <span class="nb">type</span><span class="p">:</span> <span class="s1">'list'</span>
+</pre>
+
+
+<h2>Why is <code>list</code> the Default?</h2>
+<p>My second gripe here is this notion that your default ordered collection
+object in Python should be <code>list</code>. <code>tuples</code> are only to be used as "records",
+or if you suspect <em>might</em> want to use it as a dictionary key. First off, you
+never know when you'll want something to be hashable. Both dictionary keys and
+<code>sets</code> require hashability. Suppose you want to de-duplicate a collection of
+sequences. If you represent the sequences with <code>list</code>, you'll either have to
+write a custom loop that checks for duplicates, or manually convert them to
+<code>tuple</code> and throw them in a <code>set</code>. If you start with <code>tuple</code>, you don't have
+to worry about it (again, assuming the entries of the tuples are all hashable
+as well).</p>
+<p>Consider another usage of tuples, which I consider to be
+important, namely tree structures. Say you wanted a simple representation of a
+Python syntax tree. You might represent <code>1 - 2*(-3 + 4)</code> as</p>
+<pre class="code literal-block"><span></span><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
+</pre>
+
+
+<p>This isn't really a record. The meaning of the entries in the tuples is
+determined by the first value of the tuple, not position. In this example, the length
+of the tuple also signifies meaning (binary vs. unary <code>-</code>).</p>
+<p>If this looks familiar to you, it's because this is how the language Lisp
+represents all programs. This is a common pattern.
+<a href="http://dask.pydata.org/en/latest/graphs.html">Dask graphs</a> use tuples and
+dictionaries to represent computations.
+<a href="http://docs.sympy.org/latest/tutorial/manipulation.html">SymPy expression trees</a>
+use tuples and Python classes to represent symbolic mathematical expressions.</p>
+<p>But why use tuples over lists here? Suppose you had an object like the one
+above, but using lists: <code>['-', 1, ['*', 2, ['+', ['-', 3], 4]]]</code>. If you
+discover you need to use this as a dictionary key, or want to put it in a
+<code>set</code>, you would need to convert this to a hashable object. To do this you
+need to write a function that recursively converts each <code>list</code> to a <code>tuple</code>.
+See how long it takes you to write that function correctly.</p>
+<h2>Mutability is Bad</h2>
+<p>More to the point, however, mutability is bad. I counted 12 distinct methods
+on <code>list</code> that mutate it (how many can you remember off the top of your
+head?<sup id="fnref-mutate"><a class="footnote-ref" href="posts/tuples/#fn-mutate">3</a></sup>). <em>Any</em> function that gets access to a list can mutate it,
+using any one of these methods. All it takes is for someone to forget that
+<code>+=</code> mutates a list (and that they should copy it first) for code completely
+distant from the origin definition to cause issues. The hardest bug I ever
+debugged had a three character
+<a href="https://github.com/inducer/pudb/commit/b979fc5909c8d731eb907fc25f4e97904fb7cbbd">fix</a>,
+adding <code>[:]</code> to copy a global list that I was (accidentally) mutating. It took
+me a several hour airplane ride and some deep dark magic that I'll leave for
+another blog post to discover the source of my problems (the problems I was
+having appeared to be quite distant from the actual source).</p>
+<h2>A Better "Default"</h2>
+<p>I propose that Python code in general would be vastly improved if people used
+<code>tuple</code> as the default ordered collection, and only switched to <code>list</code> if
+mutation was necessary (it's less necessary than you think; you can always
+copy a tuple instead of mutating it). I agree with David Beazley that you
+don't "sometimes need a read only list". Rather, you "sometimes need a
+writable tuple".</p>
+<p>This makes more sense than defaulting to <code>list</code>, and only switching to <code>tuple</code>
+when hashability is needed, or when some weird "rule of thumb" applies that
+says that you should use <code>tuple</code> if you have a "record". Maybe there's a good
+reason that <code>*args</code> and almost all builtin and standard library functions
+return tuples instead of lists. It's harder to accidentally break someone
+else's code, or have someone else accidentally break your code, when your data
+structures are immutable.</p>
+<h2>Footnotes</h2>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn-list">
+<p>I want to avoid saying "a tuple is an immutable list", since "list"
+can be interpreted in two ways, as an English word meaning "ordered
+collection" (in
+which case, the statement is true), or as the Python type <code>list</code> (in which
+case, the statement is false—<code>tuple</code> is not a subclass of <code>list</code>). <a class="footnote-backref" href="posts/tuples/#fnref-list" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn-assign">
+<p>Yes,</p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+</pre>
+
+
+<p>works. <a class="footnote-backref" href="posts/tuples/#fnref-assign" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn-mutate">
+<p></p>
+<div id="spoiler" style="display:none">
+<code>__delitem__</code>, <code>__iadd__</code>, <code>__imul__</code>, <code>__setitem__</code>, <code>append</code>, <code>clear</code>, <code>extend</code>, <code>insert</code>,
+<code>pop</code>, <code>remove</code>, <code>reverse</code>, and <code>sort</code>.
+</div>
+<button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none')
+{document.getElementById('spoiler')
+.style.display=''}else{document.getElementById('spoiler')
+.style.display='none'}">Show/hide answer</button> <a class="footnote-backref" href="posts/tuples/#fnref-mutate" title="Jump back to footnote 3 in the text">↩</a>
+</li>
+<li id="fn-TypeError">
+<p>One of the tweets from the conversation:</p>
+<p></p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr"><a href="https://twitter.com/asmeurer">@asmeurer</a> <a href="https://twitter.com/AllenDowney">@AllenDowney</a> As yes:<br><br>t = (1,2, [3, 4])<br>t[2] += [5,6]<br><br>;-)</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778697399975813120">September 21, 2016</a>
+</blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>This is similar to this example. But
+it turns out this one doesn't work:</p>
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="k">call</span> <span class="k">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="ss">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="k">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">TypeError</span><span class="p">:</span> <span class="s1">'tuple'</span> <span class="k">object</span> <span class="n">does</span> <span class="k">not</span> <span class="n">support</span> <span class="n">item</span> <span class="k">assignment</span>
+</pre>
+
+
+<p>I have no idea why. It seems to me that it should work. <code>t[2]</code> is a list
+and <code>list</code> has <code>__iadd__</code> defined. It seems that Python gets kind of weird
+about things on the left-hand side of an assignment. <strong>EDIT:
+<a href="http://stackoverflow.com/a/29747466/161801">Here's</a> why.</strong> <a class="footnote-backref" href="posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/moving-away-from-python-2/" class="u-url">Moving Away from Python 2</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="posts/moving-away-from-python-2/" rel="bookmark">
+            <time class="published dt-published" datetime="2016-05-19T14:00:00-04:00" itemprop="datePublished" title="2016-05-19 14:00">2016-05-19 14:00</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="posts/moving-away-from-python-2/#disqus_thread" data-disqus-identifier="cache/posts/moving-away-from-python-2.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>About a month ago I tweeted this:</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">Thought: get the maintainers of a bunch of big Python libraries to sign something saying that they WILL drop Python 2.7 support in 2020.</p>— Aaron Meurer (@asmeurer) <a href="https://twitter.com/asmeurer/status/712304912428875776">March 22, 2016</a>
+</blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p><strong>EDIT: Some people have started working on making this happen. See
+<a href="https://python3statement.github.io/">https://python3statement.github.io/</a>.</strong></p>
+<p>For those of you who don't know, Python 2.7 is
+<a href="https://docs.python.org/devguide/#status-of-python-branches">slated</a> to reach
+end-of-life in 2020 (originally, it was slated to end in 2015, but it was
+extended in 2014, due to the extraordinary difficulty of moving to a newer
+version). "End-of-life" means absolutely no more support from the core Python
+team, even for security updates.</p>
+<p>I'm writing this post because I want to clarify why I think this should be
+done, and to clear up some misconceptions, the primary one being that this
+represents library developers being antagonistic against those who want or
+have to use Python 2.</p>
+<p>I'm writing this from my perspective as a library developer. I'm the lead
+developer of <a href="http://www.sympy.org/">SymPy</a>, and I have sympathies for
+developers of other libraries.<sup id="fnref-sympy"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-sympy">1</a></sup> I say this because my idea may seem a bit
+in tension with "users" (even though I hate the "developer/user" distinction).</p>
+<h3>Python 2</h3>
+<p>There are a few reasons why I think libraries should drop (and announce that
+they will drop) Python 2 support by 2020 (actually earlier, say 2018 or 2019,
+depending on how core the library is).</p>
+<p>First, library developers have to be the leaders here. This is apparent from
+the historical move to Python 3 up to this point. Consider the three (not
+necessarily disjoint) classes of people: CPython core developers, library
+developers, and users. The core developers were the first to move to Python 3,
+since they were the ones who wrote it. They were also the ones who provided
+the messaging around Python 3, which has varied over time. In my opinion, it
+should have been and should be more forceful.<sup id="fnref-core"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-core">2</a></sup> Then you have the library
+developers and the users. A chief difference here is that users are probably
+going to be using only one version of Python. In order for them to switch that
+version to Python 3, all the libraries that they use need to support it. This
+took some time, since library developers saw little impetus to support Python
+3 when no one was using it (Catch 22), and to worsen the situation, versions
+of Python older than 2.6 made
+<a href="https://asmeurersympy.wordpress.com/2013/08/22/python-3-single-codebase-vs-2to3/">single codebase compatibility</a>
+almost impossible.</p>
+<p>Today, though, <a href="http://py3readiness.org/">almost all libraries</a> support Python
+3, and we're reaching a point where those that don't have
+forks that do.</p>
+<p>But it only happened <em>after</em> the library developers transitioned. I believe
+libraries need to be the leaders in moving away from Python 2 as well. It's
+important to do this for a few reasons:</p>
+<ul>
+<li>
+<p>Python 2.7 support ends in 2020. That means all updates, including security
+  updates. For all intents and purposes, Python 2.7 becomes an insecure
+  language to use at that point in time.</p>
+</li>
+<li>
+<p>Supporting two major versions of Python is technical debt for every project
+  that does it. While writing cross compatible code is
+  <a href="http://python-future.org/">easier than ever</a>, it still remains true that
+  you have to remember to add <code>__future__</code> imports to the top of every file,
+  to import all relevant builtins from your compatibility file or library, and
+  to run all your tests in both Python 2 and 3. Supporting both versions is a
+  major cognitive burden to library developers, as they always have to be
+  aware of important differences in the two languages. Developers on any
+  library that does anything with strings will need to understand how things
+  work in both Python 2 and 3, and the often obscure workarounds required for
+  things to work in both (pop quiz: how do you write Unicode characters to a
+  file in a Python 2/3 compatible way?).</p>
+</li>
+<li>
+<p>Some of Python 3's
+  <a href="https://asmeurer.github.io/python3-presentation/slides.html">new syntax features</a>
+  (i.e., features that are impossible to use in Python 2) only matter for
+  library developers. A great example of this is
+  <a href="https://www.python.org/dev/peps/pep-3102/">keyword-only arguments</a>. From an
+  API standpoint, almost every instance of keyword arguments should be
+  implemented as keyword-only arguments. This avoids mistakes that come from
+  the antipattern of passing keyword arguments without naming the keyword, and
+  allows the argspec of the function to be expanded in the future without
+  breaking API.<sup id="fnref-swift"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-swift">3</a></sup></p>
+</li>
+</ul>
+<p>The second reason I think library developers should agree to drop Python 2
+support by 2020 is completely selfish. A response that I heard on that tweet
+(as well as elsewhere), was that libraries should provide carrots, not sticks.
+In other words, instead of forcing people off of Python 2, we should make them
+want to come to Python 3. There are some issues with this argument. First,
+Python 3 already has
+<a href="https://asmeurer.github.io/python3-presentation/slides.html">tons of carrots</a>.
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.<sup id="fnref-unicode"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-unicode">4</a></sup></p>
+<p>If you don't deal with strings, or do but don't care about those silly
+foreigners with weird accents in their names, there are other major carrots as
+well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
+major source of frustration for new users. Imagine writing out <code>1/2*x +
+x**(1/2)*y*z - 3*z**2</code> and wondering why half of what you wrote just
+"disappeared" (granted, this was worse before we
+<a href="https://asmeurersympy.wordpress.com/2011/08/18/sqrtx-now-prints-as-sqrtx/">fixed the printers</a>).
+While <code>integer/integer</code> not giving a rational number is a major
+<a href="http://docs.sympy.org/latest/tutorial/gotchas.html#two-final-notes-and">gotcha</a>
+for SymPy, giving a float is infinitely better than giving what is effectively
+the wrong answer. Don't use strings or integers?
+<a href="https://asmeurer.github.io/python3-presentation/slides.html">I've got more</a>.</p>
+<p>Frankly, if these "carrots" haven't convinced you yet, then I'll wager you're
+not really the sort of person who is persuaded by carrots.</p>
+<p>Second, some "carrots" are impossible unless they are implemented in
+libraries. While some features can be implemented in 2/3 compatible code and
+only work in Python 3 (such as <code>@</code> matrix multiplication), others, such as
+keyword-only arguments, can only be implemented in code that does not support
+Python 2. Supporting them in Python 2 would be a net deficit of technical debt
+(one can imagine, for instance, trying to support keyword-only arguments
+manually using <code>**kwargs</code>, or by using some monstrous meta-programming).</p>
+<p>Third, as I said, I'm selfish. Python 3 <em>does</em> have carrots, and I want them.
+As long as I have to support Python 2 in my code, I can't use keyword-only
+arguments, or extended argument unpacking, or async/await, or any of the
+dozens of features that can't be used in cross compatible code.</p>
+<p>A counterargument might be that instead of blocking users of existing
+libraries, developers should create new libraries which are Python 3-only and
+make use of new exciting features of Python 3 there. I agree we should do
+that, but existing libraries are good too. I don't see why developers should
+throw out all of a well-developed library just so they can use some Python
+features that they are excited about.</p>
+<h3>Legacy Python</h3>
+<p>A lot of people have taken to calling Python 2
+"<a href="https://twitter.com/RipLegacyPython">legacy Python</a>". This phrase is often
+used condescendingly and
+<a href="https://twitter.com/stephtdouglas/status/713433933040340993">angers a lot of people</a>
+(and indeed, this blog post is the first time I've used it myself). However, I
+think Python 2 really should be seen this way, as a "legacy" system. If you
+want to use it, for whatever your reasons, that's fine, but just as you
+shouldn't expect to get any of the newest features of Python, you shouldn't
+expect to be able to use the newest versions of your libraries. Those
+libraries that have a lot of development resources may choose to support older
+Python 2-compatible versions with bug and/or security fixes. Python 2 itself
+will be supported for these until 2020. Those without resources probably won't
+(keep in mind that you're using open source libraries without paying money for
+them).</p>
+<p>I get that some people have to use Python 2, for whatever reasons. But using
+outdated software comes at a cost. Libraries have borne this technical debt
+for the most part thus far, but they shouldn't be expected to bear it forever.
+The debt will only increase, especially as the technical opportunity cost, if
+you will, of not being able to use newer and shinier versions of Python 3
+grows. The burden will have to shift at some point. Those with the financial
+resources may choose to offload this debt to others,<sup id="fnref-continuum"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-continuum">5</a></sup> say, by
+backporting features or bugfixes to older library versions that support Python
+2 (or by helping to move code to Python 3).</p>
+<p>I want to end by pointing out that if you are, for whatever reason, still
+using Python 2, you may be worried that if libraries become Python 3-only and
+start using Python 3 features, won't that break your code? The answer is no.
+Assuming package maintainers mark the metadata on their packages correctly,
+tools like pip and conda will not install non-Python 2 compatible versions
+into Python 2.</p>
+<p>If you haven't transitioned yet, and want to know more, a good place to start
+is the <a href="https://docs.python.org/3/howto/pyporting.html">official docs</a>. I also
+highly recommend using <a href="http://conda.pydata.org/docs/">conda</a> environments, as
+it will make it easy to separate your Python 2 code from your Python 3 code.</p>
+<h4>Footnotes</h4>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn-sympy">
+<p>With that being said, the opinions here are entirely my own, and are
+    don't necessarily represent those of other people, nor do they
+    represent official SymPy policy (no decisions have been made by the
+    community about this at this time). <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-sympy" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn-core">
+<p>It often feels like core Python itself doesn't really want people to
+    use Python 3. It's little things, like
+    <a href="https://docs.python.org/library/">docs links</a> that redirect to Python
+    2, or <a href="https://www.python.org/dev/peps/pep-0394/">PEP 394</a>, which
+    still says that the <code>python</code> should always point to Python 2. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-core" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn-swift">
+<p>In Swift, Apple's new language for iOS and OS X, function parameter
+    names are effectively "keyword-only"
+    <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html">by default</a>. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-swift" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="fn-unicode">
+<p>As an example of this, in conda, if you use Python 2 in the root
+    environment, then installing into a path with non-ASCII characters is
+    unsupported. This is common on Windows, because Windows by default
+    uses the user's full name as the username, and the default conda
+    install path is in the user directory.</p>
+<p>This is unsupported except in Python 3, because to fix the issue,
+every single place in conda where a string appears would have to be
+changed to use a <code>unicode</code> string in Python 2. The basic issue is that
+things like <code>'π' + u'i'</code> raise <code>UnicodeDecodeError</code> in Python 2 (even
+though <code>'π' + 'i'</code>, <code>u'π' + 'i'</code>, and <code>u'π' + u'i'</code> all work fine).
+You can read a more in-depth description of the problem
+<a href="https://github.com/sympy/sympy/pull/9692#issuecomment-126162173">here</a>.
+Incidentally, this is also why you should never use <code>from __future__
+import unicode_literals</code> in Python 2, in my opinion.</p>
+<p>I no longer work on conda, but as far as I know, the
+<a href="https://github.com/conda/conda/issues/1180">issue</a> remains unfixed.
+Of course, this whole thing works just fine if conda is run in Python
+3. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-unicode" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+<li id="fn-continuum">
+<p>If that legitimately interests you, I
+    <a href="https://twitter.com/pwang/status/712780279211884546">hear Continuum</a>
+    may be able to help you. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-continuum" title="Jump back to footnote 5 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/what-happens-when-you-mess-with-hashing-in-python/" class="u-url">What happens when you mess with hashing in Python</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="posts/what-happens-when-you-mess-with-hashing-in-python/" rel="bookmark">
+            <time class="published dt-published" datetime="2016-01-25T22:13:53-06:00" itemprop="datePublished" title="2016-01-25 22:13">2016-01-25 22:13</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="posts/what-happens-when-you-mess-with-hashing-in-python/#disqus_thread" data-disqus-identifier="cache/posts/what-happens-when-you-mess-with-hashing-in-python.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p><em>This post is based off a Jupyter notebook I made in 2013. You can download
+the original <a href="https://gist.github.com/asmeurer/6046766">here</a>. That notebook
+was based off a
+<a href="https://github.com/sympy/sympy/wiki/What-happens-when-you-mess-with-hashing">wiki page</a>
+on the SymPy wiki, which in turn was based on
+<a href="https://groups.google.com/forum/#%21msg/sympy/pJ2jg2csKgU/0nn21xqZEmwJ">a message</a>
+to the SymPy mailing list.</em></p>
+<h2>What is hashing?</h2>
+<p>Before we start, let's have a brief introduction to hashing. A
+<a href="https://en.wikipedia.org/wiki/Hash_function"><em>hash function</em></a> is a function
+that maps a set of objects to a set of integers. There are many kinds of hash
+functions, which satisfy many different properties, but the most important
+property that must be satisfied by any hash function is that it be a function
+(in the mathematical sense), that is, if two objects are equal, then their
+hash should also be equal.</p>
+<p>Usually, the set of integers that the hash function maps to is much smaller
+than the set of objects, so that there will be multiple objects that hash to
+the same value. However, generally for a hash function to be useful, the set
+of integers should be large enough, and the hash function well distributed
+enough that if two objects hash to the same value, then they are very likely
+to be equal.</p>
+<p>To summarize, a hash function <em>must</em> satisfy the property:</p>
+<ul>
+<li><strong>If two objects are equal, then their hashes should be equal.</strong></li>
+</ul>
+<p>Additionally, a <em>good</em> hash function should satisfy the property:</p>
+<ul>
+<li><strong>If two objects have the same hash, then they are likely to be the same
+object.</strong></li>
+</ul>
+<p>Since there are generally more possible objects than hash values, two objects
+may hash to the same value. This is called a
+<a href="https://en.wikipedia.org/wiki/Hash_collision">hash collision</a>, and anything
+that deals with hashes should be able to deal with them.</p>
+<p>This won't be discussed here, but an additional property that a good hash
+function should satisfy to be useful is this:</p>
+<ul>
+<li><strong>The hash of an object should be cheap to compute.</strong></li>
+</ul>
+<h2>What is it used for?</h2>
+<p>If we have a hash function that satisfies the above properties, then we can
+use it to create from a collection of objects something called a <em>hash table</em>.
+Suppose we have a collection of objects, and given any object, we want to be
+able to compute very quickly if that object belongs to our collection. We
+could store these objects in an ordered array, but then to determine if it is
+in the array, we would have to search potentially through every element of the
+array (in other words, an \(O(n)\)) algorithm.</p>
+<p>With hashing, we can do better. We create what is known as a
+<a href="https://en.wikipedia.org/wiki/Hash_table"><em>hash table</em></a>. Instead of storing
+the objects in an ordered array, we create an array of buckets, each
+corresponding to some hash values. We then hash each object, and store it into
+the array corresponding to its hash value (if there are more hash values than
+buckets, we distribute them using a second hash function, which can be as
+simple as taking the modulus with respect to the number of buckets, <code>% n</code>).</p>
+<p>This image from
+<a href="https://en.wikipedia.org/wiki/File:Hash_table_3_1_1_0_1_0_0_SP.svg">Wikipedia</a>
+shows an example.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="img"></p>
+<p>To determine if an object is in a hash table, we only have to hash the object,
+and look in the bucket corresponding to that hash. This is an \(O(1)\)
+algorithm, assuming we have a good hash function, because each bucket will
+generally hold very few objects, possibly even none.</p>
+<p><em>Note: there are some additional things that need to be done to handle hash
+collisions, but the basic idea is the same, and as long as there aren't too
+many hash collisions, which should happen if hash values are evenly
+distributed and the size of the hash table is large compared to the number of
+objects stored in it, the average time to determine if an object is in the
+hash table is still \(O(1)\).</em></p>
+<h2>Hashing in Python</h2>
+<p>Python has a built in function that performs a hash called <code>hash()</code>.  For many
+objects, the hash is not very surprising.  Note, the hashes you see below may
+not be the same ones you see if you run the examples, because Python hashing
+depends on the architecture of the machine you are running on, and, in newer
+versions of Python, hashes are randomized for security purposes.</p>
+<pre><code class="language-py">&gt;&gt;&gt; hash(10)
+10
+&gt;&gt;&gt; hash(()) # An empty tuple
+3527539
+&gt;&gt;&gt; hash('a')
+12416037344
+</code></pre>
+<p>In Python, not all objects are hashable. For example</p>
+<pre><code class="language-py">&gt;&gt;&gt; hash([]) # An empty list
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unhashable type: 'list'
+</code></pre>
+<p>This is because Python has an additional restriction on hashing:</p>
+<ul>
+<li><strong>In order for an object to be hashable, it must be immutable.</strong></li>
+</ul>
+<p>This is important basically because we want the hash of an object to remain
+the same across the object's lifetime. But if we have a mutable object, then
+that object itself can change over its lifetime. But then according to our
+first bullet point above, that object's hash has to change too.</p>
+<p>This restriction simplifies hash tables. If we allowed an object's hash to
+change while it is in a hash table, we would have to move it to a different
+bucket. Not only is this costly, but the hash table would have to <em>notice</em>
+that this happened; the object itself doesn't know that it is sitting in a
+hash table, at least not in the Python implementation.</p>
+<p>In Python, there are two objects that correspond to hash tables, <code>dict</code> and
+<code>set</code>. A <code>dict</code> is a special kind of hash table called an
+<a href="https://en.wikipedia.org/wiki/Associative_array"><em>associative array</em></a>. An
+associative array is a hash table where each element of the hash table points
+to another object. The other object itself is not hashed.</p>
+<p>Think of an associative array as a generalization of a regular array (like a
+<code>list</code>). In a <code>list</code>, objects are associated to nonnegative integer indices,
+like</p>
+<pre><code class="language-py">&gt;&gt;&gt; l = ['a', 'b', 7]
+&gt;&gt;&gt; l[0]
+'a'
+&gt;&gt;&gt; l[2]
+7
+</code></pre>
+<p>In an associative array (i.e., a <code>dict</code>) we can index objects by anything, so
+long as the key is hashable.</p>
+<pre><code class="language-py">&gt;&gt;&gt; d = {0: 'a', 'hello': ['world']}
+&gt;&gt;&gt; d[0]
+'a'
+&gt;&gt;&gt; d['hello']
+['world']
+</code></pre>
+<p>Note that only the keys need to be hashable. The values can be anything, even
+unhashable objects like lists.</p>
+<p>The uses for associative arrays are boundless. <code>dict</code> is one of the most
+useful data types in the Python language. Some example uses are</p>
+<ul>
+<li>
+<p>Extension of <code>list</code> with "missing values". For example, <code>{0: 'a', 2: 7}</code>
+would correspond to the above list <code>l</code> with the value <code>'b'</code> corresponding to
+the key <code>1</code> removed.</p>
+</li>
+<li>
+<p>Representation of a mathematical function with a finite domain.</p>
+</li>
+<li>
+<p>A poor-man's database (the Wikipedia image above is an associative array
+mapping names to telephone numbers).</p>
+</li>
+<li>
+<p>Implementing a <a href="https://stackoverflow.com/q/60208/161801">Pythonic version</a>
+of the switch-case statement.</p>
+</li>
+</ul>
+<p>The other type of hash table, <code>set</code>, more closely matches the definition I
+gave above for a hash table. A <code>set</code> is just a container of hashable
+objects. <code>set</code>s are unordered, and can only contain one of each object (this
+is why they are called "sets," because this matches the mathematical
+definition of a <a href="https://en.wikipedia.org/wiki/Set_(mathematics)">set</a>).</p>
+<p>In Python 2.7 or later, you can create a set with <code>{</code> and <code>}</code>, like <code>{a, b, c}</code>. Otherwise, use <code>set([a, b, c])</code>.</p>
+<pre><code class="language-py">&gt;&gt;&gt; s = {0, (), '2'}
+&gt;&gt;&gt; s
+{0, '2', ()}
+&gt;&gt;&gt; s.add(1)
+&gt;&gt;&gt; s
+{0, 1, '2', ()}
+&gt;&gt;&gt; s.add(0)
+&gt;&gt;&gt; s
+{0, 1, '2', ()}
+</code></pre>
+<p>A final note: <code>set</code> and <code>dict</code> are themselves mutable, and hence not hashable!
+There is an immutable version of <code>set</code> called <code>frozenset</code>. There are no
+immutable dictionaries.</p>
+<pre><code class="language-py">&gt;&gt;&gt; f = frozenset([0, (), '2'])
+&gt;&gt;&gt; f
+frozenset({0, '2', ()})
+&gt;&gt;&gt; hash(f)
+-7776452922777075760
+&gt;&gt;&gt; # A frozenset, unlike a set, can be used as a dictionary key
+&gt;&gt;&gt; d[f] = 'a set'
+&gt;&gt;&gt; d
+{0: 'a', frozenset({0, '2', ()}): 'a set', 'hello': ['world']}
+</code></pre>
+<h2>Creating your own hashable objects</h2>
+<p>Before we move on, there is one final thing we need to know about hashing in
+Python, which is how to create hashes for custom objects. By default, if we
+create an object, it will be hashable.</p>
+<pre><code class="language-py">&gt;&gt;&gt; class Nothing(object):
+...     pass
+...
+&gt;&gt;&gt; N = Nothing()
+&gt;&gt;&gt; hash(N)
+270498113
+</code></pre>
+<p>Implementation-wise, the hash is <a href="https://stackoverflow.com/a/33572401/161801">based
+on</a> object's <code>id</code>, which
+corresponds to its position in memory. This satisfies the above conditions: it
+is (extremely) cheap to compute, and since by default objects in Python
+compare unequal to one another, objects with different hashes will be unequal.</p>
+<pre><code class="language-py">&gt;&gt;&gt; M = Nothing()
+&gt;&gt;&gt; M == N
+False
+&gt;&gt;&gt; hash(M)
+270498117
+&gt;&gt;&gt; hash(M) == hash(N)
+False
+</code></pre>
+<p>To define a hash function for an object, define the <code>__hash__</code> method.</p>
+<pre><code class="language-py">&gt;&gt;&gt; class HashToOne(object):
+...     def __hash__(self):
+...         return 1
+...
+&gt;&gt;&gt; HTO = HashToOne()
+&gt;&gt;&gt; hash(HTO)
+1
+</code></pre>
+<p>To set an object as not hashable, set <code>__hash__</code> to <code>None</code>.</p>
+<pre><code class="language-py">&gt;&gt;&gt; class NotHashable(object):
+...     __hash__ = None
+...
+&gt;&gt;&gt; NH = NotHashable()
+&gt;&gt;&gt; hash(NH)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unhashable type: 'NotHashable'
+</code></pre>
+<p>Finally, to override the equality operator <code>==</code>, define <code>__eq__</code>.</p>
+<pre><code class="language-py">&gt;&gt;&gt; class AlwaysEqual(object):
+...     def __eq__(self, other):
+...         if isinstance(other, AlwaysEqual):
+...             return True
+...         return False
+...
+&gt;&gt;&gt; AE1 = AlwaysEqual()
+&gt;&gt;&gt; AE2 = AlwaysEqual()
+&gt;&gt;&gt; AE1 == AE2
+True
+</code></pre>
+<p>One of the key points that I hope you will take away from this post is that if
+you override <code>__eq__</code> and you want a hashable object, you <strong>must</strong> also
+override <code>__hash__</code> to agree. Note that Python 3 will actually require this:
+in Python 3, if you override <code>__eq__</code>, it automatically sets <code>__hash__</code> to
+<code>None</code>, making the object unhashable. You need to manually override <code>__hash__</code>
+to make it hashable again. But that's as far as Python goes in enforcing these
+rules, as we will see below. In particular, Python will never actually check
+that your <code>__hash__</code> actually agrees with your <code>__eq__</code>.</p>
+<h2>Messing with hashing</h2>
+<p>Now to the fun stuff. What happens if we break some of the invariants that
+Python expects of hashing. Python expects two key invariants to hold</p>
+<ol>
+<li>
+<p><strong>The hash of an object does not change across the object's lifetime (in
+other words, a hashable object should be immutable).</strong></p>
+</li>
+<li>
+<p><strong><code>a == b</code> implies <code>hash(a) == hash(b)</code> (note that the reverse might not
+hold in the case of a hash collision).</strong></p>
+</li>
+</ol>
+<p>As we shall see, Python expects, but does not enforce either of these.</p>
+<h3>Example 1: Mutating a hash</h3>
+<p>Let's break rule 1 first. Let's create an object with a hash, and then change
+that object's hash over its lifetime, and see what sorts of things can happen.</p>
+<pre><code class="language-py">&gt;&gt;&gt; class Bad(object):
+...     def __init__(self, hash): # The object's hash will be hash
+...         self.hash = hash
+...     def __hash__(self):
+...         return self.hash
+...
+&gt;&gt;&gt; b = Bad(1)
+&gt;&gt;&gt; hash(b)
+1
+&gt;&gt;&gt; d = {b:42}
+&gt;&gt;&gt; d[b]
+42
+&gt;&gt;&gt; b.hash = 2
+&gt;&gt;&gt; hash(b)
+2
+&gt;&gt;&gt; d[b]
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+KeyError: &lt;__main__.Bad object at 0x1047e7438&gt;
+</code></pre>
+<p>Here, we implicitly changed the hash of <code>b</code> by mutating the attribute of <code>b</code>
+that is used to compute the hash. As a result, the object is no longer found
+in a dictionary, which uses the hash to find the object.</p>
+<p>The object is still there, we just can't access it any more.</p>
+<pre><code class="language-py">&gt;&gt;&gt; d
+{&lt;__main__.Bad object at 0x1047e7438&gt;: 42}
+</code></pre>
+<p>Note that Python doesn't prevent me from doing this. We could make it if we
+want (e.g., by making <code>__setattr__</code> raise <code>AttributeError</code>), but even then we
+could forcibly change it by modifying the object's <code>__dict__</code>. We could try
+some more fancy things using descriptors, metaclasses, and/or
+<code>__getattribute__</code>, but even then, if we knew what was happening, we could
+probably find a way to change it.</p>
+<p>This is what is meant when people say that Python is a "consenting adults"
+language. You are expected to not try to break things, but generally aren't
+prevented from doing so if you try.</p>
+<h3>Example 2: More mutation</h3>
+<p>Let's try something even more crazy. Let's make an object that hashes to a
+different value each time we look at the hash.</p>
+<pre><code class="language-py">&gt;&gt;&gt; class DifferentHash(object):
+...     def __init__(self):
+...         self.hashcounter = 0
+...     def __hash__(self):
+...         self.hashcounter += 1
+...         return self.hashcounter
+...
+&gt;&gt;&gt; DH = DifferentHash()
+&gt;&gt;&gt; hash(DH)
+1
+&gt;&gt;&gt; hash(DH)
+2
+&gt;&gt;&gt; hash(DH)
+3
+</code></pre>
+<p>Obviously, if we use <code>DH</code> as a key to a dictionary, then it will not work,
+because we will run into the same issue we had with <code>Bad</code>. But what about
+putting <code>DH</code> in a <code>set</code>.</p>
+<pre><code class="language-py">&gt;&gt;&gt; DHset = {DH, DH, DH}
+&gt;&gt;&gt; DHset
+{&lt;__main__.DifferentHash at 0x101f79f50&gt;,
+ &lt;__main__.DifferentHash at 0x101f79f50&gt;,
+ &lt;__main__.DifferentHash at 0x101f79f50&gt;}
+</code></pre>
+<p>Woah! We put the exact same object in a <code>set</code> three times, and it appeared all
+three times. This is not what is supposed to happen with a set.</p>
+<pre><code class="language-py">&gt;&gt;&gt; {1, 1, 1}
+{1}
+</code></pre>
+<p>What happens when we do stuff with <code>DHset</code>?</p>
+<pre><code class="language-py">&gt;&gt;&gt; DHset.remove(DH)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+KeyError: &lt;__main__.DifferentHash object at 0x1047e75f8&gt;
+</code></pre>
+<p>That didn't work, because <code>set.remove</code> searches for an object by its hash,
+which is different by this point.</p>
+<p>Now let's make a copy of <code>DHset</code>. The <code>set.copy</code> method will create a shallow
+copy (meaning that the set container itself will be different, according to
+<code>is</code> comparison, but the objects themselves will the same, according to <code>is</code>
+comparison).</p>
+<pre><code class="language-py">&gt;&gt;&gt; DHset2 = DHset.copy()
+&gt;&gt;&gt; DHset2 == DHset
+True
+</code></pre>
+<p>Everything is fine so far. This object is only going to cause trouble if
+something recomputes its hash. But remember that the whole reason that we had
+trouble with something like <code>Bad</code> above is that Python <em>doesn't</em> recompute
+that hash of an object, unless it has to. So let's do something that will
+force it to do so: let's pop an object from one of the sets and add it back
+in.</p>
+<pre><code class="language-py">&gt;&gt;&gt; D = DHset.pop()
+&gt;&gt;&gt; DHset.add(D)
+&gt;&gt;&gt; DHset
+{&lt;__main__.DifferentHash at 0x101f79f50&gt;,
+ &lt;__main__.DifferentHash at 0x101f79f50&gt;,
+ &lt;__main__.DifferentHash at 0x101f79f50&gt;}
+&gt;&gt;&gt; DHset2
+{&lt;__main__.DifferentHash at 0x101f79f50&gt;,
+ &lt;__main__.DifferentHash at 0x101f79f50&gt;,
+ &lt;__main__.DifferentHash at 0x101f79f50&gt;}
+&gt;&gt;&gt; DHset == DHset2
+False
+</code></pre>
+<p>There we go. By removing it from the set, we made the set forget about its
+hash, so it had to be recomputed when we added it again. This version of
+<code>DHset</code> now has a <code>DH</code> with a different hash than it had before. Thinking back
+to <code>set</code> being a hash table, in this <code>DHset</code>, the three <code>DH</code> objects are in
+different "buckets" than they were in before. <code>DHset.__eq__(DHset2)</code> notices
+that the bucket structure is different right away and returns <code>False</code>.</p>
+<p>By the way, what hash value are we up to these days?</p>
+<pre><code class="language-py">&gt;&gt;&gt; hash(DH)
+9
+</code></pre>
+<h3>Example 3: When <code>a == b</code> does not imply <code>hash(a) == hash(b)</code>
+</h3>
+<p>Now let's look at point 2. What happens if we create an object with <code>__eq__</code>
+that disagrees with <code>__hash__</code>. For Python 2, we already have made a class like
+this, the <code>AlwaysEqual</code> object above. Instances of <code>AlwaysEqual</code> will always
+compare equal to one another, but they will not have the same hash, because
+they will use <code>object</code>'s default <code>__hash__</code> of <code>id</code>. For Python 3, however,
+<code>AlwaysEqual</code> is automatically set as unhashable because we overrode <code>__eq__</code>
+without also overriding <code>__hash__</code>.</p>
+<p>This blog post originally used the <code>AE1</code> and <code>AE2</code> objects we created above
+for the next example, but to make it work in both Python 2 and 3, let's create
+a custom <code>AlwaysEqual</code> subclass that is hashable.</p>
+<pre><code class="language-python">&gt;&gt;&gt; class AlwaysEqualHashable(AlwaysEqual):
+...     def __hash__(self):
+...         return id(self)
+...
+&gt;&gt;&gt; AE1 = AlwaysEqualHashable()
+&gt;&gt;&gt; AE2 = AlwaysEqualHashable()
+</code></pre>
+<pre><code class="language-py">&gt;&gt;&gt; hash(AE1)
+270498221
+&gt;&gt;&gt; hash(AE2)
+270498197
+&gt;&gt;&gt; hash(AE1) == hash(AE2)
+False
+&gt;&gt;&gt; AE1 == AE2
+True
+&gt;&gt;&gt; {AE1, AE2}
+{&lt;__main__.AlwaysEqualHashable at 0x101f79950&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x101f79ad0&gt;}
+</code></pre>
+<p>We can already see that we have broken one of the key properties of a <code>set</code>,
+which is that it does not contain the same object twice (remember that <code>AE1</code>
+and <code>AE2</code> should be considered the "same object" because <code>AE1 == AE2</code> is
+<code>True</code>).</p>
+<p>This can lead to subtle issues. For example, suppose we had a list and we
+wanted to remove all the duplicate items from it. An easy way to do this is to
+convert the list to a set and then convert it back to a list.</p>
+<pre><code class="language-py">&gt;&gt;&gt; l = ['a', 'a', 'c', 'a', 'c', 'b']
+&gt;&gt;&gt; list(set(l))
+['a', 'b', 'c']
+</code></pre>
+<p>Now, this method is obviously not going to work for a list of <code>AlwaysEqualHashable</code> objects.</p>
+<pre><code class="language-py">&gt;&gt;&gt; AE3 = AlwaysEqualHashable()
+&gt;&gt;&gt; l = [AE1, AE1, AE3, AE2, AE3]
+&gt;&gt;&gt; list(set(l))
+[&lt;__main__.AlwaysEqualHashable at 0x102c1d590&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x101f79ad0&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x101f79950&gt;]
+</code></pre>
+<p>Actually, what happened here is that the equality that we defined on
+<code>AlwaysEqual</code> was essentially ignored. We got a list of unique items by <code>id</code>,
+instead of by <code>__eq__</code>. You can imagine that if <code>__eq__</code> were something a
+little less trivial, where some, but not all, objects are considered equal,
+that this could lead to very subtle issues.</p>
+<p>But there is an issue with the above algorithm. It isn't stable, that is, it
+removes the ordering that we had on the list. We could do this better by
+making a new list, and looping through the old one, adding elements to the new
+list if they aren't already there.</p>
+<pre><code class="language-py">&gt;&gt;&gt; def uniq(l):
+...     newl = []
+...     for i in l:
+...         if i not in newl:
+...             newl.append(i)
+...     return newl
+...
+&gt;&gt;&gt; uniq(['a', 'a', 'c', 'a', 'c', 'b'])
+['a', 'c', 'b']
+&gt;&gt;&gt; uniq([AE1, AE1, AE3, AE2, AE3])
+[&lt;__main__.AlwaysEqualHashable at 0x101f79ad0&gt;]
+</code></pre>
+<p>This time, we used <code>in</code>, which uses <code>==</code>, so we got only one unique element of
+the list of <code>AlwaysEqual</code> objects.</p>
+<p>But there is an issue with this algorithm as well. Checking if something is in
+a list is \(O(n)\), but we have an object that allows checking in \(O(1)\)
+time, namely, a <code>set</code>. So a more efficient version might be to create a set
+alongside the new list for containment checking purposes.</p>
+<pre><code class="language-py">&gt;&gt;&gt; def uniq2(l):
+...     newl = []
+...     newlset = set()
+...     for i in l:
+...         if i not in newlset:
+...             newl.append(i)
+...             newlset.add(i)
+...     return newl
+...
+&gt;&gt;&gt; uniq2(['a', 'a', 'c', 'a', 'c', 'b'])
+['a', 'c', 'b']
+&gt;&gt;&gt; uniq2([AE1, AE1, AE3, AE2, AE3])
+[&lt;__main__.AlwaysEqualHashable at 0x101f79ad0&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x102c1d590&gt;,
+ &lt;__main__.AlwaysEqualHashable at 0x101f79950&gt;]
+</code></pre>
+<p>Bah! Since we used a set, we compared by hashing, not equality, so we are left
+with three objects again. Notice the extremely subtle difference
+here. Basically, it is this:</p>
+<pre><code class="language-py">&gt;&gt;&gt; AE1 in {AE2}
+False
+&gt;&gt;&gt; AE1 in [AE2]
+True
+</code></pre>
+<p>Set containment uses hashing; list containment uses equality. If the two don't
+agree, then the result of your algorithm will depend on which one you use!</p>
+<p>By the way, as you might expect, dictionary containment also uses hashing, and
+tuple containment uses equality:</p>
+<pre><code class="language-py">&gt;&gt;&gt; AE1 in {AE2: 42}
+False
+&gt;&gt;&gt; AE1 in (AE2,)
+True
+</code></pre>
+<h3>Example 4: Caching hashing</h3>
+<p>If you ever want to add subtle bizarreness to a system, add some sort of
+caching, and then do it wrong.</p>
+<p>As we noted in the beginning, one important property of a hash function is
+that it is quick to compute. A nice way to achieve this for heavily cached
+objects is to cache the value of the cache on the object, so that it only
+needs to be computed once. The pattern (which is modeled after SymPy's
+<code>Basic</code>) is something like this:</p>
+<pre><code class="language-py">&gt;&gt;&gt; class HashCache(object):
+...     def __init__(self, arg):
+...         self.arg = arg
+...         self.hash_cache = None
+...     def __hash__(self):
+...         if self.hash_cache is None:
+...             self.hash_cache = hash(self.arg)
+...         return self.hash_cache
+...     def __eq__(self, other):
+...         if not isinstance(other, HashCache):
+...             return False
+...         return self.arg == other.arg
+...
+</code></pre>
+<p><code>HashCache</code> is nothing more than a small wrapper around a hashable argument,
+which caches its hash.</p>
+<pre><code class="language-py">&gt;&gt;&gt; hash('a')
+12416037344
+&gt;&gt;&gt; a = HashCache('a')
+&gt;&gt;&gt; hash(a)
+12416037344
+</code></pre>
+<p>For ordinary Python builtins, simply recomputing the hash will be faster than
+the attribute lookup used by <code>HashCache</code>. <em>Note: This uses the <code>%timeit</code> magic
+from IPython. <code>%timeit</code> only works when run in IPython or Jupyter.</em></p>
+<pre><code class="language-py">&gt;&gt;&gt; %timeit hash('a')
+10000000 loops, best of 3: 69.9 ns per loop
+&gt;&gt;&gt; %timeit hash(a)
+1000000 loops, best of 3: 328 ns per loop
+</code></pre>
+<p>But for a custom object, computing the hash may be more computationally
+expensive. As hashing is supposed to agree with equality (as I hope you've
+realized by now!), if computing equality is expensive, computing a hash
+function that agrees with it might be expensive as well.</p>
+<p>As a simple example of where this might be useful, consider a highly nested
+tuple, an object whose hash that is relatively expensive to compute.</p>
+<pre><code class="language-py">&gt;&gt;&gt; a = ()
+&gt;&gt;&gt; for i in range(1000):
+...     a = (a,)
+...
+&gt;&gt;&gt; A = HashCache(a)
+</code></pre>
+<pre><code class="language-py">&gt;&gt;&gt; %timeit hash(a)
+100000 loops, best of 3: 9.61 µs per loop
+&gt;&gt;&gt; %timeit hash(A)
+1000000 loops, best of 3: 325 ns per loop
+</code></pre>
+<p>So far, we haven't done anything wrong. <code>HashCache</code>, as you may have noticed,
+has <code>__eq__</code> defined correctly:</p>
+<pre><code class="language-py">&gt;&gt;&gt; HashCache(1) == HashCache(2)
+False
+&gt;&gt;&gt; HashCache(1) == HashCache(1)
+True
+</code></pre>
+<p>But what happens if we mutate a <code>HashCache</code>. This is different from examples 1
+and 2 above, because we will be mutating what happens with equality testing,
+but not the hash (because of the cache).</p>
+<p><em>In the below example, recall that small integers hash to themselves, so
+<code>hash(1) == 1</code> and <code>hash(2) == 2</code>.</em></p>
+<pre><code class="language-py">&gt;&gt;&gt; a = HashCache(1)
+&gt;&gt;&gt; d = {a: 42}
+&gt;&gt;&gt; a.arg = 2
+&gt;&gt;&gt; hash(a)
+1
+&gt;&gt;&gt; d[a]
+42
+</code></pre>
+<p>Because we cached the hash of <code>a</code>, which was computed as soon as we created
+the dictionary <code>d</code>, it remained unchanged when modified the arg to be
+<code>2</code>. Thus, we can still find the key of the dictionary. But since we have
+mutated <code>a</code>, the equality testing on it has changed. This means that, as with
+the previous example, we are going to have issues with dicts and sets keeping
+unique keys and entries (respectively).</p>
+<pre><code class="language-py">&gt;&gt;&gt; a = HashCache(1)
+&gt;&gt;&gt; b = HashCache(2)
+&gt;&gt;&gt; hash(a)
+1
+&gt;&gt;&gt; hash(b)
+2
+&gt;&gt;&gt; b.arg = 1
+&gt;&gt;&gt; a == b
+True
+&gt;&gt;&gt; hash(a) == hash(b)
+False
+&gt;&gt;&gt; {a, b}
+{&lt;__main__.HashCache at 0x102c32050&gt;, &lt;__main__.HashCache at 0x102c32450&gt;}
+&gt;&gt;&gt; uniq([a, b])
+[&lt;__main__.HashCache at 0x102c32050&gt;]
+&gt;&gt;&gt; uniq2([a, b])
+[&lt;__main__.HashCache at 0x102c32050&gt;, &lt;__main__.HashCache at 0x102c32450&gt;]
+</code></pre>
+<p>Once we mutate <code>b</code> so that it compares equal to <code>a</code>, we start to have the same sort of issues that we had in example 3 with <code>AlwaysEqualHashable</code>. Let's look at an instant replay.</p>
+<pre><code class="language-py">&gt;&gt;&gt; a = HashCache(1)
+&gt;&gt;&gt; b = HashCache(2)
+&gt;&gt;&gt; b.arg = 1
+&gt;&gt;&gt; print(a == b)
+True
+&gt;&gt;&gt; print(hash(a) == hash(b))
+True
+&gt;&gt;&gt; print({a, b})
+{&lt;__main__.HashCache object at 0x102c32a10&gt;}
+&gt;&gt;&gt; print(uniq([a, b]))
+[&lt;__main__.HashCache object at 0x102c32a50&gt;]
+&gt;&gt;&gt; print(uniq2([a, b]))
+[&lt;__main__.HashCache object at 0x102c32a50&gt;]
+</code></pre>
+<p>Wait a minute, this time it's different! Comparing it to above, it's pretty
+easy to see what was different this time. We left out the part where we showed
+the hash of <code>a</code> and <code>b</code>. When we did that the first time, it cached the hash
+of <code>b</code>, making it forever be <code>2</code>, but when we didn't do it the second time,
+the hash had not been cached yet, so the first time it is computed (in the
+<code>print(hash(a) == hash(b))</code> line), <code>b.arg</code> has already been changed to <code>1</code>.</p>
+<p>And herein lies the extreme subtlety: if you mutate an object with that hashes
+its cache like this, you will run into issues <strong>only if</strong> you had already
+called some function that hashed the object somewhere. Now just about anything
+might compute the hash of an object. Or it might not. For example, our <code>uniq2</code>
+function computes the hash of the objects in its input list, because it stores
+them in a set, but <code>uniq</code> does not:</p>
+<pre><code class="language-py">&gt;&gt;&gt; a = HashCache(1)
+&gt;&gt;&gt; b = HashCache(2)
+&gt;&gt;&gt; uniq2([a, b])
+&gt;&gt;&gt; b.arg = 1
+&gt;&gt;&gt; print(a == b)
+True
+&gt;&gt;&gt; print(hash(a) == hash(b))
+False
+&gt;&gt;&gt; print({a, b})
+{&lt;__main__.HashCache object at 0x102c32c50&gt;, &lt;__main__.HashCache object at 0x102c32c10&gt;}
+&gt;&gt;&gt; print(uniq([a, b]))
+[&lt;__main__.HashCache object at 0x102c32c50&gt;]
+&gt;&gt;&gt; print(uniq2([a, b]))
+[&lt;__main__.HashCache object at 0x102c32c50&gt;, &lt;__main__.HashCache object at 0x102c32c10&gt;]
+</code></pre>
+<pre><code class="language-py">&gt;&gt;&gt; a = HashCache(1)
+&gt;&gt;&gt; b = HashCache(2)
+&gt;&gt;&gt; uniq([a, b])
+&gt;&gt;&gt; b.arg = 1
+&gt;&gt;&gt; print(a == b)
+True
+&gt;&gt;&gt; print(hash(a) == hash(b))
+True
+&gt;&gt;&gt; print({a, b})
+{&lt;__main__.HashCache object at 0x102c32c90&gt;}
+&gt;&gt;&gt; print(uniq([a, b]))
+[&lt;__main__.HashCache object at 0x102c32bd0&gt;]
+&gt;&gt;&gt; print(uniq2([a, b]))
+[&lt;__main__.HashCache object at 0x102c32bd0&gt;]
+</code></pre>
+<p>The moral of this final example is that if you are going to cache something,
+that something had better be immutable.</p>
+<h2>Conclusion</h2>
+<p>The conclusion is this: don't mess with hashing. The two invariants above are
+important. Let's restate them here,</p>
+<ol>
+<li>
+<p><strong>The hash of an object must not change across the object's lifetime (in
+other words, a hashable object should be immutable).</strong></p>
+</li>
+<li>
+<p><strong><code>a == b</code> implies <code>hash(a) == hash(b)</code> (note that the reverse might not
+hold in the case of a hash collision).</strong></p>
+</li>
+</ol>
+<p>If you don't follow these rules, you will run into very subtle issues, because
+very basic Python operations expect these invariants.</p>
+<p>If you want to be able to mutate an object's properties, you have two
+options. First, make the object unhashable (set <code>__hash__ = None</code>). You won't
+be able to use it in sets or as keys to a dictionary, but you will be free to
+change the object in-place however you want.</p>
+<p>A second option is to make all mutable properties non-dependent on hashing or
+equality testing. This option works well if you just want to cache some
+internal state that doesn't inherently change the object. Both <code>__eq__</code> and
+<code>__hash__</code> should remain unchanged by changes to this state. You may also want
+to make sure you use proper getters and setters to prevent modification of
+internal state that equality testing and hashing does depend on.</p>
+<p>If you choose this second option, however, be aware that Python considers it
+fair game to swap out two identical immutable (i.e., hashable) objects at any
+time. If <code>a == b</code> and <code>a</code> is hashable, Python (and Python libraries) are free
+to replace <code>a</code> with <code>b</code> anywhere. For example, Python uses an optimization on
+strings called <em>interning</em>, where common strings are stored only once in
+memory. A similar optimization is used in CPython for small integers. If store
+something on <code>a</code> but not <code>b</code> and make <code>a</code>'s hash ignore that data, you may
+find that some function that should return <code>a</code> may actually return <code>b</code>. For
+this reason, I generally don't recommend this second option unless you know
+what you are doing.</p>
+<p>Finally, to keep invariant 2, here are some tips:</p>
+<ul>
+<li>
+<p>Make sure that the parts of the object that you use to compare equality are
+not themselves mutable. If they are, then your object cannot itself be
+immutable. This means that if <code>a == b</code> depends on <code>a.attr == b.attr</code>, and
+<code>a.attr</code> is a list, then you will need to use a tuple instead (if you want
+<code>a</code> to be hashable).</p>
+</li>
+<li>
+<p>You don't have to invent a hash function. If you find yourself doing
+bitshifts and XORs, you're doing it wrong. Reuse Python's builtin hashable
+objects. If the hash of your object should depend on the hash of <code>a</code> and
+<code>b</code>, define <code>__hash__</code> to return <code>hash((a, b))</code>. If the order of <code>a</code> and <code>b</code>
+does not matter, use <code>hash(frozenset([a, b]))</code>.</p>
+</li>
+<li>
+<p>Don't cache something unless you know that the entire cached state will not
+be changed over the lifetime of the cache. Hashable objects are actually
+great for caches. If they properly satisfy invariant 1, and all the state
+that should be cached is part of the hash, then you will not need to
+worry. And the best part is that you can just use <code>dict</code> for your cache.</p>
+</li>
+<li>
+<p>Unless you really need the performance or memory gains, don't make your
+objects mutable. This makes programs much harder to reason about. Some
+functional programming languages take this idea so far that they don't allow
+any mutable objects.</p>
+</li>
+<li>
+<p>Don't worry about the situation where <code>hash(a) == hash(b)</code> but <code>a != b</code>. This is a hash collision. Unlike the issues we looked at here, hash
+collisions are expected and checked for in Python. For example, our
+<code>HashToOne</code> object from the beginning will always hash to 1, but different
+instances will compare unequal. We can see that the right thing is done in
+every case with them.</p>
+<pre><code class="language-py">&gt;&gt;&gt; a = HashToOne()
+&gt;&gt;&gt; b = HashToOne()
+&gt;&gt;&gt; a == b
+False
+&gt;&gt;&gt; hash(a) == hash(b)
+True
+&gt;&gt;&gt; {a, b}
+{&lt;__main__.HashToOne at 0x102c32a10&gt;, &lt;__main__.HashToOne at 0x102c32cd0&gt;}
+&gt;&gt;&gt; uniq([a, b])
+[&lt;__main__.HashToOne at 0x102c32cd0&gt;, &lt;__main__.HashToOne at 0x102c32a10&gt;]
+&gt;&gt;&gt; uniq2([a, b])
+[&lt;__main__.HashToOne at 0x102c32cd0&gt;, &lt;__main__.HashToOne at 0x102c32a10&gt;]
+</code></pre>
+<p>The only concern with hash collisions is that too many of them can remove
+the performance gains of <code>dict</code> and <code>set</code>.</p>
+</li>
+<li>
+<p>Conversely, if you are writing something that uses an object's hash, remember
+that hash collisions are possible and unavoidable.</p>
+<p>A classic example of a hash collision is <code>-1</code> and <code>-2</code>. Remember I
+mentioned above that small integers hash to themselves:</p>
+<pre><code class="language-py">&gt;&gt;&gt; hash(1)
+1
+&gt;&gt;&gt; hash(-3)
+-3
+</code></pre>
+<p>The exception to this is <code>-1</code>. The CPython interpreter uses <code>-1</code> as an error
+state, so -1 is not a valid hash value. Hence, <code>hash(-1)</code> can't be <code>-1</code>. So
+the Python developers picked the next closest thing.</p>
+<pre><code class="language-py">&gt;&gt;&gt; hash(-1)
+-2
+&gt;&gt;&gt; hash(-2)
+-2
+</code></pre>
+<p>If you want to check if something handles hash collisions correctly, this is
+a simple example.  I should also note that the fact that integers hash to
+themselves is an implementation detail of CPython that may not be true in
+alternate Python implementations.</p>
+</li>
+<li>
+<p>Finally, we didn't discuss this much here, but don't assume that the hash of
+your object will be the same across Python sessions. In Python 3.3 and up,
+hash values of strings are randomized from a value that is seeded when
+Python starts up. This also affects any object whose hash is computed
+from the hash of strings. In Python 2.7, you can enable hash randomization
+with the <code>-R</code> flag to the interpreter. The following are two different
+Python sessions.</p>
+<pre><code class="language-py">&gt;&gt;&gt; print(hash('a'))
+-7750608935454338104
+</code></pre>
+<pre><code class="language-py">&gt;&gt;&gt; print(hash('a'))
+8897161376854729812
+</code></pre>
+</li>
+</ul>
+</div>
+    </div>
+    </article>
+</div>
+
+        <nav class="postindexpager"><ul class="pager">
+<li class="previous">
+                <a href="index-4.html" rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-2.html" rel="next">Older posts</a>
+            </li>
+        </ul></nav><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"], ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+   },
+   displayAlign: 'center', // Change this to 'center' to center equations.
+   "HTML-CSS": {
+       styles: {'.MathJax_Display': {"margin": 0}}
+   }
+});
+</script></main><footer id="footer"><p>Contents © 2019         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+</p>
+<p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0"></a>
+</p>
+            
+        </footer>
+</div>
+    
+            <script src="assets/js/all-nocdn.js"></script><div style="text-align:center">
+<span class="st_twitterfollow_large" displaytext="Twitter Follow" st_username="asmeurer"></span>
+<span class="st_twitter_large" displaytext="Tweet"></span>
+<span class="st_googleplus_large" displaytext="Google +"></span>
+<span class="st_plusone_large" displaytext="Google +1"></span>
+
+<span class="st_email_large" displaytext="Email"></span>
+
+</div>
+
+
+    
+    <script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
