@@ -241,3 +241,102 @@ conda install -c conda-forge removestar
 
 ## sphinx-math-dollar
 
+In SymPy, we make heavy use of LaTeX math in our documentation. For example,
+in our [special functions
+documentation](https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.hyper.hyper),
+most special functions are defined using a LaTeX formula, like <img
+src="../../besselj_docs.png" alt="The docs for besselj">
+
+(from https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj)
+
+However, the source for this math in the docstring of the function uses RST
+syntax:
+
+```py
+class besselj(BesselBase):
+    """
+    Bessel function of the first kind.
+
+    The Bessel `J` function of order `\nu` is defined to be the function
+    satisfying Bessel's differential equation
+
+    .. math ::
+        z^2 \frac{\mathrm{d}^2 w}{\mathrm{d}z^2}
+        + z \frac{\mathrm{d}w}{\mathrm{d}z} + (z^2 - \nu^2) w = 0,
+
+    with Laurent expansion
+
+    .. math ::
+        J_\nu(z) = z^\nu \left(\frac{1}{\Gamma(\nu + 1) 2^\nu} + O(z^2) \right),
+
+    if :math:`\nu` is not a negative integer. If :math:`\nu=-n \in \mathbb{Z}_{<0}`
+    *is* a negative integer, then the definition is
+
+    .. math ::
+        J_{-n}(z) = (-1)^n J_n(z).
+```
+
+Furthermore, in SymPy's documentation we have configured it so that text
+between \`single backticks\` is rendered as math. This was originally done for
+convenience, as the alternative way is to write <code>:math:\`\nu\`</code> every
+time you want to use inline math. But this has lead to many people being
+confused, as they are used to Markdown where \`single backticks\` produce
+`code`.
+
+A better way to write this would be if we could delimit math with dollar
+signs, like `$\nu$`. This is how things are done in LaTeX documents, as well
+as in things like the Jupyter notebook.
+
+With the new [sphinx-math-dollar](https://www.sympy.org/sphinx-math-dollar/)
+Sphinx extension, this is now possible. Writing `$\nu$` produces $\nu$, and
+the above docstring can now be written as
+
+
+```py
+class besselj(BesselBase):
+    """
+    Bessel function of the first kind.
+
+    The Bessel $J$ function of order $\nu$ is defined to be the function
+    satisfying Bessel's differential equation
+
+    .. math ::
+        z^2 \frac{\mathrm{d}^2 w}{\mathrm{d}z^2}
+        + z \frac{\mathrm{d}w}{\mathrm{d}z} + (z^2 - \nu^2) w = 0,
+
+    with Laurent expansion
+
+    .. math ::
+        J_\nu(z) = z^\nu \left(\frac{1}{\Gamma(\nu + 1) 2^\nu} + O(z^2) \right),
+
+    if $\nu$ is not a negative integer. If $\nu=-n \in \mathbb{Z}_{<0}$
+    *is* a negative integer, then the definition is
+
+    .. math ::
+        J_{-n}(z) = (-1)^n J_n(z).
+```
+
+We also plan to add support for `$$double dollars$$` for display math so that `..
+math ::` is no longer needed either .
+
+For end users, the documentation on docs.sympy.org will continue to render
+exactly the same, but for developers, it is much easier to read and write.
+
+This extension can be easily used in any Sphinx project. Simply install it
+with pip or conda:
+
+```
+pip install sphinx-math-dollar
+```
+
+or
+
+```
+conda install -c conda-forge sphinx-math-dollar
+```
+
+Then enable it in your `conf.py`:
+
+```py
+extensions = ['sphinx_math_dollar', 'sphinx.ext.mathjax']
+```
