@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Tue, 17 Sep 2019 22:08:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 04 Oct 2019 21:06:07 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
 the same people who started Anaconda, which aims to connect companies and open
@@ -70,27 +70,28 @@ possibly a segmentation fault.&lt;/p&gt;
 ...         A += x[i]
 ...     return A
 &amp;gt;&amp;gt;&amp;gt; x = np.arange(100)
-&amp;gt;&amp;gt;&amp;gt; outtabounds(x)
+&amp;gt;&amp;gt;&amp;gt; outtabounds(x) # pure Python/NumPy behavior
 Traceback (most recent call last):
   File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
   File "&amp;lt;stdin&amp;gt;", line 4, in outtabounds
 IndexError: index 100 is out of bounds for axis 0 with size 100
-&amp;gt;&amp;gt;&amp;gt; njit(outtabounds)(x)
+&amp;gt;&amp;gt;&amp;gt; njit(outtabounds)(x) # the default numba behavior
 -8557904790533229732
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In numba pull request &lt;a href="https://github.com/numba/numba/pull/4432"&gt;#4432&lt;/a&gt;, I am
-working on adding a flag to njit that will enable bounds checks. This will
-remain disabled by default for performance purposes, but it will be able to be
-turned on so that you can detect bounds issues like the one above. It will
-work like&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; @njit(boundscheck=True)
+working on adding a flag to &lt;code&gt;@njit&lt;/code&gt; that will enable bounds checks for array
+indexing. This will remain disabled by default for performance purposes. But
+you will be able to enable it by passing &lt;code&gt;boundscheck=True&lt;/code&gt; to &lt;code&gt;@njit&lt;/code&gt;, or by
+setting the &lt;code&gt;NUMBA_BOUNDSCHECK=1&lt;/code&gt; environment variable. This will make it
+easier to detect out of bounds issues like the one above. It will work like&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-pycon"&gt;&amp;gt;&amp;gt;&amp;gt; @njit(boundscheck=True)
 ... def outtabounds(x):
 ...     A = 0
 ...     for i in range(1000):
 ...         A += x[i]
 ...     return A
 &amp;gt;&amp;gt;&amp;gt; x = np.arange(100)
-&amp;gt;&amp;gt;&amp;gt; outtabounds(x)
+&amp;gt;&amp;gt;&amp;gt; outtabounds(x) # numba behavior in my pull request #4432
 Traceback (most recent call last):
   File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
 IndexError: index is out of bounds
@@ -102,10 +103,10 @@ debugging issues easier for people who write numba code once it is merged.&lt;/p
 &lt;p&gt;&lt;a href="https://www.asmeurer.com/removestar/"&gt;removestar&lt;/a&gt; is a new tool I wrote to
 automatically replace &lt;code&gt;import *&lt;/code&gt; in Python modules with explicit imports.&lt;/p&gt;
 &lt;p&gt;For those who don't know, Python's &lt;code&gt;import&lt;/code&gt; statement supports so-called
-"wildcard" imports, like&lt;/p&gt;
+"wildcard" or "star" imports, like&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;from sympy import *
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will import every public name from the &lt;code&gt;sympy&lt;/code&gt; module into the module
+&lt;p&gt;This will import every public name from the &lt;code&gt;sympy&lt;/code&gt; module into the current
 namespace. This is often useful because it saves on typing every name that is
 used in the import line. This is especially useful when working interactively,
 where you just want to import every name and minimize typing.&lt;/p&gt;
@@ -133,7 +134,8 @@ the file. For imports from modules (from &lt;code&gt;__init__.py&lt;/code&gt;), 
 modules and &lt;code&gt;__init__.py&lt;/code&gt; files is also good practice, as these things are
 also often confusing even for interactive use where &lt;code&gt;import *&lt;/code&gt; is
 acceptable.&lt;/li&gt;
-&lt;li&gt;In Python 3, &lt;code&gt;import *&lt;/code&gt; is syntactically not allowed inside of a function.&lt;/li&gt;
+&lt;li&gt;In Python 3, &lt;code&gt;import *&lt;/code&gt; is syntactically not allowed inside of a function
+definition.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Here are some official Python references stating not to use &lt;code&gt;import *&lt;/code&gt; in
 files:&lt;/p&gt;
@@ -159,21 +161,23 @@ readers and many automated tools.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Unfortunately, if you come across a file in the wild that uses &lt;code&gt;import *&lt;/code&gt;, it
 can be hard to fix it, because you need to find every name in the file that is
-imported from the &lt;code&gt;*&lt;/code&gt;. Removestar makes this easy by finding which names come
-from &lt;code&gt;*&lt;/code&gt; imports and replacing the import lines in the file automatically.&lt;/p&gt;
-&lt;p&gt;Suppose you have a module &lt;code&gt;mymod&lt;/code&gt; like&lt;/p&gt;
+imported from the &lt;code&gt;*&lt;/code&gt; and manually add an import for it. Removestar makes this
+easy by finding which names come from &lt;code&gt;*&lt;/code&gt; imports and replacing the import
+lines in the file automatically.&lt;/p&gt;
+&lt;p&gt;As an example, suppose you have a module &lt;code&gt;mymod&lt;/code&gt; like&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;mymod/
   | __init__.py
   | a.py
   | b.py
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With&lt;/p&gt;
+&lt;p&gt;with&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;# mymod/a.py
 from .b import *
 
 def func(x):
     return x + y
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;# mymod/b.py
 x = 1
 y = 2
@@ -206,7 +210,7 @@ imports the names dynamically.&lt;/p&gt;
 in our &lt;a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.hyper.hyper"&gt;special functions
 documentation&lt;/a&gt;,
 most special functions are defined using a LaTeX formula, like &lt;img src="https://asmeurer.com/blog/besselj_docs.png" alt="The docs for besselj"&gt;&lt;/p&gt;
-&lt;p&gt;(from https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj)&lt;/p&gt;
+&lt;p&gt;(from &lt;a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj"&gt;https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;However, the source for this math in the docstring of the function uses RST
 syntax:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;class besselj(BesselBase):
@@ -266,8 +270,9 @@ the above docstring can now be written as&lt;/p&gt;
         J_{-n}(z) = (-1)^n J_n(z).
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We also plan to add support for &lt;code&gt;$$double dollars$$&lt;/code&gt; for display math so that &lt;code&gt;.. math ::&lt;/code&gt; is no longer needed either .&lt;/p&gt;
-&lt;p&gt;For end users, the documentation on docs.sympy.org will continue to render
-exactly the same, but for developers, it is much easier to read and write.&lt;/p&gt;
+&lt;p&gt;For end users, the documentation on &lt;a href="https://docs.sympy.org"&gt;docs.sympy.org&lt;/a&gt;
+will continue to render exactly the same, but for developers, it is much
+easier to read and write.&lt;/p&gt;
 &lt;p&gt;This extension can be easily used in any Sphinx project. Simply install it
 with pip or conda:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;pip install sphinx-math-dollar
@@ -284,13 +289,17 @@ improve the tooling around SymPy's documentation. This has been to assist our
 technical writer Lauren Glattly, who is working with SymPy for the next three
 months as part of the new &lt;a href="https://developers.google.com/season-of-docs/"&gt;Google Season of
 Docs&lt;/a&gt; program. Lauren's project
-will be to improve the consistency of our docstrings in SymPy. She has already
+is to improve the consistency of our docstrings in SymPy. She has already
 identified many key ways our docstring documentation can be improved, and is
 currently working on a style guide for writing docstrings. Some of the issues
 that Lauren has identified require improved tooling around the way the HTML
 documentation is built to fix. So some other SymPy developers and I have been
 working on improving this, so that she can focus on the technical writing
-aspects of our documentation.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</guid><pubDate>Tue, 17 Sep 2019 21:11:26 GMT</pubDate></item><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+aspects of our documentation.&lt;/p&gt;
+&lt;p&gt;Lauren has created a draft style guide for documentation at
+&lt;a href="https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide"&gt;https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide&lt;/a&gt;. Please
+take a moment to look at it and if you have any feedback on it, comment below
+or write to the SymPy mailing list.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</guid><pubDate>Tue, 17 Sep 2019 21:11:26 GMT</pubDate></item><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
 the same people who started Anaconda, which aims to connect companies and open

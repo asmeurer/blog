@@ -128,27 +128,28 @@ possibly a segmentation fault.</p>
 ...         A += x[i]
 ...     return A
 &gt;&gt;&gt; x = np.arange(100)
-&gt;&gt;&gt; outtabounds(x)
+&gt;&gt;&gt; outtabounds(x) # pure Python/NumPy behavior
 Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
   File "&lt;stdin&gt;", line 4, in outtabounds
 IndexError: index 100 is out of bounds for axis 0 with size 100
-&gt;&gt;&gt; njit(outtabounds)(x)
+&gt;&gt;&gt; njit(outtabounds)(x) # the default numba behavior
 -8557904790533229732
 </code></pre>
 <p>In numba pull request <a href="https://github.com/numba/numba/pull/4432">#4432</a>, I am
-working on adding a flag to njit that will enable bounds checks. This will
-remain disabled by default for performance purposes, but it will be able to be
-turned on so that you can detect bounds issues like the one above. It will
-work like</p>
-<pre><code>&gt;&gt;&gt; @njit(boundscheck=True)
+working on adding a flag to <code>@njit</code> that will enable bounds checks for array
+indexing. This will remain disabled by default for performance purposes. But
+you will be able to enable it by passing <code>boundscheck=True</code> to <code>@njit</code>, or by
+setting the <code>NUMBA_BOUNDSCHECK=1</code> environment variable. This will make it
+easier to detect out of bounds issues like the one above. It will work like</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; @njit(boundscheck=True)
 ... def outtabounds(x):
 ...     A = 0
 ...     for i in range(1000):
 ...         A += x[i]
 ...     return A
 &gt;&gt;&gt; x = np.arange(100)
-&gt;&gt;&gt; outtabounds(x)
+&gt;&gt;&gt; outtabounds(x) # numba behavior in my pull request #4432
 Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 IndexError: index is out of bounds
@@ -160,10 +161,10 @@ debugging issues easier for people who write numba code once it is merged.</p>
 <p><a href="https://www.asmeurer.com/removestar/">removestar</a> is a new tool I wrote to
 automatically replace <code>import *</code> in Python modules with explicit imports.</p>
 <p>For those who don't know, Python's <code>import</code> statement supports so-called
-"wildcard" imports, like</p>
+"wildcard" or "star" imports, like</p>
 <pre><code class="language-py">from sympy import *
 </code></pre>
-<p>This will import every public name from the <code>sympy</code> module into the module
+<p>This will import every public name from the <code>sympy</code> module into the current
 namespace. This is often useful because it saves on typing every name that is
 used in the import line. This is especially useful when working interactively,
 where you just want to import every name and minimize typing.</p>
@@ -192,7 +193,8 @@ the file. For imports from modules (from <code>__init__.py</code>), <code>from m
 modules and <code>__init__.py</code> files is also good practice, as these things are
 also often confusing even for interactive use where <code>import *</code> is
 acceptable.</li>
-<li>In Python 3, <code>import *</code> is syntactically not allowed inside of a function.</li>
+<li>In Python 3, <code>import *</code> is syntactically not allowed inside of a function
+definition.</li>
 </ul>
 <p>Here are some official Python references stating not to use <code>import *</code> in
 files:</p>
@@ -218,21 +220,23 @@ readers and many automated tools.</p>
 </ul>
 <p>Unfortunately, if you come across a file in the wild that uses <code>import *</code>, it
 can be hard to fix it, because you need to find every name in the file that is
-imported from the <code>*</code>. Removestar makes this easy by finding which names come
-from <code>*</code> imports and replacing the import lines in the file automatically.</p>
-<p>Suppose you have a module <code>mymod</code> like</p>
+imported from the <code>*</code> and manually add an import for it. Removestar makes this
+easy by finding which names come from <code>*</code> imports and replacing the import
+lines in the file automatically.</p>
+<p>As an example, suppose you have a module <code>mymod</code> like</p>
 <pre><code>mymod/
   | __init__.py
   | a.py
   | b.py
 </code></pre>
-<p>With</p>
+<p>with</p>
 <pre><code class="language-py"># mymod/a.py
 from .b import *
 
 def func(x):
     return x + y
 </code></pre>
+<p>and</p>
 <pre><code class="language-py"># mymod/b.py
 x = 1
 y = 2
@@ -265,7 +269,7 @@ imports the names dynamically.</p>
 in our <a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.hyper.hyper">special functions
 documentation</a>,
 most special functions are defined using a LaTeX formula, like <img src="besselj_docs.png" alt="The docs for besselj"></p>
-<p>(from https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj)</p>
+<p>(from <a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj">https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj</a>)</p>
 <p>However, the source for this math in the docstring of the function uses RST
 syntax:</p>
 <pre><code class="language-py">class besselj(BesselBase):
@@ -325,8 +329,9 @@ the above docstring can now be written as</p>
         J_{-n}(z) = (-1)^n J_n(z).
 </code></pre>
 <p>We also plan to add support for <code>$$double dollars$$</code> for display math so that <code>.. math ::</code> is no longer needed either .</p>
-<p>For end users, the documentation on docs.sympy.org will continue to render
-exactly the same, but for developers, it is much easier to read and write.</p>
+<p>For end users, the documentation on <a href="https://docs.sympy.org">docs.sympy.org</a>
+will continue to render exactly the same, but for developers, it is much
+easier to read and write.</p>
 <p>This extension can be easily used in any Sphinx project. Simply install it
 with pip or conda:</p>
 <pre><code>pip install sphinx-math-dollar
@@ -343,13 +348,17 @@ improve the tooling around SymPy's documentation. This has been to assist our
 technical writer Lauren Glattly, who is working with SymPy for the next three
 months as part of the new <a href="https://developers.google.com/season-of-docs/">Google Season of
 Docs</a> program. Lauren's project
-will be to improve the consistency of our docstrings in SymPy. She has already
+is to improve the consistency of our docstrings in SymPy. She has already
 identified many key ways our docstring documentation can be improved, and is
 currently working on a style guide for writing docstrings. Some of the issues
 that Lauren has identified require improved tooling around the way the HTML
 documentation is built to fix. So some other SymPy developers and I have been
 working on improving this, so that she can focus on the technical writing
 aspects of our documentation.</p>
+<p>Lauren has created a draft style guide for documentation at
+<a href="https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide">https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide</a>. Please
+take a moment to look at it and if you have any feedback on it, comment below
+or write to the SymPy mailing list.</p>
 </div>
     </div>
     </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/whats-new-in-sympy-14/" class="u-url">What's New in SymPy 1.4</a></h1>

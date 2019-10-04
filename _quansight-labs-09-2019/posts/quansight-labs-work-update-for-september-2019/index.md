@@ -80,22 +80,23 @@ possibly a segmentation fault.
 ...         A += x[i]
 ...     return A
 >>> x = np.arange(100)
->>> outtabounds(x)
+>>> outtabounds(x) # pure Python/NumPy behavior
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "<stdin>", line 4, in outtabounds
 IndexError: index 100 is out of bounds for axis 0 with size 100
->>> njit(outtabounds)(x)
+>>> njit(outtabounds)(x) # the default numba behavior
 -8557904790533229732
 ```
 
 In numba pull request [#4432](https://github.com/numba/numba/pull/4432), I am
-working on adding a flag to njit that will enable bounds checks. This will
-remain disabled by default for performance purposes, but it will be able to be
-turned on so that you can detect bounds issues like the one above. It will
-work like
+working on adding a flag to `@njit` that will enable bounds checks for array
+indexing. This will remain disabled by default for performance purposes. But
+you will be able to enable it by passing `boundscheck=True` to `@njit`, or by
+setting the `NUMBA_BOUNDSCHECK=1` environment variable. This will make it
+easier to detect out of bounds issues like the one above. It will work like
 
-```
+```pycon
 >>> @njit(boundscheck=True)
 ... def outtabounds(x):
 ...     A = 0
@@ -103,7 +104,7 @@ work like
 ...         A += x[i]
 ...     return A
 >>> x = np.arange(100)
->>> outtabounds(x)
+>>> outtabounds(x) # numba behavior in my pull request #4432
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 IndexError: index is out of bounds
@@ -119,13 +120,13 @@ debugging issues easier for people who write numba code once it is merged.
 automatically replace `import *` in Python modules with explicit imports.
 
 For those who don't know, Python's `import` statement supports so-called
-"wildcard" imports, like
+"wildcard" or "star" imports, like
 
 ```py
 from sympy import *
 ```
 
-This will import every public name from the `sympy` module into the module
+This will import every public name from the `sympy` module into the current
 namespace. This is often useful because it saves on typing every name that is
 used in the import line. This is especially useful when working interactively,
 where you just want to import every name and minimize typing.
@@ -156,7 +157,8 @@ Some reasons why `import *` is bad:
   modules and `__init__.py` files is also good practice, as these things are
   also often confusing even for interactive use where `import *` is
   acceptable.
-- In Python 3, `import *` is syntactically not allowed inside of a function.
+- In Python 3, `import *` is syntactically not allowed inside of a function
+  definition.
 
 Here are some official Python references stating not to use `import *` in
 files:
@@ -177,10 +179,11 @@ files:
 
 Unfortunately, if you come across a file in the wild that uses `import *`, it
 can be hard to fix it, because you need to find every name in the file that is
-imported from the `*`. Removestar makes this easy by finding which names come
-from `*` imports and replacing the import lines in the file automatically.
+imported from the `*` and manually add an import for it. Removestar makes this
+easy by finding which names come from `*` imports and replacing the import
+lines in the file automatically.
 
-Suppose you have a module `mymod` like
+As an example, suppose you have a module `mymod` like
 
 ```
 mymod/
@@ -189,7 +192,7 @@ mymod/
   | b.py
 ```
 
-With
+with
 
 ```py
 # mymod/a.py
@@ -198,6 +201,8 @@ from .b import *
 def func(x):
     return x + y
 ```
+
+and
 
 ```py
 # mymod/b.py
@@ -247,7 +252,7 @@ documentation](https://docs.sympy.org/dev/modules/functions/special.html#sympy.f
 most special functions are defined using a LaTeX formula, like <img
 src="../../besselj_docs.png" alt="The docs for besselj">
 
-(from https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj)
+(from <https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj>)
 
 However, the source for this math in the docstring of the function uses RST
 syntax:
@@ -319,8 +324,9 @@ class besselj(BesselBase):
 We also plan to add support for `$$double dollars$$` for display math so that `..
 math ::` is no longer needed either .
 
-For end users, the documentation on docs.sympy.org will continue to render
-exactly the same, but for developers, it is much easier to read and write.
+For end users, the documentation on [docs.sympy.org](https://docs.sympy.org)
+will continue to render exactly the same, but for developers, it is much
+easier to read and write.
 
 This extension can be easily used in any Sphinx project. Simply install it
 with pip or conda:
@@ -348,10 +354,15 @@ improve the tooling around SymPy's documentation. This has been to assist our
 technical writer Lauren Glattly, who is working with SymPy for the next three
 months as part of the new [Google Season of
 Docs](https://developers.google.com/season-of-docs/) program. Lauren's project
-will be to improve the consistency of our docstrings in SymPy. She has already
+is to improve the consistency of our docstrings in SymPy. She has already
 identified many key ways our docstring documentation can be improved, and is
 currently working on a style guide for writing docstrings. Some of the issues
 that Lauren has identified require improved tooling around the way the HTML
 documentation is built to fix. So some other SymPy developers and I have been
 working on improving this, so that she can focus on the technical writing
 aspects of our documentation.
+
+Lauren has created a draft style guide for documentation at
+<https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide>. Please
+take a moment to look at it and if you have any feedback on it, comment below
+or write to the SymPy mailing list.
