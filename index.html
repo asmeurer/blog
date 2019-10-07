@@ -13,7 +13,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="rss.xml">
 <link rel="canonical" href="https://asmeurer.com/blog/">
 <link rel="next" href="index-4.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link rel="prefetch" href="posts/whats-new-in-sympy-14/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link rel="prefetch" href="posts/quansight-labs-work-update-for-september-2019/" type="text/html">
 </head>
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -39,7 +39,329 @@
     
     
     </ul></nav></header><main id="content"><div class="postindex">
-    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/whats-new-in-sympy-14/" class="u-url">What's New in SymPy 1.4</a></h1>
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/quansight-labs-work-update-for-september-2019/" class="u-url">Quansight Labs Work Update for September, 2019</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="posts/quansight-labs-work-update-for-september-2019/" rel="bookmark">
+            <time class="published dt-published" datetime="2019-10-07T00:00:00-05:00" itemprop="datePublished" title="2019-10-07 00:00">2019-10-07 00:00</time></a>
+            </p>
+                <p class="commentline">
+        
+    <a href="posts/quansight-labs-work-update-for-september-2019/#disqus_thread" data-disqus-identifier="cache/posts/quansight-labs-work-update-for-september-2019.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p><em>This post has been cross-posted on the <a href="https://labs.quansight.org/blog/">Quansight Labs Blog</a>.</em></p>
+<p>As of November, 2018, I have been working at
+<a href="https://www.quansight.com/">Quansight</a>. Quansight is a new startup founded by
+the same people who started Anaconda, which aims to connect companies and open
+source communities, and offers consulting, training, support and mentoring
+services. I work under the heading of <a href="https://www.quansight.com/labs">Quansight
+Labs</a>. Quansight Labs is a public-benefit
+division of Quansight. It provides a home for a "PyData Core Team" which
+consists of developers, community managers, designers, and documentation
+writers who build open-source technology and grow open-source communities
+around all aspects of the AI and Data Science workflow.</p>
+<p>My work at Quansight is split between doing open source consulting for various
+companies, and working on SymPy.
+<a href="https://www.sympy.org/en/index.html">SymPy</a>, for those who do not know, is a
+symbolic mathematics library written in pure Python. I am the lead maintainer
+of SymPy.</p>
+<p>In this post, I will detail some of the open source work that I have done
+recently, both as part of my open source consulting, and as part of my work on
+SymPy for Quansight Labs.</p>
+<h3>Bounds Checking in Numba</h3>
+<p>As part of work on a client project, I have been working on contributing code
+to the <a href="https://numba.pydata.org">numba</a> project. Numba is a just-in-time
+compiler for Python. It lets you write native Python code and with the use of
+a simple <code>@jit</code> decorator, the code will be automatically sped up using LLVM.
+This can result in code that is up to 1000x faster in some cases:</p>
+<pre><code>
+In [1]: import numba
+
+In [2]: import numpy
+
+In [3]: def test(x):
+   ...:     A = 0
+   ...:     for i in range(len(x)):
+   ...:         A += i*x[i]
+   ...:     return A
+   ...:
+
+In [4]: @numba.njit
+   ...: def test_jit(x):
+   ...:     A = 0
+   ...:     for i in range(len(x)):
+   ...:         A += i*x[i]
+   ...:     return A
+   ...:
+
+In [5]: x = numpy.arange(1000)
+
+In [6]: %timeit test(x)
+249 µs ± 5.77 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+
+In [7]: %timeit test_jit(x)
+336 ns ± 0.638 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+
+In [8]: 249/.336
+Out[8]: 741.0714285714286
+</code></pre>
+<p>Numba only works for a subset of Python code, and primarily targets code that
+uses NumPy arrays.</p>
+<p>Numba, with the help of LLVM, achieves this level of performance through many
+optimizations. One thing that it does to improve performance is to remove all
+bounds checking from array indexing. This means that if an array index is out
+of bounds, instead of receiving an <code>IndexError</code>, you will get garbage, or
+possibly a segmentation fault.</p>
+<pre><code>&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from numba import njit
+&gt;&gt;&gt; def outtabounds(x):
+...     A = 0
+...     for i in range(1000):
+...         A += x[i]
+...     return A
+&gt;&gt;&gt; x = np.arange(100)
+&gt;&gt;&gt; outtabounds(x) # pure Python/NumPy behavior
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+  File "&lt;stdin&gt;", line 4, in outtabounds
+IndexError: index 100 is out of bounds for axis 0 with size 100
+&gt;&gt;&gt; njit(outtabounds)(x) # the default numba behavior
+-8557904790533229732
+</code></pre>
+<p>In numba pull request <a href="https://github.com/numba/numba/pull/4432">#4432</a>, I am
+working on adding a flag to <code>@njit</code> that will enable bounds checks for array
+indexing. This will remain disabled by default for performance purposes. But
+you will be able to enable it by passing <code>boundscheck=True</code> to <code>@njit</code>, or by
+setting the <code>NUMBA_BOUNDSCHECK=1</code> environment variable. This will make it
+easier to detect out of bounds issues like the one above. It will work like</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; @njit(boundscheck=True)
+... def outtabounds(x):
+...     A = 0
+...     for i in range(1000):
+...         A += x[i]
+...     return A
+&gt;&gt;&gt; x = np.arange(100)
+&gt;&gt;&gt; outtabounds(x) # numba behavior in my pull request #4432
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+IndexError: index is out of bounds
+</code></pre>
+<p>The pull request is still in progress, and many things such as the quality of
+the error message reporting will need to be improved. This should make
+debugging issues easier for people who write numba code once it is merged.</p>
+<h3>removestar</h3>
+<p><a href="https://www.asmeurer.com/removestar/">removestar</a> is a new tool I wrote to
+automatically replace <code>import *</code> in Python modules with explicit imports.</p>
+<p>For those who don't know, Python's <code>import</code> statement supports so-called
+"wildcard" or "star" imports, like</p>
+<pre><code class="language-py">from sympy import *
+</code></pre>
+<p>This will import every public name from the <code>sympy</code> module into the current
+namespace. This is often useful because it saves on typing every name that is
+used in the import line. This is especially useful when working interactively,
+where you just want to import every name and minimize typing.</p>
+<p>However, doing <code>from module import *</code> is generally frowned upon in Python. It is
+considered acceptable when working interactively at a <code>python</code> prompt, or in
+<code>__init__.py</code> files (removestar skips <code>__init__.py</code> files by default).</p>
+<p>Some reasons why <code>import *</code> is bad:</p>
+<ul>
+<li>It hides which names are actually imported.</li>
+<li>It is difficult both for human readers and static analyzers such as
+pyflakes to tell where a given name comes from when <code>import *</code> is used. For
+example, pyflakes cannot detect unused names (for instance, from typos) in
+the presence of <code>import *</code>.</li>
+<li>If there are multiple <code>import *</code> statements, it may not be clear which names
+come from which module. In some cases, both modules may have a given name,
+but only the second import will end up being used. This can break people's
+intuition that the order of imports in a Python file generally does not
+matter.</li>
+<li>
+<code>import *</code> often imports more names than you would expect. Unless the module
+you import defines <code>__all__</code> or carefully <code>del</code>s unused names at the module
+level, <code>import *</code> will import every public (doesn't start with an
+underscore) name defined in the module file. This can often include things
+like standard library imports or loop variables defined at the top-level of
+the file. For imports from modules (from <code>__init__.py</code>), <code>from module import *</code> will include every submodule defined in that module. Using <code>__all__</code> in
+modules and <code>__init__.py</code> files is also good practice, as these things are
+also often confusing even for interactive use where <code>import *</code> is
+acceptable.</li>
+<li>In Python 3, <code>import *</code> is syntactically not allowed inside of a function
+definition.</li>
+</ul>
+<p>Here are some official Python references stating not to use <code>import *</code> in
+files:</p>
+<ul>
+<li>
+<p><a href="https://docs.python.org/3/faq/programming.html?highlight=faq#what-are-the-best-practices-for-using-import-in-a-module">The official Python
+FAQ</a>:</p>
+<blockquote>
+<p>In general, don’t use <code>from modulename import *</code>. Doing so clutters the
+importer’s namespace, and makes it much harder for linters to detect
+undefined names.</p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://www.python.org/dev/peps/pep-0008/#imports">PEP 8</a> (the official
+Python style guide):</p>
+<blockquote>
+<p>Wildcard imports (<code>from &lt;module&gt; import *</code>) should be avoided, as they
+make it unclear which names are present in the namespace, confusing both
+readers and many automated tools.</p>
+</blockquote>
+</li>
+</ul>
+<p>Unfortunately, if you come across a file in the wild that uses <code>import *</code>, it
+can be hard to fix it, because you need to find every name in the file that is
+imported from the <code>*</code> and manually add an import for it. Removestar makes this
+easy by finding which names come from <code>*</code> imports and replacing the import
+lines in the file automatically.</p>
+<p>As an example, suppose you have a module <code>mymod</code> like</p>
+<pre><code>mymod/
+  | __init__.py
+  | a.py
+  | b.py
+</code></pre>
+<p>with</p>
+<pre><code class="language-py"># mymod/a.py
+from .b import *
+
+def func(x):
+    return x + y
+</code></pre>
+<p>and</p>
+<pre><code class="language-py"># mymod/b.py
+x = 1
+y = 2
+</code></pre>
+<p>Then <code>removestar</code> works like:</p>
+<pre><code>$ removestar -i mymod/
+$ cat mymod/a.py
+# mymod/a.py
+from .b import y
+
+def func(x):
+    return x + y
+</code></pre>
+<p>The <code>-i</code> flag causes it to edit <code>a.py</code> in-place. Without it, it would just
+print a diff to the terminal.</p>
+<p>For implicit star imports and explicit star imports from the same module,
+<code>removestar</code> works statically, making use of
+<a href="https://github.com/PyCQA/pyflakes">pyflakes</a>. This means none of the code is
+actually executed. For external imports, it is not possible to work statically
+as external imports may include C extension modules, so in that case, it
+imports the names dynamically.</p>
+<p><code>removestar</code> can be installed with pip or conda:</p>
+<pre><code>pip install removestar
+</code></pre>
+<p>or if you use conda</p>
+<pre><code>conda install -c conda-forge removestar
+</code></pre>
+<h3>sphinx-math-dollar</h3>
+<p>In SymPy, we make heavy use of LaTeX math in our documentation. For example,
+in our <a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.hyper.hyper">special functions
+documentation</a>,
+most special functions are defined using a LaTeX formula, like <img src="besselj_docs.png" alt="The docs for besselj"></p>
+<p>(from <a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj">https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj</a>)</p>
+<p>However, the source for this math in the docstring of the function uses RST
+syntax:</p>
+<pre><code class="language-py">class besselj(BesselBase):
+    """
+    Bessel function of the first kind.
+
+    The Bessel `J` function of order `\nu` is defined to be the function
+    satisfying Bessel's differential equation
+
+    .. math ::
+        z^2 \frac{\mathrm{d}^2 w}{\mathrm{d}z^2}
+        + z \frac{\mathrm{d}w}{\mathrm{d}z} + (z^2 - \nu^2) w = 0,
+
+    with Laurent expansion
+
+    .. math ::
+        J_\nu(z) = z^\nu \left(\frac{1}{\Gamma(\nu + 1) 2^\nu} + O(z^2) \right),
+
+    if :math:`\nu` is not a negative integer. If :math:`\nu=-n \in \mathbb{Z}_{&lt;0}`
+    *is* a negative integer, then the definition is
+
+    .. math ::
+        J_{-n}(z) = (-1)^n J_n(z).
+</code></pre>
+<p>Furthermore, in SymPy's documentation we have configured it so that text
+between `single backticks` is rendered as math. This was originally done for
+convenience, as the alternative way is to write <code>:math:`\nu`</code> every
+time you want to use inline math. But this has lead to many people being
+confused, as they are used to Markdown where `single backticks` produce
+<code>code</code>.</p>
+<p>A better way to write this would be if we could delimit math with dollar
+signs, like <code>$\nu$</code>. This is how things are done in LaTeX documents, as well
+as in things like the Jupyter notebook.</p>
+<p>With the new <a href="https://www.sympy.org/sphinx-math-dollar/">sphinx-math-dollar</a>
+Sphinx extension, this is now possible. Writing <code>$\nu$</code> produces $\nu$, and
+the above docstring can now be written as</p>
+<pre><code class="language-py">class besselj(BesselBase):
+    """
+    Bessel function of the first kind.
+
+    The Bessel $J$ function of order $\nu$ is defined to be the function
+    satisfying Bessel's differential equation
+
+    .. math ::
+        z^2 \frac{\mathrm{d}^2 w}{\mathrm{d}z^2}
+        + z \frac{\mathrm{d}w}{\mathrm{d}z} + (z^2 - \nu^2) w = 0,
+
+    with Laurent expansion
+
+    .. math ::
+        J_\nu(z) = z^\nu \left(\frac{1}{\Gamma(\nu + 1) 2^\nu} + O(z^2) \right),
+
+    if $\nu$ is not a negative integer. If $\nu=-n \in \mathbb{Z}_{&lt;0}$
+    *is* a negative integer, then the definition is
+
+    .. math ::
+        J_{-n}(z) = (-1)^n J_n(z).
+</code></pre>
+<p>We also plan to add support for <code>$$double dollars$$</code> for display math so that <code>.. math ::</code> is no longer needed either .</p>
+<p>For end users, the documentation on <a href="https://docs.sympy.org">docs.sympy.org</a>
+will continue to render exactly the same, but for developers, it is much
+easier to read and write.</p>
+<p>This extension can be easily used in any Sphinx project. Simply install it
+with pip or conda:</p>
+<pre><code>pip install sphinx-math-dollar
+</code></pre>
+<p>or</p>
+<pre><code>conda install -c conda-forge sphinx-math-dollar
+</code></pre>
+<p>Then enable it in your <code>conf.py</code>:</p>
+<pre><code class="language-py">extensions = ['sphinx_math_dollar', 'sphinx.ext.mathjax']
+</code></pre>
+<h3>Google Season of Docs</h3>
+<p>The above work on sphinx-math-dollar is part of work I have been doing to
+improve the tooling around SymPy's documentation. This has been to assist our
+technical writer Lauren Glattly, who is working with SymPy for the next three
+months as part of the new <a href="https://developers.google.com/season-of-docs/">Google Season of
+Docs</a> program. Lauren's project
+is to improve the consistency of our docstrings in SymPy. She has already
+identified many key ways our docstring documentation can be improved, and is
+currently working on a style guide for writing docstrings. Some of the issues
+that Lauren has identified require improved tooling around the way the HTML
+documentation is built to fix. So some other SymPy developers and I have been
+working on improving this, so that she can focus on the technical writing
+aspects of our documentation.</p>
+<p>Lauren has created a draft style guide for documentation at
+<a href="https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide">https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide</a>. Please
+take a moment to look at it and if you have any feedback on it, comment below
+or write to the SymPy mailing list.</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/whats-new-in-sympy-14/" class="u-url">What's New in SymPy 1.4</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
@@ -813,216 +1135,6 @@ others could vote on them (but I understand if you don't want too much
 bikeshedding).</p>
 </li>
 </ol>
-</div>
-    </div>
-    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/" class="u-url">Automatically deploying this blog to GitHub Pages with Travis CI</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Aaron Meurer
-            </span></p>
-            <p class="dateline">
-            <a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/" rel="bookmark">
-            <time class="published dt-published" datetime="2017-06-19T14:21:32-05:00" itemprop="datePublished" title="2017-06-19 14:21">2017-06-19 14:21</time></a>
-            </p>
-                <p class="commentline">
-        
-    <a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/#disqus_thread" data-disqus-identifier="cache/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci.html">Comments</a>
-
-
-        </p>
-</div>
-    </header><div class="e-content entry-content">
-    <div>
-<p>This blog is now <a href="http://travis-ci.org/asmeurer/blog">deployed to GitHub pages automatically</a> from Travis CI.</p>
-<p>As I've outlined in the <a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/moving-to-github-pages-with-nikola/">past</a>, this
-website is built with the <a href="https://getnikola.com/">Nikola</a> static blogging
-engine. I really like Nikola because it uses Python, has lots of nice
-extensions, and
-is
-<a href="https://github.com/getnikola/nikola/blob/master/LICENSE.txt">sanely licensed</a>.</p>
-<p>Most importantly, it is a static site generator, meaning I write my posts in
-Markdown, and Nikola generates the site as static web content ("static" means no web server
-is required to run the site). This means that the site can be hosted for free
-on <a href="https://pages.github.com/">GitHub pages</a>. This is how this site has been
-hosted since I started it. I have
-a <a href="http://github.com/asmeurer/blog">GitHub repo</a> for the site, and the content
-itself is deployed to
-the <a href="https://github.com/asmeurer/blog/tree/gh-pages">gh-pages</a> branch of the
-repo. But until now, the deployment has happened only manually with the
-<code>nikola github_deploy</code> command.</p>
-<p>A much better way is to deploy automatically using Travis CI. That way, I do
-not need to run any software on my computer to deploy the blog.</p>
-<p>The steps outlined here will work for any static site generator. They assume
-you already have one set up and hosted on GitHub.</p>
-<h3>Step 1: Create a .travis.yml file</h3>
-<p><strong>Create a <code>.travis.yml</code> file like the one below</strong></p>
-<pre><code class="language-yaml">sudo: false
-language: python
-
-python:
-  - 3.6
-
-install:
-  - pip install "Nikola[extras]" doctr
-
-script:
-  - set -e
-  - nikola build
-  - doctr deploy . --built-docs output/
-</code></pre>
-<ul>
-<li>If you use a different static site generator, replace <code>nikola</code> with that
-site generator's command.</li>
-<li>If you have Nikola configured to output to a different directory, or use a
-different static site generator, replace <code>--built-docs output/</code> with the
-directory where the site is built.</li>
-<li>Add any extra packages you need to build your site to the <code>pip install</code>
-command. For instance, I use the <code>commonmark</code> extension for Nikola, so I
-need to install <code>commonmark</code>.</li>
-<li>The <code>set -e</code> line is important. It will prevent the blog from being deployed
-if the build fails.</li>
-</ul>
-<p><strong>Then go to <a href="http://www.asmeurer.com/blog/">https://travis-ci.org/profile/</a> and enable Travis for your blog
-repo.</strong></p>
-<h3>Step 2: Run doctr</h3>
-<p>The key here is <a href="https://drdoctr.github.io/doctr/">doctr</a>, a tool I wrote with
-<a href="https://github.com/gforsyth">Gil Forsyth</a> that makes deploying anything from
-Travis CI to GitHub Pages a breeze. It automatically handles creating and
-encrypting a deploy SSH key for GitHub, and the syncing of files to the
-<code>gh-pages</code> branch.</p>
-<p><strong>First install doctr.</strong> <code>doctr</code> requires
-Python 3.5+, so you'll need that. You can install it with conda:</p>
-<pre><code class="language-bash">conda install -c conda-forge doctr
-</code></pre>
-<p>or if you don't use conda, with pip</p>
-<pre><code class="language-bash">pip install doctr
-</code></pre>
-<p><strong>Then run this command in your blog repo:</strong></p>
-<pre><code class="language-bash">doctr configure
-</code></pre>
-<p>This will ask you for your GitHub username and password,
-and for the name of the repo you are deploying from and to (for instance, for
-my blog, I entered <code>asmeurer/blog</code>). The output will look something like this:</p>
-<!-- http seems to give the least amount of highlighting. text is -->
-<!-- supposed to work, but doesn't render correctly. -->
-<pre><code class="language-http">$ doctr configure
-What is your GitHub username? asmeurer
-Enter the GitHub password for asmeurer:
-A two-factor authentication code is required: app
-Authentication code: 911451
-What repo do you want to build the docs for (org/reponame, like 'drdoctr/doctr')? asmeurer/blog
-What repo do you want to deploy the docs to? [asmeurer/blog] asmeurer/blog
-Generating public/private rsa key pair.
-Your identification has been saved in github_deploy_key.
-Your public key has been saved in github_deploy_key.pub.
-The key fingerprint is:
-SHA256:4cscEfJCy9DTUb3DnPNfvbBHod2bqH7LEqz4BvBEkqc doctr deploy key for asmeurer/blog
-The key's randomart image is:
-+---[RSA 4096]----+
-|    ..+.oo..     |
-|     *o*..  .    |
-|      O.+  o o   |
-|     E + o  B  . |
-|      + S .  +o +|
-|       = o o o.o+|
-|        * . . =.=|
-|       . o ..+ =.|
-|        o..o+oo  |
-+----[SHA256]-----+
-
-The deploy key has been added for asmeurer/blog.
-
-You can go to https://github.com/asmeurer/blog/settings/keys to revoke the deploy key.
-
-================== You should now do the following ==================
-
-1. Commit the file github_deploy_key.enc.
-
-2. Add
-
-    script:
-      - set -e
-      - # Command to build your docs
-      - pip install doctr
-      - doctr deploy &lt;deploy_directory&gt;
-
-to the docs build of your .travis.yml.  The 'set -e' prevents doctr from
-running when the docs build fails. Use the 'script' section so that if
-doctr fails it causes the build to fail.
-
-3. Put
-
-    env:
-      global:
-        - secure: "Kf8DlqFuQz9ekJXpd3Q9sW5cs+CvaHpsXPSz0QmSZ01HlA4iOtdWVvUttDNb6VGyR6DcAkXlADRf/KzvAJvaqUVotETJ1LD2SegnPzgdz4t8zK21DhKt29PtqndeUocTBA6B3x6KnACdBx4enmZMTafTNRX82RMppwqxSMqO8mA="
-
-in your .travis.yml.
-</code></pre>
-<p>Follow the steps at the end of the command:</p>
-<ol>
-<li><strong>Commit the file <code>github_deploy_key.enc</code>.</strong></li>
-<li>You already have <code>doctr deploy</code> in your <code>.travis.yml</code> from step 1 above.</li>
-<li>
-<strong>Add the <code>env</code> block to your <code>.travis.yml</code>.</strong> This will let Travis CI decrypt
-the SSH key used to deploy to <code>gh-pages</code>.</li>
-</ol>
-<h3>That's it</h3>
-<p>Doctr will now deploy your blog automatically. You may want to look at the
-Travis build to make sure everything works. Note that <code>doctr</code> only deploys
-from <code>master</code> by default (see below). You may also want to look at the
-other
-<a href="https://drdoctr.github.io/doctr/commandline.html#doctr-deploy">command line flags</a> for
-<code>doctr deploy</code>, which let you do things such as to deploy to <code>gh-pages</code> for a
-different repo than the one your blog is hosted on.</p>
-<p>I recommend these steps over the ones in
-the
-<a href="https://getnikola.com/blog/automating-nikola-rebuilds-with-travis-ci.html">Nikola manual</a> because
-doctr handles the SSH key generation for you, making things more secure. I
-also found that the <code>nikola github_deploy</code> command
-was <a href="https://github.com/getnikola/nikola/issues/2847">doing too much</a>, and
-<code>doctr</code> handles syncing the built pages already anyway. Using <code>doctr</code> is much
-simpler.</p>
-<h3>Extra stuff</h3>
-<h4>Reverting a build</h4>
-<p>If a build goes wrong and you need to revert it, you'll need to use git to
-revert the commit on your <code>gh-pages</code> branch. Unfortunately, GitHub doesn't
-seem to have a way to revert commits in their web interface, so it has to be
-done from the command line.</p>
-<h4>Revoking the deploy key</h4>
-<p>To revoke the deploy key generated by doctr, go your repo in GitHub, click on
-"settings" and then "deploy keys". Do this if you decide to stop using this,
-or if you feel the key may have been compromised. If you do this, the
-deployment will stop until you run step 2 again to create a new key.</p>
-<h4>Building the blog from branches</h4>
-<p>You can also build your blog from branches, e.g., if you want to test things
-out without deploying to the final repo.</p>
-<p>We will use the steps
-outlined
-<a href="https://drdoctr.github.io/doctr/recipes.html#deploy-docs-from-any-branch">here</a>.</p>
-<p>Replace the line</p>
-<pre><code class="language-yaml">  - doctr deploy . --built-docs output/
-</code></pre>
-<p>in your <code>.travis.yml</code> with something like</p>
-<pre><code class="language-yaml">  - if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
-      doctr deploy . --built-docs output/;
-    else
-      doctr deploy "branch-$TRAVIS_BRANCH" --built-docs output/ --no-require-master;
-    fi
-</code></pre>
-<p>This will deploy your blog as normal from <code>master</code>, but from a branch it will
-deploy to the <code>branch-&lt;branchname&gt;</code> subdir. For instance, my blog is at
-<a href="http://www.asmeurer.com/blog/">http://www.asmeurer.com/blog/</a>, and if I had a branch called <code>test</code>, it would
-deploy it to <a href="posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/">http://www.asmeurer.com/blog/branch-test/</a>.</p>
-<p>Note that it will not delete old branches for you from <code>gh-pages</code>. You'll need
-to do that manually once they are merged.</p>
-<p>This only works for branches in the same repo. It is not possible to deploy
-from a branch from pull request from a fork, for security purposes.</p>
-<h4>Enable build cancellation in Travis</h4>
-<p>If you go the Travis page for your blog and choose "settings" from the
-hamburger menu, you can enable auto cancellation for branch builds. This will
-make it so that if you push many changes in succession, only the most recent
-one will get built. This makes the changes get built faster, and lets you
-revert mistakes or typos without them ever actually being deployed.</p>
 </div>
     </div>
     </article>

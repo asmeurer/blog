@@ -113,6 +113,7 @@
 ./assets/js/moment-with-locales.min.js
 ./assets/xml/atom.xsl
 ./assets/xml/rss.xsl
+./besselj_docs.png
 ./categories/index.html
 ./galleries/SpriteKit-Example-2.gif
 ./galleries/SpriteKit-Example-2.thumbnail.gif
@@ -149,6 +150,8 @@
 ./posts/playing-with-swift-and-spritekit/index.md
 ./posts/python-trickery/index.html
 ./posts/python-trickery/index.md
+./posts/quansight-labs-work-update-for-september-2019/index.html
+./posts/quansight-labs-work-update-for-september-2019/index.md
 ./posts/scipy-2014/index.html
 ./posts/scipy-2014/index.md
 ./posts/tuples/index.html

@@ -1,5 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 30 Aug 2019 17:06:24 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 07 Oct 2019 20:15:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/"&gt;Quansight Labs Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;As of November, 2018, I have been working at
+&lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
+the same people who started Anaconda, which aims to connect companies and open
+source communities, and offers consulting, training, support and mentoring
+services. I work under the heading of &lt;a href="https://www.quansight.com/labs"&gt;Quansight
+Labs&lt;/a&gt;. Quansight Labs is a public-benefit
+division of Quansight. It provides a home for a "PyData Core Team" which
+consists of developers, community managers, designers, and documentation
+writers who build open-source technology and grow open-source communities
+around all aspects of the AI and Data Science workflow.&lt;/p&gt;
+&lt;p&gt;My work at Quansight is split between doing open source consulting for various
+companies, and working on SymPy.
+&lt;a href="https://www.sympy.org/en/index.html"&gt;SymPy&lt;/a&gt;, for those who do not know, is a
+symbolic mathematics library written in pure Python. I am the lead maintainer
+of SymPy.&lt;/p&gt;
+&lt;p&gt;In this post, I will detail some of the open source work that I have done
+recently, both as part of my open source consulting, and as part of my work on
+SymPy for Quansight Labs.&lt;/p&gt;
+&lt;h3&gt;Bounds Checking in Numba&lt;/h3&gt;
+&lt;p&gt;As part of work on a client project, I have been working on contributing code
+to the &lt;a href="https://numba.pydata.org"&gt;numba&lt;/a&gt; project. Numba is a just-in-time
+compiler for Python. It lets you write native Python code and with the use of
+a simple &lt;code&gt;@jit&lt;/code&gt; decorator, the code will be automatically sped up using LLVM.
+This can result in code that is up to 1000x faster in some cases:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+In [1]: import numba
+
+In [2]: import numpy
+
+In [3]: def test(x):
+   ...:     A = 0
+   ...:     for i in range(len(x)):
+   ...:         A += i*x[i]
+   ...:     return A
+   ...:
+
+In [4]: @numba.njit
+   ...: def test_jit(x):
+   ...:     A = 0
+   ...:     for i in range(len(x)):
+   ...:         A += i*x[i]
+   ...:     return A
+   ...:
+
+In [5]: x = numpy.arange(1000)
+
+In [6]: %timeit test(x)
+249 µs ± 5.77 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+
+In [7]: %timeit test_jit(x)
+336 ns ± 0.638 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+
+In [8]: 249/.336
+Out[8]: 741.0714285714286
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Numba only works for a subset of Python code, and primarily targets code that
+uses NumPy arrays.&lt;/p&gt;
+&lt;p&gt;Numba, with the help of LLVM, achieves this level of performance through many
+optimizations. One thing that it does to improve performance is to remove all
+bounds checking from array indexing. This means that if an array index is out
+of bounds, instead of receiving an &lt;code&gt;IndexError&lt;/code&gt;, you will get garbage, or
+possibly a segmentation fault.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import numpy as np
+&amp;gt;&amp;gt;&amp;gt; from numba import njit
+&amp;gt;&amp;gt;&amp;gt; def outtabounds(x):
+...     A = 0
+...     for i in range(1000):
+...         A += x[i]
+...     return A
+&amp;gt;&amp;gt;&amp;gt; x = np.arange(100)
+&amp;gt;&amp;gt;&amp;gt; outtabounds(x) # pure Python/NumPy behavior
+Traceback (most recent call last):
+  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
+  File "&amp;lt;stdin&amp;gt;", line 4, in outtabounds
+IndexError: index 100 is out of bounds for axis 0 with size 100
+&amp;gt;&amp;gt;&amp;gt; njit(outtabounds)(x) # the default numba behavior
+-8557904790533229732
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In numba pull request &lt;a href="https://github.com/numba/numba/pull/4432"&gt;#4432&lt;/a&gt;, I am
+working on adding a flag to &lt;code&gt;@njit&lt;/code&gt; that will enable bounds checks for array
+indexing. This will remain disabled by default for performance purposes. But
+you will be able to enable it by passing &lt;code&gt;boundscheck=True&lt;/code&gt; to &lt;code&gt;@njit&lt;/code&gt;, or by
+setting the &lt;code&gt;NUMBA_BOUNDSCHECK=1&lt;/code&gt; environment variable. This will make it
+easier to detect out of bounds issues like the one above. It will work like&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-pycon"&gt;&amp;gt;&amp;gt;&amp;gt; @njit(boundscheck=True)
+... def outtabounds(x):
+...     A = 0
+...     for i in range(1000):
+...         A += x[i]
+...     return A
+&amp;gt;&amp;gt;&amp;gt; x = np.arange(100)
+&amp;gt;&amp;gt;&amp;gt; outtabounds(x) # numba behavior in my pull request #4432
+Traceback (most recent call last):
+  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
+IndexError: index is out of bounds
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The pull request is still in progress, and many things such as the quality of
+the error message reporting will need to be improved. This should make
+debugging issues easier for people who write numba code once it is merged.&lt;/p&gt;
+&lt;h3&gt;removestar&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://www.asmeurer.com/removestar/"&gt;removestar&lt;/a&gt; is a new tool I wrote to
+automatically replace &lt;code&gt;import *&lt;/code&gt; in Python modules with explicit imports.&lt;/p&gt;
+&lt;p&gt;For those who don't know, Python's &lt;code&gt;import&lt;/code&gt; statement supports so-called
+"wildcard" or "star" imports, like&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;from sympy import *
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will import every public name from the &lt;code&gt;sympy&lt;/code&gt; module into the current
+namespace. This is often useful because it saves on typing every name that is
+used in the import line. This is especially useful when working interactively,
+where you just want to import every name and minimize typing.&lt;/p&gt;
+&lt;p&gt;However, doing &lt;code&gt;from module import *&lt;/code&gt; is generally frowned upon in Python. It is
+considered acceptable when working interactively at a &lt;code&gt;python&lt;/code&gt; prompt, or in
+&lt;code&gt;__init__.py&lt;/code&gt; files (removestar skips &lt;code&gt;__init__.py&lt;/code&gt; files by default).&lt;/p&gt;
+&lt;p&gt;Some reasons why &lt;code&gt;import *&lt;/code&gt; is bad:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It hides which names are actually imported.&lt;/li&gt;
+&lt;li&gt;It is difficult both for human readers and static analyzers such as
+pyflakes to tell where a given name comes from when &lt;code&gt;import *&lt;/code&gt; is used. For
+example, pyflakes cannot detect unused names (for instance, from typos) in
+the presence of &lt;code&gt;import *&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If there are multiple &lt;code&gt;import *&lt;/code&gt; statements, it may not be clear which names
+come from which module. In some cases, both modules may have a given name,
+but only the second import will end up being used. This can break people's
+intuition that the order of imports in a Python file generally does not
+matter.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;import *&lt;/code&gt; often imports more names than you would expect. Unless the module
+you import defines &lt;code&gt;__all__&lt;/code&gt; or carefully &lt;code&gt;del&lt;/code&gt;s unused names at the module
+level, &lt;code&gt;import *&lt;/code&gt; will import every public (doesn't start with an
+underscore) name defined in the module file. This can often include things
+like standard library imports or loop variables defined at the top-level of
+the file. For imports from modules (from &lt;code&gt;__init__.py&lt;/code&gt;), &lt;code&gt;from module import *&lt;/code&gt; will include every submodule defined in that module. Using &lt;code&gt;__all__&lt;/code&gt; in
+modules and &lt;code&gt;__init__.py&lt;/code&gt; files is also good practice, as these things are
+also often confusing even for interactive use where &lt;code&gt;import *&lt;/code&gt; is
+acceptable.&lt;/li&gt;
+&lt;li&gt;In Python 3, &lt;code&gt;import *&lt;/code&gt; is syntactically not allowed inside of a function
+definition.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here are some official Python references stating not to use &lt;code&gt;import *&lt;/code&gt; in
+files:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://docs.python.org/3/faq/programming.html?highlight=faq#what-are-the-best-practices-for-using-import-in-a-module"&gt;The official Python
+FAQ&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In general, don’t use &lt;code&gt;from modulename import *&lt;/code&gt;. Doing so clutters the
+importer’s namespace, and makes it much harder for linters to detect
+undefined names.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.python.org/dev/peps/pep-0008/#imports"&gt;PEP 8&lt;/a&gt; (the official
+Python style guide):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Wildcard imports (&lt;code&gt;from &amp;lt;module&amp;gt; import *&lt;/code&gt;) should be avoided, as they
+make it unclear which names are present in the namespace, confusing both
+readers and many automated tools.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Unfortunately, if you come across a file in the wild that uses &lt;code&gt;import *&lt;/code&gt;, it
+can be hard to fix it, because you need to find every name in the file that is
+imported from the &lt;code&gt;*&lt;/code&gt; and manually add an import for it. Removestar makes this
+easy by finding which names come from &lt;code&gt;*&lt;/code&gt; imports and replacing the import
+lines in the file automatically.&lt;/p&gt;
+&lt;p&gt;As an example, suppose you have a module &lt;code&gt;mymod&lt;/code&gt; like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mymod/
+  | __init__.py
+  | a.py
+  | b.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;with&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;# mymod/a.py
+from .b import *
+
+def func(x):
+    return x + y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;# mymod/b.py
+x = 1
+y = 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then &lt;code&gt;removestar&lt;/code&gt; works like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ removestar -i mymod/
+$ cat mymod/a.py
+# mymod/a.py
+from .b import y
+
+def func(x):
+    return x + y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;-i&lt;/code&gt; flag causes it to edit &lt;code&gt;a.py&lt;/code&gt; in-place. Without it, it would just
+print a diff to the terminal.&lt;/p&gt;
+&lt;p&gt;For implicit star imports and explicit star imports from the same module,
+&lt;code&gt;removestar&lt;/code&gt; works statically, making use of
+&lt;a href="https://github.com/PyCQA/pyflakes"&gt;pyflakes&lt;/a&gt;. This means none of the code is
+actually executed. For external imports, it is not possible to work statically
+as external imports may include C extension modules, so in that case, it
+imports the names dynamically.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;removestar&lt;/code&gt; can be installed with pip or conda:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install removestar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or if you use conda&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;conda install -c conda-forge removestar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;sphinx-math-dollar&lt;/h3&gt;
+&lt;p&gt;In SymPy, we make heavy use of LaTeX math in our documentation. For example,
+in our &lt;a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.hyper.hyper"&gt;special functions
+documentation&lt;/a&gt;,
+most special functions are defined using a LaTeX formula, like &lt;img src="https://asmeurer.com/blog/besselj_docs.png" alt="The docs for besselj"&gt;&lt;/p&gt;
+&lt;p&gt;(from &lt;a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj"&gt;https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;However, the source for this math in the docstring of the function uses RST
+syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;class besselj(BesselBase):
+    """
+    Bessel function of the first kind.
+
+    The Bessel `J` function of order `\nu` is defined to be the function
+    satisfying Bessel's differential equation
+
+    .. math ::
+        z^2 \frac{\mathrm{d}^2 w}{\mathrm{d}z^2}
+        + z \frac{\mathrm{d}w}{\mathrm{d}z} + (z^2 - \nu^2) w = 0,
+
+    with Laurent expansion
+
+    .. math ::
+        J_\nu(z) = z^\nu \left(\frac{1}{\Gamma(\nu + 1) 2^\nu} + O(z^2) \right),
+
+    if :math:`\nu` is not a negative integer. If :math:`\nu=-n \in \mathbb{Z}_{&amp;lt;0}`
+    *is* a negative integer, then the definition is
+
+    .. math ::
+        J_{-n}(z) = (-1)^n J_n(z).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Furthermore, in SymPy's documentation we have configured it so that text
+between `single backticks` is rendered as math. This was originally done for
+convenience, as the alternative way is to write &lt;code&gt;:math:`\nu`&lt;/code&gt; every
+time you want to use inline math. But this has lead to many people being
+confused, as they are used to Markdown where `single backticks` produce
+&lt;code&gt;code&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A better way to write this would be if we could delimit math with dollar
+signs, like &lt;code&gt;$\nu$&lt;/code&gt;. This is how things are done in LaTeX documents, as well
+as in things like the Jupyter notebook.&lt;/p&gt;
+&lt;p&gt;With the new &lt;a href="https://www.sympy.org/sphinx-math-dollar/"&gt;sphinx-math-dollar&lt;/a&gt;
+Sphinx extension, this is now possible. Writing &lt;code&gt;$\nu$&lt;/code&gt; produces $\nu$, and
+the above docstring can now be written as&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;class besselj(BesselBase):
+    """
+    Bessel function of the first kind.
+
+    The Bessel $J$ function of order $\nu$ is defined to be the function
+    satisfying Bessel's differential equation
+
+    .. math ::
+        z^2 \frac{\mathrm{d}^2 w}{\mathrm{d}z^2}
+        + z \frac{\mathrm{d}w}{\mathrm{d}z} + (z^2 - \nu^2) w = 0,
+
+    with Laurent expansion
+
+    .. math ::
+        J_\nu(z) = z^\nu \left(\frac{1}{\Gamma(\nu + 1) 2^\nu} + O(z^2) \right),
+
+    if $\nu$ is not a negative integer. If $\nu=-n \in \mathbb{Z}_{&amp;lt;0}$
+    *is* a negative integer, then the definition is
+
+    .. math ::
+        J_{-n}(z) = (-1)^n J_n(z).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We also plan to add support for &lt;code&gt;$$double dollars$$&lt;/code&gt; for display math so that &lt;code&gt;.. math ::&lt;/code&gt; is no longer needed either .&lt;/p&gt;
+&lt;p&gt;For end users, the documentation on &lt;a href="https://docs.sympy.org"&gt;docs.sympy.org&lt;/a&gt;
+will continue to render exactly the same, but for developers, it is much
+easier to read and write.&lt;/p&gt;
+&lt;p&gt;This extension can be easily used in any Sphinx project. Simply install it
+with pip or conda:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install sphinx-math-dollar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;conda install -c conda-forge sphinx-math-dollar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then enable it in your &lt;code&gt;conf.py&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;extensions = ['sphinx_math_dollar', 'sphinx.ext.mathjax']
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Google Season of Docs&lt;/h3&gt;
+&lt;p&gt;The above work on sphinx-math-dollar is part of work I have been doing to
+improve the tooling around SymPy's documentation. This has been to assist our
+technical writer Lauren Glattly, who is working with SymPy for the next three
+months as part of the new &lt;a href="https://developers.google.com/season-of-docs/"&gt;Google Season of
+Docs&lt;/a&gt; program. Lauren's project
+is to improve the consistency of our docstrings in SymPy. She has already
+identified many key ways our docstring documentation can be improved, and is
+currently working on a style guide for writing docstrings. Some of the issues
+that Lauren has identified require improved tooling around the way the HTML
+documentation is built to fix. So some other SymPy developers and I have been
+working on improving this, so that she can focus on the technical writing
+aspects of our documentation.&lt;/p&gt;
+&lt;p&gt;Lauren has created a draft style guide for documentation at
+&lt;a href="https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide"&gt;https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide&lt;/a&gt;. Please
+take a moment to look at it and if you have any feedback on it, comment below
+or write to the SymPy mailing list.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</guid><pubDate>Mon, 07 Oct 2019 05:00:00 GMT</pubDate></item><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
 the same people who started Anaconda, which aims to connect companies and open
@@ -2777,18 +3077,4 @@ Windows tends to be both forwards compatible &lt;em&gt;and&lt;/em&gt; backwards
 compatible. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn3" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item><item><title>Python Trickery</title><link>https://asmeurer.com/blog/posts/python-trickery/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are some bits of Python trickery that I have come across. Each of the
-following is invalid syntax.  See if you can figure out why&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;/li&gt;&lt;/ol&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;1 + not(2)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start="2"&gt;
-&lt;li&gt;
-&lt;/li&gt;&lt;/ol&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;f(*(
-i for i in range(10)
-if i % 2),
-x=3,)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/python-trickery/</guid><pubDate>Mon, 04 May 2015 19:11:46 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item></channel></rss>
