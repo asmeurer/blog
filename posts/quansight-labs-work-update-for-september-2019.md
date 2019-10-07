@@ -1,4 +1,5 @@
-*This post has been cross-posted on the [Quansight Labs Blog](https://labs.quansight.org/blog/).*
+*This post has been cross-posted on the [Quansight Labs
+Blog](https://labs.quansight.org/blog/2019/10/quansight-labs-work-update-for-september-2019/).*
 
 As of November, 2018, I have been working at
 [Quansight](https://www.quansight.com/). Quansight is a new startup founded by
