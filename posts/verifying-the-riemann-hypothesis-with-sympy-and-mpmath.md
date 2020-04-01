@@ -333,7 +333,7 @@ So our approach to verifying the Riemann Hypothesis is as such:
    integral will tell us there are exactly $n$ zeros in the contour, counting
    multiplicity.
 
-2. Try to find $n$ sign changes of $Z(1/2 + it)$ from $t=0\ldots N$. If we can
+2. Try to find $n$ sign changes of $Z(1/2 + it)$ for $t\in [0, N]$. If we can
    find $n$ of them, we are done. We have confirmed all the zeros are on the
    critical line.
 
