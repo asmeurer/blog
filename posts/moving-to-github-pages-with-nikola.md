@@ -10,7 +10,7 @@ over everything. And there is no lock in. If I decide I don't like the
 software that is generating the posts, I can easily move to something else,
 since the post content itself is all Markdown (or the occasional rst or
 IPython notebook if I want to do something that Markdown doesn't support). I
-can use MathJax for math (like \\( e^{i\pi} + 1 = 0 \\)). Wordpress.com
+can use MathJax for math (like $ e^{i\pi} + 1 = 0 $). Wordpress.com
 doesn't let you install abtirary Javascript on your blog, so you can't do
 things like install MathJax or enable some cool sidebar thing (like a Twitter
 feed).
@@ -93,7 +93,7 @@ metadata file. There are some bugs right now, but ideally you could do inline
 math with `$math$` and display math with `$$math$$`. `$math$` doesn't work
 currently, but you can do `\\(math\\)` (both `\`s are required, although this
 is likely a bug). You can do `\\[math\\]` for display math.  Here are some
-examples. Inline: \\( \sin ^2{x} + \cos^2{x} = 1\\). Display: $$ e^{i\pi} + 1 = 0 .$$
+examples. Inline: $ \sin ^2{x} + \cos^2{x} = 1$. Display: $$ e^{i\pi} + 1 = 0 .$$
 
 - Your one-stop command when blogging is `nikola auto`. This requires
   `livereload`. This will serve the blog on localhost, and automatically

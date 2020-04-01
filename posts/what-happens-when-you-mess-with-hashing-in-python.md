@@ -50,7 +50,7 @@ Suppose we have a collection of objects, and given any object, we want to be
 able to compute very quickly if that object belongs to our collection. We
 could store these objects in an ordered array, but then to determine if it is
 in the array, we would have to search potentially through every element of the
-array (in other words, an \\(O(n)\\)) algorithm.
+array (in other words, an $O(n)$) algorithm.
 
 With hashing, we can do better. We create what is known as a
 [*hash table*](https://en.wikipedia.org/wiki/Hash_table). Instead of storing
@@ -67,7 +67,7 @@ shows an example.
 ![img](https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg)
 
 To determine if an object is in a hash table, we only have to hash the object,
-and look in the bucket corresponding to that hash. This is an \\(O(1)\\)
+and look in the bucket corresponding to that hash. This is an $O(1)$
 algorithm, assuming we have a good hash function, because each bucket will
 generally hold very few objects, possibly even none.
 
@@ -76,7 +76,7 @@ collisions, but the basic idea is the same, and as long as there aren't too
 many hash collisions, which should happen if hash values are evenly
 distributed and the size of the hash table is large compared to the number of
 objects stored in it, the average time to determine if an object is in the
-hash table is still \\(O(1)\\).*
+hash table is still $O(1)$.*
 
 # Hashing in Python
 
@@ -564,7 +564,7 @@ This time, we used `in`, which uses `==`, so we got only one unique element of
 the list of `AlwaysEqual` objects.
 
 But there is an issue with this algorithm as well. Checking if something is in
-a list is \\(O(n)\\), but we have an object that allows checking in \\(O(1)\\)
+a list is $O(n)$, but we have an object that allows checking in $O(1)$
 time, namely, a `set`. So a more efficient version might be to create a set
 alongside the new list for containment checking purposes.
 

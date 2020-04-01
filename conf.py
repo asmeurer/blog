@@ -498,25 +498,6 @@ PRETTY_URLS = True
 # If True, schedules post to today if possible, even if scheduled hour is over
 # SCHEDULE_FORCE_TODAY = False
 
-# Do you want a add a Mathjax config file?
-# MATHJAX_CONFIG = ""
-
-# # If you are using the compile-ipynb plugin, just add this one:
-MATHJAX_CONFIG = """
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-   tex2jax: {
-       inlineMath: [ ['$','$'], ["\\\(","\\\)"], ],
-       displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ]
-   },
-   displayAlign: 'center', // Change this to 'center' to center equations.
-   "HTML-CSS": {
-       styles: {'.MathJax_Display': {"margin": 0}}
-   }
-});
-</script>
-"""
-
 # Do you want to customize the nbconversion of your IPython notebook?
 # IPYNB_CONFIG = {}
 # With the following example configuracion you can use a custom jinja template
@@ -639,6 +620,29 @@ BODY_END += """
 <script
 src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+"""
+
+# Mathjax. We use this instead of the built-in support as it loads MathJax 3.0
+
+MATHJAX_CONFIG = """
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+"""
+
+BODY_END += MATHJAX_CONFIG
+
+BODY_END += """
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 """
 
 # Use content distribution networks for jquery and twitter-bootstrap css and js
