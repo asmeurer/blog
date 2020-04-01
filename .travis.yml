@@ -10,7 +10,8 @@ python:
 
 install:
   - pip install "Nikola[extras]" commonmark doctr
-
+  # Work around https://github.com/getnikola/nikola/issues/3363
+  - pip install Markdown==3.1.1
 script:
   - set -e
   - nikola build
