@@ -137,7 +137,7 @@ POSTS = (
     ("posts/*.rst", "posts", "post.tmpl"),
     ("posts/*.txt", "posts", "post.tmpl"),
     ("posts/*.wp", "posts", "post.tmpl"),
-    ("posts/*.ipynb", "posts", "post.tmpl"),
+    # ("posts/*.ipynb", "posts", "post.tmpl"),
 )
 PAGES = (
     ("stories/about.md", "", "story.tmpl"),
@@ -169,7 +169,7 @@ COMPILERS = {
     "txt2tags": ('.t2t',),
     "bbcode": ('.bb',),
     "wiki": ('.wiki',),
-    "ipynb": ('.ipynb',),
+    # "ipynb": ('.ipynb',),
     "html": ('.html', '.htm'),
     # Pandoc detects the input from the source filename
     # but is disabled by default as it would conflict
