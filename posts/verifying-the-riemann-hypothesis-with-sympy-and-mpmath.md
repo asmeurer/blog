@@ -310,14 +310,325 @@ Hypothesis either).
 
 # Verification with SymPy and mpmath
 
+We now use SymPy and mpmath to compute the above quantities. We use
+[SymPy](https://www.sympy.org/) to do symbolic manipulation for us, but the
+heavy work is done by [mpmath](http://mpmath.org/doc/current/index.html).
+mpmath is a pure Python library for arbitrary precision numerics. It is used
+by SymPy under the hood, but it will be easier to use it directly. It can do,
+among other things, numeric integration. When I first tried to do this, I
+tried using [SciPy zeta
+function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.zeta.html),
+but unfortunately, it does not support complex arguments.
+
+First we do some basic imports
+
+```py
+>>> from sympy import *
+>>> import mpmath
+>>> import numpy as np
+>>> import matplotlib.pyplot as plt
+>>> s = symbols('s')
+```
+
+Define the completed zeta function $Z = \pi^{-s/2}\Gamma(s/2)\zeta(s)$.
+
+```
+>>> Z = pi**(-s/2)*gamma(s/2)*zeta(s)
+```
+
+We can verify that Z is indeed real for $\frac{1}{2} + it.$
+
+```py
+>>> Z.subs(s, 1/2 + 0.5j).evalf()
+-1.97702795164031 + 5.49690501450151e-17*I
+```
+
+We get a small imaginary part due to the way floating point arithmetic works.
+Since it is below `1e-15`, we can safely ignore it.
+
+`D` will be the logarithmic derivative of `Z`.
+
+```py
+>>> D = simplify(Z.diff(s)/Z)
+>>> D
+polygamma(0, s/2)/2 - log(pi)/2 + Derivative(zeta(s), s)/zeta(s)
+```
+
+This is $$\frac{\operatorname{polygamma}{\left(0,\frac{s}{2} \right)}}{2} -
+\frac{\log{\left(\pi \right)}}{2} + \frac{\frac{d}{d s}
+\zeta\left(s\right)}{\zeta\left(s\right)}$$
+
+Note that logarithmic derivatives behave similar to logarithms. The
+logarithmic derivative of a product is the sum of logarithmic derivatives.
+
+We now use
+[`lambdify`](https://docs.sympy.org/latest/modules/utilities/lambdify.html#sympy.utilities.lambdify.lambdify)
+to convert the SymPy expression `D` into a function that is evaluated using
+mpmath. A technical difficulty here is that the derivative $\zeta'(s)$ does not have a
+closed-form expression. mpmath's `zeta` can evaluate $\zeta'$ (see
+http://mpmath.org/doc/current/functions/zeta.html?highlight=zeta#mpmath.zeta),
+but it doesn't yet work with `sympy.lambdify`
+(https://github.com/sympy/sympy/issues/11802). So we have to manually define
+`"Derivative"` in lambdify, knowing that it will be the derivative of `zeta`
+when it is called. Beware that this is only correct for this specific
+expression where we know that `Derivative` will be `Derivative(zeta(s), s)`.
+
+```py
+>>> Z_func = lambdify(s, Z, 'mpmath')
+>>> D_func = lambdify(s, D, modules=['mpmath', {'Derivative': lambda expr, z: mpmath.zeta(z, derivative=1)}])
+```
+
+Now define a function to use the argument principle to count the number of
+roots up to $Ni$. Due to the symmetry $Z(s) = Z(1 - s)$, it is only necessary
+to count zeros in the top half-plane.
+
+Note that we have to be careful about the poles of $Z(s)$ at 0 and 1.
+
 We can either integrate right above them, or expand the contour to include
-them. I chose to do the former, since it is already known that there are no
-zeros near the real axis. It has also been shown that there are no zeros on
-the lines $\mathrm{Re}(s) = 0$ or $\mathrm{Re}(s) = 1$, so we do not need to
-worry about that. If the upper point of our contour happens to have zeros on
-it, we would be very unlucky, but if it happens we can just adjust it a little
-bit.
+them. I chose to do the former, starting at $0.1i$,since it is already known
+that there are no zeros near the real axis. It has also been shown that there
+are no zeros on the lines $\mathrm{Re}(s) = 0$ or $\mathrm{Re}(s) = 1$, so we
+do not need to worry about that. If the upper point of our contour happens to
+have zeros on it, we would be very unlucky, but if it happens we can just
+adjust it a little bit.
 
 <img src="../../contour-c.svg" width="608">
 
 (created with [Geogebra](https://www.geogebra.org/graphing/nmnsaywd))
+
+The `maxdegree` parameter allows us to increase the degree of the quadrature
+if it becomes necessary to get an accurate result.
+
+```py
+>>> def argument_count(func, N, maxdegree=6):
+...     return 1/(2*mpmath.pi*1j)*(mpmath.quad(func,
+...         [1 + 0.1j, 1 + N*1j, 0 + N*1j, 0 + 0.1j,  1 + 0.1j],
+...         maxdegree=maxdegree))
+```
+
+Now let's test it. Lets count the roots of $$s^2 - s + 1/2$$ in the box
+bounded by the above rectangle ($N = 10$).
+
+```py
+>>> expr = s**2 - s + S(1)/2
+>>> argument_count(lambdify(s, expr.diff(s)/expr), 10)
+mpc(real='1.0', imag='3.4287545414000525e-24')
+```
+
+We can confirm there is indeed one zero in this box, at $\frac{1}{2} + \frac{i}{2}$.
+
+```py
+>>> solve(s**2 - s + S(1)/2)
+[1/2 - I/2, 1/2 + I/2]
+```
+
+Now define a function to count the number of sign changes in a list of real
+values.
+
+```py
+>>> def sign_changes(L):
+...     """
+...     Count the number of sign changes in L
+...
+...     Values of L should all be real.
+...     """
+...     changes = 0
+...     assert im(L[0]) == 0, L[0]
+...     s = sign(L[0])
+...     for i in L[1:]:
+...         assert im(i) == 0, i
+...         s_ = sign(i)
+...         if s_ == 0:
+...             # Assume these got chopped to 0
+...             continue
+...         if s_ != s:
+...             changes += 1
+...         s = s_
+...     return changes
+```
+
+For example, for $\sin(s)$ from -10 to 10, there are 7 zeros ($3\pi\approx
+9.42$)
+
+```py
+>>> sign_changes(lambdify(s, sin(s))(np.linspace(-10, 10)))
+7
+```
+
+Now compute sign changes along the critical line. We also make provisions in
+case we have to increase the precision of mpmath to get correct results here.
+
+```py
+>>> def compute_points(Z_func, N, npoints=10000, dps=15):
+...     import warnings
+...     old_dps = mpmath.mp.dps
+...     points = np.linspace(0, N, npoints)
+...     try:
+...         mpmath.mp.dps = dps
+...         L = [mpmath.chop(Z_func(i)) for i in 1/2 + points*1j]
+...     finally:
+...         mpmath.mp.dps = old_dps
+...     if L[-1] == 0:
+...         warnings.warn("You may need to increase the precision")
+...     return L
+```
+
+Now we can check how many roots of $Z(s)$ (and hence non-trivial roots of
+$\zeta(s)$) we can find. According to
+[Wikipedia](https://en.wikipedia.org/wiki/Riemann_hypothesis), the first few
+non-trivial roots of $\zeta(s)$ in the upper half-plane are 14.135, 21.022 and
+25.011.
+
+First try up to $N=20$.
+
+```py
+>>> argument_count(D_func, 20)
+mpc(real='0.99999931531867581', imag='-3.2332902529067346e-24')
+```
+
+Mathematically, the above value *must* be an integer, so we know it is 1.
+
+Now check the number of sign changes from $\frac{1}{2}$ to $\frac{1}{2} + 20i$.
+
+```py
+>>> L = compute_points(Z_func, 20)
+>>> sign_changes(L)
+1
+```
+
+So it checks out. There is one root between $0$ and $20i$ on the critical
+strip, and it is in fact on the critical line, as expected!
+
+Now let's verify the other two roots from Wikipedia.
+
+```py
+>>> argument_count(D_func, 25)
+mpc(real='1.9961479945577916', imag='-3.2332902529067346e-24')
+>>> L = compute_points(Z_func, 25)
+>>> sign_changes(L)
+2
+>>> argument_count(D_func, 30)
+mpc(real='2.9997317058520916', imag='-3.2332902529067346e-24')
+>>> L = compute_points(Z_func, 30)
+>>> sign_changes(L)
+3
+```
+
+Both check out as well.
+
+Since we are computing the points, we can go ahead and make a plot as well.
+However, there is a technical difficulty. If you naively try to plot $Z(1/2 +
+it)$, you will find that it decays rapidly, so fast that you cannot really
+tell where it crosses 0.
+
+
+```py
+>>> def plot_points_bad(L, N):
+...     npoints = len(L)
+...     points = np.linspace(0, N, npoints)
+...     plt.figure()
+...     plt.plot(points, L)
+...     plt.plot(points, [0]*npoints, linestyle=':')
+>>> plot_points_bad(L, 30)
+```
+
+<img src="../../riemann-bad.svg" width="608">
+
+Instead, we plot $\log(|Z(1/2 + it)|)$. The logarithm will make the zeros go
+to $-\infty$, but these will be easy to see.
+
+```py
+>>> def plot_points(L, N):
+...     npoints = len(L)
+...     points = np.linspace(0, N, npoints)
+...     p = [mpmath.log(abs(i)) for i in L]
+...     plt.figure()
+...     plt.plot(points, p)
+...     plt.plot(points, [0]*npoints, linestyle=':')
+>>> plot_points(L, 30)
+```
+
+<img src="../../riemann-30.svg" width="608">
+
+The spikes downward are the zeros.
+
+Finally, let's check up to N=100. [OEIS A072080](https://oeis.org/A072080)
+gives the number of roots of $\zeta(s)$ in upper half-plane up to $10^ni$.
+According to it, we should get 29 roots between $0$ and $100i$.
+
+```py
+>>> argument_count(D_func, 100)
+mpc(real='28.248036536895913', imag='-3.2332902529067346e-24')
+```
+
+This is not near an integer. This means we need to increase the precision of
+the quadrature (the `maxdegree` argument).
+
+```py
+>>> argument_count(D_func, 100, maxdegree=9)
+mpc(real='29.000000005970151', imag='-3.2332902529067346e-24')
+```
+
+And the sign changes...
+
+```py
+>>> L = compute_points(Z_func, 100)
+__main__:11: UserWarning: You may need to increase the precisio
+```
+
+Our guard against the precision being too low was triggered. Try raising it
+(the default dps is 15).
+
+```py
+>>> L = compute_points(Z_func, 100, dps=50)
+>>> sign_changes(L)
+29
+```
+
+They both give 29. So we have verified the Riemann Hypothesis up to $100i$!
+
+Here is a plot of these 29 roots.
+
+```py
+>>> plot_points(L, 100)
+```
+
+<img src="../../riemann-100.svg" width="608">
+
+
+# Conclusion
+
+$N=100$ takes a few minutes to compute, and I imagine larger and larger values
+would require increasing the precision more, slowing it down even further, so
+I didn't go higher than this. But it is clear that this method works.
+
+This was just me playing around with SymPy and mpmath, but if I wanted to
+actually verify the Riemann Hypothesis, I would try to find a more efficient
+method of computing the above quantities. Furthermore, for the argument
+principle integral, I would like to see precise error estimates for the
+integral. We saw above with $N=100$ with the default quadrature that we got a
+value of 28.248, which is not close to an integer. This tipped us off that we
+should increase the quadrature, which ended up giving us the right answer, but
+if the original number just happened to be close to an integer, we might have
+been fooled. Ideally, one would like know the exact quadrature degree needed.
+If you can get error estimates guaranteeing the error for the integral will be
+less than 0.5, you can always round the answer to the nearest integer. For the
+sign changes, you don't need to be as rigorous, because simply seeing as many
+sign changes as you have roots is sufficient. However, one could certainly be
+more efficient in computing the values along the interval, rather than just
+naively computing 10000 points and raising the precision until it works, as I
+have done.
+
+One would also probably want to use a faster integrator than mpmath (like one
+written in C), and perhaps also find a faster to evaluate expression than the
+one I used for $Z$. It is also possible that one could special-case the
+quadrature algorithm knowing that it will be computed on $Z'/Z$.
+
+I haven't really gone over the details of why the Riemann Hypothesis matters.
+I encourage you to watch the videos in my [YouTube
+playlist](https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT)
+if you want to know this. Among other things, the truth of the Riemann
+Hypothesis would give a very precise bound on the distribution of prime
+numbers. The non-trivial zeros of $\zeta(s)$ are the "spectrum" of the
+prime numbers, so in some sense, they exactly encode the position of every
+prime on the number line.
