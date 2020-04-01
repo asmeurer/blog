@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width">
 <title>Tuples | Aaron Meurer's Blog</title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
@@ -115,11 +113,11 @@ fixed shape, the positions in a tuple can be "fixed" values, and by convention�
 Python programmer sees parentheses instead of square brackets, he is more
 likely to see the object as "record-like". The <code>namedtuple</code> object in the standard library
 takes the record idea further by letting you actually name the fields:</p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Person'</span><span class="p">,</span> <span class="s1">'name, age'</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
 <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
-</pre>
+</code></pre>
 
 
 <p>But is that really the <em>only</em> place you'd want to use a tuple over a list?</p>
@@ -133,8 +131,8 @@ Allen Downey:</p>
 <ol>
 <li>
 <p><strong>Multiple assignments:</strong></p>
-<pre class="code literal-block"><span></span><span class="err">&gt;&gt;&gt; (a, b) = 1, 2</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; (a, b) = 1, 2</span>
+</code></pre>
 
 
 <p>(yes, the parentheses are optional here, as they are in many places where a
@@ -148,19 +146,19 @@ for the most part a special case of using tuples as records.</p>
 </li>
 <li>
 <p><strong><code>*args</code>:</strong></p>
-<pre class="code literal-block"><span></span><span class="err">&gt;&gt;&gt; def f(*args):</span>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; def f(*args):</span>
 <span class="err">...     print(type(args), args)</span>
 <span class="err">...</span>
 <span class="err">&gt;&gt;&gt; f(1, 2, 3)</span>
 <span class="err">&lt;class 'tuple'&gt; (1, 2, 3)</span>
-</pre>
+</code></pre>
 
 
 <p>Arbitrary positional function arguments are always stored as a <code>tuple</code>.</p>
 </li>
 <li>
 <p><strong>Return value from builtins <code>zip</code>, <code>enumerate</code>, etc.:</strong></p>
-<pre class="code literal-block"><span></span><span class="err">&gt;&gt;&gt; for i in zip(range(3), 'abc'):</span>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; for i in zip(range(3), 'abc'):</span>
 <span class="err">...     print(i)</span>
 <span class="err">...</span>
 <span class="err">(0, 'a')</span>
@@ -172,7 +170,7 @@ for the most part a special case of using tuples as records.</p>
 <span class="err">(0, 'a')</span>
 <span class="err">(1, 'b')</span>
 <span class="err">(2, 'c')</span>
-</pre>
+</code></pre>
 
 
 <p>This also applies to the combinatoric generators in
@@ -181,14 +179,14 @@ for the most part a special case of using tuples as records.</p>
 </li>
 <li>
 <p><strong>Dictionary keys:</strong></p>
-<pre class="code literal-block"><span></span><span class="err">&gt;&gt;&gt; {</span>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; {</span>
 <span class="err">...     (0, 0): '.',</span>
 <span class="err">...     (0, 1): ' ',</span>
 <span class="err">...     (1, 0): '.',</span>
 <span class="err">...     (1, 1): ' ',</span>
 <span class="err">... }</span>
 <span class="err">{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}</span>
-</pre>
+</code></pre>
 
 
 </li>
@@ -201,20 +199,20 @@ to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.</p>
 <p>However, be careful. Not all tuples are hashable. Tuples can contain
 anything, but only tuples of immutable values are hashable. Consider<sup id="fnref:TypeError"><a class="footnote-ref" href="#fn:TypeError">4</a></sup></p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span>
 <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-</pre>
+</code></pre>
 
 
 <p>Such tuples are not hashable, and cannot be used as dictionary keys.</p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
   <span class="n">File</span> <span class="s2">"&lt;ipython-input-39-36822ba665ca&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
     <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="ne">TypeError</span><span class="p">:</span> <span class="n">unhashable</span> <span class="nb">type</span><span class="p">:</span> <span class="s1">'list'</span>
-</pre>
+</code></pre>
 
 
 <h2>Why is <code>list</code> the Default?</h2>
@@ -231,8 +229,8 @@ as well).</p>
 <p>Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent <code>1 - 2*(-3 + 4)</code> as</p>
-<pre class="code literal-block"><span></span><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
+</code></pre>
 
 
 <p>This isn't really a record. The meaning of the entries in the tuples is
@@ -290,8 +288,8 @@ case, the statement is false—<code>tuple</code> is not a subclass of <code>lis
 </li>
 <li id="fn:assign">
 <p>Yes,</p>
-<pre class="code literal-block"><span></span><span class="err">&gt;&gt;&gt; [a, b] = 1, 2</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; [a, b] = 1, 2</span>
+</code></pre>
 
 
 <p>works. <a class="footnote-backref" href="#fnref:assign" title="Jump back to footnote 2 in the text">↩</a></p>
@@ -314,12 +312,12 @@ case, the statement is false—<code>tuple</code> is not a subclass of <code>lis
 <p lang="en" dir="ltr"><a href="https://twitter.com/asmeurer">@asmeurer</a> <a href="https://twitter.com/AllenDowney">@AllenDowney</a> As yes:<br><br>t = (1,2, [3, 4])<br>t[2] += [5,6]<br><br>;-)</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778697399975813120">September 21, 2016</a>
 </blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>This is similar to this example. But
 it turns out this one doesn't work:</p>
-<pre class="code literal-block"><span></span><span class="err">&gt;&gt;&gt; t = (1,2, [3, 4])</span>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; t = (1,2, [3, 4])</span>
 <span class="err">&gt;&gt;&gt; t[2] += [5,6]</span>
 <span class="err">Traceback (most recent call last):</span>
 <span class="err">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span>
 <span class="c">TypeError: 'tuple' object does not support item assignment</span>
-</pre>
+</code></pre>
 
 
 <p>I have no idea why. It seems to me that it should work. <code>t[2]</code> is a list
