@@ -489,6 +489,7 @@ div.system-message {
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
+  color: #212529;
   background-clip: border-box;
   border: 1px solid rgba(0,0,0,.125);
   border-radius: .25rem;
@@ -612,7 +613,7 @@ table.codetable { width: 100%;} td.linenos {text-align: right; width: 4em;}
 @charset "UTF-8";
 
 /*
-	Copyright © 2014-2019 Daniel Aleksandersen and others.
+	Copyright © 2014-2020 Daniel Aleksandersen and others.
 
 	Permission is hereby granted, free of charge, to any
 	person obtaining a copy of this software and associated

@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width">
 <title>What happens when you mess with hashing in Python | Aaron Meurer's Blog</title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
@@ -33,7 +31,7 @@ to the Sym">
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
     <div id="container">
-         
+        
     <header id="header"><h1 id="brand"><a href="https://asmeurer.com/blog/" title="Aaron Meurer's Blog" rel="home">
 
         <span id="blog-title">Aaron Meurer's Blog</span>
@@ -123,7 +121,7 @@ Suppose we have a collection of objects, and given any object, we want to be
 able to compute very quickly if that object belongs to our collection. We
 could store these objects in an ordered array, but then to determine if it is
 in the array, we would have to search potentially through every element of the
-array (in other words, an \(O(n)\)) algorithm.</p>
+array (in other words, an $O(n)$) algorithm.</p>
 <p>With hashing, we can do better. We create what is known as a
 <a href="https://en.wikipedia.org/wiki/Hash_table"><em>hash table</em></a>. Instead of storing
 the objects in an ordered array, we create an array of buckets, each
@@ -136,7 +134,7 @@ simple as taking the modulus with respect to the number of buckets, <code>% n</c
 shows an example.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="img"></p>
 <p>To determine if an object is in a hash table, we only have to hash the object,
-and look in the bucket corresponding to that hash. This is an \(O(1)\)
+and look in the bucket corresponding to that hash. This is an $O(1)$
 algorithm, assuming we have a good hash function, because each bucket will
 generally hold very few objects, possibly even none.</p>
 <p><em>Note: there are some additional things that need to be done to handle hash
@@ -144,7 +142,7 @@ collisions, but the basic idea is the same, and as long as there aren't too
 many hash collisions, which should happen if hash values are evenly
 distributed and the size of the hash table is large compared to the number of
 objects stored in it, the average time to determine if an object is in the
-hash table is still \(O(1)\).</em></p>
+hash table is still $O(1)$.</em></p>
 <h2>Hashing in Python</h2>
 <p>Python has a built in function that performs a hash called <code>hash()</code>.  For many
 objects, the hash is not very surprising.  Note, the hashes you see below may
@@ -517,7 +515,7 @@ list if they aren't already there.</p>
 <p>This time, we used <code>in</code>, which uses <code>==</code>, so we got only one unique element of
 the list of <code>AlwaysEqual</code> objects.</p>
 <p>But there is an issue with this algorithm as well. Checking if something is in
-a list is \(O(n)\), but we have an object that allows checking in \(O(1)\)
+a list is $O(n)$, but we have an object that allows checking in $O(1)$
 time, namely, a <code>set</code>. So a more efficient version might be to create a set
 alongside the new list for containment checking purposes.</p>
 <pre><code class="language-py">&gt;&gt;&gt; def uniq2(l):
@@ -867,18 +865,16 @@ Python sessions.</p>
     <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-   tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ],
-       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
-   },
-   displayAlign: 'center', // Change this to 'center' to center equations.
-   "HTML-CSS": {
-       styles: {'.MathJax_Display': {"margin": 0}}
-   }
-});
-</script></article><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer id="footer"><p>Contents © 2019         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script></article><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer id="footer"><p>Contents © 2020         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 </p>
 <p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
@@ -907,6 +903,15 @@ MathJax.Hub.Config({
             return element.getElementsByTagName('img')[0].alt;
     }});
     </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script><script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>

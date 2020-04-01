@@ -1,5 +1,561 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 07 Oct 2019 20:21:57 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/10/quansight-labs-work-update-for-september-2019/"&gt;Quansight Labs
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 01 Apr 2020 17:35:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
+it watching various YouTube videos about the &lt;a href="https://en.wikipedia.org/wiki/Riemann_hypothesis"&gt;Riemann
+Hypothesis&lt;/a&gt;. I've collected
+the videos I've watched into &lt;a href="https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT"&gt;YouTube
+playlist&lt;/a&gt;.
+The playlist is sorted with the most mathematically approachable videos first,
+so even if you haven't studied complex analysis before, you can watch the
+first few. If you have studied complex analysis, all the videos will be within
+your reach (none of them are highly technical with proofs). Each video
+contains parts that aren't in any of the other videos, so you will get
+something out of watching each of them.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://www.youtube.com/watch?v=lyf9W2PWm40&amp;amp;list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT&amp;amp;index=8"&gt;last video in the
+playlist&lt;/a&gt;
+is a lecture by Keith Conrad. In it, he mentioned a method by which one could
+go about verifying the Riemann Hypothesis with a computer. I wanted to see if
+I could do this with SymPy and mpmath. It turns out you can.&lt;/p&gt;
+&lt;h2&gt;Background Mathematics&lt;/h2&gt;
+&lt;h3&gt;Euler's Product Formula&lt;/h3&gt;
+&lt;p&gt;Before we get to the computations, let's go over some mathematical background.
+As you may know, the Riemann Hypothesis is one of the 7 &lt;a href="https://en.wikipedia.org/wiki/Millennium_Prize_Problems"&gt;Millennium Prize
+Problems&lt;/a&gt; outlined by
+the Clay Mathematics Institute in 2000. The problems have gained some fame
+because each problem comes with a $1,000,000 prize if solved. One problem, the
+&lt;a href="https://en.wikipedia.org/wiki/Poincar%C3%A9_conjecture"&gt;Poincaré conjecture&lt;/a&gt;,
+has already been solved (Grigori Perelman who solved it turned down the 1
+million dollar prize). The remainder remain unsolved.&lt;/p&gt;
+&lt;p&gt;The Riemann Hypothesis is one of the most famous of these problems. The reason
+for this is that the problem is central many open questions in number theory.
+There are hundreds of theorems which are only known to be true contingent on
+the Riemann Hypothesis, meaning that if the Riemann Hypothesis were proven,
+immediately hundreds of theorems would be proven as well. Also, unlike some
+other Millennium Prize problems, like P=NP, the Riemann Hypothesis is almost
+universally believed to be true by mathematicians. So it's not a question of
+whether or not it is true, just one of how to actually prove it. The problem
+has been open for over 160 years, and while many advances have been made, no
+one has yet come up with a proof of it (crackpot proofs aside).&lt;/p&gt;
+&lt;p&gt;To understand the statement of the hypothesis, we must first define the zeta
+function. Let&lt;/p&gt;
+&lt;p&gt;$$\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$$&lt;/p&gt;
+&lt;p&gt;(that squiggle $\zeta$ is the lowercase Greek letter zeta). This expression
+makes sense if $s$ is an integer greater than or equal to 2, $s=2, 3, 4, \ldots$,
+since we know from simple arguments from calculus that the summation converges
+in those cases (it isn't important for us what those values are, only that the
+summation converges). The story begins with Euler, who in 1740 considered the
+following infinite product:&lt;/p&gt;
+&lt;p&gt;$$\prod_{\text{$p$ prime}}\frac{1}{1 -
+\frac{1}{p^s}}.$$&lt;/p&gt;
+&lt;p&gt;The product ranges over all prime numbers, i.e., it is
+$$\left(\frac{1}{1 - \frac{1}{2^s}}\right)\cdot\left(\frac{1}{1 -
+\frac{1}{3^s}}\right)\cdot\left(\frac{1}{1 - \frac{1}{5^s}}\right)\cdots.$$
+The fraction $\frac{1}{1 - \frac{1}{p}}$ may seem odd at first, but consider
+the famous geometric series formula, $$\sum_{k=0}^\infty r^k = \frac{1}{1 -
+r},$$ which is true for $|r| &amp;lt; 1$. Our fraction is exactly of this form, with
+$r = \frac{1}{p^s}$. So substituting, we have&lt;/p&gt;
+&lt;p&gt;$$\prod_{\text{$p$ prime}}\frac{1}{1 - \frac{1}{p^s}} =
+\prod_{\text{$p$ prime}}\sum_{k=0}^\infty \left(\frac{1}{p^s}\right)^k =
+\prod_{\text{$p$ prime}}\sum_{k=0}^\infty \left(\frac{1}{p^k}\right)^s.$$&lt;/p&gt;
+&lt;p&gt;Let's take a closer look at what this is. It is&lt;/p&gt;
+&lt;p&gt;$$\left(\frac{1}{p_1^s} + \frac{1}{p_1^{2s}} + \frac{1}{p_1^{3s}} +
+\cdots\right)\cdot\left(\frac{1}{p_2^s} + \frac{1}{p_2^{2s}} +
+\frac{1}{p_2^{3s}} + \cdots\right)\cdot\left(\frac{1}{p_3^s} + \frac{1}{p_3^{2s}} +
+\frac{1}{p_3^{3s}} + \cdots\right)\cdots,$$&lt;/p&gt;
+&lt;p&gt;where $p_1$ is the first prime, $p_2$ is the second prime, and so on. Now
+think about how to expand finite products of finite sums, for instance,
+$$(x_1 + x_2 + x_3)(y_1 + y_2 + y_3)(z_1 + z_2 + z_3).$$ To expand the above,
+you would take a sum of every combination where you pick one $x$ term, one $y$
+term, and one $z$ term, giving&lt;/p&gt;
+&lt;p&gt;$$x_1y_1z_1 + x_1y_1z_2 + \cdots + x_2y_1z_3 + \cdots + x_3y_2z_1 + \cdots + x_3y_3z_3.$$&lt;/p&gt;
+&lt;p&gt;So to expand the infinite product, we do the same thing. We take every
+combination of picking $1/p_i^{ks}$, with one $k$ for each $i$. If we pick
+infinitely many non-$1$ powers, the product will be zero, so we only need to
+consider terms where there are finitely many primes. The resulting sum will be
+something like&lt;/p&gt;
+&lt;p&gt;$$\frac{1}{1^s} + \frac{1}{p_1^s} + \frac{1}{p_2^s} + \frac{1}{\left(p_1^2\right)^s} +
+\frac{1}{p_3^s} + \frac{1}{\left(p_1p_2\right)^s} + \cdots,$$&lt;/p&gt;
+&lt;p&gt;where each prime power combination is picked exactly once. However, we know by
+the &lt;a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"&gt;Fundamental Theorem of
+Arithmetic&lt;/a&gt;
+that when you take all combinations of products primes that you get each
+positive integer exactly once. So the above sum is just&lt;/p&gt;
+&lt;p&gt;$$\frac{1}{1^s} + \frac{1}{2^s} + \frac{1}{3^s} + \cdots,$$ which is just
+$\zeta(s)$ as we defined it above.&lt;/p&gt;
+&lt;p&gt;In other words,&lt;/p&gt;
+&lt;p&gt;$$\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s} = \prod_{\text{$p$
+prime}}\frac{1}{1 - \frac{1}{p^s}},$$ for $s = 2, 3, 4, \ldots$. This is known
+as Euler's product formula for the zeta function. Euler's product formula
+gives us our first clue as to why the zeta function can give us insights into
+prime numbers.&lt;/p&gt;
+&lt;h3&gt;Analytic Continuation&lt;/h3&gt;
+&lt;p&gt;In 1859, Bernhard Riemann wrote a &lt;a href="https://en.wikipedia.org/wiki/On_the_Number_of_Primes_Less_Than_a_Given_Magnitude"&gt;short 9 page paper on number theory and the
+zeta
+function&lt;/a&gt;.
+It was the only paper Riemann ever wrote on the subject of number theory, but
+it is undoubtedly one of the most important papers every written on the
+subject.&lt;/p&gt;
+&lt;p&gt;In the paper, Riemann considered that the zeta function summation,&lt;/p&gt;
+&lt;p&gt;$$\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s},$$&lt;/p&gt;
+&lt;p&gt;makes sense not just for integers $s = 2, 3, 4, \ldots$, but for any real
+number $s &amp;gt; 1$ (if $s = 1$, the summation is the &lt;a href="https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"&gt;harmonic
+series&lt;/a&gt;, which
+famously diverges). In fact, it is not hard to see that for complex $s$, the
+summation makes sense so long as $\mathrm{Re}(s) &amp;gt; 1$ (for more about what it
+even means for $s$ to be complex in that formula, and the basic ideas of
+analytic continuation, I recommend &lt;a href="https://www.youtube.com/watch?v=sD0NjbwqlYw&amp;amp;list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT&amp;amp;index=3"&gt;3Blue1Brown's
+video&lt;/a&gt;
+from my YouTube playlist).&lt;/p&gt;
+&lt;p&gt;Riemann wanted to extend this function to the entire complex plane, not just
+$\mathrm{Re}(s) &amp;gt; 1$. The process of doing this is called &lt;a href="https://en.wikipedia.org/wiki/Analytic_continuation"&gt;analytic
+continuation&lt;/a&gt;. The theory
+of complex analysis tells us that if we can find an extension of $\zeta(s)$ to
+the whole complex plan that remains differentiable, then that extension is
+unique, and we can reasonably say that that &lt;em&gt;is&lt;/em&gt; the definition of the
+function everywhere.&lt;/p&gt;
+&lt;p&gt;Riemann used the following approach. Consider what we might call the
+"completed zeta function"&lt;/p&gt;
+&lt;p&gt;$$Z(s) = \pi^{-\frac{s}{2}}\Gamma\left(\frac{s}{2}\right)\zeta(s).$$&lt;/p&gt;
+&lt;p&gt;Using Fourier analysis, Riemann gave a formula for $Z(s)$ that is defined
+everywhere, allowing us to use it to define $\zeta(s)$ to the left of 1. I
+won't repeat Riemann's formula for $Z(s)$ as the exact formula isn't
+important, but from it one could also see&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;$Z(s)$ is defined everywhere in the complex plane, except for simple poles at 0
+and 1.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$Z(s) = Z(1 - s).$ This means if we have a value for $s$ that is right of
+the line $\mathrm{Re}(z) = \frac{1}{2},$ we can get a value to the left of
+it by reflecting it over the real-axis and the line at $\frac{1}{2}$ (to
+see this, note that the average of $s$ and $1 - s$ is $1/2$, so the
+midpoint of a line connecting the two should always go through the point
+$1/2$).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src="https://asmeurer.com/blog/s-and-1-s.svg" alt="Reflection of s and 1 - s" width="608"&gt;
+&lt;p&gt;(Reflection of $s$ and $1 - s$. Created with
+&lt;a href="https://www.geogebra.org/graphing/c9rzy9hj"&gt;Geogebra&lt;/a&gt;)&lt;/p&gt;
+&lt;h3&gt;Zeros&lt;/h3&gt;
+&lt;p&gt;Looking at $Z(s)$, it is a product of three parts. So the zeros and poles of
+$Z(s)$ correspond to the zeros and poles of these parts, unless they cancel.
+$\pi^{-\frac{s}{2}}$ is the easiest: it has no zeros and no poles. The second
+part is the &lt;a href="https://en.wikipedia.org/wiki/Gamma_function"&gt;gamma function&lt;/a&gt;.
+$\Gamma(z)$ has no zeros and has simple poles at nonpositive integers $z=0,
+-1, -2, \ldots$.&lt;/p&gt;
+&lt;p&gt;So taking this, along with the fact that $Z(s)$ is entire except for simple
+poles at 0 and 1, we get from $$\zeta(s) =
+\frac{Z(s)}{\pi^{-\frac{s}{2}}\Gamma\left(\frac{s}{2}\right)}$$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$Z(s)$ has a simple pole at 1, which means that $\zeta(s)$ does as well.
+This is not surprising, since we already know the summation formula from
+above diverges as $s$ approaches 1.&lt;/li&gt;
+&lt;li&gt;$Z(s)$ has a simple pole at 0. Since $\Gamma\left(\frac{s}{2}\right)$ also
+has a simple pole at 0, they must cancel and $\zeta(s)$ must have neither a
+zero nor a pole at 0 (in fact, $\zeta(0) = -1/2$).&lt;/li&gt;
+&lt;li&gt;Since $\Gamma\left(\frac{s}{2}\right)$ has no zeros, there are no further
+poles of $\zeta(s)$. Thus, $\zeta(s)$ is entire everywhere except for a
+simple pole at $s=1$.&lt;/li&gt;
+&lt;li&gt;$\Gamma\left(\frac{s}{2}\right)$ has poles at the remaining negative even
+integers. Since $Z(s)$ has no poles there, these must correspond to zeros
+of $\zeta(s)$. These are the so-called "trivial" zeros of the zeta
+function, at $s=-2, -4, -6, \ldots$. The term "trivial" here is a relative
+one. They are trivial to see from the above formula, whereas other zeros of
+$\zeta(s)$ are much harder to find.&lt;/li&gt;
+&lt;li&gt;$\zeta(s) \neq 0$ if $\mathrm{Re}(s) &amp;gt; 1$. One way to see this is from the
+Euler product formula. Since each term in the product is not zero, the
+function itself cannot be zero (this is a bit hand-wavy, but it can be made
+rigorous). This implies that $Z(s) \neq 0$ in this region as well. We can
+reflect $\mathrm{Re}(s) &amp;gt; 1$ over the line at $\frac{1}{2}$ by considering
+$\zeta(1 - s)$. Using the above formula and the fact that $Z(s) = Z(1 -
+s)$, we see that $\zeta(s)$ cannot be zero for $\mathrm{Re}(s) &amp;lt; 0$ either,
+with the exception of the aforementioned trivial zeros at $s=-2, -4, -6,
+\ldots$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Thus, any non-trivial zeros of $\zeta(s)$ must have real part between 0 and 1.
+This is the so-called "critical strip". Riemann hypothesized that these zeros
+are not only between 0 and 1, but are in fact on the line dividing the strip
+at real part equal to $1/2$. This line is called the "critical line". This is
+Riemann's famous hypothesis: that all the non-trivial zeros of $\zeta(s)$ have
+real part equal to $1/2$.&lt;/p&gt;
+&lt;h3&gt;Computational Verification&lt;/h3&gt;
+&lt;p&gt;Whenever you have a mathematical hypothesis, it is good to check if it is true
+numerically. Riemann himself used some methods (not the same ones we use here)
+to numerically estimate the first few non-trivial zeros of $\zeta(s)$, and
+found that they lied on the critical line, hence the motivation for his
+hypotehsis. Here is an &lt;a href="https://www.maths.tcd.ie/pub/HistMath/People/Riemann/Zeta/EZeta.pdf"&gt;English
+translation&lt;/a&gt;
+of his original paper if you are interested.&lt;/p&gt;
+&lt;p&gt;If we verified that all the zeros in the critical strip from, say,
+$\mathrm{Im}(s) = 0$ to $\mathrm{Im}(s) = N$ are in fact on the critical line
+for some large $N$, then it would give evidence that the Riemann Hypothesis is
+true. However, to be sure, this would not constitute a proof.
+&lt;a href="https://en.wikipedia.org/wiki/G._H._Hardy"&gt;Hardy&lt;/a&gt; showed in 1914 that
+$\zeta(s)$ has infinitely many zeros on the critical strip, so only finding
+finitely many of them would not suffice as a proof. (Although if we were to
+find a counter-example, a zero &lt;em&gt;not&lt;/em&gt; on the critical line, that WOULD
+constitute a proof that the Hypothesis is false. However, there are strong
+reasons to believe that the hypothesis is not false, so this would be unlikely
+to happen.)&lt;/p&gt;
+&lt;p&gt;How would we verify that the zeros are all on the line $1/2$. We can find
+zeros of $\zeta(s)$ numerically, but how would we know if the real part is
+really exactly 0.5 and not 0.500000000000000000000000000000000001? And more
+importantly, just because we find some zeros, it doesn't mean that we have all
+of them. Maybe we can find a bunch of zeros on the critical line, but how
+would we be sure that there aren't other zeros lurking around elsewhere on the
+critical strip?&lt;/p&gt;
+&lt;p&gt;We want to find rigorous answers to these two questions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;How can we count the number of zeros between $\mathrm{Im}(s) = 0$ and
+$\mathrm{Im}(s) = N$ of $\zeta(s)$?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How can we verify that all those zeros lie on the critical line, that is,
+they have real part equal to exactly $1/2$?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Counting Zeros Part 1&lt;/h4&gt;
+&lt;p&gt;To answer the first question, we can make use of a powerful theorem from
+complex analysis called the &lt;a href="https://en.wikipedia.org/wiki/Argument_principle#Generalized_argument_principle"&gt;argument
+principle&lt;/a&gt;.
+The argument principle says that if $f$ is a meromorphic function on some
+closed contour $C$, and does not have any zeros or poles on $C$ itself, then&lt;/p&gt;
+&lt;p&gt;$$\frac{1}{2\pi i}\oint_C \frac{f'(z)}{f(z)}\,dx = \#\left\{\text{zeros of $f$
+inside of C}\right\} - \#\left\{\text{poles of $f$
+inside of C}\right\},$$ where all zeros and poles are counted with
+multiplicity.&lt;/p&gt;
+&lt;p&gt;In other words, the integral on the left-hand side counts the number of zeros
+of $f$ minus the number of poles of $f$ in a region. The argument principle is
+quite easy to show given the Cauchy residue theorem (see the above linked
+Wikipedia article for a proof). The expression $f'(z)/f(z)$ is called the
+"&lt;a href="https://en.wikipedia.org/wiki/Logarithmic_derivative"&gt;logarithmic
+derivative&lt;/a&gt; of $f$",
+because it equals $\frac{d}{dz} \log(f(z))$ (although it makes sense even without
+defining what "$\log$" means).&lt;/p&gt;
+&lt;p&gt;One should take a moment to appreciate the beauty of this result. The
+left-hand side is an integral, something we generally think of as being a
+continuous quantity. But it is always exactly equal to an integer. Results
+such as these give us a further glimpse at how analytic functions and complex
+analysis can produce theorems about number theory, a field which one would
+naively think can only be studied via discrete means. In fact, these methods
+are far more powerful than discrete methods. For many results in number
+theory, we only know how to prove them using complex analytic means. So-called
+&lt;a href="https://en.wikipedia.org/wiki/Elementary_proof"&gt;"elementary" proofs&lt;/a&gt; for
+these results, or proofs that only use discrete methods and do not use complex
+analysis, have not yet been found.&lt;/p&gt;
+&lt;p&gt;Practically speaking, the fact that the above integral is exactly an integer
+means that if we compute it numerically and it comes out to something like
+0.9999999, we know that it must in fact equal exactly 1. So as long as we get
+a result that is near an integer, we can round it to the exact answer.&lt;/p&gt;
+&lt;p&gt;We can integrate a contour along the critical strip up to some $\mathrm{Im}(s)
+= N$ to count the number of zeros up to $N$ (we have to make sure to account
+for the poles. I go into more details about this when I actually compute the
+integral below).&lt;/p&gt;
+&lt;h4&gt;Counting Zeros Part 2&lt;/h4&gt;
+&lt;p&gt;So using the argument principle, we can count the number of zeros in a region.
+Now how can we verify that they all lie on the critical line? The answer lies
+in the $Z(s)$ function defined above. By the points outlined in the previous
+section, we can see that $Z(s)$ is zero exactly where $\zeta(s)$ is zero on
+the critical strip, and it is not zero anywhere else. In other words,&lt;/p&gt;
+&lt;div style="text-align:center"&gt; &lt;b&gt;the zeros of $Z(s)$ are exactly the non-trivial zeros of $\zeta(s)$.&lt;/b&gt;&lt;/div&gt;
+&lt;p&gt;This helps us because $Z(s)$ has a nice property on the critical line. First
+we note that $Z(s)$ commutes with conjugation, that is $\overline{Z(s)} =
+Z(\overline{s})$ (this isn't obvious from what I have shown, but it is true).
+On the critical line $\frac{1}{2} + it$, we have&lt;/p&gt;
+&lt;p&gt;$$\overline{Z\left(\frac{1}{2} + it\right)} = Z\left(\overline{\frac{1}{2} +
+it}\right) = Z\left(\frac{1}{2} - it\right).$$&lt;/p&gt;
+&lt;p&gt;However, $Z(s) = Z(1 - s)$, and $1 - \left(\frac{1}{2} - it\right) =
+\frac{1}{2} + it$, so&lt;/p&gt;
+&lt;p&gt;$$\overline{Z\left(\frac{1}{2} + it\right)} = Z\left(\frac{1}{2} +
+it\right),$$&lt;/p&gt;
+&lt;p&gt;which means that $Z\left(\frac{1}{2} + it\right)$ is real valued for real $t$.&lt;/p&gt;
+&lt;p&gt;This simplifies things a lot, because it is much easier to find zeros of a real
+function. In fact, we don't even care about finding the zeros, only counting
+them. Since $Z(s)$ is continuous, we can use a simple method: counting sign
+changes. If a continuous real function changes signs from negative to positive or from
+positive to negative n times in an interval, then it must have at least n
+zeros in that interval. It may have more, for instance, if some zeros are
+clustered close together, or if a zero has a multiplicity greater than 1, but
+we know that there must be at least n.&lt;/p&gt;
+&lt;p&gt;So our approach to verifying the Riemann Hypothesis is as such:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Integrate $\frac{1}{2\pi i}\oint_C Z'(s)/Z(s)\,dx$ along a contour $C$
+that runs along the critical strip up to some $\mathrm{Im}(s) = N$. The
+integral will tell us there are exactly $n$ zeros in the contour, counting
+multiplicity.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Try to find $n$ sign changes of $Z(1/2 + it)$ from $t=0\ldots N$. If we can
+find $n$ of them, we are done. We have confirmed all the zeros are on the
+critical line.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Step 2 would fail if the Riemann Hypothesis is false, in which case a zero
+wouldn't be on the critical line. But it would also fail if a zero has a
+multiplicity greater than 1, since the integral would count it more times than
+the sign changes. Fortunately, as it turns out, the Riemann Hypothesis has
+been verified up to N = 10000000000000, and no one has yet found a zero of the
+zeta function yet that has a multiplicity greater than 1, so we should not
+expect that to happen (no one has yet found a counterexample to the Riemann
+Hypothesis either).&lt;/p&gt;
+&lt;h2&gt;Verification with SymPy and mpmath&lt;/h2&gt;
+&lt;p&gt;We now use SymPy and mpmath to compute the above quantities. We use
+&lt;a href="https://www.sympy.org/"&gt;SymPy&lt;/a&gt; to do symbolic manipulation for us, but the
+heavy work is done by &lt;a href="http://mpmath.org/doc/current/index.html"&gt;mpmath&lt;/a&gt;.
+mpmath is a pure Python library for arbitrary precision numerics. It is used
+by SymPy under the hood, but it will be easier for us to use it directly. It
+can do, among other things, numeric integration. When I first tried to do
+this, I tried using the &lt;a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.zeta.html"&gt;&lt;code&gt;scipy.special&lt;/code&gt; zeta
+function&lt;/a&gt;,
+but unfortunately, it does not support complex arguments.&lt;/p&gt;
+&lt;p&gt;First we do some basic imports&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; from sympy import *
+&amp;gt;&amp;gt;&amp;gt; import mpmath
+&amp;gt;&amp;gt;&amp;gt; import numpy as np
+&amp;gt;&amp;gt;&amp;gt; import matplotlib.pyplot as plt
+&amp;gt;&amp;gt;&amp;gt; s = symbols('s')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Define the completed zeta function $Z = \pi^{-s/2}\Gamma(s/2)\zeta(s)$.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; Z = pi**(-s/2)*gamma(s/2)*zeta(s)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can verify that Z is indeed real for $\frac{1}{2} + it.$&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; Z.subs(s, 1/2 + 0.5j).evalf()
+-1.97702795164031 + 5.49690501450151e-17*I
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We get a small imaginary part due to the way floating point arithmetic works.
+Since it is below &lt;code&gt;1e-15&lt;/code&gt;, we can safely ignore it.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;D&lt;/code&gt; will be the logarithmic derivative of &lt;code&gt;Z&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; D = simplify(Z.diff(s)/Z)
+&amp;gt;&amp;gt;&amp;gt; D
+polygamma(0, s/2)/2 - log(pi)/2 + Derivative(zeta(s), s)/zeta(s)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is $$\frac{\operatorname{polygamma}{\left(0,\frac{s}{2} \right)}}{2} -
+\frac{\log{\left(\pi \right)}}{2} + \frac{
+\zeta'\left(s\right)}{\zeta\left(s\right)}.$$&lt;/p&gt;
+&lt;p&gt;Note that logarithmic derivatives behave similar to logarithms. The
+logarithmic derivative of a product is the sum of logarithmic derivatives (the
+$\operatorname{polygamma}$ function is the derivative of $\Gamma$).&lt;/p&gt;
+&lt;p&gt;We now use
+&lt;a href="https://docs.sympy.org/latest/modules/utilities/lambdify.html#sympy.utilities.lambdify.lambdify"&gt;&lt;code&gt;lambdify&lt;/code&gt;&lt;/a&gt;
+to convert the SymPy expressions &lt;code&gt;Z&lt;/code&gt; and &lt;code&gt;D&lt;/code&gt; into functions that are evaluated
+using mpmath. A technical difficulty here is that the derivative of the zeta
+function $\zeta'(s)$ does not have a closed-form expression. &lt;a href="http://mpmath.org/doc/current/functions/zeta.html?highlight=zeta#mpmath.zeta"&gt;mpmath's &lt;code&gt;zeta&lt;/code&gt;
+can evaluate
+$\zeta'$&lt;/a&gt;
+but it doesn't yet work with &lt;code&gt;sympy.lambdify&lt;/code&gt; (see &lt;a href="https://github.com/sympy/sympy/issues/11802"&gt;SymPy issue
+11802&lt;/a&gt;). So we have to manually
+define &lt;code&gt;"Derivative"&lt;/code&gt; in lambdify, knowing that it will be the derivative of
+&lt;code&gt;zeta&lt;/code&gt; when it is called. Beware that this is only correct for this specific
+expression where we know that &lt;code&gt;Derivative&lt;/code&gt; will be &lt;code&gt;Derivative(zeta(s), s)&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; Z_func = lambdify(s, Z, 'mpmath')
+&amp;gt;&amp;gt;&amp;gt; D_func = lambdify(s, D, modules=['mpmath',
+...     {'Derivative': lambda expr, z: mpmath.zeta(z, derivative=1)}])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now define a function to use the argument principle to count the number of
+zeros up to $Ni$. Due to the symmetry $Z(s) = Z(1 - s)$, it is only necessary
+to count zeros in the top half-plane.&lt;/p&gt;
+&lt;p&gt;We have to be careful about the poles of $Z(s)$ at 0 and 1. We can either
+integrate right above them, or expand the contour to include them. I chose to
+do the former, starting at $0.1i$. It is known that there $\zeta(s)$ has no
+zeros near the real axis on the critical strip. I could have also expanded the
+contour to go around 0 and 1, and offset the result by 2 to account for the
+integral counting those points as poles.&lt;/p&gt;
+&lt;p&gt;It has also been shown that there are no zeros on the lines $\mathrm{Re}(s) =
+0$ or $\mathrm{Re}(s) = 1$, so we do not need to worry about that. If the
+upper point of our contour happens to have zeros exactly on it, we would be
+very unlucky, but even if this were to happen we could just adjust it up a
+little bit.&lt;/p&gt;
+&lt;img src="https://asmeurer.com/blog/contour-c.svg" alt="Our contour" width="608"&gt;
+&lt;p&gt;(Our contour. Created with &lt;a href="https://www.geogebra.org/graphing/nmnsaywd"&gt;Geogebra&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://mpmath.org/doc/current/calculus/integration.html#mpmath.quad"&gt;&lt;code&gt;mpmath.quad&lt;/code&gt;&lt;/a&gt;
+can take a list of points to compute a contour. The &lt;code&gt;maxdegree&lt;/code&gt; parameter
+allows us to increase the degree of the quadrature if it becomes necessary to
+get an accurate result.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def argument_count(func, N, maxdegree=6):
+...     return 1/(2*mpmath.pi*1j)*(mpmath.quad(func,
+...         [1 + 0.1j, 1 + N*1j, 0 + N*1j, 0 + 0.1j,  1 + 0.1j],
+...         maxdegree=maxdegree))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now let's test it. Lets count the zeros of $$s^2 - s + 1/2$$ in the box
+bounded by the above rectangle ($N = 10$).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; expr = s**2 - s + S(1)/2
+&amp;gt;&amp;gt;&amp;gt; argument_count(lambdify(s, expr.diff(s)/expr), 10)
+mpc(real='1.0', imag='3.4287545414000525e-24')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The integral is 1. We can confirm there is indeed one
+zero in this box, at $\frac{1}{2} + \frac{i}{2}$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; solve(s**2 - s + S(1)/2)
+[1/2 - I/2, 1/2 + I/2]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now define a function to count the number of sign changes in a list of real
+values.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def sign_changes(L):
+...     """
+...     Count the number of sign changes in L
+...
+...     Values of L should all be real.
+...     """
+...     changes = 0
+...     assert im(L[0]) == 0, L[0]
+...     s = sign(L[0])
+...     for i in L[1:]:
+...         assert im(i) == 0, i
+...         s_ = sign(i)
+...         if s_ == 0:
+...             # Assume these got chopped to 0
+...             continue
+...         if s_ != s:
+...             changes += 1
+...         s = s_
+...     return changes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For example, for $\sin(s)$ from -10 to 10, there are 7 zeros ($3\pi\approx
+9.42$)&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; sign_changes(lambdify(s, sin(s))(np.linspace(-10, 10)))
+7
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now compute sign changes along the critical line. We also make provisions in
+case we have to increase the precision of mpmath to get correct results here.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def compute_points(Z_func, N, npoints=10000, dps=15):
+...     import warnings
+...     old_dps = mpmath.mp.dps
+...     points = np.linspace(0, N, npoints)
+...     try:
+...         mpmath.mp.dps = dps
+...         L = [mpmath.chop(Z_func(i)) for i in 1/2 + points*1j]
+...     finally:
+...         mpmath.mp.dps = old_dps
+...     if L[-1] == 0:
+...         # mpmath will give 0 if the precision is not high enough, since Z
+...         # decays rapidly on the critical line.
+...         warnings.warn("You may need to increase the precision")
+...     return L
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can check how many zeros of $Z(s)$ (and hence non-trivial zeros of
+$\zeta(s)$) we can find. According to
+&lt;a href="https://en.wikipedia.org/wiki/Riemann_hypothesis"&gt;Wikipedia&lt;/a&gt;, the first few
+non-trivial zeros of $\zeta(s)$ in the upper half-plane are 14.135, 21.022,
+and 25.011.&lt;/p&gt;
+&lt;p&gt;First try up to $N=20$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; argument_count(D_func, 20)
+mpc(real='0.99999931531867581', imag='-3.2332902529067346e-24')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Mathematically, the above value &lt;em&gt;must&lt;/em&gt; be an integer, so we know it is 1.&lt;/p&gt;
+&lt;p&gt;Now check the number of sign changes of $Z(s)$ from $\frac{1}{2}$ to
+$\frac{1}{2} + 20i$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; L = compute_points(Z_func, 20)
+&amp;gt;&amp;gt;&amp;gt; sign_changes(L)
+1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So it checks out. There is one zero between $0$ and $20i$ on the critical
+strip, and it is in fact on the critical line, as expected!&lt;/p&gt;
+&lt;p&gt;Now let's verify the other two zeros from Wikipedia.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; argument_count(D_func, 25)
+mpc(real='1.9961479945577916', imag='-3.2332902529067346e-24')
+&amp;gt;&amp;gt;&amp;gt; L = compute_points(Z_func, 25)
+&amp;gt;&amp;gt;&amp;gt; sign_changes(L)
+2
+&amp;gt;&amp;gt;&amp;gt; argument_count(D_func, 30)
+mpc(real='2.9997317058520916', imag='-3.2332902529067346e-24')
+&amp;gt;&amp;gt;&amp;gt; L = compute_points(Z_func, 30)
+&amp;gt;&amp;gt;&amp;gt; sign_changes(L)
+3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Both check out as well.&lt;/p&gt;
+&lt;p&gt;Since we are computing the points, we can go ahead and make a plot as well.
+However, there is a technical difficulty. If you naively try to plot $Z(1/2 +
+it)$, you will find that it decays rapidly, so fast that you cannot really
+tell where it crosses 0:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def plot_points_bad(L, N):
+...     npoints = len(L)
+...     points = np.linspace(0, N, npoints)
+...     plt.figure()
+...     plt.plot(points, L)
+...     plt.plot(points, [0]*npoints, linestyle=':')
+&amp;gt;&amp;gt;&amp;gt; plot_points_bad(L, 30)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src="https://asmeurer.com/blog/riemann-bad.svg" width="608"&gt;
+&lt;p&gt;So instead of plotting $Z(1/2 + it)$, we plot $\log(|Z(1/2 + it)|)$. The
+logarithm will make the zeros go to $-\infty$, but these will be easy to see.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def plot_points(L, N):
+...     npoints = len(L)
+...     points = np.linspace(0, N, npoints)
+...     p = [mpmath.log(abs(i)) for i in L]
+...     plt.figure()
+...     plt.plot(points, p)
+...     plt.plot(points, [0]*npoints, linestyle=':')
+&amp;gt;&amp;gt;&amp;gt; plot_points(L, 30)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src="https://asmeurer.com/blog/riemann-30.svg" width="608"&gt;
+&lt;p&gt;The spikes downward are the zeros.&lt;/p&gt;
+&lt;p&gt;Finally, let's check up to N=100. &lt;a href="https://oeis.org/A072080"&gt;OEIS A072080&lt;/a&gt;
+gives the number of zeros of $\zeta(s)$ in upper half-plane up to $10^ni$.
+According to it, we should get 29 zeros between $0$ and $100i$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; argument_count(D_func, 100)
+mpc(real='28.248036536895913', imag='-3.2332902529067346e-24')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is not near an integer. This means we need to increase the precision of
+the quadrature (the &lt;code&gt;maxdegree&lt;/code&gt; argument).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; argument_count(D_func, 100, maxdegree=9)
+mpc(real='29.000000005970151', imag='-3.2332902529067346e-24')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And the sign changes...&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; L = compute_points(Z_func, 100)
+__main__:11: UserWarning: You may need to increase the precisio
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our guard against the precision being too low was triggered. Try raising it
+(the default dps is 15).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; L = compute_points(Z_func, 100, dps=50)
+&amp;gt;&amp;gt;&amp;gt; sign_changes(L)
+29
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;They both give 29. So we have verified the Riemann Hypothesis up to $100i$!&lt;/p&gt;
+&lt;p&gt;Here is a plot of these 29 zeros.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; plot_points(L, 100)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src="https://asmeurer.com/blog/riemann-100.svg" width="608"&gt;
+&lt;p&gt;(remember that the spikes downward are the zeros)&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;$N=100$ takes a few minutes to compute, and I imagine larger and larger values
+would require increasing the precision more, slowing it down even further, so
+I didn't go higher than this. But it is clear that this method works.&lt;/p&gt;
+&lt;p&gt;This was just me playing around with SymPy and mpmath, but if I wanted to
+actually verify the Riemann Hypothesis, I would try to find a more efficient
+method of computing the above quantities. For the sake of simplicity, I used
+$Z(s)$ for both the argument principle and sign changes computations, but it
+would have been more efficient to use $\zeta(s)$ for the argument principle
+integral, since it has a simpler formula. It would also be useful if there
+were a formula with similar properties to $Z(s)$ (real on the critical line
+with the same zeros as $\zeta(s)$), but that did not decay as rapidly.&lt;/p&gt;
+&lt;p&gt;Furthermore, for the argument principle integral, I would like to see precise
+error estimates for the integral. We saw above with $N=100$ with the default
+quadrature that we got a value of 28.248, which is not close to an integer.
+This tipped us off that we should increase the quadrature, which ended up
+giving us the right answer, but if the original number happened to be close to
+an integer, we might have been fooled. Ideally, one would like know the exact
+quadrature degree needed. If you can get error estimates guaranteeing the
+error for the integral will be less than 0.5, you can always round the answer
+to the nearest integer. For the sign changes, you don't need to be as
+rigorous, because simply seeing as many sign changes as you have zeros is
+sufficient. However, one could certainly be more efficient in computing the
+values along the interval, rather than just naively computing 10000 points and
+raising the precision until it works, as I have done.&lt;/p&gt;
+&lt;p&gt;One would also probably want to use a faster integrator than mpmath (like one
+written in C), and perhaps also find a faster to evaluate expression than the
+one I used for $Z(s)$. It is also possible that one could special-case the
+quadrature algorithm knowing that it will be computed on $\zeta'(s)/\zeta(s)$.&lt;/p&gt;
+&lt;p&gt;In this post I described the Riemann zeta function and the Riemann Hypothesis,
+and showed how to computationally verify it. But I didn't really go over the
+details of why the Riemann Hypothesis matters. I encourage you to watch the
+videos in my &lt;a href="https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT"&gt;YouTube
+playlist&lt;/a&gt;
+if you want to know this. Among other things, the truth of the Riemann
+Hypothesis would give a very precise bound on the distribution of prime
+numbers. Also, the non-trivial zeros of $\zeta(s)$ are, in some sense, the
+"spectrum" of the prime numbers, meaning they exactly encode the position of
+every prime on the number line.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</guid><pubDate>Tue, 31 Mar 2020 21:12:54 GMT</pubDate></item><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/10/quansight-labs-work-update-for-september-2019/"&gt;Quansight Labs
 Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
@@ -1513,7 +2069,7 @@ the most entertaining Python people you can
 can't disagree sometimes.&lt;/p&gt;
 &lt;h2&gt;List vs. Tuple. Fight!&lt;/h2&gt;
 &lt;p&gt;As you probably know, there are two "array" datatypes in Python, &lt;code&gt;list&lt;/code&gt; and
-&lt;code&gt;tuple&lt;/code&gt;.&lt;sup id="fnref-list"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-list"&gt;1&lt;/a&gt;&lt;/sup&gt; The primary difference between the two is that lists are &lt;em&gt;mutable&lt;/em&gt;,
+&lt;code&gt;tuple&lt;/code&gt;.&lt;sup id="fnref:list"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn:list"&gt;1&lt;/a&gt;&lt;/sup&gt; The primary difference between the two is that lists are &lt;em&gt;mutable&lt;/em&gt;,
 that is you can change their entries and length after they are created, with
 methods like &lt;code&gt;.append&lt;/code&gt; or &lt;code&gt;+=&lt;/code&gt;. Tuples, on the other hand, are &lt;em&gt;immutable&lt;/em&gt;.
 Once you create one, you cannot change it. This makes the implementation
@@ -1532,11 +2088,11 @@ fixed shape, the positions in a tuple can be "fixed" values, and by convention�
 Python programmer sees parentheses instead of square brackets, he is more
 likely to see the object as "record-like". The &lt;code&gt;namedtuple&lt;/code&gt; object in the standard library
 takes the record idea further by letting you actually name the fields:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Person'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'name, age'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;But is that really the &lt;em&gt;only&lt;/em&gt; place you'd want to use a tuple over a list?&lt;/p&gt;
@@ -1550,8 +2106,8 @@ Allen Downey:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Multiple assignments:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
-&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;(yes, the parentheses are optional here, as they are in many places where a
@@ -1565,31 +2121,31 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;*args&lt;/code&gt;:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;...&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="s1"&gt;'tuple'&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):&lt;/span&gt;
+&lt;span class="err"&gt;...     print(type(args), args)&lt;/span&gt;
+&lt;span class="err"&gt;...&lt;/span&gt;
+&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; f(1, 2, 3)&lt;/span&gt;
+&lt;span class="err"&gt;&amp;lt;class 'tuple'&amp;gt; (1, 2, 3)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;Arbitrary positional function arguments are always stored as a &lt;code&gt;tuple&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Return value from builtins &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;enumerate&lt;/code&gt;, etc.:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;zip&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;range&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;abc&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
-...     &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-...
-&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;a&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;c&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;enumerate&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;abc&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
-...     &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-...
-&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;a&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;, &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;c&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; for i in zip(range(3), 'abc'):&lt;/span&gt;
+&lt;span class="err"&gt;...     print(i)&lt;/span&gt;
+&lt;span class="err"&gt;...&lt;/span&gt;
+&lt;span class="err"&gt;(0, 'a')&lt;/span&gt;
+&lt;span class="err"&gt;(1, 'b')&lt;/span&gt;
+&lt;span class="err"&gt;(2, 'c')&lt;/span&gt;
+&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; for i in enumerate('abc'):&lt;/span&gt;
+&lt;span class="err"&gt;...     print(i)&lt;/span&gt;
+&lt;span class="err"&gt;...&lt;/span&gt;
+&lt;span class="err"&gt;(0, 'a')&lt;/span&gt;
+&lt;span class="err"&gt;(1, 'b')&lt;/span&gt;
+&lt;span class="err"&gt;(2, 'c')&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;This also applies to the combinatoric generators in
@@ -1598,40 +2154,40 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Dictionary keys:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="err"&gt;}&lt;/span&gt;
-&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; {&lt;/span&gt;
+&lt;span class="err"&gt;...     (0, 0): '.',&lt;/span&gt;
+&lt;span class="err"&gt;...     (0, 1): ' ',&lt;/span&gt;
+&lt;span class="err"&gt;...     (1, 0): '.',&lt;/span&gt;
+&lt;span class="err"&gt;...     (1, 1): ' ',&lt;/span&gt;
+&lt;span class="err"&gt;... }&lt;/span&gt;
+&lt;span class="err"&gt;{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This last one I find to be very important. You could arguably use a list for
-the first four of Allen Downey's points&lt;sup id="fnref-assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-assign"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
+the first four of Allen Downey's points&lt;sup id="fnref:assign"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn:assign"&gt;2&lt;/a&gt;&lt;/sup&gt; (or Python could have, if it wanted to). But it
 is
 &lt;a href="https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/"&gt;impossible&lt;/a&gt;
 to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.&lt;/p&gt;
 &lt;p&gt;However, be careful. Not all tuples are hashable. Tuples can contain
-anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref-TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-TypeError"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref:TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn:TypeError"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;Such tuples are not hashable, and cannot be used as dictionary keys.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
   &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;ipython-input-39-36822ba665ca&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;unhashable&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'list'&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;h2&gt;Why is &lt;code&gt;list&lt;/code&gt; the Default?&lt;/h2&gt;
@@ -1648,8 +2204,8 @@ as well).&lt;/p&gt;
 &lt;p&gt;Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent &lt;code&gt;1 - 2*(-3 + 4)&lt;/code&gt; as&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'*'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'+'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'*'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'+'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;This isn't really a record. The meaning of the entries in the tuples is
@@ -1670,7 +2226,7 @@ See how long it takes you to write that function correctly.&lt;/p&gt;
 &lt;h2&gt;Mutability is Bad&lt;/h2&gt;
 &lt;p&gt;More to the point, however, mutability is bad. I counted 12 distinct methods
 on &lt;code&gt;list&lt;/code&gt; that mutate it (how many can you remember off the top of your
-head?&lt;sup id="fnref-mutate"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn-mutate"&gt;3&lt;/a&gt;&lt;/sup&gt;). &lt;em&gt;Any&lt;/em&gt; function that gets access to a list can mutate it,
+head?&lt;sup id="fnref:mutate"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn:mutate"&gt;3&lt;/a&gt;&lt;/sup&gt;). &lt;em&gt;Any&lt;/em&gt; function that gets access to a list can mutate it,
 using any one of these methods. All it takes is for someone to forget that
 &lt;code&gt;+=&lt;/code&gt; mutates a list (and that they should copy it first) for code completely
 distant from the origin definition to cause issues. The hardest bug I ever
@@ -1698,22 +2254,22 @@ structures are immutable.&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id="fn-list"&gt;
+&lt;li id="fn:list"&gt;
 &lt;p&gt;I want to avoid saying "a tuple is an immutable list", since "list"
 can be interpreted in two ways, as an English word meaning "ordered
 collection" (in
 which case, the statement is true), or as the Python type &lt;code&gt;list&lt;/code&gt; (in which
-case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass of &lt;code&gt;list&lt;/code&gt;). &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-list" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass of &lt;code&gt;list&lt;/code&gt;). &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref:list" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn-assign"&gt;
+&lt;li id="fn:assign"&gt;
 &lt;p&gt;Yes,&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
-&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-assign" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref:assign" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn-mutate"&gt;
+&lt;li id="fn:mutate"&gt;
 &lt;p&gt;&lt;/p&gt;&lt;div id="spoiler" style="display:none"&gt;
 &lt;code&gt;__delitem__&lt;/code&gt;, &lt;code&gt;__iadd__&lt;/code&gt;, &lt;code&gt;__imul__&lt;/code&gt;, &lt;code&gt;__setitem__&lt;/code&gt;, &lt;code&gt;append&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;extend&lt;/code&gt;, &lt;code&gt;insert&lt;/code&gt;,
 &lt;code&gt;pop&lt;/code&gt;, &lt;code&gt;remove&lt;/code&gt;, &lt;code&gt;reverse&lt;/code&gt;, and &lt;code&gt;sort&lt;/code&gt;.
@@ -1721,25 +2277,25 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none')
 {document.getElementById('spoiler')
 .style.display=''}else{document.getElementById('spoiler')
-.style.display='none'}"&gt;Show/hide answer&lt;/button&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-mutate" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;
+.style.display='none'}"&gt;Show/hide answer&lt;/button&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref:mutate" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;
 &lt;/li&gt;
-&lt;li id="fn-TypeError"&gt;
+&lt;li id="fn:TypeError"&gt;
 &lt;p&gt;One of the tweets from the conversation:&lt;/p&gt;
 &lt;p&gt;&lt;/p&gt;&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/asmeurer"&gt;@asmeurer&lt;/a&gt; &lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; As yes:&lt;br&gt;&lt;br&gt;t = (1,2, [3, 4])&lt;br&gt;t[2] += [5,6]&lt;br&gt;&lt;br&gt;;-)&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778697399975813120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 &lt;p&gt;This is similar to this example. But
 it turns out this one doesn't work:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="k"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="ss"&gt;"&amp;lt;stdin&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="n"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'tuple'&lt;/span&gt; &lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="n"&gt;does&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;support&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="k"&gt;assignment&lt;/span&gt;
-&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; t = (1,2, [3, 4])&lt;/span&gt;
+&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; t[2] += [5,6]&lt;/span&gt;
+&lt;span class="err"&gt;Traceback (most recent call last):&lt;/span&gt;
+&lt;span class="err"&gt;  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;TypeError: 'tuple' object does not support item assignment&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;I have no idea why. It seems to me that it should work. &lt;code&gt;t[2]&lt;/code&gt; is a list
 and &lt;code&gt;list&lt;/code&gt; has &lt;code&gt;__iadd__&lt;/code&gt; defined. It seems that Python gets kind of weird
 about things on the left-hand side of an assignment. &lt;strong&gt;EDIT:
-&lt;a href="http://stackoverflow.com/a/29747466/161801"&gt;Here's&lt;/a&gt; why.&lt;/strong&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;a href="http://stackoverflow.com/a/29747466/161801"&gt;Here's&lt;/a&gt; why.&lt;/strong&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref:TypeError" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.com/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;
@@ -1761,7 +2317,7 @@ represents library developers being antagonistic against those who want or
 have to use Python 2.&lt;/p&gt;
 &lt;p&gt;I'm writing this from my perspective as a library developer. I'm the lead
 developer of &lt;a href="http://www.sympy.org/"&gt;SymPy&lt;/a&gt;, and I have sympathies for
-developers of other libraries.&lt;sup id="fnref-sympy"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-sympy"&gt;1&lt;/a&gt;&lt;/sup&gt; I say this because my idea may seem a bit
+developers of other libraries.&lt;sup id="fnref:sympy"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn:sympy"&gt;1&lt;/a&gt;&lt;/sup&gt; I say this because my idea may seem a bit
 in tension with "users" (even though I hate the "developer/user" distinction).&lt;/p&gt;
 &lt;h3&gt;Python 2&lt;/h3&gt;
 &lt;p&gt;There are a few reasons why I think libraries should drop (and announce that
@@ -1773,7 +2329,7 @@ necessarily disjoint) classes of people: CPython core developers, library
 developers, and users. The core developers were the first to move to Python 3,
 since they were the ones who wrote it. They were also the ones who provided
 the messaging around Python 3, which has varied over time. In my opinion, it
-should have been and should be more forceful.&lt;sup id="fnref-core"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-core"&gt;2&lt;/a&gt;&lt;/sup&gt; Then you have the library
+should have been and should be more forceful.&lt;sup id="fnref:core"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn:core"&gt;2&lt;/a&gt;&lt;/sup&gt; Then you have the library
 developers and the users. A chief difference here is that users are probably
 going to be using only one version of Python. In order for them to switch that
 version to Python 3, all the libraries that they use need to support it. This
@@ -1818,7 +2374,7 @@ important to do this for a few reasons:&lt;/p&gt;
   implemented as keyword-only arguments. This avoids mistakes that come from
   the antipattern of passing keyword arguments without naming the keyword, and
   allows the argspec of the function to be expanded in the future without
-  breaking API.&lt;sup id="fnref-swift"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-swift"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  breaking API.&lt;sup id="fnref:swift"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn:swift"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The second reason I think library developers should agree to drop Python 2
@@ -1828,7 +2384,7 @@ In other words, instead of forcing people off of Python 2, we should make them
 want to come to Python 3. There are some issues with this argument. First,
 Python 3 already has
 &lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;tons of carrots&lt;/a&gt;.
-Honestly, not being terrible at Unicode ought to be a carrot in its own right.&lt;sup id="fnref-unicode"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-unicode"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.&lt;sup id="fnref:unicode"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn:unicode"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;If you don't deal with strings, or do but don't care about those silly
 foreigners with weird accents in their names, there are other major carrots as
 well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
@@ -1881,7 +2437,7 @@ for the most part thus far, but they shouldn't be expected to bear it forever.
 The debt will only increase, especially as the technical opportunity cost, if
 you will, of not being able to use newer and shinier versions of Python 3
 grows. The burden will have to shift at some point. Those with the financial
-resources may choose to offload this debt to others,&lt;sup id="fnref-continuum"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn-continuum"&gt;5&lt;/a&gt;&lt;/sup&gt; say, by
+resources may choose to offload this debt to others,&lt;sup id="fnref:continuum"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fn:continuum"&gt;5&lt;/a&gt;&lt;/sup&gt; say, by
 backporting features or bugfixes to older library versions that support Python
 2 (or by helping to move code to Python 3).&lt;/p&gt;
 &lt;p&gt;I want to end by pointing out that if you are, for whatever reason, still
@@ -1898,25 +2454,25 @@ it will make it easy to separate your Python 2 code from your Python 3 code.&lt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id="fn-sympy"&gt;
+&lt;li id="fn:sympy"&gt;
 &lt;p&gt;With that being said, the opinions here are entirely my own, and are
     don't necessarily represent those of other people, nor do they
     represent official SymPy policy (no decisions have been made by the
-    community about this at this time). &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-sympy" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    community about this at this time). &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref:sympy" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn-core"&gt;
+&lt;li id="fn:core"&gt;
 &lt;p&gt;It often feels like core Python itself doesn't really want people to
     use Python 3. It's little things, like
     &lt;a href="https://docs.python.org/library/"&gt;docs links&lt;/a&gt; that redirect to Python
     2, or &lt;a href="https://www.python.org/dev/peps/pep-0394/"&gt;PEP 394&lt;/a&gt;, which
-    still says that the &lt;code&gt;python&lt;/code&gt; should always point to Python 2. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-core" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    still says that the &lt;code&gt;python&lt;/code&gt; should always point to Python 2. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref:core" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn-swift"&gt;
+&lt;li id="fn:swift"&gt;
 &lt;p&gt;In Swift, Apple's new language for iOS and OS X, function parameter
     names are effectively "keyword-only"
-    &lt;a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html"&gt;by default&lt;/a&gt;. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-swift" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    &lt;a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html"&gt;by default&lt;/a&gt;. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref:swift" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn-unicode"&gt;
+&lt;li id="fn:unicode"&gt;
 &lt;p&gt;As an example of this, in conda, if you use Python 2 in the root
     environment, then installing into a path with non-ASCII characters is
     unsupported. This is common on Windows, because Windows by default
@@ -1934,12 +2490,12 @@ import unicode_literals&lt;/code&gt; in Python 2, in my opinion.&lt;/p&gt;
 &lt;p&gt;I no longer work on conda, but as far as I know, the
 &lt;a href="https://github.com/conda/conda/issues/1180"&gt;issue&lt;/a&gt; remains unfixed.
 Of course, this whole thing works just fine if conda is run in Python
-3. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-unicode" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+3. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref:unicode" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn-continuum"&gt;
+&lt;li id="fn:continuum"&gt;
 &lt;p&gt;If that legitimately interests you, I
     &lt;a href="https://twitter.com/pwang/status/712780279211884546"&gt;hear Continuum&lt;/a&gt;
-    may be able to help you. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref-continuum" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
+    may be able to help you. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref:continuum" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item><item><title>What happens when you mess with hashing in Python</title><link>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post is based off a Jupyter notebook I made in 2013. You can download
@@ -1988,7 +2544,7 @@ Suppose we have a collection of objects, and given any object, we want to be
 able to compute very quickly if that object belongs to our collection. We
 could store these objects in an ordered array, but then to determine if it is
 in the array, we would have to search potentially through every element of the
-array (in other words, an \(O(n)\)) algorithm.&lt;/p&gt;
+array (in other words, an $O(n)$) algorithm.&lt;/p&gt;
 &lt;p&gt;With hashing, we can do better. We create what is known as a
 &lt;a href="https://en.wikipedia.org/wiki/Hash_table"&gt;&lt;em&gt;hash table&lt;/em&gt;&lt;/a&gt;. Instead of storing
 the objects in an ordered array, we create an array of buckets, each
@@ -2001,7 +2557,7 @@ simple as taking the modulus with respect to the number of buckets, &lt;code&gt;
 shows an example.&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="img"&gt;&lt;/p&gt;
 &lt;p&gt;To determine if an object is in a hash table, we only have to hash the object,
-and look in the bucket corresponding to that hash. This is an \(O(1)\)
+and look in the bucket corresponding to that hash. This is an $O(1)$
 algorithm, assuming we have a good hash function, because each bucket will
 generally hold very few objects, possibly even none.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note: there are some additional things that need to be done to handle hash
@@ -2009,7 +2565,7 @@ collisions, but the basic idea is the same, and as long as there aren't too
 many hash collisions, which should happen if hash values are evenly
 distributed and the size of the hash table is large compared to the number of
 objects stored in it, the average time to determine if an object is in the
-hash table is still \(O(1)\).&lt;/em&gt;&lt;/p&gt;
+hash table is still $O(1)$.&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;Hashing in Python&lt;/h2&gt;
 &lt;p&gt;Python has a built in function that performs a hash called &lt;code&gt;hash()&lt;/code&gt;.  For many
 objects, the hash is not very surprising.  Note, the hashes you see below may
@@ -2381,7 +2937,7 @@ list if they aren't already there.&lt;/p&gt;
 &lt;p&gt;This time, we used &lt;code&gt;in&lt;/code&gt;, which uses &lt;code&gt;==&lt;/code&gt;, so we got only one unique element of
 the list of &lt;code&gt;AlwaysEqual&lt;/code&gt; objects.&lt;/p&gt;
 &lt;p&gt;But there is an issue with this algorithm as well. Checking if something is in
-a list is \(O(n)\), but we have an object that allows checking in \(O(1)\)
+a list is $O(n)$, but we have an object that allows checking in $O(1)$
 time, namely, a &lt;code&gt;set&lt;/code&gt;. So a more efficient version might be to create a set
 alongside the new list for containment checking purposes.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def uniq2(l):
@@ -2872,210 +3428,4 @@ motivated to learn more.&lt;/p&gt;
 &lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;No Starch Press&lt;/a&gt; website, both
 as a print book or an ebook. The website also includes a sample chapter
 (&lt;a href="https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf"&gt;chapter 1&lt;/a&gt;),
-code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item><item><title>Lessons learned from working at Continuum</title><link>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Last Friday was my last day working at Continuum Analytics. I enjoyed my
-time at the company, and wish success to it, but the time has come for me to
-move on. Starting later this year, I will start working with
-&lt;a href="https://twitter.com/scopatz"&gt;Anthony Scopatz&lt;/a&gt; at his new lab
-&lt;a href="http://www.ergs.sc.edu/index.html"&gt;ERGS&lt;/a&gt; at the University of South
-Carolina.&lt;/p&gt;
-&lt;p&gt;During my time at Continuum (over two years if you count a summer internship),
-I primarily worked on the
-&lt;a href="https://www.continuum.io/downloads"&gt;Anaconda distribution&lt;/a&gt; and its open
-source package manager, &lt;a href="http://conda.pydata.org/"&gt;conda&lt;/a&gt;.  I learned a lot of
-lessons in that time, and I'd like to share some of them here.&lt;/p&gt;
-&lt;p&gt;In no particular order:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Left to their own devices, people will make the minimal possible solution to
-  packaging. They won't try to architect something. The result will be
-  over-engineered, specific to their use-case, and lack reproducibility.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The best way to ensure that some software has no bugs is for it to have many
-  users.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Be wary of the "software would be great if it weren't for all the users"
-  mentality (cf. the previous point).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Most people don't code defensively. If you are working on a project that
-  requires extreme stability, be cautious of contributions from those outside
-  the development team.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Hostility towards Windows and Windows users doesn't help anyone.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="https://twitter.com/asmeurer/status/593170976981913600"&gt;https://twitter.com/asmeurer/status/593170976981913600&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;For a software updater, stability is the number one priority. If the updater
-  breaks, how can a fix be deployed?&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Even if you configure your program to update itself every time it runs you
-  will still get bug reports with arbitrarily old versions.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Separating components into separate git repositories leads to a
-  philosophical separation of concerns among the components.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Everyone who isn't an active developer on the project will ignore this
-  separation and open issues in the wrong repo.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Avoid object oriented programming when procedural programming will do just
-  fine.&lt;sup id="fnref4-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Open source is more about the open than the source. Develop things in the
-  open, and you will create a community that respects you.&lt;sup id="fnref3-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Academics (often) don't know good software practices, nor good licensing
-  practices.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Neither do some large corporations.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Avoid over-engineering things.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Far fewer people than I would have thought understand the difference between
-  hard links and soft links.&lt;sup id="fnref-fn2"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Changelogs are useful.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Semantic versioning is over-hyped.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;If you make something and release it, the first version should be 1.0 (not
-  0.1 or 0.0.1).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Getting a difficult package to compile is like hacking a computer. All it
-  takes is time.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;It doesn't matter how open source friendly your business is, there will
-  always be people who will be skeptical and point their fingers at the
-  smallest proprietary components, fear monger, and overgeneralize unrelated
-  issues into FUD. These people should generally be ignored.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Don't feed the trolls.&lt;sup id="fnref2-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;People constantly misspell the name of
-  &lt;a href="https://twitter.com/asmeurer/status/618595687958122496"&gt;Apple's desktop operating system&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;People always assume you have way more automation than you really do.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The Python standard library is not a Zen garden. Some parts of it are
-  completely broken, and if you need to rely on them, you'll have to rewrite
-  them. &lt;code&gt;shutil.rmtree&lt;/code&gt; on Windows is one example of this.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Linux is strictly backwards compatible. Windows is strictly forwards
-  compatible. &lt;sup id="fnref-fn3"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn3"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On Linux, things tend to be very simple. On Windows, things tend to be very
-  complicated.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;I can't decide about OS X. It lies somewhere in between.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Nobody uses 32-bit Linux. Why do we even support that?&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;People oversimplify the problem of solving for package dependencies in their
-  heads.  No one realizes that it's meaningless to say something like "the
-  dependencies of NumPy" (every build of every version of NumPy has its own
-  set of dependencies, which may or may not be the same).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Writing a set of rules and a solver to solve against those rules is
-  relatively easy. Writing heuristics to tell users why those rules are
-  unsolvable when they are is hard.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;SAT solvers solve NP-complete problems in general, but they can be very fast
-  to solve common case problems. &lt;sup id="fnref-fn1"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fn-fn1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Some of the smartest people I know, who otherwise make very rational and
-  intelligent decisions,
-  &lt;a href="https://asmeurer.github.io/python3-presentation/slides.html"&gt;refuse to update to Python 3&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;As an introvert, the option of working from home is great for maintaining
-  sanity.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="http://blog.codinghorror.com/a-developers-second-most-important-asset/"&gt;Aeron chairs are awesome&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;If living in Austin doesn't turn you into a foodie you will at least gain a
-  respect for them.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Twitter, if used correctly, is a great way to interact with your users.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Twitter is also a great place to learn new things. Follow
-  &lt;a href="https://twitter.com/JohnDCook"&gt;John Cook&lt;/a&gt; and
-  &lt;a href="https://twitter.com/worrydream"&gt;Bret Victor&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;One of the best ways to make heavily shared content is to make it about git
-  (at least if you're an expert).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;A good optimization algorithm avoids getting caught in local maxima by
-  trying different parts of the search space that initially appear to be
-  worse. The same approach should be taken in life.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;Footnotes&lt;/h4&gt;
-&lt;div class="footnote"&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id="fn-fn1"&gt;
-&lt;p&gt;These are things that I already knew, but were reiterated. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref2-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref3-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref4-fn1" title="Jump back to footnote 1 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn-fn2"&gt;
-&lt;p&gt;If you are one of those people, I have a small presentation that
-   explains the difference &lt;a href="https://speakerdeck.com/asmeurer/hard-links-and-soft-links"&gt;here&lt;/a&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn2" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn-fn3"&gt;
-&lt;p&gt;These terms can be confusing, and I admit I got this backwards the
-    first time I wrote this. According to Wikipedia,
-    &lt;a href="https://en.wikipedia.org/wiki/Forward_compatibility"&gt;forwards compatible&lt;/a&gt;
-    means a system can accept input intended for a later version of itself
-    and
-    &lt;a href="https://en.wikipedia.org/wiki/Backward_compatibility"&gt;backwards compatible&lt;/a&gt;
-    means a system can accept input intended for an earlier version of
-    itself.&lt;/p&gt;
-&lt;p&gt;What I specifically mean here is that in terms of building packages
-for Linux or Windows, for Linux, you should build a package on the
-oldest version that you wish to support. That package will work on
-newer versions of Linux, but not anything older (generally due to the
-version of libc you are linked against).&lt;/p&gt;
-&lt;p&gt;On the other hand, on Windows, you can can compile things on the
-newest version (I used Windows 8 on my main Windows build VM), and it
-will work on older versions of Windows like XP (as long as you ship
-the right runtime DLLs). This is also somewhat confusing because
-Windows tends to be both forwards compatible &lt;em&gt;and&lt;/em&gt; backwards
-compatible. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/#fnref-fn3" title="Jump back to footnote 3 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/lessons-learned-from-working-at-continuum/</guid><pubDate>Mon, 05 Oct 2015 22:29:03 GMT</pubDate></item></channel></rss>
+code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item></channel></rss>

@@ -6,8 +6,6 @@
 <meta name="viewport" content="width=device-width">
 <title>Aaron Meurer's Blog (old posts, page 3) | Aaron Meurer's Blog</title>
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
-<link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="rss.xml">
@@ -19,7 +17,7 @@
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
     <div id="container">
-         
+        
     <header id="header"><h1 id="brand"><a href="https://asmeurer.com/blog/" title="Aaron Meurer's Blog" rel="home">
 
         <span id="blog-title">Aaron Meurer's Blog</span>
@@ -82,7 +80,7 @@ the most entertaining Python people you can
 can't disagree sometimes.</p>
 <h2>List vs. Tuple. Fight!</h2>
 <p>As you probably know, there are two "array" datatypes in Python, <code>list</code> and
-<code>tuple</code>.<sup id="fnref-list"><a class="footnote-ref" href="posts/tuples/#fn-list">1</a></sup> The primary difference between the two is that lists are <em>mutable</em>,
+<code>tuple</code>.<sup id="fnref:list"><a class="footnote-ref" href="posts/tuples/#fn:list">1</a></sup> The primary difference between the two is that lists are <em>mutable</em>,
 that is you can change their entries and length after they are created, with
 methods like <code>.append</code> or <code>+=</code>. Tuples, on the other hand, are <em>immutable</em>.
 Once you create one, you cannot change it. This makes the implementation
@@ -101,11 +99,11 @@ fixed shape, the positions in a tuple can be "fixed" values, and by convention�
 Python programmer sees parentheses instead of square brackets, he is more
 likely to see the object as "record-like". The <code>namedtuple</code> object in the standard library
 takes the record idea further by letting you actually name the fields:</p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Person'</span><span class="p">,</span> <span class="s1">'name, age'</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
 <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
-</pre>
+</code></pre>
 
 
 <p>But is that really the <em>only</em> place you'd want to use a tuple over a list?</p>
@@ -119,8 +117,8 @@ Allen Downey:</p>
 <ol>
 <li>
 <p><strong>Multiple assignments:</strong></p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; (a, b) = 1, 2</span>
+</code></pre>
 
 
 <p>(yes, the parentheses are optional here, as they are in many places where a
@@ -134,31 +132,31 @@ for the most part a special case of using tuples as records.</p>
 </li>
 <li>
 <p><strong><code>*args</code>:</strong></p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">def</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-<span class="p">...</span>     <span class="n">print</span><span class="p">(</span><span class="k">type</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">args</span><span class="p">)</span>
-<span class="p">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="s1">'tuple'</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; def f(*args):</span>
+<span class="err">...     print(type(args), args)</span>
+<span class="err">...</span>
+<span class="err">&gt;&gt;&gt; f(1, 2, 3)</span>
+<span class="err">&lt;class 'tuple'&gt; (1, 2, 3)</span>
+</code></pre>
 
 
 <p>Arbitrary positional function arguments are always stored as a <code>tuple</code>.</p>
 </li>
 <li>
 <p><strong>Return value from builtins <code>zip</code>, <code>enumerate</code>, etc.:</strong></p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> <span class="nv">zip</span><span class="ss">(</span><span class="nv">range</span><span class="ss">(</span><span class="mi">3</span><span class="ss">)</span>, <span class="s1">'</span><span class="s">abc</span><span class="s1">'</span><span class="ss">)</span>:
-...     <span class="nv">print</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
-...
-<span class="ss">(</span><span class="mi">0</span>, <span class="s1">'</span><span class="s">a</span><span class="s1">'</span><span class="ss">)</span>
-<span class="ss">(</span><span class="mi">1</span>, <span class="s1">'</span><span class="s">b</span><span class="s1">'</span><span class="ss">)</span>
-<span class="ss">(</span><span class="mi">2</span>, <span class="s1">'</span><span class="s">c</span><span class="s1">'</span><span class="ss">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="s1">'</span><span class="s">abc</span><span class="s1">'</span><span class="ss">)</span>:
-...     <span class="nv">print</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
-...
-<span class="ss">(</span><span class="mi">0</span>, <span class="s1">'</span><span class="s">a</span><span class="s1">'</span><span class="ss">)</span>
-<span class="ss">(</span><span class="mi">1</span>, <span class="s1">'</span><span class="s">b</span><span class="s1">'</span><span class="ss">)</span>
-<span class="ss">(</span><span class="mi">2</span>, <span class="s1">'</span><span class="s">c</span><span class="s1">'</span><span class="ss">)</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; for i in zip(range(3), 'abc'):</span>
+<span class="err">...     print(i)</span>
+<span class="err">...</span>
+<span class="err">(0, 'a')</span>
+<span class="err">(1, 'b')</span>
+<span class="err">(2, 'c')</span>
+<span class="err">&gt;&gt;&gt; for i in enumerate('abc'):</span>
+<span class="err">...     print(i)</span>
+<span class="err">...</span>
+<span class="err">(0, 'a')</span>
+<span class="err">(1, 'b')</span>
+<span class="err">(2, 'c')</span>
+</code></pre>
 
 
 <p>This also applies to the combinatoric generators in
@@ -167,40 +165,40 @@ for the most part a special case of using tuples as records.</p>
 </li>
 <li>
 <p><strong>Dictionary keys:</strong></p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="err">{</span>
-<span class="p">...</span>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span>
-<span class="p">...</span>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span>
-<span class="p">...</span>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span>
-<span class="p">...</span>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span>
-<span class="p">...</span> <span class="err">}</span>
-<span class="err">{</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s1">'.'</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s1">' '</span><span class="err">}</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; {</span>
+<span class="err">...     (0, 0): '.',</span>
+<span class="err">...     (0, 1): ' ',</span>
+<span class="err">...     (1, 0): '.',</span>
+<span class="err">...     (1, 1): ' ',</span>
+<span class="err">... }</span>
+<span class="err">{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}</span>
+</code></pre>
 
 
 </li>
 </ol>
 <p>This last one I find to be very important. You could arguably use a list for
-the first four of Allen Downey's points<sup id="fnref-assign"><a class="footnote-ref" href="posts/tuples/#fn-assign">2</a></sup> (or Python could have, if it wanted to). But it
+the first four of Allen Downey's points<sup id="fnref:assign"><a class="footnote-ref" href="posts/tuples/#fn:assign">2</a></sup> (or Python could have, if it wanted to). But it
 is
 <a href="https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/">impossible</a>
 to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.</p>
 <p>However, be careful. Not all tuples are hashable. Tuples can contain
-anything, but only tuples of immutable values are hashable. Consider<sup id="fnref-TypeError"><a class="footnote-ref" href="posts/tuples/#fn-TypeError">4</a></sup></p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+anything, but only tuples of immutable values are hashable. Consider<sup id="fnref:TypeError"><a class="footnote-ref" href="posts/tuples/#fn:TypeError">4</a></sup></p>
+<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span>
 <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-</pre>
+</code></pre>
 
 
 <p>Such tuples are not hashable, and cannot be used as dictionary keys.</p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
   <span class="n">File</span> <span class="s2">"&lt;ipython-input-39-36822ba665ca&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
     <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="ne">TypeError</span><span class="p">:</span> <span class="n">unhashable</span> <span class="nb">type</span><span class="p">:</span> <span class="s1">'list'</span>
-</pre>
+</code></pre>
 
 
 <h2>Why is <code>list</code> the Default?</h2>
@@ -217,8 +215,8 @@ as well).</p>
 <p>Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent <code>1 - 2*(-3 + 4)</code> as</p>
-<pre class="code literal-block"><span></span><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
+</code></pre>
 
 
 <p>This isn't really a record. The meaning of the entries in the tuples is
@@ -239,7 +237,7 @@ See how long it takes you to write that function correctly.</p>
 <h2>Mutability is Bad</h2>
 <p>More to the point, however, mutability is bad. I counted 12 distinct methods
 on <code>list</code> that mutate it (how many can you remember off the top of your
-head?<sup id="fnref-mutate"><a class="footnote-ref" href="posts/tuples/#fn-mutate">3</a></sup>). <em>Any</em> function that gets access to a list can mutate it,
+head?<sup id="fnref:mutate"><a class="footnote-ref" href="posts/tuples/#fn:mutate">3</a></sup>). <em>Any</em> function that gets access to a list can mutate it,
 using any one of these methods. All it takes is for someone to forget that
 <code>+=</code> mutates a list (and that they should copy it first) for code completely
 distant from the origin definition to cause issues. The hardest bug I ever
@@ -267,22 +265,22 @@ structures are immutable.</p>
 <div class="footnote">
 <hr>
 <ol>
-<li id="fn-list">
+<li id="fn:list">
 <p>I want to avoid saying "a tuple is an immutable list", since "list"
 can be interpreted in two ways, as an English word meaning "ordered
 collection" (in
 which case, the statement is true), or as the Python type <code>list</code> (in which
-case, the statement is false—<code>tuple</code> is not a subclass of <code>list</code>). <a class="footnote-backref" href="posts/tuples/#fnref-list" title="Jump back to footnote 1 in the text">↩</a></p>
+case, the statement is false—<code>tuple</code> is not a subclass of <code>list</code>). <a class="footnote-backref" href="posts/tuples/#fnref:list" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
-<li id="fn-assign">
+<li id="fn:assign">
 <p>Yes,</p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; [a, b] = 1, 2</span>
+</code></pre>
 
 
-<p>works. <a class="footnote-backref" href="posts/tuples/#fnref-assign" title="Jump back to footnote 2 in the text">↩</a></p>
+<p>works. <a class="footnote-backref" href="posts/tuples/#fnref:assign" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
-<li id="fn-mutate">
+<li id="fn:mutate">
 <p></p>
 <div id="spoiler" style="display:none">
 <code>__delitem__</code>, <code>__iadd__</code>, <code>__imul__</code>, <code>__setitem__</code>, <code>append</code>, <code>clear</code>, <code>extend</code>, <code>insert</code>,
@@ -291,27 +289,27 @@ case, the statement is false—<code>tuple</code> is not a subclass of <code>lis
 <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none')
 {document.getElementById('spoiler')
 .style.display=''}else{document.getElementById('spoiler')
-.style.display='none'}">Show/hide answer</button> <a class="footnote-backref" href="posts/tuples/#fnref-mutate" title="Jump back to footnote 3 in the text">↩</a>
+.style.display='none'}">Show/hide answer</button> <a class="footnote-backref" href="posts/tuples/#fnref:mutate" title="Jump back to footnote 3 in the text">↩</a>
 </li>
-<li id="fn-TypeError">
+<li id="fn:TypeError">
 <p>One of the tweets from the conversation:</p>
 <p></p>
 <blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
 <p lang="en" dir="ltr"><a href="https://twitter.com/asmeurer">@asmeurer</a> <a href="https://twitter.com/AllenDowney">@AllenDowney</a> As yes:<br><br>t = (1,2, [3, 4])<br>t[2] += [5,6]<br><br>;-)</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778697399975813120">September 21, 2016</a>
 </blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>This is similar to this example. But
 it turns out this one doesn't work:</p>
-<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="k">call</span> <span class="k">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="ss">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="k">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="n">TypeError</span><span class="p">:</span> <span class="s1">'tuple'</span> <span class="k">object</span> <span class="n">does</span> <span class="k">not</span> <span class="n">support</span> <span class="n">item</span> <span class="k">assignment</span>
-</pre>
+<pre class="code literal-block"><span></span><code><span class="err">&gt;&gt;&gt; t = (1,2, [3, 4])</span>
+<span class="err">&gt;&gt;&gt; t[2] += [5,6]</span>
+<span class="err">Traceback (most recent call last):</span>
+<span class="err">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span>
+<span class="c">TypeError: 'tuple' object does not support item assignment</span>
+</code></pre>
 
 
 <p>I have no idea why. It seems to me that it should work. <code>t[2]</code> is a list
 and <code>list</code> has <code>__iadd__</code> defined. It seems that Python gets kind of weird
 about things on the left-hand side of an assignment. <strong>EDIT:
-<a href="http://stackoverflow.com/a/29747466/161801">Here's</a> why.</strong> <a class="footnote-backref" href="posts/tuples/#fnref-TypeError" title="Jump back to footnote 4 in the text">↩</a></p>
+<a href="http://stackoverflow.com/a/29747466/161801">Here's</a> why.</strong> <a class="footnote-backref" href="posts/tuples/#fnref:TypeError" title="Jump back to footnote 4 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -354,7 +352,7 @@ represents library developers being antagonistic against those who want or
 have to use Python 2.</p>
 <p>I'm writing this from my perspective as a library developer. I'm the lead
 developer of <a href="http://www.sympy.org/">SymPy</a>, and I have sympathies for
-developers of other libraries.<sup id="fnref-sympy"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-sympy">1</a></sup> I say this because my idea may seem a bit
+developers of other libraries.<sup id="fnref:sympy"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:sympy">1</a></sup> I say this because my idea may seem a bit
 in tension with "users" (even though I hate the "developer/user" distinction).</p>
 <h3>Python 2</h3>
 <p>There are a few reasons why I think libraries should drop (and announce that
@@ -366,7 +364,7 @@ necessarily disjoint) classes of people: CPython core developers, library
 developers, and users. The core developers were the first to move to Python 3,
 since they were the ones who wrote it. They were also the ones who provided
 the messaging around Python 3, which has varied over time. In my opinion, it
-should have been and should be more forceful.<sup id="fnref-core"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-core">2</a></sup> Then you have the library
+should have been and should be more forceful.<sup id="fnref:core"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:core">2</a></sup> Then you have the library
 developers and the users. A chief difference here is that users are probably
 going to be using only one version of Python. In order for them to switch that
 version to Python 3, all the libraries that they use need to support it. This
@@ -411,7 +409,7 @@ important to do this for a few reasons:</p>
   implemented as keyword-only arguments. This avoids mistakes that come from
   the antipattern of passing keyword arguments without naming the keyword, and
   allows the argspec of the function to be expanded in the future without
-  breaking API.<sup id="fnref-swift"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-swift">3</a></sup></p>
+  breaking API.<sup id="fnref:swift"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:swift">3</a></sup></p>
 </li>
 </ul>
 <p>The second reason I think library developers should agree to drop Python 2
@@ -421,7 +419,7 @@ In other words, instead of forcing people off of Python 2, we should make them
 want to come to Python 3. There are some issues with this argument. First,
 Python 3 already has
 <a href="https://asmeurer.github.io/python3-presentation/slides.html">tons of carrots</a>.
-Honestly, not being terrible at Unicode ought to be a carrot in its own right.<sup id="fnref-unicode"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-unicode">4</a></sup></p>
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.<sup id="fnref:unicode"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:unicode">4</a></sup></p>
 <p>If you don't deal with strings, or do but don't care about those silly
 foreigners with weird accents in their names, there are other major carrots as
 well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
@@ -474,7 +472,7 @@ for the most part thus far, but they shouldn't be expected to bear it forever.
 The debt will only increase, especially as the technical opportunity cost, if
 you will, of not being able to use newer and shinier versions of Python 3
 grows. The burden will have to shift at some point. Those with the financial
-resources may choose to offload this debt to others,<sup id="fnref-continuum"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn-continuum">5</a></sup> say, by
+resources may choose to offload this debt to others,<sup id="fnref:continuum"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:continuum">5</a></sup> say, by
 backporting features or bugfixes to older library versions that support Python
 2 (or by helping to move code to Python 3).</p>
 <p>I want to end by pointing out that if you are, for whatever reason, still
@@ -491,25 +489,25 @@ it will make it easy to separate your Python 2 code from your Python 3 code.</p>
 <div class="footnote">
 <hr>
 <ol>
-<li id="fn-sympy">
+<li id="fn:sympy">
 <p>With that being said, the opinions here are entirely my own, and are
     don't necessarily represent those of other people, nor do they
     represent official SymPy policy (no decisions have been made by the
-    community about this at this time). <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-sympy" title="Jump back to footnote 1 in the text">↩</a></p>
+    community about this at this time). <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:sympy" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
-<li id="fn-core">
+<li id="fn:core">
 <p>It often feels like core Python itself doesn't really want people to
     use Python 3. It's little things, like
     <a href="https://docs.python.org/library/">docs links</a> that redirect to Python
     2, or <a href="https://www.python.org/dev/peps/pep-0394/">PEP 394</a>, which
-    still says that the <code>python</code> should always point to Python 2. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-core" title="Jump back to footnote 2 in the text">↩</a></p>
+    still says that the <code>python</code> should always point to Python 2. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:core" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
-<li id="fn-swift">
+<li id="fn:swift">
 <p>In Swift, Apple's new language for iOS and OS X, function parameter
     names are effectively "keyword-only"
-    <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html">by default</a>. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-swift" title="Jump back to footnote 3 in the text">↩</a></p>
+    <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html">by default</a>. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:swift" title="Jump back to footnote 3 in the text">↩</a></p>
 </li>
-<li id="fn-unicode">
+<li id="fn:unicode">
 <p>As an example of this, in conda, if you use Python 2 in the root
     environment, then installing into a path with non-ASCII characters is
     unsupported. This is common on Windows, because Windows by default
@@ -527,12 +525,12 @@ import unicode_literals</code> in Python 2, in my opinion.</p>
 <p>I no longer work on conda, but as far as I know, the
 <a href="https://github.com/conda/conda/issues/1180">issue</a> remains unfixed.
 Of course, this whole thing works just fine if conda is run in Python
-3. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-unicode" title="Jump back to footnote 4 in the text">↩</a></p>
+3. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:unicode" title="Jump back to footnote 4 in the text">↩</a></p>
 </li>
-<li id="fn-continuum">
+<li id="fn:continuum">
 <p>If that legitimately interests you, I
     <a href="https://twitter.com/pwang/status/712780279211884546">hear Continuum</a>
-    may be able to help you. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref-continuum" title="Jump back to footnote 5 in the text">↩</a></p>
+    may be able to help you. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:continuum" title="Jump back to footnote 5 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -602,7 +600,7 @@ Suppose we have a collection of objects, and given any object, we want to be
 able to compute very quickly if that object belongs to our collection. We
 could store these objects in an ordered array, but then to determine if it is
 in the array, we would have to search potentially through every element of the
-array (in other words, an \(O(n)\)) algorithm.</p>
+array (in other words, an $O(n)$) algorithm.</p>
 <p>With hashing, we can do better. We create what is known as a
 <a href="https://en.wikipedia.org/wiki/Hash_table"><em>hash table</em></a>. Instead of storing
 the objects in an ordered array, we create an array of buckets, each
@@ -615,7 +613,7 @@ simple as taking the modulus with respect to the number of buckets, <code>% n</c
 shows an example.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="img"></p>
 <p>To determine if an object is in a hash table, we only have to hash the object,
-and look in the bucket corresponding to that hash. This is an \(O(1)\)
+and look in the bucket corresponding to that hash. This is an $O(1)$
 algorithm, assuming we have a good hash function, because each bucket will
 generally hold very few objects, possibly even none.</p>
 <p><em>Note: there are some additional things that need to be done to handle hash
@@ -623,7 +621,7 @@ collisions, but the basic idea is the same, and as long as there aren't too
 many hash collisions, which should happen if hash values are evenly
 distributed and the size of the hash table is large compared to the number of
 objects stored in it, the average time to determine if an object is in the
-hash table is still \(O(1)\).</em></p>
+hash table is still $O(1)$.</em></p>
 <h2>Hashing in Python</h2>
 <p>Python has a built in function that performs a hash called <code>hash()</code>.  For many
 objects, the hash is not very surprising.  Note, the hashes you see below may
@@ -996,7 +994,7 @@ list if they aren't already there.</p>
 <p>This time, we used <code>in</code>, which uses <code>==</code>, so we got only one unique element of
 the list of <code>AlwaysEqual</code> objects.</p>
 <p>But there is an issue with this algorithm as well. Checking if something is in
-a list is \(O(n)\), but we have an object that allows checking in \(O(1)\)
+a list is $O(n)$, but we have an object that allows checking in $O(1)$
 time, namely, a <code>set</code>. So a more efficient version might be to create a set
 alongside the new list for containment checking purposes.</p>
 <pre><code class="language-py">&gt;&gt;&gt; def uniq2(l):
@@ -1327,18 +1325,16 @@ Python sessions.</p>
             <li class="next">
                 <a href="index-2.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-   tex2jax: {
-       inlineMath: [ ['$','$'], ["\\(","\\)"], ],
-       displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
-   },
-   displayAlign: 'center', // Change this to 'center' to center equations.
-   "HTML-CSS": {
-       styles: {'.MathJax_Display': {"margin": 0}}
-   }
-});
-</script></main><footer id="footer"><p>Contents © 2019         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </ul></nav><script>var disqus_shortname="asmeurer";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script></main><footer id="footer"><p>Contents © 2020         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 </p>
 <p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
@@ -1367,6 +1363,15 @@ MathJax.Hub.Config({
             return element.getElementsByTagName('img')[0].alt;
     }});
     </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script><script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>

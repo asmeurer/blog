@@ -115,6 +115,7 @@
 ./assets/xml/rss.xsl
 ./besselj_docs.png
 ./categories/index.html
+./contour-c.svg
 ./galleries/SpriteKit-Example-2.gif
 ./galleries/SpriteKit-Example-2.thumbnail.gif
 ./galleries/SpriteKit-Example.gif
@@ -156,6 +157,8 @@
 ./posts/scipy-2014/index.md
 ./posts/tuples/index.html
 ./posts/tuples/index.markdown
+./posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/index.html
+./posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/index.md
 ./posts/what-happens-when-you-mess-with-hashing-in-python/index.html
 ./posts/what-happens-when-you-mess-with-hashing-in-python/index.md
 ./posts/whats-new-in-sympy-14/index.html
@@ -164,8 +167,13 @@
 ./reviews1.png
 ./reviews2.png
 ./reviews3.png
+./riemann-100.svg
+./riemann-30.svg
+./riemann-bad.svg
 ./robots.txt
 ./rss.xml
+./s-and-1-s.png
+./s-and-1-s.svg
 ./sitemap.xml
 ./sitemapindex.xml
 ./sympy-1.3-notebook.png
