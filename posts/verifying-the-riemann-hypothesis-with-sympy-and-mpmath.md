@@ -438,7 +438,7 @@ little bit.
 
 <img src="../../contour-c.svg" alt="Our contour" width="608">
 
-(Our contour. Created with [Geogebra](https://www.geogebra.org/graphing/nmnsaywd))
+(Our contour with $N=10$. Created with [Geogebra](https://www.geogebra.org/graphing/nmnsaywd))
 
 [`mpmath.quad`](http://mpmath.org/doc/current/calculus/integration.html#mpmath.quad)
 can take a list of points to compute a contour. The `maxdegree` parameter
