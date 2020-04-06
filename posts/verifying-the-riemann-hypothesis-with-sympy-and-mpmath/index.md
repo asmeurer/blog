@@ -629,7 +629,7 @@ And the sign changes...
 
 ```py
 >>> L = compute_points(Z_func, 100)
-__main__:11: UserWarning: You may need to increase the precisio
+__main__:11: UserWarning: You may need to increase the precision
 ```
 
 Our guard against the precision being too low was triggered. Try raising it
