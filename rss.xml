@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 06 Apr 2020 23:09:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 06 Apr 2020 23:10:24 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
 it watching various YouTube videos about the &lt;a href="https://en.wikipedia.org/wiki/Riemann_hypothesis"&gt;Riemann
 Hypothesis&lt;/a&gt;. I've collected
 the videos I've watched into &lt;a href="https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT"&gt;YouTube
@@ -447,7 +447,7 @@ and 25.011.&lt;/p&gt;
 mpc(real='0.99999931531867581', imag='-3.2332902529067346e-24')
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Mathematically, the above value &lt;em&gt;must&lt;/em&gt; be an integer, so we know it is 1.&lt;/p&gt;
-&lt;p&gt;Now check the number of sign changes of $Z(s)$ from $\frac{1}{2}$ to
+&lt;p&gt;Now check the number of sign changes of $Z(s)$ from $\frac{1}{2} + 0i$ to
 $\frac{1}{2} + 20i$.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; L = compute_points(Z_func, 20)
 &amp;gt;&amp;gt;&amp;gt; sign_changes(L)
