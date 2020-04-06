@@ -541,7 +541,7 @@ mpc(real='0.99999931531867581', imag='-3.2332902529067346e-24')
 
 Mathematically, the above value *must* be an integer, so we know it is 1.
 
-Now check the number of sign changes of $Z(s)$ from $\frac{1}{2}$ to
+Now check the number of sign changes of $Z(s)$ from $\frac{1}{2} + 0i$ to
 $\frac{1}{2} + 20i$.
 
 ```py
