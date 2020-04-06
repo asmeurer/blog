@@ -215,7 +215,7 @@ Whenever you have a mathematical hypothesis, it is good to check if it is true
 numerically. Riemann himself used some methods (not the same ones we use here)
 to numerically estimate the first few non-trivial zeros of $\zeta(s)$, and
 found that they lied on the critical line, hence the motivation for his
-hypotehsis. Here is an [English
+hypothesis. Here is an [English
 translation](https://www.maths.tcd.ie/pub/HistMath/People/Riemann/Zeta/EZeta.pdf)
 of his original paper if you are interested.
 
