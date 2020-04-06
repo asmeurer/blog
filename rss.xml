@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 01 Apr 2020 18:47:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 06 Apr 2020 22:48:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
 it watching various YouTube videos about the &lt;a href="https://en.wikipedia.org/wiki/Riemann_hypothesis"&gt;Riemann
 Hypothesis&lt;/a&gt;. I've collected
 the videos I've watched into &lt;a href="https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT"&gt;YouTube
@@ -221,7 +221,7 @@ complex analysis called the &lt;a href="https://en.wikipedia.org/wiki/Argument_p
 principle&lt;/a&gt;.
 The argument principle says that if $f$ is a meromorphic function on some
 closed contour $C$, and does not have any zeros or poles on $C$ itself, then&lt;/p&gt;
-&lt;p&gt;$$\frac{1}{2\pi i}\oint_C \frac{f'(z)}{f(z)}\,dx = \#\left\{\text{zeros of $f$
+&lt;p&gt;$$\frac{1}{2\pi i}\oint_C \frac{f'(z)}{f(z)}\,ds = \#\left\{\text{zeros of $f$
 inside of C}\right\} - \#\left\{\text{poles of $f$
 inside of C}\right\},$$ where all zeros and poles are counted with
 multiplicity.&lt;/p&gt;
@@ -281,7 +281,7 @@ we know that there must be at least n.&lt;/p&gt;
 &lt;p&gt;So our approach to verifying the Riemann Hypothesis is as such:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Integrate $\frac{1}{2\pi i}\oint_C Z'(s)/Z(s)\,dx$ along a contour $C$
+&lt;p&gt;Integrate $\frac{1}{2\pi i}\oint_C Z'(s)/Z(s)\,ds$ along a contour $C$
 that runs along the critical strip up to some $\mathrm{Im}(s) = N$. The
 integral will tell us there are exactly $n$ zeros in the contour, counting
 multiplicity.&lt;/p&gt;
