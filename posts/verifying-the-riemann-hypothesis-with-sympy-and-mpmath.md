@@ -504,6 +504,9 @@ For example, for $\sin(s)$ from -10 to 10, there are 7 zeros ($3\pi\approx
 
 Now compute sign changes along the critical line. We also make provisions in
 case we have to increase the precision of mpmath to get correct results here.
+[`mpmath.chop`](http://mpmath.org/doc/current/general.html#chop) zeros out
+values that are close to `0`, which removes any numerically insignificant
+imaginary parts that arise from the floating point evaluation.
 
 ```py
 >>> def compute_points(Z_func, N, npoints=10000, dps=15):
