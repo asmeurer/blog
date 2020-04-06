@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 06 Apr 2020 22:53:58 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 06 Apr 2020 23:03:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
 it watching various YouTube videos about the &lt;a href="https://en.wikipedia.org/wiki/Riemann_hypothesis"&gt;Riemann
 Hypothesis&lt;/a&gt;. I've collected
 the videos I've watched into &lt;a href="https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT"&gt;YouTube
@@ -368,7 +368,7 @@ upper point of our contour happens to have zeros exactly on it, we would be
 very unlucky, but even if this were to happen we could just adjust it up a
 little bit.&lt;/p&gt;
 &lt;img src="https://asmeurer.com/blog/contour-c.svg" alt="Our contour" width="608"&gt;
-&lt;p&gt;(Our contour. Created with &lt;a href="https://www.geogebra.org/graphing/nmnsaywd"&gt;Geogebra&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;(Our contour with $N=10$. Created with &lt;a href="https://www.geogebra.org/graphing/nmnsaywd"&gt;Geogebra&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://mpmath.org/doc/current/calculus/integration.html#mpmath.quad"&gt;&lt;code&gt;mpmath.quad&lt;/code&gt;&lt;/a&gt;
 can take a list of points to compute a contour. The &lt;code&gt;maxdegree&lt;/code&gt; parameter
 allows us to increase the degree of the quadrature if it becomes necessary to
