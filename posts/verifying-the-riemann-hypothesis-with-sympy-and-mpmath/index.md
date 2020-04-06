@@ -255,7 +255,7 @@ principle](https://en.wikipedia.org/wiki/Argument_principle#Generalized_argument
 The argument principle says that if $f$ is a meromorphic function on some
 closed contour $C$, and does not have any zeros or poles on $C$ itself, then
 
-$$\frac{1}{2\pi i}\oint_C \frac{f'(z)}{f(z)}\\,ds = \\#\left\\{\text{zeros of $f$
+$$\frac{1}{2\pi i}\oint_C \frac{f'(z)}{f(z)}\\,dz = \\#\left\\{\text{zeros of $f$
 inside of C}\right\\} - \\#\left\\{\text{poles of $f$
 inside of C}\right\\},$$ where all zeros and poles are counted with
 multiplicity.
