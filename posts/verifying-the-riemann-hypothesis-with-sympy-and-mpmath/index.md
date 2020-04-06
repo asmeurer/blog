@@ -469,7 +469,31 @@ zero in this box, at $\frac{1}{2} + \frac{i}{2}$.
 [1/2 - I/2, 1/2 + I/2]
 ```
 
-Now define a function to count the number of sign changes in a list of real
+Now compute points of $Z$ along the critical line so we can count the sign
+changes. We also make provisions in case we have to increase the precision of
+mpmath to get correct results here.
+[`mpmath.chop`](http://mpmath.org/doc/current/general.html#chop) zeros out
+values that are close to `0`, which removes any numerically insignificant
+imaginary parts that arise from the floating point evaluation.
+
+```py
+>>> def compute_points(Z_func, N, npoints=10000, dps=15):
+...     import warnings
+...     old_dps = mpmath.mp.dps
+...     points = np.linspace(0, N, npoints)
+...     try:
+...         mpmath.mp.dps = dps
+...         L = [mpmath.chop(Z_func(i)) for i in 1/2 + points*1j]
+...     finally:
+...         mpmath.mp.dps = old_dps
+...     if L[-1] == 0:
+...         # mpmath will give 0 if the precision is not high enough, since Z
+...         # decays rapidly on the critical line.
+...         warnings.warn("You may need to increase the precision")
+...     return L
+```
+
+Next define a function to count the number of sign changes in a list of real
 values.
 
 ```py
@@ -495,34 +519,11 @@ values.
 ```
 
 For example, for $\sin(s)$ from -10 to 10, there are 7 zeros ($3\pi\approx
-9.42$)
+9.42$).
 
 ```py
 >>> sign_changes(lambdify(s, sin(s))(np.linspace(-10, 10)))
 7
-```
-
-Now compute sign changes along the critical line. We also make provisions in
-case we have to increase the precision of mpmath to get correct results here.
-[`mpmath.chop`](http://mpmath.org/doc/current/general.html#chop) zeros out
-values that are close to `0`, which removes any numerically insignificant
-imaginary parts that arise from the floating point evaluation.
-
-```py
->>> def compute_points(Z_func, N, npoints=10000, dps=15):
-...     import warnings
-...     old_dps = mpmath.mp.dps
-...     points = np.linspace(0, N, npoints)
-...     try:
-...         mpmath.mp.dps = dps
-...         L = [mpmath.chop(Z_func(i)) for i in 1/2 + points*1j]
-...     finally:
-...         mpmath.mp.dps = old_dps
-...     if L[-1] == 0:
-...         # mpmath will give 0 if the precision is not high enough, since Z
-...         # decays rapidly on the critical line.
-...         warnings.warn("You may need to increase the precision")
-...     return L
 ```
 
 Now we can check how many zeros of $Z(s)$ (and hence non-trivial zeros of
