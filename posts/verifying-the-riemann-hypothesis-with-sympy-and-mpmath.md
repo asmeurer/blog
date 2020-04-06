@@ -94,7 +94,7 @@ $$\frac{1}{1^s} + \frac{1}{p_1^s} + \frac{1}{p_2^s} + \frac{1}{\left(p_1^2\right
 where each prime power combination is picked exactly once. However, we know by
 the [Fundamental Theorem of
 Arithmetic](https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic)
-that when you take all combinations of products primes that you get each
+that when you take all combinations of products of primes that you get each
 positive integer exactly once. So the above sum is just
 
 $$\frac{1}{1^s} + \frac{1}{2^s} + \frac{1}{3^s} + \cdots,$$ which is just
