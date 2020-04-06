@@ -374,7 +374,7 @@ Define the completed zeta function $Z = \pi^{-s/2}\Gamma(s/2)\zeta(s)$.
 >>> Z = pi**(-s/2)*gamma(s/2)*zeta(s)
 ```
 
-We can verify that Z is indeed real for $\frac{1}{2} + it.$
+We can verify that Z is indeed real for $s = \frac{1}{2} + it.$
 
 ```py
 >>> Z.subs(s, 1/2 + 0.5j).evalf()

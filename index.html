@@ -376,7 +376,7 @@ but unfortunately, it does not support complex arguments.</p>
 <p>Define the completed zeta function $Z = \pi^{-s/2}\Gamma(s/2)\zeta(s)$.</p>
 <pre><code>&gt;&gt;&gt; Z = pi**(-s/2)*gamma(s/2)*zeta(s)
 </code></pre>
-<p>We can verify that Z is indeed real for $\frac{1}{2} + it.$</p>
+<p>We can verify that Z is indeed real for $s = \frac{1}{2} + it.$</p>
 <pre><code class="language-py">&gt;&gt;&gt; Z.subs(s, 1/2 + 0.5j).evalf()
 -1.97702795164031 + 5.49690501450151e-17*I
 </code></pre>
