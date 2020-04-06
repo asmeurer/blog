@@ -463,7 +463,9 @@ zero in this box, at $\frac{1}{2} + \frac{i}{2}$.</p>
 </code></pre>
 <p>Now compute points of $Z$ along the critical line so we can count the sign
 changes. We also make provisions in case we have to increase the precision of
-mpmath to get correct results here.
+mpmath to get correct results here. <code>dps</code> is the number of digits of precision
+the values are computed to. The default is 15, but mpmath can compute values
+to any number of digits.
 <a href="http://mpmath.org/doc/current/general.html#chop"><code>mpmath.chop</code></a> zeros out
 values that are close to <code>0</code>, which removes any numerically insignificant
 imaginary parts that arise from the floating point evaluation.</p>
