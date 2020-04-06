@@ -489,7 +489,10 @@ values.</p>
 7
 </code></pre>
 <p>Now compute sign changes along the critical line. We also make provisions in
-case we have to increase the precision of mpmath to get correct results here.</p>
+case we have to increase the precision of mpmath to get correct results here.
+<a href="http://mpmath.org/doc/current/general.html#chop"><code>mpmath.chop</code></a> zeros out
+values that are close to <code>0</code>, which removes any numerically insignificant
+imaginary parts that arise from the floating point evaluation.</p>
 <pre><code class="language-py">&gt;&gt;&gt; def compute_points(Z_func, N, npoints=10000, dps=15):
 ...     import warnings
 ...     old_dps = mpmath.mp.dps
