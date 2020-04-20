@@ -10,7 +10,7 @@ your reach (none of them are highly technical with proofs). Each video
 contains parts that aren't in any of the other videos, so you will get
 something out of watching each of them.
 
-The [last video in the
+One of the [videos near the end of the
 playlist](https://www.youtube.com/watch?v=lyf9W2PWm40&list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT&index=8)
 is a lecture by Keith Conrad. In it, he mentioned a method by which one could
 go about verifying the Riemann Hypothesis with a computer. I wanted to see if
