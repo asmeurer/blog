@@ -110,7 +110,7 @@
 ./assets/js/html5.js
 ./assets/js/html5shiv-printshiv.min.js
 ./assets/js/justified-layout.min.js
-./assets/js/moment-with-locales.min.js
+./assets/js/luxon.min.js
 ./assets/xml/atom.xsl
 ./assets/xml/rss.xsl
 ./besselj_docs.png

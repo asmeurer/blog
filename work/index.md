@@ -22,14 +22,10 @@ and most of my open source work is on my
   If you are interested in SymPy or have any questions about it, please email
   the [SymPy mailing list](https://groups.google.com/forum/#!forum/sympy).
 
-- [Conda](http://conda.pydata.org/docs/), a package manager. I worked
-  primarily on conda when I was
-  at [Continuum Analytics](http://continuum.io/). Conda is the package manager
-  included with [Anaconda](http://continuum.io/downloads), a free collection
-  of open source packages for doing science, math, engineering, data analysis
-  in Python. I gave a [talk](https://www.youtube.com/embed/UaIvrDWrIWM) about
-  conda at SciPy 2014.
-
+- [ndindex](https://quansight.github.io/ndindex/). ndindex is a new library
+  that I have started as part of my work at
+  [Quansight](https://www.quansight.com/), which can be used to represent and
+  manipulate indices to NumPy arrays (e.g., slices).
 
 # Side stuff
 
@@ -108,3 +104,16 @@ Stuff I've done on my own. In no particular order.
 - [Prompt Toolkit](https://github.com/jonathanslenders/python-prompt-toolkit),
   a library for building interactive prompt-based terminal applications, such
   as shells and REPLs. I use this heavily in mypython (see above).
+
+- [Numba](https://numba.pydata.org/). Numba is JIT compiler for Python that
+  lets you write pure Python code that executes as fast as compiled code. I
+  have contributed to Numba as part of my work at
+  [Quansight](https://www.quansight.com/).
+
+- [Conda](http://conda.pydata.org/docs/), a package manager. I worked
+  primarily on conda when I was
+  at [Continuum Analytics](http://continuum.io/). Conda is the package manager
+  included with [Anaconda](http://continuum.io/downloads), a free collection
+  of open source packages for doing science, math, engineering, data analysis
+  in Python. I gave a [talk](https://www.youtube.com/embed/UaIvrDWrIWM) about
+  conda at SciPy 2014.

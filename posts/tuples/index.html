@@ -27,7 +27,7 @@ At the bookstore. I'll admit I judge Python books by their tuple description. &q
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
     <div id="container">
         
-    <header id="header"><h1 id="brand"><a href="https://asmeurer.com/blog/" title="Aaron Meurer's Blog" rel="home">
+    <header id="header"><h1 id="brand"><a href="../../" title="Aaron Meurer's Blog" rel="home">
 
         <span id="blog-title">Aaron Meurer's Blog</span>
     </a></h1>
@@ -113,12 +113,11 @@ fixed shape, the positions in a tuple can be "fixed" values, and by conventionâ€
 Python programmer sees parentheses instead of square brackets, he is more
 likely to see the object as "record-like". The <code>namedtuple</code> object in the standard library
 takes the record idea further by letting you actually name the fields:</p>
-<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<pre class="code literal-block"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Person'</span><span class="p">,</span> <span class="s1">'name, age'</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
 <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Aaron'</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
-</code></pre>
-
+</pre>
 
 <p>But is that really the <em>only</em> place you'd want to use a tuple over a list?</p>
 <p>Consider five other places you might encounter a tuple in Python, courtesy of
@@ -199,21 +198,19 @@ to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.</p>
 <p>However, be careful. Not all tuples are hashable. Tuples can contain
 anything, but only tuples of immutable values are hashable. Consider<sup id="fnref:TypeError"><a class="footnote-ref" href="#fn:TypeError">4</a></sup></p>
-<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<pre class="code literal-block"><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span>
 <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-</code></pre>
-
+</pre>
 
 <p>Such tuples are not hashable, and cannot be used as dictionary keys.</p>
-<pre class="code literal-block"><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<pre class="code literal-block"><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
   <span class="n">File</span> <span class="s2">"&lt;ipython-input-39-36822ba665ca&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
     <span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="ne">TypeError</span><span class="p">:</span> <span class="n">unhashable</span> <span class="nb">type</span><span class="p">:</span> <span class="s1">'list'</span>
-</code></pre>
-
+</pre>
 
 <h2>Why is <code>list</code> the Default?</h2>
 <p>My second gripe here is this notion that your default ordered collection
@@ -229,9 +226,8 @@ as well).</p>
 <p>Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent <code>1 - 2*(-3 + 4)</code> as</p>
-<pre class="code literal-block"><span></span><code><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
-</code></pre>
-
+<pre class="code literal-block"><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
+</pre>
 
 <p>This isn't really a record. The meaning of the entries in the tuples is
 determined by the first value of the tuple, not position. In this example, the length
