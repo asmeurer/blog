@@ -88,6 +88,9 @@
 ./SpriteKit-Example.mp4
 ./about/index.html
 ./about/index.md
+./android-chrome-192x192.png
+./android-chrome-512x512.png
+./apple-touch-icon.png
 ./archive.html
 ./assets/css/all-nocdn.css
 ./assets/css/all.css
@@ -116,6 +119,9 @@
 ./besselj_docs.png
 ./categories/index.html
 ./contour-c.svg
+./favicon-16x16.png
+./favicon-32x32.png
+./favicon.ico
 ./galleries/SpriteKit-Example-2.gif
 ./galleries/SpriteKit-Example-2.thumbnail.gif
 ./galleries/SpriteKit-Example.gif
@@ -174,6 +180,7 @@
 ./rss.xml
 ./s-and-1-s.png
 ./s-and-1-s.svg
+./site.webmanifest
 ./sitemap.xml
 ./sitemapindex.xml
 ./sympy-1.3-notebook.png
