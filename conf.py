@@ -611,6 +611,13 @@ INDEX_DISPLAY_POST_COUNT = 3
 # <div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
 # """
 
+EXTRA_HEAD_DATA = """
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+"""
+
 BODY_END = ""
 
 # Highlight.js (for Markdown syntax highlighting)
