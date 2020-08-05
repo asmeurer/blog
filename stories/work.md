@@ -110,10 +110,14 @@ Stuff I've done on my own. In no particular order.
   have contributed to Numba as part of my work at
   [Quansight](https://www.quansight.com/).
 
-- [Conda](http://conda.pydata.org/docs/), a package manager. I worked
-  primarily on conda when I was
-  at [Continuum Analytics](http://continuum.io/). Conda is the package manager
-  included with [Anaconda](http://continuum.io/downloads), a free collection
-  of open source packages for doing science, math, engineering, data analysis
-  in Python. I gave a [talk](https://www.youtube.com/embed/UaIvrDWrIWM) about
-  conda at SciPy 2014.
+- [Conda](http://conda.pydata.org/docs/), a package manager. I worked on conda
+  when I was at [Continuum Analytics](http://continuum.io/) (now called
+  Anaconda). Conda is the package manager included with the [Anaconda
+  distribution](https://www.anaconda.com/products/individual). I no longer
+  work on conda, so if you have any questions about it, you should reach out
+  to the support channels at Anaconda.
+
+- [conda-forge](https://conda-forge.org/) is a free distribution of conda
+  packages maintained by the community. While I am not involved in the
+  conda-forge core development, I do help maintain several package
+  [feedstocks](https://github.com/orgs/conda-forge/teams?query=%40asmeurer).
