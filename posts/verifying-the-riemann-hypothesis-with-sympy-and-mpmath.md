@@ -69,9 +69,9 @@ $$\prod_{\text{$p$ prime}}\frac{1}{1 - \frac{1}{p^s}} =
 
 Let's take a closer look at what this is. It is
 
-$$\left(\frac{1}{p_1^s} + \frac{1}{p_1^{2s}} + \frac{1}{p_1^{3s}} +
-\cdots\right)\cdot\left(\frac{1}{p_2^s} + \frac{1}{p_2^{2s}} +
-\frac{1}{p_2^{3s}} + \cdots\right)\cdot\left(\frac{1}{p_3^s} + \frac{1}{p_3^{2s}} +
+$$\left(1 + \frac{1}{p_1^s} + \frac{1}{p_1^{2s}} + \frac{1}{p_1^{3s}} +
+\cdots\right)\cdot\left(1 + \frac{1}{p_2^s} + \frac{1}{p_2^{2s}} +
+\frac{1}{p_2^{3s}} + \cdots\right)\cdot\left(1 + \frac{1}{p_3^s} + \frac{1}{p_3^{2s}} +
 \frac{1}{p_3^{3s}} + \cdots\right)\cdots,$$
 
 where $p_1$ is the first prime, $p_2$ is the second prime, and so on. Now
