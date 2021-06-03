@@ -29,7 +29,10 @@ Utterances is a very nice alternative. I has lots of advantages:
 
 If you use [Nikola](https://getnikola.com/) like I do, it [natively supports
 Utterances](https://getnikola.com/handbook.html#comments) (a feature which I
-added).
+added). Otherwise, go to the [Utterances](https://utteranc.es/) and paste the
+script tag generated at the bottom into your blog template. Then install the
+[Utterances app](https://github.com/apps/utterances) in your repo, and you are
+done.
 
 ## Exporting Disqus Comments
 
