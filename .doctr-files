@@ -138,6 +138,7 @@
 ./index-2.html
 ./index-3.html
 ./index-4.html
+./index-5.html
 ./index.html
 ./posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/index.html
 ./posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/index.md
@@ -161,6 +162,8 @@
 ./posts/quansight-labs-work-update-for-september-2019/index.md
 ./posts/scipy-2014/index.html
 ./posts/scipy-2014/index.md
+./posts/switching-to-utterances-comments/index.html
+./posts/switching-to-utterances-comments/index.md
 ./posts/tuples/index.html
 ./posts/tuples/index.markdown
 ./posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/index.html

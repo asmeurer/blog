@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html prefix="        og: http://ogp.me/ns# article: http://ogp.me/ns/article#     " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Switching to Utterances Comments | Aaron Meurer's Blog</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
+<link rel="canonical" href="https://asmeurer.com/blog/posts/switching-to-utterances-comments/">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+<link rel="manifest" href="../../site.webmanifest">
+<meta name="author" content="Aaron Meurer">
+<link rel="prev" href="../verifying-the-riemann-hypothesis-with-sympy-and-mpmath/" title="Verifying the Riemann Hypothesis with SymPy and mpmath" type="text/html">
+<meta property="og:site_name" content="Aaron Meurer's Blog">
+<meta property="og:title" content="Switching to Utterances Comments">
+<meta property="og:url" content="https://asmeurer.com/blog/posts/switching-to-utterances-comments/">
+<meta property="og:description" content="I've ditched Disqus as the comment system on this blog. I am now using
+Utterances. Utterances is an open source comment
+system that is backed by GitHub issues. Basically, every post has a
+correspondin">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-06-02T22:57:49-05:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site:id" content="123456">
+<meta name="twitter:creator:id" content="654321">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="container">
+        
+    <header id="header"><h1 id="brand"><a href="../../" title="Aaron Meurer's Blog" rel="home">
+
+        <span id="blog-title">Aaron Meurer's Blog</span>
+    </a></h1>
+
+        
+
+        
+    <nav id="menu"><ul>
+<li><a href="../../">Blog</a></li>
+                <li><a href="../../about">About</a></li>
+                <li><a href="../../work">Work</a></li>
+                <li><a href="../../archive.html">Archives</a></li>
+                <li><a href="../../rss.xml">RSS</a></li>
+
+    
+
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Switching to Utterances Comments</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                    Aaron Meurer
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2021-06-02T22:57:49-05:00" itemprop="datePublished" title="2021-06-02 22:57">2021-06-02 22:57</time></a>
+            </p>
+                <p class="commentline">
+        
+        <a href="#utterances-thread">Comments</a>
+
+
+            
+        </p>
+<p class="sourceline"><a href="https://github.com/asmeurer/blog/blob/master/posts/switching-to-utterances-comments.md" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>I've ditched Disqus as the comment system on this blog. I am now using
+<a href="https://utteranc.es/">Utterances</a>. Utterances is an open source comment
+system that is backed by GitHub issues. Basically, every post has a
+corresponding issue opened on GitHub, and the comments on the post are the
+comments on the issue. Utterances automatically places the comments at the
+bottom of the post. For example, <a href=".">here</a> is the issue corresponding to this
+post.</p>
+<p>I didn't like Disqus mostly because it serves ads and tracking. Even though I
+had opted out from as much of it as I could in the Disqus settings, it still
+loads tracking scripts on every page. I run <a href="https://github.com/gorhill/uBlock">uBlock
+Origin</a> always, and it's a bit hypocritical
+if my own side has things that are blocked by it. In some cases I can't avoid
+it (as far as I know), like when I embed a YouTube video, but it definitely
+shouldn't be on every post.</p>
+<p>Utterances is a very nice alternative. I has lots of advantages:</p>
+<ul>
+<li>Comments are not self-hosted. GitHub hosts them. Since you need a GitHub
+account to comment, this should make comment spam a non-issue.</li>
+<li>Comments support full Markdown.</li>
+<li>Users can edit their comments.</li>
+<li>I can edit and fully moderate all comments.</li>
+<li>Users log in with a federated system that proves their identity.</li>
+<li>It's completely open source and free to use.</li>
+</ul>
+<h3>Exporting Disqus Comments</h3>
+<p>Some of my old posts had Disqus comments, which I wanted to preserve somehow.
+Here is guide on how I did that, since it wasn't as straightforward as I would
+have hoped.</p>
+<p>The first step is to export your Disqus comments. It's very difficult to
+actually find the place in the Disqus site where you do this, but I finally
+found the URL https://disqus.com/admin/discussions/export/. The export takes
+some time to complete (for me it took about half an hour). When it finished,
+Disqus will email you an XML file with all your comments. Note that the file
+contains all comments for all sites you have ever set up with Disqus. For me,
+it also included all the comments on my old <a href="http://asmeurersympy.wordpress.com/">Wordpress
+blog</a>, as well as posts for draft blog
+posts that I never ended up publishing. It also contained all comments that
+were marked as spam, so you will need to remember to filter those.</p>
+<p>I decided that since I only have a handful of posts with Disqus comments, I
+would just write a script to process them all and manually print them out,
+which I will then manually enter in to the Utterances comment system for those
+posts.</p>
+<p>I wrote a script, which you can find <a href=".">here</a> to process the comments.
+Disqus does provides an
+<a href="https://disqus.com/api/schemas/1.0/disqus.xsd">XML schema</a> for the XML. I
+used a library called
+<a href="https://xsdata.readthedocs.io/en/latest/index.html">xsData</a>, which lets you
+take an XML scheme and generate Python dataclasses corresponding to it, which
+make manipulating the parsed XML much easier than the standard library xml
+library. The script outputs text like</p>
+<pre><code>========== Comments from https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/ ==========
+
+    **Comment from bjd2385 on 2016-08-28 12:33:12+00:00:**
+
+    &lt;p&gt;Very interesting post. I was just looking into hash functions (I've never formally learned what the topic entails), and since I'm most familiar with Python this post explained quite a bit, especially your early mathematical points.&lt;/p&gt;
+
+    **Comment from Mark Lawrence on 2016-10-03 20:26:54+00:00:**
+
+    &lt;p&gt;At what point does Python 3 force the override of __hash__ if you've defined __eq__?  E.g when would your&lt;/p&gt;&lt;p&gt;AlwaysEqual class fail?&lt;/p&gt;
+
+    **Replies:**
+
+        **Comment from asmeurer on 2016-10-03 20:38:13+00:00:**
+
+        &lt;p&gt;That's a good catch. I originally wrote this post in Python 2. The example does indeed fail in Python 3. More specifically, if you override __eq__, Python 3 automatically sets __hash__ to None. I'll update the post to make this more clear.&lt;/p&gt;
+
+    **Comment from Erick Mendonça on 2017-07-30 03:23:55+00:00:**
+
+    &lt;p&gt;Great article! We must really pay attention to these details when implementing custom hashes.&lt;/p&gt;
+
+    **Comment from Ignacio on 2017-10-07 22:31:56+00:00:**
+
+    &lt;p&gt;Thanks a lot for this post! Clarified a lot of concepts.&lt;/p&gt;
+</code></pre>
+<p>which I then manually copied to each post's Utterances page on GitHub.</p>
+<p>Feel free to adapt <a href=".">my script</a> if you find yourself in a similar situation.</p>
+<h3>Utterances Comments</h3>
+<p>Feel free to use the comments on this page to play around with the commenting
+system.</p>
+<p>Note that to comment, there are two options. You can log in on this page,
+which will let you type your comment in the box below. This requires giving
+the Utterances bot access to your GitHub account. Alternately, if you don't
+want to give a bot access, you can just go directly to the GitHub issue page
+and comment there. I am currently in the process of figuring out how to add
+some boilerplate to each page that makes this clear (see
+<a href="https://github.com/utterance/utterances/issues/355">this</a>). If anyone has any
+suggestions on how to do this, let me know.</p>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../verifying-the-riemann-hypothesis-with-sympy-and-mpmath/" rel="prev" title="Verifying the Riemann Hypothesis with SymPy and mpmath">Previous post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div data-title="Switching to Utterances Comments" id="utterances-thread"></div>
+        <script src="https://utteranc.es/client.js" repo="asmeurer/blog" issue-term="title"></script></section></article></main><footer id="footer"><p>Contents © 2021         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+</p>
+<p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0"></a>
+</p>
+            
+        </footer>
+</div>
+    
+            <script src="../../assets/js/all-nocdn.js"></script><div style="text-align:center">
+<span class="st_twitterfollow_large" displaytext="Twitter Follow" st_username="asmeurer"></span>
+<span class="st_twitter_large" displaytext="Tweet"></span>
+<span class="st_googleplus_large" displaytext="Google +"></span>
+<span class="st_plusone_large" displaytext="Google +1"></span>
+
+<span class="st_email_large" displaytext="Email"></span>
+
+</div>
+
+
+    
+    <script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script><script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

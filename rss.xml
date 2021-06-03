@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 05 Aug 2020 22:43:59 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 03 Jun 2021 05:31:04 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
+&lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt;. Utterances is an open source comment
+system that is backed by GitHub issues. Basically, every post has a
+corresponding issue opened on GitHub, and the comments on the post are the
+comments on the issue. Utterances automatically places the comments at the
+bottom of the post. For example, &lt;a href="https://asmeurer.com/blog/posts/switching-to-utterances-comments/"&gt;here&lt;/a&gt; is the issue corresponding to this
+post.&lt;/p&gt;
+&lt;p&gt;I didn't like Disqus mostly because it serves ads and tracking. Even though I
+had opted out from as much of it as I could in the Disqus settings, it still
+loads tracking scripts on every page. I run &lt;a href="https://github.com/gorhill/uBlock"&gt;uBlock
+Origin&lt;/a&gt; always, and it's a bit hypocritical
+if my own side has things that are blocked by it. In some cases I can't avoid
+it (as far as I know), like when I embed a YouTube video, but it definitely
+shouldn't be on every post.&lt;/p&gt;
+&lt;p&gt;Utterances is a very nice alternative. I has lots of advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Comments are not self-hosted. GitHub hosts them. Since you need a GitHub
+account to comment, this should make comment spam a non-issue.&lt;/li&gt;
+&lt;li&gt;Comments support full Markdown.&lt;/li&gt;
+&lt;li&gt;Users can edit their comments.&lt;/li&gt;
+&lt;li&gt;I can edit and fully moderate all comments.&lt;/li&gt;
+&lt;li&gt;Users log in with a federated system that proves their identity.&lt;/li&gt;
+&lt;li&gt;It's completely open source and free to use.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Exporting Disqus Comments&lt;/h3&gt;
+&lt;p&gt;Some of my old posts had Disqus comments, which I wanted to preserve somehow.
+Here is guide on how I did that, since it wasn't as straightforward as I would
+have hoped.&lt;/p&gt;
+&lt;p&gt;The first step is to export your Disqus comments. It's very difficult to
+actually find the place in the Disqus site where you do this, but I finally
+found the URL https://disqus.com/admin/discussions/export/. The export takes
+some time to complete (for me it took about half an hour). When it finished,
+Disqus will email you an XML file with all your comments. Note that the file
+contains all comments for all sites you have ever set up with Disqus. For me,
+it also included all the comments on my old &lt;a href="http://asmeurersympy.wordpress.com/"&gt;Wordpress
+blog&lt;/a&gt;, as well as posts for draft blog
+posts that I never ended up publishing. It also contained all comments that
+were marked as spam, so you will need to remember to filter those.&lt;/p&gt;
+&lt;p&gt;I decided that since I only have a handful of posts with Disqus comments, I
+would just write a script to process them all and manually print them out,
+which I will then manually enter in to the Utterances comment system for those
+posts.&lt;/p&gt;
+&lt;p&gt;I wrote a script, which you can find &lt;a href="https://asmeurer.com/blog/posts/switching-to-utterances-comments/"&gt;here&lt;/a&gt; to process the comments.
+Disqus does provides an
+&lt;a href="https://disqus.com/api/schemas/1.0/disqus.xsd"&gt;XML schema&lt;/a&gt; for the XML. I
+used a library called
+&lt;a href="https://xsdata.readthedocs.io/en/latest/index.html"&gt;xsData&lt;/a&gt;, which lets you
+take an XML scheme and generate Python dataclasses corresponding to it, which
+make manipulating the parsed XML much easier than the standard library xml
+library. The script outputs text like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;========== Comments from https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/ ==========
+
+    **Comment from bjd2385 on 2016-08-28 12:33:12+00:00:**
+
+    &amp;lt;p&amp;gt;Very interesting post. I was just looking into hash functions (I've never formally learned what the topic entails), and since I'm most familiar with Python this post explained quite a bit, especially your early mathematical points.&amp;lt;/p&amp;gt;
+
+    **Comment from Mark Lawrence on 2016-10-03 20:26:54+00:00:**
+
+    &amp;lt;p&amp;gt;At what point does Python 3 force the override of __hash__ if you've defined __eq__?  E.g when would your&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;AlwaysEqual class fail?&amp;lt;/p&amp;gt;
+
+    **Replies:**
+
+        **Comment from asmeurer on 2016-10-03 20:38:13+00:00:**
+
+        &amp;lt;p&amp;gt;That's a good catch. I originally wrote this post in Python 2. The example does indeed fail in Python 3. More specifically, if you override __eq__, Python 3 automatically sets __hash__ to None. I'll update the post to make this more clear.&amp;lt;/p&amp;gt;
+
+    **Comment from Erick Mendonça on 2017-07-30 03:23:55+00:00:**
+
+    &amp;lt;p&amp;gt;Great article! We must really pay attention to these details when implementing custom hashes.&amp;lt;/p&amp;gt;
+
+    **Comment from Ignacio on 2017-10-07 22:31:56+00:00:**
+
+    &amp;lt;p&amp;gt;Thanks a lot for this post! Clarified a lot of concepts.&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which I then manually copied to each post's Utterances page on GitHub.&lt;/p&gt;
+&lt;p&gt;Feel free to adapt &lt;a href="https://asmeurer.com/blog/posts/switching-to-utterances-comments/"&gt;my script&lt;/a&gt; if you find yourself in a similar situation.&lt;/p&gt;
+&lt;h3&gt;Utterances Comments&lt;/h3&gt;
+&lt;p&gt;Feel free to use the comments on this page to play around with the commenting
+system.&lt;/p&gt;
+&lt;p&gt;Note that to comment, there are two options. You can log in on this page,
+which will let you type your comment in the box below. This requires giving
+the Utterances bot access to your GitHub account. Alternately, if you don't
+want to give a bot access, you can just go directly to the GitHub issue page
+and comment there. I am currently in the process of figuring out how to add
+some boilerplate to each page that makes this clear (see
+&lt;a href="https://github.com/utterance/utterances/issues/355"&gt;this&lt;/a&gt;). If anyone has any
+suggestions on how to do this, let me know.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</guid><pubDate>Thu, 03 Jun 2021 03:57:49 GMT</pubDate></item><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
 it watching various YouTube videos about the &lt;a href="https://en.wikipedia.org/wiki/Riemann_hypothesis"&gt;Riemann
 Hypothesis&lt;/a&gt;. I've collected
 the videos I've watched into &lt;a href="https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT"&gt;YouTube
@@ -2053,15 +2139,10 @@ actually hopeful that they can fix these issues, and implement a feature that
 makes real headway into helping me solve one of my biggest problems on GitHub
 right now, the reviewing of pull requests.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/github-reviews-gripes/</guid><pubDate>Thu, 06 Oct 2016 00:12:16 GMT</pubDate></item><item><title>Tuples</title><link>https://asmeurer.com/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
-
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Usually there's a sentence nearby "sometimes you need a read only list." No. No, I haven't. Not in 20 years. Not even once. Sorry.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778635637457088512"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
-
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;My main objection is that "read only list" is a lazy description lacking thought. A red flag for every other topic that might be covered.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778639979052498944"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 
 &lt;p&gt;There are quite a few good responses to these tweets, both from David and from
@@ -2086,7 +2167,6 @@ points out, is the only technical difference between the two.&lt;/p&gt;
 &lt;p&gt;The the idea that particularly bugs me here is that tuples are primarily
 useful as "record" datatypes.&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; Better than "read-only-list." ;-).   Mainly looking for the tuple-as-record description. That's often what's missing.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778685294593716224"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 
 &lt;p&gt;Tuples are awesome for records. This is both by design—since they have a
@@ -2099,21 +2179,18 @@ takes the record idea further by letting you actually name the fields:&lt;/p&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;p&gt;But is that really the &lt;em&gt;only&lt;/em&gt; place you'd want to use a tuple over a list?&lt;/p&gt;
 &lt;p&gt;Consider five other places you might encounter a tuple in Python, courtesy of
 Allen Downey:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/dabeaz"&gt;@dabeaz&lt;/a&gt; (1) tuple assignment (2) multiple return values (3) *args (4) output from zip, enumerate, etc (5) key in dictionary&lt;/p&gt;— Allen Downey (@AllenDowney) &lt;a href="https://twitter.com/AllenDowney/status/778691102094176257"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 
 &lt;p&gt;In code these look like:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Multiple assignments:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;(yes, the parentheses are optional here, as they are in many places where a
 tuple can be used, but this is still a tuple, or at least it looks like one ;)&lt;/p&gt;
@@ -2126,32 +2203,30 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;*args&lt;/code&gt;:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):&lt;/span&gt;
-&lt;span class="err"&gt;...     print(type(args), args)&lt;/span&gt;
-&lt;span class="err"&gt;...&lt;/span&gt;
-&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; f(1, 2, 3)&lt;/span&gt;
-&lt;span class="err"&gt;&amp;lt;class 'tuple'&amp;gt; (1, 2, 3)&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):
+...     print(type(args), args)
+...
+&amp;gt;&amp;gt;&amp;gt; f(1, 2, 3)
+&amp;lt;class 'tuple'&amp;gt; (1, 2, 3)
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Arbitrary positional function arguments are always stored as a &lt;code&gt;tuple&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Return value from builtins &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;enumerate&lt;/code&gt;, etc.:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; for i in zip(range(3), 'abc'):&lt;/span&gt;
-&lt;span class="err"&gt;...     print(i)&lt;/span&gt;
-&lt;span class="err"&gt;...&lt;/span&gt;
-&lt;span class="err"&gt;(0, 'a')&lt;/span&gt;
-&lt;span class="err"&gt;(1, 'b')&lt;/span&gt;
-&lt;span class="err"&gt;(2, 'c')&lt;/span&gt;
-&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; for i in enumerate('abc'):&lt;/span&gt;
-&lt;span class="err"&gt;...     print(i)&lt;/span&gt;
-&lt;span class="err"&gt;...&lt;/span&gt;
-&lt;span class="err"&gt;(0, 'a')&lt;/span&gt;
-&lt;span class="err"&gt;(1, 'b')&lt;/span&gt;
-&lt;span class="err"&gt;(2, 'c')&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;'abc'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;     &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'abc'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;     &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;This also applies to the combinatoric generators in
 &lt;a href="https://docs.python.org/3.6/library/itertools.html"&gt;itertools&lt;/a&gt; (like
@@ -2159,15 +2234,14 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Dictionary keys:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; {&lt;/span&gt;
-&lt;span class="err"&gt;...     (0, 0): '.',&lt;/span&gt;
-&lt;span class="err"&gt;...     (0, 1): ' ',&lt;/span&gt;
-&lt;span class="err"&gt;...     (1, 0): '.',&lt;/span&gt;
-&lt;span class="err"&gt;...     (1, 1): ' ',&lt;/span&gt;
-&lt;span class="err"&gt;... }&lt;/span&gt;
-&lt;span class="err"&gt;{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; {
+...     (0, 0): '.',
+...     (0, 1): ' ',
+...     (1, 0): '.',
+...     (1, 1): ' ',
+... }
+{(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -2184,7 +2258,6 @@ anything, but only tuples of immutable values are hashable. Consider&lt;sup id="
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;p&gt;Such tuples are not hashable, and cannot be used as dictionary keys.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -2192,7 +2265,6 @@ anything, but only tuples of immutable values are hashable. Consider&lt;sup id="
     &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;unhashable&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'list'&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;h2&gt;Why is &lt;code&gt;list&lt;/code&gt; the Default?&lt;/h2&gt;
 &lt;p&gt;My second gripe here is this notion that your default ordered collection
 object in Python should be &lt;code&gt;list&lt;/code&gt;. &lt;code&gt;tuples&lt;/code&gt; are only to be used as "records",
@@ -2209,7 +2281,6 @@ important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent &lt;code&gt;1 - 2*(-3 + 4)&lt;/code&gt; as&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'*'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'+'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;p&gt;This isn't really a record. The meaning of the entries in the tuples is
 determined by the first value of the tuple, not position. In this example, the length
 of the tuple also signifies meaning (binary vs. unary &lt;code&gt;-&lt;/code&gt;).&lt;/p&gt;
@@ -2265,9 +2336,8 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;/li&gt;
 &lt;li id="fn:assign"&gt;
 &lt;p&gt;Yes,&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref:assign" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -2286,13 +2356,12 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;p&gt;&lt;/p&gt;&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/asmeurer"&gt;@asmeurer&lt;/a&gt; &lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; As yes:&lt;br&gt;&lt;br&gt;t = (1,2, [3, 4])&lt;br&gt;t[2] += [5,6]&lt;br&gt;&lt;br&gt;;-)&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778697399975813120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 &lt;p&gt;This is similar to this example. But
 it turns out this one doesn't work:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; t = (1,2, [3, 4])&lt;/span&gt;
-&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; t[2] += [5,6]&lt;/span&gt;
-&lt;span class="err"&gt;Traceback (most recent call last):&lt;/span&gt;
-&lt;span class="err"&gt;  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;&lt;/span&gt;
-&lt;span class="c"&gt;TypeError: 'tuple' object does not support item assignment&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mh"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;"&amp;lt;stdin&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nl"&gt;TypeError:&lt;/span&gt; &lt;span class="p"&gt;'&lt;/span&gt;&lt;span class="n"&gt;tuple&lt;/span&gt;&lt;span class="p"&gt;'&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt; &lt;span class="n"&gt;does&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;support&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="n"&gt;assignment&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;I have no idea why. It seems to me that it should work. &lt;code&gt;t[2]&lt;/code&gt; is a list
 and &lt;code&gt;list&lt;/code&gt; has &lt;code&gt;__iadd__&lt;/code&gt; defined. It seems that Python gets kind of weird
@@ -2302,7 +2371,6 @@ about things on the left-hand side of an assignment. &lt;strong&gt;EDIT:
 &lt;/ol&gt;
 &lt;/div&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.com/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Thought: get the maintainers of a bunch of big Python libraries to sign something saying that they WILL drop Python 2.7 support in 2020.&lt;/p&gt;— Aaron Meurer (@asmeurer) &lt;a href="https://twitter.com/asmeurer/status/712304912428875776"&gt;March 22, 2016&lt;/a&gt;&lt;/blockquote&gt;
-
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 
 &lt;p&gt;&lt;strong&gt;EDIT: Some people have started working on making this happen. See
@@ -3257,177 +3325,4 @@ Python sessions.&lt;/p&gt;
 8897161376854729812
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</guid><pubDate>Tue, 26 Jan 2016 04:13:53 GMT</pubDate></item><item><title>"Doing Math with Python" by Amit Saha: Book Review</title><link>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Note: No Starch Press has sent me a copy of this book for review purposes.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;SHORT VERSION: &lt;em&gt;Doing Math with Python&lt;/em&gt; is well written and introduces
-topics in a nice, mathematical way. I would recommend it for new users of
-SymPy.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;&lt;em&gt;Doing Math with Python&lt;/em&gt;&lt;/a&gt; by
-Amit Saha is a new book published by No Starch Press. The book shows how to
-use Python to do high school-level mathematics. It makes heavy use of SymPy in
-many chapters, and this review will focus mainly on those parts, as that is
-the area I have expertise in.&lt;/p&gt;
-&lt;p&gt;The book assumes a basic understanding of programming in Python 3, as well as
-the mathematics used (although advanced topics are explained). No prior
-background in the libraries used, SymPy and matplotlib, is assumed. For this
-reason, this book can serve as an introduction them. Each chapter ends with
-some programming exercises, which range from easy exercises to more advanced
-ones.&lt;/p&gt;
-&lt;p&gt;The book has seven chapters. In the first chapter, "Working with numbers",
-basic mathematics using pure Python is introduced (no SymPy yet). It should be
-noted that Python 3 (not Python 2) is required for this book. One of the
-earliest examples in the book (&lt;code&gt;3/2 == 1.5&lt;/code&gt;) will not work correctly without
-it. I applaud this choice, although I might have added a more prominent
-warning to wary users. (As a side note, in the appendix, it is recommended to
-install Python via &lt;a href="https://www.continuum.io/downloads"&gt;Anaconda&lt;/a&gt;, which I
-also applaud). This chapter also introduces the &lt;code&gt;fractions&lt;/code&gt; module, which
-seems odd since &lt;code&gt;sympy.Rational&lt;/code&gt; will be implicitly used for rational numbers
-later in the text (to little harm, however, since SymPy automatically converts
-&lt;code&gt;fractions.Fraction&lt;/code&gt; instances to &lt;code&gt;sympy.Rational&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;In all, this chapter is a good introduction to the basics of the mathematics
-of Python. There is also an introduction to variables and strings. However, as
-I noted above, one should really have some background with basic Python before
-reading this book, as concepts like flow control and function definition are
-assumed (note: there is an appendix that goes over this).&lt;/p&gt;
-&lt;p&gt;Chapters 2 and 3 cover plotting with matplotlib and basic statistics,
-respectively. I will not say much about the matplotlib chapter, since I know
-only basic matplotlib myself. I will note that the chapter covers matplotlib
-from a (high school) mathematics point of view, starting with a definition of
-the Cartesian plane, which seems a fitting choice for the book.&lt;/p&gt;
-&lt;p&gt;Chapter 3 shows how to do basic statistics (mean, median, standard deviation,
-etc.) using pure Python. This chapter is clearly meant for pedagogical
-purposes for basic statistics, since the basic functions &lt;code&gt;mean&lt;/code&gt;, &lt;code&gt;median&lt;/code&gt;,
-etc. are implemented from scratch (as opposed to using &lt;code&gt;numpy.mean&lt;/code&gt; or the
-standard library &lt;code&gt;statistics.mean&lt;/code&gt;). This serves as a good introduction to
-more Python concepts (like &lt;code&gt;collections.Counter&lt;/code&gt;) and statistics.&lt;/p&gt;
-&lt;p&gt;Note that the functions in this chapter assume that the data is the entire
-population, not a sample. This is mentioned at the beginning of the chapter,
-but not elaborated on. For example, this leads to a different definition of
-variance than what might be seen elsewhere (the &lt;code&gt;calculate_variance&lt;/code&gt; used in
-this chapter is &lt;code&gt;statistics.pvariance&lt;/code&gt;, not &lt;code&gt;statistics.variance&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;It is good to see that a numerically stable definition of variance is used
-here (see &lt;a href="https://www.python.org/dev/peps/pep-0450/"&gt;PEP 450&lt;/a&gt; for more
-discussion on this). These numerical issues show why it is important to use a
-real statistics library rather than a home grown one. In other words, use this
-chapter to learn more about statistics and Python, but if you ever need to do
-statistics on real data, use a statistics library like &lt;code&gt;statistics&lt;/code&gt; or
-&lt;code&gt;numpy&lt;/code&gt;. Finally, I should note that this book appears to be written against
-Python 3.3, whereas &lt;code&gt;statistics&lt;/code&gt; was added to the Python standard library in
-Python 3.4. Perhaps it will get a mention in future editions.&lt;/p&gt;
-&lt;p&gt;Chapter 4, "Algebra and Symbolic Math with SymPy" starts the introduction to
-SymPy. The chapter starts similar to the
-&lt;a href="http://docs.sympy.org/latest/tutorial/index.html"&gt;official SymPy tutorial&lt;/a&gt; in
-describing what symbolics is, and guiding the reader away from common
-misconceptions and gotchas. The chapter does a good job of explaining common
-gotchas and avoiding antipatterns.&lt;/p&gt;
-&lt;p&gt;This chapter may serve as an alternative to the official tutorial. Unlike the
-official tutorial, which jumps into
-&lt;a href="http://docs.sympy.org/latest/tutorial/simplification.html#powers"&gt;higher-level mathematics&lt;/a&gt;
-and &lt;a href="http://docs.sympy.org/latest/tutorial/matrices.html"&gt;broader use-cases&lt;/a&gt;,
-this chapter may be better suited to those wishing to use SymPy from the
-standpoint of high school mathematics.&lt;/p&gt;
-&lt;p&gt;My only gripes with this chapter, which, in total, are minor, relate to printing.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;The typesetting of the pretty printing is inconsistent and, in some cases,
-incorrect. Powers are printed in the book using superscript numbers, like&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;x²
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;However, SymPy prints powers like&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; 2
-x
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;even when Unicode pretty printing is enabled. This is a minor point, but it
-may confuse users. Also, the output appears to use ASCII pretty printing
-(mixed with superscript powers), for example&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    x²   x³   x⁴   x⁵
-x + -- + -- + -- + --
-    2    3    4    5
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Most users will either get MathJax printing (if they are using the Jupyter
-notebook), or Unicode printing, like&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;     2    3    4    5
-    x    x    x    x
-x + ── + ── + ── + ──
-    2    3    4    5
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Again, this is a minor point, but at the very least the correct printing
-looks better than the fake printing used here.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;In line with the previous point, I would recommend telling the user to
-start with &lt;code&gt;init_printing()&lt;/code&gt;. The function is used once to change the order
-of printing to rev-lex (for series printing). There is a link to the
-&lt;a href="http://docs.sympy.org/latest/tutorial/printing.html"&gt;tutorial page on printing&lt;/a&gt;. That
-page goes into more depth than is necessary for the book, but I would
-recommend at least mentioning to always call &lt;code&gt;init_printing()&lt;/code&gt;, as 2-D
-printing can make a huge difference over the default &lt;code&gt;str&lt;/code&gt; printing, and it
-obviates the need to call &lt;code&gt;pprint&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Chapter 5, "Playing with Sets and Probability" covers SymPy's set objects
-(particularly &lt;code&gt;FiniteSet&lt;/code&gt;) to do some basic set theory and probability. I'm
-excited to see this in the book. The sets module in SymPy is relatively new,
-but quite powerful. We do not yet have an introduction to the sets module in
-the SymPy tutorial. This chapter serves as a good introduction to it (albeit
-only with finite sets, but the SymPy functions that operate on infinite sets
-are exactly the same as the ones that operate on finite sets). In all, I don't
-have much to say about this chapter other than that I was pleasantly surprised
-to see it included.&lt;/p&gt;
-&lt;p&gt;Chapter 6 shows how to draw geometric shapes and fractals with matplotlib. I
-again won't say much on this, as I am no matplotlib expert. The ability to
-draw leaf fractals and Sierpiński triangles with Python does look
-entertaining, and should keep readers enthralled.&lt;/p&gt;
-&lt;p&gt;Chapter 7, "Solving Calculus Problems" goes into more depth with SymPy. In
-particular, assumptions, limits, derivatives, and integrals.  The chapter
-alternates between symbolic formulations using SymPy and numeric
-calculations (using &lt;code&gt;evalf&lt;/code&gt;). The numeric calculations are done both for
-simple examples and more advanced things (like implementing gradient descent).&lt;/p&gt;
-&lt;p&gt;One small gripe here. The book shows that&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from sympy import Symbol
-x = Symbol('x')
-if (x + 5) &amp;gt; 0:
-    print('Do Something')
-else:
-    print('Do Something else')
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;raises &lt;code&gt;TypeError&lt;/code&gt; at the evaluation of &lt;code&gt;(x + 5) &amp;gt; 0&lt;/code&gt; because its truth value
-cannot be determined. The solution to this issue is given as&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;x = Symbol('x', positive=True)
-if (x + 5) &amp;gt; 0:
-    print('Do Something')
-else:
-    print('Do Something else')
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Setting &lt;code&gt;x&lt;/code&gt; to be positive via &lt;code&gt;Symbol('x', positive=True)&lt;/code&gt; is correct, but
-even in this case, evaluating an inequality may still raise a &lt;code&gt;TypeError&lt;/code&gt; (for
-example, &lt;code&gt;if (x - 5) &amp;gt; 0&lt;/code&gt;). The better way to do this is to use &lt;code&gt;(x + 5).is_positive&lt;/code&gt;. This would require a bit more discussion, especially since
-SymPy uses a three-valued logic for assumptions, but I do consider "if
-&amp;lt;symbolic inequality&amp;gt;" to be a SymPy antipattern.&lt;/p&gt;
-&lt;p&gt;I like Saha's approach in this chapter of first showing unevaluated forms
-(&lt;code&gt;Limit&lt;/code&gt;, &lt;code&gt;Derivative&lt;/code&gt;, &lt;code&gt;Integral&lt;/code&gt;), and then evaluating them with
-&lt;code&gt;doit()&lt;/code&gt;. This puts users in the mindset of a mathematical expression being a
-formula which may or may not later be "calculated". The opposite approach,
-using the function forms, &lt;code&gt;limit&lt;/code&gt;, &lt;code&gt;diff&lt;/code&gt;, and &lt;code&gt;integrate&lt;/code&gt;, which evaluate if
-they can and return an unevaluated object if they can't, can be confusing to
-new users in my experience. A common new SymPy user question is (some form of)
-"how do I evaluate an expression?" (the answer is &lt;code&gt;doit()&lt;/code&gt;). Saha's approach
-avoids this question by showing &lt;code&gt;doit()&lt;/code&gt; from the outset.&lt;/p&gt;
-&lt;p&gt;I also like that this chapter explains the gotcha of &lt;code&gt;math.sin(Symbol('x'))&lt;/code&gt;,
-although I personally would have included this earlier in the text.&lt;/p&gt;
-&lt;p&gt;(Side note: now that I look, these are both areas in which the official
-tutorial could be improved).&lt;/p&gt;
-&lt;h3&gt;Summary&lt;/h3&gt;
-&lt;p&gt;This book is a good introduction to doing math with Python, and, for the
-chapters that use it, a good basic introduction to SymPy. I would recommend it
-to anyone wishing to learn SymPy, but especially to anyone whose knowledge of
-mathematics may preclude them from getting the most out of the official SymPy
-tutorial.&lt;/p&gt;
-&lt;p&gt;I imagine this book would work well as a pedagogical tool, either for math
-teachers or for self-learners. The exercises in this book should push the
-motivated to learn more.&lt;/p&gt;
-&lt;p&gt;I have a few minor gripes, but no major issues.&lt;/p&gt;
-&lt;p&gt;You can purchase this book from the
-&lt;a href="https://www.nostarch.com/doingmathwithpython"&gt;No Starch Press&lt;/a&gt; website, both
-as a print book or an ebook. The website also includes a sample chapter
-(&lt;a href="https://www.nostarch.com/download/Doing%20Math%20with%20Python_sample_Chapter1.pdf"&gt;chapter 1&lt;/a&gt;),
-code samples from the book, and exercise solutions.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/doing-math-with-python-by-amit-saha-book-review/</guid><pubDate>Sat, 19 Dec 2015 21:01:21 GMT</pubDate></item></channel></rss>
+&lt;/ul&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</guid><pubDate>Tue, 26 Jan 2016 04:13:53 GMT</pubDate></item></channel></rss>
