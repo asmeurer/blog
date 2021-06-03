@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 03 Jun 2021 06:01:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 03 Jun 2021 17:45:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
 &lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt;. Utterances is an open source comment
 system that is backed by GitHub issues. Basically, every post has a
 corresponding issue opened on GitHub, and the comments on the post are the
@@ -24,13 +24,16 @@ account to comment, this should make comment spam a non-issue.&lt;/li&gt;
 &lt;li&gt;Users log in with a federated system that proves their identity.&lt;/li&gt;
 &lt;li&gt;It's completely open source and free to use.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;If you use &lt;a href="https://getnikola.com/"&gt;Nikola&lt;/a&gt; like I do, it &lt;a href="https://getnikola.com/handbook.html#comments"&gt;natively supports
+Utterances&lt;/a&gt; (a feature which I
+added).&lt;/p&gt;
 &lt;h3&gt;Exporting Disqus Comments&lt;/h3&gt;
 &lt;p&gt;Some of my old posts had Disqus comments, which I wanted to preserve somehow.
 Here is guide on how I did that, since it wasn't as straightforward as I would
 have hoped.&lt;/p&gt;
 &lt;p&gt;The first step is to export your Disqus comments. It's very difficult to
 actually find the place in the Disqus site where you do this, but I finally
-found the URL https://disqus.com/admin/discussions/export/. The export takes
+found the &lt;a href="https://disqus.com/admin/discussions/export/"&gt;URL&lt;/a&gt;. The export takes
 some time to complete (for me it took about half an hour). When it finished,
 Disqus will email you an XML file with all your comments. Note that the file
 contains all comments for all sites you have ever set up with Disqus. For me,
