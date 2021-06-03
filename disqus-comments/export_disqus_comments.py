@@ -36,25 +36,27 @@ def main():
             if p.parent:
                 child_posts[p.parent.id].append(p.id_attribute)
 
-    def print_post(p, level=0):
+    def print_post(p, level=1):
         author = p.author
         pid = p.id_attribute
         print(textwrap.indent(f"""\
-    **Comment from {author.name} on {p.created_at.to_datetime()}:**
+**Comment from {author.name} on {p.created_at.to_datetime()}:**
 
-    {p.message}
-    """, ' '*4*level))
+{p.message}
+    """, '>'*level))
 
         if pid in child_posts:
             for child_id in child_posts[pid]:
                 child = posts[tid][child_id]
-                print(textwrap.indent("**Replies:**", ' '*4*(level+1)))
+                print(textwrap.indent("**Replies:**", '>'*level))
                 print()
                 print_post(child, level + 1)
 
     for tid in posts:
         t = threads[tid]
         print("========== Comments from", t.link, "==========")
+        print()
+        print("These are the original comments on this post that were made when this blog used the [Disqus blog system](https://www.asmeurer.com/blog/posts/switching-to-utterances-comments/).")
         print()
         for pid, p in posts[tid].items():
             if p.parent:
