@@ -25,6 +25,10 @@ Utterances is a very nice alternative. I has lots of advantages:
 - Users log in with a federated system that proves their identity.
 - It's completely open source and free to use.
 
+If you use [Nikola](https://getnikola.com/) like I do, it [natively supports
+Utterances](https://getnikola.com/handbook.html#comments) (a feature which I
+added).
+
 ## Exporting Disqus Comments
 
 Some of my old posts had Disqus comments, which I wanted to preserve somehow.
@@ -33,7 +37,7 @@ have hoped.
 
 The first step is to export your Disqus comments. It's very difficult to
 actually find the place in the Disqus site where you do this, but I finally
-found the URL https://disqus.com/admin/discussions/export/. The export takes
+found the [URL](https://disqus.com/admin/discussions/export/). The export takes
 some time to complete (for me it took about half an hour). When it finished,
 Disqus will email you an XML file with all your comments. Note that the file
 contains all comments for all sites you have ever set up with Disqus. For me,
