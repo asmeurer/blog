@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<xs:schema targetNamespace="http://disqus.com"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:dsq="http://disqus.com/disqus-internals"
+           xmlns="http://disqus.com"
+           elementFormDefault="qualified"
+>
+  <!-- import the dsq namespace -->
+  <xs:import namespace="http://disqus.com/disqus-internals"
+             schemaLocation="internals.xsd"/>
+  
+  <!-- misc types -->
+  <xs:simpleType name="identifier">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="200"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- root disqus element -->
+  <xs:element name="disqus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="category" type="category" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="thread" type="thread" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="post" type="post" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- category element -->
+  <xs:complexType name="category">
+    <xs:all minOccurs="0">
+      <xs:element name="forum" type="xs:string"/>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="order" type="xs:integer" minOccurs="0"/>
+      <xs:element name="isDefault" type="xs:boolean" default="false" minOccurs="0"/>
+    </xs:all>
+    <xs:attribute ref="dsq:id"/>
+  </xs:complexType>
+  
+  <!-- thread element -->
+  <xs:complexType name="thread">
+    <xs:all minOccurs="0">
+      <xs:element name="id" type="identifier" minOccurs="0">
+        <xs:unique name="threadID">
+          <xs:selector xpath="thread"/>
+          <xs:field xpath="@id"/>
+        </xs:unique>
+      </xs:element>
+      <xs:element name="forum" type="xs:string"/>
+      <xs:element name="category">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute ref="dsq:id"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="link" type="xs:anyURI"/>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+      <xs:element name="ipAddress" type="xs:string" minOccurs="0"/>
+      <xs:element name="author" type="author" minOccurs="0"/>
+      <xs:element name="createdAt" type="xs:dateTime"/>
+      <xs:element name="isClosed" type="xs:boolean" default="false" minOccurs="0"/>
+      <xs:element name="isDeleted" type="xs:boolean" default="false" minOccurs="0"/>
+    </xs:all>
+    <xs:attribute ref="dsq:id"/>
+  </xs:complexType>
+  
+  <!-- post element -->
+  <xs:complexType name="post">
+    <xs:all minOccurs="0">
+      <xs:element name="id" type="identifier" minOccurs="0">
+        <xs:unique name="postID">
+          <xs:selector xpath="post"/>
+          <xs:field xpath="@id"/>
+        </xs:unique>
+      </xs:element>
+      <xs:element name="parent" minOccurs="0">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="identifier">
+              <xs:attribute ref="dsq:id"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="thread">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="identifier">
+              <xs:attribute ref="dsq:id"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="author" type="author" minOccurs="0"/>
+      <xs:element name="message" type="xs:string"/>
+      <xs:element name="ipAddress" type="xs:string" minOccurs="0"/>
+      <xs:element name="createdAt" type="xs:dateTime"/>
+
+      <!-- post boolean states states -->
+      <xs:element name="isDeleted" type="xs:boolean" default="false" minOccurs="0"/>
+      <xs:element name="isApproved" type="xs:boolean" default="true" minOccurs="0"/>
+      <xs:element name="isFlagged" type="xs:boolean" default="false" minOccurs="0"/>
+      <xs:element name="isSpam" type="xs:boolean" default="false" minOccurs="0"/>
+      <xs:element name="isHighlighted" type="xs:boolean" default="false" minOccurs="0"/>
+    </xs:all>
+    <xs:attribute ref="dsq:id"/>
+  </xs:complexType>
+
+  <!-- author element -->
+  <xs:complexType name="author">
+    <xs:all minOccurs="0">
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="link" type="xs:anyURI" minOccurs="0"/>
+      <xs:element name="username" type="xs:string" minOccurs="0"/>
+      <xs:element name="isAnonymous" type="xs:boolean" default="true" minOccurs="0"/>
+    </xs:all>
+    <xs:attribute ref="dsq:id"/>
+  </xs:complexType>
+</xs:schema>
