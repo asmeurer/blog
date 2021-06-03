@@ -771,4 +771,4 @@ LOGGING_HANDLERS = {
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
 
-GLOBAL_CONTEXT = {'utterances_config': {"issue-term":"title"}}
+GLOBAL_CONTEXT = {'utterances_config': {"issue-term": "title", "label": "Comments"}}
