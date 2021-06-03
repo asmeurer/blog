@@ -18,7 +18,7 @@ def main():
                # contains some draft posts that were never published, but we
                # don't need to worry about those because they don't have any
                # comments.
-               t.link.startswith('https://asmeurer.github.io')}
+               'asmeurer.github.io' in t.link}
 
     posts = defaultdict(dict)
     for p in comments.post:
