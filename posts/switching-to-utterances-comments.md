@@ -23,6 +23,8 @@ Utterances is a very nice alternative. I has lots of advantages:
 - Users can edit their comments.
 - I can edit and fully moderate all comments.
 - Users log in with a federated system that proves their identity.
+- Email subscription to posts.
+- No ads or tracking.
 - It's completely open source and free to use.
 
 If you use [Nikola](https://getnikola.com/) like I do, it [natively supports
