@@ -64,8 +64,9 @@
 system that is backed by GitHub issues. Basically, every post has a
 corresponding issue opened on GitHub, and the comments on the post are the
 comments on the issue. Utterances automatically places the comments at the
-bottom of the post. For example, <a href="posts/switching-to-utterances-comments/">here</a> is the issue corresponding to this
-post.</p>
+bottom of the post. For example,
+<a href="https://github.com/asmeurer/blog/issues/18">here</a> is the issue corresponding
+to this post.</p>
 <p>I didn't like Disqus mostly because it serves ads and tracking. Even though I
 had opted out from as much of it as I could in the Disqus settings, it still
 loads tracking scripts on every page. I run <a href="https://github.com/gorhill/uBlock">uBlock
@@ -101,40 +102,44 @@ were marked as spam, so you will need to remember to filter those.</p>
 would just write a script to process them all and manually print them out,
 which I will then manually enter in to the Utterances comment system for those
 posts.</p>
-<p>I wrote a script, which you can find <a href="posts/switching-to-utterances-comments/">here</a> to process the comments.
-Disqus does provides an
-<a href="https://disqus.com/api/schemas/1.0/disqus.xsd">XML schema</a> for the XML. I
-used a library called
-<a href="https://xsdata.readthedocs.io/en/latest/index.html">xsData</a>, which lets you
-take an XML scheme and generate Python dataclasses corresponding to it, which
-make manipulating the parsed XML much easier than the standard library xml
-library. The script outputs text like</p>
-<pre><code>========== Comments from https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/ ==========
+<p>I wrote a script to process the comments, which you can find
+<a href="https://github.com/asmeurer/blog/blob/master/disqus-comments/export_disqus_comments.py">here</a>.
+Disqus does provides an <a href="https://disqus.com/api/schemas/1.0/disqus.xsd">XML
+schema</a> for the XML. I used a
+library called <a href="https://xsdata.readthedocs.io/en/latest/index.html">xsData</a>,
+which lets you take an XML scheme and generate Python dataclasses
+corresponding to it, which make manipulating the parsed XML much easier than
+the standard library xml library. The script outputs text like</p>
+<pre><code class="language-markdown">========== Comments from https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/ ==========
 
-    **Comment from bjd2385 on 2016-08-28 12:33:12+00:00:**
+These are the original comments on this post that were made when this blog used the [Disqus blog system](https://www.asmeurer.com/blog/posts/switching-to-utterances-comments/).
 
-    &lt;p&gt;Very interesting post. I was just looking into hash functions (I've never formally learned what the topic entails), and since I'm most familiar with Python this post explained quite a bit, especially your early mathematical points.&lt;/p&gt;
+&gt;**Comment from bjd2385 on 2016-08-28 12:33:12+00:00:**
 
-    **Comment from Mark Lawrence on 2016-10-03 20:26:54+00:00:**
+&gt;&lt;p&gt;Very interesting post. I was just looking into hash functions (I've never formally learned what the topic entails), and since I'm most familiar with Python this post explained quite a bit, especially your early mathematical points.&lt;/p&gt;
 
-    &lt;p&gt;At what point does Python 3 force the override of __hash__ if you've defined __eq__?  E.g when would your&lt;/p&gt;&lt;p&gt;AlwaysEqual class fail?&lt;/p&gt;
+&gt;**Comment from Mark Lawrence on 2016-10-03 20:26:54+00:00:**
 
-    **Replies:**
+&gt;&lt;p&gt;At what point does Python 3 force the override of __hash__ if you've defined __eq__?  E.g when would your&lt;/p&gt;&lt;p&gt;AlwaysEqual class fail?&lt;/p&gt;
 
-        **Comment from asmeurer on 2016-10-03 20:38:13+00:00:**
+&gt;**Replies:**
 
-        &lt;p&gt;That's a good catch. I originally wrote this post in Python 2. The example does indeed fail in Python 3. More specifically, if you override __eq__, Python 3 automatically sets __hash__ to None. I'll update the post to make this more clear.&lt;/p&gt;
+&gt;&gt;**Comment from asmeurer on 2016-10-03 20:38:13+00:00:**
 
-    **Comment from Erick Mendonça on 2017-07-30 03:23:55+00:00:**
+&gt;&gt;&lt;p&gt;That's a good catch. I originally wrote this post in Python 2. The example does indeed fail in Python 3. More specifically, if you override __eq__, Python 3 automatically sets __hash__ to None. I'll update the post to make this more clear.&lt;/p&gt;
 
-    &lt;p&gt;Great article! We must really pay attention to these details when implementing custom hashes.&lt;/p&gt;
+&gt;**Comment from Erick Mendonça on 2017-07-30 03:23:55+00:00:**
 
-    **Comment from Ignacio on 2017-10-07 22:31:56+00:00:**
+&gt;&lt;p&gt;Great article! We must really pay attention to these details when implementing custom hashes.&lt;/p&gt;
 
-    &lt;p&gt;Thanks a lot for this post! Clarified a lot of concepts.&lt;/p&gt;
+&gt;**Comment from Ignacio on 2017-10-07 22:31:56+00:00:**
+
+&gt;&lt;p&gt;Thanks a lot for this post! Clarified a lot of concepts.&lt;/p&gt;
 </code></pre>
 <p>which I then manually copied to each post's Utterances page on GitHub.</p>
-<p>Feel free to adapt <a href="posts/switching-to-utterances-comments/">my script</a> if you find yourself in a similar situation.</p>
+<p>Feel free to adapt <a href="https://github.com/asmeurer/blog/blob/master/disqus-comments/export_disqus_comments.py">my
+script</a>
+if you find yourself in a similar situation.</p>
 <h3>Utterances Comments</h3>
 <p>Feel free to use the comments on this page to play around with the commenting
 system.</p>
@@ -143,9 +148,10 @@ which will let you type your comment in the box below. This requires giving
 the Utterances bot access to your GitHub account. Alternately, if you don't
 want to give a bot access, you can just go directly to the GitHub issue page
 and comment there. I am currently in the process of figuring out how to add
-some boilerplate to each page that makes this clear (see
-<a href="https://github.com/utterance/utterances/issues/355">this</a>). If anyone has any
-suggestions on how to do this, let me know.</p>
+some boilerplate to each page that makes this clear (see <a href="https://github.com/utterance/utterances/issues/355">this Utterances
+issue</a>). If anyone has any
+suggestions on how to do this, let me know. For now, I am just going to
+manually add a statement about this as the first comment on each post.</p>
 </div>
     </div>
     </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/" class="u-url">Verifying the Riemann Hypothesis with SymPy and mpmath</a></h1>

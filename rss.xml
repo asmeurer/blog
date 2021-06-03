@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 03 Jun 2021 05:38:28 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 03 Jun 2021 05:54:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
 &lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt;. Utterances is an open source comment
 system that is backed by GitHub issues. Basically, every post has a
 corresponding issue opened on GitHub, and the comments on the post are the
 comments on the issue. Utterances automatically places the comments at the
-bottom of the post. For example, &lt;a href="https://asmeurer.com/blog/posts/switching-to-utterances-comments/"&gt;here&lt;/a&gt; is the issue corresponding to this
-post.&lt;/p&gt;
+bottom of the post. For example,
+&lt;a href="https://github.com/asmeurer/blog/issues/18"&gt;here&lt;/a&gt; is the issue corresponding
+to this post.&lt;/p&gt;
 &lt;p&gt;I didn't like Disqus mostly because it serves ads and tracking. Even though I
 had opted out from as much of it as I could in the Disqus settings, it still
 loads tracking scripts on every page. I run &lt;a href="https://github.com/gorhill/uBlock"&gt;uBlock
@@ -41,40 +42,44 @@ were marked as spam, so you will need to remember to filter those.&lt;/p&gt;
 would just write a script to process them all and manually print them out,
 which I will then manually enter in to the Utterances comment system for those
 posts.&lt;/p&gt;
-&lt;p&gt;I wrote a script, which you can find &lt;a href="https://asmeurer.com/blog/posts/switching-to-utterances-comments/"&gt;here&lt;/a&gt; to process the comments.
-Disqus does provides an
-&lt;a href="https://disqus.com/api/schemas/1.0/disqus.xsd"&gt;XML schema&lt;/a&gt; for the XML. I
-used a library called
-&lt;a href="https://xsdata.readthedocs.io/en/latest/index.html"&gt;xsData&lt;/a&gt;, which lets you
-take an XML scheme and generate Python dataclasses corresponding to it, which
-make manipulating the parsed XML much easier than the standard library xml
-library. The script outputs text like&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;========== Comments from https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/ ==========
+&lt;p&gt;I wrote a script to process the comments, which you can find
+&lt;a href="https://github.com/asmeurer/blog/blob/master/disqus-comments/export_disqus_comments.py"&gt;here&lt;/a&gt;.
+Disqus does provides an &lt;a href="https://disqus.com/api/schemas/1.0/disqus.xsd"&gt;XML
+schema&lt;/a&gt; for the XML. I used a
+library called &lt;a href="https://xsdata.readthedocs.io/en/latest/index.html"&gt;xsData&lt;/a&gt;,
+which lets you take an XML scheme and generate Python dataclasses
+corresponding to it, which make manipulating the parsed XML much easier than
+the standard library xml library. The script outputs text like&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-markdown"&gt;========== Comments from https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/ ==========
 
-    **Comment from bjd2385 on 2016-08-28 12:33:12+00:00:**
+These are the original comments on this post that were made when this blog used the [Disqus blog system](https://www.asmeurer.com/blog/posts/switching-to-utterances-comments/).
 
-    &amp;lt;p&amp;gt;Very interesting post. I was just looking into hash functions (I've never formally learned what the topic entails), and since I'm most familiar with Python this post explained quite a bit, especially your early mathematical points.&amp;lt;/p&amp;gt;
+&amp;gt;**Comment from bjd2385 on 2016-08-28 12:33:12+00:00:**
 
-    **Comment from Mark Lawrence on 2016-10-03 20:26:54+00:00:**
+&amp;gt;&amp;lt;p&amp;gt;Very interesting post. I was just looking into hash functions (I've never formally learned what the topic entails), and since I'm most familiar with Python this post explained quite a bit, especially your early mathematical points.&amp;lt;/p&amp;gt;
 
-    &amp;lt;p&amp;gt;At what point does Python 3 force the override of __hash__ if you've defined __eq__?  E.g when would your&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;AlwaysEqual class fail?&amp;lt;/p&amp;gt;
+&amp;gt;**Comment from Mark Lawrence on 2016-10-03 20:26:54+00:00:**
 
-    **Replies:**
+&amp;gt;&amp;lt;p&amp;gt;At what point does Python 3 force the override of __hash__ if you've defined __eq__?  E.g when would your&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;AlwaysEqual class fail?&amp;lt;/p&amp;gt;
 
-        **Comment from asmeurer on 2016-10-03 20:38:13+00:00:**
+&amp;gt;**Replies:**
 
-        &amp;lt;p&amp;gt;That's a good catch. I originally wrote this post in Python 2. The example does indeed fail in Python 3. More specifically, if you override __eq__, Python 3 automatically sets __hash__ to None. I'll update the post to make this more clear.&amp;lt;/p&amp;gt;
+&amp;gt;&amp;gt;**Comment from asmeurer on 2016-10-03 20:38:13+00:00:**
 
-    **Comment from Erick Mendonça on 2017-07-30 03:23:55+00:00:**
+&amp;gt;&amp;gt;&amp;lt;p&amp;gt;That's a good catch. I originally wrote this post in Python 2. The example does indeed fail in Python 3. More specifically, if you override __eq__, Python 3 automatically sets __hash__ to None. I'll update the post to make this more clear.&amp;lt;/p&amp;gt;
 
-    &amp;lt;p&amp;gt;Great article! We must really pay attention to these details when implementing custom hashes.&amp;lt;/p&amp;gt;
+&amp;gt;**Comment from Erick Mendonça on 2017-07-30 03:23:55+00:00:**
 
-    **Comment from Ignacio on 2017-10-07 22:31:56+00:00:**
+&amp;gt;&amp;lt;p&amp;gt;Great article! We must really pay attention to these details when implementing custom hashes.&amp;lt;/p&amp;gt;
 
-    &amp;lt;p&amp;gt;Thanks a lot for this post! Clarified a lot of concepts.&amp;lt;/p&amp;gt;
+&amp;gt;**Comment from Ignacio on 2017-10-07 22:31:56+00:00:**
+
+&amp;gt;&amp;lt;p&amp;gt;Thanks a lot for this post! Clarified a lot of concepts.&amp;lt;/p&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which I then manually copied to each post's Utterances page on GitHub.&lt;/p&gt;
-&lt;p&gt;Feel free to adapt &lt;a href="https://asmeurer.com/blog/posts/switching-to-utterances-comments/"&gt;my script&lt;/a&gt; if you find yourself in a similar situation.&lt;/p&gt;
+&lt;p&gt;Feel free to adapt &lt;a href="https://github.com/asmeurer/blog/blob/master/disqus-comments/export_disqus_comments.py"&gt;my
+script&lt;/a&gt;
+if you find yourself in a similar situation.&lt;/p&gt;
 &lt;h3&gt;Utterances Comments&lt;/h3&gt;
 &lt;p&gt;Feel free to use the comments on this page to play around with the commenting
 system.&lt;/p&gt;
@@ -83,9 +88,10 @@ which will let you type your comment in the box below. This requires giving
 the Utterances bot access to your GitHub account. Alternately, if you don't
 want to give a bot access, you can just go directly to the GitHub issue page
 and comment there. I am currently in the process of figuring out how to add
-some boilerplate to each page that makes this clear (see
-&lt;a href="https://github.com/utterance/utterances/issues/355"&gt;this&lt;/a&gt;). If anyone has any
-suggestions on how to do this, let me know.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</guid><pubDate>Thu, 03 Jun 2021 03:57:49 GMT</pubDate></item><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
+some boilerplate to each page that makes this clear (see &lt;a href="https://github.com/utterance/utterances/issues/355"&gt;this Utterances
+issue&lt;/a&gt;). If anyone has any
+suggestions on how to do this, let me know. For now, I am just going to
+manually add a statement about this as the first comment on each post.&lt;/p&gt;&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</guid><pubDate>Thu, 03 Jun 2021 03:57:49 GMT</pubDate></item><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
 it watching various YouTube videos about the &lt;a href="https://en.wikipedia.org/wiki/Riemann_hypothesis"&gt;Riemann
 Hypothesis&lt;/a&gt;. I've collected
 the videos I've watched into &lt;a href="https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT"&gt;YouTube

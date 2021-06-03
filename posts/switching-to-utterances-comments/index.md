@@ -3,8 +3,9 @@ I've ditched Disqus as the comment system on this blog. I am now using
 system that is backed by GitHub issues. Basically, every post has a
 corresponding issue opened on GitHub, and the comments on the post are the
 comments on the issue. Utterances automatically places the comments at the
-bottom of the post. For example, [here]() is the issue corresponding to this
-post.
+bottom of the post. For example,
+[here](https://github.com/asmeurer/blog/issues/18) is the issue corresponding
+to this post.
 
 I didn't like Disqus mostly because it serves ads and tracking. Even though I
 had opted out from as much of it as I could in the Disqus settings, it still
@@ -46,44 +47,48 @@ would just write a script to process them all and manually print them out,
 which I will then manually enter in to the Utterances comment system for those
 posts.
 
-I wrote a script, which you can find [here]() to process the comments.
-Disqus does provides an
-[XML schema](https://disqus.com/api/schemas/1.0/disqus.xsd) for the XML. I
-used a library called
-[xsData](https://xsdata.readthedocs.io/en/latest/index.html), which lets you
-take an XML scheme and generate Python dataclasses corresponding to it, which
-make manipulating the parsed XML much easier than the standard library xml
-library. The script outputs text like
+I wrote a script to process the comments, which you can find
+[here](https://github.com/asmeurer/blog/blob/master/disqus-comments/export_disqus_comments.py).
+Disqus does provides an [XML
+schema](https://disqus.com/api/schemas/1.0/disqus.xsd) for the XML. I used a
+library called [xsData](https://xsdata.readthedocs.io/en/latest/index.html),
+which lets you take an XML scheme and generate Python dataclasses
+corresponding to it, which make manipulating the parsed XML much easier than
+the standard library xml library. The script outputs text like
 
-```
+```markdown
 ========== Comments from https://asmeurer.github.io/blog/posts/what-happens-when-you-mess-with-hashing-in-python/ ==========
 
-    **Comment from bjd2385 on 2016-08-28 12:33:12+00:00:**
+These are the original comments on this post that were made when this blog used the [Disqus blog system](https://www.asmeurer.com/blog/posts/switching-to-utterances-comments/).
 
-    <p>Very interesting post. I was just looking into hash functions (I've never formally learned what the topic entails), and since I'm most familiar with Python this post explained quite a bit, especially your early mathematical points.</p>
+>**Comment from bjd2385 on 2016-08-28 12:33:12+00:00:**
 
-    **Comment from Mark Lawrence on 2016-10-03 20:26:54+00:00:**
+><p>Very interesting post. I was just looking into hash functions (I've never formally learned what the topic entails), and since I'm most familiar with Python this post explained quite a bit, especially your early mathematical points.</p>
 
-    <p>At what point does Python 3 force the override of __hash__ if you've defined __eq__?  E.g when would your</p><p>AlwaysEqual class fail?</p>
+>**Comment from Mark Lawrence on 2016-10-03 20:26:54+00:00:**
 
-    **Replies:**
+><p>At what point does Python 3 force the override of __hash__ if you've defined __eq__?  E.g when would your</p><p>AlwaysEqual class fail?</p>
 
-        **Comment from asmeurer on 2016-10-03 20:38:13+00:00:**
+>**Replies:**
 
-        <p>That's a good catch. I originally wrote this post in Python 2. The example does indeed fail in Python 3. More specifically, if you override __eq__, Python 3 automatically sets __hash__ to None. I'll update the post to make this more clear.</p>
+>>**Comment from asmeurer on 2016-10-03 20:38:13+00:00:**
 
-    **Comment from Erick Mendonça on 2017-07-30 03:23:55+00:00:**
+>><p>That's a good catch. I originally wrote this post in Python 2. The example does indeed fail in Python 3. More specifically, if you override __eq__, Python 3 automatically sets __hash__ to None. I'll update the post to make this more clear.</p>
 
-    <p>Great article! We must really pay attention to these details when implementing custom hashes.</p>
+>**Comment from Erick Mendonça on 2017-07-30 03:23:55+00:00:**
 
-    **Comment from Ignacio on 2017-10-07 22:31:56+00:00:**
+><p>Great article! We must really pay attention to these details when implementing custom hashes.</p>
 
-    <p>Thanks a lot for this post! Clarified a lot of concepts.</p>
+>**Comment from Ignacio on 2017-10-07 22:31:56+00:00:**
+
+><p>Thanks a lot for this post! Clarified a lot of concepts.</p>
 ```
 
 which I then manually copied to each post's Utterances page on GitHub.
 
-Feel free to adapt [my script]() if you find yourself in a similar situation.
+Feel free to adapt [my
+script](https://github.com/asmeurer/blog/blob/master/disqus-comments/export_disqus_comments.py)
+if you find yourself in a similar situation.
 
 ## Utterances Comments
 
@@ -95,6 +100,7 @@ which will let you type your comment in the box below. This requires giving
 the Utterances bot access to your GitHub account. Alternately, if you don't
 want to give a bot access, you can just go directly to the GitHub issue page
 and comment there. I am currently in the process of figuring out how to add
-some boilerplate to each page that makes this clear (see
-[this](https://github.com/utterance/utterances/issues/355)). If anyone has any
-suggestions on how to do this, let me know.
+some boilerplate to each page that makes this clear (see [this Utterances
+issue](https://github.com/utterance/utterances/issues/355)). If anyone has any
+suggestions on how to do this, let me know. For now, I am just going to
+manually add a statement about this as the first comment on each post.
