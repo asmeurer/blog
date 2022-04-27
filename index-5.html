@@ -41,344 +41,18 @@
     
     
     </ul></nav></header><main id="content"><div class="postindex">
-    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/quansight-labs-work-update-for-september-2019/" class="u-url">Quansight Labs Work Update for September, 2019</a></h1>
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/whats-new-in-sympy-14/" class="u-url">What's New in SymPy 1.4</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
             </span></p>
             <p class="dateline">
-            <a href="posts/quansight-labs-work-update-for-september-2019/" rel="bookmark">
-            <time class="published dt-published" datetime="2019-10-07T00:00:00-05:00" itemprop="datePublished" title="2019-10-07 00:00">2019-10-07 00:00</time></a>
-            </p>
-                <p class="commentline">
-        
-        <a href="posts/quansight-labs-work-update-for-september-2019/#utterances-thread">Comments</a>
-
-
-        </p>
-</div>
-    </header><div class="e-content entry-content">
-    <div>
-<p><em>This post has been cross-posted on the <a href="https://labs.quansight.org/blog/2019/10/quansight-labs-work-update-for-september-2019/">Quansight Labs
-Blog</a>.</em></p>
-<p>As of November, 2018, I have been working at
-<a href="https://www.quansight.com/">Quansight</a>. Quansight is a new startup founded by
-the same people who started Anaconda, which aims to connect companies and open
-source communities, and offers consulting, training, support and mentoring
-services. I work under the heading of <a href="https://www.quansight.com/labs">Quansight
-Labs</a>. Quansight Labs is a public-benefit
-division of Quansight. It provides a home for a "PyData Core Team" which
-consists of developers, community managers, designers, and documentation
-writers who build open-source technology and grow open-source communities
-around all aspects of the AI and Data Science workflow.</p>
-<p>My work at Quansight is split between doing open source consulting for various
-companies, and working on SymPy.
-<a href="https://www.sympy.org/en/index.html">SymPy</a>, for those who do not know, is a
-symbolic mathematics library written in pure Python. I am the lead maintainer
-of SymPy.</p>
-<p>In this post, I will detail some of the open source work that I have done
-recently, both as part of my open source consulting, and as part of my work on
-SymPy for Quansight Labs.</p>
-<h3>Bounds Checking in Numba</h3>
-<p>As part of work on a client project, I have been working on contributing code
-to the <a href="https://numba.pydata.org">numba</a> project. Numba is a just-in-time
-compiler for Python. It lets you write native Python code and with the use of
-a simple <code>@jit</code> decorator, the code will be automatically sped up using LLVM.
-This can result in code that is up to 1000x faster in some cases:</p>
-<pre><code>
-In [1]: import numba
-
-In [2]: import numpy
-
-In [3]: def test(x):
-   ...:     A = 0
-   ...:     for i in range(len(x)):
-   ...:         A += i*x[i]
-   ...:     return A
-   ...:
-
-In [4]: @numba.njit
-   ...: def test_jit(x):
-   ...:     A = 0
-   ...:     for i in range(len(x)):
-   ...:         A += i*x[i]
-   ...:     return A
-   ...:
-
-In [5]: x = numpy.arange(1000)
-
-In [6]: %timeit test(x)
-249 µs ± 5.77 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-
-In [7]: %timeit test_jit(x)
-336 ns ± 0.638 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
-
-In [8]: 249/.336
-Out[8]: 741.0714285714286
-</code></pre>
-<p>Numba only works for a subset of Python code, and primarily targets code that
-uses NumPy arrays.</p>
-<p>Numba, with the help of LLVM, achieves this level of performance through many
-optimizations. One thing that it does to improve performance is to remove all
-bounds checking from array indexing. This means that if an array index is out
-of bounds, instead of receiving an <code>IndexError</code>, you will get garbage, or
-possibly a segmentation fault.</p>
-<pre><code>&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; from numba import njit
-&gt;&gt;&gt; def outtabounds(x):
-...     A = 0
-...     for i in range(1000):
-...         A += x[i]
-...     return A
-&gt;&gt;&gt; x = np.arange(100)
-&gt;&gt;&gt; outtabounds(x) # pure Python/NumPy behavior
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-  File "&lt;stdin&gt;", line 4, in outtabounds
-IndexError: index 100 is out of bounds for axis 0 with size 100
-&gt;&gt;&gt; njit(outtabounds)(x) # the default numba behavior
--8557904790533229732
-</code></pre>
-<p>In numba pull request <a href="https://github.com/numba/numba/pull/4432">#4432</a>, I am
-working on adding a flag to <code>@njit</code> that will enable bounds checks for array
-indexing. This will remain disabled by default for performance purposes. But
-you will be able to enable it by passing <code>boundscheck=True</code> to <code>@njit</code>, or by
-setting the <code>NUMBA_BOUNDSCHECK=1</code> environment variable. This will make it
-easier to detect out of bounds issues like the one above. It will work like</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; @njit(boundscheck=True)
-... def outtabounds(x):
-...     A = 0
-...     for i in range(1000):
-...         A += x[i]
-...     return A
-&gt;&gt;&gt; x = np.arange(100)
-&gt;&gt;&gt; outtabounds(x) # numba behavior in my pull request #4432
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-IndexError: index is out of bounds
-</code></pre>
-<p>The pull request is still in progress, and many things such as the quality of
-the error message reporting will need to be improved. This should make
-debugging issues easier for people who write numba code once it is merged.</p>
-<h3>removestar</h3>
-<p><a href="https://www.asmeurer.com/removestar/">removestar</a> is a new tool I wrote to
-automatically replace <code>import *</code> in Python modules with explicit imports.</p>
-<p>For those who don't know, Python's <code>import</code> statement supports so-called
-"wildcard" or "star" imports, like</p>
-<pre><code class="language-py">from sympy import *
-</code></pre>
-<p>This will import every public name from the <code>sympy</code> module into the current
-namespace. This is often useful because it saves on typing every name that is
-used in the import line. This is especially useful when working interactively,
-where you just want to import every name and minimize typing.</p>
-<p>However, doing <code>from module import *</code> is generally frowned upon in Python. It is
-considered acceptable when working interactively at a <code>python</code> prompt, or in
-<code>__init__.py</code> files (removestar skips <code>__init__.py</code> files by default).</p>
-<p>Some reasons why <code>import *</code> is bad:</p>
-<ul>
-<li>It hides which names are actually imported.</li>
-<li>It is difficult both for human readers and static analyzers such as
-pyflakes to tell where a given name comes from when <code>import *</code> is used. For
-example, pyflakes cannot detect unused names (for instance, from typos) in
-the presence of <code>import *</code>.</li>
-<li>If there are multiple <code>import *</code> statements, it may not be clear which names
-come from which module. In some cases, both modules may have a given name,
-but only the second import will end up being used. This can break people's
-intuition that the order of imports in a Python file generally does not
-matter.</li>
-<li>
-<code>import *</code> often imports more names than you would expect. Unless the module
-you import defines <code>__all__</code> or carefully <code>del</code>s unused names at the module
-level, <code>import *</code> will import every public (doesn't start with an
-underscore) name defined in the module file. This can often include things
-like standard library imports or loop variables defined at the top-level of
-the file. For imports from modules (from <code>__init__.py</code>), <code>from module import *</code> will include every submodule defined in that module. Using <code>__all__</code> in
-modules and <code>__init__.py</code> files is also good practice, as these things are
-also often confusing even for interactive use where <code>import *</code> is
-acceptable.</li>
-<li>In Python 3, <code>import *</code> is syntactically not allowed inside of a function
-definition.</li>
-</ul>
-<p>Here are some official Python references stating not to use <code>import *</code> in
-files:</p>
-<ul>
-<li>
-<p><a href="https://docs.python.org/3/faq/programming.html?highlight=faq#what-are-the-best-practices-for-using-import-in-a-module">The official Python
-FAQ</a>:</p>
-<blockquote>
-<p>In general, don’t use <code>from modulename import *</code>. Doing so clutters the
-importer’s namespace, and makes it much harder for linters to detect
-undefined names.</p>
-</blockquote>
-</li>
-<li>
-<p><a href="https://www.python.org/dev/peps/pep-0008/#imports">PEP 8</a> (the official
-Python style guide):</p>
-<blockquote>
-<p>Wildcard imports (<code>from &lt;module&gt; import *</code>) should be avoided, as they
-make it unclear which names are present in the namespace, confusing both
-readers and many automated tools.</p>
-</blockquote>
-</li>
-</ul>
-<p>Unfortunately, if you come across a file in the wild that uses <code>import *</code>, it
-can be hard to fix it, because you need to find every name in the file that is
-imported from the <code>*</code> and manually add an import for it. Removestar makes this
-easy by finding which names come from <code>*</code> imports and replacing the import
-lines in the file automatically.</p>
-<p>As an example, suppose you have a module <code>mymod</code> like</p>
-<pre><code>mymod/
-  | __init__.py
-  | a.py
-  | b.py
-</code></pre>
-<p>with</p>
-<pre><code class="language-py"># mymod/a.py
-from .b import *
-
-def func(x):
-    return x + y
-</code></pre>
-<p>and</p>
-<pre><code class="language-py"># mymod/b.py
-x = 1
-y = 2
-</code></pre>
-<p>Then <code>removestar</code> works like:</p>
-<pre><code>$ removestar -i mymod/
-$ cat mymod/a.py
-# mymod/a.py
-from .b import y
-
-def func(x):
-    return x + y
-</code></pre>
-<p>The <code>-i</code> flag causes it to edit <code>a.py</code> in-place. Without it, it would just
-print a diff to the terminal.</p>
-<p>For implicit star imports and explicit star imports from the same module,
-<code>removestar</code> works statically, making use of
-<a href="https://github.com/PyCQA/pyflakes">pyflakes</a>. This means none of the code is
-actually executed. For external imports, it is not possible to work statically
-as external imports may include C extension modules, so in that case, it
-imports the names dynamically.</p>
-<p><code>removestar</code> can be installed with pip or conda:</p>
-<pre><code>pip install removestar
-</code></pre>
-<p>or if you use conda</p>
-<pre><code>conda install -c conda-forge removestar
-</code></pre>
-<h3>sphinx-math-dollar</h3>
-<p>In SymPy, we make heavy use of LaTeX math in our documentation. For example,
-in our <a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.hyper.hyper">special functions
-documentation</a>,
-most special functions are defined using a LaTeX formula, like <img src="besselj_docs.png" alt="The docs for besselj"></p>
-<p>(from <a href="https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj">https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj</a>)</p>
-<p>However, the source for this math in the docstring of the function uses RST
-syntax:</p>
-<pre><code class="language-py">class besselj(BesselBase):
-    """
-    Bessel function of the first kind.
-
-    The Bessel `J` function of order `\nu` is defined to be the function
-    satisfying Bessel's differential equation
-
-    .. math ::
-        z^2 \frac{\mathrm{d}^2 w}{\mathrm{d}z^2}
-        + z \frac{\mathrm{d}w}{\mathrm{d}z} + (z^2 - \nu^2) w = 0,
-
-    with Laurent expansion
-
-    .. math ::
-        J_\nu(z) = z^\nu \left(\frac{1}{\Gamma(\nu + 1) 2^\nu} + O(z^2) \right),
-
-    if :math:`\nu` is not a negative integer. If :math:`\nu=-n \in \mathbb{Z}_{&lt;0}`
-    *is* a negative integer, then the definition is
-
-    .. math ::
-        J_{-n}(z) = (-1)^n J_n(z).
-</code></pre>
-<p>Furthermore, in SymPy's documentation we have configured it so that text
-between `single backticks` is rendered as math. This was originally done for
-convenience, as the alternative way is to write <code>:math:`\nu`</code> every
-time you want to use inline math. But this has lead to many people being
-confused, as they are used to Markdown where `single backticks` produce
-<code>code</code>.</p>
-<p>A better way to write this would be if we could delimit math with dollar
-signs, like <code>$\nu$</code>. This is how things are done in LaTeX documents, as well
-as in things like the Jupyter notebook.</p>
-<p>With the new <a href="https://www.sympy.org/sphinx-math-dollar/">sphinx-math-dollar</a>
-Sphinx extension, this is now possible. Writing <code>$\nu$</code> produces $\nu$, and
-the above docstring can now be written as</p>
-<pre><code class="language-py">class besselj(BesselBase):
-    """
-    Bessel function of the first kind.
-
-    The Bessel $J$ function of order $\nu$ is defined to be the function
-    satisfying Bessel's differential equation
-
-    .. math ::
-        z^2 \frac{\mathrm{d}^2 w}{\mathrm{d}z^2}
-        + z \frac{\mathrm{d}w}{\mathrm{d}z} + (z^2 - \nu^2) w = 0,
-
-    with Laurent expansion
-
-    .. math ::
-        J_\nu(z) = z^\nu \left(\frac{1}{\Gamma(\nu + 1) 2^\nu} + O(z^2) \right),
-
-    if $\nu$ is not a negative integer. If $\nu=-n \in \mathbb{Z}_{&lt;0}$
-    *is* a negative integer, then the definition is
-
-    .. math ::
-        J_{-n}(z) = (-1)^n J_n(z).
-</code></pre>
-<p>We also plan to add support for <code>$$double dollars$$</code> for display math so that <code>.. math ::</code> is no longer needed either .</p>
-<p>For end users, the documentation on <a href="https://docs.sympy.org">docs.sympy.org</a>
-will continue to render exactly the same, but for developers, it is much
-easier to read and write.</p>
-<p>This extension can be easily used in any Sphinx project. Simply install it
-with pip or conda:</p>
-<pre><code>pip install sphinx-math-dollar
-</code></pre>
-<p>or</p>
-<pre><code>conda install -c conda-forge sphinx-math-dollar
-</code></pre>
-<p>Then enable it in your <code>conf.py</code>:</p>
-<pre><code class="language-py">extensions = ['sphinx_math_dollar', 'sphinx.ext.mathjax']
-</code></pre>
-<h3>Google Season of Docs</h3>
-<p>The above work on sphinx-math-dollar is part of work I have been doing to
-improve the tooling around SymPy's documentation. This has been to assist our
-technical writer Lauren Glattly, who is working with SymPy for the next three
-months as part of the new <a href="https://developers.google.com/season-of-docs/">Google Season of
-Docs</a> program. Lauren's project
-is to improve the consistency of our docstrings in SymPy. She has already
-identified many key ways our docstring documentation can be improved, and is
-currently working on a style guide for writing docstrings. Some of the issues
-that Lauren has identified require improved tooling around the way the HTML
-documentation is built to fix. So some other SymPy developers and I have been
-working on improving this, so that she can focus on the technical writing
-aspects of our documentation.</p>
-<p>Lauren has created a draft style guide for documentation at
-<a href="https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide">https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide</a>. Please
-take a moment to look at it and if you have any feedback on it, comment below
-or write to the SymPy mailing list.</p>
-</div>
-</div></article>
-</div></main>
-</div>
-</body>
-</html><html><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="/posts/whats-new-in-sympy-14/" class="u-url">What's New in SymPy 1.4</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Aaron Meurer
-            </span></p>
-            <p class="dateline">
-            <a href="/posts/whats-new-in-sympy-14/" rel="bookmark">
+            <a href="posts/whats-new-in-sympy-14/" rel="bookmark">
             <time class="published dt-published" datetime="2019-05-02T00:00:00-05:00" itemprop="datePublished" title="2019-05-02 00:00">2019-05-02 00:00</time></a>
             </p>
                 <p class="commentline">
         
-        <a href="/posts/whats-new-in-sympy-14/#utterances-thread">Comments</a>
+        <a href="posts/whats-new-in-sympy-14/#utterances-thread">Comments</a>
 
 
         </p>
@@ -423,12 +97,12 @@ do the release itself.</p>
 <h2>Automatic LaTeX rendering in the Jupyter notebook</h2>
 <p>Prior to SymPy 1.4, SymPy expressions in the notebook rendered by default with their
 string representation. To get <code>LaTeX</code> output, you had to call <code>init_printing()</code>:</p>
-<img src="/sympy-1.3-notebook.png" alt="SymPy 1.3 rendering in the Jupyter lab notebook"><p>In SymPy 1.4, SymPy expressions now automatically render as LaTeX in the notebook:</p>
-<img src="/sympy-1.4-notebook.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook"><p>However, this only applies automatically if the type of an object is a SymPy
+<img src="sympy-1.3-notebook.png" alt="SymPy 1.3 rendering in the Jupyter lab notebook"><p>In SymPy 1.4, SymPy expressions now automatically render as LaTeX in the notebook:</p>
+<img src="sympy-1.4-notebook.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook"><p>However, this only applies automatically if the type of an object is a SymPy
 expression. For built-in types such as lists or ints, <code>init_printing()</code> is
 still required to get LaTeX printing. For example, <code>solve()</code> returns a list,
 so does not render as LaTeX unless <code>init_printing()</code> is called:</p>
-<img src="/sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"><p><code>init_printing()</code> is also still needed if you want to change any of the
+<img src="sympy-1.4-notebook-2.png" alt="SymPy 1.4 rendering in the Jupyter lab notebook with init_printing()"><p><code>init_printing()</code> is also still needed if you want to change any of the
 printing settings, for instance, passing flags to the <code>latex()</code> printer or
 selecting a different printer.</p>
 <p>If you want the string form of an expression for copy-pasting, you can use
@@ -560,7 +234,11 @@ automatically collects release notes from every pull request, meaning SymPy
 releases have very comprehensive and readable release notes pages. If you see
 any mistakes on either page, feel free to edit the wiki and fix them.</p>
 </div>
-</div></article></html><html>
+</div></article>
+</div></main>
+</div>
+</body>
+</html><html>
 <nav class="postindexpager"><ul class="pager">
 <li class="previous">
                 <a href="/" rel="prev">Newer posts</a>
