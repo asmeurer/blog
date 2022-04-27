@@ -107,3 +107,5 @@ I do feel that being on a site like GitHub is still preferable to something like
 Finally, I want to thank everyone who supported SymPy during this incident. Even if you just talked about this on social media or upvoted the Hacker News story, that helped us get this into the public eye, which led to a much faster resolution than we expected. I especially want to thank Leah Silen and Arliss Collins from NumFOCUS; Ondřej Čertík, Oscar Benjamin, and other SymPy community members; Pamela Chestek, the NumFOCUS legal counsel; and Travis Oliphant for the help they provided to us. Thank you to Thomas Dohmke, GitHub’s CEO, who we have reached out to privately, and who has promised to improve GitHub’s DMCA policies. I also want to thank Vivek Ravisankar from HackerRank for retracting the DMCA claim, and for the generous donation to SymPy.
 
 Now that this incident is over, I’m hopeful we in the SymPy community can all go back to building software.
+
+*If you wish to donate to support SymPy, you may do so [here](https://www.sympy.org/en/donate.html).*
