@@ -298,19 +298,22 @@ about things on the left-hand side of an assignment. <strong>EDIT:
 </ol>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/moving-away-from-python-2/" class="u-url">Moving Away from Python 2</a></h1>
+</div></article>
+</div></main>
+</div>
+</body>
+</html><html><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="/posts/moving-away-from-python-2/" class="u-url">Moving Away from Python 2</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
             </span></p>
             <p class="dateline">
-            <a href="posts/moving-away-from-python-2/" rel="bookmark">
+            <a href="/posts/moving-away-from-python-2/" rel="bookmark">
             <time class="published dt-published" datetime="2016-05-19T14:00:00-04:00" itemprop="datePublished" title="2016-05-19 14:00">2016-05-19 14:00</time></a>
             </p>
                 <p class="commentline">
         
-        <a href="posts/moving-away-from-python-2/#utterances-thread">Comments</a>
+        <a href="/posts/moving-away-from-python-2/#utterances-thread">Comments</a>
 
 
         </p>
@@ -335,7 +338,7 @@ represents library developers being antagonistic against those who want or
 have to use Python 2.</p>
 <p>I'm writing this from my perspective as a library developer. I'm the lead
 developer of <a href="http://www.sympy.org/">SymPy</a>, and I have sympathies for
-developers of other libraries.<sup id="fnref:sympy"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:sympy">1</a></sup> I say this because my idea may seem a bit
+developers of other libraries.<sup id="fnref:sympy"><a class="footnote-ref" href="/posts/moving-away-from-python-2/#fn:sympy">1</a></sup> I say this because my idea may seem a bit
 in tension with "users" (even though I hate the "developer/user" distinction).</p>
 <h3>Python 2</h3>
 <p>There are a few reasons why I think libraries should drop (and announce that
@@ -347,7 +350,7 @@ necessarily disjoint) classes of people: CPython core developers, library
 developers, and users. The core developers were the first to move to Python 3,
 since they were the ones who wrote it. They were also the ones who provided
 the messaging around Python 3, which has varied over time. In my opinion, it
-should have been and should be more forceful.<sup id="fnref:core"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:core">2</a></sup> Then you have the library
+should have been and should be more forceful.<sup id="fnref:core"><a class="footnote-ref" href="/posts/moving-away-from-python-2/#fn:core">2</a></sup> Then you have the library
 developers and the users. A chief difference here is that users are probably
 going to be using only one version of Python. In order for them to switch that
 version to Python 3, all the libraries that they use need to support it. This
@@ -392,7 +395,7 @@ important to do this for a few reasons:</p>
   implemented as keyword-only arguments. This avoids mistakes that come from
   the antipattern of passing keyword arguments without naming the keyword, and
   allows the argspec of the function to be expanded in the future without
-  breaking API.<sup id="fnref:swift"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:swift">3</a></sup></p>
+  breaking API.<sup id="fnref:swift"><a class="footnote-ref" href="/posts/moving-away-from-python-2/#fn:swift">3</a></sup></p>
 </li>
 </ul>
 <p>The second reason I think library developers should agree to drop Python 2
@@ -402,7 +405,7 @@ In other words, instead of forcing people off of Python 2, we should make them
 want to come to Python 3. There are some issues with this argument. First,
 Python 3 already has
 <a href="https://asmeurer.github.io/python3-presentation/slides.html">tons of carrots</a>.
-Honestly, not being terrible at Unicode ought to be a carrot in its own right.<sup id="fnref:unicode"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:unicode">4</a></sup></p>
+Honestly, not being terrible at Unicode ought to be a carrot in its own right.<sup id="fnref:unicode"><a class="footnote-ref" href="/posts/moving-away-from-python-2/#fn:unicode">4</a></sup></p>
 <p>If you don't deal with strings, or do but don't care about those silly
 foreigners with weird accents in their names, there are other major carrots as
 well. For SymPy, the fact that 1/2 gives 0 in Python 2 has historically been a
@@ -455,7 +458,7 @@ for the most part thus far, but they shouldn't be expected to bear it forever.
 The debt will only increase, especially as the technical opportunity cost, if
 you will, of not being able to use newer and shinier versions of Python 3
 grows. The burden will have to shift at some point. Those with the financial
-resources may choose to offload this debt to others,<sup id="fnref:continuum"><a class="footnote-ref" href="posts/moving-away-from-python-2/#fn:continuum">5</a></sup> say, by
+resources may choose to offload this debt to others,<sup id="fnref:continuum"><a class="footnote-ref" href="/posts/moving-away-from-python-2/#fn:continuum">5</a></sup> say, by
 backporting features or bugfixes to older library versions that support Python
 2 (or by helping to move code to Python 3).</p>
 <p>I want to end by pointing out that if you are, for whatever reason, still
@@ -476,19 +479,19 @@ it will make it easy to separate your Python 2 code from your Python 3 code.</p>
 <p>With that being said, the opinions here are entirely my own, and are
     don't necessarily represent those of other people, nor do they
     represent official SymPy policy (no decisions have been made by the
-    community about this at this time). <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:sympy" title="Jump back to footnote 1 in the text">↩</a></p>
+    community about this at this time). <a class="footnote-backref" href="/posts/moving-away-from-python-2/#fnref:sympy" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 <li id="fn:core">
 <p>It often feels like core Python itself doesn't really want people to
     use Python 3. It's little things, like
     <a href="https://docs.python.org/library/">docs links</a> that redirect to Python
     2, or <a href="https://www.python.org/dev/peps/pep-0394/">PEP 394</a>, which
-    still says that the <code>python</code> should always point to Python 2. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:core" title="Jump back to footnote 2 in the text">↩</a></p>
+    still says that the <code>python</code> should always point to Python 2. <a class="footnote-backref" href="/posts/moving-away-from-python-2/#fnref:core" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 <li id="fn:swift">
 <p>In Swift, Apple's new language for iOS and OS X, function parameter
     names are effectively "keyword-only"
-    <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html">by default</a>. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:swift" title="Jump back to footnote 3 in the text">↩</a></p>
+    <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html">by default</a>. <a class="footnote-backref" href="/posts/moving-away-from-python-2/#fnref:swift" title="Jump back to footnote 3 in the text">↩</a></p>
 </li>
 <li id="fn:unicode">
 <p>As an example of this, in conda, if you use Python 2 in the root
@@ -508,29 +511,28 @@ import unicode_literals</code> in Python 2, in my opinion.</p>
 <p>I no longer work on conda, but as far as I know, the
 <a href="https://github.com/conda/conda/issues/1180">issue</a> remains unfixed.
 Of course, this whole thing works just fine if conda is run in Python
-3. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:unicode" title="Jump back to footnote 4 in the text">↩</a></p>
+3. <a class="footnote-backref" href="/posts/moving-away-from-python-2/#fnref:unicode" title="Jump back to footnote 4 in the text">↩</a></p>
 </li>
 <li id="fn:continuum">
 <p>If that legitimately interests you, I
     <a href="https://twitter.com/pwang/status/712780279211884546">hear Continuum</a>
-    may be able to help you. <a class="footnote-backref" href="posts/moving-away-from-python-2/#fnref:continuum" title="Jump back to footnote 5 in the text">↩</a></p>
+    may be able to help you. <a class="footnote-backref" href="/posts/moving-away-from-python-2/#fnref:continuum" title="Jump back to footnote 5 in the text">↩</a></p>
 </li>
 </ol>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/what-happens-when-you-mess-with-hashing-in-python/" class="u-url">What happens when you mess with hashing in Python</a></h1>
+</div></article></html><html><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="/posts/what-happens-when-you-mess-with-hashing-in-python/" class="u-url">What happens when you mess with hashing in Python</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Aaron Meurer
             </span></p>
             <p class="dateline">
-            <a href="posts/what-happens-when-you-mess-with-hashing-in-python/" rel="bookmark">
+            <a href="/posts/what-happens-when-you-mess-with-hashing-in-python/" rel="bookmark">
             <time class="published dt-published" datetime="2016-01-25T22:13:53-06:00" itemprop="datePublished" title="2016-01-25 22:13">2016-01-25 22:13</time></a>
             </p>
                 <p class="commentline">
         
-        <a href="posts/what-happens-when-you-mess-with-hashing-in-python/#utterances-thread">Comments</a>
+        <a href="/posts/what-happens-when-you-mess-with-hashing-in-python/#utterances-thread">Comments</a>
 
 
         </p>
@@ -1297,16 +1299,13 @@ Python sessions.</p>
 </li>
 </ul>
 </div>
-    </div>
-    </article>
-</div>
-
-        <nav class="postindexpager"><ul class="pager">
+</div></article></html><html>
+<nav class="postindexpager"><ul class="pager">
 <li class="previous">
-                <a href="index-4.html" rel="prev">Newer posts</a>
+                <a href="/index-4.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
-                <a href="index-2.html" rel="next">Older posts</a>
+                <a href="/index-2.html" rel="next">Older posts</a>
             </li>
         </ul></nav><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script>
 MathJax = {
@@ -1317,17 +1316,14 @@ MathJax = {
     fontCache: 'global'
   }
 };
-</script></main><footer id="footer"><p>Contents © 2021         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+</script><footer id="footer"><p>Contents © 2022         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 </p>
 <p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
     <img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0"></a>
 </p>
             
-        </footer>
-</div>
-    
-            <script src="assets/js/all-nocdn.js"></script><div style="text-align:center">
+        </footer><script src="/assets/js/all-nocdn.js"></script><div style="text-align:center">
 <span class="st_twitterfollow_large" displaytext="Twitter Follow" st_username="asmeurer"></span>
 <span class="st_twitter_large" displaytext="Tweet"></span>
 <span class="st_googleplus_large" displaytext="Google +"></span>
@@ -1336,10 +1332,7 @@ MathJax = {
 <span class="st_email_large" displaytext="Email"></span>
 
 </div>
-
-
-    
-    <script>
+<script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
@@ -1354,5 +1347,5 @@ MathJax = {
   }
 };
 </script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</body>
 </html>
+

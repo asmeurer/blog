@@ -1,4 +1,0 @@
-Sitemap: https://asmeurer.com/blog/sitemapindex.xml
-
-User-Agent: *
-Host: asmeurer.com
