@@ -72,6 +72,9 @@ First, for background, the SymPy documentation website [https://docs.sympy.org/]
 
   As a company we take a lot of pride in helping developers and it sucks to see this. I'm extremely sorry for what happened here.
   ```
+
+  HackerRank did follow through with the $25k donation to SymPy.
+
 * **Wednesday, April 20, 12:00 AM (approximately)**: The SymPy documentation website and the sympy/sympy_doc repository went back online.
 * **Wednesday, April 20, 2022, 10:11 AM**: We received an email notice from GitHub that the DMCA claim against our repository has been retracted. The [retraction is made available online](https://github.com/github/dmca/blob/master/2022/04/2022-04-19-hackerrank-retraction.md) on the github/dmca repository.
 
