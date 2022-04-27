@@ -370,7 +370,7 @@ GITHUB_COMMIT_SOURCE = False
 
 # date format used to display post dates.
 # (str used by datetime.datetime.strftime)
-# DATE_FORMAT = '%Y-%m-%d %H:%M'
+DATE_FORMAT = 'yyyy-MM-dd'
 
 # FAVICONS contains (name, file, size) tuples.
 # Used for create favicon link like this:
