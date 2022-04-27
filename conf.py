@@ -349,6 +349,10 @@ THEME_CONFIG = {
     'github_repo': 'https://github.com/asmeurer/blog',
 }
 
+GITHUB_DEPLOY_BRANCH = "gh-pages"
+GITHUB_SOURCE_BRANCH = "master"
+GITHUB_COMMIT_SOURCE = False
+
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.
 # Can be any of autumn borland bw colorful default emacs friendly fruity manni
