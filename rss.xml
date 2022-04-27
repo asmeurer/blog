@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 27 Apr 2022 21:45:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 27 Apr 2022 21:46:28 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The SymPy/HackerRank DMCA Incident</title><link>https://asmeurer.com/blog/posts/the-sympy-hackerrank-dmca-incident/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Thank you to Ondřej Čertík, Oscar Benjamin, Travis Oliphant, and Pamela Chestek for reviewing this blog post. Any errors in the post are my own.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;On April 19, 2022, for approximately 11.5 hours, the &lt;a href="https://docs.sympy.org/"&gt;documentation website&lt;/a&gt; for the open source &lt;a href="https://www.sympy.org/"&gt;SymPy&lt;/a&gt; project and the &lt;a href="https://github.com/sympy/sympy_doc"&gt;corresponding GitHub repository&lt;/a&gt; were taken down as a result of a &lt;a href="https://github.com/github/dmca/blob/master/2022/04/2022-04-15-hackerrank.md"&gt;DMCA takedown notice&lt;/a&gt; submitted by WorthIT Solutions on behalf of HackerRank. In this post, I’d like to explain what the DMCA is and how it works, detail exactly what happened with this incident, and go over my views on the incident and some of the lessons we’ve learned as a result.&lt;/p&gt;
+&lt;h2&gt;What is the DMCA?&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;The information in this section has been drawn from various sources, including:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;a href="https://assets.fenwick.com/legacy/FenwickDocuments/DMCA-QA.pdf"&gt;“Your DMCA Safe Harbor Questions Answered”&lt;/a&gt; Mitchell Zimmerman (2017)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;The EFF’s &lt;a href="https://www.eff.org/wp/unintended-consequences-16-years-under-dmca"&gt;Unintended Consequences - 16 Years Under the DMCA&lt;/a&gt; (2014)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;GitHub’s &lt;a href="https://docs.github.com/en/site-policy/content-removal-policies/dmca-takedown-policy"&gt;DMCA Takedown Policy&lt;/a&gt; page&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The Digital Millennium Copyright Act (DMCA) is a US law that was passed in 1998. It has laid the groundwork for how copyright is enforced in the age of the internet. One of the DMCA provisions that is important to understand is the so-called “safe harbor” provision. The safe harbor provision, roughly speaking, makes it so that websites can avoid liability because they are simply hosting or transmitting copyrighted content on behalf of their end-users.&lt;/p&gt;
+&lt;p&gt;The safe harbor provision has been absolutely essential to the modern internet. Without it, a website like GitHub could not exist. Imagine if every time someone found their copyrighted content had been uploaded to GitHub without their permission, that they could sue GitHub for damages. If this were the case, GitHub could never operate. The way GitHub works today, it cannot possibly know if every single thing that is uploaded to it is done so legally. The safe harbor provision also makes modern social media websites like Facebook, Twitter, and YouTube possible.&lt;/p&gt;
+&lt;p&gt;However, in order for a website to have and maintain safe harbor status, it must follow certain practices as outlined by the DMCA. In particular, sites must manage the “notice-and-take-down process”. GitHub’s notice-and-take-down process is described in its &lt;a href="https://docs.github.com/en/site-policy/content-removal-policies/dmca-takedown-policy"&gt;DMCA takedown policy&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The notice-and-take-down process works like this: a provider (like GitHub) has a means for a copyright holder to submit a notice. In GitHub’s case, they provide an online &lt;a href="https://github.com/contact/dmca"&gt;form&lt;/a&gt;. This notice must include certain information, including the name and address of the submitter, identification of the copyrighted work, the material on the site that is infringing copyright, and a statement of good faith, signed under penalty of perjury, that the person submitting the notice owns the copyright and believes their rights have been infringed upon. GitHub’s form also requires the submitter to assert that they have taken &lt;a href="https://www.lumendatabase.org/topics/22"&gt;fair use&lt;/a&gt; into consideration.&lt;/p&gt;
+&lt;p&gt;Once the notice is submitted and once the provider confirms that the above things are done, they must “expeditiously” remove public access to the content. The DMCA does not define “expeditiously”.&lt;/p&gt;
+&lt;p&gt;The owner of the accused content then has the opportunity to file a counter-notice.  GitHub’s counter notice procedure is described in its &lt;a href="https://docs.github.com/en/site-policy/content-removal-policies/guide-to-submitting-a-dmca-counter-notice"&gt;guide to submitting a DMCA counter notice&lt;/a&gt;. This gives the person whose content has been removed recourse if they believe the original notice was invalid. A counter notice contains a statement by the user that the content was removed “as a result of mistake or misidentification”, signed under penalty of perjury. When a provider receives a counter notice, they must forward it to the original complainant, and restore the challenged material after 10-14 business days. At this point, if the complainant wishes to keep the material down, they must file a lawsuit against the alleged infringer.&lt;/p&gt;
+&lt;p&gt;By following these procedures as outlined by the DMCA, GitHub avoids liability to either party.&lt;/p&gt;
+&lt;p&gt;GitHub goes beyond what the DMCA law requires. All notices and counter notices that have ever been submitted to GitHub are published publicly in the &lt;a href="https://github.com/github/dmca"&gt;github/dmca repository&lt;/a&gt; (with personal information redacted). GitHub has also historically sided with developers in high profile infringement cases, such as the &lt;a href="https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/"&gt;youtube-dl incident in 2020&lt;/a&gt; (this incident involved a takedown relating to copyright circumvention, which is a different part of the DMCA law that I haven’t discussed here because it isn’t relevant to the notice that was sent to SymPy).&lt;/p&gt;
+&lt;p&gt;It’s important to understand, however, that GitHub’s hands are tied in many ways here. If they do not follow the notice and counter notice procedures exactly as outlined in the DMCA law, they risk losing their safe harbor status with the US Copyright Office. Were this to happen, it would be completely disastrous to GitHub as a business. Without safe harbor protection, GitHub could be liable for any copyrighted content that someone uploaded to its platform.&lt;/p&gt;
+&lt;p&gt;Finally, a technical note: when someone submits a takedown notice on a single part of a GitHub repository, GitHub’s response is to take down the entire repository. This is because it is technically impossible to remove only part of a repository due to the way git works. Completely scrubbing data from git history is possible, but it’s a destructive process that’s very disruptive to developers. Instead, GitHub requires the repository owners to &lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository"&gt;scrub the data themselves&lt;/a&gt;, if they choose to, within one business day. Otherwise, they will take the entire repository down.&lt;/p&gt;
+&lt;h2&gt;What happened&lt;/h2&gt;
+&lt;p&gt;Below I provide a quick timeline of what happened. Times are in Mountain Daylight Time, which is where I live.&lt;/p&gt;
+&lt;p&gt;First, for background, the SymPy documentation website &lt;a href="https://docs.sympy.org/"&gt;https://docs.sympy.org/&lt;/a&gt; is hosted on &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt; and mirrors the repository &lt;a href="https://github.com/sympy/sympy_doc"&gt;https://github.com/sympy/sympy_doc&lt;/a&gt;. It is common for websites to be hosted on GitHub Pages because it’s completely free and easy to set up for someone who is already used to using git and GitHub. This &lt;a href="https://github.com/asmeurer/blog"&gt;blog itself&lt;/a&gt; is hosted on GitHub Pages. The sympy_doc repository only contains the pre-built HTML of SymPy’s documentation. The actual source code lives in &lt;a href="https://github.com/sympy/sympy"&gt;the main SymPy repository&lt;/a&gt;. However, the DMCA claims were only ever made against the website, so the main SymPy source code repository was unaffected.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Friday, Apr 15, 4:26 PM&lt;/strong&gt;: Admins of the sympy/sympy_doc GitHub repository (myself, Ondřej Čertík, and Oscar Benjamin) received an automated email from &lt;a href="mailto:support@githubsupport.com"&gt;support@githubsupport.com&lt;/a&gt; informing us that a DMCA takedown notice was filed against the SymPy documentation. Specifically, the claim, which can now be found on &lt;a href="https://github.com/github/dmca/blob/master/2022/04/2022-04-15-hackerrank.md"&gt;the github/dmca repository&lt;/a&gt;, claimed that “Someone has illegally copied our client's technical exams questions and answers from their official website https://www.hackerrank.com/ and uploaded them on their platform without permission.” It specifically referenced the page &lt;a href="https://docs.sympy.org/latest/modules/solvers/solvers.html"&gt;https://docs.sympy.org/latest/modules/solvers/solvers.html&lt;/a&gt;. The notice was made on behalf of HackerRank by an individual from “WorthIT Solutions Pvt. Ltd.” The notice also stated “the infringing website is not willing to remove our client's work”, which came as a surprise to us since, at no point in time prior to receiving this notice had we received any communications from HackerRank or WorthIT Solutions.&lt;/p&gt;
+&lt;p&gt;The support email stated that if we do not remove the offending content within one business day, the repository, and consequently the docs website, will be taken down.&lt;/p&gt;
+&lt;p&gt;While it is not relevant to the legality of the situation, it is worth noting that this was on Good Friday and the upcoming Sunday, April 17, was Easter Sunday, which limited our ability to effectively respond over the weekend.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Friday, April 15 - Tuesday, April 19&lt;/strong&gt;: At first, we were not sure if the support email was legitimate or if it was just convincing spam. One thing that confused us was that the support email came from a domain, &lt;a href="https://githubsupport.com/"&gt;githubsupport.com&lt;/a&gt;, which did not appear to exist. Another issue is that although GitHub’s policy was to post all DMCA claims to &lt;a href="https://github.com/github/dmca"&gt;the github/dmca repository&lt;/a&gt;, this particular claim had not yet been uploaded there. We reached out to GitHub support to ask if the email was legitimate, and they responded Monday, April 18, 3:18 PM that the email was indeed a legitimate email from GitHub Trust &amp;amp; Safety.&lt;/p&gt;
+&lt;p&gt;I had already reached out on Friday to &lt;a href="https://numfocus.org/"&gt;NumFOCUS&lt;/a&gt; for assistance. NumFOCUS is a 501(c)(3) non-profit organization that represents many open source scientific projects including SymPy. However, due to the limited time frame of the notice and the fact that it occurred over a holiday weekend, NumFOCUS was not able to connect us with legal counsel until Tuesday.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tuesday, April 19, 12:21 PM&lt;/strong&gt;: We received notice from GitHub that the &lt;a href="https://github.com/sympy/sympy_doc"&gt;sympy/sympy_doc&lt;/a&gt; repository has been taken offline. The sympy/sympy_doc repository was replaced with a notice that the documentation was taken down by the DMCA notice with a link to the notice, which had been posted to the public github/dmca repository, and the documentation website itself started to 404. Since this was now public knowledge, we publicly announced this on the &lt;a href="https://groups.google.com/g/sympy/c/yuJXymiJqws"&gt;SymPy mailing list&lt;/a&gt; and &lt;a href="https://twitter.com/SymPy/status/1516534649970851841"&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We also worked with NumFOCUS and the legal counsel to send a counter notice to GitHub, since we believed that the notice was mistaken and that the claimed infringement, the code and mathematical examples on the docs page, were likely not even copyrightable.&lt;/p&gt;
+&lt;p&gt;Not long after the takedown occurred, someone posted it &lt;a href="https://news.ycombinator.com/item?id=31087175"&gt;to Hacker News&lt;/a&gt;. The Hacker News posting eventually made its way to the front page and by the end of the day it had made its way to &lt;a href="https://upvotetracker.com/post/hn/31087175"&gt;rank 3&lt;/a&gt; on the site, where it received hundreds of upvotes and comments. The story also generated a lot of &lt;a href="https://twitter.com/search?q=hackerrank%20since%3A2022-04-19%20until%3A2022-04-20"&gt;buzz on Twitter&lt;/a&gt; at this time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tuesday, April 19, 6:40 PM&lt;/strong&gt;: Vivek Ravisankar, the CEO of HackerRank, &lt;a href="https://news.ycombinator.com/item?id=31091354"&gt;posted a public apology on the Hacker News thread&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-markdown"&gt;Hello, I'm Vivek, founder/CEO of HackerRank. Our intention with this initiative is to takedown plagiarized code snippets or solutions to company assessments. This was definitely an unintended consequence. We are looking into it ASAP and also going to do an RCA to ensure this doesn't happen again.
+
+Sorry, everyone!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tuesday, April 19, 8:26 PM&lt;/strong&gt;: Vivek posted a &lt;a href="https://news.ycombinator.com/item?id=31092085"&gt;followup comment on Hacker News&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-markdown"&gt;Hello again, Vivek, founder/CEO here. In the interest of moving swiftly, here are the actions we are going to take:
+(1) We have withdrawn the DMCA notice for sympy; Sent a note to senior leadership in Github to act on this quickly.
+
+(2) We have stopped the whole DMCA process for now and working on internal guidelines of what constitutes a real violation so that these kind of incidents don't happen. We are going to do this in-house
+
+(3) We are going to donate $25k to the sympy project.
+
+As a company we take a lot of pride in helping developers and it sucks to see this. I'm extremely sorry for what happened here.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;HackerRank did follow through with the $25k donation to SymPy.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Wednesday, April 20, 12:00 AM (approximately)&lt;/strong&gt;: The SymPy documentation website and the sympy/sympy_doc repository went back online.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Wednesday, April 20, 2022, 10:11 AM&lt;/strong&gt;: We received an email notice from GitHub that the DMCA claim against our repository has been retracted. The &lt;a href="https://github.com/github/dmca/blob/master/2022/04/2022-04-19-hackerrank-retraction.md"&gt;retraction is made available online&lt;/a&gt; on the github/dmca repository.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;My Views&lt;/h2&gt;
+&lt;p&gt;Now that I’ve stated the facts, let me take a moment to give my own thoughts on this whole thing. My belief is that the DMCA claim that was made against the SymPy repository was completely baseless and without merit. Not only is no part of the SymPy documentation, to my knowledge, taken illegally from HackerRank or any other copyrighted source, but the claim itself was completely unspecific about which parts of the documentation were supposedly infringing. This made it impossible for us to comply even if the complaint was legitimate. In addition, it is questionable whether the supposed parts of the documentation that were taken from HackerRank, the mathematical and code examples, are even copyrightable. While this may not have been an actively targeted attack against SymPy, as a community run open source project, it served as one in practice.&lt;/p&gt;
+&lt;p&gt;We have never learned any more about which parts of the SymPy documentation were supposedly infringing on HackerRank’s copyright, and I expect we never will. Some people online have speculated that HackerRank actually took examples from the SymPy documentation, not the other way around, but I do not know if this is the case or not. It seems likely, given the large number of other &lt;a href="https://github.com/github/dmca/search?q=worthit"&gt;takedown notices WorthIT has made to GitHub on HackerRank’s behalf&lt;/a&gt;, that they were using some sort of automated or semi-automated detection system, which somehow detected what it thought was infringing content on our website. I have personally never used the HackerRank platform, so I only know what sorts of things are on it from second-hand accounts.&lt;/p&gt;
+&lt;p&gt;Firstly let me say that if anyone or anything is to be blamed for this, my personal belief is that the blame should primarily lie on the DMCA law itself. While the “safe harbor” provisions of the law have been critical to the development of the modern internet, allowing social websites such as GitHub to exist without the burden of legal liability for user contributed content, other provisions are hostile to those same users, even those who are operating in a completely legal manner. The DMCA works in a “guilty until proven innocent” way, and the very operation of the takedown notice policy implicitly assumes that those making claims are not abusing the system as bad actors. It also incentivizes platforms such as GitHub to step aside and not take sides in claims, even claims such as this one, which refer to likely uncopyrightable material or are too unspecific to reasonably address even if they are legitimate.&lt;/p&gt;
+&lt;p&gt;The DMCA also has had further chilling effects due to its anti-circumvention provisions. The &lt;a href="https://www.eff.org/wp/unintended-consequences-16-years-under-dmca"&gt;EFF has written&lt;/a&gt; extensively about these. While something as radical as &lt;a href="https://en.wikipedia.org/wiki/Copyright_abolition"&gt;abolishing copyright&lt;/a&gt; may be considered to be practically untenable, I believe that laws like the DMCA can be rewritten so that they still serve their intended function of protecting copyright owners and providing “safe harbor” to websites like GitHub, while also protecting the rights of those accused of infringing copyright.&lt;/p&gt;
+&lt;p&gt;With that being said, I think some blame does need to lie on HackerRank and WorthIT Solutions for abusing the DMCA system and filing claims like this. They also lied in their claim when they said “the infringing website is not willing to remove our client's work.” At no point were we contacted by HackerRank or WorthIT Solutions about any copyright infringement. If we were, we would have been happy to work with them to determine whether any content in SymPy is infringing on copyright and remove it if it was. Even if it were the case that SymPy’s documentation infringed on HackerRank’s copyright, the immediate escalation to a DMCA takedown notice, which legally forced GitHub to completely disable the entire SymPy documentation, was completely inappropriate. Even submitting a counter notice is risky, because by doing so it increases the likelihood that the complaining party will bring an infringement lawsuit. Many DMCA’d repositories do not submit a counter notice for this reason, and we were only able to do so comfortably because we were able to do so via NumFOCUS. Had HackerRank not retracted the notice, we would have had to wait for our counter notice to take effect, meaning our docs website would have remained unavailable for 10-14 days. And had they instead taken down the main SymPy repository instead of the sympy_doc repo where the docs are hosted, this would have been a major disruption for our entire development workflow.&lt;/p&gt;
+&lt;p&gt;I do want to thank Vivek for quickly retracting the notice once this came to his attention, and I hope that he will be rethinking their DMCA policies at HackerRank, and for their donation to support SymPy and NumFOCUS.&lt;/p&gt;
+&lt;p&gt;Finally, while many have blamed GitHub, I believe that for the most part, they have acted as they are effectively required to by law. It is important to understand that any similar website based in the US would have likely treated this claim in a similar way. For instance, here is &lt;a href="https://about.gitlab.com/handbook/dmca/"&gt;GitLab’s DMCA policy&lt;/a&gt;, which you can see is very similar to GitHub’s. By all accounts, GitHub is an industry leader here, by posting all notices and counter notices &lt;a href="https://github.com/github/dmca"&gt;online&lt;/a&gt;, which they are not required to do, and by being very open about their DMCA policies (&lt;a href="https://docs.github.com/en/site-policy/content-removal-policies/dmca-takedown-policy"&gt;[1]&lt;/a&gt;, &lt;a href="https://docs.github.com/en/site-policy/content-removal-policies/guide-to-submitting-a-dmca-counter-notice"&gt;[2]&lt;/a&gt;, &lt;a href="https://docs.github.com/en/site-policy/content-removal-policies/guide-to-submitting-a-dmca-takedown-notice"&gt;[3]&lt;/a&gt;). With that being said, there are ways that GitHub’s processes could be improved here. The one business day that we were given to respond is actually standard in the industry, and ultimately comes from the “expeditiously” wording of the DMCA. But even so, if we were given more time than this, it would have made things much easier. It may have even been possible for us to reach out to HackerRank and resolve the situation before any actual takedown occurred. It also would be helpful if GitHub, while staying within the DMCA provisions, had a higher standard of legitimacy for takedown notices such as the one we received. As I have noted, the request we received was not nearly specific enough for us to effectively act on it, which should have been apparent to GitHub, since the only information WorthIT provided was a link to the HackerRank home page. Finally, I have two small technical requests from GitHub: first is to make &lt;a href="https://githubsupport.com/"&gt;githubsupport.com&lt;/a&gt; a real website so that support emails appear more legitimate, and second is to post DMCA notices to the DMCA repository right away rather than only after the repository is taken down, to make it clearer that the notices are in fact legitimate.&lt;/p&gt;
+&lt;p&gt;Open source communities such as SymPy are under-resourced and typically ill equipped to handle situations like these, which inherently puts them in an inferior position. This is despite the fact that open source software serves a global commons that benefits all. I have estimated that SymPy itself is used by hundreds of thousands of people, and the broader scientific Python ecosystem that it is part of is used by millions of people. Abuses of copyright law against these communities are harmful to society as a whole.&lt;/p&gt;
+&lt;h2&gt;Lessons Learned&lt;/h2&gt;
+&lt;p&gt;I’d like to end with a few lessons that I’ve learned from this whole process.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Take DMCA takedown notices seriously.&lt;/strong&gt; If you ever receive a DMCA takedown notice from GitHub or any other website, you need to take it seriously. The website is required by law to remove your content after they receive such a notice. You can submit a counter notice, but this increases the likelihood of being sued.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NumFOCUS fiscal sponsorship is invaluable.&lt;/strong&gt; Our NumFOCUS fiscal sponsorship was invaluable here. Thanks to NumFOCUS, we were able to immediately access high quality legal advice on how to proceed here. Had HackerRank not retracted their notice, or even, heaven forbid, decided to sue, we would have had significant assistance and support from NumFOCUS. If you are part of an open source project that doesn’t have fiscal sponsorship, I would recommend looking into NumFOCUS, or other similar organizations. And if you want to &lt;a href="https://numfocus.org/support"&gt;support NumFOCUS&lt;/a&gt;, I encourage you to do so.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Make backups of your online data.&lt;/strong&gt; While the source code of any GitHub repository is effectively backed up onto every computer that has a git clone. Other data such as issues and pull request comments are not. We were lucky that the DMCA notice was sent against our documentation repository instead of our main repository. If our main repository were taken down instead, we would have lost access to all GitHub issue and pull request history. I have been looking into effective ways to backup this data. If anyone has any suggestions here, please let me know in the comments.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I do feel that being on a site like GitHub is still preferable to something like self-hosting. If you self-host, you become responsible for a ton of things which GitHub does for you, like making sure everything stays online, handling servers, and managing spam. Also, self-hosting does not magically shield you from legal threats. If you self-host content that infringes on someone’s copyright, you are still legally liable for hosting that content.&lt;/p&gt;
+&lt;p&gt;Finally, I want to thank everyone who supported SymPy during this incident. Even if you just talked about this on social media or upvoted the Hacker News story, that helped us get this into the public eye, which led to a much faster resolution than we expected. I especially want to thank Leah Silen and Arliss Collins from NumFOCUS; Ondřej Čertík, Oscar Benjamin, and other SymPy community members; Pamela Chestek, the NumFOCUS legal counsel; and Travis Oliphant for the help they provided to us. Thank you to Thomas Dohmke, GitHub’s CEO, who we have reached out to privately, and who has promised to improve GitHub’s DMCA policies. I also want to thank Vivek Ravisankar from HackerRank for retracting the DMCA claim, and for the generous donation to SymPy.&lt;/p&gt;
+&lt;p&gt;Now that this incident is over, I’m hopeful we in the SymPy community can all go back to building software.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;If you wish to donate to support SymPy, you may do so &lt;a href="https://www.sympy.org/en/donate.html"&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
+
+</description><guid>https://asmeurer.com/blog/posts/the-sympy-hackerrank-dmca-incident/</guid><pubDate>Wed, 27 Apr 2022 20:00:00 GMT</pubDate></item><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
 &lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt;. Utterances is an open source comment
 system that is backed by GitHub issues. Basically, every post has a
 corresponding issue opened on GitHub, and the comments on the post are the
@@ -2609,764 +2695,4 @@ Of course, this whole thing works just fine if conda is run in Python
 &lt;/div&gt;&lt;/div&gt;
 &lt;/body&gt;&lt;/html&gt;
 
-</description><guid>https://asmeurer.com/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item><item><title>What happens when you mess with hashing in Python</title><link>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post is based off a Jupyter notebook I made in 2013. You can download
-the original &lt;a href="https://gist.github.com/asmeurer/6046766"&gt;here&lt;/a&gt;. That notebook
-was based off a
-&lt;a href="https://github.com/sympy/sympy/wiki/What-happens-when-you-mess-with-hashing"&gt;wiki page&lt;/a&gt;
-on the SymPy wiki, which in turn was based on
-&lt;a href="https://groups.google.com/forum/#%21msg/sympy/pJ2jg2csKgU/0nn21xqZEmwJ"&gt;a message&lt;/a&gt;
-to the SymPy mailing list.&lt;/em&gt;&lt;/p&gt;
-&lt;h2&gt;What is hashing?&lt;/h2&gt;
-&lt;p&gt;Before we start, let's have a brief introduction to hashing. A
-&lt;a href="https://en.wikipedia.org/wiki/Hash_function"&gt;&lt;em&gt;hash function&lt;/em&gt;&lt;/a&gt; is a function
-that maps a set of objects to a set of integers. There are many kinds of hash
-functions, which satisfy many different properties, but the most important
-property that must be satisfied by any hash function is that it be a function
-(in the mathematical sense), that is, if two objects are equal, then their
-hash should also be equal.&lt;/p&gt;
-&lt;p&gt;Usually, the set of integers that the hash function maps to is much smaller
-than the set of objects, so that there will be multiple objects that hash to
-the same value. However, generally for a hash function to be useful, the set
-of integers should be large enough, and the hash function well distributed
-enough that if two objects hash to the same value, then they are very likely
-to be equal.&lt;/p&gt;
-&lt;p&gt;To summarize, a hash function &lt;em&gt;must&lt;/em&gt; satisfy the property:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;If two objects are equal, then their hashes should be equal.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Additionally, a &lt;em&gt;good&lt;/em&gt; hash function should satisfy the property:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;If two objects have the same hash, then they are likely to be the same
-object.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Since there are generally more possible objects than hash values, two objects
-may hash to the same value. This is called a
-&lt;a href="https://en.wikipedia.org/wiki/Hash_collision"&gt;hash collision&lt;/a&gt;, and anything
-that deals with hashes should be able to deal with them.&lt;/p&gt;
-&lt;p&gt;This won't be discussed here, but an additional property that a good hash
-function should satisfy to be useful is this:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;The hash of an object should be cheap to compute.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;What is it used for?&lt;/h2&gt;
-&lt;p&gt;If we have a hash function that satisfies the above properties, then we can
-use it to create from a collection of objects something called a &lt;em&gt;hash table&lt;/em&gt;.
-Suppose we have a collection of objects, and given any object, we want to be
-able to compute very quickly if that object belongs to our collection. We
-could store these objects in an ordered array, but then to determine if it is
-in the array, we would have to search potentially through every element of the
-array (in other words, an $O(n)$) algorithm.&lt;/p&gt;
-&lt;p&gt;With hashing, we can do better. We create what is known as a
-&lt;a href="https://en.wikipedia.org/wiki/Hash_table"&gt;&lt;em&gt;hash table&lt;/em&gt;&lt;/a&gt;. Instead of storing
-the objects in an ordered array, we create an array of buckets, each
-corresponding to some hash values. We then hash each object, and store it into
-the array corresponding to its hash value (if there are more hash values than
-buckets, we distribute them using a second hash function, which can be as
-simple as taking the modulus with respect to the number of buckets, &lt;code&gt;% n&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;This image from
-&lt;a href="https://en.wikipedia.org/wiki/File:Hash_table_3_1_1_0_1_0_0_SP.svg"&gt;Wikipedia&lt;/a&gt;
-shows an example.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="img"&gt;&lt;/p&gt;
-&lt;p&gt;To determine if an object is in a hash table, we only have to hash the object,
-and look in the bucket corresponding to that hash. This is an $O(1)$
-algorithm, assuming we have a good hash function, because each bucket will
-generally hold very few objects, possibly even none.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note: there are some additional things that need to be done to handle hash
-collisions, but the basic idea is the same, and as long as there aren't too
-many hash collisions, which should happen if hash values are evenly
-distributed and the size of the hash table is large compared to the number of
-objects stored in it, the average time to determine if an object is in the
-hash table is still $O(1)$.&lt;/em&gt;&lt;/p&gt;
-&lt;h2&gt;Hashing in Python&lt;/h2&gt;
-&lt;p&gt;Python has a built in function that performs a hash called &lt;code&gt;hash()&lt;/code&gt;.  For many
-objects, the hash is not very surprising.  Note, the hashes you see below may
-not be the same ones you see if you run the examples, because Python hashing
-depends on the architecture of the machine you are running on, and, in newer
-versions of Python, hashes are randomized for security purposes.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(10)
-10
-&amp;gt;&amp;gt;&amp;gt; hash(()) # An empty tuple
-3527539
-&amp;gt;&amp;gt;&amp;gt; hash('a')
-12416037344
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In Python, not all objects are hashable. For example&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash([]) # An empty list
-Traceback (most recent call last):
-  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
-TypeError: unhashable type: 'list'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is because Python has an additional restriction on hashing:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;In order for an object to be hashable, it must be immutable.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This is important basically because we want the hash of an object to remain
-the same across the object's lifetime. But if we have a mutable object, then
-that object itself can change over its lifetime. But then according to our
-first bullet point above, that object's hash has to change too.&lt;/p&gt;
-&lt;p&gt;This restriction simplifies hash tables. If we allowed an object's hash to
-change while it is in a hash table, we would have to move it to a different
-bucket. Not only is this costly, but the hash table would have to &lt;em&gt;notice&lt;/em&gt;
-that this happened; the object itself doesn't know that it is sitting in a
-hash table, at least not in the Python implementation.&lt;/p&gt;
-&lt;p&gt;In Python, there are two objects that correspond to hash tables, &lt;code&gt;dict&lt;/code&gt; and
-&lt;code&gt;set&lt;/code&gt;. A &lt;code&gt;dict&lt;/code&gt; is a special kind of hash table called an
-&lt;a href="https://en.wikipedia.org/wiki/Associative_array"&gt;&lt;em&gt;associative array&lt;/em&gt;&lt;/a&gt;. An
-associative array is a hash table where each element of the hash table points
-to another object. The other object itself is not hashed.&lt;/p&gt;
-&lt;p&gt;Think of an associative array as a generalization of a regular array (like a
-&lt;code&gt;list&lt;/code&gt;). In a &lt;code&gt;list&lt;/code&gt;, objects are associated to nonnegative integer indices,
-like&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; l = ['a', 'b', 7]
-&amp;gt;&amp;gt;&amp;gt; l[0]
-'a'
-&amp;gt;&amp;gt;&amp;gt; l[2]
-7
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In an associative array (i.e., a &lt;code&gt;dict&lt;/code&gt;) we can index objects by anything, so
-long as the key is hashable.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; d = {0: 'a', 'hello': ['world']}
-&amp;gt;&amp;gt;&amp;gt; d[0]
-'a'
-&amp;gt;&amp;gt;&amp;gt; d['hello']
-['world']
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that only the keys need to be hashable. The values can be anything, even
-unhashable objects like lists.&lt;/p&gt;
-&lt;p&gt;The uses for associative arrays are boundless. &lt;code&gt;dict&lt;/code&gt; is one of the most
-useful data types in the Python language. Some example uses are&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Extension of &lt;code&gt;list&lt;/code&gt; with "missing values". For example, &lt;code&gt;{0: 'a', 2: 7}&lt;/code&gt;
-would correspond to the above list &lt;code&gt;l&lt;/code&gt; with the value &lt;code&gt;'b'&lt;/code&gt; corresponding to
-the key &lt;code&gt;1&lt;/code&gt; removed.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Representation of a mathematical function with a finite domain.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;A poor-man's database (the Wikipedia image above is an associative array
-mapping names to telephone numbers).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Implementing a &lt;a href="https://stackoverflow.com/q/60208/161801"&gt;Pythonic version&lt;/a&gt;
-of the switch-case statement.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The other type of hash table, &lt;code&gt;set&lt;/code&gt;, more closely matches the definition I
-gave above for a hash table. A &lt;code&gt;set&lt;/code&gt; is just a container of hashable
-objects. &lt;code&gt;set&lt;/code&gt;s are unordered, and can only contain one of each object (this
-is why they are called "sets," because this matches the mathematical
-definition of a &lt;a href="https://en.wikipedia.org/wiki/Set_(mathematics)"&gt;set&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;In Python 2.7 or later, you can create a set with &lt;code&gt;{&lt;/code&gt; and &lt;code&gt;}&lt;/code&gt;, like &lt;code&gt;{a, b, c}&lt;/code&gt;. Otherwise, use &lt;code&gt;set([a, b, c])&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; s = {0, (), '2'}
-&amp;gt;&amp;gt;&amp;gt; s
-{0, '2', ()}
-&amp;gt;&amp;gt;&amp;gt; s.add(1)
-&amp;gt;&amp;gt;&amp;gt; s
-{0, 1, '2', ()}
-&amp;gt;&amp;gt;&amp;gt; s.add(0)
-&amp;gt;&amp;gt;&amp;gt; s
-{0, 1, '2', ()}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A final note: &lt;code&gt;set&lt;/code&gt; and &lt;code&gt;dict&lt;/code&gt; are themselves mutable, and hence not hashable!
-There is an immutable version of &lt;code&gt;set&lt;/code&gt; called &lt;code&gt;frozenset&lt;/code&gt;. There are no
-immutable dictionaries.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; f = frozenset([0, (), '2'])
-&amp;gt;&amp;gt;&amp;gt; f
-frozenset({0, '2', ()})
-&amp;gt;&amp;gt;&amp;gt; hash(f)
--7776452922777075760
-&amp;gt;&amp;gt;&amp;gt; # A frozenset, unlike a set, can be used as a dictionary key
-&amp;gt;&amp;gt;&amp;gt; d[f] = 'a set'
-&amp;gt;&amp;gt;&amp;gt; d
-{0: 'a', frozenset({0, '2', ()}): 'a set', 'hello': ['world']}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Creating your own hashable objects&lt;/h2&gt;
-&lt;p&gt;Before we move on, there is one final thing we need to know about hashing in
-Python, which is how to create hashes for custom objects. By default, if we
-create an object, it will be hashable.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class Nothing(object):
-...     pass
-...
-&amp;gt;&amp;gt;&amp;gt; N = Nothing()
-&amp;gt;&amp;gt;&amp;gt; hash(N)
-270498113
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Implementation-wise, the hash is &lt;a href="https://stackoverflow.com/a/33572401/161801"&gt;based
-on&lt;/a&gt; object's &lt;code&gt;id&lt;/code&gt;, which
-corresponds to its position in memory. This satisfies the above conditions: it
-is (extremely) cheap to compute, and since by default objects in Python
-compare unequal to one another, objects with different hashes will be unequal.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; M = Nothing()
-&amp;gt;&amp;gt;&amp;gt; M == N
-False
-&amp;gt;&amp;gt;&amp;gt; hash(M)
-270498117
-&amp;gt;&amp;gt;&amp;gt; hash(M) == hash(N)
-False
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To define a hash function for an object, define the &lt;code&gt;__hash__&lt;/code&gt; method.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class HashToOne(object):
-...     def __hash__(self):
-...         return 1
-...
-&amp;gt;&amp;gt;&amp;gt; HTO = HashToOne()
-&amp;gt;&amp;gt;&amp;gt; hash(HTO)
-1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To set an object as not hashable, set &lt;code&gt;__hash__&lt;/code&gt; to &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class NotHashable(object):
-...     __hash__ = None
-...
-&amp;gt;&amp;gt;&amp;gt; NH = NotHashable()
-&amp;gt;&amp;gt;&amp;gt; hash(NH)
-Traceback (most recent call last):
-  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
-TypeError: unhashable type: 'NotHashable'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Finally, to override the equality operator &lt;code&gt;==&lt;/code&gt;, define &lt;code&gt;__eq__&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class AlwaysEqual(object):
-...     def __eq__(self, other):
-...         if isinstance(other, AlwaysEqual):
-...             return True
-...         return False
-...
-&amp;gt;&amp;gt;&amp;gt; AE1 = AlwaysEqual()
-&amp;gt;&amp;gt;&amp;gt; AE2 = AlwaysEqual()
-&amp;gt;&amp;gt;&amp;gt; AE1 == AE2
-True
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;One of the key points that I hope you will take away from this post is that if
-you override &lt;code&gt;__eq__&lt;/code&gt; and you want a hashable object, you &lt;strong&gt;must&lt;/strong&gt; also
-override &lt;code&gt;__hash__&lt;/code&gt; to agree. Note that Python 3 will actually require this:
-in Python 3, if you override &lt;code&gt;__eq__&lt;/code&gt;, it automatically sets &lt;code&gt;__hash__&lt;/code&gt; to
-&lt;code&gt;None&lt;/code&gt;, making the object unhashable. You need to manually override &lt;code&gt;__hash__&lt;/code&gt;
-to make it hashable again. But that's as far as Python goes in enforcing these
-rules, as we will see below. In particular, Python will never actually check
-that your &lt;code&gt;__hash__&lt;/code&gt; actually agrees with your &lt;code&gt;__eq__&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Messing with hashing&lt;/h2&gt;
-&lt;p&gt;Now to the fun stuff. What happens if we break some of the invariants that
-Python expects of hashing. Python expects two key invariants to hold&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;The hash of an object does not change across the object's lifetime (in
-other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
-hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;As we shall see, Python expects, but does not enforce either of these.&lt;/p&gt;
-&lt;h3&gt;Example 1: Mutating a hash&lt;/h3&gt;
-&lt;p&gt;Let's break rule 1 first. Let's create an object with a hash, and then change
-that object's hash over its lifetime, and see what sorts of things can happen.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class Bad(object):
-...     def __init__(self, hash): # The object's hash will be hash
-...         self.hash = hash
-...     def __hash__(self):
-...         return self.hash
-...
-&amp;gt;&amp;gt;&amp;gt; b = Bad(1)
-&amp;gt;&amp;gt;&amp;gt; hash(b)
-1
-&amp;gt;&amp;gt;&amp;gt; d = {b:42}
-&amp;gt;&amp;gt;&amp;gt; d[b]
-42
-&amp;gt;&amp;gt;&amp;gt; b.hash = 2
-&amp;gt;&amp;gt;&amp;gt; hash(b)
-2
-&amp;gt;&amp;gt;&amp;gt; d[b]
-Traceback (most recent call last):
-  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
-KeyError: &amp;lt;__main__.Bad object at 0x1047e7438&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here, we implicitly changed the hash of &lt;code&gt;b&lt;/code&gt; by mutating the attribute of &lt;code&gt;b&lt;/code&gt;
-that is used to compute the hash. As a result, the object is no longer found
-in a dictionary, which uses the hash to find the object.&lt;/p&gt;
-&lt;p&gt;The object is still there, we just can't access it any more.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; d
-{&amp;lt;__main__.Bad object at 0x1047e7438&amp;gt;: 42}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that Python doesn't prevent me from doing this. We could make it if we
-want (e.g., by making &lt;code&gt;__setattr__&lt;/code&gt; raise &lt;code&gt;AttributeError&lt;/code&gt;), but even then we
-could forcibly change it by modifying the object's &lt;code&gt;__dict__&lt;/code&gt;. We could try
-some more fancy things using descriptors, metaclasses, and/or
-&lt;code&gt;__getattribute__&lt;/code&gt;, but even then, if we knew what was happening, we could
-probably find a way to change it.&lt;/p&gt;
-&lt;p&gt;This is what is meant when people say that Python is a "consenting adults"
-language. You are expected to not try to break things, but generally aren't
-prevented from doing so if you try.&lt;/p&gt;
-&lt;h3&gt;Example 2: More mutation&lt;/h3&gt;
-&lt;p&gt;Let's try something even more crazy. Let's make an object that hashes to a
-different value each time we look at the hash.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class DifferentHash(object):
-...     def __init__(self):
-...         self.hashcounter = 0
-...     def __hash__(self):
-...         self.hashcounter += 1
-...         return self.hashcounter
-...
-&amp;gt;&amp;gt;&amp;gt; DH = DifferentHash()
-&amp;gt;&amp;gt;&amp;gt; hash(DH)
-1
-&amp;gt;&amp;gt;&amp;gt; hash(DH)
-2
-&amp;gt;&amp;gt;&amp;gt; hash(DH)
-3
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Obviously, if we use &lt;code&gt;DH&lt;/code&gt; as a key to a dictionary, then it will not work,
-because we will run into the same issue we had with &lt;code&gt;Bad&lt;/code&gt;. But what about
-putting &lt;code&gt;DH&lt;/code&gt; in a &lt;code&gt;set&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; DHset = {DH, DH, DH}
-&amp;gt;&amp;gt;&amp;gt; DHset
-{&amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
- &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
- &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Woah! We put the exact same object in a &lt;code&gt;set&lt;/code&gt; three times, and it appeared all
-three times. This is not what is supposed to happen with a set.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; {1, 1, 1}
-{1}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What happens when we do stuff with &lt;code&gt;DHset&lt;/code&gt;?&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; DHset.remove(DH)
-Traceback (most recent call last):
-  File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
-KeyError: &amp;lt;__main__.DifferentHash object at 0x1047e75f8&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That didn't work, because &lt;code&gt;set.remove&lt;/code&gt; searches for an object by its hash,
-which is different by this point.&lt;/p&gt;
-&lt;p&gt;Now let's make a copy of &lt;code&gt;DHset&lt;/code&gt;. The &lt;code&gt;set.copy&lt;/code&gt; method will create a shallow
-copy (meaning that the set container itself will be different, according to
-&lt;code&gt;is&lt;/code&gt; comparison, but the objects themselves will the same, according to &lt;code&gt;is&lt;/code&gt;
-comparison).&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; DHset2 = DHset.copy()
-&amp;gt;&amp;gt;&amp;gt; DHset2 == DHset
-True
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Everything is fine so far. This object is only going to cause trouble if
-something recomputes its hash. But remember that the whole reason that we had
-trouble with something like &lt;code&gt;Bad&lt;/code&gt; above is that Python &lt;em&gt;doesn't&lt;/em&gt; recompute
-that hash of an object, unless it has to. So let's do something that will
-force it to do so: let's pop an object from one of the sets and add it back
-in.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; D = DHset.pop()
-&amp;gt;&amp;gt;&amp;gt; DHset.add(D)
-&amp;gt;&amp;gt;&amp;gt; DHset
-{&amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
- &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
- &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;}
-&amp;gt;&amp;gt;&amp;gt; DHset2
-{&amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
- &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;,
- &amp;lt;__main__.DifferentHash at 0x101f79f50&amp;gt;}
-&amp;gt;&amp;gt;&amp;gt; DHset == DHset2
-False
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There we go. By removing it from the set, we made the set forget about its
-hash, so it had to be recomputed when we added it again. This version of
-&lt;code&gt;DHset&lt;/code&gt; now has a &lt;code&gt;DH&lt;/code&gt; with a different hash than it had before. Thinking back
-to &lt;code&gt;set&lt;/code&gt; being a hash table, in this &lt;code&gt;DHset&lt;/code&gt;, the three &lt;code&gt;DH&lt;/code&gt; objects are in
-different "buckets" than they were in before. &lt;code&gt;DHset.__eq__(DHset2)&lt;/code&gt; notices
-that the bucket structure is different right away and returns &lt;code&gt;False&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;By the way, what hash value are we up to these days?&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(DH)
-9
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;Example 3: When &lt;code&gt;a == b&lt;/code&gt; does not imply &lt;code&gt;hash(a) == hash(b)&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Now let's look at point 2. What happens if we create an object with &lt;code&gt;__eq__&lt;/code&gt;
-that disagrees with &lt;code&gt;__hash__&lt;/code&gt;. For Python 2, we already have made a class like
-this, the &lt;code&gt;AlwaysEqual&lt;/code&gt; object above. Instances of &lt;code&gt;AlwaysEqual&lt;/code&gt; will always
-compare equal to one another, but they will not have the same hash, because
-they will use &lt;code&gt;object&lt;/code&gt;'s default &lt;code&gt;__hash__&lt;/code&gt; of &lt;code&gt;id&lt;/code&gt;. For Python 3, however,
-&lt;code&gt;AlwaysEqual&lt;/code&gt; is automatically set as unhashable because we overrode &lt;code&gt;__eq__&lt;/code&gt;
-without also overriding &lt;code&gt;__hash__&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This blog post originally used the &lt;code&gt;AE1&lt;/code&gt; and &lt;code&gt;AE2&lt;/code&gt; objects we created above
-for the next example, but to make it work in both Python 2 and 3, let's create
-a custom &lt;code&gt;AlwaysEqual&lt;/code&gt; subclass that is hashable.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-python"&gt;&amp;gt;&amp;gt;&amp;gt; class AlwaysEqualHashable(AlwaysEqual):
-...     def __hash__(self):
-...         return id(self)
-...
-&amp;gt;&amp;gt;&amp;gt; AE1 = AlwaysEqualHashable()
-&amp;gt;&amp;gt;&amp;gt; AE2 = AlwaysEqualHashable()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(AE1)
-270498221
-&amp;gt;&amp;gt;&amp;gt; hash(AE2)
-270498197
-&amp;gt;&amp;gt;&amp;gt; hash(AE1) == hash(AE2)
-False
-&amp;gt;&amp;gt;&amp;gt; AE1 == AE2
-True
-&amp;gt;&amp;gt;&amp;gt; {AE1, AE2}
-{&amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;,
- &amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can already see that we have broken one of the key properties of a &lt;code&gt;set&lt;/code&gt;,
-which is that it does not contain the same object twice (remember that &lt;code&gt;AE1&lt;/code&gt;
-and &lt;code&gt;AE2&lt;/code&gt; should be considered the "same object" because &lt;code&gt;AE1 == AE2&lt;/code&gt; is
-&lt;code&gt;True&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;This can lead to subtle issues. For example, suppose we had a list and we
-wanted to remove all the duplicate items from it. An easy way to do this is to
-convert the list to a set and then convert it back to a list.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; l = ['a', 'a', 'c', 'a', 'c', 'b']
-&amp;gt;&amp;gt;&amp;gt; list(set(l))
-['a', 'b', 'c']
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, this method is obviously not going to work for a list of &lt;code&gt;AlwaysEqualHashable&lt;/code&gt; objects.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; AE3 = AlwaysEqualHashable()
-&amp;gt;&amp;gt;&amp;gt; l = [AE1, AE1, AE3, AE2, AE3]
-&amp;gt;&amp;gt;&amp;gt; list(set(l))
-[&amp;lt;__main__.AlwaysEqualHashable at 0x102c1d590&amp;gt;,
- &amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;,
- &amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Actually, what happened here is that the equality that we defined on
-&lt;code&gt;AlwaysEqual&lt;/code&gt; was essentially ignored. We got a list of unique items by &lt;code&gt;id&lt;/code&gt;,
-instead of by &lt;code&gt;__eq__&lt;/code&gt;. You can imagine that if &lt;code&gt;__eq__&lt;/code&gt; were something a
-little less trivial, where some, but not all, objects are considered equal,
-that this could lead to very subtle issues.&lt;/p&gt;
-&lt;p&gt;But there is an issue with the above algorithm. It isn't stable, that is, it
-removes the ordering that we had on the list. We could do this better by
-making a new list, and looping through the old one, adding elements to the new
-list if they aren't already there.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def uniq(l):
-...     newl = []
-...     for i in l:
-...         if i not in newl:
-...             newl.append(i)
-...     return newl
-...
-&amp;gt;&amp;gt;&amp;gt; uniq(['a', 'a', 'c', 'a', 'c', 'b'])
-['a', 'c', 'b']
-&amp;gt;&amp;gt;&amp;gt; uniq([AE1, AE1, AE3, AE2, AE3])
-[&amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This time, we used &lt;code&gt;in&lt;/code&gt;, which uses &lt;code&gt;==&lt;/code&gt;, so we got only one unique element of
-the list of &lt;code&gt;AlwaysEqual&lt;/code&gt; objects.&lt;/p&gt;
-&lt;p&gt;But there is an issue with this algorithm as well. Checking if something is in
-a list is $O(n)$, but we have an object that allows checking in $O(1)$
-time, namely, a &lt;code&gt;set&lt;/code&gt;. So a more efficient version might be to create a set
-alongside the new list for containment checking purposes.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; def uniq2(l):
-...     newl = []
-...     newlset = set()
-...     for i in l:
-...         if i not in newlset:
-...             newl.append(i)
-...             newlset.add(i)
-...     return newl
-...
-&amp;gt;&amp;gt;&amp;gt; uniq2(['a', 'a', 'c', 'a', 'c', 'b'])
-['a', 'c', 'b']
-&amp;gt;&amp;gt;&amp;gt; uniq2([AE1, AE1, AE3, AE2, AE3])
-[&amp;lt;__main__.AlwaysEqualHashable at 0x101f79ad0&amp;gt;,
- &amp;lt;__main__.AlwaysEqualHashable at 0x102c1d590&amp;gt;,
- &amp;lt;__main__.AlwaysEqualHashable at 0x101f79950&amp;gt;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Bah! Since we used a set, we compared by hashing, not equality, so we are left
-with three objects again. Notice the extremely subtle difference
-here. Basically, it is this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; AE1 in {AE2}
-False
-&amp;gt;&amp;gt;&amp;gt; AE1 in [AE2]
-True
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Set containment uses hashing; list containment uses equality. If the two don't
-agree, then the result of your algorithm will depend on which one you use!&lt;/p&gt;
-&lt;p&gt;By the way, as you might expect, dictionary containment also uses hashing, and
-tuple containment uses equality:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; AE1 in {AE2: 42}
-False
-&amp;gt;&amp;gt;&amp;gt; AE1 in (AE2,)
-True
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;Example 4: Caching hashing&lt;/h3&gt;
-&lt;p&gt;If you ever want to add subtle bizarreness to a system, add some sort of
-caching, and then do it wrong.&lt;/p&gt;
-&lt;p&gt;As we noted in the beginning, one important property of a hash function is
-that it is quick to compute. A nice way to achieve this for heavily cached
-objects is to cache the value of the cache on the object, so that it only
-needs to be computed once. The pattern (which is modeled after SymPy's
-&lt;code&gt;Basic&lt;/code&gt;) is something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; class HashCache(object):
-...     def __init__(self, arg):
-...         self.arg = arg
-...         self.hash_cache = None
-...     def __hash__(self):
-...         if self.hash_cache is None:
-...             self.hash_cache = hash(self.arg)
-...         return self.hash_cache
-...     def __eq__(self, other):
-...         if not isinstance(other, HashCache):
-...             return False
-...         return self.arg == other.arg
-...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;HashCache&lt;/code&gt; is nothing more than a small wrapper around a hashable argument,
-which caches its hash.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash('a')
-12416037344
-&amp;gt;&amp;gt;&amp;gt; a = HashCache('a')
-&amp;gt;&amp;gt;&amp;gt; hash(a)
-12416037344
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For ordinary Python builtins, simply recomputing the hash will be faster than
-the attribute lookup used by &lt;code&gt;HashCache&lt;/code&gt;. &lt;em&gt;Note: This uses the &lt;code&gt;%timeit&lt;/code&gt; magic
-from IPython. &lt;code&gt;%timeit&lt;/code&gt; only works when run in IPython or Jupyter.&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; %timeit hash('a')
-10000000 loops, best of 3: 69.9 ns per loop
-&amp;gt;&amp;gt;&amp;gt; %timeit hash(a)
-1000000 loops, best of 3: 328 ns per loop
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But for a custom object, computing the hash may be more computationally
-expensive. As hashing is supposed to agree with equality (as I hope you've
-realized by now!), if computing equality is expensive, computing a hash
-function that agrees with it might be expensive as well.&lt;/p&gt;
-&lt;p&gt;As a simple example of where this might be useful, consider a highly nested
-tuple, an object whose hash that is relatively expensive to compute.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = ()
-&amp;gt;&amp;gt;&amp;gt; for i in range(1000):
-...     a = (a,)
-...
-&amp;gt;&amp;gt;&amp;gt; A = HashCache(a)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; %timeit hash(a)
-100000 loops, best of 3: 9.61 µs per loop
-&amp;gt;&amp;gt;&amp;gt; %timeit hash(A)
-1000000 loops, best of 3: 325 ns per loop
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So far, we haven't done anything wrong. &lt;code&gt;HashCache&lt;/code&gt;, as you may have noticed,
-has &lt;code&gt;__eq__&lt;/code&gt; defined correctly:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; HashCache(1) == HashCache(2)
-False
-&amp;gt;&amp;gt;&amp;gt; HashCache(1) == HashCache(1)
-True
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But what happens if we mutate a &lt;code&gt;HashCache&lt;/code&gt;. This is different from examples 1
-and 2 above, because we will be mutating what happens with equality testing,
-but not the hash (because of the cache).&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;In the below example, recall that small integers hash to themselves, so
-&lt;code&gt;hash(1) == 1&lt;/code&gt; and &lt;code&gt;hash(2) == 2&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
-&amp;gt;&amp;gt;&amp;gt; d = {a: 42}
-&amp;gt;&amp;gt;&amp;gt; a.arg = 2
-&amp;gt;&amp;gt;&amp;gt; hash(a)
-1
-&amp;gt;&amp;gt;&amp;gt; d[a]
-42
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Because we cached the hash of &lt;code&gt;a&lt;/code&gt;, which was computed as soon as we created
-the dictionary &lt;code&gt;d&lt;/code&gt;, it remained unchanged when modified the arg to be
-&lt;code&gt;2&lt;/code&gt;. Thus, we can still find the key of the dictionary. But since we have
-mutated &lt;code&gt;a&lt;/code&gt;, the equality testing on it has changed. This means that, as with
-the previous example, we are going to have issues with dicts and sets keeping
-unique keys and entries (respectively).&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
-&amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
-&amp;gt;&amp;gt;&amp;gt; hash(a)
-1
-&amp;gt;&amp;gt;&amp;gt; hash(b)
-2
-&amp;gt;&amp;gt;&amp;gt; b.arg = 1
-&amp;gt;&amp;gt;&amp;gt; a == b
-True
-&amp;gt;&amp;gt;&amp;gt; hash(a) == hash(b)
-False
-&amp;gt;&amp;gt;&amp;gt; {a, b}
-{&amp;lt;__main__.HashCache at 0x102c32050&amp;gt;, &amp;lt;__main__.HashCache at 0x102c32450&amp;gt;}
-&amp;gt;&amp;gt;&amp;gt; uniq([a, b])
-[&amp;lt;__main__.HashCache at 0x102c32050&amp;gt;]
-&amp;gt;&amp;gt;&amp;gt; uniq2([a, b])
-[&amp;lt;__main__.HashCache at 0x102c32050&amp;gt;, &amp;lt;__main__.HashCache at 0x102c32450&amp;gt;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once we mutate &lt;code&gt;b&lt;/code&gt; so that it compares equal to &lt;code&gt;a&lt;/code&gt;, we start to have the same sort of issues that we had in example 3 with &lt;code&gt;AlwaysEqualHashable&lt;/code&gt;. Let's look at an instant replay.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
-&amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
-&amp;gt;&amp;gt;&amp;gt; b.arg = 1
-&amp;gt;&amp;gt;&amp;gt; print(a == b)
-True
-&amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
-True
-&amp;gt;&amp;gt;&amp;gt; print({a, b})
-{&amp;lt;__main__.HashCache object at 0x102c32a10&amp;gt;}
-&amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
-[&amp;lt;__main__.HashCache object at 0x102c32a50&amp;gt;]
-&amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))
-[&amp;lt;__main__.HashCache object at 0x102c32a50&amp;gt;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Wait a minute, this time it's different! Comparing it to above, it's pretty
-easy to see what was different this time. We left out the part where we showed
-the hash of &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt;. When we did that the first time, it cached the hash
-of &lt;code&gt;b&lt;/code&gt;, making it forever be &lt;code&gt;2&lt;/code&gt;, but when we didn't do it the second time,
-the hash had not been cached yet, so the first time it is computed (in the
-&lt;code&gt;print(hash(a) == hash(b))&lt;/code&gt; line), &lt;code&gt;b.arg&lt;/code&gt; has already been changed to &lt;code&gt;1&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;And herein lies the extreme subtlety: if you mutate an object with that hashes
-its cache like this, you will run into issues &lt;strong&gt;only if&lt;/strong&gt; you had already
-called some function that hashed the object somewhere. Now just about anything
-might compute the hash of an object. Or it might not. For example, our &lt;code&gt;uniq2&lt;/code&gt;
-function computes the hash of the objects in its input list, because it stores
-them in a set, but &lt;code&gt;uniq&lt;/code&gt; does not:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
-&amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
-&amp;gt;&amp;gt;&amp;gt; uniq2([a, b])
-&amp;gt;&amp;gt;&amp;gt; b.arg = 1
-&amp;gt;&amp;gt;&amp;gt; print(a == b)
-True
-&amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
-False
-&amp;gt;&amp;gt;&amp;gt; print({a, b})
-{&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;, &amp;lt;__main__.HashCache object at 0x102c32c10&amp;gt;}
-&amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
-[&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;]
-&amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))
-[&amp;lt;__main__.HashCache object at 0x102c32c50&amp;gt;, &amp;lt;__main__.HashCache object at 0x102c32c10&amp;gt;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashCache(1)
-&amp;gt;&amp;gt;&amp;gt; b = HashCache(2)
-&amp;gt;&amp;gt;&amp;gt; uniq([a, b])
-&amp;gt;&amp;gt;&amp;gt; b.arg = 1
-&amp;gt;&amp;gt;&amp;gt; print(a == b)
-True
-&amp;gt;&amp;gt;&amp;gt; print(hash(a) == hash(b))
-True
-&amp;gt;&amp;gt;&amp;gt; print({a, b})
-{&amp;lt;__main__.HashCache object at 0x102c32c90&amp;gt;}
-&amp;gt;&amp;gt;&amp;gt; print(uniq([a, b]))
-[&amp;lt;__main__.HashCache object at 0x102c32bd0&amp;gt;]
-&amp;gt;&amp;gt;&amp;gt; print(uniq2([a, b]))
-[&amp;lt;__main__.HashCache object at 0x102c32bd0&amp;gt;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The moral of this final example is that if you are going to cache something,
-that something had better be immutable.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;The conclusion is this: don't mess with hashing. The two invariants above are
-important. Let's restate them here,&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;The hash of an object must not change across the object's lifetime (in
-other words, a hashable object should be immutable).&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;a == b&lt;/code&gt; implies &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; (note that the reverse might not
-hold in the case of a hash collision).&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;If you don't follow these rules, you will run into very subtle issues, because
-very basic Python operations expect these invariants.&lt;/p&gt;
-&lt;p&gt;If you want to be able to mutate an object's properties, you have two
-options. First, make the object unhashable (set &lt;code&gt;__hash__ = None&lt;/code&gt;). You won't
-be able to use it in sets or as keys to a dictionary, but you will be free to
-change the object in-place however you want.&lt;/p&gt;
-&lt;p&gt;A second option is to make all mutable properties non-dependent on hashing or
-equality testing. This option works well if you just want to cache some
-internal state that doesn't inherently change the object. Both &lt;code&gt;__eq__&lt;/code&gt; and
-&lt;code&gt;__hash__&lt;/code&gt; should remain unchanged by changes to this state. You may also want
-to make sure you use proper getters and setters to prevent modification of
-internal state that equality testing and hashing does depend on.&lt;/p&gt;
-&lt;p&gt;If you choose this second option, however, be aware that Python considers it
-fair game to swap out two identical immutable (i.e., hashable) objects at any
-time. If &lt;code&gt;a == b&lt;/code&gt; and &lt;code&gt;a&lt;/code&gt; is hashable, Python (and Python libraries) are free
-to replace &lt;code&gt;a&lt;/code&gt; with &lt;code&gt;b&lt;/code&gt; anywhere. For example, Python uses an optimization on
-strings called &lt;em&gt;interning&lt;/em&gt;, where common strings are stored only once in
-memory. A similar optimization is used in CPython for small integers. If store
-something on &lt;code&gt;a&lt;/code&gt; but not &lt;code&gt;b&lt;/code&gt; and make &lt;code&gt;a&lt;/code&gt;'s hash ignore that data, you may
-find that some function that should return &lt;code&gt;a&lt;/code&gt; may actually return &lt;code&gt;b&lt;/code&gt;. For
-this reason, I generally don't recommend this second option unless you know
-what you are doing.&lt;/p&gt;
-&lt;p&gt;Finally, to keep invariant 2, here are some tips:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Make sure that the parts of the object that you use to compare equality are
-not themselves mutable. If they are, then your object cannot itself be
-immutable. This means that if &lt;code&gt;a == b&lt;/code&gt; depends on &lt;code&gt;a.attr == b.attr&lt;/code&gt;, and
-&lt;code&gt;a.attr&lt;/code&gt; is a list, then you will need to use a tuple instead (if you want
-&lt;code&gt;a&lt;/code&gt; to be hashable).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;You don't have to invent a hash function. If you find yourself doing
-bitshifts and XORs, you're doing it wrong. Reuse Python's builtin hashable
-objects. If the hash of your object should depend on the hash of &lt;code&gt;a&lt;/code&gt; and
-&lt;code&gt;b&lt;/code&gt;, define &lt;code&gt;__hash__&lt;/code&gt; to return &lt;code&gt;hash((a, b))&lt;/code&gt;. If the order of &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt;
-does not matter, use &lt;code&gt;hash(frozenset([a, b]))&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Don't cache something unless you know that the entire cached state will not
-be changed over the lifetime of the cache. Hashable objects are actually
-great for caches. If they properly satisfy invariant 1, and all the state
-that should be cached is part of the hash, then you will not need to
-worry. And the best part is that you can just use &lt;code&gt;dict&lt;/code&gt; for your cache.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Unless you really need the performance or memory gains, don't make your
-objects mutable. This makes programs much harder to reason about. Some
-functional programming languages take this idea so far that they don't allow
-any mutable objects.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Don't worry about the situation where &lt;code&gt;hash(a) == hash(b)&lt;/code&gt; but &lt;code&gt;a != b&lt;/code&gt;. This is a hash collision. Unlike the issues we looked at here, hash
-collisions are expected and checked for in Python. For example, our
-&lt;code&gt;HashToOne&lt;/code&gt; object from the beginning will always hash to 1, but different
-instances will compare unequal. We can see that the right thing is done in
-every case with them.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; a = HashToOne()
-&amp;gt;&amp;gt;&amp;gt; b = HashToOne()
-&amp;gt;&amp;gt;&amp;gt; a == b
-False
-&amp;gt;&amp;gt;&amp;gt; hash(a) == hash(b)
-True
-&amp;gt;&amp;gt;&amp;gt; {a, b}
-{&amp;lt;__main__.HashToOne at 0x102c32a10&amp;gt;, &amp;lt;__main__.HashToOne at 0x102c32cd0&amp;gt;}
-&amp;gt;&amp;gt;&amp;gt; uniq([a, b])
-[&amp;lt;__main__.HashToOne at 0x102c32cd0&amp;gt;, &amp;lt;__main__.HashToOne at 0x102c32a10&amp;gt;]
-&amp;gt;&amp;gt;&amp;gt; uniq2([a, b])
-[&amp;lt;__main__.HashToOne at 0x102c32cd0&amp;gt;, &amp;lt;__main__.HashToOne at 0x102c32a10&amp;gt;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The only concern with hash collisions is that too many of them can remove
-the performance gains of &lt;code&gt;dict&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Conversely, if you are writing something that uses an object's hash, remember
-that hash collisions are possible and unavoidable.&lt;/p&gt;
-&lt;p&gt;A classic example of a hash collision is &lt;code&gt;-1&lt;/code&gt; and &lt;code&gt;-2&lt;/code&gt;. Remember I
-mentioned above that small integers hash to themselves:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(1)
-1
-&amp;gt;&amp;gt;&amp;gt; hash(-3)
--3
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The exception to this is &lt;code&gt;-1&lt;/code&gt;. The CPython interpreter uses &lt;code&gt;-1&lt;/code&gt; as an error
-state, so -1 is not a valid hash value. Hence, &lt;code&gt;hash(-1)&lt;/code&gt; can't be &lt;code&gt;-1&lt;/code&gt;. So
-the Python developers picked the next closest thing.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; hash(-1)
--2
-&amp;gt;&amp;gt;&amp;gt; hash(-2)
--2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you want to check if something handles hash collisions correctly, this is
-a simple example.  I should also note that the fact that integers hash to
-themselves is an implementation detail of CPython that may not be true in
-alternate Python implementations.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Finally, we didn't discuss this much here, but don't assume that the hash of
-your object will be the same across Python sessions. In Python 3.3 and up,
-hash values of strings are randomized from a value that is seeded when
-Python starts up. This also affects any object whose hash is computed
-from the hash of strings. In Python 2.7, you can enable hash randomization
-with the &lt;code&gt;-R&lt;/code&gt; flag to the interpreter. The following are two different
-Python sessions.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; print(hash('a'))
--7750608935454338104
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class="language-py"&gt;&amp;gt;&amp;gt;&amp;gt; print(hash('a'))
-8897161376854729812
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/what-happens-when-you-mess-with-hashing-in-python/</guid><pubDate>Tue, 26 Jan 2016 04:13:53 GMT</pubDate></item></channel></rss>
+</description><guid>https://asmeurer.com/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item></channel></rss>
