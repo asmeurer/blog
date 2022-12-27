@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 27 Apr 2022 21:46:28 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The SymPy/HackerRank DMCA Incident</title><link>https://asmeurer.com/blog/posts/the-sympy-hackerrank-dmca-incident/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Thank you to Ondřej Čertík, Oscar Benjamin, Travis Oliphant, and Pamela Chestek for reviewing this blog post. Any errors in the post are my own.&lt;/em&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Meurer's Blog</title><link>https://asmeurer.com/blog/</link><description>My blog</description><atom:link href="https://asmeurer.com/blog/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Tue, 27 Dec 2022 22:23:59 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The SymPy/HackerRank DMCA Incident</title><link>https://asmeurer.com/blog/posts/the-sympy-hackerrank-dmca-incident/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;&lt;em&gt;Thank you to Ondřej Čertík, Oscar Benjamin, Travis Oliphant, and Pamela Chestek for reviewing this blog post. Any errors in the post are my own.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;On April 19, 2022, for approximately 11.5 hours, the &lt;a href="https://docs.sympy.org/"&gt;documentation website&lt;/a&gt; for the open source &lt;a href="https://www.sympy.org/"&gt;SymPy&lt;/a&gt; project and the &lt;a href="https://github.com/sympy/sympy_doc"&gt;corresponding GitHub repository&lt;/a&gt; were taken down as a result of a &lt;a href="https://github.com/github/dmca/blob/master/2022/04/2022-04-15-hackerrank.md"&gt;DMCA takedown notice&lt;/a&gt; submitted by WorthIT Solutions on behalf of HackerRank. In this post, I’d like to explain what the DMCA is and how it works, detail exactly what happened with this incident, and go over my views on the incident and some of the lessons we’ve learned as a result.&lt;/p&gt;
 &lt;h2&gt;What is the DMCA?&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;The information in this section has been drawn from various sources, including:&lt;/em&gt;&lt;/p&gt;
@@ -82,10 +82,7 @@ As a company we take a lot of pride in helping developers and it sucks to see th
 &lt;p&gt;I do feel that being on a site like GitHub is still preferable to something like self-hosting. If you self-host, you become responsible for a ton of things which GitHub does for you, like making sure everything stays online, handling servers, and managing spam. Also, self-hosting does not magically shield you from legal threats. If you self-host content that infringes on someone’s copyright, you are still legally liable for hosting that content.&lt;/p&gt;
 &lt;p&gt;Finally, I want to thank everyone who supported SymPy during this incident. Even if you just talked about this on social media or upvoted the Hacker News story, that helped us get this into the public eye, which led to a much faster resolution than we expected. I especially want to thank Leah Silen and Arliss Collins from NumFOCUS; Ondřej Čertík, Oscar Benjamin, and other SymPy community members; Pamela Chestek, the NumFOCUS legal counsel; and Travis Oliphant for the help they provided to us. Thank you to Thomas Dohmke, GitHub’s CEO, who we have reached out to privately, and who has promised to improve GitHub’s DMCA policies. I also want to thank Vivek Ravisankar from HackerRank for retracting the DMCA claim, and for the generous donation to SymPy.&lt;/p&gt;
 &lt;p&gt;Now that this incident is over, I’m hopeful we in the SymPy community can all go back to building software.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;If you wish to donate to support SymPy, you may do so &lt;a href="https://www.sympy.org/en/donate.html"&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/the-sympy-hackerrank-dmca-incident/</guid><pubDate>Wed, 27 Apr 2022 20:00:00 GMT</pubDate></item><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
+&lt;p&gt;&lt;em&gt;If you wish to donate to support SymPy, you may do so &lt;a href="https://www.sympy.org/en/donate.html"&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</description><guid>https://asmeurer.com/blog/posts/the-sympy-hackerrank-dmca-incident/</guid><pubDate>Wed, 27 Apr 2022 20:00:00 GMT</pubDate></item><item><title>Switching to Utterances Comments</title><link>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;I've ditched Disqus as the comment system on this blog. I am now using
 &lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt;. Utterances is an open source comment
 system that is backed by GitHub issues. Basically, every post has a
 corresponding issue opened on GitHub, and the comments on the post are the
@@ -185,10 +182,7 @@ and comment there. I am currently in the process of figuring out how to add
 some boilerplate to each page that makes this clear (see &lt;a href="https://github.com/utterance/utterances/issues/355"&gt;this Utterances
 issue&lt;/a&gt;). If anyone has any
 suggestions on how to do this, let me know. For now, I am just going to
-manually add a statement about this as the first comment on each post.&lt;/p&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</guid><pubDate>Thu, 03 Jun 2021 03:57:49 GMT</pubDate></item><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
+manually add a statement about this as the first comment on each post.&lt;/p&gt;</description><guid>https://asmeurer.com/blog/posts/switching-to-utterances-comments/</guid><pubDate>Thu, 03 Jun 2021 03:57:49 GMT</pubDate></item><item><title>Verifying the Riemann Hypothesis with SymPy and mpmath</title><link>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;Like most people, I've had a lot of free time recently, and I've spent some of
 it watching various YouTube videos about the &lt;a href="https://en.wikipedia.org/wiki/Riemann_hypothesis"&gt;Riemann
 Hypothesis&lt;/a&gt;. I've collected
 the videos I've watched into &lt;a href="https://www.youtube.com/playlist?list=PLrFrByaoJbcqKjzgJvLs2-spSmzP7jolT"&gt;YouTube
@@ -750,10 +744,7 @@ if you want to know this. Among other things, the truth of the Riemann
 Hypothesis would give a very precise bound on the distribution of prime
 numbers. Also, the non-trivial zeros of $\zeta(s)$ are, in some sense, the
 "spectrum" of the prime numbers, meaning they exactly encode the position of
-every prime on the number line.&lt;/p&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</guid><pubDate>Tue, 31 Mar 2020 21:12:54 GMT</pubDate></item><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/10/quansight-labs-work-update-for-september-2019/"&gt;Quansight Labs
+every prime on the number line.&lt;/p&gt;</description><guid>https://asmeurer.com/blog/posts/verifying-the-riemann-hypothesis-with-sympy-and-mpmath/</guid><pubDate>Tue, 31 Mar 2020 21:12:54 GMT</pubDate></item><item><title>Quansight Labs Work Update for September, 2019</title><link>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/10/quansight-labs-work-update-for-september-2019/"&gt;Quansight Labs
 Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
@@ -1054,10 +1045,7 @@ aspects of our documentation.&lt;/p&gt;
 &lt;p&gt;Lauren has created a draft style guide for documentation at
 &lt;a href="https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide"&gt;https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide&lt;/a&gt;. Please
 take a moment to look at it and if you have any feedback on it, comment below
-or write to the SymPy mailing list.&lt;/p&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</guid><pubDate>Mon, 07 Oct 2019 05:00:00 GMT</pubDate></item><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+or write to the SymPy mailing list.&lt;/p&gt;</description><guid>https://asmeurer.com/blog/posts/quansight-labs-work-update-for-september-2019/</guid><pubDate>Mon, 07 Oct 2019 05:00:00 GMT</pubDate></item><item><title>What's New in SymPy 1.4</title><link>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;&lt;em&gt;This post has been cross-posted on the &lt;a href="https://labs.quansight.org/blog/2019/04/whats-new-in-sympy-14/"&gt;Quansight Blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As of November, 2018, I have been working at
 &lt;a href="https://www.quansight.com/"&gt;Quansight&lt;/a&gt;. Quansight is a new startup founded by
 the same people who started Anaconda, which aims to connect companies and open
@@ -1233,10 +1221,7 @@ also has the in progress changes for our next release, &lt;a href="https://githu
 released later this year. Our &lt;a href="https://github.com/sympy/sympy-bot"&gt;bot&lt;/a&gt;
 automatically collects release notes from every pull request, meaning SymPy
 releases have very comprehensive and readable release notes pages. If you see
-any mistakes on either page, feel free to edit the wiki and fix them.&lt;/p&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</guid><pubDate>Thu, 02 May 2019 05:00:00 GMT</pubDate></item><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
+any mistakes on either page, feel free to edit the wiki and fix them.&lt;/p&gt;</description><guid>https://asmeurer.com/blog/posts/whats-new-in-sympy-14/</guid><pubDate>Thu, 02 May 2019 05:00:00 GMT</pubDate></item><item><title>GitHub Cuts</title><link>https://asmeurer.com/blog/posts/github-cuts/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;GitHub recently announced its &lt;a href="https://blog.github.com/2018-08-28-announcing-paper-cuts/"&gt;paper cuts
 initiative&lt;/a&gt; to fix
 minor issues that make things more difficult for GitHub users. As someone who
 spends most of his day on &lt;a href="https://github.com"&gt;github.com&lt;/a&gt;, this initiative is
@@ -1796,10 +1781,7 @@ ask on Twitter, but get no response. Preferably something public so that
 others could vote on them (but I understand if you don't want too much
 bikeshedding).&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/github-cuts/</guid><pubDate>Tue, 06 Nov 2018 22:54:21 GMT</pubDate></item><item><title>Automatically deploying this blog to GitHub Pages with Travis CI</title><link>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;This blog is now &lt;a href="http://travis-ci.org/asmeurer/blog"&gt;deployed to GitHub pages automatically&lt;/a&gt; from Travis CI.&lt;/p&gt;
+&lt;/ol&gt;</description><guid>https://asmeurer.com/blog/posts/github-cuts/</guid><pubDate>Tue, 06 Nov 2018 22:54:21 GMT</pubDate></item><item><title>Automatically deploying this blog to GitHub Pages with Travis CI</title><link>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;This blog is now &lt;a href="http://travis-ci.org/asmeurer/blog"&gt;deployed to GitHub pages automatically&lt;/a&gt; from Travis CI.&lt;/p&gt;
 &lt;p&gt;As I've outlined in the &lt;a href="https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/moving-to-github-pages-with-nikola/"&gt;past&lt;/a&gt;, this
 website is built with the &lt;a href="https://getnikola.com/"&gt;Nikola&lt;/a&gt; static blogging
 engine. I really like Nikola because it uses Python, has lots of nice
@@ -1987,10 +1969,7 @@ from a branch from pull request from a fork, for security purposes.&lt;/p&gt;
 hamburger menu, you can enable auto cancellation for branch builds. This will
 make it so that if you push many changes in succession, only the most recent
 one will get built. This makes the changes get built faster, and lets you
-revert mistakes or typos without them ever actually being deployed.&lt;/p&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</guid><pubDate>Mon, 19 Jun 2017 19:21:32 GMT</pubDate></item><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.com/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
+revert mistakes or typos without them ever actually being deployed.&lt;/p&gt;</description><guid>https://asmeurer.com/blog/posts/automatically-deploying-this-blog-to-github-pages-with-travis-ci/</guid><pubDate>Mon, 19 Jun 2017 19:21:32 GMT</pubDate></item><item><title>GitHub Reviews Gripes</title><link>https://asmeurer.com/blog/posts/github-reviews-gripes/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;&lt;em&gt;Update: I want to keep the original post intact, but I'll post any feature
 updates that GitHub makes here as they are released.&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -2255,10 +2234,7 @@ trip up sometimes. I'm not yet calling "doom" on GitHub. Everyone has
 their &lt;a href="https://en.wikipedia.org/wiki/Apple_USB_Mouse"&gt;hockey puck mice&lt;/a&gt;. I'm
 actually hopeful that they can fix these issues, and implement a feature that
 makes real headway into helping me solve one of my biggest problems on GitHub
-right now, the reviewing of pull requests.&lt;/p&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/github-reviews-gripes/</guid><pubDate>Thu, 06 Oct 2016 00:12:16 GMT</pubDate></item><item><title>Tuples</title><link>https://asmeurer.com/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
+right now, the reviewing of pull requests.&lt;/p&gt;</description><guid>https://asmeurer.com/blog/posts/github-reviews-gripes/</guid><pubDate>Thu, 06 Oct 2016 00:12:16 GMT</pubDate></item><item><title>Tuples</title><link>https://asmeurer.com/blog/posts/tuples/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;Today, David Beazley made some tweets:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;At the bookstore. I'll admit I judge Python books by their tuple description. "Read only list?"  Back on the shelf.  Nope.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778634205395845120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Usually there's a sentence nearby "sometimes you need a read only list." No. No, I haven't. Not in 20 years. Not even once. Sorry.&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778635637457088512"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
@@ -2295,11 +2271,12 @@ fixed shape, the positions in a tuple can be "fixed" values, and by convention�
 Python programmer sees parentheses instead of square brackets, he is more
 likely to see the object as "record-like". The &lt;code&gt;namedtuple&lt;/code&gt; object in the standard library
 takes the record idea further by letting you actually name the fields:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Person'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'name, age'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Aaron'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;26&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;But is that really the &lt;em&gt;only&lt;/em&gt; place you'd want to use a tuple over a list?&lt;/p&gt;
 &lt;p&gt;Consider five other places you might encounter a tuple in Python, courtesy of
 Allen Downey:&lt;/p&gt;
@@ -2310,8 +2287,8 @@ Allen Downey:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Multiple assignments:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; (a, b) = 1, 2
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;(yes, the parentheses are optional here, as they are in many places where a
 tuple can be used, but this is still a tuple, or at least it looks like one ;)&lt;/p&gt;
@@ -2324,30 +2301,30 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;*args&lt;/code&gt;:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; def f(*args):
 ...     print(type(args), args)
 ...
 &amp;gt;&amp;gt;&amp;gt; f(1, 2, 3)
 &amp;lt;class 'tuple'&amp;gt; (1, 2, 3)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Arbitrary positional function arguments are always stored as a &lt;code&gt;tuple&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Return value from builtins &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;enumerate&lt;/code&gt;, etc.:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;'abc'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;span class="o"&gt;...&lt;/span&gt;     &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;...&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'abc'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;span class="o"&gt;...&lt;/span&gt;     &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;...&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'abc'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'abc'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This also applies to the combinatoric generators in
 &lt;a href="https://docs.python.org/3.6/library/itertools.html"&gt;itertools&lt;/a&gt; (like
@@ -2355,14 +2332,14 @@ for the most part a special case of using tuples as records.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Dictionary keys:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; {
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; {
 ...     (0, 0): '.',
 ...     (0, 1): ' ',
 ...     (1, 0): '.',
 ...     (1, 1): ' ',
 ... }
 {(0, 1): ' ', (1, 0): '.', (0, 0): '.', (1, 1): ' '}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -2374,18 +2351,20 @@ to meaningfully hash a mutable data structure in Python, and hashability is a
 requirement for dictionary keys.&lt;/p&gt;
 &lt;p&gt;However, be careful. Not all tuples are hashable. Tuples can contain
 anything, but only tuples of immutable values are hashable. Consider&lt;sup id="fnref:TypeError"&gt;&lt;a class="footnote-ref" href="https://asmeurer.com/blog/posts/tuples/#fn:TypeError"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Such tuples are not hashable, and cannot be used as dictionary keys.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
   &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;ipython-input-39-36822ba665ca&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;unhashable&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'list'&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h2&gt;Why is &lt;code&gt;list&lt;/code&gt; the Default?&lt;/h2&gt;
 &lt;p&gt;My second gripe here is this notion that your default ordered collection
 object in Python should be &lt;code&gt;list&lt;/code&gt;. &lt;code&gt;tuples&lt;/code&gt; are only to be used as "records",
@@ -2400,8 +2379,9 @@ as well).&lt;/p&gt;
 &lt;p&gt;Consider another usage of tuples, which I consider to be
 important, namely tree structures. Say you wanted a simple representation of a
 Python syntax tree. You might represent &lt;code&gt;1 - 2*(-3 + 4)&lt;/code&gt; as&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'*'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'+'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'*'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'+'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;This isn't really a record. The meaning of the entries in the tuples is
 determined by the first value of the tuple, not position. In this example, the length
 of the tuple also signifies meaning (binary vs. unary &lt;code&gt;-&lt;/code&gt;).&lt;/p&gt;
@@ -2457,8 +2437,8 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;/li&gt;
 &lt;li id="fn:assign"&gt;
 &lt;p&gt;Yes,&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&amp;gt;&amp;gt;&amp;gt; [a, b] = 1, 2
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;works. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref:assign" title="Jump back to footnote 2 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -2477,12 +2457,12 @@ case, the statement is false—&lt;code&gt;tuple&lt;/code&gt; is not a subclass 
 &lt;p&gt;&lt;/p&gt;&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/asmeurer"&gt;@asmeurer&lt;/a&gt; &lt;a href="https://twitter.com/AllenDowney"&gt;@AllenDowney&lt;/a&gt; As yes:&lt;br&gt;&lt;br&gt;t = (1,2, [3, 4])&lt;br&gt;t[2] += [5,6]&lt;br&gt;&lt;br&gt;;-)&lt;/p&gt;— David Beazley (@dabeaz) &lt;a href="https://twitter.com/dabeaz/status/778697399975813120"&gt;September 21, 2016&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 &lt;p&gt;This is similar to this example. But
 it turns out this one doesn't work:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mh"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;"&amp;lt;stdin&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="nl"&gt;TypeError:&lt;/span&gt; &lt;span class="p"&gt;'&lt;/span&gt;&lt;span class="n"&gt;tuple&lt;/span&gt;&lt;span class="p"&gt;'&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt; &lt;span class="n"&gt;does&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;support&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="n"&gt;assignment&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mh"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;recent&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;call&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"&amp;lt;stdin&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nl"&gt;TypeError:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;'&lt;/span&gt;&lt;span class="n"&gt;tuple&lt;/span&gt;&lt;span class="p"&gt;'&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;object&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;does&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;not&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;support&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;assignment&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I have no idea why. It seems to me that it should work. &lt;code&gt;t[2]&lt;/code&gt; is a list
 and &lt;code&gt;list&lt;/code&gt; has &lt;code&gt;__iadd__&lt;/code&gt; defined. It seems that Python gets kind of weird
@@ -2490,10 +2470,7 @@ about things on the left-hand side of an assignment. &lt;strong&gt;EDIT:
 &lt;a href="http://stackoverflow.com/a/29747466/161801"&gt;Here's&lt;/a&gt; why.&lt;/strong&gt; &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/tuples/#fnref:TypeError" title="Jump back to footnote 4 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.com/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;div&gt;&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;
+&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/tuples/</guid><pubDate>Thu, 22 Sep 2016 02:33:14 GMT</pubDate></item><item><title>Moving Away from Python 2</title><link>https://asmeurer.com/blog/posts/moving-away-from-python-2/</link><dc:creator>Aaron Meurer</dc:creator><description>&lt;p&gt;About a month ago I tweeted this:&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Thought: get the maintainers of a bunch of big Python libraries to sign something saying that they WILL drop Python 2.7 support in 2020.&lt;/p&gt;— Aaron Meurer (@asmeurer) &lt;a href="https://twitter.com/asmeurer/status/712304912428875776"&gt;March 22, 2016&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 
@@ -2692,7 +2669,4 @@ Of course, this whole thing works just fine if conda is run in Python
     may be able to help you. &lt;a class="footnote-backref" href="https://asmeurer.com/blog/posts/moving-away-from-python-2/#fnref:continuum" title="Jump back to footnote 5 in the text"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
-
-</description><guid>https://asmeurer.com/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><guid>https://asmeurer.com/blog/posts/moving-away-from-python-2/</guid><pubDate>Thu, 19 May 2016 18:00:00 GMT</pubDate></item></channel></rss>

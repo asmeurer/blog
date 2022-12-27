@@ -83,27 +83,22 @@ Stuff I've done on my own. In no particular order.
   [posts](https://asmeurersympy.wordpress.com/2011/08/08/hacking-pudb-now-an-even-better-python-debugger/)
   in the past about it.
 
-- [Pyflakes](https://pypi.python.org/pypi/pyflakes), a linter for Python with
-  a focus on logical errors only (no stylistic warnings). I use
-  [flycheck-pyflakes](https://github.com/Wilfred/flycheck-pyflakes) in emacs
-  to highlight errors in Python using pyflakes as I write. It's an essential
-  tool for catching stupid mistakes early, and it doesn't bug about style, so
-  the annoyance factor is minimal.
-
-- [Jedi](http://jedi.jedidjah.ch/en/latest/), a completion library for
-  Python. Jedi is pure magic. I use
-  [emacs-jedi](https://tkf.github.io/emacs-jedi/latest/), but there are
-  plugins for other editors as well.
-
-- [Pyinstrument](https://github.com/joerick/pyinstrument), a statistical call
-  stack profiler. The best way to speed profile Python code, although the
-  standard library `profile` module and
-  [line_profiler](https://pypi.python.org/pypi/line_profiler) are also good
-  (and serve different purposes).
-
 - [Prompt Toolkit](https://github.com/jonathanslenders/python-prompt-toolkit),
   a library for building interactive prompt-based terminal applications, such
   as shells and REPLs. I use this heavily in mypython (see above).
+
+- [NumPy](https://numpy.org/) is the core library for numerics in Python,
+  which implements the standard array type and some common algorithms. I have
+  contributed to NumPy, specifically the `numpy.array_api` module (see the
+  next bullet).
+
+- [Array API specification](https://data-apis.org/array-api/latest/) is a
+  specification for Python array APIs, such as NumPy and other similar
+  libraries. I have worked on this as part of my work at Quansight, including
+  work on the official [test
+  suite](https://github.com/data-apis/array-api-tests) as well as the [NumPy
+  implementation of the
+  specification](https://numpy.org/doc/stable/reference/array_api.html).
 
 - [Numba](https://numba.pydata.org/). Numba is JIT compiler for Python that
   lets you write pure Python code that executes as fast as compiled code. I

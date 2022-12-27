@@ -152,30 +152,24 @@ understanding Python code. I wrote some
 in the past about it.</p>
 </li>
 <li>
-<p><a href="https://pypi.python.org/pypi/pyflakes">Pyflakes</a>, a linter for Python with
-a focus on logical errors only (no stylistic warnings). I use
-<a href="https://github.com/Wilfred/flycheck-pyflakes">flycheck-pyflakes</a> in emacs
-to highlight errors in Python using pyflakes as I write. It's an essential
-tool for catching stupid mistakes early, and it doesn't bug about style, so
-the annoyance factor is minimal.</p>
-</li>
-<li>
-<p><a href="http://jedi.jedidjah.ch/en/latest/">Jedi</a>, a completion library for
-Python. Jedi is pure magic. I use
-<a href="https://tkf.github.io/emacs-jedi/latest/">emacs-jedi</a>, but there are
-plugins for other editors as well.</p>
-</li>
-<li>
-<p><a href="https://github.com/joerick/pyinstrument">Pyinstrument</a>, a statistical call
-stack profiler. The best way to speed profile Python code, although the
-standard library <code>profile</code> module and
-<a href="https://pypi.python.org/pypi/line_profiler">line_profiler</a> are also good
-(and serve different purposes).</p>
-</li>
-<li>
 <p><a href="https://github.com/jonathanslenders/python-prompt-toolkit">Prompt Toolkit</a>,
 a library for building interactive prompt-based terminal applications, such
 as shells and REPLs. I use this heavily in mypython (see above).</p>
+</li>
+<li>
+<p><a href="https://numpy.org/">NumPy</a> is the core library for numerics in Python,
+which implements the standard array type and some common algorithms. I have
+contributed to NumPy, specifically the <code>numpy.array_api</code> module (see the
+next bullet).</p>
+</li>
+<li>
+<p><a href="https://data-apis.org/array-api/latest/">Array API specification</a> is a
+specification for Python array APIs, such as NumPy and other similar
+libraries. I have worked on this as part of my work at Quansight, including
+work on the official <a href="https://github.com/data-apis/array-api-tests">test
+suite</a> as well as the <a href="https://numpy.org/doc/stable/reference/array_api.html">NumPy
+implementation of the
+specification</a>.</p>
 </li>
 <li>
 <p><a href="https://numba.pydata.org/">Numba</a>. Numba is JIT compiler for Python that
