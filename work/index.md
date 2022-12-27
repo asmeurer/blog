@@ -22,7 +22,7 @@ and most of my open source work is on my
   If you are interested in SymPy or have any questions about it, please email
   the [SymPy mailing list](https://groups.google.com/forum/#!forum/sympy).
 
-- [ndindex](https://quansight.github.io/ndindex/). ndindex is a new library
+- [ndindex](https://quansight-labs.github.io/ndindex/). ndindex is a new library
   that I have started as part of my work at
   [Quansight](https://www.quansight.com/), which can be used to represent and
   manipulate indices to NumPy arrays (e.g., slices).
@@ -31,18 +31,14 @@ and most of my open source work is on my
 
 Stuff I've done on my own. In no particular order.
 
-- [Doctr](https://drdoctr.github.io/doctr/). A tool for automatically
-  deploying docs from Travis CI to GitHub pages
-  ([Gil Forsyth](https://github.com/gforsyth/) also works on this).
-
-- [removestar](https://www.asmeurer.com/removestar/). A tool to automatically
-  replace `import *` with explicit imports in Python files.
-
 - [Brown Water Python](https://www.asmeurer.com/brown-water-python/). Better
   documentation for Python's
   [tokenize](https://docs.python.org/3/library/tokenize.html) module (in the
   spirit of Thomas Kluyver's [Green Tree
   Snakes](https://greentreesnakes.readthedocs.io/en/latest/)).
+
+- [removestar](https://www.asmeurer.com/removestar/). A tool to automatically
+  replace `import *` with explicit imports in Python files.
 
 - [mypython](https://github.com/asmeurer/mypython). I wrote my own Python
   REPL.
