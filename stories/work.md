@@ -31,18 +31,14 @@ and most of my open source work is on my
 
 Stuff I've done on my own. In no particular order.
 
-- [Doctr](https://drdoctr.github.io/doctr/). A tool for automatically
-  deploying docs from Travis CI to GitHub pages
-  ([Gil Forsyth](https://github.com/gforsyth/) also works on this).
-
-- [removestar](https://www.asmeurer.com/removestar/). A tool to automatically
-  replace `import *` with explicit imports in Python files.
-
 - [Brown Water Python](https://www.asmeurer.com/brown-water-python/). Better
   documentation for Python's
   [tokenize](https://docs.python.org/3/library/tokenize.html) module (in the
   spirit of Thomas Kluyver's [Green Tree
   Snakes](https://greentreesnakes.readthedocs.io/en/latest/)).
+
+- [removestar](https://www.asmeurer.com/removestar/). A tool to automatically
+  replace `import *` with explicit imports in Python files.
 
 - [mypython](https://github.com/asmeurer/mypython). I wrote my own Python
   REPL.
