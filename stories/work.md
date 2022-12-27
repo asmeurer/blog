@@ -22,7 +22,7 @@ and most of my open source work is on my
   If you are interested in SymPy or have any questions about it, please email
   the [SymPy mailing list](https://groups.google.com/forum/#!forum/sympy).
 
-- [ndindex](https://quansight.github.io/ndindex/). ndindex is a new library
+- [ndindex](https://quansight-labs.github.io/ndindex/). ndindex is a new library
   that I have started as part of my work at
   [Quansight](https://www.quansight.com/), which can be used to represent and
   manipulate indices to NumPy arrays (e.g., slices).
