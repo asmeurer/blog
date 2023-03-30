@@ -13,6 +13,8 @@ Here are my various social sites:
 
 [Twitter (@asmeurer)](https://twitter.com/asmeurer)
 
+[Mastodon (@asmeurer@mastodon.social)](https://mastodon.social/@asmeurer)
+
 Homepage: [You're looking at it](http://www.asmeurer.com).
 
 Personal Email: <a href="mailto:asmeurer@gmail.com" target="_top">

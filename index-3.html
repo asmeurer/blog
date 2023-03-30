@@ -138,18 +138,18 @@ for the most part a special case of using tuples as records.</p>
 </li>
 <li>
 <p><strong>Return value from builtins <code>zip</code>, <code>enumerate</code>, etc.:</strong></p>
-<div class="code"><pre class="code literal-block"><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="s1">'abc'</span><span class="p">):</span><span class="w"></span>
-<span class="o">...</span><span class="w">     </span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="o">...</span><span class="w"></span>
-<span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'a'</span><span class="p">)</span><span class="w"></span>
-<span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'b'</span><span class="p">)</span><span class="w"></span>
-<span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'c'</span><span class="p">)</span><span class="w"></span>
-<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">):</span><span class="w"></span>
-<span class="o">...</span><span class="w">     </span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="o">...</span><span class="w"></span>
-<span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'a'</span><span class="p">)</span><span class="w"></span>
-<span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'b'</span><span class="p">)</span><span class="w"></span>
-<span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'c'</span><span class="p">)</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="s1">'abc'</span><span class="p">):</span>
+<span class="o">...</span><span class="w">     </span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'a'</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'b'</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'c'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">):</span>
+<span class="o">...</span><span class="w">     </span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'a'</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'b'</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'c'</span><span class="p">)</span>
 </pre></div>
 
 <p>This also applies to the combinatoric generators in
@@ -286,11 +286,11 @@ case, the statement is false—<code>tuple</code> is not a subclass of <code>lis
 <p lang="en" dir="ltr"><a href="https://twitter.com/asmeurer">@asmeurer</a> <a href="https://twitter.com/AllenDowney">@AllenDowney</a> As yes:<br><br>t = (1,2, [3, 4])<br>t[2] += [5,6]<br><br>;-)</p>— David Beazley (@dabeaz) <a href="https://twitter.com/dabeaz/status/778697399975813120">September 21, 2016</a>
 </blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>This is similar to this example. But
 it turns out this one doesn't work:</p>
-<div class="code"><pre class="code literal-block"><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mh">1</span><span class="p">,</span><span class="mh">2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="p">,</span><span class="w"> </span><span class="mh">4</span><span class="p">])</span><span class="w"></span>
-<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">t</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">[</span><span class="mh">5</span><span class="p">,</span><span class="mh">6</span><span class="p">]</span><span class="w"></span>
-<span class="n">Traceback</span><span class="w"> </span><span class="p">(</span><span class="n">most</span><span class="w"> </span><span class="n">recent</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="n">last</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
-<span class="w">  </span><span class="n">File</span><span class="w"> </span><span class="s">"&lt;stdin&gt;"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">&lt;</span><span class="k">module</span><span class="o">&gt;</span><span class="w"></span>
-<span class="nl">TypeError:</span><span class="w"> </span><span class="p">'</span><span class="n">tuple</span><span class="p">'</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">support</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="n">assignment</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mh">1</span><span class="p">,</span><span class="mh">2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="p">,</span><span class="w"> </span><span class="mh">4</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">t</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">[</span><span class="mh">5</span><span class="p">,</span><span class="mh">6</span><span class="p">]</span>
+<span class="n">Traceback</span><span class="w"> </span><span class="p">(</span><span class="n">most</span><span class="w"> </span><span class="n">recent</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="n">last</span><span class="p">)</span><span class="o">:</span>
+<span class="w">  </span><span class="n">File</span><span class="w"> </span><span class="s">"&lt;stdin&gt;"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">&lt;</span><span class="k">module</span><span class="o">&gt;</span>
+<span class="nl">TypeError:</span><span class="w"> </span><span class="p">'</span><span class="n">tuple</span><span class="p">'</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">support</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="n">assignment</span>
 </pre></div>
 
 <p>I have no idea why. It seems to me that it should work. <code>t[2]</code> is a list
@@ -1315,7 +1315,7 @@ MathJax = {
     fontCache: 'global'
   }
 };
-</script></main><footer id="footer"><p>Contents © 2022         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+</script></main><footer id="footer"><p>Contents © 2023         <a href="mailto:asmeurer@gmail.com">Aaron Meurer</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 </p>
 <p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
