@@ -22,6 +22,18 @@ and most of my open source work is on my
   If you are interested in SymPy or have any questions about it, please email
   the [SymPy mailing list](https://groups.google.com/forum/#!forum/sympy).
 
+- [Array API Standard](https://data-apis.org/array-api/latest/). I have been
+  invoked in the Data APIs Consortium work on the Array API Standard. I have
+  worked on the [standard itself](https://github.com/data-apis/array-api), the
+  [array api test suite](https://github.com/data-apis/array-api-tests), the
+  [array-api-compat](https://github.com/data-apis/array-api-compat) package,
+  and the
+  [`numpy.array_api`](https://numpy.org/devdocs/reference/array_api.html)
+  minimal implementation. I have given a talk about the array API standard at
+  [SciPy 2023](https://www.youtube.com/watch?v=16rB-fosAWw), with a
+  [corresponding proceedings
+  paper](https://conference.scipy.org/proceedings/scipy2023/aaron_meurer.html).
+
 - [ndindex](https://quansight-labs.github.io/ndindex/). ndindex is a new library
   that I have started as part of my work at
   [Quansight](https://www.quansight.com/), which can be used to represent and
