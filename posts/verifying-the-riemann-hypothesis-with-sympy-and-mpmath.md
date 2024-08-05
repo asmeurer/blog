@@ -358,6 +358,12 @@ this, I tried using the [`scipy.special` zeta
 function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.zeta.html),
 but unfortunately, it does not support complex arguments.
 
+⚠️⚠️⚠️ **Note** ⚠️⚠️⚠️ **SymPy 1.13 has a
+[regression](https://github.com/sympy/sympy/issues/26663) that prevents the
+below code from working. If you are following along, you'll need to use SymPy
+1.12.1.**
+
+
 First we do some basic imports
 
 ```py
