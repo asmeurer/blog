@@ -63,22 +63,6 @@ and most of my open source work is on my
 <h2>Main projects</h2>
 <ul>
 <li>
-<p><a href="http://www.sympy.org/en/index.html">SymPy</a>, a
-<a href="https://en.wikipedia.org/wiki/Computer_algebra_system">computer algebra system</a>
-in Python. My first foray into open source was with
-<a href="https://summerofcode.withgoogle.com/">Google Summer of Code</a> with SymPy in 2009.
-I've been an active contributor ever since, and am now the lead developer.</p>
-<p>I've touched most parts of SymPy, but the parts that I'm most proud of are
-the <a href="http://docs.sympy.org/latest/modules/solvers/ode.html">ODE module</a> (my
-2009 GSoC project), the implementation of the
-<a href="https://en.wikipedia.org/wiki/Risch_algorithm">Risch integration algorithm</a>
-(my 2010 GSoC project), improvements to the assumptions system (an ongoing
-project), and the
-<a href="http://docs.sympy.org/latest/tutorial/index.html">tutorial</a>.</p>
-<p>If you are interested in SymPy or have any questions about it, please email
-the <a href="https://groups.google.com/forum/#%21forum/sympy">SymPy mailing list</a>.</p>
-</li>
-<li>
 <p><a href="https://data-apis.org/array-api/latest/">Array API Standard</a>. I have been
 invoked in the Data APIs Consortium work on the Array API Standard. I have
 worked on the <a href="https://github.com/data-apis/array-api">standard itself</a>, the
@@ -95,7 +79,22 @@ paper</a>.</p>
 <p><a href="https://quansight-labs.github.io/ndindex/">ndindex</a>. ndindex is a new library
 that I have started as part of my work at
 <a href="https://www.quansight.com/">Quansight</a>, which can be used to represent and
-manipulate indices to NumPy arrays (e.g., slices).</p>
+manipulate indices to NumPy arrays (e.g., slices). I've also written a
+comprehensive <a href="https://quansight-labs.github.io/ndindex/indexing-guide/index.html">guide to NumPy
+indexing</a>
+which lives in the ndindex documentation</p>
+</li>
+<li>
+<p><a href="https://github.com/deshaw/versioned-hdf5">Versioned HDF5</a> is a library I
+designed and wrote as part of my work at Quansight. It is an open source Python
+library that adds a versioned abstraction on top of HDF5 files.</p>
+</li>
+<li>
+<p><a href="http://www.sympy.org/en/index.html">SymPy</a>, a <a href="https://en.wikipedia.org/wiki/Computer_algebra_system">computer algebra
+system</a> in Python.
+I've been a contributor to SymPy since 2009 when I participated in <a href="https://summerofcode.withgoogle.com/">Google
+Summer of Code</a> as a student, which
+was my introduction to open source.</p>
 </li>
 </ul>
 <h2>Side stuff</h2>
@@ -148,9 +147,59 @@ emacs, and other interesting things about Python and mathematics.</p>
 about why you should be using Python 3.</p>
 </li>
 </ul>
+<h2>Presentations</h2>
+<p>I have given several presentations at conferences, most notably the <a href="https://conference.scipy.org/">SciPy
+conference</a>. A selection of my presentations
+include:</p>
+<ul>
+<li>
+<p><strong>Python Array API Standard: Toward Array Interoperability in the Scientific
+Python Ecosystem</strong> SciPy 2023.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=16rB-fosAWw">Video</a></li>
+<li><a href="https://speakerdeck.com/asmeurer/python-array-api-standard-toward-array-interoperability-in-the-scientific-python-ecosystem">Slides</a></li>
+</ul>
+</li>
+<li>
+<p><strong>SymPy Introductory Tutorial</strong> SciPy 2023. Co-presented with Sangyub Lee.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=FZWevQ6Xz6U">Video</a></li>
+<li><a href="https://github.com/sympy/scipy-2023-tutorial/">Materials</a></li>
+</ul>
+</li>
+<li>
+<p><strong>SymPy Code generation</strong> SciPy 2016.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=nmI-cDAUjdE">Video</a></li>
+<li><a href="https://speakerdeck.com/asmeurer/sympy-code-generation">Slides</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Conda: A Cross Platform Package Manager for any Binary Distribution</strong>
+SciPy 2014.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=UaIvrDWrIWM">Video</a></li>
+<li><a href="https://speakerdeck.com/asmeurer/conda-a-cross-platform-binary-package-manager-for-any-distribution">Slides</a></li>
+</ul>
+</li>
+</ul>
 <h2>Open source projects that I use heavily and contribute to</h2>
 <p>(though some not as much as I would like)</p>
 <ul>
+<li>
+<p><a href="https://numpy.org/">NumPy</a> is the core library for numerics in Python,
+which implements the standard array type and some common algorithms. I have
+contributed to NumPy, primarily as part of my work on the array API standard.</p>
+</li>
+<li>
+<p><a href="https://data-apis.org/array-api/latest/">Array API standard</a> is a standard
+specification for Python array APIs, such as NumPy, PyTorch, and other
+similar libraries. I have worked on this as part of my work at Quansight,
+including work on the official <a href="https://github.com/data-apis/array-api-tests">test
+suite</a>, the <a href="https://data-apis.org/array-api-compat/">compatibility
+layer</a>, and the NumPy
+implementation of the specification.</p>
+</li>
 <li>
 <p><a href="http://mathema.tician.de/debug-python-in-style/">PuDB</a>, a curses-based
 debugger for Python. It has been an essential tool for debugging and
@@ -163,21 +212,6 @@ in the past about it.</p>
 <p><a href="https://github.com/jonathanslenders/python-prompt-toolkit">Prompt Toolkit</a>,
 a library for building interactive prompt-based terminal applications, such
 as shells and REPLs. I use this heavily in mypython (see above).</p>
-</li>
-<li>
-<p><a href="https://numpy.org/">NumPy</a> is the core library for numerics in Python,
-which implements the standard array type and some common algorithms. I have
-contributed to NumPy, specifically the <code>numpy.array_api</code> module (see the
-next bullet).</p>
-</li>
-<li>
-<p><a href="https://data-apis.org/array-api/latest/">Array API specification</a> is a
-specification for Python array APIs, such as NumPy and other similar
-libraries. I have worked on this as part of my work at Quansight, including
-work on the official <a href="https://github.com/data-apis/array-api-tests">test
-suite</a> as well as the <a href="https://numpy.org/doc/stable/reference/array_api.html">NumPy
-implementation of the
-specification</a>.</p>
 </li>
 <li>
 <p><a href="https://numba.pydata.org/">Numba</a>. Numba is JIT compiler for Python that
