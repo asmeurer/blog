@@ -5,23 +5,6 @@ and most of my open source work is on my
 
 # Main projects
 
-- [SymPy](http://www.sympy.org/en/index.html), a
-  [computer algebra system](https://en.wikipedia.org/wiki/Computer_algebra_system)
-  in Python. My first foray into open source was with
-  [Google Summer of Code](https://summerofcode.withgoogle.com/) with SymPy in 2009.
-  I've been an active contributor ever since, and am now the lead developer.
-
-  I've touched most parts of SymPy, but the parts that I'm most proud of are
-  the [ODE module](http://docs.sympy.org/latest/modules/solvers/ode.html) (my
-  2009 GSoC project), the implementation of the
-  [Risch integration algorithm](https://en.wikipedia.org/wiki/Risch_algorithm)
-  (my 2010 GSoC project), improvements to the assumptions system (an ongoing
-  project), and the
-  [tutorial](http://docs.sympy.org/latest/tutorial/index.html).
-
-  If you are interested in SymPy or have any questions about it, please email
-  the [SymPy mailing list](https://groups.google.com/forum/#!forum/sympy).
-
 - [Array API Standard](https://data-apis.org/array-api/latest/). I have been
   invoked in the Data APIs Consortium work on the Array API Standard. I have
   worked on the [standard itself](https://github.com/data-apis/array-api), the
@@ -37,7 +20,20 @@ and most of my open source work is on my
 - [ndindex](https://quansight-labs.github.io/ndindex/). ndindex is a new library
   that I have started as part of my work at
   [Quansight](https://www.quansight.com/), which can be used to represent and
-  manipulate indices to NumPy arrays (e.g., slices).
+  manipulate indices to NumPy arrays (e.g., slices). I've also written a
+  comprehensive [guide to NumPy
+  indexing](https://quansight-labs.github.io/ndindex/indexing-guide/index.html)
+  which lives in the ndindex documentation
+
+- [Versioned HDF5](https://github.com/deshaw/versioned-hdf5) is a library I
+  designed and wrote as part of my work at Quansight. It is an open source Python
+  library that adds a versioned abstraction on top of HDF5 files.
+
+- [SymPy](http://www.sympy.org/en/index.html), a [computer algebra
+  system](https://en.wikipedia.org/wiki/Computer_algebra_system) in Python.
+  I've been a contributor to SymPy since 2009 when I participated in [Google
+  Summer of Code](https://summerofcode.withgoogle.com/) as a student, which
+  was my introduction to open source.
 
 # Side stuff
 
@@ -79,10 +75,45 @@ Stuff I've done on my own. In no particular order.
   [presentation](https://asmeurer.github.io/python3-presentation/slides.html)
   about why you should be using Python 3.
 
+# Presentations
+
+I have given several presentations at conferences, most notably the [SciPy
+conference](https://conference.scipy.org/). A selection of my presentations
+include:
+
+- **Python Array API Standard: Toward Array Interoperability in the Scientific
+  Python Ecosystem** SciPy 2023.
+  - [Video](https://www.youtube.com/watch?v=16rB-fosAWw)
+  - [Slides](https://speakerdeck.com/asmeurer/python-array-api-standard-toward-array-interoperability-in-the-scientific-python-ecosystem)
+
+- **SymPy Introductory Tutorial** SciPy 2023. Co-presented with Sangyub Lee.
+  - [Video](https://www.youtube.com/watch?v=FZWevQ6Xz6U)
+  - [Materials](https://github.com/sympy/scipy-2023-tutorial/)
+
+- **SymPy Code generation** SciPy 2016.
+  - [Video](https://www.youtube.com/watch?v=nmI-cDAUjdE)
+  - [Slides](https://speakerdeck.com/asmeurer/sympy-code-generation)
+
+- **Conda: A Cross Platform Package Manager for any Binary Distribution**
+SciPy 2014.
+  - [Video](https://www.youtube.com/watch?v=UaIvrDWrIWM)
+  - [Slides](https://speakerdeck.com/asmeurer/conda-a-cross-platform-binary-package-manager-for-any-distribution)
 
 # Open source projects that I use heavily and contribute to
 
 (though some not as much as I would like)
+
+- [NumPy](https://numpy.org/) is the core library for numerics in Python,
+  which implements the standard array type and some common algorithms. I have
+  contributed to NumPy, primarily as part of my work on the array API standard.
+
+- [Array API standard](https://data-apis.org/array-api/latest/) is a standard
+  specification for Python array APIs, such as NumPy, PyTorch, and other
+  similar libraries. I have worked on this as part of my work at Quansight,
+  including work on the official [test
+  suite](https://github.com/data-apis/array-api-tests), the [compatibility
+  layer](https://data-apis.org/array-api-compat/), and the NumPy
+  implementation of the specification.
 
 - [PuDB](http://mathema.tician.de/debug-python-in-style/), a curses-based
   debugger for Python. It has been an essential tool for debugging and
@@ -94,19 +125,6 @@ Stuff I've done on my own. In no particular order.
 - [Prompt Toolkit](https://github.com/jonathanslenders/python-prompt-toolkit),
   a library for building interactive prompt-based terminal applications, such
   as shells and REPLs. I use this heavily in mypython (see above).
-
-- [NumPy](https://numpy.org/) is the core library for numerics in Python,
-  which implements the standard array type and some common algorithms. I have
-  contributed to NumPy, specifically the `numpy.array_api` module (see the
-  next bullet).
-
-- [Array API specification](https://data-apis.org/array-api/latest/) is a
-  specification for Python array APIs, such as NumPy and other similar
-  libraries. I have worked on this as part of my work at Quansight, including
-  work on the official [test
-  suite](https://github.com/data-apis/array-api-tests) as well as the [NumPy
-  implementation of the
-  specification](https://numpy.org/doc/stable/reference/array_api.html).
 
 - [Numba](https://numba.pydata.org/). Numba is JIT compiler for Python that
   lets you write pure Python code that executes as fast as compiled code. I
